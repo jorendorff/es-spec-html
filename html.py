@@ -8,8 +8,15 @@ empty_tags = {'meta', 'br', 'hr'}
 def save_html(filename, ht):
     assert ht.name == 'html'
 
+    def htmlify(name):
+        """ Convert a pythonified tag name or attribute name back to HTML. """
+        if name.endswith('_'):
+            name = name[:-1]
+        name = name.replace('_', '-')
+        return name
+
     def start_tag(ht):
-        attrs = ''.join(' {0}="{1}"'.format(k.replace('_', '-'), escape(v, True))
+        attrs = ''.join(' {0}="{1}"'.format(htmlify(k), escape(v, True))
                         for k, v in ht.attrs.items())
         return '<{0}{1}>'.format(ht.name, attrs)
 
@@ -54,7 +61,12 @@ def _init(v):
         construct.__name__ = name
         return construct
 
-    for name in 'html head meta link body section div h1 h2 p a b em i span strong br hr'.split():
+    names = ('html head meta link '
+             'body section div figure '
+             'table caption colgroup col tbody thead tfoot tr td th '
+             'h1 h2 p a b em i span strong sub sup br hr').split()
+
+    for name in names:
         v[name] = element_constructor(name)
         __all__.append(name)
 

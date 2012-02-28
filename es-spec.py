@@ -22,11 +22,10 @@ def sketch_schema(document):
     def walk(e, path):
         tag = shorten(e.tag)
         path.append(tag)
-        if has_own_text(e):
-            hits.add(' > '.join(path))
-        if not tag.endswith('Pr') and not tag.endswith('PrEx') and tag != 'pict':
+        hits.add(' > '.join(path))
+        if tag != 'pict':
             kpath = path
-            if tag in ('r', 'p'):
+            if tag in ('r', 'p') or tag.endswith('Pr') or tag.endswith('PrEx'):
                 kpath = [tag]
             for kid in e:
                 walk(kid, kpath)
