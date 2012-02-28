@@ -91,6 +91,9 @@ def transform(e):
                     css = ht
                 else:
                     css.update(ht)
+            elif isinstance(ht, str) and c and isinstance(c[-1], str):
+                # Merge adjacent strings.
+                c[-1] += ht
             elif ht is not None:
                 c.append(ht)
 
