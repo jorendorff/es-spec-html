@@ -151,8 +151,10 @@ def transform(e):
                     if not css:
                         if cls == 'Heading1':
                             return h1(*c)
-                        if cls in ('Heading2', 'Heading3', 'Heading4'):
+                        elif cls in ('Heading2', 'Heading3', 'Heading4'):
                             return h2(*c)
+                        else:
+                            return p(*c)
                 return p(*c, style=dict_to_css(css))
             else:
                 return p(*c)
