@@ -1,3 +1,4 @@
+import collections
 from xml.etree import ElementTree
 from html import *
 
@@ -29,6 +30,7 @@ def bloat(name):
     return '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}' + name
 
 def transformPr(e):
+    val_key = bloat('val')
     assert e.text is None
 
     pr = {}
@@ -47,20 +49,37 @@ def transformPr(e):
             if not k.keys():
                 put('font-weight', 'bold')
         elif name == 'vertAlign':
-            if list(k.keys()) == [bloat('val')]:
-                v = k.get(bloat('val'))
+            if list(k.keys()) == [val_key]:
+                v = k.get(val_key)
                 if v == 'superscript':
                     put('vertical-align', 'super')
                 elif v == 'subscript':
                     put('vertical-align', 'sub')
+        elif name == 'numPr':
+            ilvl = None
+            numId = None
+            for item in k:
+                item_tag = shorten(item.tag)
+                if item_tag == 'ilvl':
+                    assert list(item.keys()) == [val_key]
+                    assert ilvl is None
+                    ilvl = item.get(val_key)
+                else:
+                    assert item_tag == 'numId'
+                    assert list(item.keys()) == [val_key]
+                    assert numId is None
+                    numId = item.get(val_key)
+            put('@num', ilvl + '/' + numId)
         elif name == 'pStyle':
-            if list(k.keys()) == [bloat('val')]:
-                put('@cls', k.get(bloat('val')))
+            if list(k.keys()) == [val_key]:
+                put('@cls', k.get(val_key))
 
     return pr or None
 
 def dict_to_css(d):
     return "; ".join(p + ": " + v for p, v in d.items())
+
+unrecognized_styles = collections.defaultdict(int)
 
 def transform(e):
     name = shorten(e.tag)
@@ -148,15 +167,73 @@ def transform(e):
 
         elif name == 'p':
             if css is not None:
+                num = None
+                if '@num' in css:
+                    num = css['@num']
+                    del css['@num']
+                    if not css:
+                        return li(*c)
+
                 if '@cls' in css:
                     cls = css['@cls']
                     del css['@cls']
                     if not css:
-                        if cls == 'Heading1':
+                        if cls in ('Alg2', 'Alg3', 'Alg4', 'Alg40', 'Alg41', 'M4'):
+                            if num is not None:
+                                return li(*c)
+                            else:
+                                # apparently useless markup
+                                if len(c) == 0:
+                                    return None
+                                else:
+                                    return p(*c)
+                        elif cls == 'ANNEX':
+                            # TODO - add annex heading, which is computed in the original
                             return h1(*c)
-                        elif cls in ('Heading2', 'Heading3', 'Heading4'):
+                        elif cls == 'bibliography':
+                            if len(c) == 0:
+                                return None
+                            return li(*c, class_="bibliography-entry")
+                        elif cls == 'BulletNotlast':
+                            return li(*c)
+                        elif cls in ('CodeSample3', 'CodeSample4'):
+                            return pre(*c)
+                        elif cls in ('Definition', 'M0'):
+                            # apparently useless markup
+                            return p(*c)
+                        elif cls == 'Figuretitle':
+                            return figcaption(*c)
+                        elif cls == 'Heading1':
+                            return h1(*c)
+                        elif cls in ('Heading2', 'Heading3', 'Heading4', 'Heading5', 'TermNum'):
                             return h2(*c)
+                        elif cls == 'M20':
+                            return div(*c, class_="math-display")
+                        elif cls == 'MathDefinition4':
+                            return div(*c, class_="display")
+                        elif cls == 'MathSpecialCase3':
+                            return li(*c)
+                        elif cls == 'Note':
+                            return div(*c, class_="note")
+                        elif cls == 'RefNorm':
+                            return p(*c, class_="formal-reference")
+                        elif cls == 'Syntax':
+                            return h2(*c)
+                        elif cls in ('SyntaxRule', 'SyntaxRule2'):
+                            return div(*c, class_="gp")
+                        elif cls in ('SyntaxDefinition', 'SyntaxDefinition2'):
+                            return div(*c, class_="rhs")
+                        elif cls == 'Tabletitle':
+                            return figcaption(*c)
+                        elif cls == 'Terms':
+                            return p(dfn(*c))
+                        elif cls == 'zzBiblio':
+                            return h1(*c)
+                        elif cls == 'zzSTDTitle':
+                            return div(*c, class_="inner-title")
                         else:
+                            unrecognized_styles[cls] += 1
+                            #return p(span('<{0}>'.format(cls), style="color:red"), *c)
                             return p(*c)
                 return p(*c, style=dict_to_css(css))
             else:

@@ -62,9 +62,11 @@ def _init(v):
         return construct
 
     names = ('html head meta link '
-             'body section div figure '
              'table caption colgroup col tbody thead tfoot tr td th '
-             'h1 h2 p a b em i span strong sub sup br hr').split()
+             'body section nav article aside h1 h2 h3 h4 h5 h6 hgroup header footer address '
+             'p hr pre blockquote ol ul li dl dt dd figure figcaption div '
+             'a em strong small s cite q dfn abbr data time code var '
+             'samp kbd sub sup i b u mark ruby rt rp bdi bdo span br wbr').split()
 
     for name in names:
         v[name] = element_constructor(name)

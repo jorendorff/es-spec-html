@@ -2,7 +2,7 @@
 
 import zipfile
 from xml.etree import ElementTree
-from transform import transform, shorten
+from transform import transform, shorten, unrecognized_styles
 import html
 from cgi import escape
 
@@ -68,6 +68,8 @@ def save_xml(document):
 
 def save_html(document):
     result = transform(document)
+    for k, v in sorted(unrecognized_styles.items(), key=lambda pair: pair[1]):
+        print(k, v)
     html.save_html('doc.html', result)
 
 save_html(document)

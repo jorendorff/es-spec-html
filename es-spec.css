@@ -56,6 +56,9 @@ pre {
     margin-left: 2em;
     font-size: 85%;
 }
+div.math-display {
+    margin-left: 4em;
+}
 
 a:link {
     text-decoration: none;
