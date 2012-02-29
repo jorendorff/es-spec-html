@@ -291,12 +291,12 @@ def transform(e):
                     'F0A3': '\u2264', # less-than or equal to
                     'F0A5': '\u221e', # infinity
                     'F0B3': '\u2265', # greater-than or equal to
-                    'F0B4': '\u00d7', # times sign
+                    'F0B4': '\u00d7', # multiplication sign
                     'F0B8': '\u00f7', # division sign
                     'F0B9': '\u2260', # not equal to
                     'F0CF': '\u2208', # element of
-                    'F0D4': '\u2122', # trademark sign
-                    'F0E4': '\u2122'  # trademark sign again
+                    'F0D4': '\u2122', # trade mark sign
+                    'F0E4': '\u2122'  # trade mark sign (again)
                 }
                 ch = _symbols.get(attrs['char'], '\ufffd') # U+FFFD, replacement character
                 if ch == '\ufffd':

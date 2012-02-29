@@ -10,23 +10,28 @@ import html
 def fixup_sections(doc):
     """ Group h1 elements and subsequent elements of all kinds together into sections. """
 
-    def heading_number(h):
-        """ h is an h1 element. Dig into it and pull out the heading number.
-        Return the number (as a string) or None if there is no heading number. """
+    def heading_info(h):
+        """ h is an h1 element. Return a pair (sec_num, title).
+        sec_num is the section number, as a string, or None.
+        title is the title, another string, or None.
+        """
+
         c = h.content
         if len(c) == 0:
-            return None
+            return None, None
         s = c[0]
         if not isinstance(s, str):
-            return None
+            return None, None
+
         num, tab, title = s.partition('\t')
         if tab is None:
             parts = s.split(None, 1)
             if len(parts) == 2:
-                return parts[0]
+                num, title = parts
             else:
-                return None
-        return num
+                return None, s
+
+        return num, title
 
     def contains(a, b):
         """ True if section `a` contains section `b` as a subsection.
@@ -35,27 +40,34 @@ def fixup_sections(doc):
         """
         return a is not None and (b is None or b.startswith(a + "."))
 
-    def wrap(sec_num, start):
+    def wrap(sec_num, sec_title, start):
         """ Wrap the section starting at body[start] in a section element. """
-        print(">>> wrap({0}, {1})".format(sec_num, start))
         j = start + 1
         while j < len(body):
             kid = body[j]
             if not isinstance(kid, str) and kid.name == "h1":
-                kid_num = heading_number(kid)
+                kid_num, kid_title = heading_info(kid)
                 if contains(sec_num, kid_num):
-                    wrap(kid_num, j)  # kid starts a subsection. Wrap it!
+                    # kid starts a subsection. Wrap it!
+                    wrap(kid_num, kid_title, j)
                 else:
-                    break  # kid starts the next section. Done!
+                    # kid starts the next section. Done!
+                    break
             j += 1
         stop = j
 
-        # Actually do the wrapping.
         attrs = {}
         if sec_num is not None and sec_num[:1].isdigit():
             attrs['id'] = "sec-" + sec_num
+            span = html.span(
+                html.a(sec_num, href="#sec-" + num, title="link to this section"),
+                class_="secnum")
+            c = body[start].content
+            c[0] = ' ' + sec_title
+            c.insert(0, span)
+
+        # Actually do the wrapping.
         body[start:stop] = [html.section(*body[start:stop], **attrs)]
-        print("<<< done wrapping section", sec_num)
 
     assert len(doc.content) == 2
     body_elt = doc.content[1]
@@ -69,7 +81,8 @@ def fixup_sections(doc):
     while i < len(body):
         kid = body[i]
         if not isinstance(kid, str) and kid.name == "h1":
-            wrap(heading_number(kid), i)
+            num, title = heading_info(kid)
+            wrap(num, title, i)
         i += 1
 
 def fixup_code(e):
