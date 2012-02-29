@@ -239,9 +239,38 @@ def fixup_lists(e):
 
     kids[:] = new_content
 
+def fixup_grammar(e):
+    """ Fix div.gp and div.rhs elements in `e` by changing the div.gp to a div.lhs
+    and wrapping them both in a new div.gp. """
+
+    def wrap(parent_list, start):
+        j = start + 1
+        while j < len(parent_list):
+            sib = parent_list[j]
+            if isinstance(sib, str) or sib.name != "div" or sib.attrs.get("class_") != "rhs":
+                break
+            j += 1
+
+        if j > start + 1:
+            stop = j
+            parent_list[start].attrs["class_"] = "lhs"
+            parent_list[start:stop] = [html.div(*parent_list[start:stop], class_="gp")]
+
+    i = 0
+    while i < len(e.content):
+        kid = e.content[i]
+        if not isinstance(kid, str):
+            if kid.name == "div" and kid.attrs.get("class_") == "gp":
+                wrap(e.content, i)
+            elif kid.name in ('body', 'section', 'div'):
+                fixup_grammar(kid)
+        i += 1
+
+
 def fixup(doc):
     fixup_sections(doc)
     fixup_code(doc)
     fixup_notes(doc)
     fixup_lists(doc)
+    fixup_grammar(doc)
     return doc
