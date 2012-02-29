@@ -19,6 +19,17 @@ class Element:
         write_html(f, self)
         return f.getvalue()
 
+# These tags all insist on being emitted on a line (or more) of their own.
+# These tags all have in common that inserting space before and/or after them
+# does not affect rendering.
+_spaceable_tags = set('html head title base link meta style '
+                      'table caption colgroup col tbody thead tfoot tr td th '
+                      'body section nav article aside h1 h2 h3 h4 h5 h6 header footer '
+                      'p hr pre blockquote ol ul li dl dt dd figure figcaption div '.split())
+
+def is_spaceable(ht):
+    return not isinstance(ht, str) and ht.name in _spaceable_tags
+
 def escape(s, quote=False):
     def replace(m):
         c = ord(m.group(0))
@@ -66,36 +77,47 @@ def write_html(f, ht):
             if ht.name in empty_tags and not ht.content:
                 f.write("\n")
             else:
-                if ht.name != 'body' and any(isinstance(k, str) for k in ht.content):
-                    for k in ht.content:
-                        write_inline(f, k)
+                inner_indent = indent
+                if ht.name not in non_indenting_tags:
+                    inner_indent += "  "
+
+                if any(not is_spaceable(k) for k in ht.content):
+                    write_inline_content(f, ht.content, inner_indent)
                 else:
                     f.write("\n")
-                    inner_indent = indent
-                    if ht.name not in non_indenting_tags:
-                        inner_indent += "  "
                     for k in ht.content:
                         write_block(f, k, inner_indent)
                     f.write(indent)
                 f.write("</{0}>\n".format(ht.name))
 
-    def write_inline(f, ht):
+    def write_inline_content(f, content, indent):
+        for k in content:
+            if not isinstance(k, str) and k.name in ('ol', 'ul', 'table'):
+                f.write('\n')
+                write_block(f, k, indent)
+                f.write(indent)
+            else:
+                write_inline(f, k, indent)
+
+    def write_inline(f, ht, indent):
         if isinstance(ht, str):
             f.write(escape(ht))
         else:
             f.write(start_tag(ht))
+            write_inline_content(f, ht.content, indent)
             if ht.content or ht.name not in empty_tags:
-                for k in ht.content:
-                    write_inline(f, k)
                 f.write("</{0}>".format(ht.name))
 
     write_block(f, ht)
 
 __all__ = []  # modified by _init
 
+_seen = set()
+
 def _init(v):
     def element_constructor(name):
         def construct(*content, **attrs):
+            _seen.add(name)
             return Element(name, attrs, None, list(content))
         construct.__name__ = name
         return construct
