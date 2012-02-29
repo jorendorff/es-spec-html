@@ -791,7 +791,7 @@
 <p>states that the nonterminal WhileStatement represents the token <code>while</code>, followed by a left parenthesis token, followed by an Expression, followed by a right parenthesis token, followed by a Statement. The occurrences of Expression and Statement are themselves nonterminals. As another example, the syntactic definition:</p>
 <div class="gp">
   <div class="lhs">ArgumentList <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">AssignmentExpression<span><br>ArgumentList</span><code> , </code>AssignmentExpression</div>
+  <div class="rhs">AssignmentExpression<br>ArgumentList<code> , </code>AssignmentExpression</div>
 </div>
 <p>states that an ArgumentList may represent either a single AssignmentExpression or an ArgumentList, followed by a comma, followed by an AssignmentExpression. This definition of ArgumentList is recursive, that is, it is defined in terms of itself. The result is that an ArgumentList may contain any positive number of arguments, separated by commas, where each argument expression is an AssignmentExpression. Such recursive definitions of nonterminals are common.</p>
 <p>The subscripted suffix &ldquo;<sub>opt</sub>&rdquo;, which may appear after a terminal or nonterminal, indicates an optional symbol. The alternative containing the optional symbol actually specifies two right-hand sides, one that omits the optional element and one that includes it. This means that:</p>
@@ -802,7 +802,7 @@
 <p>is a convenient abbreviation for:</p>
 <div class="gp">
   <div class="lhs">VariableDeclaration <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">Identifier<span><br>Identifier Initialiser</span></div>
+  <div class="rhs">Identifier<br>Identifier Initialiser</div>
 </div>
 <p>and that:</p>
 <div class="gp">
@@ -843,12 +843,12 @@
 </div>
 <div class="gp">
   <div class="lhs">DecimalDigits <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs">DecimalDigit<span><br>DecimalDigits DecimalDigit</span></div>
+  <div class="rhs">DecimalDigit<br>DecimalDigits DecimalDigit</div>
 </div>
 <p>the definition</p>
 <div class="gp">
   <div class="lhs">LookaheadExample <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs"><code>n</code> <span style="font-family: sans-serif">[lookahead </span><span style="font-family: sans-serif">&isin;</span><span style="font-family: sans-serif"> {</span><code>1</code>, <code>3</code>, <code>5</code>, <code>7</code>, <code>9</code><span style="font-family: sans-serif">}]</span> DecimalDigits<span><br>DecimalDigit </span> <span style="font-family: sans-serif">[lookahead </span><span style="font-family: sans-serif">&isin;</span> DecimalDigit <span style="font-family: sans-serif">]</span></div>
+  <div class="rhs"><code>n</code> <span style="font-family: sans-serif">[lookahead </span><span style="font-family: sans-serif">&isin;</span><span style="font-family: sans-serif"> {</span><code>1</code>, <code>3</code>, <code>5</code>, <code>7</code>, <code>9</code><span style="font-family: sans-serif">}]</span> DecimalDigits<br>DecimalDigit  <span style="font-family: sans-serif">[lookahead </span><span style="font-family: sans-serif">&isin;</span> DecimalDigit <span style="font-family: sans-serif">]</span></div>
 </div>
 <p>matches either the letter <code>n</code> followed by one or more decimal digits the first of which is even, or a decimal digit not followed by another decimal digit.</p>
 <p>If the phrase &ldquo;[no <span style="font-family: Times New Roman; font-style: italic">LineTerminator</span> here]&rdquo; appears in the right-hand side of a production of the syntactic grammar, it indicates that the production is <i>a restricted production</i>: it may not be used if a LineTerminator occurs in the input stream at the indicated position. For example, the production:</p>
@@ -947,11 +947,11 @@
 <h2>Syntax</h2>
 <div class="gp">
   <div class="lhs">InputElementDiv <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs">WhiteSpace<span><br>LineTerminator</span><span><br>Comment</span><span><br>Token</span><span><br>DivPunctuator</span><br></div>
+  <div class="rhs">WhiteSpace<br>LineTerminator<br>Comment<br>Token<br>DivPunctuator<br></div>
 </div>
 <div class="gp">
   <div class="lhs">InputElementRegExp <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs">WhiteSpace<span><br>LineTerminator</span><span><br>Comment</span><span><br>Token</span><span><br>RegularExpressionLiteral</span></div>
+  <div class="rhs">WhiteSpace<br>LineTerminator<br>Comment<br>Token<br>RegularExpressionLiteral</div>
 </div>
 <section id="sec-7.1">
 <h1><span class="secnum"><a href="#sec-7" title="link to this section">7.1</a></span> Unicode Format-Control Characters</h1>
@@ -1115,7 +1115,7 @@
 <h2>Syntax</h2>
 <div class="gp">
   <div class="lhs">WhiteSpace <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs">&lt;TAB&gt;<span><br>&lt;VT&gt;</span><span><br>&lt;FF&gt;</span><span><br>&lt;SP&gt;</span><span><br>&lt;NBSP&gt;</span><span><br>&lt;BOM&gt;</span><span><br>&lt;USP&gt;</span></div>
+  <div class="rhs">&lt;TAB&gt;<br>&lt;VT&gt;<br>&lt;FF&gt;<br>&lt;SP&gt;<br>&lt;NBSP&gt;<br>&lt;BOM&gt;<br>&lt;USP&gt;</div>
 </div>
 </section>
 <section id="sec-7.3">
@@ -1188,11 +1188,11 @@
 <h2>Syntax</h2>
 <div class="gp">
   <div class="lhs">LineTerminator <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs">&lt;LF&gt;<span><br>&lt;CR&gt;</span><span><br>&lt;LS&gt;</span><span><br>&lt;PS&gt;</span></div>
+  <div class="rhs">&lt;LF&gt;<br>&lt;CR&gt;<br>&lt;LS&gt;<br>&lt;PS&gt;</div>
 </div>
 <div class="gp">
   <div class="lhs">LineTerminatorSequence <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs">&lt;LF&gt;<span><br>&lt;CR&gt; </span><span style="font-family: sans-serif">[lookahead</span> <span style="font-family: sans-serif">&isin;</span> &lt;LF&gt; <span style="font-family: sans-serif">]</span><span><br>&lt;LS&gt;</span><span><br>&lt;PS&gt;</span><span><br>&lt;CR&gt; &lt;LF&gt;</span></div>
+  <div class="rhs">&lt;LF&gt;<br>&lt;CR&gt; <span style="font-family: sans-serif">[lookahead</span> <span style="font-family: sans-serif">&isin;</span> &lt;LF&gt; <span style="font-family: sans-serif">]</span><br>&lt;LS&gt;<br>&lt;PS&gt;<br>&lt;CR&gt; &lt;LF&gt;</div>
 </div>
 </section>
 <section id="sec-7.4">
@@ -1203,7 +1203,7 @@
 <h2>Syntax</h2>
 <div class="gp">
   <div class="lhs">Comment <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs">MultiLineComment<span><br>SingleLineComment</span></div>
+  <div class="rhs">MultiLineComment<br>SingleLineComment</div>
 </div>
 <div class="gp">
   <div class="lhs">MultiLineComment <span style="font-family: sans-serif; font-weight: bold">::</span></div>
@@ -1243,7 +1243,7 @@
 <h2>Syntax</h2>
 <div class="gp">
   <div class="lhs">Token <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs">IdentifierName<span><br>Punctuator</span><span><br>NumericLiteral</span><span><br>StringLiteral</span></div>
+  <div class="rhs">IdentifierName<br>Punctuator<br>NumericLiteral<br>StringLiteral</div>
 </div>
 <div class="note">
   <p><span class="nh">NOTE</span> The <span style="font-family: Times New Roman; font-style: italic">DivPunctuator</span> and <span style="font-family: Times New Roman; font-style: italic">RegularExpressionLiteral</span> productions define tokens, but are not included in the <span style="font-family: Times New Roman; font-style: italic">Token</span> production.</p>
@@ -1263,7 +1263,7 @@
 </div>
 <div class="gp">
   <div class="lhs">IdentifierName <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs">IdentifierStart<span><br>IdentifierName IdentifierPart</span></div>
+  <div class="rhs">IdentifierStart<br>IdentifierName IdentifierPart</div>
 </div>
 <div class="gp">
   <div class="lhs">IdentifierStart <span style="font-family: sans-serif; font-weight: bold">::</span></div>
@@ -1271,7 +1271,7 @@
 </div>
 <div class="gp">
   <div class="lhs">IdentifierPart <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs">IdentifierStart<span><br>UnicodeCombiningMark</span><span><br>UnicodeDigit</span><span><br>UnicodeConnectorPunctuation</span><br>&lt;ZWNJ&gt;<span><br>&lt;ZWJ&gt;</span></div>
+  <div class="rhs">IdentifierStart<br>UnicodeCombiningMark<br>UnicodeDigit<br>UnicodeConnectorPunctuation<br>&lt;ZWNJ&gt;<br>&lt;ZWJ&gt;</div>
 </div>
 <div class="gp">
   <div class="lhs">UnicodeLetter <span style="font-family: sans-serif; font-weight: bold">::</span></div>
@@ -1297,7 +1297,7 @@
 </ol>
 <div class="gp">
   <div class="lhs">IdentifierName <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs">IdentifierStart<span><br>IdentifierName IdentifierPart</span></div>
+  <div class="rhs">IdentifierStart<br>IdentifierName IdentifierPart</div>
 </div>
 <ol class="proc">
   <li>Return the String value consisting of the sequence of characters corresponding to IdentifierName.</li>
@@ -1308,7 +1308,7 @@
 <h2>Syntax</h2>
 <div class="gp">
   <div class="lhs">ReservedWord <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs">Keyword<span><br>FutureReservedWord</span><span><br>NullLiteral</span><span><br>BooleanLiteral</span></div>
+  <div class="rhs">Keyword<br>FutureReservedWord<br>NullLiteral<br>BooleanLiteral</div>
 </div>
 <section id="sec-7.6.1.1">
 <h1><span class="secnum"><a href="#sec-7" title="link to this section">7.6.1.1</a></span> Keywords</h1>
@@ -1687,11 +1687,11 @@
 <h2>Syntax</h2>
 <div class="gp">
   <div class="lhs">Literal <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs">NullLiteral<span><br>ValueLiteral</span></div>
+  <div class="rhs">NullLiteral<br>ValueLiteral</div>
 </div>
 <div class="gp">
   <div class="lhs">ValueLiteral <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs">BooleanLiteral<span><br>NumericLiteral</span><span><br>StringLiteral</span> <span><br>RegularExpressionLiteral</span></div>
+  <div class="rhs">BooleanLiteral<br>NumericLiteral<br>StringLiteral <br>RegularExpressionLiteral</div>
 </div>
 <section id="sec-7.8.1">
 <h1><span class="secnum"><a href="#sec-7" title="link to this section">7.8.1</a></span> Null Literals</h1>
@@ -1719,19 +1719,19 @@
 <h2>Syntax</h2>
 <div class="gp">
   <div class="lhs">NumericLiteral <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs">DecimalLiteral<span><br>HexIntegerLiteral</span></div>
+  <div class="rhs">DecimalLiteral<br>HexIntegerLiteral</div>
 </div>
 <div class="gp">
   <div class="lhs">DecimalLiteral <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs">DecimalIntegerLiteral <code>.</code> DecimalDigits<span style="font-family: sans-serif; vertical-align: sub">opt</span>   ExponentPart<span style="font-family: sans-serif; vertical-align: sub">opt</span><br><code>.</code> DecimalDigits ExponentPart<span style="font-family: sans-serif; vertical-align: sub">opt</span><span><br>DecimalIntegerLiteral ExponentPart</span><span style="font-family: sans-serif; vertical-align: sub">opt</span></div>
+  <div class="rhs">DecimalIntegerLiteral <code>.</code> DecimalDigits<span style="font-family: sans-serif; vertical-align: sub">opt</span>   ExponentPart<span style="font-family: sans-serif; vertical-align: sub">opt</span><br><code>.</code> DecimalDigits ExponentPart<span style="font-family: sans-serif; vertical-align: sub">opt</span><br>DecimalIntegerLiteral ExponentPart<span style="font-family: sans-serif; vertical-align: sub">opt</span></div>
 </div>
 <div class="gp">
   <div class="lhs">DecimalIntegerLiteral <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs"><code>0</code><span><br>NonZeroDigit DecimalDigits</span><span style="font-family: sans-serif; vertical-align: sub">opt</span></div>
+  <div class="rhs"><code>0</code><br>NonZeroDigit DecimalDigits<span style="font-family: sans-serif; vertical-align: sub">opt</span></div>
 </div>
 <div class="gp">
   <div class="lhs">DecimalDigits <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs">DecimalDigit<span><br>DecimalDigits DecimalDigit</span></div>
+  <div class="rhs">DecimalDigit<br>DecimalDigits DecimalDigit</div>
 </div>
 <div class="gp">
   <div class="lhs">DecimalDigit <span style="font-family: sans-serif; font-weight: bold">::</span> <span style="font-family: sans-serif; font-weight: bold">one of</span></div>
@@ -1755,7 +1755,7 @@
 </div>
 <div class="gp">
   <div class="lhs">HexIntegerLiteral <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs"><code>0x</code> HexDigit<br><code>0X</code> HexDigit<span><br>HexIntegerLiteral HexDigit</span></div>
+  <div class="rhs"><code>0x</code> HexDigit<br><code>0X</code> HexDigit<br>HexIntegerLiteral HexDigit</div>
 </div>
 <div class="gp">
   <div class="lhs">HexDigit <span style="font-family: sans-serif">::</span> <span style="font-family: sans-serif">one of</span>&#x9;</div>
@@ -1834,11 +1834,11 @@
 </div>
 <div class="gp">
   <div class="lhs">DoubleStringCharacter <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs">SourceCharacter <span style="font-family: sans-serif; font-weight: bold">but not one of</span> <code>"</code> <span style="font-family: sans-serif; font-weight: bold">or</span> <code>\</code> <span style="font-family: sans-serif; font-weight: bold">or</span> LineTerminator<br><code>\ </code>EscapeSequence<span><br>LineContinuation</span></div>
+  <div class="rhs">SourceCharacter <span style="font-family: sans-serif; font-weight: bold">but not one of</span> <code>"</code> <span style="font-family: sans-serif; font-weight: bold">or</span> <code>\</code> <span style="font-family: sans-serif; font-weight: bold">or</span> LineTerminator<br><code>\ </code>EscapeSequence<br>LineContinuation</div>
 </div>
 <div class="gp">
   <div class="lhs">SingleStringCharacter <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs">SourceCharacter <span style="font-family: sans-serif; font-weight: bold">but not one of</span> <code>'</code> <span style="font-family: sans-serif; font-weight: bold">or</span> <code>\</code> <span style="font-family: sans-serif; font-weight: bold">or</span> LineTerminator<br><code>\ </code>EscapeSequence<span><br>LineContinuation</span></div>
+  <div class="rhs">SourceCharacter <span style="font-family: sans-serif; font-weight: bold">but not one of</span> <code>'</code> <span style="font-family: sans-serif; font-weight: bold">or</span> <code>\</code> <span style="font-family: sans-serif; font-weight: bold">or</span> LineTerminator<br><code>\ </code>EscapeSequence<br>LineContinuation</div>
 </div>
 <div class="gp">
   <div class="lhs">LineContinuation <span style="font-family: sans-serif; font-weight: bold">::</span></div>
@@ -1846,11 +1846,11 @@
 </div>
 <div class="gp">
   <div class="lhs">EscapeSequence <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs">CharacterEscapeSequence<br><code>0</code>  <span style="font-family: sans-serif">[lookahead </span><span style="font-family: sans-serif">&isin;</span> DecimalDigit<span style="font-family: sans-serif">]</span><span><br>HexEscapeSequence</span><span><br>UnicodeEscapeSequence</span></div>
+  <div class="rhs">CharacterEscapeSequence<br><code>0</code>  <span style="font-family: sans-serif">[lookahead </span><span style="font-family: sans-serif">&isin;</span> DecimalDigit<span style="font-family: sans-serif">]</span><br>HexEscapeSequence<br>UnicodeEscapeSequence</div>
 </div>
 <div class="gp">
   <div class="lhs">CharacterEscapeSequence <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs">SingleEscapeCharacter<span><br>NonEscapeCharacter</span></div>
+  <div class="rhs">SingleEscapeCharacter<br>NonEscapeCharacter</div>
 </div>
 <div class="gp">
   <div class="lhs">SingleEscapeCharacter <span style="font-family: sans-serif; font-weight: bold">::</span>  <span style="font-family: sans-serif; font-weight: bold">one of</span></div>
@@ -1862,7 +1862,7 @@
 </div>
 <div class="gp">
   <div class="lhs">EscapeCharacter <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs">SingleEscapeCharacter<span><br>DecimalDigit</span><br><code>x</code><b><br></b><code>u</code></div>
+  <div class="rhs">SingleEscapeCharacter<br>DecimalDigit<br><code>x</code><b><br></b><code>u</code></div>
 </div>
 <div class="gp">
   <div class="lhs">HexEscapeSequence <span style="font-family: sans-serif; font-weight: bold">::</span></div>
@@ -2068,15 +2068,15 @@
 </div>
 <div class="gp">
   <div class="lhs">RegularExpressionChars <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs"><span style="font-family: sans-serif">[empty]</span><span><br>RegularExpressionChars RegularExpressionChar</span></div>
+  <div class="rhs"><span style="font-family: sans-serif">[empty]</span><br>RegularExpressionChars RegularExpressionChar</div>
 </div>
 <div class="gp">
   <div class="lhs">RegularExpressionFirstChar <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs">RegularExpressionNonTerminator <span style="font-family: sans-serif; font-weight: bold">but not one of</span> <code>*</code> <span style="font-family: sans-serif; font-weight: bold">or</span> <code>\</code> <span style="font-family: sans-serif; font-weight: bold">or</span> <code>/ </code><span style="font-family: sans-serif; font-weight: bold">or</span><code> [</code><span><br>RegularExpressionBackslashSequence</span><span><br>RegularExpressionClass</span></div>
+  <div class="rhs">RegularExpressionNonTerminator <span style="font-family: sans-serif; font-weight: bold">but not one of</span> <code>*</code> <span style="font-family: sans-serif; font-weight: bold">or</span> <code>\</code> <span style="font-family: sans-serif; font-weight: bold">or</span> <code>/ </code><span style="font-family: sans-serif; font-weight: bold">or</span><code> [</code><br>RegularExpressionBackslashSequence<br>RegularExpressionClass</div>
 </div>
 <div class="gp">
   <div class="lhs">RegularExpressionChar <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs">RegularExpressionNonTerminator <span style="font-family: sans-serif; font-weight: bold">but not one of</span> <code>\</code> <span style="font-family: sans-serif; font-weight: bold">or</span> <code>/ </code><span style="font-family: sans-serif; font-weight: bold">or</span><code> [</code><span><br>RegularExpressionBackslashSequence</span><span><br>RegularExpressionClass</span></div>
+  <div class="rhs">RegularExpressionNonTerminator <span style="font-family: sans-serif; font-weight: bold">but not one of</span> <code>\</code> <span style="font-family: sans-serif; font-weight: bold">or</span> <code>/ </code><span style="font-family: sans-serif; font-weight: bold">or</span><code> [</code><br>RegularExpressionBackslashSequence<br>RegularExpressionClass</div>
 </div>
 <div class="gp">
   <div class="lhs">RegularExpressionBackslashSequence <span style="font-family: sans-serif; font-weight: bold">::</span></div>
@@ -2092,7 +2092,7 @@
 </div>
 <div class="gp">
   <div class="lhs">RegularExpressionClassChars <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs"><span style="font-family: sans-serif">[empty]</span><span><br>RegularExpressionClassChars</span> RegularExpressionClassChar</div>
+  <div class="rhs"><span style="font-family: sans-serif">[empty]</span><br>RegularExpressionClassChars RegularExpressionClassChar</div>
 </div>
 <div class="gp">
   <div class="lhs">RegularExpressionClassChar <span style="font-family: sans-serif; font-weight: bold">::</span></div>
@@ -2100,7 +2100,7 @@
 </div>
 <div class="gp">
   <div class="lhs">RegularExpressionFlags <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs"><span style="font-family: sans-serif">[empty]</span><span><br>RegularExpressionFlags IdentifierPart</span></div>
+  <div class="rhs"><span style="font-family: sans-serif">[empty]</span><br>RegularExpressionFlags IdentifierPart</div>
 </div>
 <div class="note">
   <p><span class="nh">NOTE</span> Regular expression literals may not be empty; instead of representing an empty regular expression literal, the characters <code>//</code> start a single-line comment. To specify an empty regular expression, use:  <code>/(?:)/</code>.</p>
@@ -2164,32 +2164,32 @@
 <p>The source</p>
 <pre>{ 1 2 } 3</pre>
 <p>is not a valid sentence in the ECMAScript grammar, even with the automatic semicolon insertion rules. In contrast, the source</p>
-<pre>{ 1<span><br>2 } 3</span></pre>
+<pre>{ 1<br>2 } 3</pre>
 <p>is also not a valid ECMAScript sentence, but is transformed by automatic semicolon insertion into the following:</p>
-<pre>{ 1<span><br>;2 ;} 3;</span></pre>
+<pre>{ 1<br>;2 ;} 3;</pre>
 <p>which is a valid ECMAScript sentence.</p>
 <p>The source</p>
-<pre>for (a; b<span><br>)</span></pre>
+<pre>for (a; b<br>)</pre>
 <p>is not a valid ECMAScript sentence and is not altered by automatic semicolon insertion because the semicolon is needed for the header of a <code>for</code> statement. Automatic semicolon insertion never inserts one of the two semicolons in the header of a <code>for</code> statement.</p>
 <p>The source</p>
-<pre>return<span><br>a + b</span></pre>
+<pre>return<br>a + b</pre>
 <p>is transformed by automatic semicolon insertion into the following:</p>
-<pre>return;<span><br>a + b;</span></pre>
+<pre>return;<br>a + b;</pre>
 <div class="note">
   <p><span class="nh">NOTE</span> The expression <code>a + b</code> is not treated as a value to be returned by the <code>return</code> statement, because a LineTerminator separates it from the token <code>return</code>.</p>
 </div>
 <p>The source</p>
-<pre>a = b<span><br>++c</span></pre>
+<pre>a = b<br>++c</pre>
 <p>is transformed by automatic semicolon insertion into the following:</p>
-<pre>a = b;<span><br>++c;</span></pre>
+<pre>a = b;<br>++c;</pre>
 <div class="note">
   <p><span class="nh">NOTE</span> The token <code>++</code> is not treated as a postfix operator applying to the variable <code>b</code>, because a LineTerminator occurs between <code>b</code> and <code>++</code>.</p>
 </div>
 <p>The source</p>
-<pre>if (a &gt; b)<span><br>else c = d</span></pre>
+<pre>if (a &gt; b)<br>else c = d</pre>
 <p>is not a valid ECMAScript sentence and is not altered by automatic semicolon insertion before the <code>else</code> token, even though no production of the grammar applies at that point, because an automatically inserted semicolon would then be parsed as an empty statement.</p>
 <p>The source</p>
-<pre>a = b + c<span><br>(d + e).print()</span></pre>
+<pre>a = b + c<br>(d + e).print()</pre>
 <p>is <i>not</i> transformed by automatic semicolon insertion, because the parenthesised expression that begins the second line can be interpreted as an argument list for a function call:</p>
 <pre>a = b + c(d + e).print()</pre>
 <p>In the circumstance that an assignment statement must begin with a left parenthesis, it is a good idea for the programmer to provide an explicit semicolon at the end of the preceding statement rather than to rely on automatic semicolon insertion.</p>
@@ -3373,7 +3373,7 @@
     </li>
   <li>Else, create a named data property named <i>P </i>on object <i>O </i>as follows
     <ol class="block">
-      <li>Let <i>newDesc</i> be the Property Descriptor<span><br>{[[Value]]: </span><i>V</i>, [[Writable]]: <b>true</b>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}.</li>
+      <li>Let <i>newDesc</i> be the Property Descriptor<br>{[[Value]]: <i>V</i>, [[Writable]]: <b>true</b>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}.</li>
       <li>Return the result of calling the [[DefineOwnProperty]] internal method of <i>O</i> passing <i>P</i>, <i>newDesc</i>, and <i>Throw</i> as arguments.</li>
     </ol>
     </li>
@@ -3821,7 +3821,7 @@
 <h2>Syntax </h2>
 <div class="gp">
   <div class="lhs">StringNumericLiteral <span style="font-family: sans-serif; font-weight: bold">:::</span></div>
-  <div class="rhs">StrWhiteSpace<span style="font-family: sans-serif; vertical-align: sub">opt</span><span><br>StrWhiteSpace</span><span style="font-family: sans-serif; vertical-align: sub">opt</span> StrNumericLiteral StrWhiteSpace<span style="font-family: sans-serif; vertical-align: sub">opt</span></div>
+  <div class="rhs">StrWhiteSpace<span style="font-family: sans-serif; vertical-align: sub">opt</span><br>StrWhiteSpace<span style="font-family: sans-serif; vertical-align: sub">opt</span> StrNumericLiteral StrWhiteSpace<span style="font-family: sans-serif; vertical-align: sub">opt</span></div>
 </div>
 <div class="gp">
   <div class="lhs">StrWhiteSpace <span style="font-family: sans-serif; font-weight: bold">:::</span></div>
@@ -3829,11 +3829,11 @@
 </div>
 <div class="gp">
   <div class="lhs">StrWhiteSpaceChar <span style="font-family: sans-serif; font-weight: bold">:::</span></div>
-  <div class="rhs">WhiteSpace<span><br>LineTerminator</span></div>
+  <div class="rhs">WhiteSpace<br>LineTerminator</div>
 </div>
 <div class="gp">
   <div class="lhs">StrNumericLiteral <span style="font-family: sans-serif; font-weight: bold">:::</span></div>
-  <div class="rhs">StrDecimalLiteral<span><br>HexIntegerLiteral</span></div>
+  <div class="rhs">StrDecimalLiteral<br>HexIntegerLiteral</div>
 </div>
 <div class="gp">
   <div class="lhs">StrDecimalLiteral <span style="font-family: sans-serif; font-weight: bold">:::</span></div>
@@ -3841,11 +3841,11 @@
 </div>
 <div class="gp">
   <div class="lhs">StrUnsignedDecimalLiteral <span style="font-family: sans-serif; font-weight: bold">:::</span></div>
-  <div class="rhs"><code>Infinity</code><span><br> DecimalDigits </span><code>.</code> DecimalDigits<span style="font-family: sans-serif; vertical-align: sub">opt</span> ExponentPart<span style="font-family: sans-serif; vertical-align: sub">opt</span><br><code>.</code> DecimalDigits ExponentPart<span style="font-family: sans-serif; vertical-align: sub">opt</span><span><br>DecimalDigits ExponentPart</span><span style="font-family: sans-serif; vertical-align: sub">opt</span></div>
+  <div class="rhs"><code>Infinity</code><br> DecimalDigits <code>.</code> DecimalDigits<span style="font-family: sans-serif; vertical-align: sub">opt</span> ExponentPart<span style="font-family: sans-serif; vertical-align: sub">opt</span><br><code>.</code> DecimalDigits ExponentPart<span style="font-family: sans-serif; vertical-align: sub">opt</span><br>DecimalDigits ExponentPart<span style="font-family: sans-serif; vertical-align: sub">opt</span></div>
 </div>
 <div class="gp">
   <div class="lhs">DecimalDigits <span style="font-family: sans-serif; font-weight: bold">:::</span></div>
-  <div class="rhs">DecimalDigit<span><br>DecimalDigits DecimalDigit</span></div>
+  <div class="rhs">DecimalDigit<br>DecimalDigits DecimalDigit</div>
 </div>
 <div class="gp">
   <div class="lhs">DecimalDigit <span style="font-family: sans-serif; font-weight: bold">:::</span> <span style="font-family: sans-serif; font-weight: bold">one of</span></div>
@@ -3865,7 +3865,7 @@
 </div>
 <div class="gp">
   <div class="lhs">HexIntegerLiteral <span style="font-family: sans-serif; font-weight: bold">:::</span></div>
-  <div class="rhs"><code>0x</code> HexDigit<br><code>0X</code> HexDigit<span><br>HexIntegerLiteral HexDigit</span></div>
+  <div class="rhs"><code>0x</code> HexDigit<br><code>0X</code> HexDigit<br>HexIntegerLiteral HexDigit</div>
 </div>
 <div class="gp">
   <div class="lhs">HexDigit <span style="font-family: sans-serif">:::</span> <span style="font-family: sans-serif; font-weight: bold">one of</span></div>
@@ -5216,7 +5216,7 @@
 <h2>Syntax </h2>
 <div class="gp">
   <div class="lhs">PrimaryExpression <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs"><code>this</code><span><br>Identifier</span><span><br>Literal</span><br>SealedArrayLiteral<br>SealedObjectLiteral<br>FunctionExpression<span><br>GeneratorExpression</span><span><br>GeneratorComprehension</span><br><code>(</code> Expression <code>)</code></div>
+  <div class="rhs"><code>this</code><br>Identifier<br>Literal<br>SealedArrayLiteral<br>SealedObjectLiteral<br>FunctionExpression<br>GeneratorExpression<br>GeneratorComprehension<br><code>(</code> Expression <code>)</code></div>
 </div>
 <section id="sec-11.1.1">
 <h1><span class="secnum"><a href="#sec-11" title="link to this section">11.1.1</a></span> The <span style="font-family: monospace">this</span> Keyword</h1>
@@ -5260,11 +5260,11 @@
 </div>
 <div class="gp">
   <div class="lhs">ElementList <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">Elision<span style="font-family: sans-serif; vertical-align: sub">opt</span> AssignmentExpression<span><br>Elision</span><span style="font-family: sans-serif; vertical-align: sub">opt</span> <code>&hellip; </code>AssignmentExpression<span><br>ElementList </span><code>,</code> Elision<span style="font-family: sans-serif; vertical-align: sub">opt</span> AssignmentExpression<span><br>ElementList </span><code>,</code> Elision<span style="font-family: sans-serif; vertical-align: sub">opt</span> SpreadElement</div>
+  <div class="rhs">Elision<span style="font-family: sans-serif; vertical-align: sub">opt</span> AssignmentExpression<br>Elision<span style="font-family: sans-serif; vertical-align: sub">opt</span> <code>&hellip; </code>AssignmentExpression<br>ElementList <code>,</code> Elision<span style="font-family: sans-serif; vertical-align: sub">opt</span> AssignmentExpression<br>ElementList <code>,</code> Elision<span style="font-family: sans-serif; vertical-align: sub">opt</span> SpreadElement</div>
 </div>
 <div class="gp">
   <div class="lhs">Elision<span style="font-family: sans-serif; font-weight: bold"> :</span></div>
-  <div class="rhs"><code>,</code><span><br>Elision </span><code>,</code></div>
+  <div class="rhs"><code>,</code><br>Elision <code>,</code></div>
 </div>
 <div class="gp">
   <div class="lhs">SpreadElement <span style="font-family: sans-serif; font-weight: bold">:</span></div>
@@ -5416,19 +5416,19 @@
 </div>
 <div class="gp">
   <div class="lhs">PropertyNameAndValueList <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">PropertyAssignment<span><br>PropertyNameAndValueList</span> <code>,</code> PropertyAssignment</div>
+  <div class="rhs">PropertyAssignment<br>PropertyNameAndValueList <code>,</code> PropertyAssignment</div>
 </div>
 <div class="gp">
   <div class="lhs">PropertyAssignment <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">IdentifierName<br>PropertyName <code>:</code> AssignmentExpression<span><br>PropertyName</span> <code>(</code> FormalParameterList <code>)</code> <code>{</code> FunctionBody <code>}</code> <br><code>*</code> PropertyName <code>(</code> FormalParameterList <code>)</code> <code>{</code> FunctionBody <code>}</code><br><code>get </code>PropertyName <code>( )</code> <code>{</code> FunctionBody <code>}</code><b><br></b><code>set </code>PropertyName <code>( </code>PropertySetParameterList<code> ) { </code>FunctionBody <code>}</code></div>
+  <div class="rhs">IdentifierName<br>PropertyName <code>:</code> AssignmentExpression<br>PropertyName <code>(</code> FormalParameterList <code>)</code> <code>{</code> FunctionBody <code>}</code> <br><code>*</code> PropertyName <code>(</code> FormalParameterList <code>)</code> <code>{</code> FunctionBody <code>}</code><br><code>get </code>PropertyName <code>( )</code> <code>{</code> FunctionBody <code>}</code><b><br></b><code>set </code>PropertyName <code>( </code>PropertySetParameterList<code> ) { </code>FunctionBody <code>}</code></div>
 </div>
 <div class="gp">
   <div class="lhs">PropertyName <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">IdentifierName<span><br>StringLiteral</span><span><br>NumericLiteral</span></div>
+  <div class="rhs">IdentifierName<br>StringLiteral<br>NumericLiteral</div>
 </div>
 <div class="gp">
   <div class="lhs">PropertySetParameterList <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">BindingIdentifier <span><br>BindingPattern </span></div>
+  <div class="rhs">BindingIdentifier <br>BindingPattern </div>
 </div>
 <section id="sec-11.1.5.1 Static Semantics">
 <h1><span class="secnum"><a href="#sec-11" title="link to this section">11.1.5.1 Static Semantics</a></span> </h1>
@@ -5439,10 +5439,10 @@
   <li>It is a Syntax Error if PropertyAssignment is the production PropertyAssignment <b>:</b> IdentifierName and <span style="font-family: Times New Roman">PropertyDefinitionList</span>(<span style="font-family: Times New Roman">PropName</span> of PropertyAssignment) of PropertyNameAndValueList is not the empty List.</li>
   <li>It is a Syntax Error if PropertyAssignment is the production PropertyAssignment <b>:</b> PropertyName <code>(</code> <span style="font-family: Times New Roman; font-style: italic">FormalParameterList</span><code> ) {</code> FunctionBody <code>}</code> and <span style="font-family: Times New Roman">PropertyDefinitionList</span>(<span style="font-family: Times New Roman">PropName</span> of PropertyAssignment) of PropertyNameAndValueList is not the empty List.</li>
   <li>It is a Syntax Error if PropertyAssignment is the production PropertyAssignment <b>:</b> <code>* </code>PropertyName <code>(</code> <span style="font-family: Times New Roman; font-style: italic">FormalParameterList</span><code> ) {</code> FunctionBody <code>}</code> and <span style="font-family: Times New Roman">PropertyDefinitionList</span>(<span style="font-family: Times New Roman">PropName</span> of PropertyAssignment) of PropertyNameAndValueList is not the empty List.</li>
-  <li>It is a Syntax Error if PropertyAssignment is the production<span><br>   </span>PropertyAssignment <b>:</b> <code>get</code> PropertyName <code>( ) {</code> FunctionBody <code>}</code><span style="font-family: sans-serif"><br></span>and <span style="font-family: Times New Roman">PropertyDefinitionList</span> (<span style="font-family: Times New Roman">PropName</span> of PropertyAssignment) of PropertyNameAndValueList includes a production of the form PropertyAssignment <b>:</b> PropertyName <code>:</code> AssignmentExpression.</li>
-  <li>It is a Syntax Error if PropertyAssignment is the production<span><br>   </span>PropertyAssignment <b>:</b> <code>set</code> PropertyName <code>( </code>PropertySetParameterList<code> )</code> <code>{</code> FunctionBody <code>}</code><span style="font-family: sans-serif"><br></span>and <span style="font-family: Times New Roman">PropertyDefinitionList</span> (<span style="font-family: Times New Roman">PropName</span> of PropertyAssignment) of PropertyNameAndValueList includes a production of the form PropertyAssignment <b>:</b> PropertyName <code>:</code> AssignmentExpression.</li>
-  <li>It is a Syntax Error if PropertyAssignment is the production<span><br>   </span>PropertyAssignment <b>:</b> <code>get</code> PropertyName <code>( ) {</code> FunctionBody <code>}</code><span><br>and </span><span style="font-family: Times New Roman">PropertyDefinitionList</span> (<span style="font-family: Times New Roman">PropName</span> of PropertyAssignment) of PropertyNameAndValueList includes a production of the form PropertyAssignment <b>:</b> <code>get</code> PropertyName <code>( ) {</code> FunctionBody <code>}</code>.</li>
-  <li>It is a Syntax Error if PropertyAssignment is the production<span><br>   </span>PropertyAssignment <b>:</b> <code>set</code> PropertyName <code>( </code>PropertySetParameterList<code> )</code> <code>{</code> FunctionBody <code>}</code><span style="font-family: sans-serif"><br></span>and <span style="font-family: Times New Roman">PropertyDefinitionList</span> (<span style="font-family: Times New Roman">PropName</span> of PropertyAssignment) of PropertyNameAndValueList includes a production of the form<span><br>   </span>PropertyAssignment <b>:</b> <code>set</code> PropertyName <code>( </code>PropertySetParameterList<code> )</code> <code>{</code> FunctionBody <code>}</code>.</li>
+  <li>It is a Syntax Error if PropertyAssignment is the production<br>   PropertyAssignment <b>:</b> <code>get</code> PropertyName <code>( ) {</code> FunctionBody <code>}</code><span style="font-family: sans-serif"><br></span>and <span style="font-family: Times New Roman">PropertyDefinitionList</span> (<span style="font-family: Times New Roman">PropName</span> of PropertyAssignment) of PropertyNameAndValueList includes a production of the form PropertyAssignment <b>:</b> PropertyName <code>:</code> AssignmentExpression.</li>
+  <li>It is a Syntax Error if PropertyAssignment is the production<br>   PropertyAssignment <b>:</b> <code>set</code> PropertyName <code>( </code>PropertySetParameterList<code> )</code> <code>{</code> FunctionBody <code>}</code><span style="font-family: sans-serif"><br></span>and <span style="font-family: Times New Roman">PropertyDefinitionList</span> (<span style="font-family: Times New Roman">PropName</span> of PropertyAssignment) of PropertyNameAndValueList includes a production of the form PropertyAssignment <b>:</b> PropertyName <code>:</code> AssignmentExpression.</li>
+  <li>It is a Syntax Error if PropertyAssignment is the production<br>   PropertyAssignment <b>:</b> <code>get</code> PropertyName <code>( ) {</code> FunctionBody <code>}</code><br>and <span style="font-family: Times New Roman">PropertyDefinitionList</span> (<span style="font-family: Times New Roman">PropName</span> of PropertyAssignment) of PropertyNameAndValueList includes a production of the form PropertyAssignment <b>:</b> <code>get</code> PropertyName <code>( ) {</code> FunctionBody <code>}</code>.</li>
+  <li>It is a Syntax Error if PropertyAssignment is the production<br>   PropertyAssignment <b>:</b> <code>set</code> PropertyName <code>( </code>PropertySetParameterList<code> )</code> <code>{</code> FunctionBody <code>}</code><span style="font-family: sans-serif"><br></span>and <span style="font-family: Times New Roman">PropertyDefinitionList</span> (<span style="font-family: Times New Roman">PropName</span> of PropertyAssignment) of PropertyNameAndValueList includes a production of the form<br>   PropertyAssignment <b>:</b> <code>set</code> PropertyName <code>( </code>PropertySetParameterList<code> )</code> <code>{</code> FunctionBody <code>}</code>.</li>
 </ol>
 <p>PropertyAssignment <b>:</b> PropertyName <code>( </code>FormalParameterList<code> )</code> <code>{</code> FunctionBody <code>} </code></p>
 <p><span style="font-family: sans-serif">a</span><span style="font-family: sans-serif">nd</span></p>
@@ -5659,7 +5659,7 @@
 <h2>Syntax</h2>
 <div class="gp">
   <div class="lhs">MemberExpression <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">PrimaryExpression<span><br>MemberExpression </span><code>[</code> Expression <code>]<br></code>MemberExpression <code>.</code> IdentifierName<br>MemberExpression <code>&lt;|</code> TriangleLiteral<br><code>super</code> <code>[</code> Expression <code>]</code><br><code>super</code> <code>.</code> IdentifierName<br><code>new</code> MemberExpression Arguments</div>
+  <div class="rhs">PrimaryExpression<br>MemberExpression <code>[</code> Expression <code>]<br></code>MemberExpression <code>.</code> IdentifierName<br>MemberExpression <code>&lt;|</code> TriangleLiteral<br><code>super</code> <code>[</code> Expression <code>]</code><br><code>super</code> <code>.</code> IdentifierName<br><code>new</code> MemberExpression Arguments</div>
 </div>
 <div class="gp">
   <div class="lhs">NewExpression <span style="font-family: sans-serif; font-weight: bold">:</span></div>
@@ -5675,22 +5675,22 @@
 </div>
 <div class="gp">
   <div class="lhs">ArgumentList <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">AssignmentExpression<br><code>... </code>AssignmentExpression<span><br>ArgumentList </span><code>,</code> AssignmentExpression<span><br>ArgumentList </span><code>,</code> <code>... </code>AssignmentExpression</div>
+  <div class="rhs">AssignmentExpression<br><code>... </code>AssignmentExpression<br>ArgumentList <code>,</code> AssignmentExpression<br>ArgumentList <code>,</code> <code>... </code>AssignmentExpression</div>
 </div>
 <div class="gp">
   <div class="lhs">TriangleLiteral <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">SealedArrayLiteral<span><br>SealedObjectLiteral</span><span><br>FunctionExpression</span><span><br>ValueLiteral</span></div>
+  <div class="rhs">SealedArrayLiteral<br>SealedObjectLiteral<br>FunctionExpression<br>ValueLiteral</div>
 </div>
 <div class="gp">
   <div class="lhs">LeftHandSideExpression <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">NewExpression<span><br>CallExpression</span></div>
+  <div class="rhs">NewExpression<br>CallExpression</div>
 </div>
 <section id="sec-11.2.1">
 <h1><span class="secnum"><a href="#sec-11" title="link to this section">11.2.1</a></span> Property Accessors</h1>
 <p>Properties are accessed by name, using either the dot notation:</p>
-<div class="gp">MemberExpression <code>.</code> IdentifierName<span><br>CallExpression </span><code>.</code> IdentifierName</div>
+<div class="gp">MemberExpression <code>.</code> IdentifierName<br>CallExpression <code>.</code> IdentifierName</div>
 <p>or the bracket notation:</p>
-<div class="gp">MemberExpression <code>[</code> Expression <code>]</code><span><br>CallExpression </span><code>[</code> Expression <code>]</code></div>
+<div class="gp">MemberExpression <code>[</code> Expression <code>]</code><br>CallExpression <code>[</code> Expression <code>]</code></div>
 <p>The dot notation is explained by the following syntactic conversion:</p>
 <div class="gp">MemberExpression <code>.</code> IdentifierName</div>
 <p>is identical in its behaviour to</p>
@@ -5887,13 +5887,13 @@
 <h2>Syntax</h2>
 <div class="gp">
   <div class="lhs">PostfixExpression <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">LeftHandSideExpression<span><br>LeftHandSideExpression</span> <span style="font-family: sans-serif">[no </span>LineTerminator<span style="font-family: sans-serif"> here]</span><code> ++</code><span><br>LeftHandSideExpression</span> <span style="font-family: sans-serif">[no </span>LineTerminator<span style="font-family: sans-serif"> here]</span><code> --</code></div>
+  <div class="rhs">LeftHandSideExpression<br>LeftHandSideExpression <span style="font-family: sans-serif">[no </span>LineTerminator<span style="font-family: sans-serif"> here]</span><code> ++</code><br>LeftHandSideExpression <span style="font-family: sans-serif">[no </span>LineTerminator<span style="font-family: sans-serif"> here]</span><code> --</code></div>
 </div>
 <p><span style="font-family: sans-serif; font-weight: bold">Static Semantics</span></p>
 <p><span style="font-family: sans-serif; font-weight: bold">Static Semantics:  </span><span style="font-family: sans-serif; font-weight: bold">Early Errors</span></p>
 <div class="gp">
   <div class="lhs">PostfixExpression <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">LeftHandSideExpression <span style="font-family: sans-serif">[no </span>LineTerminator<span style="font-family: sans-serif"> here]</span><code> ++</code><span><br>LeftHandSideExpression</span> <span style="font-family: sans-serif">[no </span>LineTerminator<span style="font-family: sans-serif"> here]</span><code> --</code></div>
+  <div class="rhs">LeftHandSideExpression <span style="font-family: sans-serif">[no </span>LineTerminator<span style="font-family: sans-serif"> here]</span><code> ++</code><br>LeftHandSideExpression <span style="font-family: sans-serif">[no </span>LineTerminator<span style="font-family: sans-serif"> here]</span><code> --</code></div>
 </div>
 <ol class="proc">
   <li>It is a Syntax Error if the PostfixExpression is contained in strict code and LeftHandSideExpression is the Identifier <code>eval</code> or the Identifier <code>arguments</code>.</li>
@@ -6162,7 +6162,7 @@
 <h2>Syntax</h2>
 <div class="gp">
   <div class="lhs">MultiplicativeExpression <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">UnaryExpression<span><br>MultiplicativeExpression </span><code>*</code> UnaryExpression<span><br>MultiplicativeExpression </span><code>/</code> UnaryExpression<span><br>MultiplicativeExpression </span><code>%</code> UnaryExpression</div>
+  <div class="rhs">UnaryExpression<br>MultiplicativeExpression <code>*</code> UnaryExpression<br>MultiplicativeExpression <code>/</code> UnaryExpression<br>MultiplicativeExpression <code>%</code> UnaryExpression</div>
 </div>
 <p><span style="font-family: sans-serif; font-weight: bold">Runtime Semantics: </span><span style="font-family: sans-serif; font-weight: bold">Evaluation</span></p>
 <p>The production <span style="font-family: Times New Roman; font-style: italic">MultiplicativeExpression </span><b>:</b> MultiplicativeExpression<i> @ </i>UnaryExpression, where @ stands for one of the operators in the above definitions, is evaluated as follows:</p>
@@ -6378,7 +6378,7 @@
 </div>
 <div class="gp">
   <div class="lhs">RelationalExpressionNoIn <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">ShiftExpression<span><br>RelationalExpressionNoIn </span><code>&lt;</code> ShiftExpression<span><br>RelationalExpressionNoIn </span><code>&gt;</code> ShiftExpression<span><br>RelationalExpressionNoIn </span><code>&lt;=</code> ShiftExpression<span><br>RelationalExpressionNoIn </span><code>&gt;=</code> ShiftExpression<span><br>RelationalExpressionNoIn </span><code>instanceof</code> ShiftExpression</div>
+  <div class="rhs">ShiftExpression<br>RelationalExpressionNoIn <code>&lt;</code> ShiftExpression<br>RelationalExpressionNoIn <code>&gt;</code> ShiftExpression<br>RelationalExpressionNoIn <code>&lt;=</code> ShiftExpression<br>RelationalExpressionNoIn <code>&gt;=</code> ShiftExpression<br>RelationalExpressionNoIn <code>instanceof</code> ShiftExpression</div>
 </div>
 <p>The semantics of the RelationalExpressionNoIn productions are the same as the RelationalExpression productions except that the contained RelationalExpressionNoIn is used in place of the contained RelationalExpression.</p>
 <div class="note">
@@ -6512,11 +6512,11 @@
 <h2>Syntax</h2>
 <div class="gp">
   <div class="lhs">EqualityExpression <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">RelationalExpression<span><br>EqualityExpression</span> <code>==</code> RelationalExpression<span><br>EqualityExpression</span> <code>!=</code> RelationalExpression<span><br>EqualityExpression</span> <code>===</code> RelationalExpression<span><br>EqualityExpression</span> <code>!==</code> RelationalExpression<br>EqualityExpression <span style="font-family: sans-serif">[no </span>LineTerminator<span style="font-family: sans-serif"> here]</span> <code>is</code> RelationalExpression<span><br>EqualityExpression</span> <span style="font-family: sans-serif">[no </span>LineTerminator<span style="font-family: sans-serif"> here]</span> <code>isnt</code> RelationalExpression</div>
+  <div class="rhs">RelationalExpression<br>EqualityExpression <code>==</code> RelationalExpression<br>EqualityExpression <code>!=</code> RelationalExpression<br>EqualityExpression <code>===</code> RelationalExpression<br>EqualityExpression <code>!==</code> RelationalExpression<br>EqualityExpression <span style="font-family: sans-serif">[no </span>LineTerminator<span style="font-family: sans-serif"> here]</span> <code>is</code> RelationalExpression<br>EqualityExpression <span style="font-family: sans-serif">[no </span>LineTerminator<span style="font-family: sans-serif"> here]</span> <code>isnt</code> RelationalExpression</div>
 </div>
 <div class="gp">
   <div class="lhs">EqualityExpressionNoIn <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">RelationalExpressionNoIn<span><br>EqualityExpressionNoIn</span> <code>==</code> RelationalExpressionNoIn<span><br>EqualityExpressionNoIn</span> <code>!=</code> RelationalExpressionNoIn<span><br>EqualityExpressionNoIn</span> <code>===</code> RelationalExpressionNoIn<span><br>EqualityExpressionNoIn</span> <code>!==</code> RelationalExpressionNoIn <br>EqualityExpression <span style="font-family: sans-serif">[no </span>LineTerminator<span style="font-family: sans-serif"> here]</span> <code>is</code> RelationalExpression<span><br>EqualityExpression</span> <span style="font-family: sans-serif">[no </span>LineTerminator<span style="font-family: sans-serif"> here]</span> <code>isnt</code> RelationalExpression</div>
+  <div class="rhs">RelationalExpressionNoIn<br>EqualityExpressionNoIn <code>==</code> RelationalExpressionNoIn<br>EqualityExpressionNoIn <code>!=</code> RelationalExpressionNoIn<br>EqualityExpressionNoIn <code>===</code> RelationalExpressionNoIn<br>EqualityExpressionNoIn <code>!==</code> RelationalExpressionNoIn <br>EqualityExpression <span style="font-family: sans-serif">[no </span>LineTerminator<span style="font-family: sans-serif"> here]</span> <code>is</code> RelationalExpression<br>EqualityExpression <span style="font-family: sans-serif">[no </span>LineTerminator<span style="font-family: sans-serif"> here]</span> <code>isnt</code> RelationalExpression</div>
 </div>
 <p>The semantics of the EqualityExpressionNoIn productions are the same as the EqualityExpression productions except that the contained EqualityExpressionNoIn and RelationalExpressionNoIn are used in place of the contained EqualityExpression and RelationalExpression, respectively.</p>
 <section id="sec-11.9.1 Runtime Semantics">
@@ -6547,12 +6547,12 @@
     </li>
   <li>If <i>x</i> is <b>null</b> and <i>y </i>is <b>undefined</b>, return <b>true</b>.</li>
   <li>If <i>x</i> is <b>undefined</b> and <i>y </i>is <b>null</b>, return <b>true</b>.</li>
-  <li>If Type(<i>x</i>) is Number and Type(<i>y</i>) is String,<span><br>return the result of the comparison</span><i> x</i> == ToNumber(<i>y</i>).</li>
-  <li>If Type(<i>x</i>) is String and Type(<i>y</i>) is Number,<span><br>return the result of the comparison ToNumber(</span><i>x</i>) == <i>y</i>.</li>
+  <li>If Type(<i>x</i>) is Number and Type(<i>y</i>) is String,<br>return the result of the comparison<i> x</i> == ToNumber(<i>y</i>).</li>
+  <li>If Type(<i>x</i>) is String and Type(<i>y</i>) is Number,<br>return the result of the comparison ToNumber(<i>x</i>) == <i>y</i>.</li>
   <li>If Type(<i>x</i>) is Boolean, return the result of the comparison ToNumber(<i>x</i>) == <i>y</i>.</li>
   <li>If Type(<i>y</i>) is Boolean, return the result of the comparison<i> x</i> == ToNumber(<i>y</i>).</li>
-  <li>If Type(<i>x</i>) is either String or Number and Type(<i>y</i>) is Object,<span><br>return the result of the comparison </span><i>x</i> == ToPrimitive(<i>y</i>).</li>
-  <li>If Type(<i>x</i>) is Object and Type(<i>y</i>) is either String or Number,<span><br>return the result of the comparison ToPrimitive(</span><i>x</i>) == <i>y</i>.</li>
+  <li>If Type(<i>x</i>) is either String or Number and Type(<i>y</i>) is Object,<br>return the result of the comparison <i>x</i> == ToPrimitive(<i>y</i>).</li>
+  <li>If Type(<i>x</i>) is Object and Type(<i>y</i>) is either String or Number,<br>return the result of the comparison ToPrimitive(<i>x</i>) == <i>y</i>.</li>
   <li>Return <b>false</b>.</li>
 </ol>
 <div class="note">
@@ -6672,27 +6672,27 @@
 <h2>Syntax</h2>
 <div class="gp">
   <div class="lhs">BitwiseANDExpression <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">EqualityExpression<span><br>BitwiseANDExpression </span><code>&amp;</code> EqualityExpression</div>
+  <div class="rhs">EqualityExpression<br>BitwiseANDExpression <code>&amp;</code> EqualityExpression</div>
 </div>
 <div class="gp">
   <div class="lhs">BitwiseANDExpressionNoIn <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">EqualityExpressionNoIn<span><br>BitwiseANDExpressionNoIn </span><code>&amp;</code> EqualityExpressionNoIn</div>
+  <div class="rhs">EqualityExpressionNoIn<br>BitwiseANDExpressionNoIn <code>&amp;</code> EqualityExpressionNoIn</div>
 </div>
 <div class="gp">
   <div class="lhs">BitwiseXORExpression <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">BitwiseANDExpression<span><br>BitwiseXORExpression </span><code>^</code> BitwiseANDExpression</div>
+  <div class="rhs">BitwiseANDExpression<br>BitwiseXORExpression <code>^</code> BitwiseANDExpression</div>
 </div>
 <div class="gp">
   <div class="lhs">BitwiseXORExpressionNoIn <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">BitwiseANDExpressionNoIn<span><br>BitwiseXORExpressionNoIn </span><code>^</code> BitwiseANDExpressionNoIn</div>
+  <div class="rhs">BitwiseANDExpressionNoIn<br>BitwiseXORExpressionNoIn <code>^</code> BitwiseANDExpressionNoIn</div>
 </div>
 <div class="gp">
   <div class="lhs">BitwiseORExpression <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">BitwiseXORExpression<span><br>BitwiseORExpression </span><code>|</code> BitwiseXORExpression</div>
+  <div class="rhs">BitwiseXORExpression<br>BitwiseORExpression <code>|</code> BitwiseXORExpression</div>
 </div>
 <div class="gp">
   <div class="lhs">BitwiseORExpressionNoIn <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">BitwiseXORExpressionNoIn<span><br>BitwiseORExpressionNoIn </span><code>|</code> BitwiseXORExpressionNoIn</div>
+  <div class="rhs">BitwiseXORExpressionNoIn<br>BitwiseORExpressionNoIn <code>|</code> BitwiseXORExpressionNoIn</div>
 </div>
 <p><span style="font-family: sans-serif; font-weight: bold">Runtime Semantics: </span><span style="font-family: sans-serif; font-weight: bold">Evaluation</span></p>
 <p>The production <span style="font-family: Times New Roman; font-style: italic">A </span><b>:</b> A<i> @ </i>B, where @ is one of the bitwise operators in the productions above, is evaluated as follows:</p>
@@ -6758,11 +6758,11 @@
 <h2>Syntax</h2>
 <div class="gp">
   <div class="lhs">ConditionalExpression <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">LogicalORExpression<span><br>LogicalORExpression</span><code> ?</code> AssignmentExpression <code>:</code> AssignmentExpression</div>
+  <div class="rhs">LogicalORExpression<br>LogicalORExpression<code> ?</code> AssignmentExpression <code>:</code> AssignmentExpression</div>
 </div>
 <div class="gp">
   <div class="lhs">ConditionalExpressionNoIn <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">LogicalORExpressionNoIn<span><br>LogicalORExpressionNoIn</span><code> ?</code> AssignmentExpression <code>:</code> AssignmentExpressionNoIn</div>
+  <div class="rhs">LogicalORExpressionNoIn<br>LogicalORExpressionNoIn<code> ?</code> AssignmentExpression <code>:</code> AssignmentExpressionNoIn</div>
 </div>
 <p>The semantics of the ConditionalExpressionNoIn production is the same as the ConditionalExpression production except that the contained LogicalORExpressionNoIn, AssignmentExpression and AssignmentExpressionNoIn are used in place of the contained LogicalORExpression, first AssignmentExpression and second AssignmentExpression, respectively.</p>
 <div class="note">
@@ -6793,11 +6793,11 @@
 <h2>Syntax</h2>
 <div class="gp">
   <div class="lhs">AssignmentExpression <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">ConditionalExpression<span><br>YieldExpression</span><span><br>LeftHandSideExpression </span><code>=</code> AssignmentExpression <span><br>LeftHandSideExpression AssignmentOperator AssignmentExpression</span></div>
+  <div class="rhs">ConditionalExpression<br>YieldExpression<br>LeftHandSideExpression <code>=</code> AssignmentExpression <br>LeftHandSideExpression AssignmentOperator AssignmentExpression</div>
 </div>
 <div class="gp">
   <div class="lhs">AssignmentExpressionNoIn <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">ConditionalExpressionNoIn<span><br>LeftHandSideExpression </span><code>=</code> AssignmentExpressionNoIn<span><br>LeftHandSideExpression AssignmentOperator AssignmentExpressionNoIn</span></div>
+  <div class="rhs">ConditionalExpressionNoIn<br>LeftHandSideExpression <code>=</code> AssignmentExpressionNoIn<br>LeftHandSideExpression AssignmentOperator AssignmentExpressionNoIn</div>
 </div>
 <div class="gp">AssignmentOperator <span style="font-family: sans-serif; font-weight: bold">:</span> <span style="font-family: sans-serif; font-weight: bold">one of</span></div>
 <figure>
@@ -6846,7 +6846,7 @@
 <p><span style="font-family: sans-serif; font-weight: bold">Static Semantics:  </span><span style="font-family: sans-serif; font-weight: bold">Early Errors</span></p>
 <div class="gp">
   <div class="lhs">AssignmentExpression <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">LeftHandSideExpression  <code>=</code> AssignmentExpression <span><br>LeftHandSideExpression</span>  AssignmentOperator AssignmentExpression</div>
+  <div class="rhs">LeftHandSideExpression  <code>=</code> AssignmentExpression <br>LeftHandSideExpression  AssignmentOperator AssignmentExpression</div>
 </div>
 <ol class="proc">
   <li>It is a Syntax Error if the AssignmentExpression is contained in strict code and LeftHandSideExpression is the Identifier <code>eval</code> or the Identifier <code>arguments</code>.</li>
@@ -6904,7 +6904,7 @@
 <p>In certain circumstances when processing the production AssignmentExpression <b>:</b> LeftHandSideExpression <code>=</code> AssignmentExpression the following grammar is used to refine the interpretation of  LeftHandSideExpression.</p>
 <div class="gp">
   <div class="lhs">AssignmentPattern <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">ObjectAssignmentPattern<span><br>ArrayAssignmentPattern</span> </div>
+  <div class="rhs">ObjectAssignmentPattern<br>ArrayAssignmentPattern </div>
 </div>
 <div class="gp">
   <div class="lhs">ObjectAssignmentPattern <span style="font-family: sans-serif; font-weight: bold">:</span></div>
@@ -6916,15 +6916,15 @@
 </div>
 <div class="gp">
   <div class="lhs">AssignmentPropertyList <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">AssignmentProperty<span><br>AssignmentPropertyList </span><code>,</code> AssignmentProperty</div>
+  <div class="rhs">AssignmentProperty<br>AssignmentPropertyList <code>,</code> AssignmentProperty</div>
 </div>
 <div class="gp">
   <div class="lhs">AssignmentElementList <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">Elision<span style="font-family: sans-serif; vertical-align: sub">opt</span>  AssignmentElement <span><br>AssignmentElementList </span><code>,</code> Elision<span style="font-family: sans-serif; vertical-align: sub">opt </span> AssignmentElement</div>
+  <div class="rhs">Elision<span style="font-family: sans-serif; vertical-align: sub">opt</span>  AssignmentElement <br>AssignmentElementList <code>,</code> Elision<span style="font-family: sans-serif; vertical-align: sub">opt </span> AssignmentElement</div>
 </div>
 <div class="gp">
   <div class="lhs">AssignmentProperty <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">Identifier<span><br>PropertyName</span><code> : </code>LeftHandSideExpression</div>
+  <div class="rhs">Identifier<br>PropertyName<code> : </code>LeftHandSideExpression</div>
 </div>
 <div class="gp">
   <div class="lhs">AssignmentElement <span style="font-family: sans-serif; font-weight: bold">:</span></div>
@@ -7100,11 +7100,11 @@
 <h2>Syntax</h2>
 <div class="gp">
   <div class="lhs"><i>Expression</i> <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs"><i>AssignmentExpression</i><span><br>Expression </span><code>,</code> AssignmentExpression</div>
+  <div class="rhs"><i>AssignmentExpression</i><br>Expression <code>,</code> AssignmentExpression</div>
 </div>
 <div class="gp">
   <div class="lhs">ExpressionNoIn <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">AssignmentExpressionNoIn<span><br>ExpressionNoIn </span><code>,</code> AssignmentExpressionNoIn</div>
+  <div class="rhs">AssignmentExpressionNoIn<br>ExpressionNoIn <code>,</code> AssignmentExpressionNoIn</div>
 </div>
 <p>The semantics of the ExpressionNoIn production is the same manner as the Expression production except that the contained ExpressionNoIn and AssignmentExpressionNoIn are used in place of the contained Expression and AssignmentExpression, respectively.</p>
 <p><span style="font-family: sans-serif; font-weight: bold">Runtime Semantics: </span><span style="font-family: sans-serif; font-weight: bold">Evaluation</span></p>
@@ -7124,7 +7124,7 @@
 <h2>Syntax</h2>
 <div class="gp">
   <div class="lhs">Statement <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">BlockStatement<span><br>VariableStatement</span><span><br>EmptyStatement</span><span><br>ExpressionStatement</span><span><br>IfStatement</span><br>BreakableStatement<span><br>ContinueStatement</span><span><br>BreakStatement</span><span><br>ReturnStatement</span><span><br>WithStatement</span><span><br>LabelledStatement</span><span><br>ThrowStatement</span><span><br>TryStatement</span><span><br>DebuggerStatement</span></div>
+  <div class="rhs">BlockStatement<br>VariableStatement<br>EmptyStatement<br>ExpressionStatement<br>IfStatement<br>BreakableStatement<br>ContinueStatement<br>BreakStatement<br>ReturnStatement<br>WithStatement<br>LabelledStatement<br>ThrowStatement<br>TryStatement<br>DebuggerStatement</div>
 </div>
 <div class="gp">
   <div class="lhs">Declaration <span style="font-family: sans-serif; font-weight: bold">:</span></div>
@@ -7132,7 +7132,7 @@
 </div>
 <div class="gp">
   <div class="lhs">BreakableStatement <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">IterationStatement<span><br>SwitchStatement</span></div>
+  <div class="rhs">IterationStatement<br>SwitchStatement</div>
 </div>
 </section>
 <section>
@@ -7145,14 +7145,14 @@
 <p><span style="font-family: sans-serif; font-weight: bold">Static Semantics:  </span><span style="font-family: sans-serif; font-weight: bold">VarDeclaredNames</span></p>
 <div class="gp">
   <div class="lhs">Statement <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">EmptyStatement<span><br>ExpressionStatement</span><span><br>ContinueStatement</span><span><br>BreakStatement</span><span><br>ReturnStatement</span><span><br>ThrowStatement</span><span><br>DebuggerStatement</span></div>
+  <div class="rhs">EmptyStatement<br>ExpressionStatement<br>ContinueStatement<br>BreakStatement<br>ReturnStatement<br>ThrowStatement<br>DebuggerStatement</div>
 </div>
 <ol class="proc">
   <li>Return a new empty List.</li>
 </ol>
 <div class="gp">
   <div class="lhs">Statement <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">BlockStatement<span><br>VariableStatement</span><span><br>IterationStatement</span><span><br>WithStatement</span><span><br>LabelledStatement</span><span><br>SwitchStatement</span><span><br>TryStatement </span></div>
+  <div class="rhs">BlockStatement<br>VariableStatement<br>IterationStatement<br>WithStatement<br>LabelledStatement<br>SwitchStatement<br>TryStatement </div>
 </div>
 <ol class="proc">
   <li>Return the VarDeclaredNames of the  single non-terminal symbol that is the right hand side of the production.</li>
@@ -7201,7 +7201,7 @@
 <p>NOTE&#x9;The result of evaluating a <span style="font-family: Times New Roman; font-style: italic">Statement</span> or <span style="font-family: Times New Roman; font-style: italic">Declaration</span> is always a Completion value.</p>
 <div class="gp">
   <div class="lhs">BreakableStatement <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">IterationStatement<span><br>SwitchStatement</span></div>
+  <div class="rhs">IterationStatement<br>SwitchStatement</div>
 </div>
 <ol class="proc">
   <li>Let <i>newLabelSet </i> be a new empty List.</li>
@@ -7221,11 +7221,11 @@
 </div>
 <div class="gp">
   <div class="lhs">StatementList <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">StatementListItem<span><br>StatementList Statement</span>ListItem</div>
+  <div class="rhs">StatementListItem<br>StatementList StatementListItem</div>
 </div>
 <div class="gp">
   <div class="lhs">StatementListItem <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">Statement<span><br>Declaration</span></div>
+  <div class="rhs">Statement<br>Declaration</div>
 </div>
 </section>
 <section>
@@ -7387,11 +7387,11 @@
 </div>
 <div class="gp">
   <div class="lhs">BindingList <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">LexicalBinding<span><br>BindingList </span><code>,</code> LexicalBinding</div>
+  <div class="rhs">LexicalBinding<br>BindingList <code>,</code> LexicalBinding</div>
 </div>
 <div class="gp">
   <div class="lhs">BindingListNoIn <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">LexicalBindingNoIn<span><br>BindingListNoIn </span><code>,</code> LexicalBindingNoIn</div>
+  <div class="rhs">LexicalBindingNoIn<br>BindingListNoIn <code>,</code> LexicalBindingNoIn</div>
 </div>
 <div class="gp">
   <div class="lhs">LexicalBinding <span style="font-family: sans-serif; font-weight: bold">:</span></div>
@@ -7550,11 +7550,11 @@
 </div>
 <div class="gp">
   <div class="lhs">VariableDeclarationList <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">VariableDeclaration<span><br>VariableDeclarationList </span><code>,</code> VariableDeclaration</div>
+  <div class="rhs">VariableDeclaration<br>VariableDeclarationList <code>,</code> VariableDeclaration</div>
 </div>
 <div class="gp">
   <div class="lhs">VariableDeclarationListNoIn <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">VariableDeclarationNoIn<span><br>VariableDeclarationListNoIn </span><code>,</code> VariableDeclarationNoIn</div>
+  <div class="rhs">VariableDeclarationNoIn<br>VariableDeclarationListNoIn <code>,</code> VariableDeclarationNoIn</div>
 </div>
 <div class="gp">
   <div class="lhs">VariableDeclaration <span style="font-family: sans-serif; font-weight: bold">:</span></div>
@@ -7653,7 +7653,7 @@
 <h2>Syntax</h2>
 <div class="gp">
   <div class="lhs">BindingPattern <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">ObjectBindingPattern<span><br>ArrayBindingPattern</span> </div>
+  <div class="rhs">ObjectBindingPattern<br>ArrayBindingPattern </div>
 </div>
 <div class="gp">
   <div class="lhs">ObjectBindingPattern <span style="font-family: sans-serif; font-weight: bold">:</span></div>
@@ -7665,11 +7665,11 @@
 </div>
 <div class="gp">
   <div class="lhs">BindingPropertyList <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">BindingProperty<span><br>BindingPropertyList </span><code>,</code> BindingProperty</div>
+  <div class="rhs">BindingProperty<br>BindingPropertyList <code>,</code> BindingProperty</div>
 </div>
 <div class="gp">
   <div class="lhs">BindingElementList <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">Elision<span style="font-family: sans-serif; vertical-align: sub">opt</span>  BindingElement <span><br>BindingElementList </span><code>,</code> Elision<span style="font-family: sans-serif; vertical-align: sub">opt </span> BindingElement</div>
+  <div class="rhs">Elision<span style="font-family: sans-serif; vertical-align: sub">opt</span>  BindingElement <br>BindingElementList <code>,</code> Elision<span style="font-family: sans-serif; vertical-align: sub">opt </span> BindingElement</div>
 </div>
 <div class="gp">
   <div class="lhs">BindingProperty <span style="font-family: sans-serif; font-weight: bold">:</span></div>
@@ -8694,7 +8694,7 @@
 </div>
 <div class="gp">
   <div class="lhs">CaseClauses <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">CaseClause<span><br>CaseClauses CaseClause</span></div>
+  <div class="rhs">CaseClause<br>CaseClauses CaseClause</div>
 </div>
 <div class="gp">
   <div class="lhs">CaseClause <span style="font-family: sans-serif; font-weight: bold">:</span></div>
@@ -9224,7 +9224,7 @@
 </div>
 <div class="gp">
   <div class="lhs">FormalParameterList <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs"><span style="font-family: sans-serif">[empty]</span><code><br></code>FunctionRestParameter<span><br>FormalsList</span><br>FormalsList<code>,</code> FunctionRestParameter</div>
+  <div class="rhs"><span style="font-family: sans-serif">[empty]</span><code><br></code>FunctionRestParameter<br>FormalsList<br>FormalsList<code>,</code> FunctionRestParameter</div>
 </div>
 <div class="gp">
   <div class="lhs">FormalsList <span style="font-family: sans-serif; font-weight: bold">:</span></div>
@@ -9322,7 +9322,7 @@
 </ol>
 <div class="gp">
   <div class="lhs">FormalParameterList <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs">FormalsList<span><br>FormalsList</span> <code>, </code>FunctionRestParameter</div>
+  <div class="rhs">FormalsList<br>FormalsList <code>, </code>FunctionRestParameter</div>
 </div>
 <ol class="proc">
   <li>Return the ExpectedArgumentCount of FormalsList.</li>
@@ -9776,7 +9776,7 @@
 </div>
 <div class="gp">
   <div class="lhs">uriCharacter <span style="font-family: sans-serif; font-weight: bold">:::</span></div>
-  <div class="rhs">uriReserved<span><br>uriUnescaped</span><span><br>uriEscaped</span></div>
+  <div class="rhs">uriReserved<br>uriUnescaped<br>uriEscaped</div>
 </div>
 <div class="gp">
   <div class="lhs">uriReserved <span style="font-family: sans-serif; font-weight: bold">:::</span> <span style="font-family: sans-serif; font-weight: bold">one of</span></div>
@@ -9784,7 +9784,7 @@
 </div>
 <div class="gp">
   <div class="lhs">uriUnescaped <span style="font-family: sans-serif; font-weight: bold">:::</span></div>
-  <div class="rhs">uriAlpha<span><br>DecimalDigit</span><span><br>uriMark</span></div>
+  <div class="rhs">uriAlpha<br>DecimalDigit<br>uriMark</div>
 </div>
 <div class="gp">
   <div class="lhs">uriEscaped <span style="font-family: sans-serif; font-weight: bold">:::</span></div>
@@ -12818,7 +12818,7 @@
 <p>An implementation is permitted to extend the behaviour of <code>toFixed</code> for values of <span style="font-family: Times New Roman; font-style: italic">fractionDigits</span> less than 0 or greater than 20. In this case <code>toFixed</code> would not necessarily throw <b>RangeError</b> for such values.</p>
 <div class="note">
   <p><span class="nh">NOTE</span> The output of <code>toFixed</code> may be more precise than <code>toString</code> for some values because toString only prints enough significant digits to distinguish the number from adjacent number values. For example, </p>
-  <p>(<code>1000000000000000128).toString()</code> returns <code>"1000000000000000100"</code>,<span><br>while (</span><code>1000000000000000128).toFixed(0)</code> returns <code>"1000000000000000128"</code>.</p>
+  <p>(<code>1000000000000000128).toString()</code> returns <code>"1000000000000000100"</code>,<br>while (<code>1000000000000000128).toFixed(0)</code> returns <code>"1000000000000000128"</code>.</p>
 </div>
 </section>
 <section id="sec-15.7.4.6">
@@ -13314,7 +13314,7 @@
 <section id="sec-15.9.1.3">
 <h1><span class="secnum"><a href="#sec-15" title="link to this section">15.9.1.3</a></span> Year Number</h1>
 <p>ECMAScript uses an extrapolated Gregorian system to map a day number to a year number and to determine the month and date within that year. In this system, leap years are precisely those which are (divisible by <span style="font-family: Times New Roman">4</span>) and ((not divisible by <span style="font-family: Times New Roman">100</span>) or (divisible by <span style="font-family: Times New Roman">400</span>)). The number of days in year number <span style="font-family: Times New Roman; font-style: italic">y</span> is therefore defined by</p>
-<div class="display">DaysInYear(<i>y</i>) &#x9;= 365  if (<i>y</i> modulo 4) &ne; 0<span><br>= 366  if (</span><i>y</i> modulo 4) = 0 and (y modulo 100) &ne; 0<span><br>= 365  if (</span><i>y</i> modulo 100) = 0 and (y modulo 400) &ne; 0<span><br>= 366  if (</span><i>y</i> modulo 400) = 0</div>
+<div class="display">DaysInYear(<i>y</i>) &#x9;= 365  if (<i>y</i> modulo 4) &ne; 0<br>= 366  if (<i>y</i> modulo 4) = 0 and (y modulo 100) &ne; 0<br>= 365  if (<i>y</i> modulo 100) = 0 and (y modulo 400) &ne; 0<br>= 366  if (<i>y</i> modulo 400) = 0</div>
 <p>All non-leap years have <span style="font-family: Times New Roman">365</span> days with the usual number of days per month and leap years have an extra day in February. The day number of the first day of year <span style="font-family: Times New Roman; font-style: italic">y</span> is given by:</p>
 <div class="display">DayFromYear(<i>y</i>)&#x9;= 365 &times; (<i>y</i>&minus;1970) + floor((<i>y</i>&minus;1969)/4) &minus; floor((<i>y</i>&minus;1901)/100) + floor((<i>y</i>&minus;1601)/400)</div>
 <p>The time value of the start of a year is:</p>
@@ -13322,7 +13322,7 @@
 <p>A time value determines a year by:</p>
 <div class="display">YearFromTime(<i>t</i>)&#x9;=  the largest integer <i>y</i> (closest to positive infinity) such that TimeFromYear(<i>y</i>) &le; <i>t</i></div>
 <p>The leap-year function is 1 for a time within a leap year and otherwise is zero:</p>
-<div class="display">InLeapYear(<i>t</i>)&#x9;= 0  if DaysInYear(YearFromTime(<i>t</i>)) = 365<span><br>= 1  if DaysInYear(YearFromTime</span><i>(t</i>)) = 366</div>
+<div class="display">InLeapYear(<i>t</i>)&#x9;= 0  if DaysInYear(YearFromTime(<i>t</i>)) = 365<br>= 1  if DaysInYear(YearFromTime<i>(t</i>)) = 366</div>
 </section>
 <section id="sec-15.9.1.4">
 <h1><span class="secnum"><a href="#sec-15" title="link to this section">15.9.1.4</a></span> Month Number</h1>
@@ -14029,15 +14029,15 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">Disjunction <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs">Alternative<span><br> Alternative </span><code>|</code> Disjunction</div>
+  <div class="rhs">Alternative<br> Alternative <code>|</code> Disjunction</div>
 </div>
 <div class="gp">
   <div class="lhs">Alternative <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs"><span style="font-family: sans-serif">[empty]</span><span><br>Alternative Term</span></div>
+  <div class="rhs"><span style="font-family: sans-serif">[empty]</span><br>Alternative Term</div>
 </div>
 <div class="gp">
   <div class="lhs">Term <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs">Assertion<span><br>Atom</span><span><br>Atom Quantifier</span></div>
+  <div class="rhs">Assertion<br>Atom<br>Atom Quantifier</div>
 </div>
 <div class="gp">
   <div class="lhs">Assertion <span style="font-family: sans-serif; font-weight: bold">::</span></div>
@@ -14045,7 +14045,7 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">Quantifier <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs">QuantifierPrefix<span><br>QuantifierPrefix</span><code> ?</code></div>
+  <div class="rhs">QuantifierPrefix<br>QuantifierPrefix<code> ?</code></div>
 </div>
 <div class="gp">
   <div class="lhs">QuantifierPrefix <span style="font-family: sans-serif; font-weight: bold">::</span></div>
@@ -14053,7 +14053,7 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">Atom <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs">PatternCharacter<br><span style="font-family: monospace">.</span><br><code>\ </code>AtomEscape<span><br>CharacterClass</span><code><br>(</code> Disjunction <code>)</code><br><code>(</code> <code>?</code> <code>:</code> Disjunction <code>)</code></div>
+  <div class="rhs">PatternCharacter<br><span style="font-family: monospace">.</span><br><code>\ </code>AtomEscape<br>CharacterClass<code><br>(</code> Disjunction <code>)</code><br><code>(</code> <code>?</code> <code>:</code> Disjunction <code>)</code></div>
 </div>
 <div class="gp">
   <div class="lhs">PatternCharacter <span style="font-family: sans-serif; font-weight: bold">::</span> </div>
@@ -14061,11 +14061,11 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">AtomEscape <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs">DecimalEscape<span><br>CharacterEscape</span><span><br>CharacterClassEscape</span></div>
+  <div class="rhs">DecimalEscape<br>CharacterEscape<br>CharacterClassEscape</div>
 </div>
 <div class="gp">
   <div class="lhs">CharacterEscape <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs">ControlEscape<br><code>c </code>ControlLetter<span><br>HexEscapeSequence</span><span><br>UnicodeEscapeSequence</span><span><br>IdentityEscape</span></div>
+  <div class="rhs">ControlEscape<br><code>c </code>ControlLetter<br>HexEscapeSequence<br>UnicodeEscapeSequence<br>IdentityEscape</div>
 </div>
 <div class="gp">
   <div class="lhs">ControlEscape <span style="font-family: sans-serif; font-weight: bold">::</span>  <span style="font-family: sans-serif; font-weight: bold">one of</span></div>
@@ -14077,7 +14077,7 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">IdentityEscape <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs">SourceCharacter <span style="font-family: sans-serif; font-weight: bold">but not</span> IdentifierPart<br>&lt;ZWJ&gt;<span><br>&lt;ZWNJ&gt;</span></div>
+  <div class="rhs">SourceCharacter <span style="font-family: sans-serif; font-weight: bold">but not</span> IdentifierPart<br>&lt;ZWJ&gt;<br>&lt;ZWNJ&gt;</div>
 </div>
 <div class="gp">
   <div class="lhs">DecimalEscape <span style="font-family: sans-serif; font-weight: bold">::</span></div>
@@ -14093,19 +14093,19 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">ClassRanges <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs"><span style="font-family: sans-serif">[empty]</span><span><br>NonemptyClassRanges</span></div>
+  <div class="rhs"><span style="font-family: sans-serif">[empty]</span><br>NonemptyClassRanges</div>
 </div>
 <div class="gp">
   <div class="lhs">NonemptyClassRanges <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs">ClassAtom<span><br>ClassAtom NonemptyClassRangesNoDash</span><span><br>ClassAtom</span><code> - </code>ClassAtom ClassRanges</div>
+  <div class="rhs">ClassAtom<br>ClassAtom NonemptyClassRangesNoDash<br>ClassAtom<code> - </code>ClassAtom ClassRanges</div>
 </div>
 <div class="gp">
   <div class="lhs">NonemptyClassRangesNoDash <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs">ClassAtom<span><br>ClassAtomNoDash NonemptyClassRangesNoDash</span><span><br>ClassAtomNoDash</span><code> - </code>ClassAtom ClassRanges</div>
+  <div class="rhs">ClassAtom<br>ClassAtomNoDash NonemptyClassRangesNoDash<br>ClassAtomNoDash<code> - </code>ClassAtom ClassRanges</div>
 </div>
 <div class="gp">
   <div class="lhs">ClassAtom <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs"><code>-</code><span><br>ClassAtomNoDash</span></div>
+  <div class="rhs"><code>-</code><br>ClassAtomNoDash</div>
 </div>
 <div class="gp">
   <div class="lhs">ClassAtomNoDash <span style="font-family: sans-serif; font-weight: bold">::</span></div>
@@ -14113,7 +14113,7 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">ClassEscape <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs">DecimalEscape<br><code>b</code><span><br>CharacterEscape</span><code><br></code>CharacterClassEscape</div>
+  <div class="rhs">DecimalEscape<br><code>b</code><br>CharacterEscape<code><br></code>CharacterClassEscape</div>
 </div>
 </section>
 <section id="sec-15.10.2">
@@ -15540,7 +15540,7 @@ THH:mm:ss.sss</pre>
 <p>JSON is similar to ECMAScript source text in that it consists of a sequence of characters conforming to the rules of <span style="font-family: Times New Roman; font-style: italic">SourceCharacter</span>. The JSON Lexical Grammar defines the tokens that make up a JSON text similar to the manner that the ECMAScript lexical grammar defines the tokens of an ECMAScript source text. The JSON Lexical grammar only recognises the white space character specified by the production <span style="font-family: Times New Roman; font-style: italic">JSONWhiteSpace</span>. The JSON lexical grammar shares some productions with the ECMAScript lexical grammar.  All nonterminal symbols of the grammar that do not begin with the characters &ldquo;JSON&rdquo; are defined by productions of the ECMAScript lexical grammar.</p>
 <h2>Syntax</h2>
 <p><span style="font-family: Times New Roman; font-style: italic">JSONWhiteSpace </span><b>::</b></p>
-<div class="gp">&lt;TAB&gt;<span><br>&lt;CR&gt;</span><span><br>&lt;LF&gt;</span><span><br>&lt;SP&gt;</span></div>
+<div class="gp">&lt;TAB&gt;<br>&lt;CR&gt;<br>&lt;LF&gt;<br>&lt;SP&gt;</div>
 <div class="gp">JSONString <span style="font-family: sans-serif; font-weight: bold">::</span></div>
 <div class="gp"><code>" </code>JSONStringCharacters<span style="font-family: sans-serif; vertical-align: sub">opt</span><code> "</code></div>
 <div class="gp">JSONStringCharacters <span style="font-family: sans-serif; font-weight: bold">::</span></div>
@@ -15569,17 +15569,17 @@ THH:mm:ss.sss</pre>
 <div class="gp">JSONText <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9; </div>
 <div class="gp">JSONValue</div>
 <div class="gp">JSONValue <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9; </div>
-<div class="gp">JSONNullLiteral<span><br>JSONBooleanLiteral</span><span><br>JSONObject</span><span><br>JSONArray</span><span><br>JSONString</span><span><br>JSONNumber</span></div>
+<div class="gp">JSONNullLiteral<br>JSONBooleanLiteral<br>JSONObject<br>JSONArray<br>JSONString<br>JSONNumber</div>
 <div class="gp">JSONObject <span style="font-family: sans-serif; font-weight: bold">:</span></div>
 <div class="gp"><code>{ }</code><br><code>{</code> JSONMemberList <code>}</code></div>
 <div class="gp">JSONMember <span style="font-family: sans-serif; font-weight: bold">:</span></div>
 <div class="gp">JSONString <code>:</code> JSONValue</div>
 <div class="gp">JSONMemberList <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-<div class="gp">JSONMember <span><br>JSONMemberList </span><code>,</code> JSONMember </div>
+<div class="gp">JSONMember <br>JSONMemberList <code>,</code> JSONMember </div>
 <div class="gp">JSONArray <span style="font-family: sans-serif; font-weight: bold">:</span></div>
 <div class="gp"><code>[ ]</code><br><code>[ </code>JSONElementList<code> ]</code></div>
 <div class="gp">JSONElementList <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-<div class="gp">JSONValue<span><br>JSONElementList</span><code> ,</code> JSONValue</div>
+<div class="gp">JSONValue<br>JSONElementList<code> ,</code> JSONValue</div>
 </section>
 </section>
 <section id="sec-15.12.2">
@@ -16014,27 +16014,27 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">InputElementDiv <span style="font-family: sans-serif; font-weight: bold">::</span><span style="font-family: sans-serif">&#x9;See clause 7</span></div>
-  <div class="rhs">WhiteSpace<span><br>LineTerminator</span><span><br>Comment</span><span><br>Token</span><span><br>DivPunctuator</span></div>
+  <div class="rhs">WhiteSpace<br>LineTerminator<br>Comment<br>Token<br>DivPunctuator</div>
 </div>
 <div class="gp">
   <div class="lhs">InputElementRegExp <span style="font-family: sans-serif; font-weight: bold">::</span>&#x9;<span style="font-family: sans-serif">See clause 7</span></div>
-  <div class="rhs">WhiteSpace<span><br>LineTerminator</span><span><br>Comment</span><span><br>Token</span><span><br>RegularExpressionLiteral</span></div>
+  <div class="rhs">WhiteSpace<br>LineTerminator<br>Comment<br>Token<br>RegularExpressionLiteral</div>
 </div>
 <div class="gp">
   <div class="lhs">WhiteSpace <span style="font-family: sans-serif; font-weight: bold">::</span>&#x9;<span style="font-family: sans-serif">See 7.2</span></div>
-  <div class="rhs">&lt;TAB&gt;<span><br>&lt;VT&gt;</span><span><br>&lt;FF&gt;</span><span><br>&lt;SP&gt;</span><span><br>&lt;NBSP&gt;</span><span><br>&lt;BOM&gt;</span><span><br>&lt;USP&gt;</span></div>
+  <div class="rhs">&lt;TAB&gt;<br>&lt;VT&gt;<br>&lt;FF&gt;<br>&lt;SP&gt;<br>&lt;NBSP&gt;<br>&lt;BOM&gt;<br>&lt;USP&gt;</div>
 </div>
 <div class="gp">
   <div class="lhs">LineTerminator <span style="font-family: sans-serif; font-weight: bold">::</span><span style="font-family: sans-serif">&#x9;See 7.3</span></div>
-  <div class="rhs">&lt;LF&gt;<span><br>&lt;CR&gt;</span><span><br>&lt;LS&gt;</span><span><br>&lt;PS&gt;</span></div>
+  <div class="rhs">&lt;LF&gt;<br>&lt;CR&gt;<br>&lt;LS&gt;<br>&lt;PS&gt;</div>
 </div>
 <div class="gp">
   <div class="lhs">LineTerminatorSequence <span style="font-family: sans-serif; font-weight: bold">::</span>&#x9;<span style="font-family: sans-serif">See 7.3</span></div>
-  <div class="rhs">&lt;LF&gt;<span><br>&lt;CR&gt; </span><span style="font-family: sans-serif">[lookahead </span><span style="font-family: sans-serif">&isin;</span> &lt;LF&gt; <span style="font-family: sans-serif">]</span><span><br>&lt;LS&gt;</span><span><br>&lt;PS&gt;</span><span><br>&lt;CR&gt; &lt;LF&gt;</span></div>
+  <div class="rhs">&lt;LF&gt;<br>&lt;CR&gt; <span style="font-family: sans-serif">[lookahead </span><span style="font-family: sans-serif">&isin;</span> &lt;LF&gt; <span style="font-family: sans-serif">]</span><br>&lt;LS&gt;<br>&lt;PS&gt;<br>&lt;CR&gt; &lt;LF&gt;</div>
 </div>
 <div class="gp">
   <div class="lhs">Comment <span style="font-family: sans-serif; font-weight: bold">::</span>&#x9;<span style="font-family: sans-serif">See 7.4</span></div>
-  <div class="rhs">MultiLineComment<span><br>SingleLineComment</span></div>
+  <div class="rhs">MultiLineComment<br>SingleLineComment</div>
 </div>
 <div class="gp">
   <div class="lhs">MultiLineComment <span style="font-family: sans-serif; font-weight: bold">::</span><span style="font-family: sans-serif">&#x9;See 7.4</span></div>
@@ -16070,7 +16070,7 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">Token <span style="font-family: sans-serif; font-weight: bold">::</span>&#x9;<span style="font-family: sans-serif">See 7.5</span></div>
-  <div class="rhs">IdentifierName<span><br>Punctuator</span><span><br>NumericLiteral</span><span><br>StringLiteral</span></div>
+  <div class="rhs">IdentifierName<br>Punctuator<br>NumericLiteral<br>StringLiteral</div>
 </div>
 <div class="gp">
   <div class="lhs">Identifier <span style="font-family: sans-serif; font-weight: bold">::</span><span style="font-family: sans-serif">&#x9;See 7.6</span></div>
@@ -16078,7 +16078,7 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">IdentifierName <span style="font-family: sans-serif; font-weight: bold">::</span><span style="font-family: sans-serif">&#x9;See 7.6</span></div>
-  <div class="rhs">IdentifierStart<span><br>IdentifierName IdentifierPart</span></div>
+  <div class="rhs">IdentifierStart<br>IdentifierName IdentifierPart</div>
 </div>
 <div class="gp">
   <div class="lhs">IdentifierStart <span style="font-family: sans-serif; font-weight: bold">::</span><span style="font-family: sans-serif">&#x9;See 7.6</span></div>
@@ -16086,7 +16086,7 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">IdentifierPart <span style="font-family: sans-serif; font-weight: bold">::</span><span style="font-family: sans-serif">&#x9;See 7.6</span></div>
-  <div class="rhs">IdentifierStart<span><br>UnicodeCombiningMark</span><span><br>UnicodeDigit</span><span><br>UnicodeConnectorPunctuation</span><br>&lt;ZWNJ&gt;<span><br>&lt;ZWJ&gt;</span></div>
+  <div class="rhs">IdentifierStart<br>UnicodeCombiningMark<br>UnicodeDigit<br>UnicodeConnectorPunctuation<br>&lt;ZWNJ&gt;<br>&lt;ZWJ&gt;</div>
 </div>
 <div class="gp">
   <div class="lhs">UnicodeLetter <span style="font-family: sans-serif; font-weight: bold">::</span><span style="font-family: sans-serif">&#x9;See 7.6</span></div>
@@ -16106,7 +16106,7 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">ReservedWord <span style="font-family: sans-serif; font-weight: bold">::</span><span style="font-family: sans-serif">&#x9;See 7.6.1</span></div>
-  <div class="rhs">Keyword<span><br>FutureReservedWord</span><span><br>NullLiteral</span><span><br>BooleanLiteral</span></div>
+  <div class="rhs">Keyword<br>FutureReservedWord<br>NullLiteral<br>BooleanLiteral</div>
 </div>
 <div class="gp">Keyword <span style="font-family: sans-serif; font-weight: bold">::</span> <span style="font-family: sans-serif; font-weight: bold">one of</span>&#x9;<span style="font-family: sans-serif">See 7.6.1.1</span></div>
 <figure>
@@ -16471,7 +16471,7 @@ THH:mm:ss.sss</pre>
 </figure>
 <div class="gp">
   <div class="lhs">Literal <span style="font-family: sans-serif; font-weight: bold">::</span>&#x9;<span style="font-family: sans-serif">See 7.8</span></div>
-  <div class="rhs">NullLiteral<span><br>BooleanLiteral</span><span><br>NumericLiteral</span><span><br>StringLiteral</span><span><br>RegularExpressionLiteral</span></div>
+  <div class="rhs">NullLiteral<br>BooleanLiteral<br>NumericLiteral<br>StringLiteral<br>RegularExpressionLiteral</div>
 </div>
 <div class="gp">
   <div class="lhs">NullLiteral <span style="font-family: sans-serif; font-weight: bold">::</span>&#x9;<span style="font-family: sans-serif">See 7.8.1</span></div>
@@ -16483,19 +16483,19 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs"><i>NumericLiteral</i> <span style="font-family: sans-serif; font-weight: bold">::</span><span style="font-family: sans-serif">&#x9;See 7.8.3</span></div>
-  <div class="rhs">DecimalLiteral<span><br>HexIntegerLiteral</span></div>
+  <div class="rhs">DecimalLiteral<br>HexIntegerLiteral</div>
 </div>
 <div class="gp">
   <div class="lhs">DecimalLiteral <span style="font-family: sans-serif; font-weight: bold">::</span><span style="font-family: sans-serif">&#x9;See 7.8.3</span></div>
-  <div class="rhs">DecimalIntegerLiteral <code>.</code> DecimalDigits<span style="font-family: sans-serif; vertical-align: sub">opt</span> ExponentPart<span style="font-family: sans-serif; vertical-align: sub">opt</span><br><code>.</code> DecimalDigits ExponentPart<span style="font-family: sans-serif; vertical-align: sub">opt</span><span><br>DecimalIntegerLiteral ExponentPart</span><span style="font-family: sans-serif; vertical-align: sub">opt</span></div>
+  <div class="rhs">DecimalIntegerLiteral <code>.</code> DecimalDigits<span style="font-family: sans-serif; vertical-align: sub">opt</span> ExponentPart<span style="font-family: sans-serif; vertical-align: sub">opt</span><br><code>.</code> DecimalDigits ExponentPart<span style="font-family: sans-serif; vertical-align: sub">opt</span><br>DecimalIntegerLiteral ExponentPart<span style="font-family: sans-serif; vertical-align: sub">opt</span></div>
 </div>
 <div class="gp">
   <div class="lhs">DecimalIntegerLiteral <span style="font-family: sans-serif; font-weight: bold">::</span><span style="font-family: sans-serif">&#x9;See 7.8.3</span></div>
-  <div class="rhs"><code>0</code><span><br>NonZeroDigit DecimalDigits</span><span style="font-family: sans-serif; vertical-align: sub">opt</span></div>
+  <div class="rhs"><code>0</code><br>NonZeroDigit DecimalDigits<span style="font-family: sans-serif; vertical-align: sub">opt</span></div>
 </div>
 <div class="gp">
   <div class="lhs">DecimalDigits <span style="font-family: sans-serif; font-weight: bold">::</span><span style="font-family: sans-serif">&#x9;See 7.8.3</span></div>
-  <div class="rhs">DecimalDigit<span><br>DecimalDigits DecimalDigit</span></div>
+  <div class="rhs">DecimalDigit<br>DecimalDigits DecimalDigit</div>
 </div>
 <div class="gp">
   <div class="lhs">DecimalDigit <span style="font-family: sans-serif; font-weight: bold">::</span> <span style="font-family: sans-serif; font-weight: bold">one of</span>&#x9;<span style="font-family: sans-serif">See 7.8.3</span></div>
@@ -16519,7 +16519,7 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">HexIntegerLiteral <span style="font-family: sans-serif; font-weight: bold">::</span><span style="font-family: sans-serif">&#x9;See 7.8.3</span></div>
-  <div class="rhs"><code>0x</code> HexDigit<br><code>0X</code> HexDigit<span><br>HexIntegerLiteral HexDigit</span></div>
+  <div class="rhs"><code>0x</code> HexDigit<br><code>0X</code> HexDigit<br>HexIntegerLiteral HexDigit</div>
 </div>
 <div class="gp">
   <div class="lhs">HexDigit <span style="font-family: sans-serif; font-weight: bold">::</span> <span style="font-family: sans-serif; font-weight: bold">one of</span>&#x9;<span style="font-family: sans-serif">See 7.8.3</span></div>
@@ -16539,11 +16539,11 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">DoubleStringCharacter <span style="font-family: sans-serif; font-weight: bold">::</span><span style="font-family: sans-serif">&#x9;See 7.8.4</span></div>
-  <div class="rhs">SourceCharacter <span style="font-family: sans-serif; font-weight: bold">but not one of</span> <code>"</code> <span style="font-family: sans-serif; font-weight: bold">or</span> <code>\</code> <span style="font-family: sans-serif; font-weight: bold">or</span> LineTerminator<br><code>\ </code>EscapeSequence<span><br>LineContinuation</span></div>
+  <div class="rhs">SourceCharacter <span style="font-family: sans-serif; font-weight: bold">but not one of</span> <code>"</code> <span style="font-family: sans-serif; font-weight: bold">or</span> <code>\</code> <span style="font-family: sans-serif; font-weight: bold">or</span> LineTerminator<br><code>\ </code>EscapeSequence<br>LineContinuation</div>
 </div>
 <div class="gp">
   <div class="lhs">SingleStringCharacter <span style="font-family: sans-serif; font-weight: bold">::</span><span style="font-family: sans-serif">&#x9;See 7.8.4</span></div>
-  <div class="rhs">SourceCharacter <span style="font-family: sans-serif; font-weight: bold">but not one of</span> <code>'</code> <span style="font-family: sans-serif; font-weight: bold">or</span> <code>\</code> <span style="font-family: sans-serif; font-weight: bold">or</span> LineTerminator<br><code>\ </code>EscapeSequence<span><br>LineContinuation</span></div>
+  <div class="rhs">SourceCharacter <span style="font-family: sans-serif; font-weight: bold">but not one of</span> <code>'</code> <span style="font-family: sans-serif; font-weight: bold">or</span> <code>\</code> <span style="font-family: sans-serif; font-weight: bold">or</span> LineTerminator<br><code>\ </code>EscapeSequence<br>LineContinuation</div>
 </div>
 <div class="gp">
   <div class="lhs">LineContinuation <span style="font-family: sans-serif; font-weight: bold">::</span><span style="font-family: sans-serif">&#x9;See 7.8.4</span></div>
@@ -16551,11 +16551,11 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">EscapeSequence <span style="font-family: sans-serif; font-weight: bold">::</span><span style="font-family: sans-serif">&#x9;See 7.8.4</span></div>
-  <div class="rhs">CharacterEscapeSequence<br><code>0</code>  <span style="font-family: sans-serif">[lookahead </span><span style="font-family: sans-serif">&isin;</span> DecimalDigit<span style="font-family: sans-serif">]</span><span><br>HexEscapeSequence</span><span><br>UnicodeEscapeSequence</span></div>
+  <div class="rhs">CharacterEscapeSequence<br><code>0</code>  <span style="font-family: sans-serif">[lookahead </span><span style="font-family: sans-serif">&isin;</span> DecimalDigit<span style="font-family: sans-serif">]</span><br>HexEscapeSequence<br>UnicodeEscapeSequence</div>
 </div>
 <div class="gp">
   <div class="lhs">CharacterEscapeSequence <span style="font-family: sans-serif; font-weight: bold">::</span><span style="font-family: sans-serif">&#x9;See 7.8.4</span></div>
-  <div class="rhs">SingleEscapeCharacter<span><br>NonEscapeCharacter</span></div>
+  <div class="rhs">SingleEscapeCharacter<br>NonEscapeCharacter</div>
 </div>
 <div class="gp">
   <div class="lhs">SingleEscapeCharacter <span style="font-family: sans-serif; font-weight: bold">::</span>  <span style="font-family: sans-serif; font-weight: bold">one of</span><span style="font-family: sans-serif">&#x9;See 7.8.4</span></div>
@@ -16565,7 +16565,7 @@ THH:mm:ss.sss</pre>
 <div class="gp">SourceCharacter <span style="font-family: sans-serif; font-weight: bold">but not one of</span> EscapeCharacter <span style="font-family: sans-serif; font-weight: bold">or</span> LineTerminator</div>
 <div class="gp">
   <div class="lhs">EscapeCharacter <span style="font-family: sans-serif; font-weight: bold">::</span><span style="font-family: sans-serif">&#x9;See 7.8.4</span></div>
-  <div class="rhs">SingleEscapeCharacter<span><br>DecimalDigit</span><br><code>x</code><span style="font-family: sans-serif; font-weight: bold"><br></span><code>u</code></div>
+  <div class="rhs">SingleEscapeCharacter<br>DecimalDigit<br><code>x</code><span style="font-family: sans-serif; font-weight: bold"><br></span><code>u</code></div>
 </div>
 <div class="gp">
   <div class="lhs">HexEscapeSequence <span style="font-family: sans-serif; font-weight: bold">::</span><span style="font-family: sans-serif">&#x9;See 7.8.4</span></div>
@@ -16585,15 +16585,15 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">RegularExpressionChars <span style="font-family: sans-serif; font-weight: bold">::</span><span style="font-family: sans-serif">&#x9;See 7.8.5</span></div>
-  <div class="rhs"><span style="font-family: sans-serif">[empty]</span><span><br>RegularExpressionChars RegularExpressionChar</span></div>
+  <div class="rhs"><span style="font-family: sans-serif">[empty]</span><br>RegularExpressionChars RegularExpressionChar</div>
 </div>
 <div class="gp">
   <div class="lhs">RegularExpressionFirstChar <span style="font-family: sans-serif; font-weight: bold">::</span><span style="font-family: sans-serif">&#x9;See 7.8.5</span></div>
-  <div class="rhs">RegularExpressionNonTerminator <span style="font-family: sans-serif; font-weight: bold">but not one of</span> <code>*</code> <span style="font-family: sans-serif; font-weight: bold">or</span> <code>\</code> <span style="font-family: sans-serif; font-weight: bold">or</span> <code>/ </code><span style="font-family: sans-serif; font-weight: bold">or</span><code> [</code><span><br>RegularExpressionBackslashSequence</span><span><br>RegularExpressionClass</span></div>
+  <div class="rhs">RegularExpressionNonTerminator <span style="font-family: sans-serif; font-weight: bold">but not one of</span> <code>*</code> <span style="font-family: sans-serif; font-weight: bold">or</span> <code>\</code> <span style="font-family: sans-serif; font-weight: bold">or</span> <code>/ </code><span style="font-family: sans-serif; font-weight: bold">or</span><code> [</code><br>RegularExpressionBackslashSequence<br>RegularExpressionClass</div>
 </div>
 <div class="gp">
   <div class="lhs">RegularExpressionChar <span style="font-family: sans-serif; font-weight: bold">::</span><span style="font-family: sans-serif">&#x9;See 7.8.5</span></div>
-  <div class="rhs">RegularExpressionNonTerminator <span style="font-family: sans-serif; font-weight: bold">but not</span> <code>\</code> <span style="font-family: sans-serif; font-weight: bold">or</span> <code>/ </code><span style="font-family: sans-serif; font-weight: bold">or</span><code> [</code><span><br>RegularExpressionBackslashSequence</span><span><br>RegularExpressionClass</span></div>
+  <div class="rhs">RegularExpressionNonTerminator <span style="font-family: sans-serif; font-weight: bold">but not</span> <code>\</code> <span style="font-family: sans-serif; font-weight: bold">or</span> <code>/ </code><span style="font-family: sans-serif; font-weight: bold">or</span><code> [</code><br>RegularExpressionBackslashSequence<br>RegularExpressionClass</div>
 </div>
 <div class="gp">
   <div class="lhs">RegularExpressionBackslashSequence <span style="font-family: sans-serif; font-weight: bold">::</span><span style="font-family: sans-serif">&#x9;See 7.8.5</span></div>
@@ -16609,7 +16609,7 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">RegularExpressionClassChars <span style="font-family: sans-serif; font-weight: bold">::</span> <span style="font-family: sans-serif">&#x9;See 7.8.5</span></div>
-  <div class="rhs"><span style="font-family: sans-serif">[empty]</span><span><br>RegularExpressionClassChars</span> RegularExpressionClassChar</div>
+  <div class="rhs"><span style="font-family: sans-serif">[empty]</span><br>RegularExpressionClassChars RegularExpressionClassChar</div>
 </div>
 <div class="gp">
   <div class="lhs">RegularExpressionClassChar <span style="font-family: sans-serif; font-weight: bold">::</span> <span style="font-family: sans-serif">&#x9;See 7.8.5</span></div>
@@ -16617,12 +16617,12 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">RegularExpressionFlags <span style="font-family: sans-serif; font-weight: bold">::</span><span style="font-family: sans-serif">&#x9;See 7.8.5</span></div>
-  <div class="rhs"><span style="font-family: sans-serif">[empty]</span><span><br>RegularExpressionFlags IdentifierPart</span></div>
+  <div class="rhs"><span style="font-family: sans-serif">[empty]</span><br>RegularExpressionFlags IdentifierPart</div>
 </div>
 <p>Number Conversions</p>
 <div class="gp">
   <div class="lhs">StringNumericLiteral <span style="font-family: sans-serif; font-weight: bold">:::</span><span style="font-family: sans-serif">&#x9;See 9.3.1</span></div>
-  <div class="rhs">StrWhiteSpace<span style="font-family: sans-serif; vertical-align: sub">opt</span><span><br>StrWhiteSpace</span><span style="font-family: sans-serif; vertical-align: sub">opt</span> StrNumericLiteral StrWhiteSpace<span style="font-family: sans-serif; vertical-align: sub">opt</span></div>
+  <div class="rhs">StrWhiteSpace<span style="font-family: sans-serif; vertical-align: sub">opt</span><br>StrWhiteSpace<span style="font-family: sans-serif; vertical-align: sub">opt</span> StrNumericLiteral StrWhiteSpace<span style="font-family: sans-serif; vertical-align: sub">opt</span></div>
 </div>
 <div class="gp">
   <div class="lhs">StrWhiteSpace <span style="font-family: sans-serif; font-weight: bold">:::</span><span style="font-family: sans-serif">&#x9;See 9.3.1</span></div>
@@ -16630,11 +16630,11 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">StrWhiteSpaceChar <span style="font-family: sans-serif; font-weight: bold">:::</span><span style="font-family: sans-serif">&#x9;See 9.3.1</span></div>
-  <div class="rhs">WhiteSpace<span><br>LineTerminator</span></div>
+  <div class="rhs">WhiteSpace<br>LineTerminator</div>
 </div>
 <div class="gp">
   <div class="lhs">StrNumericLiteral <span style="font-family: sans-serif; font-weight: bold">:::</span><span style="font-family: sans-serif">&#x9;See 9.3.1</span></div>
-  <div class="rhs">StrDecimalLiteral<span><br>HexIntegerLiteral</span></div>
+  <div class="rhs">StrDecimalLiteral<br>HexIntegerLiteral</div>
 </div>
 <div class="gp">
   <div class="lhs">StrDecimalLiteral <span style="font-family: sans-serif; font-weight: bold">:::</span><span style="font-family: sans-serif">&#x9;See 9.3.1</span></div>
@@ -16642,11 +16642,11 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">StrUnsignedDecimalLiteral <span style="font-family: sans-serif; font-weight: bold">:::</span><span style="font-family: sans-serif">&#x9;See 9.3.1</span></div>
-  <div class="rhs"><code>Infinity</code><span><br>DecimalDigits </span><code>.</code> DecimalDigits<span style="font-family: sans-serif; vertical-align: sub">opt</span> ExponentPart<span style="font-family: sans-serif; vertical-align: sub">opt</span><br><code>.</code> DecimalDigits ExponentPart<span style="font-family: sans-serif; vertical-align: sub">opt</span><span><br>DecimalDigits ExponentPart</span><span style="font-family: sans-serif; vertical-align: sub">opt</span></div>
+  <div class="rhs"><code>Infinity</code><br>DecimalDigits <code>.</code> DecimalDigits<span style="font-family: sans-serif; vertical-align: sub">opt</span> ExponentPart<span style="font-family: sans-serif; vertical-align: sub">opt</span><br><code>.</code> DecimalDigits ExponentPart<span style="font-family: sans-serif; vertical-align: sub">opt</span><br>DecimalDigits ExponentPart<span style="font-family: sans-serif; vertical-align: sub">opt</span></div>
 </div>
 <div class="gp">
   <div class="lhs">DecimalDigits <span style="font-family: sans-serif; font-weight: bold">:::</span><span style="font-family: sans-serif">&#x9;See 9.3.1</span></div>
-  <div class="rhs">DecimalDigit<span><br>DecimalDigits DecimalDigit</span></div>
+  <div class="rhs">DecimalDigit<br>DecimalDigits DecimalDigit</div>
 </div>
 <div class="gp">
   <div class="lhs">DecimalDigit <span style="font-family: sans-serif; font-weight: bold">:::</span> <span style="font-family: sans-serif; font-weight: bold">one of</span>&#x9;<span style="font-family: sans-serif">See 9.3.1</span></div>
@@ -16666,7 +16666,7 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">HexIntegerLiteral <span style="font-family: sans-serif; font-weight: bold">:::</span><span style="font-family: sans-serif">&#x9;See 9.3.1</span></div>
-  <div class="rhs"><code>0x</code> HexDigit<br><code>0X</code> HexDigit<span><br>HexIntegerLiteral HexDigit</span></div>
+  <div class="rhs"><code>0x</code> HexDigit<br><code>0X</code> HexDigit<br>HexIntegerLiteral HexDigit</div>
 </div>
 <div class="gp">
   <div class="lhs">HexDigit <span style="font-family: sans-serif; font-weight: bold">:::</span> <span style="font-family: sans-serif; font-weight: bold">one of</span>&#x9;<span style="font-family: sans-serif">See 9.3.1</span></div>
@@ -16675,7 +16675,7 @@ THH:mm:ss.sss</pre>
 <p>Expressions</p>
 <div class="gp">
   <div class="lhs">PrimaryExpression <span style="font-family: sans-serif; font-weight: bold">:</span><span style="font-family: sans-serif">&#x9;See 11.1</span></div>
-  <div class="rhs"><code>this</code><span><br>Identifier</span><span><br>Literal</span><span><br>ArrayLiteral</span><span><br>ObjectLiteral</span><br><code>(</code> Expression <code>)</code></div>
+  <div class="rhs"><code>this</code><br>Identifier<br>Literal<br>ArrayLiteral<br>ObjectLiteral<br><code>(</code> Expression <code>)</code></div>
 </div>
 <div class="gp">
   <div class="lhs">ArrayLiteral <span style="font-family: sans-serif; font-weight: bold">:</span><span style="font-family: sans-serif">&#x9;See 11.1.4</span></div>
@@ -16683,11 +16683,11 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">ElementList <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 11.1.4</span></div>
-  <div class="rhs">Elision<span style="font-family: sans-serif; vertical-align: sub">opt</span> AssignmentExpression<span><br>ElementList</span> <code>,</code> Elision<span style="font-family: sans-serif; vertical-align: sub">opt</span> AssignmentExpression</div>
+  <div class="rhs">Elision<span style="font-family: sans-serif; vertical-align: sub">opt</span> AssignmentExpression<br>ElementList <code>,</code> Elision<span style="font-family: sans-serif; vertical-align: sub">opt</span> AssignmentExpression</div>
 </div>
 <div class="gp">
   <div class="lhs">Elision <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 11.1.4</span></div>
-  <div class="rhs"><code>,</code><span><br>Elision</span> <code>,</code></div>
+  <div class="rhs"><code>,</code><br>Elision <code>,</code></div>
 </div>
 <div class="gp">
   <div class="lhs">ObjectLiteral <span style="font-family: sans-serif; font-weight: bold">:</span><span style="font-family: sans-serif">&#x9;See 11.1.5</span></div>
@@ -16695,7 +16695,7 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">PropertyNameAndValueList <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 11.1.5</span></div>
-  <div class="rhs">PropertyAssignment<span><br>PropertyNameAndValueList</span> <code>,</code>  PropertyAssignment</div>
+  <div class="rhs">PropertyAssignment<br>PropertyNameAndValueList <code>,</code>  PropertyAssignment</div>
 </div>
 <div class="gp">
   <div class="lhs">PropertyAssignment <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 11.1.5</span></div>
@@ -16703,7 +16703,7 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">PropertyName <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 11.1.5</span></div>
-  <div class="rhs">IdentifierName<span><br>StringLiteral</span><span><br>NumericLiteral</span></div>
+  <div class="rhs">IdentifierName<br>StringLiteral<br>NumericLiteral</div>
 </div>
 <div class="gp">
   <div class="lhs">PropertySetParameterList <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 11.1.5</span></div>
@@ -16711,7 +16711,7 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">MemberExpression <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 11.2</span></div>
-  <div class="rhs">PrimaryExpression<span><br>FunctionExpression</span><span><br>MemberExpression </span><code>[</code> Expression <code>]<br></code>MemberExpression <code>.</code> IdentifierName<br><code>new</code> MemberExpression <i>Arguments</i></div>
+  <div class="rhs">PrimaryExpression<br>FunctionExpression<br>MemberExpression <code>[</code> Expression <code>]<br></code>MemberExpression <code>.</code> IdentifierName<br><code>new</code> MemberExpression <i>Arguments</i></div>
 </div>
 <div class="gp">
   <div class="lhs">NewExpression <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 11.2</span></div>
@@ -16727,15 +16727,15 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">ArgumentList <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 11.2</span></div>
-  <div class="rhs">AssignmentExpression<span><br>ArgumentList </span><code>,</code> AssignmentExpression</div>
+  <div class="rhs">AssignmentExpression<br>ArgumentList <code>,</code> AssignmentExpression</div>
 </div>
 <div class="gp">
   <div class="lhs">LeftHandSideExpression <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 11.2</span></div>
-  <div class="rhs">NewExpression<span><br>CallExpression</span></div>
+  <div class="rhs">NewExpression<br>CallExpression</div>
 </div>
 <div class="gp">
   <div class="lhs">PostfixExpression <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 11.3</span></div>
-  <div class="rhs">LeftHandSideExpression<span><br>LeftHandSideExpression</span> <span style="font-family: sans-serif">[no</span> LineTerminator <span style="font-family: sans-serif">here]</span><code> ++</code><span><br>LeftHandSideExpression</span> <span style="font-family: sans-serif">[no</span> LineTerminator <span style="font-family: sans-serif">here]</span><code> --</code></div>
+  <div class="rhs">LeftHandSideExpression<br>LeftHandSideExpression <span style="font-family: sans-serif">[no</span> LineTerminator <span style="font-family: sans-serif">here]</span><code> ++</code><br>LeftHandSideExpression <span style="font-family: sans-serif">[no</span> LineTerminator <span style="font-family: sans-serif">here]</span><code> --</code></div>
 </div>
 <div class="gp">
   <div class="lhs">UnaryExpression <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 11.4</span></div>
@@ -16743,87 +16743,87 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">MultiplicativeExpression <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 11.5</span></div>
-  <div class="rhs">UnaryExpression<span><br>MultiplicativeExpression </span><code>*</code> UnaryExpression<span><br>MultiplicativeExpression </span><code>/</code> UnaryExpression<span><br>MultiplicativeExpression </span><code>%</code> UnaryExpression</div>
+  <div class="rhs">UnaryExpression<br>MultiplicativeExpression <code>*</code> UnaryExpression<br>MultiplicativeExpression <code>/</code> UnaryExpression<br>MultiplicativeExpression <code>%</code> UnaryExpression</div>
 </div>
 <div class="gp">
   <div class="lhs">AdditiveExpression <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 11.6</span></div>
-  <div class="rhs">MultiplicativeExpression<span><br>AdditiveExpression </span><code>+</code> MultiplicativeExpression<span><br>AdditiveExpression </span><code>-</code> MultiplicativeExpression</div>
+  <div class="rhs">MultiplicativeExpression<br>AdditiveExpression <code>+</code> MultiplicativeExpression<br>AdditiveExpression <code>-</code> MultiplicativeExpression</div>
 </div>
 <div class="gp">
   <div class="lhs">ShiftExpression <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 11.7</span></div>
-  <div class="rhs">AdditiveExpression<span><br>ShiftExpression </span><code>&lt;&lt;</code> AdditiveExpression<span><br>ShiftExpression </span><code>&gt;&gt;</code> AdditiveExpression<span><br>ShiftExpression </span><code>&gt;&gt;&gt;</code> AdditiveExpression</div>
+  <div class="rhs">AdditiveExpression<br>ShiftExpression <code>&lt;&lt;</code> AdditiveExpression<br>ShiftExpression <code>&gt;&gt;</code> AdditiveExpression<br>ShiftExpression <code>&gt;&gt;&gt;</code> AdditiveExpression</div>
 </div>
 <div class="gp">
   <div class="lhs">RelationalExpression <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 11.8</span></div>
-  <div class="rhs">ShiftExpression<span><br>RelationalExpression </span><code>&lt;</code> ShiftExpression<span><br>RelationalExpression </span><code>&gt;</code> ShiftExpression<span><br>RelationalExpression </span><code>&lt;=</code> ShiftExpression<span><br>RelationalExpression </span><code>&gt;=</code> ShiftExpression<span><br>RelationalExpression </span><code>instanceof</code> ShiftExpression<span><br>RelationalExpression </span><code>in</code> ShiftExpression</div>
+  <div class="rhs">ShiftExpression<br>RelationalExpression <code>&lt;</code> ShiftExpression<br>RelationalExpression <code>&gt;</code> ShiftExpression<br>RelationalExpression <code>&lt;=</code> ShiftExpression<br>RelationalExpression <code>&gt;=</code> ShiftExpression<br>RelationalExpression <code>instanceof</code> ShiftExpression<br>RelationalExpression <code>in</code> ShiftExpression</div>
 </div>
 <div class="gp">
   <div class="lhs">RelationalExpressionNoIn <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 11.8</span></div>
-  <div class="rhs">ShiftExpression<span><br>RelationalExpressionNoIn </span><code>&lt;</code> ShiftExpression<span><br>RelationalExpressionNoIn </span><code>&gt;</code> ShiftExpression<span><br>RelationalExpressionNoIn </span><code>&lt;=</code> ShiftExpression<span><br>RelationalExpressionNoIn </span><code>&gt;=</code> ShiftExpression<span><br>RelationalExpressionNoIn </span><code>instanceof</code> ShiftExpression</div>
+  <div class="rhs">ShiftExpression<br>RelationalExpressionNoIn <code>&lt;</code> ShiftExpression<br>RelationalExpressionNoIn <code>&gt;</code> ShiftExpression<br>RelationalExpressionNoIn <code>&lt;=</code> ShiftExpression<br>RelationalExpressionNoIn <code>&gt;=</code> ShiftExpression<br>RelationalExpressionNoIn <code>instanceof</code> ShiftExpression</div>
 </div>
 <div class="gp">
   <div class="lhs">EqualityExpression <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 11.9</span></div>
-  <div class="rhs">RelationalExpression<span><br>EqualityExpression </span><code>==</code> RelationalExpression<span><br>EqualityExpression </span><code>!=</code> RelationalExpression<span><br>EqualityExpression </span><code>===</code> RelationalExpression<span><br>EqualityExpression </span><code>!==</code> RelationalExpression</div>
+  <div class="rhs">RelationalExpression<br>EqualityExpression <code>==</code> RelationalExpression<br>EqualityExpression <code>!=</code> RelationalExpression<br>EqualityExpression <code>===</code> RelationalExpression<br>EqualityExpression <code>!==</code> RelationalExpression</div>
 </div>
 <div class="gp">
   <div class="lhs">EqualityExpressionNoIn <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 11.9</span></div>
-  <div class="rhs">RelationalExpressionNoIn<span><br>EqualityExpressionNoIn </span><code>==</code> RelationalExpressionNoIn<span><br>EqualityExpressionNoIn </span><code>!=</code> RelationalExpressionNoIn<span><br>EqualityExpressionNoIn </span><code>===</code> RelationalExpressionNoIn<span><br>EqualityExpressionNoIn </span><code>!==</code> RelationalExpressionNoIn</div>
+  <div class="rhs">RelationalExpressionNoIn<br>EqualityExpressionNoIn <code>==</code> RelationalExpressionNoIn<br>EqualityExpressionNoIn <code>!=</code> RelationalExpressionNoIn<br>EqualityExpressionNoIn <code>===</code> RelationalExpressionNoIn<br>EqualityExpressionNoIn <code>!==</code> RelationalExpressionNoIn</div>
 </div>
 <div class="gp">
   <div class="lhs">BitwiseANDExpression <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 11.10</span></div>
-  <div class="rhs">EqualityExpression<span><br>BitwiseANDExpression </span><code>&amp;</code> EqualityExpression</div>
+  <div class="rhs">EqualityExpression<br>BitwiseANDExpression <code>&amp;</code> EqualityExpression</div>
 </div>
 <div class="gp">
   <div class="lhs">BitwiseANDExpressionNoIn <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 11.10</span></div>
-  <div class="rhs">EqualityExpressionNoIn<span><br>BitwiseANDExpressionNoIn </span><code>&amp;</code> EqualityExpressionNoIn</div>
+  <div class="rhs">EqualityExpressionNoIn<br>BitwiseANDExpressionNoIn <code>&amp;</code> EqualityExpressionNoIn</div>
 </div>
 <div class="gp">
   <div class="lhs">BitwiseXORExpression <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 11.10</span></div>
-  <div class="rhs">BitwiseANDExpression<span><br>BitwiseXORExpression </span><code>^</code> BitwiseANDExpression</div>
+  <div class="rhs">BitwiseANDExpression<br>BitwiseXORExpression <code>^</code> BitwiseANDExpression</div>
 </div>
 <div class="gp">
   <div class="lhs">BitwiseXORExpressionNoIn <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 11.10</span></div>
-  <div class="rhs">BitwiseANDExpressionNoIn<span><br>BitwiseXORExpressionNoIn </span><code>^</code> BitwiseANDExpressionNoIn</div>
+  <div class="rhs">BitwiseANDExpressionNoIn<br>BitwiseXORExpressionNoIn <code>^</code> BitwiseANDExpressionNoIn</div>
 </div>
 <div class="gp">
   <div class="lhs">BitwiseORExpression <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 11.10</span></div>
-  <div class="rhs">BitwiseXORExpression<span><br>BitwiseORExpression </span><code>|</code> BitwiseXORExpression</div>
+  <div class="rhs">BitwiseXORExpression<br>BitwiseORExpression <code>|</code> BitwiseXORExpression</div>
 </div>
 <div class="gp">
   <div class="lhs">BitwiseORExpressionNoIn <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 11.10</span></div>
-  <div class="rhs">BitwiseXORExpressionNoIn<span><br>BitwiseORExpressionNoIn </span><code>|</code> BitwiseXORExpressionNoIn</div>
+  <div class="rhs">BitwiseXORExpressionNoIn<br>BitwiseORExpressionNoIn <code>|</code> BitwiseXORExpressionNoIn</div>
 </div>
 <div class="gp">
   <div class="lhs">LogicalANDExpression <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 11.11</span></div>
-  <div class="rhs">BitwiseORExpression<span><br>LogicalANDExpression </span><code>&amp;&amp;</code> BitwiseORExpression</div>
+  <div class="rhs">BitwiseORExpression<br>LogicalANDExpression <code>&amp;&amp;</code> BitwiseORExpression</div>
 </div>
 <div class="gp">
   <div class="lhs">LogicalANDExpressionNoIn <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 11.11</span></div>
-  <div class="rhs">BitwiseORExpressionNoIn<span><br>LogicalANDExpressionNoIn </span><code>&amp;&amp;</code> BitwiseORExpressionNoIn</div>
+  <div class="rhs">BitwiseORExpressionNoIn<br>LogicalANDExpressionNoIn <code>&amp;&amp;</code> BitwiseORExpressionNoIn</div>
 </div>
 <div class="gp">
   <div class="lhs">LogicalORExpression <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 11.11</span></div>
-  <div class="rhs">LogicalANDExpression<span><br>LogicalORExpression </span><code>||</code> LogicalANDExpression</div>
+  <div class="rhs">LogicalANDExpression<br>LogicalORExpression <code>||</code> LogicalANDExpression</div>
 </div>
 <div class="gp">
   <div class="lhs">LogicalORExpressionNoIn <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 11.11</span></div>
-  <div class="rhs">LogicalANDExpressionNoIn<span><br>LogicalORExpressionNoIn </span><code>||</code> LogicalANDExpressionNoIn</div>
+  <div class="rhs">LogicalANDExpressionNoIn<br>LogicalORExpressionNoIn <code>||</code> LogicalANDExpressionNoIn</div>
 </div>
 <div class="gp">
   <div class="lhs">ConditionalExpression <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 11.12</span></div>
-  <div class="rhs">LogicalORExpression<span><br>LogicalORExpression</span><code> ?</code> AssignmentExpression <code>:</code> AssignmentExpression</div>
+  <div class="rhs">LogicalORExpression<br>LogicalORExpression<code> ?</code> AssignmentExpression <code>:</code> AssignmentExpression</div>
 </div>
 <div class="gp">
   <div class="lhs">ConditionalExpressionNoIn <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 11.12</span></div>
-  <div class="rhs">LogicalORExpressionNoIn<span><br>LogicalORExpressionNoIn</span><code> ?</code> AssignmentExpression <code>:</code> AssignmentExpressionNoIn</div>
+  <div class="rhs">LogicalORExpressionNoIn<br>LogicalORExpressionNoIn<code> ?</code> AssignmentExpression <code>:</code> AssignmentExpressionNoIn</div>
 </div>
 <div class="gp">
   <div class="lhs">AssignmentExpression <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 11.13</span></div>
-  <div class="rhs">ConditionalExpression<span><br>LeftHandSideExpression</span><code> = </code>AssignmentExpression <span><br>LeftHandSideExpression AssignmentOperator AssignmentExpression</span></div>
+  <div class="rhs">ConditionalExpression<br>LeftHandSideExpression<code> = </code>AssignmentExpression <br>LeftHandSideExpression AssignmentOperator AssignmentExpression</div>
 </div>
 <div class="gp">
   <div class="lhs">AssignmentExpressionNoIn <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 11.13</span></div>
-  <div class="rhs">ConditionalExpressionNoIn<span><br>LeftHandSideExpression</span><code> = </code>AssignmentExpressionNoIn<span><br>LeftHandSideExpression AssignmentOperator AssignmentExpressionNoIn</span></div>
+  <div class="rhs">ConditionalExpressionNoIn<br>LeftHandSideExpression<code> = </code>AssignmentExpressionNoIn<br>LeftHandSideExpression AssignmentOperator AssignmentExpressionNoIn</div>
 </div>
 <div class="gp">AssignmentOperator <span style="font-family: sans-serif; font-weight: bold">:</span> <span style="font-family: sans-serif; font-weight: bold">one of</span><span style="font-family: sans-serif">&#x9;See 11.13</span></div>
 <figure>
@@ -16867,16 +16867,16 @@ THH:mm:ss.sss</pre>
 </figure>
 <div class="gp">
   <div class="lhs">Expression <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 11.14</span></div>
-  <div class="rhs">AssignmentExpression<span><br>Expression </span><code>,</code> AssignmentExpression</div>
+  <div class="rhs">AssignmentExpression<br>Expression <code>,</code> AssignmentExpression</div>
 </div>
 <div class="gp">
   <div class="lhs">ExpressionNoIn <span style="font-family: sans-serif; font-weight: bold">:</span><span style="font-family: sans-serif">&#x9;See 11.14</span></div>
-  <div class="rhs">AssignmentExpressionNoIn<span><br>ExpressionNoIn </span><code>,</code> AssignmentExpressionNoIn</div>
+  <div class="rhs">AssignmentExpressionNoIn<br>ExpressionNoIn <code>,</code> AssignmentExpressionNoIn</div>
 </div>
 <p>Statements</p>
 <div class="gp">
   <div class="lhs">Statement <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See clause 12</span></div>
-  <div class="rhs">Block<span><br>VariableStatement</span><span><br>EmptyStatement</span><span><br>ExpressionStatement</span><span><br>IfStatement</span><span><br>IterationStatement</span><span><br>ContinueStatement</span><span><br>BreakStatement</span><span><br>ReturnStatement</span><span><br>WithStatement</span><span><br>LabelledStatement</span><span><br>SwitchStatement</span><span><br>ThrowStatement</span><span><br>TryStatement</span><span><br>DebuggerStatement</span></div>
+  <div class="rhs">Block<br>VariableStatement<br>EmptyStatement<br>ExpressionStatement<br>IfStatement<br>IterationStatement<br>ContinueStatement<br>BreakStatement<br>ReturnStatement<br>WithStatement<br>LabelledStatement<br>SwitchStatement<br>ThrowStatement<br>TryStatement<br>DebuggerStatement</div>
 </div>
 <div class="gp">
   <div class="lhs">Block <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 12.1</span></div>
@@ -16884,7 +16884,7 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">StatementList <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 12.1</span></div>
-  <div class="rhs">Statement<span><br>StatementList Statement</span></div>
+  <div class="rhs">Statement<br>StatementList Statement</div>
 </div>
 <div class="gp">
   <div class="lhs">VariableStatement <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 12.2</span></div>
@@ -16892,11 +16892,11 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">VariableDeclarationList <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 12.2</span></div>
-  <div class="rhs">VariableDeclaration<span><br>VariableDeclarationList </span><code>,</code> VariableDeclaration</div>
+  <div class="rhs">VariableDeclaration<br>VariableDeclarationList <code>,</code> VariableDeclaration</div>
 </div>
 <div class="gp">
   <div class="lhs">VariableDeclarationListNoIn <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 12.2</span></div>
-  <div class="rhs">VariableDeclarationNoIn<span><br>VariableDeclarationListNoIn </span><code>,</code> VariableDeclarationNoIn</div>
+  <div class="rhs">VariableDeclarationNoIn<br>VariableDeclarationListNoIn <code>,</code> VariableDeclarationNoIn</div>
 </div>
 <div class="gp">
   <div class="lhs">VariableDeclaration <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 12.2</span></div>
@@ -16956,7 +16956,7 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">CaseClauses <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 12.11</span></div>
-  <div class="rhs">CaseClause<span><br>CaseClauses CaseClause</span></div>
+  <div class="rhs">CaseClause<br>CaseClauses CaseClause</div>
 </div>
 <div class="gp">
   <div class="lhs">CaseClause <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 12.11</span></div>
@@ -17001,7 +17001,7 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">FormalParameterList <span style="font-family: sans-serif; font-weight: bold">:</span><span style="font-family: sans-serif">&#x9;See clause 13</span></div>
-  <div class="rhs">Identifier<span><br>FormalParameterList </span><code>,</code> Identifier</div>
+  <div class="rhs">Identifier<br>FormalParameterList <code>,</code> Identifier</div>
 </div>
 <div class="gp">
   <div class="lhs">FunctionBody <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See clause 13</span></div>
@@ -17013,11 +17013,11 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">SourceElements <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See clause 14</span></div>
-  <div class="rhs">SourceElement<span><br>SourceElements SourceElement</span></div>
+  <div class="rhs">SourceElement<br>SourceElements SourceElement</div>
 </div>
 <div class="gp">
   <div class="lhs">SourceElement <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See clause 14</span></div>
-  <div class="rhs">Statement<span><br>FunctionDeclaration</span></div>
+  <div class="rhs">Statement<br>FunctionDeclaration</div>
 </div>
 <p>Universal Resource Identifier Character Classes</p>
 <div class="gp">
@@ -17030,7 +17030,7 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">uriCharacter <span style="font-family: sans-serif; font-weight: bold">:::</span><span style="font-family: sans-serif">&#x9;See 15.1.3</span></div>
-  <div class="rhs">uriReserved<span><br>uriUnescaped</span><span><br>uriEscaped</span></div>
+  <div class="rhs">uriReserved<br>uriUnescaped<br>uriEscaped</div>
 </div>
 <div class="gp">
   <div class="lhs">uriReserved <span style="font-family: sans-serif; font-weight: bold">:::</span> <span style="font-family: sans-serif; font-weight: bold">one of</span>&#x9;<span style="font-family: sans-serif">See 15.1.3</span></div>
@@ -17038,7 +17038,7 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">uriUnescaped <span style="font-family: sans-serif; font-weight: bold">:::</span><span style="font-family: sans-serif">&#x9;See 15.1.3</span></div>
-  <div class="rhs">uriAlpha<span><br>DecimalDigit</span><span><br>uriMark</span></div>
+  <div class="rhs">uriAlpha<br>DecimalDigit<br>uriMark</div>
 </div>
 <div class="gp">
   <div class="lhs">uriEscaped <span style="font-family: sans-serif; font-weight: bold">:::</span>&#x9;<span style="font-family: sans-serif">See 15.1.3</span></div>
@@ -17059,15 +17059,15 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">Disjunction <span style="font-family: sans-serif; font-weight: bold">::</span>&#x9;<span style="font-family: sans-serif">See 15.10.1</span></div>
-  <div class="rhs">Alternative<span><br> Alternative </span><code>|</code> Disjunction</div>
+  <div class="rhs">Alternative<br> Alternative <code>|</code> Disjunction</div>
 </div>
 <div class="gp">
   <div class="lhs">Alternative <span style="font-family: sans-serif; font-weight: bold">::</span>&#x9;<span style="font-family: sans-serif">See 15.10.1</span></div>
-  <div class="rhs"><span style="font-family: sans-serif">[empty]</span><span><br>Alternative Term</span></div>
+  <div class="rhs"><span style="font-family: sans-serif">[empty]</span><br>Alternative Term</div>
 </div>
 <div class="gp">
   <div class="lhs">Term <span style="font-family: sans-serif; font-weight: bold">::</span>&#x9;<span style="font-family: sans-serif">See 15.10.1</span></div>
-  <div class="rhs">Assertion<span><br>Atom</span><span><br>Atom Quantifier</span></div>
+  <div class="rhs">Assertion<br>Atom<br>Atom Quantifier</div>
 </div>
 <div class="gp">
   <div class="lhs">Assertion <span style="font-family: sans-serif; font-weight: bold">::</span>&#x9;<span style="font-family: sans-serif">See 15.10.1</span></div>
@@ -17075,7 +17075,7 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">Quantifier <span style="font-family: sans-serif; font-weight: bold">::</span>&#x9;<span style="font-family: sans-serif">See 15.10.1</span></div>
-  <div class="rhs">QuantifierPrefix<span><br>QuantifierPrefix</span><code> ?</code></div>
+  <div class="rhs">QuantifierPrefix<br>QuantifierPrefix<code> ?</code></div>
 </div>
 <div class="gp">
   <div class="lhs">QuantifierPrefix <span style="font-family: sans-serif; font-weight: bold">::</span>&#x9;<span style="font-family: sans-serif">See 15.10.1</span></div>
@@ -17083,7 +17083,7 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">Atom <span style="font-family: sans-serif; font-weight: bold">::</span>&#x9;<span style="font-family: sans-serif">See 15.10.1</span></div>
-  <div class="rhs">PatternCharacter<br><span style="font-family: monospace">.</span><br><code>\ </code>AtomEscape<span><br>CharacterClass</span><code><br>(</code> Disjunction <code>)</code><br><code>(</code> <code>?</code> <code>:</code> Disjunction <code>)</code></div>
+  <div class="rhs">PatternCharacter<br><span style="font-family: monospace">.</span><br><code>\ </code>AtomEscape<br>CharacterClass<code><br>(</code> Disjunction <code>)</code><br><code>(</code> <code>?</code> <code>:</code> Disjunction <code>)</code></div>
 </div>
 <div class="gp">
   <div class="lhs"><i>PatternCharacter</i> <span style="font-family: sans-serif">::</span>&#x9;<span style="font-family: sans-serif">See 15.10.1</span></div>
@@ -17091,11 +17091,11 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">AtomEscape <span style="font-family: sans-serif; font-weight: bold">::</span>&#x9;<span style="font-family: sans-serif">See 15.10.1</span></div>
-  <div class="rhs">DecimalEscape<span><br>CharacterEscape</span><span><br>CharacterClassEscape</span></div>
+  <div class="rhs">DecimalEscape<br>CharacterEscape<br>CharacterClassEscape</div>
 </div>
 <div class="gp">
   <div class="lhs">CharacterEscape <span style="font-family: sans-serif; font-weight: bold">::</span>&#x9;<span style="font-family: sans-serif">See 15.10.1</span></div>
-  <div class="rhs">ControlEscape<br><code>c</code> ControlLetter<span><br>HexEscapeSequence</span><span><br>UnicodeEscapeSequence</span><span><br>IdentityEscape</span></div>
+  <div class="rhs">ControlEscape<br><code>c</code> ControlLetter<br>HexEscapeSequence<br>UnicodeEscapeSequence<br>IdentityEscape</div>
 </div>
 <div class="gp">
   <div class="lhs">ControlEscape <span style="font-family: sans-serif; font-weight: bold">::</span> <span style="font-family: sans-serif; font-weight: bold">one of</span>&#x9;<span style="font-family: sans-serif">See 15.10.1</span></div>
@@ -17107,7 +17107,7 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">IdentityEscape <span style="font-family: sans-serif; font-weight: bold">::</span>&#x9;<span style="font-family: sans-serif">See 15.10.1</span></div>
-  <div class="rhs">SourceCharacter <span style="font-family: sans-serif; font-weight: bold">but not</span> IdentifierPart<br>&lt;ZWJ&gt;<span><br>&lt;ZWNJ&gt;</span></div>
+  <div class="rhs">SourceCharacter <span style="font-family: sans-serif; font-weight: bold">but not</span> IdentifierPart<br>&lt;ZWJ&gt;<br>&lt;ZWNJ&gt;</div>
 </div>
 <div class="gp">
   <div class="lhs">DecimalEscape <span style="font-family: sans-serif; font-weight: bold">::</span>&#x9;<span style="font-family: sans-serif">See 15.10.1</span></div>
@@ -17123,19 +17123,19 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">ClassRanges <span style="font-family: sans-serif; font-weight: bold">::</span>&#x9;<span style="font-family: sans-serif">See 15.10.1</span></div>
-  <div class="rhs"><span style="font-family: sans-serif">[empty]</span><span><br>NonemptyClassRanges</span></div>
+  <div class="rhs"><span style="font-family: sans-serif">[empty]</span><br>NonemptyClassRanges</div>
 </div>
 <div class="gp">
   <div class="lhs">NonemptyClassRanges <span style="font-family: sans-serif; font-weight: bold">::</span>&#x9;<span style="font-family: sans-serif">See 15.10.1</span></div>
-  <div class="rhs">ClassAtom<span><br>ClassAtom NonemptyClassRangesNoDash</span><span><br>ClassAtom</span><code> &ndash; </code>ClassAtom ClassRanges</div>
+  <div class="rhs">ClassAtom<br>ClassAtom NonemptyClassRangesNoDash<br>ClassAtom<code> &ndash; </code>ClassAtom ClassRanges</div>
 </div>
 <div class="gp">
   <div class="lhs">NonemptyClassRangesNoDash <span style="font-family: sans-serif; font-weight: bold">::</span>&#x9;<span style="font-family: sans-serif">See 15.10.1</span></div>
-  <div class="rhs">ClassAtom<span><br>ClassAtomNoDash NonemptyClassRangesNoDash</span><span><br>ClassAtomNoDash</span><code> &ndash; </code>ClassAtom ClassRanges</div>
+  <div class="rhs">ClassAtom<br>ClassAtomNoDash NonemptyClassRangesNoDash<br>ClassAtomNoDash<code> &ndash; </code>ClassAtom ClassRanges</div>
 </div>
 <div class="gp">
   <div class="lhs">ClassAtom <span style="font-family: sans-serif; font-weight: bold">::</span>&#x9;<span style="font-family: sans-serif">See 15.10.1</span></div>
-  <div class="rhs"><code>-</code><span><br>ClassAtomNoDash</span></div>
+  <div class="rhs"><code>-</code><br>ClassAtomNoDash</div>
 </div>
 <div class="gp">
   <div class="lhs">ClassAtomNoDash <span style="font-family: sans-serif; font-weight: bold">::</span>&#x9;<span style="font-family: sans-serif">See 15.10.1</span></div>
@@ -17143,12 +17143,12 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">ClassEscape <span style="font-family: sans-serif; font-weight: bold">::</span>&#x9;<span style="font-family: sans-serif">See 15.10.1</span></div>
-  <div class="rhs">DecimalEscape<br><code>b</code><span><br>CharacterEscape</span><code><br></code>CharacterClassEscape</div>
+  <div class="rhs">DecimalEscape<br><code>b</code><br>CharacterEscape<code><br></code>CharacterClassEscape</div>
 </div>
 <p>JSON</p>
 <p>JSON Lexical Grammar</p>
 <div class="gp"><i>JSONWhiteSpace</i> <span style="font-family: sans-serif; font-weight: bold">::</span> &#x9;<span style="font-family: sans-serif">See 15.12.1.1</span></div>
-<div class="gp">&lt;TAB&gt;<span><br>&lt;CR&gt;</span><span><br>&lt;LF&gt;</span><span><br>&lt;SP&gt;</span></div>
+<div class="gp">&lt;TAB&gt;<br>&lt;CR&gt;<br>&lt;LF&gt;<br>&lt;SP&gt;</div>
 <div class="gp">JSONString <span style="font-family: sans-serif; font-weight: bold">::</span> &#x9;<span style="font-family: sans-serif">See 15.12.1.1</span></div>
 <div class="gp"><code>" </code>JSONStringCharacters<span style="font-family: sans-serif; vertical-align: sub">opt</span> <code>"</code></div>
 <div class="gp">JSONStringCharacters <span style="font-family: sans-serif; font-weight: bold">::</span>&#x9;<span style="font-family: sans-serif"> See 15.12.1.1</span></div>
@@ -17173,23 +17173,23 @@ THH:mm:ss.sss</pre>
 <div class="gp">JSONText <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9; <span style="font-family: sans-serif">See 15.12.1.2</span></div>
 <div class="gp">JSONValue</div>
 <div class="gp">JSONValue <span style="font-family: sans-serif; font-weight: bold">:</span> &#x9;<span style="font-family: sans-serif">See 15.12.1.2</span>&#x9; </div>
-<div class="gp">JSONNullLiteral<span><br>JSONBooleanLiteral</span><span><br>JSONObject</span><span><br>JSONArray</span><span><br>JSONString</span><span><br>JSONNumber</span></div>
+<div class="gp">JSONNullLiteral<br>JSONBooleanLiteral<br>JSONObject<br>JSONArray<br>JSONString<br>JSONNumber</div>
 <div class="gp">JSONObject <span style="font-family: sans-serif; font-weight: bold">:</span> &#x9;<span style="font-family: sans-serif">See 15.12.1.2</span></div>
 <div class="gp"><code>{ }</code><br><code>{</code> JSONMemberList <code>}</code></div>
 <div class="gp">JSONMember <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 15.12.1.2</span></div>
 <div class="gp">JSONString <code>:</code> JSONValue</div>
 <div class="gp">JSONMemberList <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 15.12.1.2</span></div>
-<div class="gp">JSONMember <span><br>JSONMemberList </span><code>,</code> JSONMember </div>
+<div class="gp">JSONMember <br>JSONMemberList <code>,</code> JSONMember </div>
 <div class="gp">JSONArray <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 15.12.1.2</span></div>
 <div class="gp"><code>[ ]</code><br><code>[</code> JSONElementList<code> ]</code></div>
 <div class="gp">JSONElementList <span style="font-family: sans-serif; font-weight: bold">:</span> &#x9;<span style="font-family: sans-serif">See 15.12.1.2</span></div>
-<div class="gp">JSONValue<span><br>JSONElementList</span><code> ,</code> JSONValue</div>
+<div class="gp">JSONValue<br>JSONElementList<code> ,</code> JSONValue</div>
 <p>
   <hr>
 </p>
 </section>
 <section>
-<h1><span><br>(</span>normative)<br>{SEQ aaa \h }{SEQ table \r0\h }{SEQ figure \r0\h }<br>Additional ECMAScript Features for Web Browsers</h1>
+<h1><br>(normative)<br>{SEQ aaa \h }{SEQ table \r0\h }{SEQ figure \r0\h }<br>Additional ECMAScript Features for Web Browsers</h1>
 <p>The ECMAScript language syntax and semantics defined in this annex are required when the ECMAScript host is a web browser. The content of this annex is normative but optional if the ECMAScript host is not a web browser.</p>
 <p>Additional Syntax</p>
 <p>Numeric Literals</p>
@@ -17197,11 +17197,11 @@ THH:mm:ss.sss</pre>
 <h2>Syntax</h2>
 <div class="gp">
   <div class="lhs">NumericLiteral <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs">DecimalLiteral<span><br>HexIntegerLiteral</span><span><br>OctalIntegerLiteral</span></div>
+  <div class="rhs">DecimalLiteral<br>HexIntegerLiteral<br>OctalIntegerLiteral</div>
 </div>
 <div class="gp">
   <div class="lhs">OctalIntegerLiteral <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs"><code>0</code> OctalDigit<span><br>OctalIntegerLiteral OctalDigit</span></div>
+  <div class="rhs"><code>0</code> OctalDigit<br>OctalIntegerLiteral OctalDigit</div>
 </div>
 <div class="gp">
   <div class="lhs">OctalDigit <span style="font-family: sans-serif; font-weight: bold">::</span> <span style="font-family: sans-serif; font-weight: bold">one of</span></div>
@@ -17226,11 +17226,11 @@ THH:mm:ss.sss</pre>
 <h2>Syntax</h2>
 <div class="gp">
   <div class="lhs">EscapeSequence <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs">CharacterEscapeSequence<span><br>OctalEscapeSequence</span><span><br>HexEscapeSequence</span><span><br>UnicodeEscapeSequence</span></div>
+  <div class="rhs">CharacterEscapeSequence<br>OctalEscapeSequence<br>HexEscapeSequence<br>UnicodeEscapeSequence</div>
 </div>
 <div class="gp">
   <div class="lhs">OctalEscapeSequence <span style="font-family: sans-serif; font-weight: bold">::</span></div>
-  <div class="rhs">OctalDigit <span style="font-family: sans-serif">[lookahead </span><span style="font-family: sans-serif">&isin;</span> DecimalDigit<span style="font-family: sans-serif">]</span><span><br>ZeroToThree OctalDigit </span><span style="font-family: sans-serif">[lookahead </span><span style="font-family: sans-serif">&isin;</span> DecimalDigit<span style="font-family: sans-serif">]</span><span><br>FourToSeven OctalDigit</span><span><br>ZeroToThree OctalDigit OctalDigit</span></div>
+  <div class="rhs">OctalDigit <span style="font-family: sans-serif">[lookahead </span><span style="font-family: sans-serif">&isin;</span> DecimalDigit<span style="font-family: sans-serif">]</span><br>ZeroToThree OctalDigit <span style="font-family: sans-serif">[lookahead </span><span style="font-family: sans-serif">&isin;</span> DecimalDigit<span style="font-family: sans-serif">]</span><br>FourToSeven OctalDigit<br>ZeroToThree OctalDigit OctalDigit</div>
 </div>
 <div class="gp">
   <div class="lhs">ZeroToThree <span style="font-family: sans-serif; font-weight: bold">::</span> <span style="font-family: sans-serif; font-weight: bold">one of</span></div>
@@ -17434,7 +17434,7 @@ THH:mm:ss.sss</pre>
   <li>Call the [[DefineOwnProperty]] internal method of <i>obj</i> with arguments <i>propId</i>.name, <i>propId</i>.descriptor, and <b>false</b>.</li>
   <li>Return <i>obj</i>.</li>
 </ol>
-<p>The production<span><br>     </span>PropertyNameAndValueList <b>:</b>  PropertyNameAndValueList <code>,</code> PropertyAssignment<span><br>is evaluated as follows:</span></p>
+<p>The production<br>     PropertyNameAndValueList <b>:</b>  PropertyNameAndValueList <code>,</code> PropertyAssignment<br>is evaluated as follows:</p>
 <ol class="proc">
   <li>Let <i>obj</i> be the result of evaluating <i>PropertyNameAndValueList</i>.</li>
   <li>Let <i>propId</i> be the result of evaluating <i>PropertyAssignment</i>.</li>
@@ -17491,7 +17491,7 @@ THH:mm:ss.sss</pre>
 </ol>
 </section>
 <section>
-<h1><br>(informative)<br>{SEQ aaa \h }{SEQ table \r0\h }{SEQ figure \r0\h }<br>Corrections and Clarifications in the 5<sup>th</sup> Edition<span><br>with Possible 3</span><sup>rd</sup> Edition Compatibility Impact</h1>
+<h1><br>(informative)<br>{SEQ aaa \h }{SEQ table \r0\h }{SEQ figure \r0\h }<br>Corrections and Clarifications in the 5<sup>th</sup> Edition<br>with Possible 3<sup>rd</sup> Edition Compatibility Impact</h1>
 <p>Throughout: In the Edition 3 specification the meaning of phrases such as &ldquo;as if by the expression <code>new Array()</code>&rdquo; are subject to misinterpretation. In the Edition 5 specification text for all internal references and invocations of standard built-in objects and methods has been clarified by making it explicit that the intent is that the actual built-in object is to be used rather than the current dynamic value of the correspondingly named property. </p>
 <p>11.8.1: ECMAScript generally uses a left to right evaluation order, however the Edition 3 specification language for the &gt; and &lt;= operators resulted in a partial right to left order. The specification has been corrected for these operators such that it now specifies a full left to right evaluation order. However, this change of order is potentially observable if side-effects occur during the evaluation process.</p>
 <p>11.1.4: Edition 5 clarifies the fact that a trailing comma at the end of an <span style="font-family: Times New Roman; font-style: italic">ArrayInitialiser</span> does not add to the length of the array. This is not a semantic change from Edition 3 but some implementations may have previously misinterpreted this.</p>
@@ -17505,7 +17505,7 @@ THH:mm:ss.sss</pre>
 </p>
 </section>
 <section>
-<h1><br>(informative)<br>{SEQ aaa \h }{SEQ table \r0\h }{SEQ figure \r0\h }<br>Additions and Changes in the 5<sup>th</sup> Edition that<span><br>Introduce Incompatibilities with the 3</span><sup>rd</sup> Edition</h1>
+<h1><br>(informative)<br>{SEQ aaa \h }{SEQ table \r0\h }{SEQ figure \r0\h }<br>Additions and Changes in the 5<sup>th</sup> Edition that<br>Introduce Incompatibilities with the 3<sup>rd</sup> Edition</h1>
 <p>7.1: Unicode format control characters are no longer stripped from ECMAScript source text before processing. In Edition 5, if such a character appears in a <span style="font-family: Times New Roman; font-style: italic">StringLiteral</span> or <span style="font-family: Times New Roman; font-style: italic">RegularExpressionLiteral</span> the character will be incorporated into the literal where in Edition 3 the character would not be incorporated into the literal.</p>
 <p>7.2: Unicode character &lt;BOM&gt; is now treated as whitespace  and its presence in the middle of what appears to be an identifier could result in a syntax error which would not have occurred in Edition 3</p>
 <p>7.3: Line terminator characters that are preceded by an escape sequence are now allowed within a string literal token.  In Edition 3 a syntax error would have been produced.</p>
@@ -17538,7 +17538,7 @@ THH:mm:ss.sss</pre>
 </p>
 </section>
 <section>
-<h1><br>(informative)<br>{SEQ aaa \h }{SEQ table \r0\h }{SEQ figure \r0\h }<span><br>Technical</span>ly Significant Corrections and Clarifications in the 5.1 Edition</h1>
+<h1><br>(informative)<br>{SEQ aaa \h }{SEQ table \r0\h }{SEQ figure \r0\h }<br>Technically Significant Corrections and Clarifications in the 5.1 Edition</h1>
 <p>7.8.4: CV definitions added for <span style="font-family: Times New Roman; font-style: italic">DoubleStringCharacter</span> <b>::</b> <span style="font-family: Times New Roman; font-style: italic">LineContinuation</span> and <span style="font-family: Times New Roman; font-style: italic">SingleStringCharacter</span> <b>::</b> <span style="font-family: Times New Roman; font-style: italic">LineContinuation</span>.</p>
 <p>10.2.1.1.3: The argument S is not ignored. It controls whether an exception is thrown when attempting to set an immutable binding.</p>
 <p>10.2.1.2.2: In algorithm step 5, <b>true</b> is passed as the last argument to [[DefineOwnProperty]].</p>

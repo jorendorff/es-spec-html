@@ -140,20 +140,24 @@ def transform(e):
         assert e.text is None
 
         # Transform all children.
-        css = None
+        css = {}
         c = []
-        for k in e:
-            ht = transform(k)
+        def add(ht):
             if isinstance(ht, dict):
-                if css is None:
-                    css = ht
-                else:
-                    css.update(ht)
+                css.update(ht)
+            elif isinstance(ht, list):
+                for item in ht:
+                    add(item)
             elif isinstance(ht, str) and c and isinstance(c[-1], str):
                 # Merge adjacent strings.
                 c[-1] += ht
             elif ht is not None:
                 c.append(ht)
+
+        for k in e:
+            add(transform(k))
+        if not css:
+            css = None
 
         if name == 'document':
             [body_e] = c
@@ -185,7 +189,9 @@ def transform(e):
             return body(section(disclaimer, *c, id="everything"))
 
         elif name == 'r':
-            if css is not None:
+            if css is None:
+                return c
+            else:
                 # No amount of style matters if there's no text here.
                 if len(c) == 0:
                     return None
@@ -206,13 +212,6 @@ def transform(e):
                     result = span(*c)
                     result.style = css
                     return result
-            else:
-                if len(c) == 0:
-                    return None
-                elif len(c) == 1:
-                    return c[0]
-                else:
-                    return span(*c)
 
         elif name == 'p':
             if len(c) == 0:
