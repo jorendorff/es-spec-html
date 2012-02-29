@@ -81,6 +81,6 @@ def save_html(document):
     print()
 
     fixups.fixup(result)
-    html.save_html('doc.html', result)
+    html.save_html('es6-draft.html', result)
 
 save_html(document)

@@ -160,7 +160,7 @@ def transform(e):
             return html(
                 head(
                     meta(http_equiv="Content-Type", content="text/html; charset=UTF-8"),
-                    link(rel="stylesheet", type="text/css", href="es-spec.css")),
+                    link(rel="stylesheet", type="text/css", href="es6-draft.css")),
                 body_e)
 
         elif name == 'body':
@@ -247,7 +247,8 @@ def transform(e):
                             return p(*c)
                         elif cls == 'Figuretitle':
                             return figcaption(*c)
-                        elif cls in ('Heading1', 'Heading2', 'Heading3', 'Heading4', 'Heading5', 'TermNum'):
+                        elif cls in ('Heading1', 'Heading2', 'Heading3', 'Heading4', 'Heading5',
+                                     'Introduction', 'TermNum'):
                             return h1(*c)
                         elif cls == 'M20':
                             return div(*c, class_="math-display")
@@ -320,6 +321,13 @@ def transform(e):
             else:
                 assert br_type == 'page'
                 return hr()
+
+        elif name == 'lastRenderedPageBreak':
+            # This means "the last time we actually rendered this document to
+            # pages, there was a page break here". Theoretically, this could be
+            # used to show PDF page numbers in the HTML, but it's not worth it.
+            # Everyone uses section numbers anyway.
+            return None
 
         elif name == 'noBreakHyphen':
             # This appears 4 times in the document. The first 3 times it is a

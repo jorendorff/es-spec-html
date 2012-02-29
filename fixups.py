@@ -45,14 +45,20 @@ def fixup_sections(doc):
         j = start + 1
         while j < len(body):
             kid = body[j]
-            if not isinstance(kid, str) and kid.name == "h1":
-                kid_num, kid_title = heading_info(kid)
-                if contains(sec_num, kid_num):
-                    # kid starts a subsection. Wrap it!
-                    wrap(kid_num, kid_title, j)
-                else:
-                    # kid starts the next section. Done!
-                    break
+            if not isinstance(kid, str):
+                if kid.name == "div":
+                    if (kid.attrs.get("id") == "ecma-disclaimer"
+                        or kid.attrs.get("class_") == "inner-title"):
+                        # Don't let the introduction section eat up these elements.
+                        break
+                if kid.name == "h1":
+                    kid_num, kid_title = heading_info(kid)
+                    if contains(sec_num, kid_num):
+                        # kid starts a subsection. Wrap it!
+                        wrap(kid_num, kid_title, j)
+                    else:
+                        # kid starts the next section. Done!
+                        break
             j += 1
         stop = j
 
