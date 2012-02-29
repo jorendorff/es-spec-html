@@ -321,6 +321,12 @@ def transform(e):
                 assert br_type == 'page'
                 return hr()
 
+        elif name == 'noBreakHyphen':
+            # This appears 4 times in the document. The first 3 times it is a
+            # mistake and U+2212 MINUS SIGN would be more appropriate. The last
+            # time, a plain old hyphen would be better.
+            return '\u2011'  #non-breaking hyphen
+
         elif name in {'bookmarkStart', 'bookmarkEnd', 'commentRangeStart', 'commentRangeEnd'}:
             return None
 

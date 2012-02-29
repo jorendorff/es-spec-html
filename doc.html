@@ -11953,7 +11953,7 @@
 </section>
 <section id="sec-15.5.4.7">
 <h1><span class="secnum"><a href="#sec-15" title="link to this section">15.5.4.7</a></span> String.prototype.indexOf (searchString, position)</h1>
-<p>If <span style="font-family: Times New Roman; font-style: italic">searchString</span> appears as a substring of the result of converting this object to a String, at one or more positions that are greater than or equal to <span style="font-family: Times New Roman; font-style: italic">position</span>, then the index of the smallest such position is returned; otherwise, <code>1</code> is returned. If <span style="font-family: Times New Roman; font-style: italic">position</span> is <b>undefined</b>, 0 is assumed, so as to search all of the String.</p>
+<p>If <span style="font-family: Times New Roman; font-style: italic">searchString</span> appears as a substring of the result of converting this object to a String, at one or more positions that are greater than or equal to <span style="font-family: Times New Roman; font-style: italic">position</span>, then the index of the smallest such position is returned; otherwise, <code>‑1</code> is returned. If <span style="font-family: Times New Roman; font-style: italic">position</span> is <b>undefined</b>, 0 is assumed, so as to search all of the String.</p>
 <p>The <code>indexOf</code> method takes two arguments, <span style="font-family: Times New Roman; font-style: italic">searchString </span>and<span style="font-family: Times New Roman; font-style: italic"> position</span>, and performs the following steps:</p>
 <ol class="proc">
   <li>Call CheckObjectCoercible passing the <b>this</b> value as its argument.</li>
@@ -11972,7 +11972,7 @@
 </section>
 <section id="sec-15.5.4.8">
 <h1><span class="secnum"><a href="#sec-15" title="link to this section">15.5.4.8</a></span> String.prototype.lastIndexOf (searchString, position)</h1>
-<p>If <span style="font-family: Times New Roman; font-style: italic">searchString</span> appears as a substring of the result of converting this object to a String at one or more positions that are smaller than or equal to <span style="font-family: Times New Roman; font-style: italic">position</span>, then the index of the greatest such position is returned; otherwise, <code>1</code> is returned. If <span style="font-family: Times New Roman; font-style: italic">position</span> is <b>undefined</b>, the length of the String value is assumed, so as to search all of the String.</p>
+<p>If <span style="font-family: Times New Roman; font-style: italic">searchString</span> appears as a substring of the result of converting this object to a String at one or more positions that are smaller than or equal to <span style="font-family: Times New Roman; font-style: italic">position</span>, then the index of the greatest such position is returned; otherwise, <code>‑1</code> is returned. If <span style="font-family: Times New Roman; font-style: italic">position</span> is <b>undefined</b>, the length of the String value is assumed, so as to search all of the String.</p>
 <p>The <code>lastIndexOf</code> method takes two arguments, <span style="font-family: Times New Roman; font-style: italic">searchString </span>and<span style="font-family: Times New Roman; font-style: italic"> position</span>, and performs the following steps:</p>
 <ol class="proc">
   <li>Call CheckObjectCoercible passing the <b>this</b> value as its argument.</li>
@@ -12407,7 +12407,7 @@
 </section>
 <section id="sec-15.7.3.3">
 <h1><span class="secnum"><a href="#sec-15" title="link to this section">15.7.3.3</a></span> Number.MIN_VALUE</h1>
-<p>The value of <code>Number.MIN_VALUE</code> is the smallest positive value of the Number type, which is approximately <span style="font-family: Times New Roman">5 </span><span style="font-family: Times New Roman">×</span><span style="font-family: Times New Roman"> 10</span><span style="font-family: Times New Roman; vertical-align: super">324</span>.</p>
+<p>The value of <code>Number.MIN_VALUE</code> is the smallest positive value of the Number type, which is approximately <span style="font-family: Times New Roman">5 </span><span style="font-family: Times New Roman">×</span><span style="font-family: Times New Roman"> 10</span><span style="font-family: Times New Roman; vertical-align: super">‑324</span>.</p>
 <p>This property has the attributes { [[Writable]]: <b>false</b>, [[Enumerable]]: <b>false</b>, [[Configurable]]: <b>false</b> }.</p>
 </section>
 <section id="sec-15.7.3.4">
@@ -15262,7 +15262,7 @@ THH:mm:ss.sss</pre>
   <p>looks for an <code>a</code> not immediately followed by some positive number n of <code>a</code>'s, a <code>b</code>, another n <code>a</code>'s (specified by the first <code>\2</code>) and a <code>c</code>. The second <code>\2</code> is outside the negative lookahead, so it matches against <b>undefined</b> and therefore always succeeds. The whole expression returns the array:</p>
   <pre>["baaabaac", "ba", undefined, "abaac"]</pre>
 </div>
-<p>In case-insignificant matches all characters are implicitly converted to upper case immediately before they are compared. However, if converting a character to upper case would expand that character into more than one character (such as converting <code>"ß"</code> (<span style="font-family: monospace">\u00DF</span>) into <code>"SS"</code>), then the character is left as-is instead. The character is also left as-is if it is not an ASCII character but converting it to upper case would make it into an ASCII character. This prevents Unicode characters such as <span style="font-family: monospace">\u0131</span> and <span style="font-family: monospace">\u017F</span> from matching regular expressions such as <code>/[az]/i</code>, which are only intended to match ASCII letters. Furthermore, if these conversions were allowed, then <code>/[^\W]/i</code> would match each of <code>a</code>, <code>b</code>, …, <code>h</code>, but not <code>i</code> or <code>s</code>.</p>
+<p>In case-insignificant matches all characters are implicitly converted to upper case immediately before they are compared. However, if converting a character to upper case would expand that character into more than one character (such as converting <code>"ß"</code> (<span style="font-family: monospace">\u00DF</span>) into <code>"SS"</code>), then the character is left as-is instead. The character is also left as-is if it is not an ASCII character but converting it to upper case would make it into an ASCII character. This prevents Unicode characters such as <span style="font-family: monospace">\u0131</span> and <span style="font-family: monospace">\u017F</span> from matching regular expressions such as <code>/[a‑z]/i</code>, which are only intended to match ASCII letters. Furthermore, if these conversions were allowed, then <code>/[^\W]/i</code> would match each of <code>a</code>, <code>b</code>, …, <code>h</code>, but not <code>i</code> or <code>s</code>.</p>
 </section>
 <section id="sec-15.10.2.9">
 <h1><span class="secnum"><a href="#sec-15" title="link to this section">15.10.2.9</a></span> AtomEscape</h1>
