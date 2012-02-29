@@ -76,30 +76,21 @@ def fixup_sections(doc):
 
     body = everything_elt.content
 
-    i = 0
-    while i < len(body):
-        kid = body[i]
-        if not isinstance(kid, str) and kid.name == "h1":
-            num, title = heading_info(kid)
-            wrap(num, title, i)
-        i += 1
+    for i, kid in everything_elt.kids("h1"):
+        num, title = heading_info(kid)
+        wrap(num, title, i)
 
 def fixup_code(e):
     """ Merge adjacent code elements. Convert p elements containing only code elements to pre. """
 
-    i = 0
-    while i < len(e.content):
-        k = e.content[i]
-        if isinstance(k, str):
-            pass
-        elif k.name == 'code':
+    for i, k in e.kids():
+        if k.name == 'code':
             while i + 1 < len(e.content) and not isinstance(e.content[i + 1], str) and e.content[i + 1].name == 'code':
                 # merge two adjacent code nodes (should merge adjacent text nodes after this :-P)
                 k.content += e.content[i + 1].content
                 del e.content[i + 1]
         else:
             fixup_code(k)
-        i += 1
 
     if e.name == 'p' and len(e.content) == 1 and not isinstance(e.content[0], str) and e.content[0].name == 'code':
         code = e.content[0]
@@ -149,12 +140,8 @@ def fixup_notes(e):
                 and find_nh(next_sibling) is None)
 
     def fixup_notes_in(e):
-        i = 0
-        while i < len(e.content):
-            k = e.content[i]
-            if isinstance(k, str):
-                pass
-            elif k.name == 'div' and k.attrs.get('class_') == 'note':
+        for i, k in e.kids():
+            if k.name == 'div' and k.attrs.get('class_') == 'note':
                 # This is a note! See if the word "NOTE" or "NOTE 1" can be divided out into
                 # a span.nh element. This should ordinarily be the case.
                 nh_info = find_nh(k, verbose=True)
@@ -181,8 +168,6 @@ def fixup_notes(e):
                 # Recurse.
                 fixup_notes(k)
 
-            i += 1
-
     fixup_notes_in(e)
 
 def fixup_lists(e):
@@ -192,51 +177,50 @@ def fixup_lists(e):
         # identify. So skip this.
         return
 
-    kids = e.content
-
     have_list_items = False
-    for k in kids:
-        if not isinstance(k, str):
-            fixup_lists(k)
-            if k.name == 'li':
-                have_list_items = True
+    for _, k in e.kids():
+        fixup_lists(k)
+        if k.name == 'li':
+            have_list_items = True
 
-    # Walk the elements from left to right. If we find any <li> elements,
-    # wrap them in <ol> elements to the appropriate depth.
-    new_content = []
-    lists = []
-    for k in kids:
-        if isinstance(k, str) or k.name != 'li':
-            # Not a list item. Close all open lists. Add k to new_content.
-            del lists[:]
-            new_content.append(k)
-        else:
-            # Oh no. It is a list item. Well, what is its depth?
-            if k.style and '@num' in k.style:
-                depth = int(k.style['@num'].partition('/')[0])
-
-                # While we're here, delete the @num magic style attribute.
-                del k.style['@num']
+    if have_list_items:
+        # Walk the elements from left to right. If we find any <li> elements,
+        # wrap them in <ol> elements to the appropriate depth.
+        kids = e.content
+        new_content = []
+        lists = []
+        for k in kids:
+            if isinstance(k, str) or k.name != 'li':
+                # Not a list item. Close all open lists. Add k to new_content.
+                del lists[:]
+                new_content.append(k)
             else:
-                depth = 0
+                # Oh no. It is a list item. Well, what is its depth?
+                if k.style and '@num' in k.style:
+                    depth = int(k.style['@num'].partition('/')[0])
 
-            # Close any open lists at greater depth.
-            while lists and lists[-1][0] > depth:
-                del lists[-1]
+                    # While we're here, delete the @num magic style attribute.
+                    del k.style['@num']
+                else:
+                    depth = 0
 
-            # If we don't already have a list at that depth, open one.
-            if not lists or depth > lists[-1][0]:
-                new_list = html.ol(class_='block' if lists else 'proc')
+                # Close any open lists at greater depth.
+                while lists and lists[-1][0] > depth:
+                    del lists[-1]
 
-                # If there is an enclosing list, add new_list to the last <li>
-                # of the enclosing list, not the enclosing list itself.
-                # If there is no enclosing list, add new_list to new_content.
-                (lists[-1][1][-1].content if lists else new_content).append(new_list)
-                lists.append((depth, new_list.content))
+                # If we don't already have a list at that depth, open one.
+                if not lists or depth > lists[-1][0]:
+                    new_list = html.ol(class_='block' if lists else 'proc')
 
-            lists[-1][1].append(k)
+                    # If there is an enclosing list, add new_list to the last <li>
+                    # of the enclosing list, not the enclosing list itself.
+                    # If there is no enclosing list, add new_list to new_content.
+                    (lists[-1][1][-1].content if lists else new_content).append(new_list)
+                    lists.append((depth, new_list.content))
 
-    kids[:] = new_content
+                lists[-1][1].append(k)
+
+        kids[:] = new_content
 
 def fixup_grammar(e):
     """ Fix div.gp and div.rhs elements in `e` by changing the div.gp to a div.lhs
@@ -255,16 +239,11 @@ def fixup_grammar(e):
             parent_list[start].attrs["class_"] = "lhs"
             parent_list[start:stop] = [html.div(*parent_list[start:stop], class_="gp")]
 
-    i = 0
-    while i < len(e.content):
-        kid = e.content[i]
-        if not isinstance(kid, str):
-            if kid.name == "div" and kid.attrs.get("class_") == "gp":
-                wrap(e.content, i)
-            elif kid.name in ('body', 'section', 'div'):
-                fixup_grammar(kid)
-        i += 1
-
+    for i, kid in e.kids():
+        if kid.name == "div" and kid.attrs.get("class_") == "gp":
+            wrap(e.content, i)
+        elif kid.name in ('body', 'section', 'div'):
+            fixup_grammar(kid)
 
 def all_parent_index_child_triples(e):
     for i, k in enumerate(e.content):

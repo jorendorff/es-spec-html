@@ -19,6 +19,14 @@ class Element:
         write_html(f, self)
         return f.getvalue()
 
+    def kids(self, name=None):
+        """ Return an iterator over (index, child) pairs where each child is a
+        child element of self. The iterator is robust against mutating
+        self.content to the right of i. """
+        for i, kid in enumerate(self.content):
+            if isinstance(kid, Element) and (name is None or kid.name == name):
+                yield i, kid
+
 # These tags all insist on being emitted on a line (or more) of their own.
 # These tags all have in common that inserting space before and/or after them
 # does not affect rendering.
