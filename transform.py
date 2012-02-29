@@ -215,7 +215,9 @@ def transform(e):
                     return span(*c)
 
         elif name == 'p':
-            if css is None:
+            if len(c) == 0:
+                return None
+            elif css is None:
                 return p(*c)
             else:
                 num = '@num' in css
