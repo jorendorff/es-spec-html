@@ -247,10 +247,8 @@ def transform(e):
                             return p(*c)
                         elif cls == 'Figuretitle':
                             return figcaption(*c)
-                        elif cls == 'Heading1':
+                        elif cls in ('Heading1', 'Heading2', 'Heading3', 'Heading4', 'Heading5', 'TermNum'):
                             return h1(*c)
-                        elif cls in ('Heading2', 'Heading3', 'Heading4', 'Heading5', 'TermNum'):
-                            return h2(*c)
                         elif cls == 'M20':
                             return div(*c, class_="math-display")
                         elif cls == 'MathDefinition4':
@@ -258,7 +256,7 @@ def transform(e):
                         elif cls == 'MathSpecialCase3':
                             return li(*c)
                         elif cls == 'Note':
-                            return div(*c, class_="note")
+                            return div(constructor(*c), class_="note")
                         elif cls == 'RefNorm':
                             return p(*c, class_="formal-reference")
                         elif cls == 'Syntax':

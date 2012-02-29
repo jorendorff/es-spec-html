@@ -1,5 +1,6 @@
 from collections import namedtuple
 from cgi import escape
+from io import StringIO
 
 class Element:
     __slots__ = ['name', 'attrs', 'style', 'content']
@@ -12,12 +13,22 @@ class Element:
         self.style = style
         self.content = list(content)
 
+    def to_html(self):
+        f = StringIO()
+        write_html(f, self)
+        return f.getvalue()
+
 empty_tags = {'meta', 'br', 'hr'}
 non_indenting_tags = {'html', 'body', 'section'}
 
 def save_html(filename, ht):
     assert ht.name == 'html'
 
+    with open(filename, 'w', encoding='utf-8') as f:
+        f.write("<!doctype html>\n")
+        write_html(f, ht)
+
+def write_html(f, ht):
     def htmlify(name):
         """ Convert a pythonified tag name or attribute name back to HTML. """
         if name.endswith('_'):
@@ -64,9 +75,7 @@ def save_html(filename, ht):
                     write_inline(f, k)
                 f.write("</{0}>".format(ht.name))
 
-    with open(filename, 'w', encoding='utf-8') as f:
-        f.write("<!doctype html>\n")
-        write_block(f, ht)
+    write_block(f, ht)
 
 __all__ = []  # modified by _init
 
