@@ -95,23 +95,6 @@ span.typename { font-style: italic; }
 span.typecombinator { font-style: italic; }
 dfn { font-style: italic; }
 
-/* Ridiculous page numbers */
-span.pagemark {
-    width: 8em;
-    line-height: normal;
-    float: right;
-    margin-right: -9em;
-    font-style: italic;
-    color: #ccc;
-    border-top: 1px solid #eee;
-    font-size: 10pt; /* not just "smaller" -- see note below */
-
-    /* Restore defaults rather than inherit from parent element for CSS
-       properties where the default is to inherit.  These are only needed
-       in case the pagemark lands in some element that has them set.  */
-    font-weight: normal;
-    font-family: Times New Roman, Times, FreeSerif, serif;
-}
 div.blank-page:after {
     content: '\0000a0';
     clear: both;
