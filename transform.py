@@ -31,6 +31,12 @@ def bloat(name):
 
 def transformPr(e):
     val_key = bloat('val')
+    ascii_key = bloat('ascii')
+    hAnsi_key = bloat('hAnsi')
+    cs_key = bloat('cs')
+    eastAsia_key = bloat('eastAsia')
+    font_keys = {ascii_key, hAnsi_key, cs_key, eastAsia_key}
+
     assert e.text is None
 
     pr = {}
@@ -45,9 +51,37 @@ def transformPr(e):
         if name == 'i':
             if not k.keys():
                 put('font-style', 'italic')
+
         elif name == 'b':
             if not k.keys():
                 put('font-weight', 'bold')
+
+        elif name == 'rFonts':
+            # There are some cases of <rFonts eastAsia="Calibri"/> which Word
+            # apparently ignores; we ignore them too.  When cs= and ascii= are
+            # both present with different values (awesome), apparently Word
+            # uses ascii=, so we do the same.
+            assert set(k.keys()) <= font_keys
+            font = k.get(ascii_key) or k.get(cs_key)
+            if font is not None:
+                assert k.get(ascii_key, font) == font
+                assert k.get(hAnsi_key, font) == font
+
+                if font == 'Symbol':
+                    font = None  # vomit(); vomit(); forget()
+                elif font == 'Mistral':
+                    font = None  # fanciful, drop it
+                elif font in ('Courier', 'Courier New'):
+                    font = 'monospace'
+                elif font in ('Arial', 'Helvetica'):
+                    font = 'sans-serif'
+                elif font == 'CG Times':
+                    font = 'Times New Roman'
+
+                if font is not None:
+                    put('font-family', font)
+                    all_fonts[font] += 1
+
         elif name == 'vertAlign':
             if list(k.keys()) == [val_key]:
                 v = k.get(val_key)
@@ -55,6 +89,7 @@ def transformPr(e):
                     put('vertical-align', 'super')
                 elif v == 'subscript':
                     put('vertical-align', 'sub')
+
         elif name == 'numPr':
             ilvl = None
             numId = None
@@ -69,7 +104,10 @@ def transformPr(e):
                     assert list(item.keys()) == [val_key]
                     assert numId is None
                     numId = item.get(val_key)
-            put('@num', ilvl + '/' + numId)
+
+            if numId != "0":
+                put('@num', ilvl + '/' + numId)
+
         elif name == 'pStyle':
             if list(k.keys()) == [val_key]:
                 put('@cls', k.get(val_key))
@@ -80,6 +118,7 @@ def dict_to_css(d):
     return "; ".join(p + ": " + v for p, v in d.items())
 
 unrecognized_styles = collections.defaultdict(int)
+all_fonts = collections.defaultdict(int)
 
 def transform(e):
     name = shorten(e.tag)
@@ -147,6 +186,12 @@ def transform(e):
 
         elif name == 'r':
             if css is not None:
+                # No amount of style matters if there's no text here.
+                if len(c) == 0:
+                    return None
+                elif len(c) == 1 and isinstance(c[0], str) and c[0].strip() == '':
+                    return c[0] or None
+
                 if css == {'font-style': 'italic'}:
                     return i(*c)
                 elif css == {'font-weight': 'bold'}:
@@ -155,8 +200,12 @@ def transform(e):
                     return sup(*c)
                 elif css == {'vertical-align': 'sub'}:
                     return sub(*c)
+                elif css == {'font-family': 'monospace', 'font-weight': 'bold'}:
+                    return code(*c)
                 else:
-                    return span(*c, style=dict_to_css(css))
+                    result = span(*c)
+                    result.style = css
+                    return result
             else:
                 if len(c) == 0:
                     return None
@@ -166,27 +215,22 @@ def transform(e):
                     return span(*c)
 
         elif name == 'p':
-            if css is not None:
-                num = None
-                if '@num' in css:
-                    num = css['@num']
-                    del css['@num']
-                    if not css:
-                        return li(*c)
+            if css is None:
+                return p(*c)
+            else:
+                num = '@num' in css
+                constructor = li if num else p
 
                 if '@cls' in css:
                     cls = css['@cls']
                     del css['@cls']
                     if not css:
                         if cls in ('Alg2', 'Alg3', 'Alg4', 'Alg40', 'Alg41', 'M4'):
-                            if num is not None:
-                                return li(*c)
+                            if num or c:
+                                return constructor(*c)
                             else:
                                 # apparently useless markup
-                                if len(c) == 0:
-                                    return None
-                                else:
-                                    return p(*c)
+                                return None
                         elif cls == 'ANNEX':
                             # TODO - add annex heading, which is computed in the original
                             return h1(*c)
@@ -234,10 +278,10 @@ def transform(e):
                         else:
                             unrecognized_styles[cls] += 1
                             #return p(span('<{0}>'.format(cls), style="color:red"), *c)
-                            return p(*c)
-                return p(*c, style=dict_to_css(css))
-            else:
-                return p(*c)
+                            return constructor(*c)
+                result = constructor(*c)
+                result.style = css
+                return result
 
         elif name == 'sym':
             assert not c

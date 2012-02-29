@@ -1,9 +1,19 @@
 from collections import namedtuple
 from cgi import escape
 
-Element = namedtuple('Element', 'name, attrs, content')
+class Element:
+    __slots__ = ['name', 'attrs', 'style', 'content']
+    def __init__(self, name, attrs, style, content):
+        assert isinstance(name, str)
+        self.name = name
+        assert attrs is None or isinstance(attrs, dict)
+        self.attrs = attrs or {}
+        assert style is None or isinstance(style, dict)
+        self.style = style
+        self.content = list(content)
 
 empty_tags = {'meta', 'br', 'hr'}
+non_indenting_tags = {'html', 'body', 'section'}
 
 def save_html(filename, ht):
     assert ht.name == 'html'
@@ -18,6 +28,9 @@ def save_html(filename, ht):
     def start_tag(ht):
         attrs = ''.join(' {0}="{1}"'.format(htmlify(k), escape(v, True))
                         for k, v in ht.attrs.items())
+        if ht.style and 'style' not in ht.attrs:
+            style = '; '.join(name + ": " + value for name, value in sorted(ht.style.items()))
+            attrs += ' style="{0}"'.format(style)
         return '<{0}{1}>'.format(ht.name, attrs)
 
     def write_block(f, ht, indent=''):
@@ -33,8 +46,11 @@ def save_html(filename, ht):
                         write_inline(f, k)
                 else:
                     f.write("\n")
+                    inner_indent = indent
+                    if ht.name not in non_indenting_tags:
+                        inner_indent += "  "
                     for k in ht.content:
-                        write_block(f, k, indent + "  ")
+                        write_block(f, k, inner_indent)
                     f.write(indent)
                 f.write("</{0}>\n".format(ht.name))
 
@@ -57,7 +73,7 @@ __all__ = []  # modified by _init
 def _init(v):
     def element_constructor(name):
         def construct(*content, **attrs):
-            return Element(name, attrs, content)
+            return Element(name, attrs, None, list(content))
         construct.__name__ = name
         return construct
 

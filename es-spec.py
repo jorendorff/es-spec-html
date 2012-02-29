@@ -2,8 +2,9 @@
 
 import zipfile
 from xml.etree import ElementTree
-from transform import transform, shorten, unrecognized_styles
 import html
+from transform import transform, shorten, unrecognized_styles, all_fonts
+import fixups
 from cgi import escape
 
 with zipfile.ZipFile("es6-draft.docx") as f:
@@ -68,8 +69,18 @@ def save_xml(document):
 
 def save_html(document):
     result = transform(document)
+
+    print("=== Unrecognized styles")
     for k, v in sorted(unrecognized_styles.items(), key=lambda pair: pair[1]):
         print(k, v)
+    print()
+
+    print("=== Fonts")
+    for k, v in sorted(all_fonts.items(), key=lambda pair: pair[1]):
+        print(k, v)
+    print()
+
+    fixups.fixup(result)
     html.save_html('doc.html', result)
 
 save_html(document)
