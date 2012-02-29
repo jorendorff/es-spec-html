@@ -1,12 +1,5 @@
 import htmodel as html
 
-## def all_elements(e):
-##     yield e
-##     for k in e.content:
-##         if not isinstance(k, str):
-##             for d in all_elements(k):
-##                 yield d
-
 def fixup_sections(doc):
     """ Group h1 elements and subsequent elements of all kinds together into sections. """
 
@@ -273,10 +266,29 @@ def fixup_grammar(e):
         i += 1
 
 
+def all_parent_index_child_triples(e):
+    for i, k in enumerate(e.content):
+        if not isinstance(k, str):
+            yield e, i, k
+            for t in all_parent_index_child_triples(k):
+                yield t
+
+def fixup_hr(doc):
+    """ Replace <p><hr></p> with <hr>.
+
+    Word treats an explicit page break as occurring within a paragraph rather
+    than between paragraphs, and this leads to goofy markup which has to be
+    fixed up.
+    """
+    for a, i, b in all_parent_index_child_triples(doc):
+        if b.name == "p" and len(b.content) == 1 and isinstance(b.content[0], html.Element) and b.content[0].name == "hr":
+            a.content[i] = b.content[0]
+
 def fixup(doc):
     fixup_sections(doc)
     fixup_code(doc)
     fixup_notes(doc)
     fixup_lists(doc)
     fixup_grammar(doc)
+    fixup_hr(doc)
     return doc

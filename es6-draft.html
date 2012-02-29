@@ -24,9 +24,7 @@
   <p>Ecma/TC39/2011/0xx</p>
   <p>Draft</p>
 </p>
-<p>
-  <hr>
-</p>
+<hr>
 <p>Contents&#x9;Page</p>
 <p>Introduction&#x9;vii</p>
 <p>{ TOC \o "1-3" \h \z }1&#x9;Scope&#x9;{ PAGEREF _Toc318131229 \h }1</p>
@@ -394,9 +392,7 @@
   <div>Annex&nbsp;E (informative)  Additions and Changes in the 5<sup>th</sup> Edition that Introduce Incompatibilities with the 3<sup>rd</sup> Edition&#x9;{ PAGEREF _Toc318131521 \h }286</div>
 </p>
 <p>Annex&nbsp;F (informative)  Technically Significant Corrections and Clarifications in the 5.1 Edition&#x9;{ PAGEREF _Toc318131522 \h }290</p>
-<p>
-  <hr>
-</p>
+<hr>
 <section>
 <h1>Introduction</h1>
 <p>This Ecma Standard is based on several originating technologies, the most well known being JavaScript (Netscape) and JScript (Microsoft). The language was invented by Brendan Eich at Netscape and first appeared in that company&rsquo;s Navigator 2.0 browser. It has appeared in all subsequent browsers from Netscape and in all browsers from Microsoft starting with Internet Explorer 3.0.</p>
@@ -16002,9 +15998,7 @@ THH:mm:ss.sss</pre>
   <li><span style="font-family: sans-serif">An implementation may provide additional types, values, objects, properties, and functions beyond those described in this specification. This may cause constructs (such as looking up a variable in the global scope) to have implementation-defined behaviour instead of throwing an error (such as </span><span style="font-family: sans-serif; font-weight: bold">ReferenceError</span><span style="font-family: sans-serif">).</span></li>
   <li><span style="font-family: sans-serif">An implementation may define behaviour other than throwing </span><span style="font-family: sans-serif; font-weight: bold">RangeError</span><span style="font-family: sans-serif"> for </span><code>toFixed</code><span style="font-family: sans-serif">, </span><code>toExponential</code><span style="font-family: sans-serif">, and </span><code>toPrecision</code><span style="font-family: sans-serif"> when the </span>fractionDigits<span style="font-family: sans-serif"> or </span>precision<span style="font-family: sans-serif"> argument is outside the specified range.</span></li>
 </ol>
-<p>
-  <hr>
-</p>
+<hr>
 <section>
 <h1><br>(informative){SEQ aaa \h }{SEQ table \r0\h }{SEQ figure \r0\h }<br><br>Grammar Summary</h1>
 <p>Lexical Grammar</p>
@@ -17184,9 +17178,7 @@ THH:mm:ss.sss</pre>
 <div class="gp"><code>[ ]</code><br><code>[</code> JSONElementList<code> ]</code></div>
 <div class="gp">JSONElementList <span style="font-family: sans-serif; font-weight: bold">:</span> &#x9;<span style="font-family: sans-serif">See 15.12.1.2</span></div>
 <div class="gp">JSONValue<br>JSONElementList<code> ,</code> JSONValue</div>
-<p>
-  <hr>
-</p>
+<hr>
 </section>
 <section>
 <h1><br>(normative)<br>{SEQ aaa \h }{SEQ table \r0\h }{SEQ figure \r0\h }<br>Additional ECMAScript Features for Web Browsers</h1>
@@ -17500,9 +17492,7 @@ THH:mm:ss.sss</pre>
 <p>13: In Edition 3, the algorithm for the production <span style="font-family: Times New Roman; font-style: italic">FunctionExpression</span> with an <span style="font-family: Times New Roman; font-style: italic">Identifier</span> adds an object created as if by <code>new Object()</code> to the scope chain to serve as a scope for looking up the name of the function. The identifier resolution rules (10.1.4 in Edition 3) when applied to such an object will, if necessary, follow the object&rsquo;s prototype chain when attempting to resolve an identifier.  This means all the properties of Object.prototype are visible as identifiers within that scope.  In practice most implementations of Edition 3 have not implemented this semantics.  Edition 5 changes the specified semantics by using a Declarative Environment Record to bind the name of the function.</p>
 <p>14: In Edition 3, the algorithm for the production <span style="font-family: Times New Roman; font-style: italic">SourceElements </span><b>:</b> <span style="font-family: Times New Roman; font-style: italic">SourceElements SourceElement </span>did not correctly propagate statement result values in the same manner as <span style="font-family: Times New Roman; font-style: italic">Block</span>. This could result in the <code>eval</code> function producing an incorrect result when evaluating a <span style="font-family: Times New Roman; font-style: italic">Program</span> text. In practice most implementations of Edition 3 have implemented the correct propagation rather than what was specified in Edition 5.</p>
 <p>15.10.6: RegExp.prototype is now a RegExp object rather than an instance of Object. The value of its [[Class]] internal property which is observable using Object.prototype.toString is now &ldquo;RegExp&rdquo; rather than &ldquo;Object&rdquo;.</p>
-<p>
-  <hr>
-</p>
+<hr>
 </section>
 <section>
 <h1><br>(informative)<br>{SEQ aaa \h }{SEQ table \r0\h }{SEQ figure \r0\h }<br>Additions and Changes in the 5<sup>th</sup> Edition that<br>Introduce Incompatibilities with the 3<sup>rd</sup> Edition</h1>
@@ -17533,9 +17523,7 @@ THH:mm:ss.sss</pre>
 <p>15.11.2.1, 15.11.4.3:  In Edition 5, if an initial value for the <code>message</code> property of an Error object is not specified via the <code>Error</code> constructor the initial value of the property is the empty String.  In Edition 3, such an initial value is implementation defined.</p>
 <p>15.11.4.4:  In Edition 3, the result of <code>Error.prototype.toString</code> is implementation defined.  In Edition 5, the result is fully specified and hence may differ from some Edition 3 implementations.</p>
 <p>15.12: In Edition 5, the name <code>JSON</code> is defined in the global environment. In Edition 3, testing for the presence of that name will show it to be undefined unless it is defined by the program or implementation.</p>
-<p>
-  <hr>
-</p>
+<hr>
 </section>
 <section>
 <h1><br>(informative)<br>{SEQ aaa \h }{SEQ table \r0\h }{SEQ figure \r0\h }<br>Technically Significant Corrections and Clarifications in the 5.1 Edition</h1>
