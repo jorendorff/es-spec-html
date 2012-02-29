@@ -1,5 +1,6 @@
-from collections import namedtuple
-from cgi import escape
+import re
+import html as _html
+from html.entities import codepoint2name as _entities
 from io import StringIO
 
 class Element:
@@ -17,6 +18,19 @@ class Element:
         f = StringIO()
         write_html(f, self)
         return f.getvalue()
+
+def escape(s, quote=False):
+    def replace(m):
+        c = ord(m.group(0))
+        if c in _entities:
+            return '&' + _entities[c] + ';'
+        return '&#x{:x};'.format(c)
+
+    # The stdlib takes care of & > < ' " for us.
+    s = _html.escape(s, quote)
+
+    # Now we only need to worry about non-ascii characters.
+    return re.sub('[^\n -~]', replace, s)
 
 empty_tags = {'meta', 'br', 'hr'}
 non_indenting_tags = {'html', 'body', 'section'}
@@ -86,7 +100,7 @@ def _init(v):
         construct.__name__ = name
         return construct
 
-    names = ('html head meta link '
+    names = ('html head title base link meta style script noscript '
              'table caption colgroup col tbody thead tfoot tr td th '
              'body section nav article aside h1 h2 h3 h4 h5 h6 hgroup header footer address '
              'p hr pre blockquote ol ul li dl dt dd figure figcaption div '

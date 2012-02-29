@@ -1,6 +1,6 @@
 import collections
 from xml.etree import ElementTree
-from html import *
+from htmodel import *
 
 namespaces = {
     'http://schemas.openxmlformats.org/wordprocessingml/2006/main': '',
@@ -159,7 +159,7 @@ def transform(e):
             [body_e] = c
             return html(
                 head(
-                    meta(http_equiv="Content-Type", content="text/html; charset=UTF-8"),
+                    title("ECMAScript Language Specification ECMA-262 6th Edition - DRAFT"),
                     link(rel="stylesheet", type="text/css", href="es6-draft.css")),
                 body_e)
 

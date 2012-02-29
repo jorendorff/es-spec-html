@@ -2,7 +2,7 @@
 
 import zipfile
 from xml.etree import ElementTree
-import html
+import htmodel
 from transform import transform, shorten, unrecognized_styles, all_fonts
 import fixups
 from cgi import escape
@@ -81,6 +81,6 @@ def save_html(document):
     print()
 
     fixups.fixup(result)
-    html.save_html('es6-draft.html', result)
+    htmodel.save_html('es6-draft.html', result)
 
 save_html(document)
