@@ -175,23 +175,22 @@ def fixup_element_spacing(doc):
                 # Don't mess with spaces in a pre element.
                 result.append(k)
             else:
-                discard_space = (k.name in {'p', 'div', 'section', 'table', 'tr', 'td'})
+                discard_space = (k.name in {'p', 'div', 'section', 'table', 'tr', 'td', 'li', 'ol', 'ul'})
                 if k.content:
                     a = k.content[0]
                     if isinstance(a, str) and a[:1].isspace():
-                        k.content[0] = leftover = a.lstrip()
+                        k.content[0] = a.lstrip()
                         if not discard_space:
-                            addstr(a[:-len(leftover)])
+                            addstr(' ')
                 result.append(k)
                 if k.content:
                     b = k.content[-1]
                     if isinstance(b, str) and b[-1:].isspace():
-                        k.content[-1] = leftover = b.rstrip()
+                        k.content[-1] = b.rstrip()
                         if not discard_space:
-                            addstr(b[len(leftover):])
+                            addstr(' ')
 
         parent.content[:] = result
-    
 
 def fixup_sections(doc):
     """ Group h1 elements and subsequent elements of all kinds together into sections. """
