@@ -27,6 +27,17 @@ def fixup_formatting(doc):
     """
 
     def new_span(content, style):
+        # Merge adjacent strings, if any.
+        i = 0
+        while i < len(content) - 1:
+            a = content[i]
+            b = content[i + 1]
+            if isinstance(a, str) and isinstance(b, str):
+                content[i] = a + b
+                del content[i + 1]
+            else:
+                i += 1
+
         if style == {'font-style': 'italic'}:
             return html.i(*content)
         elif style == {'font-weight': 'bold'}:
@@ -35,6 +46,8 @@ def fixup_formatting(doc):
             return html.sup(*content)
         elif style == {'vertical-align': 'sub'}:
             return html.sub(*content)
+        elif content == ["opt"] and style == {'font-family': 'sans-serif', 'vertical-align': 'sub'}:
+            return html.sub("opt")
         elif style == {'font-family': 'monospace', 'font-weight': 'bold'}:
             return html.code(*content)
         else:
@@ -132,7 +145,53 @@ def fixup_formatting(doc):
             # to
             #   <i>foo</i>
             rewrite_adjacent_spans(parent, i, j)
-                
+
+def fixup_element_spacing(doc):
+    """
+    Change "A<i> B</i>" to "A <i>B</i>".
+
+    That is, move all start tags to the right of any adjacent whitespace,
+    and move all end tags to the left of any adjacent whitespace.
+    """
+    parents_to_rebuild = set()
+    for parent, _, child in all_parent_index_child_triples(doc):
+        if child.content:
+            if ((isinstance(child.content[0], str) and child.content[0][:1].isspace())
+                or (isinstance(child.content[-1], str) and child.content[-1][-1:].isspace())):
+                parents_to_rebuild.add(parent)
+
+    for parent in parents_to_rebuild:
+        result = []
+        def addstr(s):
+            if result and isinstance(result[-1], str):
+                result[-1] += s
+            else:
+                result.append(s)
+
+        for k in parent.content:
+            if isinstance(k, str):
+                addstr(k)
+            elif k.name == 'pre':
+                # Don't mess with spaces in a pre element.
+                result.append(k)
+            else:
+                discard_space = (k.name in {'p', 'div', 'section', 'table', 'tr', 'td'})
+                if k.content:
+                    a = k.content[0]
+                    if isinstance(a, str) and a[:1].isspace():
+                        k.content[0] = leftover = a.lstrip()
+                        if not discard_space:
+                            addstr(a[:-len(leftover)])
+                result.append(k)
+                if k.content:
+                    b = k.content[-1]
+                    if isinstance(b, str) and b[-1:].isspace():
+                        k.content[-1] = leftover = b.rstrip()
+                        if not discard_space:
+                            addstr(b[len(leftover):])
+
+        parent.content[:] = result
+    
 
 def fixup_sections(doc):
     """ Group h1 elements and subsequent elements of all kinds together into sections. """
@@ -392,6 +451,7 @@ def fixup_hr(doc):
 
 def fixup(doc):
     fixup_formatting(doc)
+    fixup_element_spacing(doc)
     fixup_sections(doc)
     fixup_code(doc)
     fixup_notes(doc)
