@@ -198,20 +198,9 @@ def transform(e):
                 elif len(c) == 1 and isinstance(c[0], str) and c[0].strip() == '':
                     return c[0] or None
 
-                if css == {'font-style': 'italic'}:
-                    return i(*c)
-                elif css == {'font-weight': 'bold'}:
-                    return b(*c)
-                elif css == {'vertical-align': 'super'}:
-                    return sup(*c)
-                elif css == {'vertical-align': 'sub'}:
-                    return sub(*c)
-                elif css == {'font-family': 'monospace', 'font-weight': 'bold'}:
-                    return code(*c)
-                else:
-                    result = span(*c)
-                    result.style = css
-                    return result
+                result = span(*c)
+                result.style = css
+                return result
 
         elif name == 'p':
             if len(c) == 0:

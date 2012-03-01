@@ -1,4 +1,138 @@
 import htmodel as html
+import collections
+
+def all_parent_index_child_triples(e):
+    for i, k in enumerate(e.content):
+        if not isinstance(k, str):
+            yield e, i, k
+            for t in all_parent_index_child_triples(k):
+                yield t
+
+def fixup_formatting(doc):
+    """
+    Convert runs of span elements to more HTML-like code.
+
+    The OOXML schema starts out like this:
+     - w:body contains w:p elements (paragraphs)
+     - w:p contains w:r elements (runs)
+     - w:r contains an optional w:rPr (style data) followed by some amount of text
+       and/or tabs, line breaks, and other junk (w:t, w:tab, w:br, etc.)
+
+    But note that w:r elements don't nest.
+
+    In Word, when someone selects a whole paragraph, already containing markup,
+    and changes the font, the result is a paragraph containing many runs, every
+    one of which has its own w:r>w:rPr>w:rFonts element. This fixup turns the
+    redundant formatting into nested HTML markup.
+    """
+
+    def new_span(content, style):
+        if style == {'font-style': 'italic'}:
+            return html.i(*content)
+        elif style == {'font-weight': 'bold'}:
+            return html.b(*content)
+        elif style == {'vertical-align': 'super'}:
+            return html.sup(*content)
+        elif style == {'vertical-align': 'sub'}:
+            return html.sub(*content)
+        elif style == {'font-family': 'monospace', 'font-weight': 'bold'}:
+            return html.code(*content)
+        else:
+            result = html.span(*content)
+            result.style = style
+            return result
+
+    def rewrite_adjacent_spans(parent, i, j):
+        spans = parent.content[i:j]  # copies a slice of the array
+
+        all_content = []
+        ranges = collections.defaultdict(dict)
+        current_style = {}
+
+        def set_current_style_to(style):
+            here = len(all_content)
+            for prop, (start, old_val) in list(current_style.items()):
+                if style.get(prop, not old_val) != old_val:
+                    # note end of earlier style
+                    ranges[start, here][prop] = old_val
+                    del current_style[prop]
+            for prop, val in style.items():
+                if prop not in current_style:
+                    # note start of new style
+                    current_style[prop] = here, val
+                else:
+                    assert current_style[prop][1] == val
+            assert {k: v for k, (_, v) in current_style.items()} == style
+
+        # Build ranges.
+        for kid in spans:
+            set_current_style_to(kid.style)
+            all_content += kid.content
+        set_current_style_to({})
+
+        # Convert ranges to a list.
+        ranges = [(start, stop, style) for (start, stop), style in ranges.items()]
+        ranges.sort(key=lambda triple: (triple[0], -triple[1]))
+
+        def build_result(ranges, i0, i1):
+            result = []
+            content_index = i0
+            while ranges:
+                start, stop, style = ranges[0]
+                assert i0 <= start < stop <= i1
+                assert content_index <= start
+                result += all_content[content_index:start]  # add any plain content
+
+                # split 'ranges' into two parts
+                inner_ranges = []
+                after_ranges = []
+                for triple in ranges[1:]:
+                    r0, r1, rs = triple
+                    assert start <= r0 < r1 <= i1
+                    if r1 <= stop:
+                        inner_ranges.append(triple)
+                    elif stop <= r0:
+                        after_ranges.append(triple)
+                    else:
+                        # the gross case, hopefully rare
+                        inner_ranges.append((r0, stop, rs))
+                        after_ranges.append((stop, r1, rs))
+
+                # recurse to build the child, add that to the result
+                child_content = build_result(inner_ranges, start, stop)
+                result.append(new_span(child_content, style))
+
+                content_index = stop
+                ranges = after_ranges
+
+            result += all_content[content_index:i1]  # add any trailing plain content
+            return result
+
+        parent.content[i:j] = build_result(ranges, 0, len(all_content))
+
+
+    for parent, i, kid in all_parent_index_child_triples(doc):
+        if kid.name == 'span':
+            # We assert the spans don't have attrs because we are going to
+            # rewrite these guys retaining only the style. This fixup needs to
+            # happen early enough in rewriting that this isn't a problem; it also
+            # has to be early so that other markup doesn't get in the way.
+            assert not kid.attrs
+            j = i + 1
+            while j < len(parent.content):
+                sibling = parent.content[j]
+                if isinstance(sibling, str) or sibling.name != 'span':
+                    break
+                assert not sibling.attrs
+                j += 1
+
+            # Call rewrite even if j == i + 1, to make sure new_span gets called,
+            # converting, for example
+            #   <span style="font-style: italic">foo</span>
+            # to
+            #   <i>foo</i>
+            rewrite_adjacent_spans(parent, i, j)
+                
 
 def fixup_sections(doc):
     """ Group h1 elements and subsequent elements of all kinds together into sections. """
@@ -245,13 +379,6 @@ def fixup_grammar(e):
         elif kid.name in ('body', 'section', 'div'):
             fixup_grammar(kid)
 
-def all_parent_index_child_triples(e):
-    for i, k in enumerate(e.content):
-        if not isinstance(k, str):
-            yield e, i, k
-            for t in all_parent_index_child_triples(k):
-                yield t
-
 def fixup_hr(doc):
     """ Replace <p><hr></p> with <hr>.
 
@@ -264,6 +391,7 @@ def fixup_hr(doc):
             a.content[i] = b.content[0]
 
 def fixup(doc):
+    fixup_formatting(doc)
     fixup_sections(doc)
     fixup_code(doc)
     fixup_notes(doc)
