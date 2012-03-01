@@ -493,7 +493,7 @@
                 <div>
                   <p><b>cf<sub>1</sub></b></p>
                   <p><span style="font-family: monospace">q1</span></p>
-                  <p> <span style="font-family: monospace">q2</span></p>
+                  <p><span style="font-family: monospace">q2</span></p>
                 </div>
               </div>
               <div>
@@ -5221,7 +5221,7 @@
   <li>Call the [[Put]] internal method of <i>array</i> with arguments <span style="font-family: monospace">"<b>length</b>"</span>, ToUint32(<i>pad</i>+<i>len</i>), and <b>false</b>.</li>
   <li>Return <i>array</i>.</li>
 </ol>
-</section><section id="sec-11.1.4.2"><h1><span class="secnum"><a href="#sec-11" title="link to this section">11.1.4.2</a></span> Array Comprehension</h1><h2>Syntax</h2><div class="gp"><div class="lhs">ArrayComprehension <span style="font-family: sans-serif; font-weight: bold">:</span></div><div class="rhs"><code>[</code> Expression ComprehensionForList <code>]<br>[</code> Expression ComprehensionForList  <code>if (</code> Expression <code>)</code> <code>]</code></div></div><div class="gp"><div class="lhs">ComprehensionForList <span style="font-family: sans-serif; font-weight: bold">:</span></div><div class="rhs">ComprehensionFor<code><br></code>ComprehensionForList  ComprehensionFor</div></div><div class="gp"><div class="lhs">ComprehensionFor <span style="font-family: sans-serif; font-weight: bold">:</span></div><div class="rhs"><code>for (</code> LeftHandSideExpression <code>of</code> Expression <code>)</code></div></div></section></section><section id="sec-11.1.5"><h1><span class="secnum"><a href="#sec-11" title="link to this section">11.1.5</a></span> Object Initialiser</h1><p>NOTE&#x9;An object initialiser is an expression describing the initialisation of an Object, written in a form resembling a literal. It is a list of zero or more pairs of property names and associated values, enclosed in curly braces. The values need not be literals; they are evaluated each time the object initialiser is evaluated.</p><h2>Syntax</h2><div class="gp"><div class="lhs">SealedObjectLiteral <span style="font-family: sans-serif; font-weight: bold">:</span></div><div class="rhs">ObjectLiteral<code><br>#</code> ObjectLiteral</div></div><div class="gp"><div class="lhs">ObjectLiteral <span style="font-family: sans-serif; font-weight: bold">:</span></div><div class="rhs"><code>{ }</code><br><code>{</code> PropertyNameAndValueList <code>}<br>{</code> PropertyNameAndValueList <span style="font-family: monospace">, <b>}</b></span></div></div><div class="gp"><div class="lhs">PropertyNameAndValueList <span style="font-family: sans-serif; font-weight: bold">:</span></div><div class="rhs">PropertyAssignment<br>PropertyNameAndValueList <code>,</code> PropertyAssignment</div></div><div class="gp"><div class="lhs">PropertyAssignment <span style="font-family: sans-serif; font-weight: bold">:</span></div><div class="rhs">IdentifierName<br>PropertyName <code>:</code> AssignmentExpression<br>PropertyName <code>(</code> FormalParameterList <code>)</code> <code>{</code> FunctionBody <code>}</code> <br><code>*</code> PropertyName <code>(</code> FormalParameterList <code>)</code> <code>{</code> FunctionBody <code>}</code><br><code>get</code> PropertyName <code>( )</code> <code>{</code> FunctionBody <b><span style="font-family: monospace">}</span><br><span style="font-family: monospace">set</span></b> PropertyName <code>(</code> PropertySetParameterList <code>) {</code> FunctionBody <code>}</code></div></div><div class="gp"><div class="lhs">PropertyName <span style="font-family: sans-serif; font-weight: bold">:</span></div><div class="rhs">IdentifierName<br>StringLiteral<br>NumericLiteral</div></div><div class="gp"><div class="lhs">PropertySetParameterList <span style="font-family: sans-serif; font-weight: bold">:</span></div><div class="rhs">BindingIdentifier <br>BindingPattern</div></div><section id="sec-11.1.5.1 Static Semantics"><h1><span class="secnum"><a href="#sec-11" title="link to this section">11.1.5.1 Static Semantics</a></span> </h1><p><span style="font-family: sans-serif; font-weight: bold">Early Errors</span></p><p>PropertyNameAndValueList <b>:</b>  PropertyNameAndValueList <code>,</code> PropertyAssignment</p>
+</section><section id="sec-11.1.4.2"><h1><span class="secnum"><a href="#sec-11" title="link to this section">11.1.4.2</a></span> Array Comprehension</h1><h2>Syntax</h2><div class="gp"><div class="lhs">ArrayComprehension <span style="font-family: sans-serif; font-weight: bold">:</span></div><div class="rhs"><code>[</code> Expression ComprehensionForList <code>]<br>[</code> Expression ComprehensionForList  <code>if (</code> Expression <code>)</code> <code>]</code></div></div><div class="gp"><div class="lhs">ComprehensionForList <span style="font-family: sans-serif; font-weight: bold">:</span></div><div class="rhs">ComprehensionFor<code><br></code>ComprehensionForList  ComprehensionFor</div></div><div class="gp"><div class="lhs">ComprehensionFor <span style="font-family: sans-serif; font-weight: bold">:</span></div><div class="rhs"><code>for (</code> LeftHandSideExpression <code>of</code> Expression <code>)</code></div></div></section></section><section id="sec-11.1.5"><h1><span class="secnum"><a href="#sec-11" title="link to this section">11.1.5</a></span> Object Initialiser</h1><p>NOTE&#x9;An object initialiser is an expression describing the initialisation of an Object, written in a form resembling a literal. It is a list of zero or more pairs of property names and associated values, enclosed in curly braces. The values need not be literals; they are evaluated each time the object initialiser is evaluated.</p><h2>Syntax</h2><div class="gp"><div class="lhs">SealedObjectLiteral <span style="font-family: sans-serif; font-weight: bold">:</span></div><div class="rhs">ObjectLiteral<code><br>#</code> ObjectLiteral</div></div><div class="gp"><div class="lhs">ObjectLiteral <span style="font-family: sans-serif; font-weight: bold">:</span></div><div class="rhs"><code>{ }</code><br><code>{</code> PropertyNameAndValueList <code>}<br>{</code> PropertyNameAndValueList <span style="font-family: monospace">, <b>}</b></span></div></div><div class="gp"><div class="lhs">PropertyNameAndValueList <span style="font-family: sans-serif; font-weight: bold">:</span></div><div class="rhs">PropertyAssignment<br>PropertyNameAndValueList <code>,</code> PropertyAssignment</div></div><div class="gp"><div class="lhs">PropertyAssignment <span style="font-family: sans-serif; font-weight: bold">:</span></div><div class="rhs">IdentifierName<br>PropertyName <code>:</code> AssignmentExpression<br>PropertyName <code>(</code> FormalParameterList <code>)</code> <code>{</code> FunctionBody <code>}</code> <br><code>*</code> PropertyName <code>(</code> FormalParameterList <code>)</code> <code>{</code> FunctionBody <code>}</code><br><code>get</code> PropertyName <code>( )</code> <code>{</code> FunctionBody <b><span style="font-family: monospace">}</span><br><span style="font-family: monospace">set</span> </b>PropertyName <code>(</code> PropertySetParameterList <code>) {</code> FunctionBody <code>}</code></div></div><div class="gp"><div class="lhs">PropertyName <span style="font-family: sans-serif; font-weight: bold">:</span></div><div class="rhs">IdentifierName<br>StringLiteral<br>NumericLiteral</div></div><div class="gp"><div class="lhs">PropertySetParameterList <span style="font-family: sans-serif; font-weight: bold">:</span></div><div class="rhs">BindingIdentifier <br>BindingPattern</div></div><section id="sec-11.1.5.1 Static Semantics"><h1><span class="secnum"><a href="#sec-11" title="link to this section">11.1.5.1 Static Semantics</a></span> </h1><p><span style="font-family: sans-serif; font-weight: bold">Early Errors</span></p><p>PropertyNameAndValueList <b>:</b>  PropertyNameAndValueList <code>,</code> PropertyAssignment</p>
 <ol class="proc">
   <li>It is a Syntax Error if this production is contained in strict code,  PropertyAssignment is the production PropertyAssignment <b>:</b> PropertyName <code>:</code> AssignmentExpression<span style="font-family: sans-serif">,</span> and <span style="font-family: Times New Roman">PropertyDefinitionList</span>(<span style="font-family: Times New Roman">PropName</span> of PropertyAssignment) of PropertyNameAndValueList is not the empty List.</li>
   <li>It is a Syntax Error if PropertyAssignment is the production PropertyAssignment <b>:</b> IdentifierName and <span style="font-family: Times New Roman">PropertyDefinitionList</span>(<span style="font-family: Times New Roman">PropName</span> of PropertyAssignment) of PropertyNameAndValueList is not the empty List.</li>
@@ -7514,7 +7514,7 @@
     </li>
   <li>Return the result of performing Indexed Binding Initialisation for ArrayBindingPattern using <i>array</i>, 0, and <i>environment</i> as arguments.</li>
 </ol>
-<p>ObjectBindingPattern<b>:</b> <code>{ }</code> </p>
+<p>ObjectBindingPattern<b>:</b> <code>{ }</code></p>
 <ol class="proc">
   <li>Return.</li>
 </ol>
@@ -8603,15 +8603,15 @@
   <li><span style="font-family: Times New Roman">Repeat (Note that if step 7.a.i has been performed this loop does not start at the beginning of <i>B</i>)</span>
     <ol class="block">
       <li><span style="font-family: Times New Roman">Let <i>C</i> be the next <i>CaseClause</i> in <i>B</i>. If there is no such <i>CaseClause</i>, return</span> NormalCompletion(<span style="font-family: Times New Roman"><i>V</i>).</span></li>
-      <li><span style="font-family: Times New Roman">If <i>C</i> has a <i>StatementList</i>, then</span></li>
+      <li><span style="font-family: Times New Roman">If <i>C</i> has a <i>StatementList</i>, then</span> 
+        <ol class="block">
+          <li><span style="font-family: Times New Roman">Evaluate <i>C</i>&rsquo;s <i>StatementList</i> and let <i>R</i> be the result.</span></li>
+          <li><span style="font-family: Times New Roman">If <i>R</i>.[[value]] is not</span> <span style="font-family: sans-serif">empty</span><span style="font-family: Times New Roman">, then let <i>V</i> = <i>R</i>.[[value]].</span></li>
+          <li><span style="font-family: Times New Roman">If <i>R</i> is an abrupt completion, then Completion</span> <span style="font-family: Times New Roman">{[[type]]:</span> <span style="font-family: Times New Roman"><i>R</i>.[[type]],</span> <span style="font-family: Times New Roman">[[value]]:</span>  <span style="font-family: Times New Roman"><i>V</i>,</span> <span style="font-family: Times New Roman">[[target]]:</span>  <span style="font-family: Times New Roman"><i>R</i>.[[target]]}.</span></li>
+        </ol>
+        </li>
     </ol>
     </li>
-</ol>
- 
-<ol class="proc">
-  <li><span style="font-family: Times New Roman">Evaluate <i>C</i>&rsquo;s <i>StatementList</i> and let <i>R</i> be the result.</span></li>
-  <li><span style="font-family: Times New Roman">If <i>R</i>.[[value]] is not</span> <span style="font-family: sans-serif">empty</span><span style="font-family: Times New Roman">, then let <i>V</i> = <i>R</i>.[[value]].</span></li>
-  <li><span style="font-family: Times New Roman">If <i>R</i> is an abrupt completion, then Completion</span> <span style="font-family: Times New Roman">{[[type]]:</span> <span style="font-family: Times New Roman"><i>R</i>.[[type]],</span> <span style="font-family: Times New Roman">[[value]]:</span>  <span style="font-family: Times New Roman"><i>V</i>,</span> <span style="font-family: Times New Roman">[[target]]:</span>  <span style="font-family: Times New Roman"><i>R</i>.[[target]]}.</span></li>
 </ol>
 <p><span style="font-family: sans-serif; font-weight: bold">Runtime Semantics: Evaluation</span></p><p><span style="font-family: Times New Roman; font-style: italic">SwitchStatement</span> <b>:</b> <code>switch</code> <code>(</code> <span style="font-family: Times New Roman; font-style: italic">Expression</span> <code>)</code> <span style="font-family: Times New Roman; font-style: italic">CaseBlock</span></p>
 <ol class="proc">
@@ -8894,7 +8894,7 @@
   <li>It is a Syntax Error if the any element of the LexicallyDeclaredNames of <span style="font-family: Times New Roman; font-style: italic">FormalParameterList</span> also occurs in the VarDeclaredNames of <span style="font-family: Times New Roman; font-style: italic">FunctionBody</span>.</li>
   <li>It is a Syntax Error if any element of the BoundNames of <span style="font-family: Times New Roman; font-style: italic">FormalParameterList</span> also occurs in the LexicallyDeclaredNames of <span style="font-family: Times New Roman; font-style: italic">FunctionBody</span>.</li>
 </ol>
-<p><span style="font-family: Times New Roman; font-style: italic">FunctionBody</span> <b>:</b> <span style="font-family: Times New Roman; font-style: italic">StatementList</span></p>
+<p><span style="font-family: Times New Roman; font-style: italic">FunctionBody</span> <b>:</b> <span style="font-family: Times New Roman; font-style: italic">StatementList</span> </p>
 <ol class="proc">
   <li>It is a Syntax Error if the LexicallyDeclaredNames of <span style="font-family: Times New Roman; font-style: italic">StatementList</span> contains any duplicate entiries.</li>
   <li>It is a Syntax Error if any element of the LexicallyDeclaredNames of <span style="font-family: Times New Roman; font-style: italic">StatementList</span> also occurs in the VarDeclaredNames of <span style="font-family: Times New Roman; font-style: italic">StatementList</span>.</li>
@@ -13865,7 +13865,7 @@ THH:mm:ss.sss</pre>
     </ol>
     </li>
 </ol>
-<p>The production <span style="font-family: Times New Roman; font-style: italic">Assertion</span> <b>:: <span style="font-family: monospace">( ? !</span></b> <span style="font-family: Times New Roman; font-style: italic">Disjunction</span> <code>)</code> evaluates as follows:</p>
+<p>The production <span style="font-family: Times New Roman; font-style: italic">Assertion</span> <b>:: <span style="font-family: monospace">( ? !</span> </b><span style="font-family: Times New Roman; font-style: italic">Disjunction</span> <code>)</code> evaluates as follows:</p>
 <ol class="proc">
   <li>Evaluate <i>Disjunction</i> to obtain a Matcher <i>m</i>.</li>
   <li>Return an internal Matcher closure that takes two arguments, a State <i>x</i> and a Continuation <i>c</i>, and performs the following steps:
@@ -14141,7 +14141,7 @@ THH:mm:ss.sss</pre>
   <li>Let <i>i</i> be the MV of <i>DecimalDigits</i>.</li>
   <li>Return the two results <i>i</i> and &infin;.</li>
 </ol>
-<p>The production <span style="font-family: Times New Roman; font-style: italic">QuantifierPrefix</span> <b>:: <span style="font-family: monospace">{</span></b> <span style="font-family: Times New Roman; font-style: italic">DecimalDigits</span> <code>,</code> <span style="font-family: Times New Roman; font-style: italic">DecimalDigits</span> <code>}</code> evaluates as follows:</p>
+<p>The production <span style="font-family: Times New Roman; font-style: italic">QuantifierPrefix</span> <b>:: <span style="font-family: monospace">{</span> </b><span style="font-family: Times New Roman; font-style: italic">DecimalDigits</span> <code>,</code> <span style="font-family: Times New Roman; font-style: italic">DecimalDigits</span> <code>}</code> evaluates as follows:</p>
 <ol class="proc">
   <li>Let <i>i</i> be the MV of the first <i>DecimalDigits</i>.</li>
   <li>Let <i>j</i> be the MV of the second <i>DecimalDigits</i>.</li>
@@ -14646,7 +14646,7 @@ THH:mm:ss.sss</pre>
 </section>
 <section id="sec-15.10.2.13">
 <h1><span class="secnum"><a href="#sec-15" title="link to this section">15.10.2.13</a></span> CharacterClass</h1>
-<p>The production <span style="font-family: Times New Roman; font-style: italic">CharacterClass</span> <b>:: <span style="font-family: monospace">[</span></b> [lookahead &isin; {<b>^</b>}] <span style="font-family: Times New Roman; font-style: italic">ClassRanges</span> <code>]</code> evaluates by evaluating <span style="font-family: Times New Roman; font-style: italic">ClassRanges</span> to obtain a CharSet and returning that CharSet and the Boolean <b>false</b>.</p>
+<p>The production <span style="font-family: Times New Roman; font-style: italic">CharacterClass</span> <b>:: <span style="font-family: monospace">[</span> </b>[lookahead &isin; {<b>^</b>}] <span style="font-family: Times New Roman; font-style: italic">ClassRanges</span> <code>]</code> evaluates by evaluating <span style="font-family: Times New Roman; font-style: italic">ClassRanges</span> to obtain a CharSet and returning that CharSet and the Boolean <b>false</b>.</p>
 <p>The production <span style="font-family: Times New Roman; font-style: italic">CharacterClass</span>  <b>:: <span style="font-family: monospace">[ ^</span></b> <span style="font-family: Times New Roman; font-style: italic">ClassRanges</span> <code>]</code> evaluates by evaluating <span style="font-family: Times New Roman; font-style: italic">ClassRanges</span> to obtain a CharSet and returning that CharSet and the Boolean <b>true</b>.</p>
 </section>
 <section id="sec-15.10.2.14">
@@ -14714,7 +14714,7 @@ THH:mm:ss.sss</pre>
 </section>
 <section id="sec-15.10.2.18">
 <h1><span class="secnum"><a href="#sec-15" title="link to this section">15.10.2.18</a></span> ClassAtomNoDash</h1>
-<p>The production <span style="font-family: Times New Roman; font-style: italic">ClassAtomNoDash</span> <b>::</b> <span style="font-family: Times New Roman; font-style: italic">SourceCharacter</span> <b>but not one of <span style="font-family: monospace">\</span> or <span style="font-family: monospace">]</span> or <span style="font-family: monospace">-</span></b> evaluates by returning a one-element CharSet containing the character represented by <span style="font-family: Times New Roman; font-style: italic">SourceCharacter</span>.</p>
+<p>The production <span style="font-family: Times New Roman; font-style: italic">ClassAtomNoDash</span> <b>::</b> <span style="font-family: Times New Roman; font-style: italic">SourceCharacter</span> <b>but not one of <span style="font-family: monospace">\</span> or <span style="font-family: monospace">]</span> or <span style="font-family: monospace">-</span> </b>evaluates by returning a one-element CharSet containing the character represented by <span style="font-family: Times New Roman; font-style: italic">SourceCharacter</span>.</p>
 <p>The production <span style="font-family: Times New Roman; font-style: italic">ClassAtomNoDash</span> <b>:: <span style="font-family: monospace">\</span> </b><span style="font-family: Times New Roman; font-style: italic">ClassEscape</span> evaluates by evaluating <span style="font-family: Times New Roman; font-style: italic">ClassEscape</span> to obtain a CharSet and returning that CharSet.</p>
 </section>
 <section id="sec-15.10.2.19">
