@@ -153,14 +153,8 @@ def fixup_element_spacing(doc):
     That is, move all start tags to the right of any adjacent whitespace,
     and move all end tags to the left of any adjacent whitespace.
     """
-    parents_to_rebuild = set()
-    for parent, _, child in all_parent_index_child_triples(doc):
-        if child.content:
-            if ((isinstance(child.content[0], str) and child.content[0][:1].isspace())
-                or (isinstance(child.content[-1], str) and child.content[-1][-1:].isspace())):
-                parents_to_rebuild.add(parent)
 
-    for parent in parents_to_rebuild:
+    def rebuild(parent):
         result = []
         def addstr(s):
             if result and isinstance(result[-1], str):
@@ -191,6 +185,26 @@ def fixup_element_spacing(doc):
                             addstr(' ')
 
         parent.content[:] = result
+
+    def walk(e):
+        rebuild_e = False
+        for i, kid in e.kids():
+            if (not rebuild_e
+                and kid.content
+                and ((isinstance(kid.content[0], str) and kid.content[0][:1].isspace())
+                     or (isinstance(kid.content[-1], str) and kid.content[-1][-1:].isspace()))):
+                # We do not rebuild immediately, but wait until after walking
+                # all contents, because if we eject trailing whitespace from
+                # the last kid, we want to eject it from the parent too in
+                # turn.
+                rebuild_e = True
+            walk(kid)
+
+        if rebuild_e:
+            rebuild(e)
+
+    walk(doc)
+
 
 def fixup_sections(doc):
     """ Group h1 elements and subsequent elements of all kinds together into sections. """
