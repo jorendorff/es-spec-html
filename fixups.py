@@ -402,12 +402,12 @@ def fixup_lists(e):
                 new_content.append(k)
             else:
                 # Oh no. It is a list item. Well, what is its depth?
-                if k.style and 'ooxml-ilvl' in k.style:
-                    depth = int(k.style['ooxml-ilvl'])
+                if k.style and '-ooxml-ilvl' in k.style:
+                    depth = int(k.style['-ooxml-ilvl'])
 
                     # While we're here, delete the magic style attributes.
-                    del k.style['ooxml-ilvl']
-                    del k.style['ooxml-numId']
+                    del k.style['-ooxml-ilvl']
+                    del k.style['-ooxml-numId']
                 else:
                     depth = 0
 

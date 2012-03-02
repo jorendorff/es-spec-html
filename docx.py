@@ -111,9 +111,9 @@ def parse_pr(e):
                     numId = item.get(k_val)
 
             if numId is not None and numId != "0":
-                put('ooxml-numId', numId)
+                put('-ooxml-numId', numId)
                 if ilvl is not None:
-                    put('ooxml-ilvl', ilvl)
+                    put('-ooxml-ilvl', ilvl)
 
         elif name == 'pStyle':
             if list(k.keys()) == [k_val]:

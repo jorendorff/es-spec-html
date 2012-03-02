@@ -101,7 +101,7 @@ def transform(e):
             elif css is None:
                 return p(*c)
             else:
-                num = 'ooxml-numId' in css
+                num = '-ooxml-numId' in css
                 constructor = li if num else p
 
                 if '@cls' in css:
