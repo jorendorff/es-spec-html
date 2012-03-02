@@ -527,45 +527,39 @@
 <h1><span class="secnum"><a href="#sec-4" title="link to this section">4.3</a></span> Terms and definitions</h1>
 <p>For the purposes of this document, the following terms and definitions apply.</p>
 <section id="sec-4.3.1">
-<h1><span class="secnum"><a href="#sec-4" title="link to this section">4.3.1</a></span> </h1>
-<p class="Terms">type</p>
+<h1><span class="secnum"><a href="#sec-4" title="link to this section">4.3.1</a></span> type</h1>
 <p>set of data values as defined in Clause 8 of this specification</p>
 </section>
 <section id="sec-4.3.2">
-<h1><span class="secnum"><a href="#sec-4" title="link to this section">4.3.2</a></span> </h1>
-<p class="Terms">primitive value</p>
+<h1><span class="secnum"><a href="#sec-4" title="link to this section">4.3.2</a></span> primitive value</h1>
 <p>member of one of the types Undefined, Null, Boolean, Number, or String as defined in Clause 8</p>
 <div class="note">
   <p><span class="nh">NOTE</span> A primitive value is a datum that is represented directly at the lowest level of the language implementation.</p>
 </div>
 </section>
 <section id="sec-4.3.3">
-<h1><span class="secnum"><a href="#sec-4" title="link to this section">4.3.3</a></span> </h1>
-<p class="Terms">object</p>
+<h1><span class="secnum"><a href="#sec-4" title="link to this section">4.3.3</a></span> object</h1>
 <p>member of the type Object</p>
 <div class="note">
   <p><span class="nh">NOTE</span> An object is a collection of properties and has a single prototype object. The prototype may be the null value.</p>
 </div>
 </section>
 <section id="sec-4.3.4">
-<h1><span class="secnum"><a href="#sec-4" title="link to this section">4.3.4</a></span> </h1>
-<p class="Terms">constructor</p>
+<h1><span class="secnum"><a href="#sec-4" title="link to this section">4.3.4</a></span> constructor</h1>
 <p>function object that creates and initialises objects</p>
 <div class="note">
   <p><span class="nh">NOTE</span> The value of a constructor&rsquo;s &ldquo;<span style="font-family: monospace">prototype</span>&rdquo; property is a prototype object that is used to implement inheritance and shared properties.</p>
 </div>
 </section>
 <section id="sec-4.3.5">
-<h1><span class="secnum"><a href="#sec-4" title="link to this section">4.3.5</a></span> </h1>
-<p class="Terms">prototype</p>
+<h1><span class="secnum"><a href="#sec-4" title="link to this section">4.3.5</a></span> prototype</h1>
 <p>object that provides shared properties for other objects</p>
 <div class="note">
   <p><span class="nh">NOTE</span> When a constructor creates an object, that object implicitly references the constructor&rsquo;s &ldquo;<code>prototype</code>&rdquo; property for the purpose of resolving property references. The constructor&rsquo;s &ldquo;<code>prototype</code>&rdquo; property can be referenced by the program expression <span style="font-family: monospace"><i>constructor</i><b>.prototype</b></span>, and properties added to an object&rsquo;s prototype are shared, through inheritance, by all objects sharing the prototype. Alternatively, a new object may be created with an explicitly specified prototype by using the <code>Object.create</code> built-in function.</p>
 </div>
 </section>
 <section id="sec-4.3.6">
-<h1><span class="secnum"><a href="#sec-4" title="link to this section">4.3.6</a></span> </h1>
-<p class="Terms">native object</p>
+<h1><span class="secnum"><a href="#sec-4" title="link to this section">4.3.6</a></span> native object</h1>
 <p>object in an ECMAScript implementation whose semantics are fully defined by this specification rather than by  the host environment</p>
 <div class="note">
   <p><span class="nh">NOTE</span> Standard native objects are defined in this specification. Some native objects are built-in; others may be constructed during the course of execution of an ECMAScript program.</p>
@@ -584,49 +578,41 @@
 </div>
 </section>
 <section id="sec-4.3.8">
-<h1><span class="secnum"><a href="#sec-4.3.8" title="link to this section">4.3.8</a></span> </h1>
-<p class="Terms">host object</p>
+<h1><span class="secnum"><a href="#sec-4.3.8" title="link to this section">4.3.8</a></span> host object</h1>
 <p>object supplied by the host environment to complete the execution environment of ECMAScript</p>
 <div class="note">
   <p><span class="nh">NOTE</span> Any object that is not native is a host object.</p>
 </div>
 </section>
 <section id="sec-4.3.9">
-<h1><span class="secnum"><a href="#sec-4.3.9" title="link to this section">4.3.9</a></span> </h1>
-<p class="Terms">undefined value</p>
+<h1><span class="secnum"><a href="#sec-4.3.9" title="link to this section">4.3.9</a></span> undefined value</h1>
 <p>primitive value used when a variable has not been assigned a value</p>
 </section>
 <section id="sec-4.3.10">
-<h1><span class="secnum"><a href="#sec-4.3.10" title="link to this section">4.3.10</a></span> </h1>
-<p class="Terms">Undefined type</p>
+<h1><span class="secnum"><a href="#sec-4.3.10" title="link to this section">4.3.10</a></span> Undefined type</h1>
 <p>type whose sole value is the undefined value</p>
 </section>
 <section id="sec-4.3.11">
-<h1><span class="secnum"><a href="#sec-4.3.11" title="link to this section">4.3.11</a></span> </h1>
-<p class="Terms">null value</p>
+<h1><span class="secnum"><a href="#sec-4.3.11" title="link to this section">4.3.11</a></span> null value</h1>
 <p>primitive value that represents the intentional absence of any object value</p>
 </section>
 <section id="sec-4.3.12">
-<h1><span class="secnum"><a href="#sec-4.3.12" title="link to this section">4.3.12</a></span> </h1>
-<p class="Terms">Null type</p>
+<h1><span class="secnum"><a href="#sec-4.3.12" title="link to this section">4.3.12</a></span> Null type</h1>
 <p>type whose sole value is the null value</p>
 </section>
 <section id="sec-4.3.13">
-<h1><span class="secnum"><a href="#sec-4.3.13" title="link to this section">4.3.13</a></span> </h1>
-<p class="Terms">Boolean value</p>
+<h1><span class="secnum"><a href="#sec-4.3.13" title="link to this section">4.3.13</a></span> Boolean value</h1>
 <p>member of the Boolean type</p>
 <div class="note">
   <p><span class="nh">NOTE</span> There are only two Boolean values, <b>true</b> and <b>false</b>.</p>
 </div>
 </section>
 <section id="sec-4.3.14">
-<h1><span class="secnum"><a href="#sec-4.3.14" title="link to this section">4.3.14</a></span> </h1>
-<p class="Terms">Boolean type</p>
+<h1><span class="secnum"><a href="#sec-4.3.14" title="link to this section">4.3.14</a></span> Boolean type</h1>
 <p>type consisting of the primitive values <b>true</b> and <b>false</b></p>
 </section>
 <section id="sec-4.3.15">
-<h1><span class="secnum"><a href="#sec-4.3.15" title="link to this section">4.3.15</a></span> </h1>
-<p class="Terms">Boolean object</p>
+<h1><span class="secnum"><a href="#sec-4.3.15" title="link to this section">4.3.15</a></span> Boolean object</h1>
 <p>member of the Object type that is an instance of the standard built-in <code>Boolean</code> constructor</p>
 <div class="note">
   <p><span class="nh">NOTE</span> A Boolean object is created by using the <code>Boolean</code> constructor in a <code>new</code> expression, supplying a Boolean value as an argument. The resulting object has an internal property whose value is the Boolean value. A Boolean object can be coerced to a Boolean value.</p>
@@ -643,102 +629,87 @@
 </div>
 </section>
 <section id="sec-4.3.17">
-<h1><span class="secnum"><a href="#sec-4.3.17" title="link to this section">4.3.17</a></span> </h1>
-<p class="Terms">String type</p>
+<h1><span class="secnum"><a href="#sec-4.3.17" title="link to this section">4.3.17</a></span> String type</h1>
 <p>set of all possible String values</p>
 </section>
 <section id="sec-4.3.18">
-<h1><span class="secnum"><a href="#sec-4.3.18" title="link to this section">4.3.18</a></span> </h1>
-<p class="Terms">String object</p>
+<h1><span class="secnum"><a href="#sec-4.3.18" title="link to this section">4.3.18</a></span> String object</h1>
 <p>member of the Object type that is an instance of the standard built-in <code>String</code> constructor</p>
 <div class="note">
   <p><span class="nh">NOTE</span> A String object is created by using the <code>String</code> constructor in a <code>new</code> expression, supplying a String value as an argument. The resulting object has an internal property whose value is the String value. A String object can be coerced to a String value by calling the <code>String</code> constructor as a function (15.5.1).</p>
 </div>
 </section>
 <section id="sec-4.3.19">
-<h1><span class="secnum"><a href="#sec-4.3.19" title="link to this section">4.3.19</a></span> </h1>
-<p class="Terms">Number value</p>
+<h1><span class="secnum"><a href="#sec-4.3.19" title="link to this section">4.3.19</a></span> Number value</h1>
 <p>primitive value corresponding to a double-precision 64-bit binary format IEEE 754 value</p>
 <div class="note">
   <p><span class="nh">NOTE</span> A Number value is a member of the Number type and is a direct representation of a number.</p>
 </div>
 </section>
 <section id="sec-4.3.20">
-<h1><span class="secnum"><a href="#sec-4.3.20" title="link to this section">4.3.20</a></span> </h1>
-<p class="Terms">Number type</p>
+<h1><span class="secnum"><a href="#sec-4.3.20" title="link to this section">4.3.20</a></span> Number type</h1>
 <p>set of all possible Number values including the special &ldquo;Not-a-Number&rdquo; (NaN) values, positive infinity, and negative infinity</p>
 </section>
 <section id="sec-4.3.21">
-<h1><span class="secnum"><a href="#sec-4.3.21" title="link to this section">4.3.21</a></span> </h1>
-<p class="Terms">Number object</p>
+<h1><span class="secnum"><a href="#sec-4.3.21" title="link to this section">4.3.21</a></span> Number object</h1>
 <p>member of the Object type that is an instance of the standard built-in <code>Number</code> constructor</p>
 <div class="note">
   <p><span class="nh">NOTE</span> A Number object is created by using the <code>Number</code> constructor in a <code>new</code> expression, supplying a Number value as an argument. The resulting object has an internal property whose value is the Number value. A Number object can be coerced to a Number value by calling the <code>Number</code> constructor as a function (15.7.1).</p>
 </div>
 </section>
 <section id="sec-4.3.22">
-<h1><span class="secnum"><a href="#sec-4.3.22" title="link to this section">4.3.22</a></span> </h1>
-<p class="Terms">Infinity</p>
+<h1><span class="secnum"><a href="#sec-4.3.22" title="link to this section">4.3.22</a></span> Infinity</h1>
 <p>number value that is the positive infinite Number value</p>
 </section>
 <section id="sec-4.3.23">
-<h1><span class="secnum"><a href="#sec-4.3.23" title="link to this section">4.3.23</a></span> </h1>
-<p class="Terms">NaN</p>
+<h1><span class="secnum"><a href="#sec-4.3.23" title="link to this section">4.3.23</a></span> NaN</h1>
 <p>number value that is a IEEE 754 &ldquo;Not-a-Number&rdquo; value</p>
 </section>
 <section id="sec-4.3.24">
-<h1><span class="secnum"><a href="#sec-4.3.24" title="link to this section">4.3.24</a></span> </h1>
-<p class="Terms">function</p>
+<h1><span class="secnum"><a href="#sec-4.3.24" title="link to this section">4.3.24</a></span> function</h1>
 <p>member of the Object type that is an instance of the standard built-in <code>Function</code> constructor and that may be invoked as a subroutine</p>
 <div class="note">
   <p><span class="nh">NOTE</span> In addition to its named properties, a function contains executable code and state that determine how it behaves when invoked. A function&rsquo;s code may or may not be written in ECMAScript.</p>
 </div>
 </section>
 <section id="sec-4.3.25">
-<h1><span class="secnum"><a href="#sec-4.3.25" title="link to this section">4.3.25</a></span> </h1>
-<p class="Terms">built-in function</p>
+<h1><span class="secnum"><a href="#sec-4.3.25" title="link to this section">4.3.25</a></span> built-in function</h1>
 <p>built-in object that is a function</p>
 <div class="note">
   <p><span class="nh">NOTE</span> Examples of built-in functions include <code>parseInt</code> and <code>Math.exp</code>. An implementation may provide implementation-dependent built-in functions that are not described in this specification.</p>
 </div>
 </section>
 <section id="sec-4.3.26">
-<h1><span class="secnum"><a href="#sec-4.3.26" title="link to this section">4.3.26</a></span> </h1>
-<p class="Terms">property</p>
+<h1><span class="secnum"><a href="#sec-4.3.26" title="link to this section">4.3.26</a></span> property</h1>
 <p>association between a name and a value that is a part of an object</p>
 <div class="note">
   <p><span class="nh">NOTE</span> Depending upon the form of the property the value may be represented either directly as a data value (a primitive value, an object, or a function object) or indirectly by a pair of accessor functions.</p>
 </div>
 </section>
 <section id="sec-4.3.27">
-<h1><span class="secnum"><a href="#sec-4.3.27" title="link to this section">4.3.27</a></span> </h1>
-<p class="Terms">method</p>
+<h1><span class="secnum"><a href="#sec-4.3.27" title="link to this section">4.3.27</a></span> method</h1>
 <p>function that is the value of a property</p>
 <div class="note">
   <p><span class="nh">NOTE</span> When a function is called as a method of an object, the object is passed to the function as its <b>this</b> value.</p>
 </div>
 </section>
 <section id="sec-4.3.28">
-<h1><span class="secnum"><a href="#sec-4.3.28" title="link to this section">4.3.28</a></span> </h1>
-<p class="Terms">built-in method</p>
+<h1><span class="secnum"><a href="#sec-4.3.28" title="link to this section">4.3.28</a></span> built-in method</h1>
 <p>method that is a built-in function</p>
 <div class="note">
   <p><span class="nh">NOTE</span> Standard built-in methods are defined in this specification, and an ECMAScript implementation may specify and provide other additional built-in methods.</p>
 </div>
 </section>
 <section id="sec-4.3.29">
-<h1><span class="secnum"><a href="#sec-4.3.29" title="link to this section">4.3.29</a></span> </h1>
-<p class="Terms">attribute</p>
+<h1><span class="secnum"><a href="#sec-4.3.29" title="link to this section">4.3.29</a></span> attribute</h1>
 <p>internal value that defines some characteristic of a property</p>
 </section>
 <section id="sec-4.3.30">
-<h1><span class="secnum"><a href="#sec-4.3.30" title="link to this section">4.3.30</a></span> </h1>
-<p class="Terms">own property</p>
+<h1><span class="secnum"><a href="#sec-4.3.30" title="link to this section">4.3.30</a></span> own property</h1>
 <p>property that is directly contained by its object</p>
 </section>
 <section id="sec-4.3.31">
-<h1><span class="secnum"><a href="#sec-4.3.31" title="link to this section">4.3.31</a></span> </h1>
-<p class="Terms">inherited property</p>
+<h1><span class="secnum"><a href="#sec-4.3.31" title="link to this section">4.3.31</a></span> inherited property</h1>
 <p>property of an object that is not an own property but is a property (either own or inherited) of the object&rsquo;s prototype</p>
 </section>
 <section id="sec-5">

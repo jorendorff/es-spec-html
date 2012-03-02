@@ -317,6 +317,17 @@ def insert_disclaimer(doc):
     everything.content += body.content
     body.content = [everything]
 
+def fixup_sec_4_3(doc):
+    for parent, i, kid in all_parent_index_child_triples(doc):
+        if kid.name == 'p' and kid.attrs.get('class') == 'Terms' and i > 0 and parent.content[i - 1].name == 'h1':
+            h1_content = parent.content[i - 1].content
+            kid.content.insert(0, '\t')
+            for item in kid.content:
+                if isinstance(item, str) and h1_content and isinstance(h1_content[-1], str):
+                    h1_content[-1] += item
+                else:
+                    h1_content.append(item)
+            del parent.content[i]
 
 def fixup_sections(doc):
     """ Group h1 elements and subsequent elements of all kinds together into sections. """
@@ -580,6 +591,7 @@ def fixup(doc):
     fixup_paragraph_classes(doc)
     fixup_element_spacing(doc)
     insert_disclaimer(doc)
+    fixup_sec_4_3(doc)
     fixup_sections(doc)
     fixup_code(doc)
     fixup_notes(doc)
