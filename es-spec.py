@@ -1,19 +1,11 @@
 #!/usr/bin/env python3.2
 
-import zipfile
-from xml.etree import ElementTree
+import docx
 import htmodel
-from transform import transform, shorten, unrecognized_styles, all_fonts
+from transform import transform, unrecognized_styles
 import fixups
-from cgi import escape
 
-with zipfile.ZipFile("es6-draft.docx") as f:
-    document = ElementTree.fromstring(f.read('word/document.xml'))
-
-## [body] = list(document)
-## for e in body:
-##     if e.tag != u'{http://schemas.openxmlformats.org/wordprocessingml/2006/main}p':
-##         print(e.tag)
+es6_draft = docx.load("es6-draft.docx")
 
 def sketch_schema(document):
     def has_own_text(e):
@@ -37,36 +29,6 @@ def sketch_schema(document):
     for path in sorted(hits):
         print(path)
 
-    print(len(hits))
-
-#sketch_schema(document)
-
-def save_xml(document):
-    def writexml(e, out, indent='', context='block'):
-        t = shorten(e.tag)
-        assert e.tail is None
-        start_tag = t
-        for k, v in e.items():
-            start_tag += ' {0}="{1}"'.format(shorten(k), escape(v, True))
-
-        kids = list(e)
-        if kids:
-            assert e.text is None
-            out.write("{0}<{1}>\n".format(indent, start_tag))
-            for k in kids:
-                writexml(k, out, indent + '  ')
-            out.write("{0}</{1}>\n".format(indent, t))
-        elif e.text:
-            out.write("{0}<{1}>{2}</{3}>\n".format(indent, start_tag, escape(e.text), t))
-        else:
-            out.write("{0}<{1} />\n".format(indent, start_tag))
-
-    with open('original.xml', 'w', encoding='utf-8') as out:
-        writexml(document, out)
-        out.write("\n")
-
-#save_xml(document)
-
 def save_html(document):
     result = transform(document)
 
@@ -75,12 +37,9 @@ def save_html(document):
         print(k, v)
     print()
 
-    print("=== Fonts")
-    for k, v in sorted(all_fonts.items(), key=lambda pair: pair[1]):
-        print(k, v)
-    print()
-
     fixups.fixup(result)
     htmodel.save_html('es6-draft.html', result)
 
-save_html(document)
+#sketch_schema(es6_draft.document)
+#es6_draft._extract()
+save_html(es6_draft.document)

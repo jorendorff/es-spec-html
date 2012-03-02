@@ -1,124 +1,12 @@
 import collections
 from xml.etree import ElementTree
 from htmodel import *
-
-namespaces = {
-    'http://schemas.openxmlformats.org/wordprocessingml/2006/main': '',
-    'http://schemas.openxmlformats.org/markup-compatibility/2006': 'compat',
-    'urn:schemas-microsoft-com:vml': 'vml',
-    'urn:schemas-microsoft-com:office:office': 'office',
-    'http://www.w3.org/XML/1998/namespace': 'xml',
-    'urn:schemas-microsoft-com:office:word': 'msword',
-}
-
-def shorten(name):
-    if name[:1] == '{':
-        end = name.index('}')
-        schema = name[1:end]
-        v = namespaces.get(schema)
-        if v is None:
-            return name
-        elif v == '':
-            return name[end + 1:]
-        else:
-            return v + ':' + name[end + 1:]
-    else:
-        return name
-
-def bloat(name):
-    assert ':' not in name
-    return '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}' + name
-
-def transformPr(e):
-    val_key = bloat('val')
-    ascii_key = bloat('ascii')
-    hAnsi_key = bloat('hAnsi')
-    cs_key = bloat('cs')
-    eastAsia_key = bloat('eastAsia')
-    font_keys = {ascii_key, hAnsi_key, cs_key, eastAsia_key}
-
-    assert e.text is None
-
-    pr = {}
-    def put(k, v):
-        if k in pr:
-            raise Exception("duplicate CSS property on the same element: " + k)
-        pr[k] = v
-
-    for k in e:
-        assert k.tail is None
-        name = shorten(k.tag)
-        if name == 'i':
-            if not k.keys():
-                put('font-style', 'italic')
-
-        elif name == 'b':
-            if not k.keys():
-                put('font-weight', 'bold')
-
-        elif name == 'rFonts':
-            # There are some cases of <rFonts eastAsia="Calibri"/> which Word
-            # apparently ignores; we ignore them too.  When cs= and ascii= are
-            # both present with different values (awesome), apparently Word
-            # uses ascii=, so we do the same.
-            assert set(k.keys()) <= font_keys
-            font = k.get(ascii_key) or k.get(cs_key)
-            if font is not None:
-                assert k.get(ascii_key, font) == font
-                assert k.get(hAnsi_key, font) == font
-
-                if font == 'Symbol':
-                    font = None  # vomit(); vomit(); forget()
-                elif font == 'Mistral':
-                    font = None  # fanciful, drop it
-                elif font in ('Courier', 'Courier New'):
-                    font = 'monospace'
-                elif font in ('Arial', 'Helvetica'):
-                    font = 'sans-serif'
-                elif font == 'CG Times':
-                    font = 'Times New Roman'
-
-                if font is not None:
-                    put('font-family', font)
-                    all_fonts[font] += 1
-
-        elif name == 'vertAlign':
-            if list(k.keys()) == [val_key]:
-                v = k.get(val_key)
-                if v == 'superscript':
-                    put('vertical-align', 'super')
-                elif v == 'subscript':
-                    put('vertical-align', 'sub')
-
-        elif name == 'numPr':
-            ilvl = None
-            numId = None
-            for item in k:
-                item_tag = shorten(item.tag)
-                if item_tag == 'ilvl':
-                    assert list(item.keys()) == [val_key]
-                    assert ilvl is None
-                    ilvl = item.get(val_key)
-                else:
-                    assert item_tag == 'numId'
-                    assert list(item.keys()) == [val_key]
-                    assert numId is None
-                    numId = item.get(val_key)
-
-            if numId != "0":
-                put('@num', ilvl + '/' + numId)
-
-        elif name == 'pStyle':
-            if list(k.keys()) == [val_key]:
-                put('@cls', k.get(val_key))
-
-    return pr or None
+from docx import shorten, parse_pr
 
 def dict_to_css(d):
     return "; ".join(p + ": " + v for p, v in d.items())
 
 unrecognized_styles = collections.defaultdict(int)
-all_fonts = collections.defaultdict(int)
 
 def transform(e):
     name = shorten(e.tag)
@@ -133,8 +21,13 @@ def transform(e):
         return '{' + e.text + '}'
 
     elif name in {'pPr', 'rPr', 'sectPr', 'tblPr', 'tblPrEx', 'trPr', 'tcPr', 'numPr'}:
-        # Presentation data.
-        return transformPr(e)
+        # Presentation data which we currently do not parse.
+        # tcPr has shading which we'd like to have.
+        return parse_pr(e)
+
+    elif name == 'pPrChange':
+        # A diff to a previous version of the document.
+        return None
 
     else:
         assert e.text is None
@@ -208,7 +101,7 @@ def transform(e):
             elif css is None:
                 return p(*c)
             else:
-                num = '@num' in css
+                num = 'ooxml-numId' in css
                 constructor = li if num else p
 
                 if '@cls' in css:
