@@ -126,6 +126,9 @@ def _init(v):
     def element_constructor(name):
         def construct(*content, **attrs):
             _seen.add(name)
+            if 'class_' in attrs:
+                attrs['class'] = attrs['class_']
+                del attrs['class_']
             return Element(name, attrs, None, list(content))
         construct.__name__ = name
         return construct

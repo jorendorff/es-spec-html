@@ -1,12 +1,9 @@
-import collections
 from xml.etree import ElementTree
 from htmodel import *
 from docx import shorten, parse_pr
 
 def dict_to_css(d):
     return "; ".join(p + ": " + v for p, v in d.items())
-
-unrecognized_styles = collections.defaultdict(int)
 
 def transform(e):
     name = shorten(e.tag)
@@ -61,25 +58,7 @@ def transform(e):
                 body_e)
 
         elif name == 'body':
-            disclaimer = div(
-                p(strong("This is ", em("not"), " the official ECMAScript Language Specification.")),
-                p("The most recent final ECMAScript standard is Edition 5.1, the PDF document located at ",
-                  a("http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-262.pdf",
-                    href="http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-262.pdf"),
-                  "."),
-                p("This is a draft of the next version of the standard. If all goes well it will become "
-                  "ECMAScript Edition 6."),
-                p("This is an HTML version of the current working draft published at ",
-                  a("http://wiki.ecmascript.org/doku.php?id=harmony:specification_drafts",
-                    href="http://wiki.ecmascript.org/doku.php?id=harmony:specification_drafts"),
-                  ". The program used to convert that Word doc to HTML is a custom-piled heap of hacks. "
-                  "Currently it is pretty bad. It has stripped out most of the formatting that makes "
-                  "the specification comprehensible. You can help improve the program ",
-                  a("here", href="https://github.com/jorendorff/es-spec-html"),
-                  "."),
-                p("For copyright information, see ECMA's legal disclaimer in the document itself."),
-                id="unofficial")
-            return body(section(disclaimer, *c, id="everything"))
+            return body(*c)
 
         elif name == 'r':
             if css is None:
@@ -98,72 +77,13 @@ def transform(e):
         elif name == 'p':
             if len(c) == 0:
                 return None
-            elif css is None:
-                return p(*c)
-            else:
-                num = '-ooxml-numId' in css
-                constructor = li if num else p
 
-                if '@cls' in css:
-                    cls = css['@cls']
-                    del css['@cls']
-                    if not css:
-                        if cls in ('Alg2', 'Alg3', 'Alg4', 'Alg40', 'Alg41', 'M4'):
-                            if num or c:
-                                return constructor(*c)
-                            else:
-                                # apparently useless markup
-                                return None
-                        elif cls == 'ANNEX':
-                            # TODO - add annex heading, which is computed in the original
-                            return h1(*c)
-                        elif cls == 'bibliography':
-                            if len(c) == 0:
-                                return None
-                            return li(*c, class_="bibliography-entry")
-                        elif cls == 'BulletNotlast':
-                            return li(*c)
-                        elif cls in ('CodeSample3', 'CodeSample4'):
-                            return pre(*c)
-                        elif cls in ('Definition', 'M0'):
-                            # apparently useless markup
-                            return p(*c)
-                        elif cls == 'Figuretitle':
-                            return figcaption(*c)
-                        elif cls in ('Heading1', 'Heading2', 'Heading3', 'Heading4', 'Heading5',
-                                     'Introduction', 'TermNum'):
-                            return h1(*c)
-                        elif cls == 'M20':
-                            return div(*c, class_="math-display")
-                        elif cls == 'MathDefinition4':
-                            return div(*c, class_="display")
-                        elif cls == 'MathSpecialCase3':
-                            return li(*c)
-                        elif cls == 'Note':
-                            return div(constructor(*c), class_="note")
-                        elif cls == 'RefNorm':
-                            return p(*c, class_="formal-reference")
-                        elif cls == 'Syntax':
-                            return h2(*c)
-                        elif cls in ('SyntaxRule', 'SyntaxRule2'):
-                            return div(*c, class_="gp")
-                        elif cls in ('SyntaxDefinition', 'SyntaxDefinition2'):
-                            return div(*c, class_="rhs")
-                        elif cls == 'Tabletitle':
-                            return figcaption(*c)
-                        elif cls == 'Terms':
-                            return p(dfn(*c))
-                        elif cls == 'zzBiblio':
-                            return h1(*c)
-                        elif cls == 'zzSTDTitle':
-                            return div(*c, class_="inner-title")
-                        else:
-                            unrecognized_styles[cls] += 1
-                            #return p(span('<{0}>'.format(cls), style="color:red"), *c)
-                            return constructor(*c)
-                result = constructor(*c)
-                result.style = css
-                return result
+            result = p(*c)
+            if css and '@cls' in css:
+                result.attrs['class'] = css['@cls']
+                del css['@cls']
+            result.style = css
+            return result
 
         elif name == 'sym':
             assert not c

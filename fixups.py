@@ -123,7 +123,6 @@ def fixup_formatting(doc):
 
         parent.content[i:j] = build_result(ranges, 0, len(all_content))
 
-
     for parent, i, kid in all_parent_index_child_triples(doc):
         if kid.name == 'span':
             # We assert the spans don't have attrs because we are going to
@@ -146,6 +145,82 @@ def fixup_formatting(doc):
             #   <i>foo</i>
             rewrite_adjacent_spans(parent, i, j)
 
+def findall(e, name):
+    if e.name == name:
+        yield e
+    for k in e.content:
+        if not isinstance(k, str):
+            for d in findall(k, name):
+                yield d
+
+unrecognized_styles = collections.defaultdict(int)
+
+def fixup_paragraph_classes(doc):
+    tag_names = {
+        'ANNEX': 'h1',
+        'Alg2': None,
+        'Alg3': None,
+        'Alg4': None,
+        'Alg40': None,
+        'Alg41': None,
+        'bibliography': 'li.bibliography-entry',
+        'BulletNotlast': 'li',
+        'CodeSample3': 'pre',
+        'CodeSample4': 'pre',
+        'Figuretitle': 'figcaption',
+        'Heading1': 'h1',
+        'Heading2': 'h1',
+        'Heading3': 'h1',
+        'Heading4': 'h1',
+        'Heading5': 'h1',
+        'Introduction': 'h1',
+        'M0': None,
+        'M4': None,
+        'M20': 'div.math-display',
+        'MathDefinition4': 'div.display',
+        'MathSpecialCase3': 'li',
+        'Note': 'div.note',  # TODO needs default_tag *also*
+        'RefNorm': 'p.formal-reference',
+        'Syntax': 'h2',
+        'SyntaxDefinition': 'div.rhs',
+        'SyntaxDefinition2': 'div.rhs',
+        'SyntaxRule': 'div.gp',
+        'SyntaxRule2': 'div.gp',
+        'Tabletitle': 'figcaption',
+        'TermNum': 'h1',
+        'Terms': 'p.Terms',  # TODO needs later fixup
+        'zzBiblio': 'h1',
+        'zzSTDTitle': 'div.inner-title'
+    }
+
+    for e in findall(doc, 'p'):
+        num = e.style and '-ooxml-numId' in e.style
+        default_tag = 'li' if num else 'p'
+
+        if 'class' in e.attrs:
+            cls = e.attrs['class']
+            del e.attrs['class']
+
+            if cls not in tag_names:
+                unrecognized_styles[cls] += 1
+                #e.content.insert(0, span('<{0}>'.format(cls), style="color:red"))
+
+            if cls == 'Note':
+                # Total special case. Wrap in div.note.
+                e.name = 'div'
+                e.content = [html.Element(default_tag, e.attrs, e.style, e.content)]
+                e.style = None
+                e.attrs = {'class': 'note'}
+            else:
+                tag = tag_names.get(cls)
+                if tag is None:
+                    tag = default_tag
+                elif '.' in tag:
+                    tag, _, e.attrs['class'] = tag.partition('.')
+                e.name = tag
+        else:
+            e.name = default_tag
+
 def fixup_element_spacing(doc):
     """
     Change "A<i> B</i>" to "A <i>B</i>".
@@ -153,6 +228,11 @@ def fixup_element_spacing(doc):
     That is, move all start tags to the right of any adjacent whitespace,
     and move all end tags to the left of any adjacent whitespace.
     """
+
+    block_elements = {
+        'html', 'body', 'p', 'div', 'section',
+        'table', 'tbody', 'tr', 'th', 'td', 'li', 'ol', 'ul'
+    }
 
     def rebuild(parent):
         result = []
@@ -169,7 +249,7 @@ def fixup_element_spacing(doc):
                 # Don't mess with spaces in a pre element.
                 result.append(k)
             else:
-                discard_space = (k.name in {'p', 'div', 'section', 'table', 'tr', 'td', 'li', 'ol', 'ul'})
+                discard_space = k.name in block_elements
                 if k.content:
                     a = k.content[0]
                     if isinstance(a, str) and a[:1].isspace():
@@ -204,6 +284,38 @@ def fixup_element_spacing(doc):
             rebuild(e)
 
     walk(doc)
+
+def insert_disclaimer(doc):
+    div = html.div
+    p = html.p
+    strong = html.strong
+    em = html.em
+    a = html.a
+
+    disclaimer = div(
+        p(strong("This is ", em("not"), " the official ECMAScript Language Specification.")),
+        p("The most recent final ECMAScript standard is Edition 5.1, the PDF document located at ",
+          a("http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-262.pdf",
+            href="http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-262.pdf"),
+          "."),
+        p("This is a draft of the next version of the standard. If all goes well it will become "
+          "ECMAScript Edition 6."),
+        p("This is an HTML version of the current working draft published at ",
+          a("http://wiki.ecmascript.org/doku.php?id=harmony:specification_drafts",
+            href="http://wiki.ecmascript.org/doku.php?id=harmony:specification_drafts"),
+          ". The program used to convert that Word doc to HTML is a custom-piled heap of hacks. "
+          "Currently it is pretty bad. It has stripped out most of the formatting that makes "
+          "the specification comprehensible. You can help improve the program ",
+          a("here", href="https://github.com/jorendorff/es-spec-html"),
+          "."),
+        p("For copyright information, see ECMA's legal disclaimer in the document itself."),
+        id="unofficial")
+
+    body = doc.content[1]
+    assert body.name == 'body'
+    everything = html.section(disclaimer, id="everything")
+    everything.content += body.content
+    body.content = [everything]
 
 
 def fixup_sections(doc):
@@ -247,7 +359,7 @@ def fixup_sections(doc):
             if not isinstance(kid, str):
                 if kid.name == "div":
                     if (kid.attrs.get("id") == "ecma-disclaimer"
-                        or kid.attrs.get("class_") == "inner-title"):
+                        or kid.attrs.get("class") == "inner-title"):
                         # Don't let the introduction section eat up these elements.
                         break
                 if kid.name == "h1":
@@ -342,12 +454,12 @@ def fixup_notes(e):
     def can_be_combined(next_sibling):
         return (not isinstance(next_sibling, str)
                 and next_sibling.name == 'div'
-                and next_sibling.attrs.get("class_") == "note"
+                and next_sibling.attrs.get("class") == "note"
                 and find_nh(next_sibling) is None)
 
     def fixup_notes_in(e):
         for i, k in e.kids():
-            if k.name == 'div' and k.attrs.get('class_') == 'note':
+            if k.name == 'div' and k.attrs.get('class') == 'note':
                 # This is a note! See if the word "NOTE" or "NOTE 1" can be divided out into
                 # a span.nh element. This should ordinarily be the case.
                 nh_info = find_nh(k, verbose=True)
@@ -437,17 +549,17 @@ def fixup_grammar(e):
         j = start + 1
         while j < len(parent_list):
             sib = parent_list[j]
-            if isinstance(sib, str) or sib.name != "div" or sib.attrs.get("class_") != "rhs":
+            if isinstance(sib, str) or sib.name != "div" or sib.attrs.get("class") != "rhs":
                 break
             j += 1
 
         if j > start + 1:
             stop = j
-            parent_list[start].attrs["class_"] = "lhs"
+            parent_list[start].attrs["class"] = "lhs"
             parent_list[start:stop] = [html.div(*parent_list[start:stop], class_="gp")]
 
     for i, kid in e.kids():
-        if kid.name == "div" and kid.attrs.get("class_") == "gp":
+        if kid.name == "div" and kid.attrs.get("class") == "gp":
             wrap(e.content, i)
         elif kid.name in ('body', 'section', 'div'):
             fixup_grammar(kid)
@@ -465,7 +577,9 @@ def fixup_hr(doc):
 
 def fixup(doc):
     fixup_formatting(doc)
+    fixup_paragraph_classes(doc)
     fixup_element_spacing(doc)
+    insert_disclaimer(doc)
     fixup_sections(doc)
     fixup_code(doc)
     fixup_notes(doc)

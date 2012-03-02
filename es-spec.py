@@ -2,7 +2,7 @@
 
 import docx
 import htmodel
-from transform import transform, unrecognized_styles
+from transform import transform
 import fixups
 
 es6_draft = docx.load("es6-draft.docx")
@@ -31,13 +31,13 @@ def sketch_schema(document):
 
 def save_html(document):
     result = transform(document)
+    fixups.fixup(result)
 
     print("=== Unrecognized styles")
-    for k, v in sorted(unrecognized_styles.items(), key=lambda pair: pair[1]):
+    for k, v in sorted(fixups.unrecognized_styles.items(), key=lambda pair: pair[1]):
         print(k, v)
     print()
 
-    fixups.fixup(result)
     htmodel.save_html('es6-draft.html', result)
 
 #sketch_schema(es6_draft.document)

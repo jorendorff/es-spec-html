@@ -528,12 +528,12 @@
 <p>For the purposes of this document, the following terms and definitions apply.</p>
 <section id="sec-4.3.1">
 <h1><span class="secnum"><a href="#sec-4" title="link to this section">4.3.1</a></span> </h1>
-<p><dfn>type</dfn></p>
+<p class="Terms">type</p>
 <p>set of data values as defined in Clause 8 of this specification</p>
 </section>
 <section id="sec-4.3.2">
 <h1><span class="secnum"><a href="#sec-4" title="link to this section">4.3.2</a></span> </h1>
-<p><dfn>primitive value</dfn></p>
+<p class="Terms">primitive value</p>
 <p>member of one of the types Undefined, Null, Boolean, Number, or String as defined in Clause 8</p>
 <div class="note">
   <p><span class="nh">NOTE</span> A primitive value is a datum that is represented directly at the lowest level of the language implementation.</p>
@@ -541,7 +541,7 @@
 </section>
 <section id="sec-4.3.3">
 <h1><span class="secnum"><a href="#sec-4" title="link to this section">4.3.3</a></span> </h1>
-<p><dfn>object</dfn></p>
+<p class="Terms">object</p>
 <p>member of the type Object</p>
 <div class="note">
   <p><span class="nh">NOTE</span> An object is a collection of properties and has a single prototype object. The prototype may be the null value.</p>
@@ -549,7 +549,7 @@
 </section>
 <section id="sec-4.3.4">
 <h1><span class="secnum"><a href="#sec-4" title="link to this section">4.3.4</a></span> </h1>
-<p><dfn>constructor</dfn></p>
+<p class="Terms">constructor</p>
 <p>function object that creates and initialises objects</p>
 <div class="note">
   <p><span class="nh">NOTE</span> The value of a constructor&rsquo;s &ldquo;<span style="font-family: monospace">prototype</span>&rdquo; property is a prototype object that is used to implement inheritance and shared properties.</p>
@@ -557,7 +557,7 @@
 </section>
 <section id="sec-4.3.5">
 <h1><span class="secnum"><a href="#sec-4" title="link to this section">4.3.5</a></span> </h1>
-<p><dfn>prototype</dfn></p>
+<p class="Terms">prototype</p>
 <p>object that provides shared properties for other objects</p>
 <div class="note">
   <p><span class="nh">NOTE</span> When a constructor creates an object, that object implicitly references the constructor&rsquo;s &ldquo;<code>prototype</code>&rdquo; property for the purpose of resolving property references. The constructor&rsquo;s &ldquo;<code>prototype</code>&rdquo; property can be referenced by the program expression <span style="font-family: monospace"><i>constructor</i><b>.prototype</b></span>, and properties added to an object&rsquo;s prototype are shared, through inheritance, by all objects sharing the prototype. Alternatively, a new object may be created with an explicitly specified prototype by using the <code>Object.create</code> built-in function.</p>
@@ -565,7 +565,7 @@
 </section>
 <section id="sec-4.3.6">
 <h1><span class="secnum"><a href="#sec-4" title="link to this section">4.3.6</a></span> </h1>
-<p><dfn>native object</dfn></p>
+<p class="Terms">native object</p>
 <p>object in an ECMAScript implementation whose semantics are fully defined by this specification rather than by  the host environment</p>
 <div class="note">
   <p><span class="nh">NOTE</span> Standard native objects are defined in this specification. Some native objects are built-in; others may be constructed during the course of execution of an ECMAScript program.</p>
@@ -585,7 +585,7 @@
 </section>
 <section id="sec-4.3.8">
 <h1><span class="secnum"><a href="#sec-4.3.8" title="link to this section">4.3.8</a></span> </h1>
-<p><dfn>host object</dfn></p>
+<p class="Terms">host object</p>
 <p>object supplied by the host environment to complete the execution environment of ECMAScript</p>
 <div class="note">
   <p><span class="nh">NOTE</span> Any object that is not native is a host object.</p>
@@ -593,27 +593,27 @@
 </section>
 <section id="sec-4.3.9">
 <h1><span class="secnum"><a href="#sec-4.3.9" title="link to this section">4.3.9</a></span> </h1>
-<p><dfn>undefined value</dfn></p>
+<p class="Terms">undefined value</p>
 <p>primitive value used when a variable has not been assigned a value</p>
 </section>
 <section id="sec-4.3.10">
 <h1><span class="secnum"><a href="#sec-4.3.10" title="link to this section">4.3.10</a></span> </h1>
-<p><dfn>Undefined type</dfn></p>
+<p class="Terms">Undefined type</p>
 <p>type whose sole value is the undefined value</p>
 </section>
 <section id="sec-4.3.11">
 <h1><span class="secnum"><a href="#sec-4.3.11" title="link to this section">4.3.11</a></span> </h1>
-<p><dfn>null value</dfn></p>
+<p class="Terms">null value</p>
 <p>primitive value that represents the intentional absence of any object value</p>
 </section>
 <section id="sec-4.3.12">
 <h1><span class="secnum"><a href="#sec-4.3.12" title="link to this section">4.3.12</a></span> </h1>
-<p><dfn>Null type</dfn></p>
+<p class="Terms">Null type</p>
 <p>type whose sole value is the null value</p>
 </section>
 <section id="sec-4.3.13">
 <h1><span class="secnum"><a href="#sec-4.3.13" title="link to this section">4.3.13</a></span> </h1>
-<p><dfn>Boolean value</dfn></p>
+<p class="Terms">Boolean value</p>
 <p>member of the Boolean type</p>
 <div class="note">
   <p><span class="nh">NOTE</span> There are only two Boolean values, <b>true</b> and <b>false</b>.</p>
@@ -621,12 +621,12 @@
 </section>
 <section id="sec-4.3.14">
 <h1><span class="secnum"><a href="#sec-4.3.14" title="link to this section">4.3.14</a></span> </h1>
-<p><dfn>Boolean type</dfn></p>
+<p class="Terms">Boolean type</p>
 <p>type consisting of the primitive values <b>true</b> and <b>false</b></p>
 </section>
 <section id="sec-4.3.15">
 <h1><span class="secnum"><a href="#sec-4.3.15" title="link to this section">4.3.15</a></span> </h1>
-<p><dfn>Boolean object</dfn></p>
+<p class="Terms">Boolean object</p>
 <p>member of the Object type that is an instance of the standard built-in <code>Boolean</code> constructor</p>
 <div class="note">
   <p><span class="nh">NOTE</span> A Boolean object is created by using the <code>Boolean</code> constructor in a <code>new</code> expression, supplying a Boolean value as an argument. The resulting object has an internal property whose value is the Boolean value. A Boolean object can be coerced to a Boolean value.</p>
@@ -644,12 +644,12 @@
 </section>
 <section id="sec-4.3.17">
 <h1><span class="secnum"><a href="#sec-4.3.17" title="link to this section">4.3.17</a></span> </h1>
-<p><dfn>String type</dfn></p>
+<p class="Terms">String type</p>
 <p>set of all possible String values</p>
 </section>
 <section id="sec-4.3.18">
 <h1><span class="secnum"><a href="#sec-4.3.18" title="link to this section">4.3.18</a></span> </h1>
-<p><dfn>String object</dfn></p>
+<p class="Terms">String object</p>
 <p>member of the Object type that is an instance of the standard built-in <code>String</code> constructor</p>
 <div class="note">
   <p><span class="nh">NOTE</span> A String object is created by using the <code>String</code> constructor in a <code>new</code> expression, supplying a String value as an argument. The resulting object has an internal property whose value is the String value. A String object can be coerced to a String value by calling the <code>String</code> constructor as a function (15.5.1).</p>
@@ -657,7 +657,7 @@
 </section>
 <section id="sec-4.3.19">
 <h1><span class="secnum"><a href="#sec-4.3.19" title="link to this section">4.3.19</a></span> </h1>
-<p><dfn>Number value</dfn></p>
+<p class="Terms">Number value</p>
 <p>primitive value corresponding to a double-precision 64-bit binary format IEEE 754 value</p>
 <div class="note">
   <p><span class="nh">NOTE</span> A Number value is a member of the Number type and is a direct representation of a number.</p>
@@ -665,12 +665,12 @@
 </section>
 <section id="sec-4.3.20">
 <h1><span class="secnum"><a href="#sec-4.3.20" title="link to this section">4.3.20</a></span> </h1>
-<p><dfn>Number type</dfn></p>
+<p class="Terms">Number type</p>
 <p>set of all possible Number values including the special &ldquo;Not-a-Number&rdquo; (NaN) values, positive infinity, and negative infinity</p>
 </section>
 <section id="sec-4.3.21">
 <h1><span class="secnum"><a href="#sec-4.3.21" title="link to this section">4.3.21</a></span> </h1>
-<p><dfn>Number object</dfn></p>
+<p class="Terms">Number object</p>
 <p>member of the Object type that is an instance of the standard built-in <code>Number</code> constructor</p>
 <div class="note">
   <p><span class="nh">NOTE</span> A Number object is created by using the <code>Number</code> constructor in a <code>new</code> expression, supplying a Number value as an argument. The resulting object has an internal property whose value is the Number value. A Number object can be coerced to a Number value by calling the <code>Number</code> constructor as a function (15.7.1).</p>
@@ -678,17 +678,17 @@
 </section>
 <section id="sec-4.3.22">
 <h1><span class="secnum"><a href="#sec-4.3.22" title="link to this section">4.3.22</a></span> </h1>
-<p><dfn>Infinity</dfn></p>
+<p class="Terms">Infinity</p>
 <p>number value that is the positive infinite Number value</p>
 </section>
 <section id="sec-4.3.23">
 <h1><span class="secnum"><a href="#sec-4.3.23" title="link to this section">4.3.23</a></span> </h1>
-<p><dfn>NaN</dfn></p>
+<p class="Terms">NaN</p>
 <p>number value that is a IEEE 754 &ldquo;Not-a-Number&rdquo; value</p>
 </section>
 <section id="sec-4.3.24">
 <h1><span class="secnum"><a href="#sec-4.3.24" title="link to this section">4.3.24</a></span> </h1>
-<p><dfn>function</dfn></p>
+<p class="Terms">function</p>
 <p>member of the Object type that is an instance of the standard built-in <code>Function</code> constructor and that may be invoked as a subroutine</p>
 <div class="note">
   <p><span class="nh">NOTE</span> In addition to its named properties, a function contains executable code and state that determine how it behaves when invoked. A function&rsquo;s code may or may not be written in ECMAScript.</p>
@@ -696,7 +696,7 @@
 </section>
 <section id="sec-4.3.25">
 <h1><span class="secnum"><a href="#sec-4.3.25" title="link to this section">4.3.25</a></span> </h1>
-<p><dfn>built-in function</dfn></p>
+<p class="Terms">built-in function</p>
 <p>built-in object that is a function</p>
 <div class="note">
   <p><span class="nh">NOTE</span> Examples of built-in functions include <code>parseInt</code> and <code>Math.exp</code>. An implementation may provide implementation-dependent built-in functions that are not described in this specification.</p>
@@ -704,7 +704,7 @@
 </section>
 <section id="sec-4.3.26">
 <h1><span class="secnum"><a href="#sec-4.3.26" title="link to this section">4.3.26</a></span> </h1>
-<p><dfn>property</dfn></p>
+<p class="Terms">property</p>
 <p>association between a name and a value that is a part of an object</p>
 <div class="note">
   <p><span class="nh">NOTE</span> Depending upon the form of the property the value may be represented either directly as a data value (a primitive value, an object, or a function object) or indirectly by a pair of accessor functions.</p>
@@ -712,7 +712,7 @@
 </section>
 <section id="sec-4.3.27">
 <h1><span class="secnum"><a href="#sec-4.3.27" title="link to this section">4.3.27</a></span> </h1>
-<p><dfn>method</dfn></p>
+<p class="Terms">method</p>
 <p>function that is the value of a property</p>
 <div class="note">
   <p><span class="nh">NOTE</span> When a function is called as a method of an object, the object is passed to the function as its <b>this</b> value.</p>
@@ -720,7 +720,7 @@
 </section>
 <section id="sec-4.3.28">
 <h1><span class="secnum"><a href="#sec-4.3.28" title="link to this section">4.3.28</a></span> </h1>
-<p><dfn>built-in method</dfn></p>
+<p class="Terms">built-in method</p>
 <p>method that is a built-in function</p>
 <div class="note">
   <p><span class="nh">NOTE</span> Standard built-in methods are defined in this specification, and an ECMAScript implementation may specify and provide other additional built-in methods.</p>
@@ -728,17 +728,17 @@
 </section>
 <section id="sec-4.3.29">
 <h1><span class="secnum"><a href="#sec-4.3.29" title="link to this section">4.3.29</a></span> </h1>
-<p><dfn>attribute</dfn></p>
+<p class="Terms">attribute</p>
 <p>internal value that defines some characteristic of a property</p>
 </section>
 <section id="sec-4.3.30">
 <h1><span class="secnum"><a href="#sec-4.3.30" title="link to this section">4.3.30</a></span> </h1>
-<p><dfn>own property</dfn></p>
+<p class="Terms">own property</p>
 <p>property that is directly contained by its object</p>
 </section>
 <section id="sec-4.3.31">
 <h1><span class="secnum"><a href="#sec-4.3.31" title="link to this section">4.3.31</a></span> </h1>
-<p><dfn>inherited property</dfn></p>
+<p class="Terms">inherited property</p>
 <p>property of an object that is not an own property but is a property (either own or inherited) of the object&rsquo;s prototype</p>
 </section>
 <section id="sec-5">
@@ -3891,12 +3891,12 @@
 </ol>
 <div class="note">
   <p><span class="nh">NOTE</span> Given the above definition of ToInt32:</p>
+  <ol class="proc">
+    <li>The ToInt32 abstract operation is idempotent: if applied to a result that it produced, the second application leaves that value unchanged.</li>
+    <li>ToInt32(ToUint32(x)) is equal to <span style="font-family: Times New Roman">ToInt32(<i>x</i>)</span> for all values of x. (It is to preserve this latter property that +<b>&infin;</b> and &minus;<b>&infin;</b> are mapped to <b>+0</b>.)</li>
+    <li>ToInt32 maps <b>&minus;0</b> to <b>+0</b>.</li>
+  </ol>
 </div>
-<ol class="proc">
-  <li>The ToInt32 abstract operation is idempotent: if applied to a result that it produced, the second application leaves that value unchanged.</li>
-  <li>ToInt32(ToUint32(x)) is equal to <span style="font-family: Times New Roman">ToInt32(<i>x</i>)</span> for all values of x. (It is to preserve this latter property that +<b>&infin;</b> and &minus;<b>&infin;</b> are mapped to <b>+0</b>.)</li>
-  <li>ToInt32 maps <b>&minus;0</b> to <b>+0</b>.</li>
-</ol>
 </section>
 <section id="sec-9.1.6">
 <h1><span class="secnum"><a href="#sec-9.1" title="link to this section">9.1.6</a></span> ToUint32: (Unsigned 32 Bit Integer)</h1>
@@ -3911,13 +3911,13 @@
 </ol>
 <div class="note">
   <p><span class="nh">NOTE</span> Given the above definition of ToUInt32:</p>
+  <ol class="proc">
+    <li>Step 5 is the only difference between ToUint32 and ToInt32.</li>
+    <li>The ToUint32 abstract operation is idempotent: if applied to a result that it produced, the second application leaves that value unchanged.</li>
+    <li><span style="font-family: Times New Roman">ToUint32(ToInt32(<i>x</i>))</span> is equal to <span style="font-family: Times New Roman">ToUint32(<i>x</i>)</span> for all values of <span style="font-family: Times New Roman; font-style: italic">x</span>. (It is to preserve this latter property that <b>+&infin;</b> and <b>&minus;&infin;</b> are mapped to <b>+0</b>.)</li>
+    <li>ToUint32 maps <b>&minus;0</b> to <b>+0</b>.</li>
+  </ol>
 </div>
-<ol class="proc">
-  <li>Step 5 is the only difference between ToUint32 and ToInt32.</li>
-  <li>The ToUint32 abstract operation is idempotent: if applied to a result that it produced, the second application leaves that value unchanged.</li>
-  <li><span style="font-family: Times New Roman">ToUint32(ToInt32(<i>x</i>))</span> is equal to <span style="font-family: Times New Roman">ToUint32(<i>x</i>)</span> for all values of <span style="font-family: Times New Roman; font-style: italic">x</span>. (It is to preserve this latter property that <b>+&infin;</b> and <b>&minus;&infin;</b> are mapped to <b>+0</b>.)</li>
-  <li>ToUint32 maps <b>&minus;0</b> to <b>+0</b>.</li>
-</ol>
 </section>
 <section id="sec-9.1.7">
 <h1><span class="secnum"><a href="#sec-9.1" title="link to this section">9.1.7</a></span> ToUint16: (Unsigned 16 Bit Integer)</h1>
@@ -3932,11 +3932,11 @@
 </ol>
 <div class="note">
   <p><span class="nh">NOTE</span> Given the above definition of ToUint16:</p>
+  <ol class="proc">
+    <li>The substitution of <span style="font-family: Times New Roman">2<sup>16</sup></span> for <span style="font-family: Times New Roman">2<sup>32</sup></span> in step 4 is the only difference between ToUint32 and ToUint16.</li>
+    <li>ToUint16 maps <b>&minus;0</b> to <b>+0</b>.</li>
+  </ol>
 </div>
-<ol class="proc">
-  <li>The substitution of <span style="font-family: Times New Roman">2<sup>16</sup></span> for <span style="font-family: Times New Roman">2<sup>32</sup></span> in step 4 is the only difference between ToUint32 and ToUint16.</li>
-  <li>ToUint16 maps <b>&minus;0</b> to <b>+0</b>.</li>
-</ol>
 </section>
 <section id="sec-9.1.8">
 <h1><span class="secnum"><a href="#sec-9.1" title="link to this section">9.1.8</a></span> ToString</h1>
@@ -4030,11 +4030,11 @@
 </ol>
 <div class="note">
   <p><span class="nh">NOTE 1</span> The following observations may be useful as guidelines for implementations, but are not part of the normative requirements of this Standard:</p>
+  <ol class="proc">
+    <li>If x is any Number value other than <b>&minus;0</b>, then ToNumber(ToString(x)) is exactly the same Number value as x.</li>
+    <li>The least significant digit of s is not always uniquely determined by the requirements listed in step 5.</li>
+  </ol>
 </div>
-<ol class="proc">
-  <li>If x is any Number value other than <b>&minus;0</b>, then ToNumber(ToString(x)) is exactly the same Number value as x.</li>
-  <li>The least significant digit of s is not always uniquely determined by the requirements listed in step 5.</li>
-</ol>
 <div class="note">
   <p><span class="nh">NOTE 2</span> For implementations that provide more accurate conversions than required by the rules above, it is recommended that the following alternative version of step 5 be used as a guideline:</p>
   <p><span style="font-family: Times New Roman">Otherwise, let <i>n</i>, <i>k</i>, and <i>s</i> be integers such that <i>k</i></span> <span style="font-family: Times New Roman">&ge; 1, 10<sup><i>k</i>&minus;1</sup></span> <span style="font-family: Times New Roman">&le;</span> <span style="font-family: Times New Roman"><i>s</i> &lt; 10<span style="font-style: italic; vertical-align: super">k</span>, the Number value for <i>s</i></span> <span style="font-family: Times New Roman">&times; 10<sup><i>n</i>&minus;<i>k</i></sup> is <i>m</i>, and <i>k</i> is as small as possible. If there are multiple possibilities for <i>s</i>, choose the value of <i>s</i> for which <i>s</i></span> <span style="font-family: Times New Roman">&times; 10<sup><i>n</i>&minus;<i>k</i></sup> is closest in value to <i>m</i>. If there are two such possible values of <i>s</i>, choose the one that is even. Note that <i>k</i> is the number of digits in the decimal representation of <i>s</i> and that <i>s</i> is not divisible by 10.</span></p>
@@ -15636,13 +15636,13 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="note">
   <p><span class="nh">NOTE 2</span> Symbolic primitive values are rendered as follows:</p>
+  <ol class="proc">
+    <li>The <b>null</b> value is rendered in JSON text as the String null.</li>
+    <li>The <b>undefined</b> value is not rendered.</li>
+    <li>The <b>true</b> value is rendered in JSON text as the String true.</li>
+    <li>The <b>false</b> value is rendered in JSON text as the String false.</li>
+  </ol>
 </div>
-<ol class="proc">
-  <li>The <b>null</b> value is rendered in JSON text as the String null.</li>
-  <li>The <b>undefined</b> value is not rendered.</li>
-  <li>The <b>true</b> value is rendered in JSON text as the String true.</li>
-  <li>The <b>false</b> value is rendered in JSON text as the String false.</li>
-</ol>
 <div class="note">
   <p><span class="nh">NOTE 3</span> String values are wrapped in double quotes. The characters <code>"</code> and <code>\</code> are escaped with <code>\</code> prefixes. Control characters are replaced with escape sequences <b>\u</b>HHHH, or with the shorter forms, <b>\b</b> (backspace), <b>\f</b> (formfeed), <b>\n</b> (newline), <b>\r</b> (carriage return), <b>\t</b> (tab).</p>
 </div>
