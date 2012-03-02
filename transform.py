@@ -152,11 +152,6 @@ def transform(e):
             return td(*c)
 
         else:
-            if len(c) == 0:
-                return None
-            elif len(c) == 1:
-                return c[0]
-            else:
-                return div(*c)
+            return c
 
 __all__ = ['transform', 'shorten']

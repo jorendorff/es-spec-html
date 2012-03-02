@@ -1,6 +1,14 @@
 import htmodel as html
 import collections
 
+def findall(e, name):
+    if e.name == name:
+        yield e
+    for k in e.content:
+        if not isinstance(k, str):
+            for d in findall(k, name):
+                yield d
+
 def all_parent_index_child_triples(e):
     for i, k in enumerate(e.content):
         if not isinstance(k, str):
@@ -25,6 +33,13 @@ def fixup_formatting(doc):
     one of which has its own w:r>w:rPr>w:rFonts element. This fixup turns the
     redundant formatting into nested HTML markup.
     """
+
+    run_style_properties = {
+        'font-style',
+        'font-weight',
+        'font-family',
+        'vertical-align'
+    }
 
     def new_span(content, style):
         # Merge adjacent strings, if any.
@@ -55,8 +70,15 @@ def fixup_formatting(doc):
             result.style = style
             return result
 
-    def rewrite_adjacent_spans(parent, i, j):
-        spans = parent.content[i:j]  # copies a slice of the array
+    def rewrite_spans(parent):
+        spans = parent.content[:]  # copies the array
+
+        inherited_style = {}
+        if parent.style:
+            for prop, value in list(parent.style.items()):
+                if prop in run_style_properties:
+                    del parent.style[prop]
+                    inherited_style[prop] = value
 
         all_content = []
         ranges = collections.defaultdict(dict)
@@ -79,8 +101,14 @@ def fixup_formatting(doc):
 
         # Build ranges.
         for kid in spans:
-            set_current_style_to(kid.style)
-            all_content += kid.content
+            if not isinstance(kid, str) and kid.name == 'span':
+                s = inherited_style.copy()
+                s.update(kid.style)
+                set_current_style_to(s)
+                all_content += kid.content
+            else:
+                set_current_style_to(inherited_style)
+                all_content.append(kid)
         set_current_style_to({})
 
         # Convert ranges to a list.
@@ -121,37 +149,17 @@ def fixup_formatting(doc):
             result += all_content[content_index:i1]  # add any trailing plain content
             return result
 
-        parent.content[i:j] = build_result(ranges, 0, len(all_content))
+        parent.content[:] = build_result(ranges, 0, len(all_content))
 
-    for parent, i, kid in all_parent_index_child_triples(doc):
-        if kid.name == 'span':
-            # We assert the spans don't have attrs because we are going to
-            # rewrite these guys retaining only the style. This fixup needs to
-            # happen early enough in rewriting that this isn't a problem; it also
-            # has to be early so that other markup doesn't get in the way.
-            assert not kid.attrs
-            j = i + 1
-            while j < len(parent.content):
-                sibling = parent.content[j]
-                if isinstance(sibling, str) or sibling.name != 'span':
-                    break
-                assert not sibling.attrs
-                j += 1
-
-            # Call rewrite even if j == i + 1, to make sure new_span gets called,
-            # converting, for example
-            #   <span style="font-style: italic">foo</span>
-            # to
-            #   <i>foo</i>
-            rewrite_adjacent_spans(parent, i, j)
-
-def findall(e, name):
-    if e.name == name:
-        yield e
-    for k in e.content:
-        if not isinstance(k, str):
-            for d in findall(k, name):
-                yield d
+    for p in findall(doc, 'p'):
+        # We assert the spans don't have attrs because we are going to
+        # rewrite these guys retaining only the style. This fixup needs to
+        # happen early enough in rewriting that this isn't a problem; it also
+        # has to be early so that other markup doesn't get in the way.
+        for i, kid in p.kids():
+            if kid.name == 'span':
+                assert not kid.attrs
+        rewrite_spans(p)
 
 unrecognized_styles = collections.defaultdict(int)
 
