@@ -712,22 +712,27 @@ def fixup_links(doc):
         # Match the first section number in a parenthesized list "(13.3.5, 13.4, 13.6)"
         r'\((SECTION),\ ',
 
+        # Match the first section number in a list at the beginning of a paragraph, "12.14:" or "12.7, 12.7:"
+        r'^(SECTION)[,:]',
+
         # Match the second or subsequent section number in a parenthesized list.
-        r', (SECTION)[,)]',
+        r', (SECTION)[,):]',
     ]))
 
     def find_link(s):
         best = None
         for link_re in section_link_regexes:
             m = link_re.search(s)
-            if m is not None:
+            while m is not None:
                 id = "sec-" + m.group(2)
                 if id not in all_ids:
                     warn("no such section: " + m.group(2))
+                    m = link_re.search(s, m.end(1))
                     continue
                 hit = m.start(1), m.end(1), "#sec-" + m.group(2)
                 if best is None or hit < best:
                     best = hit
+                break
         return best
 
     def linkify(parent, i, s):
