@@ -694,6 +694,8 @@ def fixup_figures(doc):
             figure.content.insert(0, child)
 
 def fixup_links(doc):
+    all_ids = set([kid.attrs['id'] for _, _, kid in all_parent_index_child_triples(doc) if 'id' in kid.attrs])
+
     stack = []
 
     def find_link(s):
@@ -712,6 +714,7 @@ def fixup_links(doc):
             if start > 0:
                 parent.content.insert(i, s[:start])
                 i += 1
+            assert not href.startswith('#') or href[1:] in all_ids
             parent.content[i] = html.a(href=href, *s[start:stop])
             i += 1
             if stop < len(s):
