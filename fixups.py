@@ -702,12 +702,9 @@ def fixup_picts(doc):
                   and ht_name_is(child.content[0], "div")
                   and child.content[0].attrs.get('class') == 'w-pict'):
                 pict = child.content[0]
-                print("GOT HERE")
-                print(e.to_html())
                 is_figure_1 = False
                 if i + 1 < len(e.content):
                     caption = e.content[i + 1]
-                    print("CAPTION IS:", caption if isinstance(caption, str) else caption.to_html())
                     if ht_name_is(caption, 'figcaption') and caption.content and caption.content[0].startswith('Figure 1'):
                         is_figure_1 = True
 
