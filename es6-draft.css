@@ -1,7 +1,7 @@
 /* Basics */
 body {
-    margin-left: 8em;
-    margin-right: 8em;
+    margin: 0 auto;
+    max-width: 800px;
     background-color: #fdfdfc;
     color: #333333;
     font-family: Cambria, Palatino Linotype, Palatino, Liberation Serif,
@@ -11,19 +11,15 @@ body {
 }
 section { display: block; }
 h1 { line-height: normal; }
-#everything {
-    margin: 0 auto;
-    max-width: 800px;
-}
-#everything > section { margin-top: 5em; }
-#everything > section > section { margin-top: 4em; }
-#everything > section > section section { margin-top: 2.5em; }
-#everything > .inner-title {
+body > section { margin-top: 5em; }
+body > section > section { margin-top: 4em; }
+body > section > section section { margin-top: 2.5em; }
+body > .inner-title {
     font-size: 160%;
     font-weight: bold;
     margin-top: 6em;
 }
-#everything section h1 { font-size: 110%; margin-bottom: 1em; }
+body section h1 { font-size: 110%; margin-bottom: 1em; }
 h1 span.secnum {
     width: 6em;
     margin-left: -6.8em;

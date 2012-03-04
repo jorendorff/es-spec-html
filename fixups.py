@@ -326,12 +326,9 @@ def insert_disclaimer(doc):
           "."),
         p("For copyright information, see ECMA's legal disclaimer in the document itself."),
         id="unofficial")
-
     body = doc.content[1]
-    assert body.name == 'body'
-    everything = html.section(disclaimer, id="everything")
-    everything.content += body.content
-    body.content = [everything]
+    assert body.name == "body"
+    body.content.insert(0, disclaimer)
 
 def fixup_sec_4_3(doc):
     for parent, i, kid in all_parent_index_child_triples(doc):
@@ -416,12 +413,8 @@ def fixup_sections(doc):
     assert len(doc.content) == 2
     body_elt = doc.content[1]
     assert body_elt.name == "body"
-    everything_elt = body_elt.content[0]
-    assert everything_elt.attrs['id'] == "everything"
-
-    body = everything_elt.content
-
-    for i, kid in everything_elt.kids("h1"):
+    body = body_elt.content
+    for i, kid in body_elt.kids("h1"):
         num, title = heading_info(kid)
         wrap(num, title, i)
 
