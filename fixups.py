@@ -377,12 +377,12 @@ def fixup_sections(doc):
 
         num, tab, title = s.partition('\t')
         if tab == "":
-            parts = s.split(None, 1)
-            if len(parts) == 2:
-                num, title = parts
+            if s[:1].isdigit():
+                parts = s.split(None, 1)
+                if len(parts) == 2:
+                    return tuple(parts)
             else:
                 return None, s
-
         return num, title
 
     def contains(a, b):
