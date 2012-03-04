@@ -38,7 +38,7 @@ k_eastAsia = bloat('eastAsia')
 k_fill = bloat('fill')
 k_color = bloat('color')
 
-def parse_pr(e, suppress_shading=False):
+def parse_pr(e):
     font_keys = {k_ascii, k_hAnsi, k_cs, k_eastAsia}
 
     assert e.text is None
@@ -97,12 +97,10 @@ def parse_pr(e, suppress_shading=False):
                     put('vertical-align', 'sub')
 
         elif name == 'shd':
-            # Suppress shading in pPr>rPr since that would give wrong semantics (yuck).
-            if not suppress_shading:
-                if k.get(k_val) == "solid" and k.get(k_fill) == "FFFFFF":
-                    color = k.get(k_color)
-                    if color is not None and re.match(r'^[0-9a-fA-F]{6}$', color):
-                        put('background-color', '#' + color)
+            if k.get(k_val) == "solid" and k.get(k_fill) == "FFFFFF":
+                color = k.get(k_color)
+                if color is not None and re.match(r'^[0-9a-fA-F]{6}$', color):
+                    put('background-color', '#' + color)
 
         # todo: shd, jc, ind, spacing, contextualSpacing
         # todo: pBdr
@@ -126,12 +124,15 @@ def parse_pr(e, suppress_shading=False):
                 if ilvl is not None:
                     put('-ooxml-ilvl', ilvl)
 
-        elif name == 'pStyle':
+        elif name in ('pStyle', 'rStyle'):
             if list(k.keys()) == [k_val]:
                 put('@cls', k.get(k_val))
 
         elif name == 'rPr':
-            for k, v in parse_pr(k, suppress_shading=True).items():
+            for k, v in parse_pr(k).items():
+                # TODO - support these properly
+                if k == 'background-color' or k == '@cls':
+                    continue
                 put(k, v)
 
     return pr

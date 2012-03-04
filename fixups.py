@@ -79,6 +79,7 @@ def fixup_formatting(doc, styles):
             inherited_style = styles[parent.attrs['class']].full_style
         else:
             inherited_style = {}
+
         if parent.style:
             # Delete w:rPr properties from the paragraph's style. As far as I
             # can tell they are always spurious; Word seems to ignore them.
@@ -108,7 +109,11 @@ def fixup_formatting(doc, styles):
         # Build ranges.
         for kid in spans:
             if not isinstance(kid, str) and kid.name == 'span':
-                set_current_style_to({p: v for p, v in kid.style.items() if inherited_style.get(p) != v})
+                run_style = kid.style
+                if 'class' in kid.attrs:
+                    run_style = run_style.copy()
+                    run_style.update(styles[kid.attrs['class']].full_style)
+                set_current_style_to({p: v for p, v in run_style.items() if inherited_style.get(p) != v})
                 all_content += kid.content
             else:
                 set_current_style_to({})
@@ -162,7 +167,7 @@ def fixup_formatting(doc, styles):
         # has to be early so that other markup doesn't get in the way.
         for i, kid in p.kids():
             if kid.name == 'span':
-                assert not kid.attrs
+                assert len(kid.attrs) == 0 or list(kid.attrs.keys()) == ['class']
         rewrite_spans(p)
 
 unrecognized_styles = collections.defaultdict(int)

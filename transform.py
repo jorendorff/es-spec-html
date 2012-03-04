@@ -72,6 +72,9 @@ def transform(e):
 
                 result = span(*c)
                 result.style = css
+                if css and '@cls' in css:
+                    result.attrs['class'] = css['@cls']
+                    del css['@cls']
                 return result
 
         elif name == 'p':
