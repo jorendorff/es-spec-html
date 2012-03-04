@@ -330,8 +330,16 @@ def insert_disclaimer(doc):
     assert body.name == "body"
     body.content.insert(0, disclaimer)
 
+def ht_name_is(ht, name):
+    return not isinstance(ht, str) and ht.name == name
+
 def fixup_sec_4_3(doc):
     for parent, i, kid in all_parent_index_child_triples(doc):
+        # Hack: Sections 4.3.7 and 4.3.16 are messed up in the document. Wrong style. Fix it.
+        if kid.name == "h1" and i > 0 and ht_name_is(parent.content[i - 1], 'h1') and (kid.content == ["built-in object"] or kid.content == ["String value"]):
+            kid.name = "p"
+            kid.attrs['class'] = 'Terms'
+
         if kid.name == 'p' and kid.attrs.get('class') == 'Terms' and i > 0 and parent.content[i - 1].name == 'h1':
             h1_content = parent.content[i - 1].content
             kid.content.insert(0, '\t')
@@ -359,7 +367,7 @@ def fixup_sections(doc):
             return None, None
 
         num, tab, title = s.partition('\t')
-        if tab is None:
+        if tab == "":
             parts = s.split(None, 1)
             if len(parts) == 2:
                 num, title = parts
@@ -401,7 +409,7 @@ def fixup_sections(doc):
         if sec_num is not None and sec_num[:1].isdigit():
             attrs['id'] = "sec-" + sec_num
             span = html.span(
-                html.a(sec_num, href="#sec-" + num, title="link to this section"),
+                html.a(sec_num, href="#sec-" + sec_num, title="link to this section"),
                 class_="secnum")
             c = body[start].content
             c[0] = ' ' + sec_title
@@ -417,6 +425,60 @@ def fixup_sections(doc):
     for i, kid in body_elt.kids("h1"):
         num, title = heading_info(kid)
         wrap(num, title, i)
+
+def fixup_hr(doc):
+    """ Replace <p><hr></p> with <hr>.
+
+    Word treats an explicit page break as occurring within a paragraph rather
+    than between paragraphs, and this leads to goofy markup which has to be
+    fixed up.
+    """
+    for a, i, b in all_parent_index_child_triples(doc):
+        if b.name == "p" and len(b.content) == 1 and isinstance(b.content[0], html.Element) and b.content[0].name == "hr":
+            a.content[i] = b.content[0]
+
+def fixup_toc(doc):
+    """ Generate a table of contents and replace the one in the document. """
+    def make_toc_list(e, depth=0):
+        sublist = []
+        for _, sect in e.kids("section"):
+            sect_item = make_toc_for(sect, depth + 1)
+            if sect_item:
+                sublist.append(html.li(*sect_item))
+        if sublist:
+            return [html.ol(*sublist, class_="toc")]
+        else:
+            return []
+
+    def make_toc_for(sect, depth):
+        if not sect.content:
+            return []
+        h1 = sect.content[0]
+        if isinstance(h1, str) or h1.name != 'h1':
+            return []
+
+        output = []
+
+        # copy the content of the header.
+        # TODO - make this clone enough to rip out the h1>span>a title= attribute
+        # TODO - make links when there isn't one
+        i = 0
+        output += h1.content[i:]  # shallow copy, nodes may appear in tree multiple times
+
+        # find any subsections.
+        if depth < 3:
+            output += make_toc_list(sect, depth)
+
+        return output
+
+    body = doc.content[1]
+    assert body.name == "body"
+    toc = html.section(html.h1("Contents"), *make_toc_list(body))
+
+    hr_iterator = body.kids("hr")
+    i0, first_hr = hr_iterator.__next__()
+    i1, next_hr = hr_iterator.__next__()
+    body.content[i0: i1 + 1] = [toc]
 
 def fixup_code(e):
     """ Merge adjacent code elements. Convert p elements containing only code elements to pre. """
@@ -584,17 +646,6 @@ def fixup_grammar(e):
         elif kid.name in ('body', 'section', 'div'):
             fixup_grammar(kid)
 
-def fixup_hr(doc):
-    """ Replace <p><hr></p> with <hr>.
-
-    Word treats an explicit page break as occurring within a paragraph rather
-    than between paragraphs, and this leads to goofy markup which has to be
-    fixed up.
-    """
-    for a, i, b in all_parent_index_child_triples(doc):
-        if b.name == "p" and len(b.content) == 1 and isinstance(b.content[0], html.Element) and b.content[0].name == "hr":
-            a.content[i] = b.content[0]
-
 def fixup(doc, styles):
     fixup_formatting(doc, styles)
     fixup_paragraph_classes(doc)
@@ -602,9 +653,10 @@ def fixup(doc, styles):
     insert_disclaimer(doc)
     fixup_sec_4_3(doc)
     fixup_sections(doc)
+    fixup_hr(doc)
+    fixup_toc(doc)
     fixup_code(doc)
     fixup_notes(doc)
     fixup_lists(doc)
     fixup_grammar(doc)
-    fixup_hr(doc)
     return doc

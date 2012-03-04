@@ -51,7 +51,7 @@ def escape(s, quote=False):
     # Now we only need to worry about non-ascii characters.
     return re.sub('[^\n -~]', replace, s)
 
-empty_tags = {'meta', 'br', 'hr'}
+empty_tags = {'meta', 'br', 'hr', 'link'}
 non_indenting_tags = {'html', 'body', 'section'}
 
 def save_html(filename, ht):

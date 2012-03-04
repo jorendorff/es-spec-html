@@ -64,23 +64,25 @@ a:hover {
     text-decoration: underline;
     color: blue;
 }
-a:link b, a:link span.value, a:link span.this, a:link span.value,
+a:link b, a:link span.value, a:link span.this,
 a:link span.libname, a:link span.errorname, a:link code {
     color: #5555bb;
 }
-a:hover b, a:hover span.value, a:hover span.this, a:hover span.value,
+a:hover b, a:hover span.value, a:hover span.this,
 a:hover span.libname, a:hover span.errorname, a:hover code {
     color: #0000ee;
 }
 a:visited b, a:visited span.value, a:visited span.this,
-a:visited span.value, a:visited span.libname, a:visited span.errorname,
-a:visited code {
+a:visited span.libname, a:visited span.errorname, a:visited code {
     color: inherit;
 }
 span.secnum a:link, span.secnum a:visited { color: inherit; }
 h1:hover span.secnum a:link, h1:hover span.secnum a:visited {
     color:#5555bb;
     text-decoration: underline;
+}
+.toc span.secnum a:link, .toc span.secnum a:visited {
+    color:#5555bb;
 }
 
 em { font-style: italic; }
@@ -101,7 +103,7 @@ div.blank-page:after {
 ol.toc { padding-left: 0; }
 ol.toc > li { list-style-type: none; padding-left: 1em; text-indent: -1em;}
 ol.toc > li span.secnum {
-    float: left; margin-left: -5em; width: 3.4em; text-align: right;
+    float: none;
 }
 #unofficial {
     margin: 4em 0;
