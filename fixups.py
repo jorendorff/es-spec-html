@@ -1,5 +1,5 @@
 import htmodel as html
-import collections
+import collections, re
 
 def findall(e, name):
     if e.name == name:
@@ -306,6 +306,12 @@ def fixup_element_spacing(doc):
 
     walk(doc)
 
+
+def doc_body(doc):
+    body = doc.content[1]
+    assert body.name == 'body'
+    return body
+
 def insert_disclaimer(doc):
     div = html.div
     p = html.p
@@ -331,9 +337,7 @@ def insert_disclaimer(doc):
           "."),
         p("For copyright information, see ECMA's legal disclaimer in the document itself."),
         id="unofficial")
-    body = doc.content[1]
-    assert body.name == "body"
-    body.content.insert(0, disclaimer)
+    doc_body(doc).content.insert(0, disclaimer)
 
 def ht_name_is(ht, name):
     return not isinstance(ht, str) and ht.name == name
@@ -357,6 +361,9 @@ def fixup_sec_4_3(doc):
 
 def fixup_sections(doc):
     """ Group h1 elements and subsequent elements of all kinds together into sections. """
+
+    body_elt = doc_body(doc)
+    body = body_elt.content
 
     def heading_info(h):
         """ h is an h1 element. Return a pair (sec_num, title).
@@ -436,10 +443,6 @@ def fixup_sections(doc):
         # Actually do the wrapping.
         body[start:stop] = [html.section(*body[start:stop], **attrs)]
 
-    assert len(doc.content) == 2
-    body_elt = doc.content[1]
-    assert body_elt.name == "body"
-    body = body_elt.content
     for i, kid in body_elt.kids("h1"):
         num, title = heading_info(kid)
         wrap(num, title, i)
@@ -495,8 +498,7 @@ def fixup_toc(doc):
 
         return output
 
-    body = doc.content[1]
-    assert body.name == "body"
+    body = doc_body(doc)
     toc = html.section(html.h1("Contents"), *make_toc_list(body))
 
     hr_iterator = body.kids("hr")
@@ -691,6 +693,44 @@ def fixup_figures(doc):
             del parent.content[i]
             figure.content.insert(0, child)
 
+def fixup_links(doc):
+    stack = []
+
+    def find_link(s):
+        m = re.search(r'\(((?:see )?(\d+(?:\.\d+)+))\)', s)
+        if m is None:
+            return None
+        else:
+            return m.start(1), m.end(1), "#sec-" + m.group(2)
+
+    def linkify(parent, i, s):
+        while True:
+            m = find_link(s)
+            if m is None:
+                return
+            start, stop, href = m
+            if start > 0:
+                parent.content.insert(i, s[:start])
+                i += 1
+            parent.content[i] = html.a(href=href, *s[start:stop])
+            i += 1
+            if stop < len(s):
+                parent.content.insert(i, s[stop:])
+            else:
+                break
+            s = s[stop:]
+
+    def visit(e):
+        stack.append(e)
+        for i, kid in enumerate(e.content):
+            if isinstance(kid, str):
+                linkify(e, i, kid)
+            else:
+                visit(kid)
+        stack.pop()
+
+    visit(doc_body(doc))
+
 def fixup(doc, styles):
     fixup_formatting(doc, styles)
     fixup_paragraph_classes(doc)
@@ -706,4 +746,5 @@ def fixup(doc, styles):
     fixup_grammar(doc)
     fixup_tables(doc)
     fixup_figures(doc)
+    fixup_links(doc)
     return doc
