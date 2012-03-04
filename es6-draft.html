@@ -141,12 +141,15 @@
           <li><span class="secnum"><a href="#sec-8.9.2" title="link to this section">8.9.2</a></span> PutValue (V, W)</li>
         </ol>
         </li>
-      <li><span class="secnum"><a href="#sec-8.10 " title="link to this section">8.10 </a></span> The Property Descriptor and Property Identifier Specification Types</li>
-      <li><span class="secnum"><a href="#sec-8.10.1" title="link to this section">8.10.1</a></span> IsAccessorDescriptor ( Desc )</li>
-      <li><span class="secnum"><a href="#sec-8.10.2" title="link to this section">8.10.2</a></span> IsDataDescriptor ( Desc )</li>
-      <li><span class="secnum"><a href="#sec-8.10.3" title="link to this section">8.10.3</a></span> IsGenericDescriptor ( Desc )</li>
-      <li><span class="secnum"><a href="#sec-8.10.4" title="link to this section">8.10.4</a></span> FromPropertyDescriptor ( Desc )</li>
-      <li><span class="secnum"><a href="#sec-8.10.5" title="link to this section">8.10.5</a></span> ToPropertyDescriptor ( Obj )</li>
+      <li><span class="secnum"><a href="#sec-8.10" title="link to this section">8.10</a></span> The Property Descriptor and Property Identifier Specification Types
+        <ol class="toc">
+          <li><span class="secnum"><a href="#sec-8.10.1" title="link to this section">8.10.1</a></span> IsAccessorDescriptor ( Desc )</li>
+          <li><span class="secnum"><a href="#sec-8.10.2" title="link to this section">8.10.2</a></span> IsDataDescriptor ( Desc )</li>
+          <li><span class="secnum"><a href="#sec-8.10.3" title="link to this section">8.10.3</a></span> IsGenericDescriptor ( Desc )</li>
+          <li><span class="secnum"><a href="#sec-8.10.4" title="link to this section">8.10.4</a></span> FromPropertyDescriptor ( Desc )</li>
+          <li><span class="secnum"><a href="#sec-8.10.5" title="link to this section">8.10.5</a></span> ToPropertyDescriptor ( Obj )</li>
+        </ol>
+        </li>
       <li><span class="secnum"><a href="#sec-8.11" title="link to this section">8.11</a></span> The Lexical Environment and Environment Record Specification Types</li>
       <li><span class="secnum"><a href="#sec-8.12" title="link to this section">8.12</a></span> Algorithms for Object Internal Methods
         <ol class="toc">
@@ -462,18 +465,7 @@
           <li><span class="secnum"><a href="#sec-15.11.4" title="link to this section">15.11.4</a></span> Properties of the Error Prototype Object</li>
           <li><span class="secnum"><a href="#sec-15.11.5" title="link to this section">15.11.5</a></span> Properties of Error Instances</li>
           <li><span class="secnum"><a href="#sec-15.11.6" title="link to this section">15.11.6</a></span> Native Error Types Used in This Standard</li>
-          <li><span class="secnum"><a href="#sec-15.11.7 " title="link to this section">15.11.7 </a></span> <i>NativeError</i> Object Structure</li>
-          <li><span class="secnum"><a href="#sec-15.11.7.1 " title="link to this section">15.11.7.1 </a></span> <i>NativeError</i> Constructors Called as Functions</li>
-          <li><span class="secnum"><a href="#sec-15.11.7.2 " title="link to this section">15.11.7.2 </a></span> <i>NativeError</i> (message)</li>
-          <li><span class="secnum"><a href="#sec-15.11.7.3" title="link to this section">15.11.7.3</a></span> The <i>NativeError</i> Constructors</li>
-          <li><span class="secnum"><a href="#sec-15.11.7.4" title="link to this section">15.11.7.4</a></span> new <i>NativeError</i> (message)</li>
-          <li><span class="secnum"><a href="#sec-15.11.7.5" title="link to this section">15.11.7.5</a></span> Properties of the <i>NativeError</i> Constructors</li>
-          <li><span class="secnum"><a href="#sec-15.11.7.6 " title="link to this section">15.11.7.6 </a></span> <i>NativeError</i>.prototype</li>
-          <li><span class="secnum"><a href="#sec-15.11.7.7" title="link to this section">15.11.7.7</a></span> Properties of the <i>NativeError</i> Prototype Objects</li>
-          <li><span class="secnum"><a href="#sec-15.11.7.8 " title="link to this section">15.11.7.8 </a></span> <i>NativeError</i>.prototype.constructor</li>
-          <li><span class="secnum"><a href="#sec-15.11.7.9 " title="link to this section">15.11.7.9 </a></span> <i>NativeError</i>.prototype.name</li>
-          <li><span class="secnum"><a href="#sec-15.11.7.10 " title="link to this section">15.11.7.10 </a></span> <i>NativeError</i>.prototype.message</li>
-          <li><span class="secnum"><a href="#sec-15.11.7.11" title="link to this section">15.11.7.11</a></span> Properties of <i>NativeError</i> Instances</li>
+          <li><span class="secnum"><a href="#sec-15.11.7" title="link to this section">15.11.7</a></span> <i>NativeError</i> Object Structure</li>
         </ol>
         </li>
       <li><span class="secnum"><a href="#sec-15.12" title="link to this section">15.12</a></span> The JSON Object
@@ -3166,15 +3158,14 @@
 </div>
 </section>
 </section>
-<section id="sec-8.10 ">
-<h1><span class="secnum"><a href="#sec-8.10 " title="link to this section">8.10 </a></span> The Property Descriptor and Property Identifier Specification Types</h1>
+<section id="sec-8.10">
+<h1><span class="secnum"><a href="#sec-8.10" title="link to this section">8.10</a></span> The Property Descriptor and Property Identifier Specification Types</h1>
 <p>The Property Descriptor type is used to explain the manipulation and reification of named property attributes. Values of the Property Descriptor type are records composed of named fields where each field&rsquo;s name is an attribute name and its value is a corresponding attribute value as specified in 8.6.1. In addition, any field may be present or absent.</p>
 <p>Property Descriptor values may be further classified as data property descriptors and accessor property descriptors based upon the existence or use of certain fields. A data property descriptor is one that includes any fields named either [[Value]] or [[Writable]]. An accessor property descriptor is one that includes any fields named either [[Get]] or [[Set]]. Any property descriptor may have fields named [[Enumerable]] and [[Configurable]]. A Property Descriptor value may not be both a data property descriptor and an accessor property descriptor; however, it may be neither. A generic property descriptor is a Property Descriptor value that is neither a data property descriptor nor an accessor property descriptor. A fully populated property descriptor is one that is either an accessor property descriptor or a data property descriptor and that has all of the fields that correspond to the property attributes defined in either 8.6.1 Table 5 or Table 6.</p>
 <p>For notational convenience within this specification, an object literal-like syntax can be used to define a property descriptor value. For example, Property Descriptor {[[Value]]: 42, [[Writable]]: <b>false</b>, [[Configurable]]: <b>true</b>} defines a data property descriptor. Field name order is not significant. Any fields that are not explicitly listed are considered to be absent.</p>
 <p>In specification text and algorithms, dot notation may be used to refer to a specific field of a Property Descriptor. For example, if D is a property descriptor then D.[[Value]] is shorthand for &ldquo;the field of D named [[Value]]&rdquo;.</p>
 <p>The Property Identifier type is used to associate a property name with a Property Descriptor.  Values of the Property Identifier type are pairs of the form (name, descriptor), where name is a String and descriptor is a Property Descriptor value.</p>
 <p>The following abstract operations are used in this specification to operate upon Property Descriptor values:</p>
-</section>
 <section id="sec-8.10.1">
 <h1><span class="secnum"><a href="#sec-8.10.1" title="link to this section">8.10.1</a></span> IsAccessorDescriptor ( Desc )</h1>
 <p>When the abstract operation IsAccessorDescriptor is called with property descriptor <span style="font-family: Times New Roman; font-style: italic">Desc</span>, the following steps are taken:</p>
@@ -3284,6 +3275,7 @@
     </li>
   <li>Return <i>desc</i>.</li>
 </ol>
+</section>
 </section>
 <section id="sec-8.11">
 <h1><span class="secnum"><a href="#sec-8.11" title="link to this section">8.11</a></span> The Lexical Environment and Environment Record Specification Types</h1>
@@ -15126,17 +15118,16 @@ THH:mm:ss.sss</pre>
 <p>Indicates that one of the global URI handling functions was used in a way that is incompatible with its definition. See 15.1.3.</p>
 </section>
 </section>
-<section id="sec-15.11.7 ">
-<h1><span class="secnum"><a href="#sec-15.11.7 " title="link to this section">15.11.7 </a></span> <i>NativeError</i> Object Structure</h1>
+<section id="sec-15.11.7">
+<h1><span class="secnum"><a href="#sec-15.11.7" title="link to this section">15.11.7</a></span> <i>NativeError</i> Object Structure</h1>
 <p>When an ECMAScript implementation detects a runtime error, it throws an instance of one of the <i>NativeError</i> objects defined in 15.11.6. Each of these objects has the structure described below, differing only in the name used as the constructor name instead of <i>NativeError</i>, in the <b>name</b> property of the prototype object, and in the implementation-defined <code>message</code> property of the prototype object.</p>
 <p>For each error object, references to <i>NativeError</i> in the definition should be replaced with the appropriate error object name from 15.11.6.</p>
-</section>
-<section id="sec-15.11.7.1 ">
-<h1><span class="secnum"><a href="#sec-15.11.7.1 " title="link to this section">15.11.7.1 </a></span> <i>NativeError</i> Constructors Called as Functions</h1>
+<section id="sec-15.11.7.1">
+<h1><span class="secnum"><a href="#sec-15.11.7.1" title="link to this section">15.11.7.1</a></span> <i>NativeError</i> Constructors Called as Functions</h1>
 <p>When a <i>NativeError</i> constructor is called as a function rather than as a constructor, it creates and initialises a new object.  A call of the object as a function is equivalent to calling it as a constructor with the same arguments.</p>
 </section>
-<section id="sec-15.11.7.2 ">
-<h1><span class="secnum"><a href="#sec-15.11.7.2 " title="link to this section">15.11.7.2 </a></span> <i>NativeError</i> (message)</h1>
+<section id="sec-15.11.7.2">
+<h1><span class="secnum"><a href="#sec-15.11.7.2" title="link to this section">15.11.7.2</a></span> <i>NativeError</i> (message)</h1>
 <p>The [[Prototype]] internal property of the newly constructed object is set to the prototype object for this error constructor.  The newly constructed object has a [[NativeBrand]] internal property whose value is NativeError . The [[Extensible]] internal property of the newly constructed object is set to <b>true</b>.</p>
 <p>If the argument <span style="font-family: Times New Roman; font-style: italic">message</span> is not <b>undefined</b>, the <code>message</code> own property of the newly constructed object is set to ToString(<span style="font-family: Times New Roman; font-style: italic">message</span>).</p>
 </section>
@@ -15154,8 +15145,8 @@ THH:mm:ss.sss</pre>
 <p>The value of the [[Prototype]] internal property of a <i>NativeError</i> constructor is the Function prototype object (15.3.4).</p>
 <p>Besides the internal properties and the <code>length</code> property (whose value is <b>1</b>), each <i>NativeError</i> constructor has the following property:</p>
 </section>
-<section id="sec-15.11.7.6 ">
-<h1><span class="secnum"><a href="#sec-15.11.7.6 " title="link to this section">15.11.7.6 </a></span> <i>NativeError</i>.prototype</h1>
+<section id="sec-15.11.7.6">
+<h1><span class="secnum"><a href="#sec-15.11.7.6" title="link to this section">15.11.7.6</a></span> <i>NativeError</i>.prototype</h1>
 <p>The initial value of <b><i>NativeError</i><span style="font-family: monospace">.prototype</span></b> is a <i>NativeError</i> prototype object (15.11.7.7). Each <i>NativeError</i> constructor has a separate prototype object.</p>
 <p>This property has the attributes { [[Writable]]: <b>false</b>, [[Enumerable]]: <b>false</b>, [[Configurable]]: <b>false</b> }.</p>
 </section>
@@ -15164,16 +15155,16 @@ THH:mm:ss.sss</pre>
 <p>Each <i>NativeError</i> prototype object is an Error object and has a [[NativeBrand]] internal property whose value is NativeError .</p>
 <p>The value of the [[Prototype]] internal property of each <i>NativeError</i> prototype object is the standard built-in Error prototype object (15.11.4).</p>
 </section>
-<section id="sec-15.11.7.8 ">
-<h1><span class="secnum"><a href="#sec-15.11.7.8 " title="link to this section">15.11.7.8 </a></span> <i>NativeError</i>.prototype.constructor</h1>
+<section id="sec-15.11.7.8">
+<h1><span class="secnum"><a href="#sec-15.11.7.8" title="link to this section">15.11.7.8</a></span> <i>NativeError</i>.prototype.constructor</h1>
 <p>The initial value of the <code>constructor</code> property of the prototype for a given <i>NativeError</i> constructor is the <i>NativeError</i> constructor function itself (15.11.7).</p>
 </section>
-<section id="sec-15.11.7.9 ">
-<h1><span class="secnum"><a href="#sec-15.11.7.9 " title="link to this section">15.11.7.9 </a></span> <i>NativeError</i>.prototype.name</h1>
+<section id="sec-15.11.7.9">
+<h1><span class="secnum"><a href="#sec-15.11.7.9" title="link to this section">15.11.7.9</a></span> <i>NativeError</i>.prototype.name</h1>
 <p>The initial value of the <code>name</code> property of the prototype for a given <i>NativeError</i> constructor is the name of the constructor (the name used instead of <i>NativeError</i>).</p>
 </section>
-<section id="sec-15.11.7.10 ">
-<h1><span class="secnum"><a href="#sec-15.11.7.10 " title="link to this section">15.11.7.10 </a></span> <i>NativeError</i>.prototype.message</h1>
+<section id="sec-15.11.7.10">
+<h1><span class="secnum"><a href="#sec-15.11.7.10" title="link to this section">15.11.7.10</a></span> <i>NativeError</i>.prototype.message</h1>
 <p>The initial value of the <code>message</code> property of the prototype for a given <i>NativeError</i> constructor is the empty String.</p>
 <div class="note">
   <p><span class="nh">NOTE</span> The prototypes for the NativeError constructors do not themselves provide a <code>toString</code> function, but instances of errors will inherit it from the Error prototype object.</p>
@@ -15182,6 +15173,7 @@ THH:mm:ss.sss</pre>
 <section id="sec-15.11.7.11">
 <h1><span class="secnum"><a href="#sec-15.11.7.11" title="link to this section">15.11.7.11</a></span> Properties of <i>NativeError</i> Instances</h1>
 <p><i>NativeError</i> instances inherit properties from their <i>NativeError</i> prototype object and have a [[NativeBrand]] internal property whose value is NativeError .  <i>NativeError</i> instances have no special properties.</p>
+</section>
 </section>
 </section>
 <section id="sec-15.12">
