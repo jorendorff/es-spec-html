@@ -1,5 +1,6 @@
 import htmodel as html
 import collections, re
+from warnings import warn
 
 def findall(e, name):
     if e.name == name:
@@ -696,14 +697,38 @@ def fixup_figures(doc):
 def fixup_links(doc):
     all_ids = set([kid.attrs['id'] for _, _, kid in all_parent_index_child_triples(doc) if 'id' in kid.attrs])
 
-    stack = []
+    SECTION = r'(\d+(?:\.\d+)+)'
+    def compile(re_source):
+        return re.compile(re_source.replace("SECTION", SECTION))
+
+    section_link_regexes = list(map(compile, [
+        # Match " (11.1.5)" and " (see 7.9)"
+        # The space is to avoid matching "(3.5)" in "Math.round(3.5)".
+        r' \(((?:see )?SECTION)\)',
+
+        # Map "(Clause 16)", "(see clause 6)".
+        r'(?:)\(((?:see\s+)?clause\s+(\d+))\)',
+
+        # Match the first section number in a parenthesized list "(13.3.5, 13.4, 13.6)"
+        r'\((SECTION),\ ',
+
+        # Match the second or subsequent section number in a parenthesized list.
+        r', (SECTION)[,)]',
+    ]))
 
     def find_link(s):
-        m = re.search(r'\(((?:see )?(\d+(?:\.\d+)+))\)', s)
-        if m is None:
-            return None
-        else:
-            return m.start(1), m.end(1), "#sec-" + m.group(2)
+        best = None
+        for link_re in section_link_regexes:
+            m = link_re.search(s)
+            if m is not None:
+                id = "sec-" + m.group(2)
+                if id not in all_ids:
+                    warn("no such section: " + m.group(2))
+                    continue
+                hit = m.start(1), m.end(1), "#sec-" + m.group(2)
+                if best is None or hit < best:
+                    best = hit
+        return best
 
     def linkify(parent, i, s):
         while True:
@@ -724,13 +749,11 @@ def fixup_links(doc):
             s = s[stop:]
 
     def visit(e):
-        stack.append(e)
         for i, kid in enumerate(e.content):
             if isinstance(kid, str):
                 linkify(e, i, kid)
             else:
                 visit(kid)
-        stack.pop()
 
     visit(doc_body(doc))
 
