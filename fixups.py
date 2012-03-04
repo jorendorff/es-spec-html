@@ -174,6 +174,41 @@ def fixup_formatting(doc, styles):
 unrecognized_styles = collections.defaultdict(int)
 
 def fixup_paragraph_classes(doc):
+    next_annex = ord('A')
+    def munge_annex_heading(e):
+        nonlocal next_annex
+
+        # Special case. Rather than implement OOXML numbering and Word
+        # {SEQ} macros to the extent we'd need to generate the annex
+        # headings, we fake it.
+        e.name = 'h1'
+        assert next_annex <= ord('Z')
+        letter = chr(next_annex)
+        next_annex += 1
+
+        # Parse the current content of the heading.
+        i = 0
+        content = e.content
+
+        assert ht_name_is(content[i], 'br')
+        i += 1
+
+        status = content[i]
+        status = re.sub(r'{SEQ .* }', '', status)
+        assert status in ('(informative)', '(normative)')
+        i += 1
+
+        assert ht_name_is(content[i], 'br')
+        i += 1
+
+        while ht_name_is(content[i], 'br') or (isinstance(content[i], str)
+                                               and re.match(r'^{SEQ .* }$', content[i])):
+            i += 1
+        title = content[i:]
+
+        # Build the new heading.
+        e.content = ["Annex " + letter, html.br(), status, html.br()] + title
+
     tag_names = {
         'ANNEX': 'h1',
         'Alg2': None,
@@ -227,7 +262,9 @@ def fixup_paragraph_classes(doc):
                 unrecognized_styles[cls] += 1
             #e.content.insert(0, html.span('<{0}>'.format(cls), style="color:red"))
 
-            if cls == 'Note':
+            if cls == 'ANNEX':
+                munge_annex_heading(e)
+            elif cls == 'Note':
                 # Total special case. Wrap in div.note.
                 e.name = 'div'
                 e.content = [html.Element(default_tag, e.attrs, e.style, e.content)]
