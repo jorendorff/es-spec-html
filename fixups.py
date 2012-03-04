@@ -686,6 +686,46 @@ def fixup_tables(doc):
                     td.name = 'th'
                     del span.style['background-color']
 
+def fixup_picts(doc):
+    """ Replace Figure 1 with canned HTML. Remove div.w-pict elements. """
+    def walk(e):
+        i = 0
+        while i < len(e.content):
+            child = e.content[i]
+            if isinstance(child, str):
+                i += 1
+            elif child.name == 'div' and child.attrs.get('class') == 'w-pict':
+                # Remove the div element, but retain its contents.
+                e.content[i:i + 1] = child.content
+            elif (child.name == 'p'
+                  and len(child.content) == 1
+                  and ht_name_is(child.content[0], "div")
+                  and child.content[0].attrs.get('class') == 'w-pict'):
+                pict = child.content[0]
+                print("GOT HERE")
+                print(e.to_html())
+                is_figure_1 = False
+                if i + 1 < len(e.content):
+                    caption = e.content[i + 1]
+                    print("CAPTION IS:", caption if isinstance(caption, str) else caption.to_html())
+                    if ht_name_is(caption, 'figcaption') and caption.content and caption.content[0].startswith('Figure 1'):
+                        is_figure_1 = True
+
+                if is_figure_1:
+                    image = html.object(
+                        html.img(src="figure-1.png", width="719", height="354", alt="An image of lots of boxes and arrows."),
+                        type="image/svg+xml", width="719", height="354", data="figure-1.svg")
+                    del e.content[i + 1]
+                    e.content[i] = html.figure(image, caption)
+                else:
+                    # Remove the div element, but retain its contents.
+                    e.content[i:i + 1] = pict.content
+            else:
+                walk(child)
+                i += 1
+
+    walk(doc)
+
 def fixup_figures(doc):
     for parent, i, child in all_parent_index_child_triples(doc):
         if child.name == 'figcaption' and i + 1 < len(parent.content) and ht_name_is(parent.content[i + 1], 'figure'):
@@ -776,6 +816,7 @@ def fixup(doc, styles):
     fixup_lists(doc)
     fixup_grammar(doc)
     fixup_tables(doc)
+    fixup_picts(doc)
     fixup_figures(doc)
     fixup_links(doc)
     return doc

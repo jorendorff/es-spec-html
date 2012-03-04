@@ -552,32 +552,10 @@
 <h1><span class="secnum"><a href="#sec-4.2.1" title="link to this section">4.2.1</a></span> Objects</h1>
 <p>ECMAScript does not use classes such as those in C++, Smalltalk, or Java. Instead objects may be created in various ways including via a literal notation or via <span style="font-style: italic; font-weight: bold">constructors</span> which create objects and then execute code that initialises all or part of them by assigning initial values to their properties. Each constructor is a function that has a property named &ldquo;<code>prototype</code>&rdquo; that is used to implement <span style="font-style: italic; font-weight: bold">prototype-based inheritance</span> and <span style="font-style: italic; font-weight: bold">shared properties</span>. Objects are created by using constructors in <b>new</b> expressions; for example, <code>new Date(2009,11)</code> creates a new Date object. Invoking a constructor without using <b>new</b> has consequences that depend on the constructor. For example, <code>Date()</code> produces a string representation of the current date and time rather than an object.</p>
 <p>Every object created by a constructor has an implicit reference (called the object&rsquo;s <i>prototype</i>) to the value of its constructor&rsquo;s &ldquo;<code>prototype</code>&rdquo; property. Furthermore, a prototype may have a non-null implicit reference to its prototype, and so on; this is called the <i>prototype chain</i>. When a reference is made to a property in an object, that reference is to the property of that name in the first object in the prototype chain that contains a property of that name. In other words, first the object mentioned directly is examined for such a property; if that object contains the named property, that is the property to which the reference refers; if that object does not contain the named property, the prototype for that object is examined next; and so on.</p>
-<p>
-  <p><b>cf<sub>5</sub></b></p>
-  <p><span style="font-family: monospace">q1</span></p>
-  <p><span style="font-family: monospace">q2</span></p>
-  <p><b>cf<sub>4</sub></b></p>
-  <p><span style="font-family: monospace">q1</span></p>
-  <p><span style="font-family: monospace">q2</span></p>
-  <p><b>cf<sub>3</sub></b></p>
-  <p><span style="font-family: monospace">q1</span></p>
-  <p><span style="font-family: monospace">q2</span></p>
-  <p><b>CF<sub>p</sub></b></p>
-  <p><span style="font-family: monospace">CFP1</span></p>
-  <p><b>CF</b></p>
-  <p><span style="font-family: monospace">prototype</span></p>
-  <p><span style="font-family: monospace">P1</span></p>
-  <p><span style="font-family: monospace">P2</span></p>
-  <p><b>cf<sub>1</sub></b></p>
-  <p><span style="font-family: monospace">q1</span></p>
-  <p><span style="font-family: monospace">q2</span></p>
-  <p><b>cf<sub>2</sub></b></p>
-  <p><span style="font-family: monospace">q1</span></p>
-  <p><span style="font-family: monospace">q2</span></p>
-  <p>implicit prototype link</p>
-  <p>explicit prototype property</p>
-</p>
-<figcaption>Figure 1 &mdash; Object/Prototype Relationships</figcaption>
+<figure>
+  <object width="719" type="image/svg+xml" data="figure-1.svg" height="354"><img src="figure-1.png" alt="An image of lots of boxes and arrows." height="354" width="719"></img></object>
+  <figcaption>Figure 1 &mdash; Object/Prototype Relationships</figcaption>
+</figure>
 <p>In a class-based object-oriented language, in general, state is carried by instances, methods are carried by classes, and inheritance is only of structure and behaviour. In ECMAScript, the state and methods are carried by objects, and structure, behaviour, and state are all inherited.</p>
 <p>All objects that do not directly contain a particular property that their prototype contains share that property and its value. Figure 1 illustrates this:</p>
 <p><b>CF</b> is a constructor (and also an object). Five objects have been created by using <code>new</code> expressions: <b>cf<sub>1</sub></b>, <b>cf<sub>2</sub></b>, <b>cf<sub>3</sub></b>, <b>cf<sub>4</sub></b>, and <b>cf<sub>5</sub></b>. Each of these objects contains properties named <span style="font-family: monospace">q1</span> and <span style="font-family: monospace">q2</span>. The dashed lines represent the implicit prototype relationship; so, for example, <b>cf<sub>3</sub></b>&rsquo;s prototype is <b>CF<sub>p</sub></b>. The constructor, <b>CF</b>, has two properties itself, named <span style="font-family: monospace">P1</span> and <span style="font-family: monospace">P2</span>, which are not visible to <b>CF<sub>p</sub></b>, <b>cf<sub>1</sub></b>, <b>cf<sub>2</sub></b>, <b>cf<sub>3</sub></b>, <b>cf<sub>4</sub></b>, or <b>cf<sub>5</sub></b>. The property named <span style="font-family: monospace">CFP1</span> in <b>CF<sub>p</sub></b> is shared by <b>cf<sub>1</sub></b>, <b>cf<sub>2</sub></b>, <b>cf<sub>3</sub></b>, <b>cf<sub>4</sub></b>, and <b>cf<sub>5</sub></b> (but not by <b>CF</b>), as are any properties found in <b>CF<sub>p</sub></b>&rsquo;s implicit prototype chain that are not named <span style="font-family: monospace">q1</span>, <span style="font-family: monospace">q2</span>, or <span style="font-family: monospace">CFP1</span>. Notice that there is no implicit prototype link between <b>CF</b> and <b>CF<sub>p</sub></b>.</p>

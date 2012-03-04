@@ -33,7 +33,7 @@ class Element:
 _spaceable_tags = set('html head title base link meta style '
                       'table caption colgroup col tbody thead tfoot tr td th '
                       'body section nav article aside h1 h2 h3 h4 h5 h6 header footer '
-                      'p hr pre blockquote ol ul li dl dt dd figure figcaption div '.split())
+                      'p hr pre blockquote ol ul li dl dt dd figure figcaption object div '.split())
 
 def is_spaceable(ht):
     return not isinstance(ht, str) and ht.name in _spaceable_tags
@@ -134,11 +134,12 @@ def _init(v):
         return construct
 
     names = ('html head title base link meta style script noscript '
-             'table caption colgroup col tbody thead tfoot tr td th '
              'body section nav article aside h1 h2 h3 h4 h5 h6 hgroup header footer address '
              'p hr pre blockquote ol ul li dl dt dd figure figcaption div '
              'a em strong small s cite q dfn abbr data time code var '
-             'samp kbd sub sup i b u mark ruby rt rp bdi bdo span br wbr').split()
+             'samp kbd sub sup i b u mark ruby rt rp bdi bdo span br wbr '
+             'img iframe embed object param video audio source track canvas map area '
+             'table caption colgroup col tbody thead tfoot tr td th').split()
 
     for name in names:
         v[name] = element_constructor(name)

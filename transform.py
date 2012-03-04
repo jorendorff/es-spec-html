@@ -88,6 +88,9 @@ def transform(e):
             result.style = css
             return result
 
+        elif name == 'pict':
+            return div(*c, class_='w-pict')
+
         elif name == 'sym':
             assert not c
             attrs = {shorten(k): v for k, v in e.items()}
