@@ -678,6 +678,14 @@ def fixup_tables(doc):
                     td.name = 'th'
                     del span.style['background-color']
 
+def fixup_figures(doc):
+    for parent, i, child in all_parent_index_child_triples(doc):
+        if child.name == 'figcaption' and i + 1 < len(parent.content) and ht_name_is(parent.content[i + 1], 'figure'):
+            # The iterator is actually ok with this mutation, but it's tricky.
+            figure = parent.content[i + 1]
+            del parent.content[i]
+            figure.content.insert(0, child)
+
 def fixup(doc, styles):
     fixup_formatting(doc, styles)
     fixup_paragraph_classes(doc)
@@ -692,4 +700,5 @@ def fixup(doc, styles):
     fixup_lists(doc)
     fixup_grammar(doc)
     fixup_tables(doc)
+    fixup_figures(doc)
     return doc

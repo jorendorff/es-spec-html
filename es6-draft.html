@@ -988,8 +988,8 @@
 <p><span style="font-family: Times New Roman">&lt;ZWNJ&gt;</span> and <span style="font-family: Times New Roman">&lt;ZWJ&gt;</span> are format-control characters that are used to make necessary distinctions when forming words or phrases in certain languages. In ECMAScript source text, <span style="font-family: Times New Roman">&lt;ZWNJ&gt;</span> and <span style="font-family: Times New Roman">&lt;ZWJ&gt;</span> may also be used in an identifier after the first character.</p>
 <p><span style="font-family: Times New Roman">&lt;BOM&gt;</span> is a format-control character used primarily at the start of a text to mark it as Unicode and to allow detection of the text's encoding and byte order. <span style="font-family: Times New Roman">&lt;BOM&gt;</span> characters intended for this purpose can sometimes also appear after the start of a text, for example as a result of concatenating files. &lt;BOM&gt; characters are treated as white space characters (see 7.2).</p>
 <p>The special treatment of certain format-control characters outside of comments, string literals, and regular expression literals is summarised in Table 1.</p>
-<figcaption>Table&nbsp;1 &mdash; Format-Control Character Usage</figcaption>
 <figure>
+  <figcaption>Table&nbsp;1 &mdash; Format-Control Character Usage</figcaption>
   <table class="real-table">
     <tr>
       <th>
@@ -1054,8 +1054,8 @@
 <h1><span class="secnum"><a href="#sec-7.2" title="link to this section">7.2</a></span> White Space</h1>
 <p>White space characters are used to improve source text readability and to separate tokens (indivisible lexical units) from each other, but are otherwise insignificant. White space characters may occur between any two tokens and at the start or end of input. White space characters may also occur within a <span style="font-family: Times New Roman; font-style: italic">StringLiteral</span> or a <span style="font-family: Times New Roman; font-style: italic">RegularExpressionLiteral</span> (where they are considered significant characters forming part of the literal value) or within a <span style="font-family: Times New Roman; font-style: italic">Comment</span>, but cannot appear within any other kind of token.</p>
 <p>The ECMAScript white space characters are listed in Table 2.</p>
-<figcaption>Table&nbsp;2 &mdash; Whitespace Characters</figcaption>
 <figure>
+  <figcaption>Table&nbsp;2 &mdash; Whitespace Characters</figcaption>
   <table class="real-table">
     <tr>
       <th>
@@ -1152,8 +1152,8 @@
 <p>A line terminator can occur within a <span style="font-family: Times New Roman; font-style: italic">MultiLineComment</span> (7.4) but cannot occur within a <span style="font-family: Times New Roman; font-style: italic">SingleLineComment</span>.</p>
 <p>Line terminators are included in the set of white space characters that are matched by the <code>\s</code> class in regular expressions.</p>
 <p>The ECMAScript line terminator characters are listed in Table 3.</p>
-<figcaption>Table&nbsp;3 &mdash; Line Terminator Characters</figcaption>
 <figure>
+  <figcaption>Table&nbsp;3 &mdash; Line Terminator Characters</figcaption>
   <table class="real-table">
     <tr>
       <th>
@@ -1925,8 +1925,8 @@
   <li><span style="font-family: sans-serif">The CV of</span> <i>EscapeSequence</i> <span style="font-family: sans-serif; font-weight: bold">::</span> <i>UnicodeEscapeSequence</i> <span style="font-family: sans-serif">is the CV of the</span> <i>UnicodeEscapeSequence</i>.</li>
   <li><span style="font-family: sans-serif">The</span> <span style="font-family: sans-serif">CV</span> <span style="font-family: sans-serif">of</span> <i>CharacterEscapeSequence</i> <span style="font-family: sans-serif; font-weight: bold">::</span> <i>SingleEscapeCharacter</i> <span style="font-family: sans-serif">is the character whose code unit value is determined by  the</span> <i>SingleEscapeCharacter</i> <span style="font-family: sans-serif">according to Table 4:</span></li>
 </ol>
-<figcaption>Table&nbsp;4 &mdash; String Single Character Escape Sequences</figcaption>
 <figure>
+  <figcaption>Table&nbsp;4 &mdash; String Single Character Escape Sequences</figcaption>
   <table class="real-table">
     <tr>
       <th>
@@ -2280,8 +2280,8 @@
 <section id="sec-8.6.1">
 <h1><span class="secnum"><a href="#sec-8.6.1" title="link to this section">8.6.1</a></span> Property Attributes</h1>
 <p>Attributes are used in this specification to define and explain the state of named properties. A named data property associates a name with the attributes listed in Table 5</p>
-<figcaption>Table&nbsp;5 &mdash; Attributes of a Named Data Property</figcaption>
 <figure>
+  <figcaption>Table&nbsp;5 &mdash; Attributes of a Named Data Property</figcaption>
   <table class="real-table">
     <tr>
       <td>
@@ -2341,8 +2341,8 @@
   </table>
 </figure>
 <p>A named accessor property associates a name with the attributes listed in Table 6.</p>
-<figcaption>Table&nbsp;6 &mdash; Attributes of a Named Accessor Property</figcaption>
 <figure>
+  <figcaption>Table&nbsp;6 &mdash; Attributes of a Named Accessor Property</figcaption>
   <table class="real-table">
     <tr>
       <td>
@@ -2402,8 +2402,8 @@
   </table>
 </figure>
 <p>If the value of an attribute is not explicitly specified by this specification for a named property, the default value defined in Table 7 is used.</p>
-<figcaption>Table&nbsp;7 &mdash; Default Attribute Values</figcaption>
 <figure>
+  <figcaption>Table&nbsp;7 &mdash; Default Attribute Values</figcaption>
   <table class="real-table">
     <tr>
       <td>
@@ -2469,8 +2469,8 @@
 <p>This specification uses various internal properties to define the semantics of object values. These internal properties are not part of the ECMAScript language. They are defined by this specification purely for expository purposes. An implementation of ECMAScript must behave as if it produced and operated upon internal properties in the manner described here. The names of internal properties are enclosed in double square brackets [[ ]]. When an algorithm uses an internal property of an object and the object does not implement the indicated internal property, a <b>TypeError</b> exception is thrown.</p>
 <p>The Table 8 summarises the internal properties used by this specification that are applicable to all ECMAScript objects. The Table 9 summarises the internal properties used by this specification that are only applicable to some ECMAScript objects. The descriptions in these tables indicate their behaviour for native ECMAScript objects, unless stated otherwise in this document for particular kinds of native ECMAScript objects. Host objects may support these internal properties with any implementation-dependent behaviour as long as it is consistent with the specific host object restrictions stated in this document.</p>
 <p>The &ldquo;Value Type Domain&rdquo; columns of the following tables define the types of values associated with internal properties. The type names refer to the types defined in Clause 8 augmented by the following additional names. &ldquo;<i>any</i>&rdquo; means the value may be any ECMAScript language type. &ldquo;<i>primitive</i>&rdquo; means Undefined, Null, Boolean, String, or Number. &ldquo;<i>SpecOp</i>&rdquo; means the internal property is an internal method, an implementation provided procedure defined by an abstract operation specification. &ldquo;SpecOp&rdquo; is followed by a list of descriptive parameter names. If a parameter name is the same as a type name then the name describes the type of the parameter. If a &ldquo;SpecOp&rdquo; returns a value, its parameter list is followed by the symbol &ldquo;&rarr;&rdquo; and the type of the returned value.</p>
-<figcaption>Table&nbsp;8 &mdash; Internal Properties Common to All Objects</figcaption>
 <figure>
+  <figcaption>Table&nbsp;8 &mdash; Internal Properties Common to All Objects</figcaption>
   <table class="real-table">
     <tr>
       <th>
@@ -2648,8 +2648,8 @@
 </ol>
 <p>The [[DefineOwnProperty]] internal method of a host object must not permit the addition of a new property to a host object if the [[Extensible]] internal property of that host object has been observed by ECMAScript code to be <b>false</b>.</p>
 <p>If the [[Extensible]] internal property of that host object has been observed by ECMAScript code to be <b>false</b> then it must not subsequently become <b>true</b>.</p>
-<figcaption><hr>Table&nbsp;9 &mdash; Internal Properties Only Defined for Some Objects</figcaption>
 <figure>
+  <figcaption><hr>Table&nbsp;9 &mdash; Internal Properties Only Defined for Some Objects</figcaption>
   <table class="real-table">
     <tr>
       <th>
@@ -2819,8 +2819,8 @@
   </table>
 </figure>
 <p>The [[NativeBrand]] internal property is used to identify native ECMASCript objects as objects that conform to specific parts of this specification. The value of a [[NativeBrand]] property is a single member of this set of enumerated values: NativeFunction, NativeArray, StringWrapper, BooleanWrapper, NumberWrapper, NativeMath, NativeDate, NativeRegExp, NativeError, NativeJSON, NativeArguments. The actual value of the [[NativeBrand]] internal property is only used to identify specific kinds of native ECMAScript objects. Host objects do not have this internal property,</p>
-<figcaption>Table&nbsp;10 &mdash; Values of the [[NativeBrand]]  Internal Property</figcaption>
 <figure>
+  <figcaption>Table&nbsp;10 &mdash; Values of the [[NativeBrand]]  Internal Property</figcaption>
   <table class="real-table">
     <tr>
       <th>
@@ -2959,8 +2959,8 @@
 <h1><span class="secnum"><a href="#sec-8.8" title="link to this section">8.8</a></span> The Completion Record Specification Type</h1>
 <p>The Completion type is a Record used to explain the runtime propagation of values and control flow such as the behaviour of statements (<code>break</code>, <code>continue</code>, <code>return</code> and <code>throw</code>) that perform nonlocal transfers of control.</p>
 <p>Values of the Completion type are Record value whole fileds are defined as by Table xxx.</p>
-<figcaption>Table&nbsp;xxx &mdash; Completion Record Fields</figcaption>
 <figure>
+  <figcaption>Table&nbsp;xxx &mdash; Completion Record Fields</figcaption>
   <table class="real-table">
     <tr>
       <th>
@@ -3609,7 +3609,7 @@
 </section>
 </section>
 </section>
-<section id="sec-9"><h1><span class="secnum"><a href="#sec-9" title="link to this section">9</a></span> Abstract Operations</h1> <p>These operations are not a part of the ECMAScript language; they are defined here to solely to aid the specification of the semantics of the ECMAScript Language.</p><section id="sec-9.1"><h1><span class="secnum"><a href="#sec-9.1" title="link to this section">9.1</a></span> Type Conversion and Testing</h1><p>The ECMAScript language implicitly performs automatic type conversion as needed. To clarify the semantics of certain constructs it is useful to define a set of conversion abstract operations.. The conversion abstract operations are polymorphic; that is, they can accept a value of any ECMAScript language type, but not of specification types.</p><section id="sec-9.1.1"><h1><span class="secnum"><a href="#sec-9.1.1" title="link to this section">9.1.1</a></span> ToPrimitive</h1><p>The abstract operation ToPrimitive takes an <span style="font-family: Times New Roman">input</span> <i>argument</i> and an optional argument <span style="font-family: Times New Roman; font-style: italic">PreferredType</span>. The abstract operation ToPrimitive converts its <span style="font-family: Times New Roman; font-style: italic">input</span> argument to a non-Object type. If an object is capable of converting to more than one primitive type, it may use the optional hint <span style="font-family: Times New Roman; font-style: italic">PreferredType</span> to favour that type. Conversion occurs according to Table 11:</p><figcaption>Table&nbsp;11 &mdash; ToPrimitive Conversions</figcaption><figure>
+<section id="sec-9"><h1><span class="secnum"><a href="#sec-9" title="link to this section">9</a></span> Abstract Operations</h1> <p>These operations are not a part of the ECMAScript language; they are defined here to solely to aid the specification of the semantics of the ECMAScript Language.</p><section id="sec-9.1"><h1><span class="secnum"><a href="#sec-9.1" title="link to this section">9.1</a></span> Type Conversion and Testing</h1><p>The ECMAScript language implicitly performs automatic type conversion as needed. To clarify the semantics of certain constructs it is useful to define a set of conversion abstract operations.. The conversion abstract operations are polymorphic; that is, they can accept a value of any ECMAScript language type, but not of specification types.</p><section id="sec-9.1.1"><h1><span class="secnum"><a href="#sec-9.1.1" title="link to this section">9.1.1</a></span> ToPrimitive</h1><p>The abstract operation ToPrimitive takes an <span style="font-family: Times New Roman">input</span> <i>argument</i> and an optional argument <span style="font-family: Times New Roman; font-style: italic">PreferredType</span>. The abstract operation ToPrimitive converts its <span style="font-family: Times New Roman; font-style: italic">input</span> argument to a non-Object type. If an object is capable of converting to more than one primitive type, it may use the optional hint <span style="font-family: Times New Roman; font-style: italic">PreferredType</span> to favour that type. Conversion occurs according to Table 11:</p><figure><figcaption>Table&nbsp;11 &mdash; ToPrimitive Conversions</figcaption>
 <table class="real-table">
   <tr>
     <th>
@@ -3681,7 +3681,7 @@
     </td>
   </tr>
 </table>
-</figure></section><section id="sec-9.1.2"><h1><span class="secnum"><a href="#sec-9.1.2" title="link to this section">9.1.2</a></span> ToBoolean</h1><p>The abstract operation ToBoolean converts its <i>argument</i> to a value of type Boolean according to Table 12:</p><figcaption>Table&nbsp;12 &mdash; ToBoolean Conversions</figcaption><figure>
+</figure></section><section id="sec-9.1.2"><h1><span class="secnum"><a href="#sec-9.1.2" title="link to this section">9.1.2</a></span> ToBoolean</h1><p>The abstract operation ToBoolean converts its <i>argument</i> to a value of type Boolean according to Table 12:</p><figure><figcaption>Table&nbsp;12 &mdash; ToBoolean Conversions</figcaption>
 <table class="real-table">
   <tr>
     <th>
@@ -3748,7 +3748,7 @@
     </td>
   </tr>
 </table>
-</figure></section><section id="sec-9.1.3"><h1><span class="secnum"><a href="#sec-9.1.3" title="link to this section">9.1.3</a></span> ToNumber</h1><p>The abstract operation ToNumber converts its <i>argument</i> to a value of type Number according to Table 13:</p><figcaption>Table&nbsp;13 &mdash; To Number Conversions</figcaption><figure>
+</figure></section><section id="sec-9.1.3"><h1><span class="secnum"><a href="#sec-9.1.3" title="link to this section">9.1.3</a></span> ToNumber</h1><p>The abstract operation ToNumber converts its <i>argument</i> to a value of type Number according to Table 13:</p><figure><figcaption>Table&nbsp;13 &mdash; To Number Conversions</figcaption>
 <table class="real-table">
   <tr>
     <th>
@@ -3929,7 +3929,7 @@
   <li>The substitution of <span style="font-family: Times New Roman">2<sup>16</sup></span> for <span style="font-family: Times New Roman">2<sup>32</sup></span> in step 4 is the only difference between ToUint32 and ToUint16.</li>
   <li>ToUint16 maps <b>&minus;0</b> to <b>+0</b>.</li>
 </ol>
-</div></section><section id="sec-9.1.8"><h1><span class="secnum"><a href="#sec-9.1.8" title="link to this section">9.1.8</a></span> ToString</h1><p>The abstract operation ToString converts its <i>argument</i> to a value of type String according to Table 14:</p><figcaption>Table&nbsp;14 &mdash; ToString Conversions</figcaption><figure>
+</div></section><section id="sec-9.1.8"><h1><span class="secnum"><a href="#sec-9.1.8" title="link to this section">9.1.8</a></span> ToString</h1><p>The abstract operation ToString converts its <i>argument</i> to a value of type String according to Table 14:</p><figure><figcaption>Table&nbsp;14 &mdash; ToString Conversions</figcaption>
 <table class="real-table">
   <tr>
     <th>
@@ -4017,7 +4017,7 @@
   <li>If x is any Number value other than <b>&minus;0</b>, then ToNumber(ToString(x)) is exactly the same Number value as x.</li>
   <li>The least significant digit of s is not always uniquely determined by the requirements listed in step 5.</li>
 </ol>
-</div><div class="note"><p><span class="nh">NOTE 2</span> For implementations that provide more accurate conversions than required by the rules above, it is recommended that the following alternative version of step 5 be used as a guideline:</p><p><span style="font-family: Times New Roman">Otherwise, let <i>n</i>, <i>k</i>, and <i>s</i> be integers such that <i>k</i></span> <span style="font-family: Times New Roman">&ge; 1, 10<sup><i>k</i>&minus;1</sup></span> <span style="font-family: Times New Roman">&le;</span> <span style="font-family: Times New Roman"><i>s</i> &lt; 10<span style="font-style: italic; vertical-align: super">k</span>, the Number value for <i>s</i></span> <span style="font-family: Times New Roman">&times; 10<sup><i>n</i>&minus;<i>k</i></sup> is <i>m</i>, and <i>k</i> is as small as possible. If there are multiple possibilities for <i>s</i>, choose the value of <i>s</i> for which <i>s</i></span> <span style="font-family: Times New Roman">&times; 10<sup><i>n</i>&minus;<i>k</i></sup> is closest in value to <i>m</i>. If there are two such possible values of <i>s</i>, choose the one that is even. Note that <i>k</i> is the number of digits in the decimal representation of <i>s</i> and that <i>s</i> is not divisible by 10.</span></p></div><div class="note"><p><span class="nh">NOTE 3</span> Implementers of ECMAScript may find useful the paper and code written by David M. Gay for binary-to-decimal conversion of floating-point numbers:</p><p>Gay, David M. Correctly Rounded Binary-Decimal and Decimal-Binary Conversions. Numerical Analysis, Manuscript 90-10. AT&amp;T Bell Laboratories (Murray Hill, New Jersey). November 30, 1990. Available as<br>http://cm.bell-labs.com/cm/cs/doc/90/4-10.ps.gz. Associated code available as<br>http://cm.bell-labs.com/netlib/fp/dtoa.c.gz&nbsp;and&nbsp;as<br>http://cm.bell-labs.com/netlib/fp/g_fmt.c.gz and may also be found at the various <code>netlib</code> mirror sites.</p></div></section></section><section id="sec-9.1.9"><h1><span class="secnum"><a href="#sec-9.1.9" title="link to this section">9.1.9</a></span> ToObject</h1><p>The abstract operation ToObject converts its <i>argument</i> to a value of type Object according to Table 15:</p><figcaption>Table&nbsp;15 &mdash; ToObject</figcaption><figure>
+</div><div class="note"><p><span class="nh">NOTE 2</span> For implementations that provide more accurate conversions than required by the rules above, it is recommended that the following alternative version of step 5 be used as a guideline:</p><p><span style="font-family: Times New Roman">Otherwise, let <i>n</i>, <i>k</i>, and <i>s</i> be integers such that <i>k</i></span> <span style="font-family: Times New Roman">&ge; 1, 10<sup><i>k</i>&minus;1</sup></span> <span style="font-family: Times New Roman">&le;</span> <span style="font-family: Times New Roman"><i>s</i> &lt; 10<span style="font-style: italic; vertical-align: super">k</span>, the Number value for <i>s</i></span> <span style="font-family: Times New Roman">&times; 10<sup><i>n</i>&minus;<i>k</i></sup> is <i>m</i>, and <i>k</i> is as small as possible. If there are multiple possibilities for <i>s</i>, choose the value of <i>s</i> for which <i>s</i></span> <span style="font-family: Times New Roman">&times; 10<sup><i>n</i>&minus;<i>k</i></sup> is closest in value to <i>m</i>. If there are two such possible values of <i>s</i>, choose the one that is even. Note that <i>k</i> is the number of digits in the decimal representation of <i>s</i> and that <i>s</i> is not divisible by 10.</span></p></div><div class="note"><p><span class="nh">NOTE 3</span> Implementers of ECMAScript may find useful the paper and code written by David M. Gay for binary-to-decimal conversion of floating-point numbers:</p><p>Gay, David M. Correctly Rounded Binary-Decimal and Decimal-Binary Conversions. Numerical Analysis, Manuscript 90-10. AT&amp;T Bell Laboratories (Murray Hill, New Jersey). November 30, 1990. Available as<br>http://cm.bell-labs.com/cm/cs/doc/90/4-10.ps.gz. Associated code available as<br>http://cm.bell-labs.com/netlib/fp/dtoa.c.gz&nbsp;and&nbsp;as<br>http://cm.bell-labs.com/netlib/fp/g_fmt.c.gz and may also be found at the various <code>netlib</code> mirror sites.</p></div></section></section><section id="sec-9.1.9"><h1><span class="secnum"><a href="#sec-9.1.9" title="link to this section">9.1.9</a></span> ToObject</h1><p>The abstract operation ToObject converts its <i>argument</i> to a value of type Object according to Table 15:</p><figure><figcaption>Table&nbsp;15 &mdash; ToObject</figcaption>
 <table class="real-table">
   <tr>
     <th>
@@ -4084,7 +4084,7 @@
     </td>
   </tr>
 </table>
-</figure></section></section><section id="sec-9.2"><h1><span class="secnum"><a href="#sec-9.2" title="link to this section">9.2</a></span> Testing and Comparision Operations</h1><section id="sec-9.2.1"><h1><span class="secnum"><a href="#sec-9.2.1" title="link to this section">9.2.1</a></span> CheckObjectCoercible</h1><p>The abstract operation CheckObjectCoercible throws an error if its argument is a value that cannot be converted to an Object using ToObject. It is defined by Table 16:</p><figcaption>Table&nbsp;16 &mdash; CheckObjectCoercible Results</figcaption><figure>
+</figure></section></section><section id="sec-9.2"><h1><span class="secnum"><a href="#sec-9.2" title="link to this section">9.2</a></span> Testing and Comparision Operations</h1><section id="sec-9.2.1"><h1><span class="secnum"><a href="#sec-9.2.1" title="link to this section">9.2.1</a></span> CheckObjectCoercible</h1><p>The abstract operation CheckObjectCoercible throws an error if its argument is a value that cannot be converted to an Object using ToObject. It is defined by Table 16:</p><figure><figcaption>Table&nbsp;16 &mdash; CheckObjectCoercible Results</figcaption>
 <table class="real-table">
   <tr>
     <th>
@@ -4151,7 +4151,7 @@
     </td>
   </tr>
 </table>
-</figure></section><section id="sec-9.2.2"><h1><span class="secnum"><a href="#sec-9.2.2" title="link to this section">9.2.2</a></span> IsCallable</h1><p>The abstract operation IsCallable determines if its <i>argument</i>, which must be an ECMAScript language value, is a callable function Object according to Table 17:</p><figcaption>Table&nbsp;17 &mdash; IsCallable Results</figcaption><figure>
+</figure></section><section id="sec-9.2.2"><h1><span class="secnum"><a href="#sec-9.2.2" title="link to this section">9.2.2</a></span> IsCallable</h1><p>The abstract operation IsCallable determines if its <i>argument</i>, which must be an ECMAScript language value, is a callable function Object according to Table 17:</p><figure><figcaption>Table&nbsp;17 &mdash; IsCallable Results</figcaption>
 <table class="real-table">
   <tr>
     <th>
@@ -4283,8 +4283,8 @@
 <h1><span class="secnum"><a href="#sec-10.2.1" title="link to this section">10.2.1</a></span> Environment Records</h1>
 <p>There are two kinds of Environment Record values used in this specification: <i>declarative environment records</i> and <i>object environment records</i>.  Declarative environment records are used to define the effect of ECMAScript language syntactic elements such as <span style="font-family: Times New Roman; font-style: italic">FunctionDeclarations</span>, <span style="font-family: Times New Roman; font-style: italic">VariableDeclarations</span>, and <span style="font-family: Times New Roman; font-style: italic">Catch</span> clauses that directly associate identifier bindings with ECMAScript language values. Object environment records are used to define the effect of ECMAScript elements such as <span style="font-family: Times New Roman; font-style: italic">Program</span> and <span style="font-family: Times New Roman; font-style: italic">WithStatement</span> that associate identifier bindings with the properties of some object.</p>
 <p>For specification purposes Environment Record values can be thought of as existing in a simple object-oriented hierarchy where Environment Record is an abstract class with two concrete subclasses, declarative environment record and object environment record. The abstract class includes the abstract specification methods defined in Table 18. These abstract methods have distinct concrete algorithms for each of the concrete subclasses.</p>
-<figcaption>Table&nbsp;18 &mdash; Abstract Methods of Environment Records</figcaption>
 <figure>
+  <figcaption>Table&nbsp;18 &mdash; Abstract Methods of Environment Records</figcaption>
   <table class="real-table">
     <tr>
       <th>
@@ -4348,8 +4348,8 @@
 <h1><span class="secnum"><a href="#sec-10.2.1.1" title="link to this section">10.2.1.1</a></span> Declarative Environment Records</h1>
 <p>Each declarative environment record is associated with an ECMAScript program scope containing variable, constant, and/or function declarations. A declarative environment record binds the set of identifiers defined by the declarations contained within its scope.</p>
 <p>In addition to the mutable bindings supported by all Environment Records, declarative environment records also provide for immutable bindings.  An immutable binding is one where the association between an identifier and a value may not be modified once it has been established. Creation and initialisation of declarative binding are distinct steps so it is possible for such bindings to exist in either an initialised or uninitialised state. Declarative environment records support the methods listed in Table 19 in addition to the Environment Record abstract specification methods:</p>
-<figcaption>Table&nbsp;19 &mdash; Additional Methods of Declarative Environment Records</figcaption>
 <figure>
+  <figcaption>Table&nbsp;19 &mdash; Additional Methods of Declarative Environment Records</figcaption>
   <table class="real-table">
     <tr>
       <th>
@@ -4589,8 +4589,8 @@
 <h1><span class="secnum"><a href="#sec-10.3" title="link to this section">10.3</a></span> Execution Contexts</h1>
 <p>When control is transferred to ECMAScript executable code, control is entering an <i>execution context</i>. Active execution contexts logically form a stack. The top execution context on this logical stack is the running execution context. A new execution context is created whenever control is transferred from the executable code associated with the currently running execution context to executable code that is not associated with that execution context. The newly created execution context is pushed onto the stack and becomes the running execution context.</p>
 <p>An execution context contains whatever state is necessary to track the execution progress of its associated code. In addition, each execution context has the state components listed in Table 20.</p>
-<figcaption>Table&nbsp;20 &mdash;Execution Context State Components</figcaption>
 <figure>
+  <figcaption>Table&nbsp;20 &mdash;Execution Context State Components</figcaption>
   <table class="real-table">
     <tr>
       <th>
@@ -5721,8 +5721,8 @@
   <li>If <i>val</i> is an abrupt completion, return <i>val</i>.</li>
   <li>Return a String determined by Type(<i>val</i>) according to Table 21.</li>
 </ol>
-<figcaption>Table&nbsp;21 &mdash; typeof Operator Results</figcaption>
 <figure>
+  <figcaption>Table&nbsp;21 &mdash; typeof Operator Results</figcaption>
   <table class="real-table">
     <tr>
       <th>
@@ -9598,8 +9598,8 @@
   <p><span class="nh">NOTE</span> This syntax of Uniform Resource Identifiers is based upon RFC 2396 and does not reflect the more recent RFC 3986 which replaces RFC 2396.  A formal description and implementation of UTF-8 is given in RFC 3629.</p>
 </div>
 <p>In UTF-8, characters are encoded using sequences of 1 to 6 octets. The only octet of a "sequence" of one has the higher-order bit set to 0, the remaining 7 bits being used to encode the character value. In a sequence of n octets, n&gt;1, the initial octet has the n higher-order bits set to 1, followed by a bit set to 0. The remaining bits of that octet contain bits from the value of the character to be encoded. The following octets all have the higher-order bit set to 1 and the following bit set to 0, leaving 6 bits in each to contain bits from the character to be encoded. The possible UTF-8 encodings of ECMAScript characters are specified in Table 22.</p>
-<figcaption>Table&nbsp;22 &mdash; UTF-8 Encodings</figcaption>
 <figure>
+  <figcaption>Table&nbsp;22 &mdash; UTF-8 Encodings</figcaption>
   <table class="real-table">
     <tr>
       <td>
@@ -10144,8 +10144,8 @@
   <li>Else, let <i>tag</i> be the string value <code>"Object"</code>.</li>
   <li>Return the String value that is the result of concatenating the three Strings <code>"[object "</code>, <i>tag</i>, and <code>"]"</code>.</li>
 </ol>
-<figcaption>Table&nbsp;23 &mdash; Tags for Classified Native Objects</figcaption>
 <figure>
+  <figcaption>Table&nbsp;23 &mdash; Tags for Classified Native Objects</figcaption>
   <table class="real-table">
     <tr>
       <td>
@@ -11968,8 +11968,8 @@
 <p>If <span style="font-family: Times New Roman; font-style: italic">searchValue</span> is not a regular expression, let <span style="font-family: Times New Roman; font-style: italic">searchString</span> be <span style="font-family: Times New Roman">ToString(<i>searchValue</i>)</span> and search <span style="font-family: Times New Roman; font-style: italic">string</span> for the first occurrence of <span style="font-family: Times New Roman; font-style: italic">searchString</span>. Let <span style="font-family: Times New Roman; font-style: italic">m</span> be 0.</p>
 <p>If <span style="font-family: Times New Roman; font-style: italic">replaceValue</span> is a function, then for each matched substring, call the function with the following <span style="font-family: Times New Roman; font-style: italic">m</span> + 3 arguments. Argument 1 is the substring that matched. If <span style="font-family: Times New Roman; font-style: italic">searchValue</span> is a regular expression, the next <span style="font-family: Times New Roman; font-style: italic">m</span> arguments are all of the captures in the MatchResult (see 15.10.2.1). Argument <span style="font-family: Times New Roman; font-style: italic">m</span> + 2 is the offset within <span style="font-family: Times New Roman; font-style: italic">string</span> where the match occurred, and argument <span style="font-family: Times New Roman; font-style: italic">m</span> + 3 is <span style="font-family: Times New Roman; font-style: italic">string</span>. The result is a String value derived from the original input by replacing each matched substring with the corresponding return value of the function call, converted to a String if need be.</p>
 <p>Otherwise, let <span style="font-family: Times New Roman; font-style: italic">newstring</span> denote the result of converting <span style="font-family: Times New Roman; font-style: italic">replaceValue</span> to a String. The result is a String value derived from the original input String by replacing each matched substring with a String derived from <span style="font-family: Times New Roman; font-style: italic">newstring</span> by replacing characters in <span style="font-family: Times New Roman; font-style: italic">newstring</span> by replacement text as specified in Table 24. These <code>$</code> replacements are done left-to-right, and, once such a replacement is performed, the new replacement text is not subject to further replacements. For example, <code>"$1,$2".replace(/(\$(\d))/g, "$$1-$1$2")</code> returns <code>"$1-$11,$1-$22"</code>. A <code>$</code> in <span style="font-family: Times New Roman; font-style: italic">newstring</span> that does not match any of the forms below is left as is.</p>
-<figcaption>Table&nbsp;24 &mdash; Replacement Text Symbol Substitutions</figcaption>
 <figure>
+  <figcaption>Table&nbsp;24 &mdash; Replacement Text Symbol Substitutions</figcaption>
   <table class="real-table">
     <tr>
       <th>
@@ -14424,8 +14424,8 @@ THH:mm:ss.sss</pre>
 <section id="sec-15.10.2.10">
 <h1><span class="secnum"><a href="#sec-15.10.2.10" title="link to this section">15.10.2.10</a></span> CharacterEscape</h1>
 <p>The production <span style="font-family: Times New Roman; font-style: italic">CharacterEscape</span> <b>::</b> <span style="font-family: Times New Roman; font-style: italic">ControlEscape</span> evaluates by returning the character according to Table 25.</p>
-<figcaption>Table&nbsp;25 &mdash; ControlEscape Character Values</figcaption>
 <figure>
+  <figcaption>Table&nbsp;25 &mdash; ControlEscape Character Values</figcaption>
   <table class="real-table">
     <tr>
       <td>
