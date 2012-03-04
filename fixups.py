@@ -665,6 +665,19 @@ def fixup_grammar(e):
         elif kid.name in ('body', 'section', 'div'):
             fixup_grammar(kid)
 
+def fixup_tables(doc):
+    for td in findall(doc, 'td'):
+        if len(td.content) == 1 and ht_name_is(td.content[0], 'p'):
+            p = td.content[0]
+            if p.style and p.style.get('background-color') == '#C0C0C0':
+                td.name = 'th'
+                del p.style['background-color']
+            if len(p.content) == 1 and ht_name_is(p.content[0], 'span'):
+                span = p.content[0]
+                if span.style and span.style.get('background-color') == '#C0C0C0':
+                    td.name = 'th'
+                    del span.style['background-color']
+
 def fixup(doc, styles):
     fixup_formatting(doc, styles)
     fixup_paragraph_classes(doc)
@@ -678,4 +691,5 @@ def fixup(doc, styles):
     fixup_notes(doc)
     fixup_lists(doc)
     fixup_grammar(doc)
+    fixup_tables(doc)
     return doc

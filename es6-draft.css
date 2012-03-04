@@ -30,6 +30,10 @@ h2 { font-size: 100%; margin-bottom: 1em; }
 
 h1 > span.section-status { display: block; }
 
+p {
+    text-align: justify;
+}
+
 b, em.jargon-first-use, span.this, span.value, span.libname,
 span.errorname, code, pre {
     color: #555555;

@@ -1,6 +1,7 @@
 import zipfile
 from xml.etree import ElementTree
 from cgi import escape
+import re
 
 namespaces = {
     'http://schemas.openxmlformats.org/wordprocessingml/2006/main': '',
@@ -34,15 +35,17 @@ k_ascii = bloat('ascii')
 k_hAnsi = bloat('hAnsi')
 k_cs = bloat('cs')
 k_eastAsia = bloat('eastAsia')
+k_fill = bloat('fill')
+k_color = bloat('color')
 
-def parse_pr(e):
+def parse_pr(e, suppress_shading=False):
     font_keys = {k_ascii, k_hAnsi, k_cs, k_eastAsia}
 
     assert e.text is None
 
     pr = {}
     def put(k, v):
-        if k in pr:
+        if k in pr and pr[k] != v:
             raise Exception("duplicate CSS property on the same element: " + k)
         pr[k] = v
 
@@ -93,6 +96,14 @@ def parse_pr(e):
                 elif v == 'subscript':
                     put('vertical-align', 'sub')
 
+        elif name == 'shd':
+            # Suppress shading in pPr>rPr since that would give wrong semantics (yuck).
+            if not suppress_shading:
+                if k.get(k_val) == "solid" and k.get(k_fill) == "FFFFFF":
+                    color = k.get(k_color)
+                    if color is not None and re.match(r'^[0-9a-fA-F]{6}$', color):
+                        put('background-color', '#' + color)
+
         # todo: shd, jc, ind, spacing, contextualSpacing
         # todo: pBdr
 
@@ -120,7 +131,7 @@ def parse_pr(e):
                 put('@cls', k.get(k_val))
 
         elif name == 'rPr':
-            for k, v in parse_pr(k).items():
+            for k, v in parse_pr(k, suppress_shading=True).items():
                 put(k, v)
 
     return pr
