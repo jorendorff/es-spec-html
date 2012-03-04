@@ -15,12 +15,12 @@
   <p>For copyright information, see ECMA's legal disclaimer in the document itself.</p>
 </div>
 <p>
-  <p>ECMA-262</p>
-  <p>6<sup>th</sup> Edition / Draft February 27 , 2012</p>
-  <p>ECMAScript Language Specification</p>
+  <h1>ECMA-262</h1>
+  <h1>6<sup>th</sup> Edition / Draft February 27 , 2012</h1>
+  <h1>ECMAScript Language Specification</h1>
   <p>Draft</p>
-  <p>Ecma/TC39/2011/0xx</p>
-  <p>Draft</p>
+  <h1>Ecma/TC39/2011/0xx</h1>
+  <h1>Draft</h1>
 </p>
 <hr>
 <p>Contents&#x9;Page</p>
@@ -3908,7 +3908,7 @@
 </div>
 <div class="note">
   <p><span class="nh">NOTE 3</span> Implementers of ECMAScript may find useful the paper and code written by David M. Gay for binary-to-decimal conversion of floating-point numbers:</p>
-  <p>Gay, David M. Correctly Rounded Binary-Decimal and Decimal-Binary Conversions. Numerical Analysis, Manuscript 90-10. AT&amp;T Bell Laboratories (Murray Hill, New Jersey). November 30, 1990. Available as<br><span style="font-family: sans-serif">http://cm.bell-labs.com/cm/cs/doc/90/4-10.ps.gz</span>. Associated code available as<br><span style="font-family: sans-serif">http://cm.bell-labs.com/netlib/fp/dtoa.c.gz</span>&nbsp;and&nbsp;as<br><span style="font-family: sans-serif">http://cm.bell-labs.com/netlib/fp/g_fmt.c.gz</span> and may also be found at the various <code>netlib</code> mirror sites.</p>
+  <p>Gay, David M. Correctly Rounded Binary-Decimal and Decimal-Binary Conversions. Numerical Analysis, Manuscript 90-10. AT&amp;T Bell Laboratories (Murray Hill, New Jersey). November 30, 1990. Available as<br>http://cm.bell-labs.com/cm/cs/doc/90/4-10.ps.gz. Associated code available as<br>http://cm.bell-labs.com/netlib/fp/dtoa.c.gz&nbsp;and&nbsp;as<br>http://cm.bell-labs.com/netlib/fp/g_fmt.c.gz and may also be found at the various <code>netlib</code> mirror sites.</p>
 </div>
 </section>
 </section>
@@ -6740,8 +6740,8 @@
 <h1><span class="secnum"><a href="#sec-11.14" title="link to this section">11.14</a></span> Comma Operator ( <span style="font-family: monospace">, )</span></h1>
 <h2>Syntax</h2>
 <div class="gp">
-  <div class="lhs"><i>Expression</i> <span style="font-family: sans-serif; font-weight: bold">:</span></div>
-  <div class="rhs"><i>AssignmentExpression</i><br>Expression <code>,</code> AssignmentExpression</div>
+  <div class="lhs">Expression <span style="font-family: sans-serif; font-weight: bold">:</span></div>
+  <div class="rhs">AssignmentExpression<br>Expression <code>,</code> AssignmentExpression</div>
 </div>
 <div class="gp">
   <div class="lhs">ExpressionNoIn <span style="font-family: sans-serif; font-weight: bold">:</span></div>
@@ -9569,7 +9569,7 @@
         <p><code>00000000</code> <span style="font-family: monospace"><b>0</b><i>zzzzzzz</i></span></p>
       </td>
       <td>
-        <p><span style="font-family: monospace"><b>0</b><i>zzzzzzz</i></span></p>
+        <p><b>0</b><i>zzzzzzz</i></p>
       </td>
       <td>
       </td>
@@ -9586,83 +9586,67 @@
         <p><span style="font-family: monospace"><b>00000</b><i>yyy yyzzzzzz</i></span></p>
       </td>
       <td>
-        <p><span style="font-family: monospace"><b>110</b><i>yyyyy</i></span></p>
+        <p><b>110</b><i>yyyyy</i></p>
       </td>
       <td>
-        <p><span style="font-family: monospace"><b>10</b><i>zzzzzz</i></span></p>
+        <p><b>10</b><i>zzzzzz</i></p>
       </td>
       <td>
-      </td>
-      <td>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <pre>0x0800 - 0xD7FF</pre>
-      </td>
-      <td>
-        <p><span style="font-family: monospace; font-style: italic">xxxxyyyy yyzzzzzz</span></p>
-      </td>
-      <td>
-        <p><span style="font-family: monospace"><b>1110</b><i>xxxx</i></span></p>
-      </td>
-      <td>
-        <p><span style="font-family: monospace"><b>10</b><i>yyyyyy</i></span></p>
-      </td>
-      <td>
-        <p><span style="font-family: monospace"><b>10</b><i>zzzzzz</i></span></p>
       </td>
       <td>
       </td>
     </tr>
     <tr>
       <td>
-        <pre>0xD800 - 0xDBFF</pre>
+        <p><b>0x0800 - 0xD7FF</b></p>
+      </td>
+      <td>
+        <p><i>xxxxyyyy yyzzzzzz</i></p>
+      </td>
+      <td>
+        <p><b>1110</b><i>xxxx</i></p>
+      </td>
+      <td>
+        <p><b>10</b><i>yyyyyy</i></p>
+      </td>
+      <td>
+        <p><b>10</b><i>zzzzzz</i></p>
+      </td>
+      <td>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><b>0xD800 - 0xDBFF</b></p>
         <p><span style="font-family: sans-serif; font-style: italic">followed by</span></p>
-        <pre>0xDC00 &ndash; 0xDFFF</pre>
+        <p><b>0xDC00 &ndash; 0xDFFF</b></p>
       </td>
       <td>
-        <p><span style="font-family: monospace"><b>110110</b><i>vv vvwwwwxx</i></span></p>
+        <p><b>110110</b><i>vv vvwwwwxx</i></p>
         <p><span style="font-family: sans-serif; font-style: italic">followed by</span></p>
-        <p><span style="font-family: monospace"><b>110111</b><i>yy yyzzzzzz</i></span></p>
+        <p><b>110111</b><i>yy yyzzzzzz</i></p>
       </td>
       <td>
-        <p><span style="font-family: monospace"><b>11110</b><i>uuu</i></span></p>
+        <p><b>11110</b><i>uuu</i></p>
       </td>
       <td>
-        <p><span style="font-family: monospace"><b>10</b><i>uuwwww</i></span></p>
+        <p><b>10</b><i>uuwwww</i></p>
       </td>
       <td>
-        <p><span style="font-family: monospace"><b>10</b><i>xxyyyy</i></span></p>
+        <p><b>10</b><i>xxyyyy</i></p>
       </td>
       <td>
-        <p><span style="font-family: monospace"><b>10</b><i>zzzzzz</i></span></p>
+        <p><b>10</b><i>zzzzzz</i></p>
       </td>
     </tr>
     <tr>
       <td>
-        <pre>0xD800 - 0xDBFF</pre>
+        <p><b>0xD800 - 0xDBFF</b></p>
         <p><span style="font-family: sans-serif; font-style: italic">not followed by</span></p>
-        <pre>0xDC00 &ndash; 0xDFFF</pre>
+        <p><b>0xDC00 &ndash; 0xDFFF</b></p>
       </td>
       <td>
-        <p><span style="font-family: sans-serif; font-style: italic">causes</span> <span style="font-family: monospace">URIError</span></p>
-      </td>
-      <td>
-      </td>
-      <td>
-      </td>
-      <td>
-      </td>
-      <td>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <pre>0xDC00 &ndash; 0xDFFF</pre>
-      </td>
-      <td>
-        <p><span style="font-family: sans-serif; font-style: italic">causes</span> <span style="font-family: monospace">URIError</span></p>
+        <p><span style="font-family: sans-serif; font-style: italic">causes</span> URIError</p>
       </td>
       <td>
       </td>
@@ -9675,19 +9659,35 @@
     </tr>
     <tr>
       <td>
-        <pre>0xE000 - 0xFFFF</pre>
+        <p><b>0xDC00 &ndash; 0xDFFF</b></p>
       </td>
       <td>
-        <p><span style="font-family: monospace; font-style: italic">xxxxyyyy yyzzzzzz</span></p>
+        <p><span style="font-family: sans-serif; font-style: italic">causes</span> URIError</p>
       </td>
       <td>
-        <p><span style="font-family: monospace"><b>1110</b><i>xxxx</i></span></p>
       </td>
       <td>
-        <p><span style="font-family: monospace"><b>10</b><i>yyyyyy</i></span></p>
       </td>
       <td>
-        <p><span style="font-family: monospace"><b>10</b><i>zzzzzz</i></span></p>
+      </td>
+      <td>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><b>0xE000 - 0xFFFF</b></p>
+      </td>
+      <td>
+        <p><i>xxxxyyyy yyzzzzzz</i></p>
+      </td>
+      <td>
+        <p><b>1110</b><i>xxxx</i></p>
+      </td>
+      <td>
+        <p><b>10</b><i>yyyyyy</i></p>
+      </td>
+      <td>
+        <p><b>10</b><i>zzzzzz</i></p>
       </td>
       <td>
       </td>
@@ -13958,197 +13958,197 @@ THH:mm:ss.sss</pre>
   <table class="real-table">
     <tr>
       <td>
-        <p><span style="font-family: monospace">a</span></p>
+        <p>a</p>
       </td>
       <td>
-        <p><span style="font-family: monospace">b</span></p>
+        <p>b</p>
       </td>
       <td>
-        <p><span style="font-family: monospace">c</span></p>
+        <p>c</p>
       </td>
       <td>
-        <p><span style="font-family: monospace">d</span></p>
+        <p>d</p>
       </td>
       <td>
-        <p><span style="font-family: monospace">e</span></p>
+        <p>e</p>
       </td>
       <td>
-        <p><span style="font-family: monospace">f</span></p>
+        <p>f</p>
       </td>
       <td>
-        <p><span style="font-family: monospace">g</span></p>
+        <p>g</p>
       </td>
       <td>
-        <p><span style="font-family: monospace">h</span></p>
+        <p>h</p>
       </td>
       <td>
-        <p><span style="font-family: monospace">i</span></p>
+        <p>i</p>
       </td>
       <td>
-        <p><span style="font-family: monospace">j</span></p>
+        <p>j</p>
       </td>
       <td>
-        <p><span style="font-family: monospace">k</span></p>
+        <p>k</p>
       </td>
       <td>
-        <p><span style="font-family: monospace">l</span></p>
+        <p>l</p>
       </td>
       <td>
-        <p><span style="font-family: monospace">m</span></p>
+        <p>m</p>
       </td>
       <td>
-        <p><span style="font-family: monospace">n</span></p>
+        <p>n</p>
       </td>
       <td>
-        <p><span style="font-family: monospace">o</span></p>
+        <p>o</p>
       </td>
       <td>
-        <p><span style="font-family: monospace">p</span></p>
+        <p>p</p>
       </td>
       <td>
-        <p><span style="font-family: monospace">q</span></p>
+        <p>q</p>
       </td>
       <td>
-        <p><span style="font-family: monospace">r</span></p>
+        <p>r</p>
       </td>
       <td>
-        <p><span style="font-family: monospace">s</span></p>
+        <p>s</p>
       </td>
       <td>
-        <p><span style="font-family: monospace">t</span></p>
+        <p>t</p>
       </td>
       <td>
-        <p><span style="font-family: monospace">u</span></p>
+        <p>u</p>
       </td>
       <td>
-        <p><span style="font-family: monospace">v</span></p>
+        <p>v</p>
       </td>
       <td>
-        <p><span style="font-family: monospace">w</span></p>
+        <p>w</p>
       </td>
       <td>
-        <p><span style="font-family: monospace">x</span></p>
+        <p>x</p>
       </td>
       <td>
-        <p><span style="font-family: monospace">y</span></p>
+        <p>y</p>
       </td>
       <td>
-        <p><span style="font-family: monospace">z</span></p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <p><span style="font-family: monospace">A</span></p>
-      </td>
-      <td>
-        <p><span style="font-family: monospace">B</span></p>
-      </td>
-      <td>
-        <p><span style="font-family: monospace">C</span></p>
-      </td>
-      <td>
-        <p><span style="font-family: monospace">D</span></p>
-      </td>
-      <td>
-        <p><span style="font-family: monospace">E</span></p>
-      </td>
-      <td>
-        <p><span style="font-family: monospace">F</span></p>
-      </td>
-      <td>
-        <p><span style="font-family: monospace">G</span></p>
-      </td>
-      <td>
-        <p><span style="font-family: monospace">H</span></p>
-      </td>
-      <td>
-        <p><span style="font-family: monospace">I</span></p>
-      </td>
-      <td>
-        <p><span style="font-family: monospace">J</span></p>
-      </td>
-      <td>
-        <p><span style="font-family: monospace">K</span></p>
-      </td>
-      <td>
-        <p><span style="font-family: monospace">L</span></p>
-      </td>
-      <td>
-        <p><span style="font-family: monospace">M</span></p>
-      </td>
-      <td>
-        <p><span style="font-family: monospace">N</span></p>
-      </td>
-      <td>
-        <p><span style="font-family: monospace">O</span></p>
-      </td>
-      <td>
-        <p><span style="font-family: monospace">P</span></p>
-      </td>
-      <td>
-        <p><span style="font-family: monospace">Q</span></p>
-      </td>
-      <td>
-        <p><span style="font-family: monospace">R</span></p>
-      </td>
-      <td>
-        <p><span style="font-family: monospace">S</span></p>
-      </td>
-      <td>
-        <p><span style="font-family: monospace">T</span></p>
-      </td>
-      <td>
-        <p><span style="font-family: monospace">U</span></p>
-      </td>
-      <td>
-        <p><span style="font-family: monospace">V</span></p>
-      </td>
-      <td>
-        <p><span style="font-family: monospace">W</span></p>
-      </td>
-      <td>
-        <p><span style="font-family: monospace">X</span></p>
-      </td>
-      <td>
-        <p><span style="font-family: monospace">Y</span></p>
-      </td>
-      <td>
-        <p><span style="font-family: monospace">Z</span></p>
+        <p>z</p>
       </td>
     </tr>
     <tr>
       <td>
-        <p><span style="font-family: monospace">0</span></p>
+        <p>A</p>
       </td>
       <td>
-        <p><span style="font-family: monospace">1</span></p>
+        <p>B</p>
       </td>
       <td>
-        <p><span style="font-family: monospace">2</span></p>
+        <p>C</p>
       </td>
       <td>
-        <p><span style="font-family: monospace">3</span></p>
+        <p>D</p>
       </td>
       <td>
-        <p><span style="font-family: monospace">4</span></p>
+        <p>E</p>
       </td>
       <td>
-        <p><span style="font-family: monospace">5</span></p>
+        <p>F</p>
       </td>
       <td>
-        <p><span style="font-family: monospace">6</span></p>
+        <p>G</p>
       </td>
       <td>
-        <p><span style="font-family: monospace">7</span></p>
+        <p>H</p>
       </td>
       <td>
-        <p><span style="font-family: monospace">8</span></p>
+        <p>I</p>
       </td>
       <td>
-        <p><span style="font-family: monospace">9</span></p>
+        <p>J</p>
       </td>
       <td>
-        <p><span style="font-family: monospace">_</span></p>
+        <p>K</p>
+      </td>
+      <td>
+        <p>L</p>
+      </td>
+      <td>
+        <p>M</p>
+      </td>
+      <td>
+        <p>N</p>
+      </td>
+      <td>
+        <p>O</p>
+      </td>
+      <td>
+        <p>P</p>
+      </td>
+      <td>
+        <p>Q</p>
+      </td>
+      <td>
+        <p>R</p>
+      </td>
+      <td>
+        <p>S</p>
+      </td>
+      <td>
+        <p>T</p>
+      </td>
+      <td>
+        <p>U</p>
+      </td>
+      <td>
+        <p>V</p>
+      </td>
+      <td>
+        <p>W</p>
+      </td>
+      <td>
+        <p>X</p>
+      </td>
+      <td>
+        <p>Y</p>
+      </td>
+      <td>
+        <p>Z</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p>0</p>
+      </td>
+      <td>
+        <p>1</p>
+      </td>
+      <td>
+        <p>2</p>
+      </td>
+      <td>
+        <p>3</p>
+      </td>
+      <td>
+        <p>4</p>
+      </td>
+      <td>
+        <p>5</p>
+      </td>
+      <td>
+        <p>6</p>
+      </td>
+      <td>
+        <p>7</p>
+      </td>
+      <td>
+        <p>8</p>
+      </td>
+      <td>
+        <p>9</p>
+      </td>
+      <td>
+        <p>_</p>
       </td>
       <td>
       </td>
@@ -16025,7 +16025,7 @@ THH:mm:ss.sss</pre>
   <div class="rhs"><code>true<br>false</code></div>
 </div>
 <div class="gp">
-  <div class="lhs"><i>NumericLiteral</i> <span style="font-family: sans-serif"><b>::</b>&#x9;See 7.8.3</span></div>
+  <div class="lhs">NumericLiteral <span style="font-family: sans-serif"><b>::</b>&#x9;See 7.8.3</span></div>
   <div class="rhs">DecimalLiteral<br>HexIntegerLiteral</div>
 </div>
 <div class="gp">
@@ -16254,7 +16254,7 @@ THH:mm:ss.sss</pre>
 </div>
 <div class="gp">
   <div class="lhs">MemberExpression <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 11.2</span></div>
-  <div class="rhs">PrimaryExpression<br>FunctionExpression<br>MemberExpression <code>[</code> Expression <code>]<br></code>MemberExpression <code>.</code> IdentifierName<br><code>new</code> MemberExpression <i>Arguments</i></div>
+  <div class="rhs">PrimaryExpression<br>FunctionExpression<br>MemberExpression <code>[</code> Expression <code>]<br></code>MemberExpression <code>.</code> IdentifierName<br><code>new</code> MemberExpression Arguments</div>
 </div>
 <div class="gp">
   <div class="lhs">NewExpression <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See 11.2</span></div>
@@ -16629,8 +16629,8 @@ THH:mm:ss.sss</pre>
   <div class="rhs">PatternCharacter<br><span style="font-family: monospace">.</span><br><code>\</code> AtomEscape<br>CharacterClass<code><br>(</code> Disjunction <code>)</code><br><code>(</code> <code>?</code> <code>:</code> Disjunction <code>)</code></div>
 </div>
 <div class="gp">
-  <div class="lhs"><i>PatternCharacter</i> <span style="font-family: sans-serif">::</span>&#x9;<span style="font-family: sans-serif">See 15.10.1</span></div>
-  <div class="rhs"><i>SourceCharacter</i> <span style="font-family: sans-serif; font-weight: bold">but not</span> <b><span style="font-family: sans-serif">one of-<br></span> <span style="font-family: monospace">^  $  \  .  *  +  ?  (  )  [  ]  {  }  |</span></b></div>
+  <div class="lhs">PatternCharacter <span style="font-family: sans-serif">::</span>&#x9;<span style="font-family: sans-serif">See 15.10.1</span></div>
+  <div class="rhs">SourceCharacter <span style="font-family: sans-serif; font-weight: bold">but not</span> <b><span style="font-family: sans-serif">one of-<br></span> <span style="font-family: monospace">^  $  \  .  *  +  ?  (  )  [  ]  {  }  |</span></b></div>
 </div>
 <div class="gp">
   <div class="lhs">AtomEscape <span style="font-family: sans-serif; font-weight: bold">::</span>&#x9;<span style="font-family: sans-serif">See 15.10.1</span></div>
@@ -16690,7 +16690,7 @@ THH:mm:ss.sss</pre>
 </div>
 <p>JSON</p>
 <p>JSON Lexical Grammar</p>
-<div class="gp"><i>JSONWhiteSpace</i> <span style="font-family: sans-serif; font-weight: bold">::</span> &#x9;<span style="font-family: sans-serif">See 15.12.1.1</span></div>
+<div class="gp">JSONWhiteSpace <span style="font-family: sans-serif; font-weight: bold">::</span> &#x9;<span style="font-family: sans-serif">See 15.12.1.1</span></div>
 <div class="gp">&lt;TAB&gt;<br>&lt;CR&gt;<br>&lt;LF&gt;<br>&lt;SP&gt;</div>
 <div class="gp">JSONString <span style="font-family: sans-serif; font-weight: bold">::</span> &#x9;<span style="font-family: sans-serif">See 15.12.1.1</span></div>
 <div class="gp"><code>"</code> JSONStringCharacters<sub>opt</sub> <code>"</code></div>
@@ -17119,11 +17119,11 @@ THH:mm:ss.sss</pre>
   <li class="bibliography-entry">IEEE Std 754-2008: IEEE Standard for Floating-Point Arithmetic. Institute of Electrical and Electronic Engineers, New York (2008)</li>
   <li class="bibliography-entry">The Unicode Consortium. The Unicode Standard, Version 3.0, defined by: The Unicode Standard, Version 3.0 (Reading, MA, Addison-Wesley, 2000. ISBN 0-201-61633-5)</li>
   <li class="bibliography-entry">Unicode Inc. (2010), Unicode Technical Report #15: Unicode Normalization Forms</li>
-  <li class="bibliography-entry"><span style="font-family: sans-serif">ISO 8601:2004(E) <i>Data elements and interchange formats &ndash; Information</i></span> <span style="font-family: sans-serif; font-style: italic">interchange -- Representation of dates and times</span></li>
-  <li class="bibliography-entry"><span style="font-family: sans-serif">RFC 1738 "Uniform Resource Locators (URL)", available at &lt;http://tools.ietf.org/html/rfc1738&gt;</span></li>
-  <li class="bibliography-entry"><span style="font-family: sans-serif">RFC 2396 "Uniform Resource Identifiers (URI): Generic Syntax", available at &lt;http://tools.ietf.org/html/rfc2396&gt;</span></li>
-  <li class="bibliography-entry"><span style="font-family: sans-serif">RFC 3629 "UTF-8, a transformation format of ISO 10646", available at &lt;http://tools.ietf.org/html/rfc3629&gt;</span></li>
-  <li class="bibliography-entry"><span style="font-family: sans-serif">RFC 4627 "The application/json Media Type for JavaScript Object</span> <span style="font-family: sans-serif">Notation (JSON)" , available at &lt;http://tools.ietf.org/html/rfc4627&gt;</span></li>
+  <li class="bibliography-entry">ISO 8601:2004(E) <i>Data elements and interchange formats &ndash; Information</i> <i>interchange -- Representation of dates and times</i></li>
+  <li class="bibliography-entry">RFC 1738 "Uniform Resource Locators (URL)", available at &lt;http://tools.ietf.org/html/rfc1738&gt;</li>
+  <li class="bibliography-entry">RFC 2396 "Uniform Resource Identifiers (URI): Generic Syntax", available at &lt;http://tools.ietf.org/html/rfc2396&gt;</li>
+  <li class="bibliography-entry">RFC 3629 "UTF-8, a transformation format of ISO 10646", available at &lt;http://tools.ietf.org/html/rfc3629&gt;</li>
+  <li class="bibliography-entry">RFC 4627 "The application/json Media Type for JavaScript Object Notation (JSON)" , available at &lt;http://tools.ietf.org/html/rfc4627&gt;</li>
 </ol>
 </section>
 </section>

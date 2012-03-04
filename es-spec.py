@@ -29,9 +29,9 @@ def sketch_schema(document):
     for path in sorted(hits):
         print(path)
 
-def save_html(document):
-    result = transform(document)
-    fixups.fixup(result)
+def save_html(docxfile):
+    result = transform(docxfile.document)
+    fixups.fixup(result, docxfile.styles)
 
     print("=== Unrecognized styles")
     for k, v in sorted(fixups.unrecognized_styles.items(), key=lambda pair: pair[1]):
@@ -42,4 +42,5 @@ def save_html(document):
 
 #sketch_schema(es6_draft.document)
 #es6_draft._extract()
-save_html(es6_draft.document)
+#es6_draft._dump_styles()
+save_html(es6_draft)

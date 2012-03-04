@@ -119,9 +119,9 @@ def parse_pr(e):
             if list(k.keys()) == [k_val]:
                 put('@cls', k.get(k_val))
 
-        ## elif name == 'rPr':
-        ##     for k, v in parse_pr(k).items():
-        ##         put(k, v)
+        elif name == 'rPr':
+            for k, v in parse_pr(k).items():
+                put(k, v)
 
     return pr
 
@@ -209,6 +209,17 @@ class Document:
         save(self.styles, 'styles.xml')
         save(self.numbering, 'numbering.xml')
 
+    def _dump_styles(self):
+        for cls, s in sorted(self.styles.items()):
+            print("p." + cls + " {")
+            for prop, value in s.style.items():
+                print("    " + prop + ": " + value + ";")
+            if s.basedOn is not None:
+                parent = self.styles[s.basedOn]
+                for prop, value in parent.full_style.items():
+                    if prop not in s.style:
+                        print("    " + prop + ": " + value + ";  /* inherited */")
+            print("}\n")
 
 def load(filename):
     with zipfile.ZipFile("es6-draft.docx") as f:

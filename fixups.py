@@ -16,7 +16,7 @@ def all_parent_index_child_triples(e):
             for t in all_parent_index_child_triples(k):
                 yield t
 
-def fixup_formatting(doc):
+def fixup_formatting(doc, styles):
     """
     Convert runs of span elements to more HTML-like code.
 
@@ -73,12 +73,18 @@ def fixup_formatting(doc):
     def rewrite_spans(parent):
         spans = parent.content[:]  # copies the array
 
-        inherited_style = {}
+        # The role of inherited style is a little weird here.
+        # We use it only to throw away pointless run markup.
+        if 'class' in parent.attrs:
+            inherited_style = styles[parent.attrs['class']].full_style
+        else:
+            inherited_style = {}
         if parent.style:
+            # Delete w:rPr properties from the paragraph's style. As far as I
+            # can tell they are always spurious; Word seems to ignore them.
             for prop, value in list(parent.style.items()):
                 if prop in run_style_properties:
                     del parent.style[prop]
-                    inherited_style[prop] = value
 
         all_content = []
         ranges = collections.defaultdict(dict)
@@ -102,12 +108,10 @@ def fixup_formatting(doc):
         # Build ranges.
         for kid in spans:
             if not isinstance(kid, str) and kid.name == 'span':
-                s = inherited_style.copy()
-                s.update(kid.style)
-                set_current_style_to(s)
+                set_current_style_to({p: v for p, v in kid.style.items() if inherited_style.get(p) != v})
                 all_content += kid.content
             else:
-                set_current_style_to(inherited_style)
+                set_current_style_to({})
                 all_content.append(kid)
         set_current_style_to({})
 
@@ -175,6 +179,8 @@ def fixup_paragraph_classes(doc):
         'BulletNotlast': 'li',
         'CodeSample3': 'pre',
         'CodeSample4': 'pre',
+        'DateTitle': 'h1',
+        'ECMAWorkgroup': 'h1',
         'Figuretitle': 'figcaption',
         'Heading1': 'h1',
         'Heading2': 'h1',
@@ -189,6 +195,8 @@ def fixup_paragraph_classes(doc):
         'MathSpecialCase3': 'li',
         'Note': 'div.note',  # TODO needs default_tag *also*
         'RefNorm': 'p.formal-reference',
+        'StandardNumber': 'h1',
+        'StandardTitle': 'h1',
         'Syntax': 'h2',
         'SyntaxDefinition': 'div.rhs',
         'SyntaxDefinition2': 'div.rhs',
@@ -211,7 +219,7 @@ def fixup_paragraph_classes(doc):
 
             if cls not in tag_names:
                 unrecognized_styles[cls] += 1
-                #e.content.insert(0, span('<{0}>'.format(cls), style="color:red"))
+            #e.content.insert(0, html.span('<{0}>'.format(cls), style="color:red"))
 
             if cls == 'Note':
                 # Total special case. Wrap in div.note.
@@ -594,8 +602,8 @@ def fixup_hr(doc):
         if b.name == "p" and len(b.content) == 1 and isinstance(b.content[0], html.Element) and b.content[0].name == "hr":
             a.content[i] = b.content[0]
 
-def fixup(doc):
-    fixup_formatting(doc)
+def fixup(doc, styles):
+    fixup_formatting(doc, styles)
     fixup_paragraph_classes(doc)
     fixup_element_spacing(doc)
     insert_disclaimer(doc)
