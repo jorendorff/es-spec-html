@@ -4913,11 +4913,11 @@
 <p>The <code>*</code> operator performs multiplication, producing the product of its operands. Multiplication is commutative. Multiplication is not always associative in ECMAScript, because of finite precision.</p>
 <p>The result of a floating-point multiplication is governed by the rules of IEEE 754 binary double-precision arithmetic:</p>
 <ul>
-  <li><span style="font-family: sans-serif">If either operand is <b>NaN</b>, the result is <b>NaN</b>.</span></li>
-  <li><span style="font-family: sans-serif">The sign of the result is positive if both operands have the same sign, negative if the operands have different signs.</span></li>
-  <li><span style="font-family: sans-serif">Multiplication of an infinity by a zero results in <b>NaN</b>.</span></li>
-  <li><span style="font-family: sans-serif">Multiplication of an infinity by an infinity results in an infinity. The sign is determined by the rule already stated above.</span></li>
-  <li><span style="font-family: sans-serif">Multiplication of an infinity by a finite nonzero value results in a signed infinity. The sign is determined by the rule already stated above.</span></li>
+  <li>If either operand is <b>NaN</b>, the result is <b>NaN</b>.</li>
+  <li>The sign of the result is positive if both operands have the same sign, negative if the operands have different signs.</li>
+  <li>Multiplication of an infinity by a zero results in <b>NaN</b>.</li>
+  <li>Multiplication of an infinity by an infinity results in an infinity. The sign is determined by the rule already stated above.</li>
+  <li>Multiplication of an infinity by a finite nonzero value results in a signed infinity. The sign is determined by the rule already stated above.</li>
   <li><span style="font-family: sans-serif">In the remaining cases, where neither an infinity or NaN is involved, the product is computed and rounded to the nearest representable value using IEEE 754 round-to-nearest mode. If the magnitude is too large to represent, the result is then an infinity of appropriate sign. If the magnitude is too small to represent, the result is then a zero of appropriate sign. The ECMAScript language requires support of gradual underflow as defined by IEEE 754.</span></li>
 </ul>
 </section>
@@ -4925,15 +4925,15 @@
 <h1><span class="secnum"><a href="#sec-11.5.2" title="link to this section">11.5.2</a></span> Applying the <span style="font-family: monospace">/</span> Operator</h1>
 <p>The <code>/</code> operator performs division, producing the quotient of its operands. The left operand is the dividend and the right operand is the divisor. ECMAScript does not perform integer division. The operands and result of all division operations are double-precision floating-point numbers. The result of division is determined by the specification of IEEE 754 arithmetic:</p>
 <ul>
-  <li><span style="font-family: sans-serif">If either operand is <b>NaN</b>, the result is <b>NaN</b>.</span></li>
-  <li><span style="font-family: sans-serif">The sign of the result is positive if both operands have the same sign, negative if the operands have different signs.</span></li>
-  <li><span style="font-family: sans-serif">Division of an infinity by an infinity results in <b>NaN</b>.</span></li>
-  <li><span style="font-family: sans-serif">Division of an infinity by a zero results in an infinity. The sign is determined by the rule already stated above.</span></li>
-  <li><span style="font-family: sans-serif">Division of an infinity by a nonzero finite value results in a signed infinity. The sign is determined by the rule already stated above.</span></li>
-  <li><span style="font-family: sans-serif">Division of a finite value by an infinity results in zero. The sign is determined by the rule already stated above.</span></li>
-  <li><span style="font-family: sans-serif">Division of a zero by a zero results in <b>NaN</b>; division of zero by any other finite value results in zero, with the sign determined by the rule already stated above.</span></li>
-  <li><span style="font-family: sans-serif">Division of a nonzero finite value by a zero results in a signed infinity. The sign is determined by the rule already stated above.</span></li>
-  <li><span style="font-family: sans-serif">In the remaining cases, where neither an infinity, nor a zero, nor <b>NaN</b> is involved, the quotient is computed and rounded to the nearest representable value using IEEE 754 round-to-nearest mode. If the magnitude is too large to represent, the operation overflows; the result is then an infinity of appropriate sign. If the magnitude is too small to represent, the operation underflows and the result is a zero of the appropriate sign. The ECMAScript language requires support of gradual underflow as defined by IEEE 754.</span></li>
+  <li>If either operand is <b>NaN</b>, the result is <b>NaN</b>.</li>
+  <li>The sign of the result is positive if both operands have the same sign, negative if the operands have different signs.</li>
+  <li>Division of an infinity by an infinity results in <b>NaN</b>.</li>
+  <li>Division of an infinity by a zero results in an infinity. The sign is determined by the rule already stated above.</li>
+  <li>Division of an infinity by a nonzero finite value results in a signed infinity. The sign is determined by the rule already stated above.</li>
+  <li>Division of a finite value by an infinity results in zero. The sign is determined by the rule already stated above.</li>
+  <li>Division of a zero by a zero results in <b>NaN</b>; division of zero by any other finite value results in zero, with the sign determined by the rule already stated above.</li>
+  <li>Division of a nonzero finite value by a zero results in a signed infinity. The sign is determined by the rule already stated above.</li>
+  <li>In the remaining cases, where neither an infinity, nor a zero, nor <b>NaN</b> is involved, the quotient is computed and rounded to the nearest representable value using IEEE 754 round-to-nearest mode. If the magnitude is too large to represent, the operation overflows; the result is then an infinity of appropriate sign. If the magnitude is too small to represent, the operation underflows and the result is a zero of the appropriate sign. The ECMAScript language requires support of gradual underflow as defined by IEEE 754.</li>
 </ul>
 </section>
 <section id="sec-11.5.3">
@@ -4945,12 +4945,12 @@
 <p>The result of a floating-point remainder operation as computed by the <code>%</code> operator is not the same as the &ldquo;remainder&rdquo; operation defined by IEEE 754. The IEEE 754 &ldquo;remainder&rdquo; operation computes the remainder from a rounding division, not a truncating division, and so its behaviour is not analogous to that of the usual integer remainder operator. Instead the ECMAScript language defines <code>%</code> on floating-point operations to behave in a manner analogous to that of the Java integer remainder operator; this may be compared with the C library function fmod.</p>
 <p>The result of an ECMAScript floating-point remainder operation is determined by the rules of IEEE arithmetic:</p>
 <ul>
-  <li><span style="font-family: sans-serif">If either operand is <b>NaN</b>, the result is <b>NaN</b>.</span>
+  <li>If either operand is <b>NaN</b>, the result is <b>NaN</b>.
     <ul>
-      <li><span style="font-family: sans-serif">The sign of the result equals the sign of the dividend.</span></li>
-      <li><span style="font-family: sans-serif">If the dividend is an infinity, or the divisor is a zero, or both, the result is <b>NaN</b>.</span></li>
-      <li><span style="font-family: sans-serif">If the dividend is finite and the divisor is an infinity, the result equals the dividend.</span></li>
-      <li><span style="font-family: sans-serif">If the dividend is a zero and the divisor is nonzero and finite, the result is the same as the dividend.</span></li>
+      <li>The sign of the result equals the sign of the dividend.</li>
+      <li>If the dividend is an infinity, or the divisor is a zero, or both, the result is <b>NaN</b>.</li>
+      <li>If the dividend is finite and the divisor is an infinity, the result equals the dividend.</li>
+      <li>If the dividend is a zero and the divisor is nonzero and finite, the result is the same as the dividend.</li>
       <li><span style="font-family: sans-serif">In the remaining cases, where neither an infinity, nor a zero, nor <b>NaN</b> is involved, the floating-point remainder r from a dividend n and a divisor d is defined by the mathematical relation r = n &minus; (d</span> &times; <span style="font-family: sans-serif">q) where q is an integer that is negative only if n/d is negative and positive only if n/d is positive, and whose magnitude is as large as possible without exceeding the magnitude of the true mathematical quotient of n and d. r is computed and rounded to the nearest representable value using IEEE 754 round-to-nearest mode.</span></li>
     </ul>
     </li>
@@ -5018,14 +5018,14 @@
 <p>Addition is a commutative operation, but not always associative.</p>
 <p>The result of an addition is determined using the rules of IEEE 754 binary double-precision arithmetic:</p>
 <ul>
-  <li><span style="font-family: sans-serif">If either operand is <b>NaN</b>, the result is <b>NaN</b>.</span></li>
-  <li><span style="font-family: sans-serif">The sum of two infinities of opposite sign is <b>NaN</b>.</span></li>
-  <li><span style="font-family: sans-serif">The sum of two infinities of the same sign is the infinity of that sign.</span></li>
-  <li><span style="font-family: sans-serif">The sum of an infinity and a finite value is equal to the infinite operand.</span></li>
-  <li><span style="font-family: sans-serif">The sum of two negative zeroes is <b>&minus;0</b>. The sum of two positive zeroes, or of two zeroes of opposite sign, is <b>+0</b>.</span></li>
-  <li><span style="font-family: sans-serif">The sum of a zero and a nonzero finite value is equal to the nonzero operand.</span></li>
-  <li><span style="font-family: sans-serif">The sum of two nonzero finite values of the same magnitude and opposite sign is <b>+0</b>.</span></li>
-  <li><span style="font-family: sans-serif">In the remaining cases, where neither an infinity, nor a zero, nor NaN is involved, and the operands have the same sign or have different magnitudes, the sum is computed and rounded to the nearest representable value using IEEE 754 round-to-nearest mode. If the magnitude is too large to represent, the operation overflows and the result is then an infinity of appropriate sign. The ECMAScript language requires support of gradual underflow as defined by IEEE 754.</span></li>
+  <li>If either operand is <b>NaN</b>, the result is <b>NaN</b>.</li>
+  <li>The sum of two infinities of opposite sign is <b>NaN</b>.</li>
+  <li>The sum of two infinities of the same sign is the infinity of that sign.</li>
+  <li>The sum of an infinity and a finite value is equal to the infinite operand.</li>
+  <li>The sum of two negative zeroes is <b>&minus;0</b>. The sum of two positive zeroes, or of two zeroes of opposite sign, is <b>+0</b>.</li>
+  <li>The sum of a zero and a nonzero finite value is equal to the nonzero operand.</li>
+  <li>The sum of two nonzero finite values of the same magnitude and opposite sign is <b>+0</b>.</li>
+  <li>In the remaining cases, where neither an infinity, nor a zero, nor NaN is involved, and the operands have the same sign or have different magnitudes, the sum is computed and rounded to the nearest representable value using IEEE 754 round-to-nearest mode. If the magnitude is too large to represent, the operation overflows and the result is then an infinity of appropriate sign. The ECMAScript language requires support of gradual underflow as defined by IEEE 754.</li>
 </ul>
 <p>The <code>-</code> operator performs subtraction when applied to two operands of numeric type, producing the difference of its operands; the left operand is the minuend and the right operand is the subtrahend. Given numeric operands <span style="font-family: Times New Roman; font-style: italic">a</span> and <span style="font-family: Times New Roman; font-style: italic">b</span>, it is always the case that <i><span style="font-family: Times New Roman">a</span><span style="font-family: monospace">&ndash;</span><span style="font-family: Times New Roman">b</span></i> produces the same result as <i><span style="font-family: Times New Roman">a</span> <span style="font-family: monospace">+(&ndash;</span><span style="font-family: Times New Roman">b</span><span style="font-family: monospace">)</span></i>.</p>
 </section>
@@ -5289,23 +5289,23 @@
   <p><span class="nh">NOTE 1</span> Given the above definition of equality:</p>
 </div>
 <ul>
-  <li><span style="font-family: sans-serif">String comparison can be forced by:</span> <code>"" + a == "" + b</code>.</li>
-  <li><span style="font-family: sans-serif">Numeric comparison can be forced by:</span> <code>+a == +b</code>.</li>
-  <li><span style="font-family: sans-serif">Boolean comparison can be forced by:</span> <code>!a == !b</code>.</li>
+  <li>String comparison can be forced by: <code>"" + a == "" + b</code>.</li>
+  <li>Numeric comparison can be forced by: <code>+a == +b</code>.</li>
+  <li>Boolean comparison can be forced by: <code>!a == !b</code>.</li>
 </ul>
 <div class="note">
   <p><span class="nh">NOTE 2</span> The equality operators maintain the following invariants:</p>
 </div>
 <ul>
-  <li><code>A</code> <code>!=</code> <code>B</code> <span style="font-family: sans-serif">is equivalent</span> <span style="font-family: sans-serif">to</span> <code>!(A</code> <code>==</code> <code>B)</code>.</li>
-  <li><code>A</code> <code>==</code> <code>B</code> <span style="font-family: sans-serif">is equivalent to</span> <code>B</code> <code>==</code> <code>A</code><span style="font-family: sans-serif">, except in the order of evaluation of</span> <code>A</code> <span style="font-family: sans-serif">and</span> <code>B</code>.</li>
+  <li><code>A</code> <code>!=</code> <code>B</code> is equivalent to <code>!(A</code> <code>==</code> <code>B)</code>.</li>
+  <li><code>A</code> <code>==</code> <code>B</code> is equivalent to <code>B</code> <code>==</code> <code>A</code>, except in the order of evaluation of <code>A</code> and <code>B</code>.</li>
 </ul>
 <div class="note">
   <p><span class="nh">NOTE 3</span> The equality operator is not always transitive. For example, there might be two distinct String objects, each representing the same String value; each String object would be considered equal to the String value by the <code>==</code> operator, but the two String objects would not be equal to each other. For Example:</p>
 </div>
 <ul>
-  <li><code>new String("a")</code> <code>==</code> <code>"a"</code> <span style="font-family: sans-serif">and</span> <code>"a"</code> <code>==</code>  <code>new String("a")</code><span style="font-family: sans-serif">are both <b>true</b>.</span></li>
-  <li><code>new String("a")</code> <code>==</code> <code>new String("a")</code> <span style="font-family: sans-serif">is <b>false</b>.</span></li>
+  <li><code>new String("a")</code> <code>==</code> <code>"a"</code> and <code>"a"</code> <code>==</code>  <code>new String("a")</code>are both <b>true</b>.</li>
+  <li><code>new String("a")</code> <code>==</code> <code>new String("a")</code> is <b>false</b>.</li>
 </ul>
 <div class="note">
   <p><span class="nh">NOTE 4</span> Comparison of Strings uses a simple equality test on sequences of code unit values. There is no attempt to use the more complex, semantically oriented definitions of character or string equality and collating order defined in the Unicode specification. Therefore Strings values that are canonically equal according to the Unicode standard could test as unequal. In effect this algorithm assumes that both Strings are already in normalised form.</p>
@@ -14160,9 +14160,9 @@ THH:mm:ss.sss</pre>
 <p>An implementation shall not treat other kinds of errors as early errors even if the compiler can prove that a construct cannot execute without error under any circumstances. An implementation may issue an early warning in such a case, but it should not report the error until the relevant construct is actually executed.</p>
 <p>An implementation shall report all errors as specified, except for the following:</p>
 <ul>
-  <li><span style="font-family: sans-serif">An implementation may extend program syntax and regular expression pattern or flag syntax. To permit this, all operations (such as calling</span> <code>eval</code><span style="font-family: sans-serif">, using a regular expression literal, or using the</span> <code>Function</code> <span style="font-family: sans-serif">or</span> <code>RegExp</code> <span style="font-family: sans-serif">constructor) that are allowed to throw <b>SyntaxError</b> are permitted to exhibit implementation-defined behaviour instead of throwing <b>SyntaxError</b> when they encounter an implementation-defined extension to the program syntax or regular expression pattern or flag syntax.</span></li>
-  <li><span style="font-family: sans-serif">An implementation may provide additional types, values, objects, properties, and functions beyond those described in this specification. This may cause constructs (such as looking up a variable in the global scope) to have implementation-defined behaviour instead of throwing an error (such as <b>ReferenceError</b>).</span></li>
-  <li><span style="font-family: sans-serif">An implementation may define behaviour other than throwing <b>RangeError</b> for</span> <code>toFixed</code><span style="font-family: sans-serif">,</span> <code>toExponential</code><span style="font-family: sans-serif">, and</span> <code>toPrecision</code> <span style="font-family: sans-serif">when the</span> <i>fractionDigits</i> <span style="font-family: sans-serif">or</span> <i>precision</i> <span style="font-family: sans-serif">argument is outside the specified range.</span></li>
+  <li>An implementation may extend program syntax and regular expression pattern or flag syntax. To permit this, all operations (such as calling <code>eval</code>, using a regular expression literal, or using the <code>Function</code> or <code>RegExp</code> constructor) that are allowed to throw <b>SyntaxError</b> are permitted to exhibit implementation-defined behaviour instead of throwing <b>SyntaxError</b> when they encounter an implementation-defined extension to the program syntax or regular expression pattern or flag syntax.</li>
+  <li>An implementation may provide additional types, values, objects, properties, and functions beyond those described in this specification. This may cause constructs (such as looking up a variable in the global scope) to have implementation-defined behaviour instead of throwing an error (such as <b>ReferenceError</b>).</li>
+  <li>An implementation may define behaviour other than throwing <b>RangeError</b> for <code>toFixed</code>, <code>toExponential</code>, and <code>toPrecision</code> when the <span style="font-family: Times New Roman; font-style: italic">fractionDigits</span> or <span style="font-family: Times New Roman; font-style: italic">precision</span> argument is outside the specified range.</li>
 </ul>
 <hr>
 </section>

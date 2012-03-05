@@ -28,7 +28,7 @@ def has_bullet(docx, p):
     return s is not None and s.numFmt == 'bullet'
 
 def fixup_list_styles(doc, docx):
-    """ Make sure bullet lists are never p.Alg4 or p.MathSpecialCase3.
+    """ Make sure bullet lists are never p.Alg4 or other particular styles.
 
     Alg4 style indicates a numbered list, with Times New Roman font. It's used
     for algorithms. However there are a few places in the Word document where
@@ -42,7 +42,7 @@ def fixup_list_styles(doc, docx):
     <span style="font-family: sans-serif"> if we did it first.
     """
 
-    wrong_types = ('Alg4', 'MathSpecialCase3')
+    wrong_types = ('Alg4', 'MathSpecialCase3', 'BulletNotlast')
 
     for p in findall(doc, 'p'):
         if p.attrs.get("class") in wrong_types and has_bullet(docx, p):
