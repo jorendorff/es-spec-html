@@ -821,7 +821,7 @@ def fixup_links(doc):
         r' \(((?:see )?SECTION)\)',
 
         # Map "(Clause 16)", "(see clause 6)".
-        r'(?:)\(((?:see\s+)?clause\s+(\d+))\)',
+        r'(?i)(?:)\((?:but )?((?:see\s+(?:also\s+)?)?clause\s+([1-9][0-9]*))\)',
 
         # Match the first section number in a parenthesized list "(13.3.5, 13.4, 13.6)"
         r'\((SECTION),\ ',
