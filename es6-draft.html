@@ -477,17 +477,54 @@
         </li>
     </ol>
     </li>
-  <li><span class="secnum"><a href="#sec-16" title="link to this section">16</a></span> Errors
+  <li><span class="secnum"><a href="#sec-16" title="link to this section">16</a></span> Errors</li>
+  <li><span class="secnum"><a href="#sec-A" title="link to this section">Annex A</a></span> <br>(informative)<br>Grammar Summary
     <ol class="toc">
-      <li>Annex A<br>(informative)<br>Grammar Summary</li>
-      <li>Annex B<br>(normative)<br>Additional ECMAScript Features for Web Browsers</li>
-      <li>Annex C<br>(informative)<br>The Strict Mode of ECMAScript</li>
-      <li>Annex D<br>(informative)<br>Corrections and Clarifications in the 5<sup>th</sup> Edition<br>with Possible 3<sup>rd</sup> Edition Compatibility Impact</li>
-      <li>Annex E<br>(informative)<br>Additions and Changes in the 5<sup>th</sup> Edition that<br>Introduce Incompatibilities with the 3<sup>rd</sup> Edition</li>
-      <li>Annex F<br>(informative)<br>Technically Significant Corrections and Clarifications in the 5.1 Edition</li>
-      <li>Bibliography</li>
+      <li><span class="secnum"><a href="#sec-A.1" title="link to this section">A.1</a></span> Lexical Grammar</li>
+      <li><span class="secnum"><a href="#sec-A.2" title="link to this section">A.2</a></span> Number Conversions</li>
+      <li><span class="secnum"><a href="#sec-A.3" title="link to this section">A.3</a></span> Expressions</li>
+      <li><span class="secnum"><a href="#sec-A.4" title="link to this section">A.4</a></span> Statements</li>
+      <li><span class="secnum"><a href="#sec-A.5" title="link to this section">A.5</a></span> Functions and Programs</li>
+      <li><span class="secnum"><a href="#sec-A.6" title="link to this section">A.6</a></span> Universal Resource Identifier Character Classes</li>
+      <li><span class="secnum"><a href="#sec-A.7" title="link to this section">A.7</a></span> Regular Expressions</li>
+      <li><span class="secnum"><a href="#sec-A.8" title="link to this section">A.8</a></span> JSON
+        <ol class="toc">
+          <li><span class="secnum"><a href="#sec-A.8.1" title="link to this section">A.8.1</a></span> JSON Lexical Grammar</li>
+          <li><span class="secnum"><a href="#sec-A.8.2" title="link to this section">A.8.2</a></span> JSON Syntactic Grammar</li>
+        </ol>
+        </li>
     </ol>
     </li>
+  <li><span class="secnum"><a href="#sec-B" title="link to this section">Annex B</a></span> <br>(normative)<br>Additional ECMAScript Features for Web Browsers
+    <ol class="toc">
+      <li><span class="secnum"><a href="#sec-B.1" title="link to this section">B.1</a></span> Additional Syntax
+        <ol class="toc">
+          <li><span class="secnum"><a href="#sec-B.1.1" title="link to this section">B.1.1</a></span> Numeric Literals</li>
+          <li><span class="secnum"><a href="#sec-B.1.2" title="link to this section">B.1.2</a></span> String Literals</li>
+        </ol>
+        </li>
+      <li><span class="secnum"><a href="#sec-B.2" title="link to this section">B.2</a></span> Additional Properties
+        <ol class="toc">
+          <li><span class="secnum"><a href="#sec-B.2.1" title="link to this section">B.2.1</a></span> escape (string)</li>
+          <li><span class="secnum"><a href="#sec-B.2.2" title="link to this section">B.2.2</a></span> unescape (string)</li>
+          <li><span class="secnum"><a href="#sec-B.2.3" title="link to this section">B.2.3</a></span> String.prototype.substr (start, length)</li>
+          <li><span class="secnum"><a href="#sec-B.2.4" title="link to this section">B.2.4</a></span> Date.prototype.getYear ( )</li>
+          <li><span class="secnum"><a href="#sec-B.2.5" title="link to this section">B.2.5</a></span> Date.prototype.setYear (year)</li>
+          <li><span class="secnum"><a href="#sec-B.2.6" title="link to this section">B.2.6</a></span> Date.prototype.toGMTString ( )</li>
+        </ol>
+        </li>
+      <li><span class="secnum"><a href="#sec-B.3" title="link to this section">B.3</a></span> Other Additional Features
+        <ol class="toc">
+          <li><span class="secnum"><a href="#sec-B.3.1" title="link to this section">B.3.1</a></span> The __proto__ pseudo property.</li>
+        </ol>
+        </li>
+    </ol>
+    </li>
+  <li><span class="secnum"><a href="#sec-C" title="link to this section">Annex C</a></span> <br>(informative)<br>The Strict Mode of ECMAScript</li>
+  <li><span class="secnum"><a href="#sec-D" title="link to this section">Annex D</a></span> <br>(informative)<br>Corrections and Clarifications in the 5<sup>th</sup> Edition<br>with Possible 3<sup>rd</sup> Edition Compatibility Impact</li>
+  <li><span class="secnum"><a href="#sec-E" title="link to this section">Annex E</a></span> <br>(informative)<br>Additions and Changes in the 5<sup>th</sup> Edition that<br>Introduce Incompatibilities with the 3<sup>rd</sup> Edition</li>
+  <li><span class="secnum"><a href="#sec-F" title="link to this section">Annex F</a></span> <br>(informative)<br>Technically Significant Corrections and Clarifications in the 5.1 Edition</li>
+  <li>Bibliography</li>
 </ol>
 </section>
 <section>
@@ -15586,9 +15623,11 @@ THH:mm:ss.sss</pre>
   <li><span style="font-family: sans-serif">An implementation may define behaviour other than throwing <b>RangeError</b> for</span> <code>toFixed</code><span style="font-family: sans-serif">,</span> <code>toExponential</code><span style="font-family: sans-serif">, and</span> <code>toPrecision</code> <span style="font-family: sans-serif">when the</span> <i>fractionDigits</i> <span style="font-family: sans-serif">or</span> <i>precision</i> <span style="font-family: sans-serif">argument is outside the specified range.</span></li>
 </ol>
 <hr>
-<section>
-<h1>Annex A<br>(informative)<br>Grammar Summary</h1>
-<p>Lexical Grammar</p>
+</section>
+<section id="sec-A">
+<h1><span class="secnum"><a href="#sec-A" title="link to this section">Annex A</a></span> <br>(informative)<br>Grammar Summary</h1>
+<section id="sec-A.1">
+<h1><span class="secnum"><a href="#sec-A.1" title="link to this section">A.1</a></span> Lexical Grammar</h1>
 <div class="gp">
   <div class="lhs">SourceCharacter <span style="font-family: sans-serif; font-weight: bold">::</span>&#x9;<span style="font-family: sans-serif">See clause 6</span></div>
   <div class="rhs"><span style="font-family: sans-serif">any Unicode code unit</span></div>
@@ -16200,7 +16239,9 @@ THH:mm:ss.sss</pre>
   <div class="lhs">RegularExpressionFlags <span style="font-family: sans-serif"><b>::</b>&#x9;See 7.8.5</span></div>
   <div class="rhs"><span style="font-family: sans-serif">[empty]</span><br>RegularExpressionFlags IdentifierPart</div>
 </div>
-<p>Number Conversions</p>
+</section>
+<section id="sec-A.2">
+<h1><span class="secnum"><a href="#sec-A.2" title="link to this section">A.2</a></span> Number Conversions</h1>
 <div class="gp">
   <div class="lhs">StringNumericLiteral <span style="font-family: sans-serif"><b>:::</b>&#x9;See 9.3.1</span></div>
   <div class="rhs">StrWhiteSpace<sub>opt</sub><br>StrWhiteSpace<sub>opt</sub> StrNumericLiteral StrWhiteSpace<sub>opt</sub></div>
@@ -16253,7 +16294,9 @@ THH:mm:ss.sss</pre>
   <div class="lhs">HexDigit <span style="font-family: sans-serif; font-weight: bold">:::</span> <span style="font-family: sans-serif; font-weight: bold">one of</span>&#x9;<span style="font-family: sans-serif">See 9.3.1</span></div>
   <div class="rhs"><code>0 1 2 3 4 5 6 7 8 9 a b c d e f A B C D E F</code></div>
 </div>
-<p>Expressions</p>
+</section>
+<section id="sec-A.3">
+<h1><span class="secnum"><a href="#sec-A.3" title="link to this section">A.3</a></span> Expressions</h1>
 <div class="gp">
   <div class="lhs">PrimaryExpression <span style="font-family: sans-serif"><b>:</b>&#x9;See 11.1</span></div>
   <div class="rhs"><code>this</code><br>Identifier<br>Literal<br>ArrayLiteral<br>ObjectLiteral<br><code>(</code> Expression <code>)</code></div>
@@ -16454,7 +16497,9 @@ THH:mm:ss.sss</pre>
   <div class="lhs">ExpressionNoIn <span style="font-family: sans-serif"><b>:</b>&#x9;See 11.14</span></div>
   <div class="rhs">AssignmentExpressionNoIn<br>ExpressionNoIn <code>,</code> AssignmentExpressionNoIn</div>
 </div>
-<p>Statements</p>
+</section>
+<section id="sec-A.4">
+<h1><span class="secnum"><a href="#sec-A.4" title="link to this section">A.4</a></span> Statements</h1>
 <div class="gp">
   <div class="lhs">Statement <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See clause 12</span></div>
   <div class="rhs">Block<br>VariableStatement<br>EmptyStatement<br>ExpressionStatement<br>IfStatement<br>IterationStatement<br>ContinueStatement<br>BreakStatement<br>ReturnStatement<br>WithStatement<br>LabelledStatement<br>SwitchStatement<br>ThrowStatement<br>TryStatement<br>DebuggerStatement</div>
@@ -16571,7 +16616,9 @@ THH:mm:ss.sss</pre>
   <div class="lhs">DebuggerStatement <span style="font-family: sans-serif"><b>:</b>&#x9;See 12.15</span></div>
   <div class="rhs"><code>debugger</code> <code>;</code></div>
 </div>
-<p>Functions and Programs</p>
+</section>
+<section id="sec-A.5">
+<h1><span class="secnum"><a href="#sec-A.5" title="link to this section">A.5</a></span> Functions and Programs</h1>
 <div class="gp">
   <div class="lhs">FunctionDeclaration <span style="font-family: sans-serif"><b>:</b>&#x9;See clause 13</span></div>
   <div class="rhs"><code>function</code> Identifier <code>(</code> FormalParameterList<sub>opt</sub> <code>)</code> <code>{</code> FunctionBody <code>}</code></div>
@@ -16600,7 +16647,9 @@ THH:mm:ss.sss</pre>
   <div class="lhs">SourceElement <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9;<span style="font-family: sans-serif">See clause 14</span></div>
   <div class="rhs">Statement<br>FunctionDeclaration</div>
 </div>
-<p>Universal Resource Identifier Character Classes</p>
+</section>
+<section id="sec-A.6">
+<h1><span class="secnum"><a href="#sec-A.6" title="link to this section">A.6</a></span> Universal Resource Identifier Character Classes</h1>
 <div class="gp">
   <div class="lhs">uri <span style="font-family: sans-serif; font-weight: bold">:::</span>&#x9;<span style="font-family: sans-serif">See 15.1.3</span></div>
   <div class="rhs">uriCharacters<sub>opt</sub></div>
@@ -16633,7 +16682,9 @@ THH:mm:ss.sss</pre>
   <div class="lhs">uriMark <span style="font-family: sans-serif; font-weight: bold">:::</span> <span style="font-family: sans-serif; font-weight: bold">one of</span>&#x9;<span style="font-family: sans-serif">See 15.1.3</span></div>
   <div class="rhs"><code>-  _  .  !  ~  *  '  (  )</code></div>
 </div>
-<p>Regular Expressions</p>
+</section>
+<section id="sec-A.7">
+<h1><span class="secnum"><a href="#sec-A.7" title="link to this section">A.7</a></span> Regular Expressions</h1>
 <div class="gp">
   <div class="lhs">Pattern <span style="font-family: sans-serif; font-weight: bold">::</span>&#x9;<span style="font-family: sans-serif">See 15.10.1</span></div>
   <div class="rhs">Disjunction</div>
@@ -16726,8 +16777,11 @@ THH:mm:ss.sss</pre>
   <div class="lhs">ClassEscape <span style="font-family: sans-serif; font-weight: bold">::</span>&#x9;<span style="font-family: sans-serif">See 15.10.1</span></div>
   <div class="rhs">DecimalEscape<br><code>b</code><br>CharacterEscape<code><br></code>CharacterClassEscape</div>
 </div>
-<p>JSON</p>
-<p>JSON Lexical Grammar</p>
+</section>
+<section id="sec-A.8">
+<h1><span class="secnum"><a href="#sec-A.8" title="link to this section">A.8</a></span> JSON</h1>
+<section id="sec-A.8.1">
+<h1><span class="secnum"><a href="#sec-A.8.1" title="link to this section">A.8.1</a></span> JSON Lexical Grammar</h1>
 <div class="gp">JSONWhiteSpace <span style="font-family: sans-serif; font-weight: bold">::</span> &#x9;<span style="font-family: sans-serif">See 15.12.1.1</span></div>
 <div class="gp">&lt;TAB&gt;<br>&lt;CR&gt;<br>&lt;LF&gt;<br>&lt;SP&gt;</div>
 <div class="gp">JSONString <span style="font-family: sans-serif; font-weight: bold">::</span> &#x9;<span style="font-family: sans-serif">See 15.12.1.1</span></div>
@@ -16750,7 +16804,9 @@ THH:mm:ss.sss</pre>
 <div class="gp">NullLiteral</div>
 <div class="gp">JSONBooleanLiteral <span style="font-family: sans-serif; font-weight: bold">::</span>&#x9;<span style="font-family: sans-serif">See 15.12.1.1</span></div>
 <div class="gp">BooleanLiteral</div>
-<p>JSON Syntactic Grammar</p>
+</section>
+<section id="sec-A.8.2">
+<h1><span class="secnum"><a href="#sec-A.8.2" title="link to this section">A.8.2</a></span> JSON Syntactic Grammar</h1>
 <div class="gp">JSONText <span style="font-family: sans-serif; font-weight: bold">:</span>&#x9; <span style="font-family: sans-serif">See 15.12.1.2</span></div>
 <div class="gp">JSONValue</div>
 <div class="gp">JSONValue <span style="font-family: sans-serif; font-weight: bold">:</span> &#x9;<span style="font-family: sans-serif">See 15.12.1.2</span></div>
@@ -16767,11 +16823,15 @@ THH:mm:ss.sss</pre>
 <div class="gp">JSONValue<br>JSONElementList <code>,</code> JSONValue</div>
 <hr>
 </section>
-<section>
-<h1>Annex B<br>(normative)<br>Additional ECMAScript Features for Web Browsers</h1>
+</section>
+</section>
+<section id="sec-B">
+<h1><span class="secnum"><a href="#sec-B" title="link to this section">Annex B</a></span> <br>(normative)<br>Additional ECMAScript Features for Web Browsers</h1>
 <p>The ECMAScript language syntax and semantics defined in this annex are required when the ECMAScript host is a web browser. The content of this annex is normative but optional if the ECMAScript host is not a web browser.</p>
-<p>Additional Syntax</p>
-<p>Numeric Literals</p>
+<section id="sec-B.1">
+<h1><span class="secnum"><a href="#sec-B.1" title="link to this section">B.1</a></span> Additional Syntax</h1>
+<section id="sec-B.1.1">
+<h1><span class="secnum"><a href="#sec-B.1.1" title="link to this section">B.1.1</a></span> Numeric Literals</h1>
 <p>The syntax and semantics of 7.8.3 is extended as follows except that this extension is not allowed for strict mode code:</p>
 <h2>Syntax</h2>
 <div class="gp">
@@ -16800,7 +16860,9 @@ THH:mm:ss.sss</pre>
   <li><span style="font-family: sans-serif">The MV of</span> <i>OctalIntegerLiteral</i> <span style="font-family: sans-serif; font-weight: bold">::</span> <code>0</code> <i>OctalDigit</i> <span style="font-family: sans-serif">is the MV of</span> <i>OctalDigit</i><span style="font-family: sans-serif">.</span></li>
   <li><span style="font-family: sans-serif">The MV of</span> <i>OctalIntegerLiteral</i> <span style="font-family: sans-serif; font-weight: bold">::</span> <i>OctalIntegerLiteral</i> <i>OctalDigit</i> <span style="font-family: sans-serif">is (the MV of</span> <i>OctalIntegerLiteral</i> <span style="font-family: sans-serif">times 8) plus the MV of</span> <i>OctalDigit</i><span style="font-family: sans-serif">.</span></li>
 </ol>
-<p>String Literals</p>
+</section>
+<section id="sec-B.1.2">
+<h1><span class="secnum"><a href="#sec-B.1.2" title="link to this section">B.1.2</a></span> String Literals</h1>
 <p>The syntax and semantics of 7.8.4 is extended as follows except that this extension is not allowed for strict mode code:</p>
 <h2>Syntax</h2>
 <div class="gp">
@@ -16835,9 +16897,13 @@ THH:mm:ss.sss</pre>
   <li><span style="font-family: sans-serif">The MV of</span> <i>FourToSeven</i> <span style="font-family: sans-serif; font-weight: bold">::</span> <code>6</code> <span style="font-family: sans-serif">is 6.</span></li>
   <li><span style="font-family: sans-serif">The MV of</span> <i>FourToSeven</i> <span style="font-family: sans-serif; font-weight: bold">::</span> <code>7</code> <span style="font-family: sans-serif">is 7.</span></li>
 </ol>
-<p>Additional Properties</p>
+</section>
+</section>
+<section id="sec-B.2">
+<h1><span class="secnum"><a href="#sec-B.2" title="link to this section">B.2</a></span> Additional Properties</h1>
 <p>When the ECMAScript host is a web browser the following these additional properties  of the standard native objects are defined.</p>
-<p>escape (string)</p>
+<section id="sec-B.2.1">
+<h1><span class="secnum"><a href="#sec-B.2.1" title="link to this section">B.2.1</a></span> escape (string)</h1>
 <p>The <code>escape</code> function is a property of the global object. It computes a new version of a String value in which certain characters have been replaced by a hexadecimal escape sequence.</p>
 <p>For those characters being replaced whose code unit value is <code>0xFF</code> or less, a two-digit escape sequence of the form <code>%</code><i>xx</i> is used. For those characters being replaced whose code unit value is greater than <code>0xFF</code>, a four-digit escape sequence of the form <code>%u</code><i>xxxx</i> is used.</p>
 <p>When the <code>escape</code> function is called with one argument <span style="font-family: Times New Roman; font-style: italic">string</span>, the following steps are taken:</p>
@@ -16862,7 +16928,9 @@ THH:mm:ss.sss</pre>
 <div class="note">
   <p><span class="nh">NOTE</span> The encoding is partly based on the encoding described in RFC 1738, but the entire encoding specified in this standard is described above without regard to the contents of RFC 1738. This encoding does not reflect changes to RFC 1738 made by RFC 3986.</p>
 </div>
-<p>unescape (string)</p>
+</section>
+<section id="sec-B.2.2">
+<h1><span class="secnum"><a href="#sec-B.2.2" title="link to this section">B.2.2</a></span> unescape (string)</h1>
 <p>The <code>unescape</code> function is a property of the global object. It computes a new version of a String value in which each escape sequence of the sort that might be introduced by the <code>escape</code> function is replaced with the character that it represents.</p>
 <p>When the <code>unescape</code> function is called with one argument <span style="font-family: Times New Roman; font-style: italic">string</span>, the following steps are taken:</p>
 <ol class="proc">
@@ -16887,7 +16955,9 @@ THH:mm:ss.sss</pre>
   <li>Increase <i>k</i> by 1.</li>
   <li>Go to step 5.</li>
 </ol>
-<p>String.prototype.substr (start, length)</p>
+</section>
+<section id="sec-B.2.3">
+<h1><span class="secnum"><a href="#sec-B.2.3" title="link to this section">B.2.3</a></span> String.prototype.substr (start, length)</h1>
 <p>The <code>substr</code> method takes two arguments, <span style="font-family: Times New Roman; font-style: italic">start</span> and <span style="font-family: Times New Roman; font-style: italic">length</span>, and returns a substring of the result of converting the this object to a String, starting from character position <span style="font-family: Times New Roman; font-style: italic">start</span> and running for <span style="font-family: Times New Roman; font-style: italic">length</span> characters (or through the end of the String if <span style="font-family: Times New Roman; font-style: italic">length</span> is <b>undefined</b>). If <span style="font-family: Times New Roman; font-style: italic">start</span> is negative, it is treated as <span style="font-family: Times New Roman">(<i>sourceLength</i>+<i>start</i>)</span> where <span style="font-family: Times New Roman; font-style: italic">sourceLength</span> is the length of the String. The result is a String value, not a String object. The following steps are taken:</p>
 <ol class="proc">
   <li>Call ToString, giving it the <b>this</b> value as its argument.</li>
@@ -16903,7 +16973,9 @@ THH:mm:ss.sss</pre>
 <div class="note">
   <p><span class="nh">NOTE</span> The <code>substr</code> function is intentionally generic; it does not require that its <b>this</b> value be a String object. Therefore it can be transferred to other kinds of objects for use as a method.</p>
 </div>
-<p>Date.prototype.getYear ( )</p>
+</section>
+<section id="sec-B.2.4">
+<h1><span class="secnum"><a href="#sec-B.2.4" title="link to this section">B.2.4</a></span> Date.prototype.getYear ( )</h1>
 <div class="note">
   <p><span class="nh">NOTE</span> The <code>getFullYear</code> method is preferred for nearly all purposes, because it avoids the &ldquo;year 2000 problem.&rdquo;</p>
 </div>
@@ -16913,7 +16985,9 @@ THH:mm:ss.sss</pre>
   <li>If <i>t</i> is <b>NaN</b>, return <b>NaN</b>.</li>
   <li>Return YearFromTime(LocalTime(<i>t</i>)) &minus; 1900.</li>
 </ol>
-<p>Date.prototype.setYear (year)</p>
+</section>
+<section id="sec-B.2.5">
+<h1><span class="secnum"><a href="#sec-B.2.5" title="link to this section">B.2.5</a></span> Date.prototype.setYear (year)</h1>
 <div class="note">
   <p><span class="nh">NOTE</span> The <code>setFullYear</code> method is preferred for nearly all purposes, because it avoids the &ldquo;year 2000 problem.&rdquo;</p>
 </div>
@@ -16928,18 +17002,27 @@ THH:mm:ss.sss</pre>
   <li>Set the [[PrimitiveValue]] internal property of the <b>this</b> value to TimeClip(Result(6)).</li>
   <li>Return the value of the [[PrimitiveValue]] internal property of the <b>this</b> value.</li>
 </ol>
-<p>Date.prototype.toGMTString ( )</p>
+</section>
+<section id="sec-B.2.6">
+<h1><span class="secnum"><a href="#sec-B.2.6" title="link to this section">B.2.6</a></span> Date.prototype.toGMTString ( )</h1>
 <div class="note">
   <p><span class="nh">NOTE</span> The property <code>toUTCString</code> is preferred. The <code>toGMTString</code> property is provided principally for compatibility with old code. It is recommended that the <code>toUTCString</code> property be used in new ECMAScript code.</p>
 </div>
 <p>The Function object that is the initial value of <code>Date.prototype.toGMTString</code> is the same Function object that is the initial value of <code>Date.prototype.toUTCString</code>.</p>
-<p>Other Additional Features</p>
-<p>The __proto__ pseudo property.</p>
-<p>Object.prototype.__proto__</p>
+</section>
+</section>
+<section id="sec-B.3">
+<h1><span class="secnum"><a href="#sec-B.3" title="link to this section">B.3</a></span> Other Additional Features</h1>
+<section id="sec-B.3.1">
+<h1><span class="secnum"><a href="#sec-B.3.1" title="link to this section">B.3.1</a></span> The __proto__ pseudo property.</h1>
+<section id="sec-B.3.1.1">
+<h1><span class="secnum"><a href="#sec-B.3.1.1" title="link to this section">B.3.1.1</a></span> Object.prototype.__proto__</h1>
 <p>The initial value of the <code>__proto__</code> property of the Object prototype object is a data property whose initial value is  <b>null</b>. This property initially has the attributes { [[Writable]]: <b>true</b>, [[Enumerable]]: <b>false</b>, [[Configurable]]: <b>true</b> }.</p>
 <p>Manipulations of this property as tracked by the Boolean valued primordial internal variable <span style="font-family: Times New Roman">UnderscoreProtoEnabled</span>.  The default initial value of <span style="font-family: Times New Roman">UnderscoreProtoEnabled</span> is true only if this property is initially present on the primordial Object prototype object.</p>
 <p>NOTE&#x9;Any modification of this property or its attributes causes <span style="font-family: Times New Roman">UnderscoreProtoEnabled</span>  to be set to <b>false</b>.</p>
-<p>Changes To Internal Methods__</p>
+</section>
+<section id="sec-B.3.1.2">
+<h1><span class="secnum"><a href="#sec-B.3.1.2" title="link to this section">B.3.1.2</a></span>  Changes To Internal Methods__</h1>
 <p>The definition of the [[Get]] internal method given in 8.12.3 is replaced with the following:</p>
 <ol class="proc">
   <li>If <i>P</i> is the string value <code>"__proto__"</code> and UnderscoreProtoEnabled is <b>true</b>, then
@@ -16992,7 +17075,9 @@ THH:mm:ss.sss</pre>
     </li>
   <li>Continue by executing the steps of 8.12.9 starting with step 1.</li>
 </ol>
-<p>__proto___ Object Initialisers _</p>
+</section>
+<section id="sec-B.3.1.3">
+<h1><span class="secnum"><a href="#sec-B.3.1.3" title="link to this section">B.3.1.3</a></span> __proto___ Object Initialisers _</h1>
 <p>Definitions of two algorithms in 11.1.5 are replaced with the following:</p>
 <p>The production  <span style="font-family: Times New Roman; font-style: italic">PropertyNameAndValueList</span> <b>:</b>  <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> is evaluated as follows:</p>
 <ol class="proc">
@@ -17042,8 +17127,11 @@ THH:mm:ss.sss</pre>
   <li>Return <i>obj</i>.</li>
 </ol>
 </section>
-<section>
-<h1>Annex C<br>(informative)<br>The Strict Mode of ECMAScript</h1>
+</section>
+</section>
+</section>
+<section id="sec-C">
+<h1><span class="secnum"><a href="#sec-C" title="link to this section">Annex C</a></span> <br>(informative)<br>The Strict Mode of ECMAScript</h1>
 <p><b>The strict mode restriction and exceptions</b></p>
 <ol class="proc">
   <li><span style="font-family: sans-serif">The identifiers "</span><code>implements</code><span style="font-family: sans-serif">", "</span><code>interface</code><span style="font-family: sans-serif">", "</span><code>let</code><span style="font-family: sans-serif">", "</span><code>package</code><span style="font-family: sans-serif">", "</span><code>private</code><span style="font-family: sans-serif">", "</span><code>protected</code><span style="font-family: sans-serif">", "</span><code>public</code><span style="font-family: sans-serif">", "</span><code>static</code><span style="font-family: sans-serif">", and "</span><code>yield</code><span style="font-family: sans-serif">" are classified as</span> <i>FutureReservedWord</i> <span style="font-family: sans-serif">tokens within strict mode code. (7.6.12).</span></li>
@@ -17069,8 +17157,8 @@ THH:mm:ss.sss</pre>
   <li><span style="font-family: sans-serif">It is a <b>SyntaxError</b> to use within strict mode code the identifiers</span> <code>eval</code> <span style="font-family: sans-serif">or</span> <code>arguments</code> <span style="font-family: sans-serif">as the</span> <i>Identifier</i> <span style="font-family: sans-serif">of a</span> <i>FunctionDeclaration</i> <span style="font-family: sans-serif">or</span> <i>FunctionExpression</i> <span style="font-family: sans-serif">or as a formal parameter name (<a href="#sec-13.1">13.1</a>). Attempting to dynamically define such a strict mode function using the</span> <code>Function</code> <span style="font-family: sans-serif">constructor (<a href="#sec-15.3.2">15.3.2</a>) will throw a <b>SyntaxError</b> exception.</span></li>
 </ol>
 </section>
-<section>
-<h1>Annex D<br>(informative)<br>Corrections and Clarifications in the 5<sup>th</sup> Edition<br>with Possible 3<sup>rd</sup> Edition Compatibility Impact</h1>
+<section id="sec-D">
+<h1><span class="secnum"><a href="#sec-D" title="link to this section">Annex D</a></span> <br>(informative)<br>Corrections and Clarifications in the 5<sup>th</sup> Edition<br>with Possible 3<sup>rd</sup> Edition Compatibility Impact</h1>
 <p>Throughout: In the Edition 3 specification the meaning of phrases such as &ldquo;as if by the expression <code>new Array()</code>&rdquo; are subject to misinterpretation. In the Edition 5 specification text for all internal references and invocations of standard built-in objects and methods has been clarified by making it explicit that the intent is that the actual built-in object is to be used rather than the current dynamic value of the correspondingly named property.</p>
 <p><a href="#sec-11.8.1">11.8.1</a>: ECMAScript generally uses a left to right evaluation order, however the Edition 3 specification language for the &gt; and &lt;= operators resulted in a partial right to left order. The specification has been corrected for these operators such that it now specifies a full left to right evaluation order. However, this change of order is potentially observable if side-effects occur during the evaluation process.</p>
 <p><a href="#sec-11.1.4">11.1.4</a>: Edition 5 clarifies the fact that a trailing comma at the end of an <span style="font-family: Times New Roman; font-style: italic">ArrayInitialiser</span> does not add to the length of the array. This is not a semantic change from Edition 3 but some implementations may have previously misinterpreted this.</p>
@@ -17081,8 +17169,8 @@ THH:mm:ss.sss</pre>
 <p><a href="#sec-15.10.6">15.10.6</a>: RegExp.prototype is now a RegExp object rather than an instance of Object. The value of its [[Class]] internal property which is observable using Object.prototype.toString is now &ldquo;RegExp&rdquo; rather than &ldquo;Object&rdquo;.</p>
 <hr>
 </section>
-<section>
-<h1>Annex E<br>(informative)<br>Additions and Changes in the 5<sup>th</sup> Edition that<br>Introduce Incompatibilities with the 3<sup>rd</sup> Edition</h1>
+<section id="sec-E">
+<h1><span class="secnum"><a href="#sec-E" title="link to this section">Annex E</a></span> <br>(informative)<br>Additions and Changes in the 5<sup>th</sup> Edition that<br>Introduce Incompatibilities with the 3<sup>rd</sup> Edition</h1>
 <p><a href="#sec-7.1">7.1</a>: Unicode format control characters are no longer stripped from ECMAScript source text before processing. In Edition 5, if such a character appears in a <span style="font-family: Times New Roman; font-style: italic">StringLiteral</span> or <span style="font-family: Times New Roman; font-style: italic">RegularExpressionLiteral</span> the character will be incorporated into the literal where in Edition 3 the character would not be incorporated into the literal.</p>
 <p><a href="#sec-7.2">7.2</a>: Unicode character &lt;BOM&gt; is now treated as whitespace  and its presence in the middle of what appears to be an identifier could result in a syntax error which would not have occurred in Edition 3</p>
 <p><a href="#sec-7.3">7.3</a>: Line terminator characters that are preceded by an escape sequence are now allowed within a string literal token.  In Edition 3 a syntax error would have been produced.</p>
@@ -17112,8 +17200,8 @@ THH:mm:ss.sss</pre>
 <p><a href="#sec-15.12">15.12</a>: In Edition 5, the name <code>JSON</code> is defined in the global environment. In Edition 3, testing for the presence of that name will show it to be undefined unless it is defined by the program or implementation.</p>
 <hr>
 </section>
-<section>
-<h1>Annex F<br>(informative)<br>Technically Significant Corrections and Clarifications in the 5.1 Edition</h1>
+<section id="sec-F">
+<h1><span class="secnum"><a href="#sec-F" title="link to this section">Annex F</a></span> <br>(informative)<br>Technically Significant Corrections and Clarifications in the 5.1 Edition</h1>
 <p><a href="#sec-7.8.4">7.8.4</a>: CV definitions added for <span style="font-family: Times New Roman; font-style: italic">DoubleStringCharacter</span> <b>::</b> <span style="font-family: Times New Roman; font-style: italic">LineContinuation</span> and <span style="font-family: Times New Roman; font-style: italic">SingleStringCharacter</span> <b>::</b> <span style="font-family: Times New Roman; font-style: italic">LineContinuation</span>.</p>
 <p><a href="#sec-10.2.1.1.3">10.2.1.1.3</a>: The argument S is not ignored. It controls whether an exception is thrown when attempting to set an immutable binding.</p>
 <p><a href="#sec-10.2.1.2.2">10.2.1.2.2</a>: In algorithm step 5, <b>true</b> is passed as the last argument to [[DefineOwnProperty]].</p>
@@ -17162,7 +17250,6 @@ THH:mm:ss.sss</pre>
   <li class="bibliography-entry">RFC 3629 "UTF-8, a transformation format of ISO 10646", available at &lt;http://tools.ietf.org/html/rfc3629&gt;</li>
   <li class="bibliography-entry">RFC 4627 "The application/json Media Type for JavaScript Object Notation (JSON)" , available at &lt;http://tools.ietf.org/html/rfc4627&gt;</li>
 </ol>
-</section>
 </section>
 </body>
 </html>

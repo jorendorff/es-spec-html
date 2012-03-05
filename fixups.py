@@ -174,43 +174,63 @@ def fixup_formatting(doc, styles):
 unrecognized_styles = collections.defaultdict(int)
 
 def fixup_paragraph_classes(doc):
-    next_annex = ord('A')
-    def munge_annex_heading(e):
-        nonlocal next_annex
-
+    annex_counters = [0, 0, 0, 0]
+    def munge_annex_heading(e, cls):
         # Special case. Rather than implement OOXML numbering and Word
         # {SEQ} macros to the extent we'd need to generate the annex
         # headings, we fake it.
+
+        print("IN munge_annex_heading:", e.to_html(), cls)
+        
+        # Figure out what level heading we are.
+        if cls == 'ANNEX':
+            level = 0
+        else:
+            level = int(cls[1:]) - 1
+        assert level < len(annex_counters)
+
+        # Bump the counter for this level; reset all the others to zero.
+        annex_counters[level] += 1
+        for i in range(level + 1, len(annex_counters)):
+            annex_counters[i] = 0
+
         e.name = 'h1'
-        assert next_annex <= ord('Z')
-        letter = chr(next_annex)
-        next_annex += 1
+        letter = chr(ord('A') + annex_counters[0] - 1)
+        if level == 0:
+            # Parse the current content of the heading.
+            i = 0
+            content = e.content
 
-        # Parse the current content of the heading.
-        i = 0
-        content = e.content
-
-        assert ht_name_is(content[i], 'br')
-        i += 1
-
-        status = content[i]
-        status = re.sub(r'{SEQ .* }', '', status)
-        assert status in ('(informative)', '(normative)')
-        i += 1
-
-        assert ht_name_is(content[i], 'br')
-        i += 1
-
-        while ht_name_is(content[i], 'br') or (isinstance(content[i], str)
-                                               and re.match(r'^{SEQ .* }$', content[i])):
+            assert ht_name_is(content[i], 'br')
             i += 1
-        title = content[i:]
 
-        # Build the new heading.
-        e.content = ["Annex " + letter, html.br(), status, html.br()] + title
+            status = content[i]
+            status = re.sub(r'{SEQ .* }', '', status)
+            assert status in ('(informative)', '(normative)')
+            i += 1
+
+            assert ht_name_is(content[i], 'br')
+            i += 1
+
+            while ht_name_is(content[i], 'br') or (isinstance(content[i], str)
+                                                   and re.match(r'^{SEQ .* }$', content[i])):
+                i += 1
+            title = content[i:]
+
+            # Build the new heading.
+            e.content = ["Annex " + letter, html.br(), status, html.br()] + title
+        else:
+            # Autogenerate annex subsection number.
+            s = letter + "." + ".".join(map(str, annex_counters[1:level + 1])) + '\t'
+            if e.content and isinstance(e.content[0], str):
+                e.content[0] = s + e.content[0]
+            else:
+                e.content.insert(0, s)
+
+        print("OUT munge_annex_heading:", e.to_html())
 
     tag_names = {
-        'ANNEX': 'h1',
+        # ANNEX, a2, a3, a4 are treated specially.
         'Alg2': None,
         'Alg3': None,
         'Alg4': None,
@@ -262,8 +282,8 @@ def fixup_paragraph_classes(doc):
                 unrecognized_styles[cls] += 1
             #e.content.insert(0, html.span('<{0}>'.format(cls), style="color:red"))
 
-            if cls == 'ANNEX':
-                munge_annex_heading(e)
+            if cls in ('ANNEX', 'a2', 'a3', 'a4'):
+                munge_annex_heading(e, cls)
             elif cls == 'Note':
                 # Total special case. Wrap in div.note.
                 e.name = 'div'
@@ -403,6 +423,9 @@ def fixup_sections(doc):
     body_elt = doc_body(doc)
     body = body_elt.content
 
+    def starts_with_section_number(s):
+        return re.match(r'[1-9]|[A-Z]\.[1-9][0-9]*', s) is not None
+
     def heading_info(h):
         """ h is an h1 element. Return a pair (sec_num, title).
         sec_num is the section number, as a string, or None.
@@ -428,7 +451,9 @@ def fixup_sections(doc):
 
         num, tab, title = s.partition('\t')
         if tab == "":
-            if s[:1].isdigit():
+            if len(c) > 1 and ht_name_is(c[1], "br"):
+                return s.strip(), ''
+            elif starts_with_section_number(s):
                 parts = s.split(None, 1)
                 if len(parts) == 2:
                     return tuple(parts)
@@ -446,8 +471,17 @@ def fixup_sections(doc):
         """
         return a is not None and (b is None or b.startswith(a + "."))
 
+    def sec_num_to_id(num):
+        if num.startswith('Annex '):
+            return num[6:]
+        else:
+            return num
+
     def wrap(sec_num, sec_title, start):
         """ Wrap the section starting at body[start] in a section element. """
+
+        sec_id = sec_num_to_id(sec_num) if sec_num else None
+
         j = start + 1
         while j < len(body):
             kid = body[j]
@@ -459,7 +493,10 @@ def fixup_sections(doc):
                         break
                 if kid.name == "h1":
                     kid_num, kid_title = heading_info(kid)
-                    if contains(sec_num, kid_num):
+
+                    # Hack: most numberless sections are subsections, but the
+                    # Bibliography is not contained in any other section.
+                    if kid_title != 'Bibliography' and contains(sec_id, kid_num):
                         # kid starts a subsection. Wrap it!
                         wrap(kid_num, kid_title, j)
                     else:
@@ -469,10 +506,10 @@ def fixup_sections(doc):
         stop = j
 
         attrs = {}
-        if sec_num is not None and sec_num[:1].isdigit():
-            attrs['id'] = "sec-" + sec_num
+        if sec_num is not None:
+            attrs['id'] = "sec-" + sec_id
             span = html.span(
-                html.a(sec_num, href="#sec-" + sec_num, title="link to this section"),
+                html.a(sec_num, href="#sec-" + sec_id, title="link to this section"),
                 class_="secnum")
             c = body[start].content
             c[0] = ' ' + sec_title
@@ -498,11 +535,6 @@ def fixup_hr(doc):
 
 def fixup_toc(doc):
     """ Generate a table of contents and replace the one in the document. """
-    # TODO 12.1 is indented wrong.
-    # TODO 12.2.2 is indented wrong.
-    # TODO 12.2.3 is missing.
-    # TODO 12.6.2 is indented wrong.
-    # TODO 13.1.1 is indented wrong.
 
     def make_toc_list(e, depth=0):
         sublist = []
