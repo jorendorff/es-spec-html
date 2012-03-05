@@ -584,8 +584,42 @@ def fixup_toc(doc):
     i1, next_hr = hr_iterator.__next__()
     body.content[i0: i1 + 1] = [toc]
 
+def fixup_tables(doc):
+    """ Turn highlighted td elements into th elements.
+
+    Also, OOXML puts all table cell content in paragraphs; strip out the extra
+    <p></p> tags.
+
+    Precedes fixup_code, which converts p elements containing only code into
+    pre elements; we don't want code elements in tables to handled that way.
+    """
+    for td in findall(doc, 'td'):
+        if len(td.content) == 1 and ht_name_is(td.content[0], 'p'):
+            p = td.content[0]
+            if p.style and p.style.get('background-color') == '#C0C0C0':
+                td.name = 'th'
+                del p.style['background-color']
+            if len(p.content) == 1 and ht_name_is(p.content[0], 'span'):
+                span = p.content[0]
+                if span.style and span.style.get('background-color') == '#C0C0C0':
+                    td.name = 'th'
+                    del span.style['background-color']
+
+            # If the p is vacuous, kill it.
+            if not p.attrs and not p.style:
+                td.content = p.content
+
+            # Ditto if it happens to contain an empty span.
+            if len(td.content) == 1 and ht_name_is(td.content[0], 'span'):
+                span = td.content[0]
+                if not span.attrs and not span.style:
+                    td.content = span.content
+
 def fixup_code(e):
-    """ Merge adjacent code elements. Convert p elements containing only code elements to pre. """
+    """ Merge adjacent code elements. Convert p elements containing only code elements to pre.
+
+    Precedes fixup_notes, which considers pre elements to be part of notes.
+    """
 
     for i, k in e.kids():
         if k.name == 'code':
@@ -610,7 +644,6 @@ def fixup_code(e):
         if s is not None:
             e.name = 'pre'
             e.content[:] = [s]
-
 
 def fixup_notes(e):
     """ Apply several fixes to div.note elements throughout the document. """
@@ -750,19 +783,6 @@ def fixup_grammar(e):
         elif kid.name in ('body', 'section', 'div'):
             fixup_grammar(kid)
 
-def fixup_tables(doc):
-    for td in findall(doc, 'td'):
-        if len(td.content) == 1 and ht_name_is(td.content[0], 'p'):
-            p = td.content[0]
-            if p.style and p.style.get('background-color') == '#C0C0C0':
-                td.name = 'th'
-                del p.style['background-color']
-            if len(p.content) == 1 and ht_name_is(p.content[0], 'span'):
-                span = p.content[0]
-                if span.style and span.style.get('background-color') == '#C0C0C0':
-                    td.name = 'th'
-                    del span.style['background-color']
-
 def fixup_picts(doc):
     """ Replace Figure 1 with canned HTML. Remove div.w-pict elements. """
     def walk(e):
@@ -888,11 +908,11 @@ def fixup(doc, styles):
     fixup_sections(doc)
     fixup_hr(doc)
     fixup_toc(doc)
+    fixup_tables(doc)
     fixup_code(doc)
     fixup_notes(doc)
     fixup_lists(doc)
     fixup_grammar(doc)
-    fixup_tables(doc)
     fixup_picts(doc)
     fixup_figures(doc)
     fixup_links(doc)
