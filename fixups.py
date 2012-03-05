@@ -179,8 +179,6 @@ def fixup_paragraph_classes(doc):
         # Special case. Rather than implement OOXML numbering and Word
         # {SEQ} macros to the extent we'd need to generate the annex
         # headings, we fake it.
-
-        print("IN munge_annex_heading:", e.to_html(), cls)
         
         # Figure out what level heading we are.
         if cls == 'ANNEX':
@@ -218,7 +216,7 @@ def fixup_paragraph_classes(doc):
             title = content[i:]
 
             # Build the new heading.
-            e.content = ["Annex " + letter, html.br(), status, html.br()] + title
+            e.content = ["Annex " + letter + " ", html.span(status, class_="section-status"), " "] + title
         else:
             # Autogenerate annex subsection number.
             s = letter + "." + ".".join(map(str, annex_counters[1:level + 1])) + '\t'
@@ -226,8 +224,6 @@ def fixup_paragraph_classes(doc):
                 e.content[0] = s + e.content[0]
             else:
                 e.content.insert(0, s)
-
-        print("OUT munge_annex_heading:", e.to_html())
 
     tag_names = {
         # ANNEX, a2, a3, a4 are treated specially.
@@ -451,7 +447,7 @@ def fixup_sections(doc):
 
         num, tab, title = s.partition('\t')
         if tab == "":
-            if len(c) > 1 and ht_name_is(c[1], "br"):
+            if len(c) > 1 and ht_name_is(c[1], "span") and c[1].attrs.get("class") == "section-status":
                 return s.strip(), ''
             elif starts_with_section_number(s):
                 parts = s.split(None, 1)
@@ -512,8 +508,7 @@ def fixup_sections(doc):
                 html.a(sec_num, href="#sec-" + sec_id, title="link to this section"),
                 class_="secnum")
             c = body[start].content
-            c[0] = ' ' + sec_title
-            c.insert(0, span)
+            c[0:1] = [span, ' ' + sec_title]
 
         # Actually do the wrapping.
         body[start:stop] = [html.section(*body[start:stop], **attrs)]
