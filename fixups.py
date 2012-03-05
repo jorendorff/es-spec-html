@@ -42,7 +42,7 @@ def fixup_list_styles(doc, docx):
     <span style="font-family: sans-serif"> if we did it first.
     """
 
-    wrong_types = ('Alg4', 'MathSpecialCase3', 'BulletNotlast')
+    wrong_types = ('Alg4', 'MathSpecialCase3', 'BulletNotlast', 'BulletLast')
 
     for p in findall(doc, 'p'):
         if p.attrs.get("class") in wrong_types and has_bullet(docx, p):
