@@ -17,6 +17,24 @@ def all_parent_index_child_triples(e):
             for t in all_parent_index_child_triples(k):
                 yield t
 
+def fixup_list_styles(doc):
+    """ Make sure bullet lists are never p.Alg4.
+
+    Alg4 style indicates a numbered list, with Times New Roman font. It's used
+    for algorithms. However there are a few places in the Word document where
+    a paragraph is style Alg4 but manually hacked to have a bullet instead of a
+    number and the default font instead of Times New Roman. Lol.
+
+    In short, this screws everything up, so we manually hack it in the general
+    direction of sanity before doing anything else.
+
+    Precedes fixup_formatting, which would spew a bunch of
+    <span style="font-family: sans-serif"> if we did it first.
+    """
+    for p in findall(doc, 'p'):
+        if p.attrs.get("class") == "Alg4" and p.style and p.style.get("-ooxml-numId") == "28":
+            p.attrs['class'] = "Normal"
+
 def fixup_formatting(doc, styles):
     """
     Convert runs of span elements to more HTML-like code.
@@ -901,6 +919,7 @@ def fixup_links(doc):
     visit(doc_body(doc))
 
 def fixup(doc, styles):
+    fixup_list_styles(doc)
     fixup_formatting(doc, styles)
     fixup_paragraph_classes(doc)
     fixup_element_spacing(doc)
