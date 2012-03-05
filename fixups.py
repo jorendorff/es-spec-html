@@ -213,7 +213,20 @@ def fixup_paragraph_classes(doc):
             while ht_name_is(content[i], 'br') or (isinstance(content[i], str)
                                                    and re.match(r'^{SEQ .* }$', content[i])):
                 i += 1
-            title = content[i:]
+
+            def ht_append(content, ht):
+                if isinstance(ht, str) and content and isinstance(content[-1], str):
+                    content[-1] += ht
+                else:
+                    content.append(ht)
+
+            title = []
+            while i < len(content):
+                ht = content[i]
+                if ht_name_is(ht, 'br'):
+                    ht = ' '
+                ht_append(title, ht)
+                i += 1
 
             # Build the new heading.
             e.content = ["Annex " + letter + " ", html.span(status, class_="section-status"), " "] + title

@@ -521,8 +521,8 @@
     </ol>
     </li>
   <li><span class="secnum"><a href="#sec-C" title="link to this section">Annex C</a></span> <span class="section-status">(informative)</span> The Strict Mode of ECMAScript</li>
-  <li><span class="secnum"><a href="#sec-D" title="link to this section">Annex D</a></span> <span class="section-status">(informative)</span> Corrections and Clarifications in the 5<sup>th</sup> Edition<br>with Possible 3<sup>rd</sup> Edition Compatibility Impact</li>
-  <li><span class="secnum"><a href="#sec-E" title="link to this section">Annex E</a></span> <span class="section-status">(informative)</span> Additions and Changes in the 5<sup>th</sup> Edition that<br>Introduce Incompatibilities with the 3<sup>rd</sup> Edition</li>
+  <li><span class="secnum"><a href="#sec-D" title="link to this section">Annex D</a></span> <span class="section-status">(informative)</span> Corrections and Clarifications in the 5<sup>th</sup> Edition with Possible 3<sup>rd</sup> Edition Compatibility Impact</li>
+  <li><span class="secnum"><a href="#sec-E" title="link to this section">Annex E</a></span> <span class="section-status">(informative)</span> Additions and Changes in the 5<sup>th</sup> Edition that Introduce Incompatibilities with the 3<sup>rd</sup> Edition</li>
   <li><span class="secnum"><a href="#sec-F" title="link to this section">Annex F</a></span> <span class="section-status">(informative)</span> Technically Significant Corrections and Clarifications in the 5.1 Edition</li>
   <li>Bibliography</li>
 </ol>
@@ -17158,7 +17158,7 @@ THH:mm:ss.sss</pre>
 </ol>
 </section>
 <section id="sec-D">
-<h1><span class="secnum"><a href="#sec-D" title="link to this section">Annex D</a></span> <span class="section-status">(informative)</span> Corrections and Clarifications in the 5<sup>th</sup> Edition<br>with Possible 3<sup>rd</sup> Edition Compatibility Impact</h1>
+<h1><span class="secnum"><a href="#sec-D" title="link to this section">Annex D</a></span> <span class="section-status">(informative)</span> Corrections and Clarifications in the 5<sup>th</sup> Edition with Possible 3<sup>rd</sup> Edition Compatibility Impact</h1>
 <p>Throughout: In the Edition 3 specification the meaning of phrases such as &ldquo;as if by the expression <code>new Array()</code>&rdquo; are subject to misinterpretation. In the Edition 5 specification text for all internal references and invocations of standard built-in objects and methods has been clarified by making it explicit that the intent is that the actual built-in object is to be used rather than the current dynamic value of the correspondingly named property.</p>
 <p><a href="#sec-11.8.1">11.8.1</a>: ECMAScript generally uses a left to right evaluation order, however the Edition 3 specification language for the &gt; and &lt;= operators resulted in a partial right to left order. The specification has been corrected for these operators such that it now specifies a full left to right evaluation order. However, this change of order is potentially observable if side-effects occur during the evaluation process.</p>
 <p><a href="#sec-11.1.4">11.1.4</a>: Edition 5 clarifies the fact that a trailing comma at the end of an <span style="font-family: Times New Roman; font-style: italic">ArrayInitialiser</span> does not add to the length of the array. This is not a semantic change from Edition 3 but some implementations may have previously misinterpreted this.</p>
@@ -17170,7 +17170,7 @@ THH:mm:ss.sss</pre>
 <hr>
 </section>
 <section id="sec-E">
-<h1><span class="secnum"><a href="#sec-E" title="link to this section">Annex E</a></span> <span class="section-status">(informative)</span> Additions and Changes in the 5<sup>th</sup> Edition that<br>Introduce Incompatibilities with the 3<sup>rd</sup> Edition</h1>
+<h1><span class="secnum"><a href="#sec-E" title="link to this section">Annex E</a></span> <span class="section-status">(informative)</span> Additions and Changes in the 5<sup>th</sup> Edition that Introduce Incompatibilities with the 3<sup>rd</sup> Edition</h1>
 <p><a href="#sec-7.1">7.1</a>: Unicode format control characters are no longer stripped from ECMAScript source text before processing. In Edition 5, if such a character appears in a <span style="font-family: Times New Roman; font-style: italic">StringLiteral</span> or <span style="font-family: Times New Roman; font-style: italic">RegularExpressionLiteral</span> the character will be incorporated into the literal where in Edition 3 the character would not be incorporated into the literal.</p>
 <p><a href="#sec-7.2">7.2</a>: Unicode character &lt;BOM&gt; is now treated as whitespace  and its presence in the middle of what appears to be an identifier could result in a syntax error which would not have occurred in Edition 3</p>
 <p><a href="#sec-7.3">7.3</a>: Line terminator characters that are preceded by an escape sequence are now allowed within a string literal token.  In Edition 3 a syntax error would have been produced.</p>
