@@ -37,6 +37,8 @@ k_cs = bloat('cs')
 k_eastAsia = bloat('eastAsia')
 k_fill = bloat('fill')
 k_color = bloat('color')
+k_left = bloat('left')
+k_hanging = bloat('hanging')
 
 def parse_pr(e):
     font_keys = {k_ascii, k_hAnsi, k_cs, k_eastAsia}
@@ -102,8 +104,27 @@ def parse_pr(e):
                 if color is not None and re.match(r'^[0-9a-fA-F]{6}$', color):
                     put('background-color', '#' + color)
 
-        # todo: shd, jc, ind, spacing, contextualSpacing
+        # todo: jc, ind, spacing, contextualSpacing
         # todo: pBdr
+
+        elif name == 'sz':
+            if list(k.keys()) == [k_val]:
+                v = k.get(k_val)
+                float(v)  # throw if sz is not a number
+                #put('font-size', v + 'pt')
+
+        elif name == 'ind':
+            left = k.get(k_left)
+            if left is not None:
+                left = int(left)
+                assert left >= 0
+                #put('padding-left', str(left / 20) + 'pt')
+        
+                hanging = k.get(k_hanging)
+                if hanging is not None:
+                    hanging = int(hanging)
+                    assert hanging >= 0
+                    #put('text-indent', str((hanging - left) / 20) + 'pt')
 
         elif name == 'numPr':
             ilvl = None
@@ -219,11 +240,22 @@ def get_val(e, key):
     else:
         return None
 
-def parse_lvl(e):
-    assert e.tag == k_lvl
+def parse_lvl(docx, e):
     lvl = Lvl()
+    assert e.tag == k_lvl
     lvl.pStyle = get_val(e, 'pStyle')
     lvl.numFmt = get_val(e, 'numFmt')
+
+    if lvl.pStyle is None:
+        style = {}
+    else:
+        style = docx.styles[lvl.pStyle].full_style.copy()
+    for kid in e.findall('pPr'):
+        style.update(parse_pr(kid))
+    for kid in e.findall('rPr'):
+        style.update(parse_pr(kid))
+    lvl.full_style = style
+
     return lvl
 
 class Numbering:
@@ -231,7 +263,7 @@ class Numbering:
         self.abstract_num = abstract_num
         self.num = num
 
-def parse_numbering(e):
+def parse_numbering(docx, e):
     assert e.tag == k_numbering
 
     # eat crunchy xml, num num num
@@ -245,7 +277,7 @@ def parse_numbering(e):
             ilvl = int(level.get(k_ilvl))
             while len(levels) <= ilvl:
                 levels.append(None)
-            levels[ilvl] = parse_lvl(level)
+            levels[ilvl] = parse_lvl(docx, level)
         abstract_num[abstract_id] = levels
 
     # Build the num dictionary (extra level of misdirection in OOXML, awesome)
@@ -261,7 +293,7 @@ def parse_numbering(e):
             while len(overrides) <= ilvl:
                 overrides.append(None)
             [lvl] = override
-            overrides[ilvl] = parse_lvl(lvl)
+            overrides[ilvl] = parse_lvl(docx, lvl)
         num[numId] = Num(val, overrides)
 
     return Numbering(abstract_num, num)
@@ -330,5 +362,5 @@ def load(filename):
     doc = Document()
     doc.document = ElementTree.fromstring(document_xml)
     doc.styles = parse_styles(ElementTree.fromstring(styles_xml))
-    doc.numbering = parse_numbering(ElementTree.fromstring(numbering_xml))
+    doc.numbering = parse_numbering(doc, ElementTree.fromstring(numbering_xml))
     return doc
