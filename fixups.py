@@ -911,6 +911,10 @@ def fixup_links(doc):
     def compile(re_source):
         return re.compile(re_source.replace("SECTION", SECTION))
 
+    specific_links = [
+        ('automatic semicolon insertion (7.9)', '#sec-7.9'),
+    ]
+
     section_link_regexes = list(map(compile, [
         # Match " (11.1.5)" and " (see 7.9)"
         # The space is to avoid matching "(3.5)" in "Math.round(3.5)".
@@ -937,6 +941,12 @@ def fixup_links(doc):
 
     def find_link(s):
         best = None
+        for text, target in specific_links:
+            i = s.find(text)
+            if i != -1:
+                if best is None or i < best[0]:
+                    best = i, i + len(text), target
+
         for link_re in section_link_regexes:
             m = link_re.search(s)
             while m is not None:
