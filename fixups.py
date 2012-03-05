@@ -645,6 +645,14 @@ def fixup_tables(doc):
             # Ditto if it happens to contain an empty span.
             if len(td.content) == 1 and ht_name_is(td.content[0], 'span'):
                 span = td.content[0]
+                if td.name == 'th' and span.style:
+                    # Delete redundant style info.
+                    if span.style.get('font-family') == 'Times New Roman':
+                        del span.style['font-family']
+                    if span.style.get('font-weight') == 'bold':
+                        del span.style['font-weight']
+                    if span.style.get('font-style') == 'italic':
+                        del span.style['font-style']
                 if not span.attrs and not span.style:
                     td.content = span.content
 
