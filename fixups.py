@@ -623,14 +623,18 @@ def fixup_tables(doc):
     pre elements; we don't want code elements in tables to handled that way.
     """
     for td in findall(doc, 'td'):
+        if td.style and td.style.get('background-color') in ('#C0C0C0', '#D8D8D8'):
+            td.name = 'th'
+            del td.style['background-color']
+
         if len(td.content) == 1 and ht_name_is(td.content[0], 'p'):
             p = td.content[0]
-            if p.style and p.style.get('background-color') == '#C0C0C0':
+            if p.style and p.style.get('background-color') in ('#C0C0C0', '#D8D8D8'):
                 td.name = 'th'
                 del p.style['background-color']
             if len(p.content) == 1 and ht_name_is(p.content[0], 'span'):
                 span = p.content[0]
-                if span.style and span.style.get('background-color') == '#C0C0C0':
+                if span.style and span.style.get('background-color') in ('#C0C0C0', '#D8D8D8'):
                     td.name = 'th'
                     del span.style['background-color']
 

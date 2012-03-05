@@ -155,7 +155,9 @@ def transform(e):
             return tr(*c)
 
         elif name == 'tc':
-            return td(*c)
+            result = td(*c)
+            result.style = css
+            return result
 
         else:
             return c

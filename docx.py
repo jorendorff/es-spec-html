@@ -99,10 +99,16 @@ def parse_pr(e):
                     put('vertical-align', 'sub')
 
         elif name == 'shd':
-            if k.get(k_val) == "solid" and k.get(k_fill) == "FFFFFF":
+            val = k.get(k_val)
+            if val == 'solid':
                 color = k.get(k_color)
-                if color is not None and re.match(r'^[0-9a-fA-F]{6}$', color):
-                    put('background-color', '#' + color)
+            elif val == 'clear':
+                color = k.get(k_fill)
+            else:
+                color = None
+
+            if color is not None and re.match(r'^[0-9a-fA-F]{6}$', color):
+                put('background-color', '#' + color)
 
         # todo: jc, ind, spacing, contextualSpacing
         # todo: pBdr
