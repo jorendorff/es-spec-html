@@ -76,10 +76,8 @@ def fixup_formatting(doc, styles):
 
         # The role of inherited style is a little weird here.
         # We use it only to throw away pointless run markup.
-        if 'class' in parent.attrs:
-            inherited_style = styles[parent.attrs['class']].full_style
-        else:
-            inherited_style = {}
+        cls = parent.attrs.get('class', 'Normal')
+        inherited_style = styles[cls].full_style
 
         if parent.style:
             # Delete w:rPr properties from the paragraph's style. As far as I
