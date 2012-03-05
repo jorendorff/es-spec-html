@@ -1799,17 +1799,15 @@
 <h1><span class="secnum"><a href="#sec-7.9.1" title="link to this section">7.9.1</a></span> Rules of Automatic Semicolon Insertion</h1>
 <p>There are three basic rules of semicolon insertion:</p>
 <ol class="proc">
-  <li><span style="font-family: sans-serif">When, as the program is parsed from left to right, a token (called the <i>offending token</i>) is encountered that is not allowed by any production of the grammar, then a semicolon is automatically inserted before the offending token if one or more of the following conditions is true:</span></li>
-</ol>
-<ul>
-  <li>The offending token is separated from the previous token by at least one <span style="font-family: Times New Roman; font-style: italic">LineTerminator</span>.</li>
-  <li>The offending token is <code>}</code>.
-    <ol class="block">
-      <li><span style="font-family: sans-serif">When, as the program is parsed from left to right, the end of the input stream of tokens is encountered and the parser is unable to parse the input token stream as a single complete ECMAScript</span> <i>Program</i><span style="font-family: sans-serif">, then a semicolon is automatically inserted at the end of the input stream.</span></li>
-      <li><span style="font-family: sans-serif">When, as the program is parsed from left to right, a token is encountered that is allowed by some production of the grammar, but the production is a <i>restricted production</i> and the token would be the first token for a terminal or nonterminal immediately following the annotation</span> &ldquo;<span style="font-family: sans-serif">[no</span> <i>LineTerminator</i> <span style="font-family: sans-serif">here]</span>&rdquo; <span style="font-family: sans-serif">within the restricted production (and therefore such a token is called a restricted token), and the restricted token is separated from the previous token by at least one</span> <i>LineTerminator</i><span style="font-family: sans-serif">, then a semicolon is automatically inserted before the restricted token.</span></li>
-    </ol>
+  <li><span style="font-family: sans-serif">When, as the program is parsed from left to right, a token (called the <i>offending token</i>) is encountered that is not allowed by any production of the grammar, then a semicolon is automatically inserted before the offending token if one or more of the following conditions is true:</span>
+    <ul>
+      <li>The offending token is separated from the previous token by at least one <span style="font-family: Times New Roman; font-style: italic">LineTerminator</span>.</li>
+      <li>The offending token is <code>}</code>.</li>
+    </ul>
     </li>
-</ul>
+  <li><span style="font-family: sans-serif">When, as the program is parsed from left to right, the end of the input stream of tokens is encountered and the parser is unable to parse the input token stream as a single complete ECMAScript</span> <i>Program</i><span style="font-family: sans-serif">, then a semicolon is automatically inserted at the end of the input stream.</span></li>
+  <li><span style="font-family: sans-serif">When, as the program is parsed from left to right, a token is encountered that is allowed by some production of the grammar, but the production is a <i>restricted production</i> and the token would be the first token for a terminal or nonterminal immediately following the annotation</span> &ldquo;<span style="font-family: sans-serif">[no</span> <i>LineTerminator</i> <span style="font-family: sans-serif">here]</span>&rdquo; <span style="font-family: sans-serif">within the restricted production (and therefore such a token is called a restricted token), and the restricted token is separated from the previous token by at least one</span> <i>LineTerminator</i><span style="font-family: sans-serif">, then a semicolon is automatically inserted before the restricted token.</span></li>
+</ol>
 <p>However, there is an additional overriding condition on the preceding rules: a semicolon is never inserted automatically if the semicolon would then be parsed as an empty statement or if that semicolon would become one of the two semicolons in the header of a <code>for</code> statement (<a href="#sec-12.6.3">see 12.6.3</a>).</p>
 <div class="note">
   <p><span class="nh">NOTE</span> The following are the only restricted productions in the grammar:</p>

@@ -736,6 +736,31 @@ def fixup_notes(e):
 
     fixup_notes_in(e)
 
+def find_section(doc, sec_id):
+    # super slow algorithm
+    want_id = "sec-" + sec_id
+    for sect in findall(doc, 'section'):
+        id = sect.attrs.get('id')
+        if id == want_id:
+            return sect
+    return None
+
+def fixup_7_9_1(doc, docx):
+    """ Fix the ilvl attributes on the bullets in section 7.9.1.
+
+    Precedes fixup_lists which consumes this data.
+    """
+    bullet_numid = '384' # gross hard-coded hack
+    assert docx.get_list_style_at(bullet_numid, '3').numFmt == 'bullet'
+
+    sect = find_section(doc, '7.9.1')
+    lst = sect.content[2:7]
+    assert [int(elt.style['-ooxml-ilvl']) for elt in lst] == [2, 0, 0, 2, 2]
+    for i in (1, 2):
+        lst[i].style['-ooxml-ilvl'] = '3'
+        lst[i].style['-ooxml-numId'] = bullet_numid
+        assert has_bullet(docx, lst[i])
+
 def fixup_lists(e, docx):
     if e.name in ('ol', 'ul'):
         # This is already a list. I don't think there are any lists we don't
@@ -957,6 +982,7 @@ def fixup(docx, doc):
     fixup_tables(doc)
     fixup_code(doc)
     fixup_notes(doc)
+    fixup_7_9_1(doc, docx)
     fixup_lists(doc, docx)
     fixup_grammar(doc)
     fixup_picts(doc)
