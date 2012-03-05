@@ -192,6 +192,80 @@ def parse_styles(e):
 
     return all_styles
 
+k_abstractNum = bloat('abstractNum')
+k_abstractNumId = bloat('abstractNumId')
+k_ilvl = bloat('ilvl')
+k_lvl = bloat('lvl')
+k_lvlOverride = bloat('lvlOverride')
+k_num = bloat('num')
+k_numId = bloat('numId')
+k_numbering = bloat('numbering')
+k_pStyle = bloat('pStyle')
+k_numFmt = bloat('numFmt')
+
+class Num:
+    def __init__(self, abstract_num_id, overrides):
+        self.abstract_num_id = abstract_num_id
+        self.overrides = overrides
+
+class Lvl:
+    pass
+
+def get_val(e, key):
+    kids = list(e.findall(bloat(key)))
+    if kids:
+        [kid] = kids
+        return kid.get(k_val)
+    else:
+        return None
+
+def parse_lvl(e):
+    assert e.tag == k_lvl
+    lvl = Lvl()
+    lvl.pStyle = get_val(e, 'pStyle')
+    lvl.numFmt = get_val(e, 'numFmt')
+    return lvl
+
+class Numbering:
+    def __init__(self, abstract_num, num):
+        self.abstract_num = abstract_num
+        self.num = num
+
+def parse_numbering(e):
+    assert e.tag == k_numbering
+
+    # eat crunchy xml, num num num
+    abstract_num = {}
+    for style in e.findall(k_abstractNum):
+        abstract_id = style.get(k_abstractNumId)
+        assert abstract_id is not None
+
+        levels = []
+        for level in style.findall(k_lvl):
+            ilvl = int(level.get(k_ilvl))
+            while len(levels) <= ilvl:
+                levels.append(None)
+            levels[ilvl] = parse_lvl(level)
+        abstract_num[abstract_id] = levels
+
+    # Build the num dictionary (extra level of misdirection in OOXML, awesome)
+    num = {}
+    for style in e.findall(k_num):
+        numId = style.get(k_numId)
+        assert numId is not None
+        val = get_val(style, 'abstractNumId')
+        assert val is not None
+        overrides = []
+        for override in style.findall(k_lvlOverride):
+            ilvl = int(override.get(k_ilvl))
+            while len(overrides) <= ilvl:
+                overrides.append(None)
+            [lvl] = override
+            overrides[ilvl] = parse_lvl(lvl)
+        num[numId] = Num(val, overrides)
+
+    return Numbering(abstract_num, num)
+
 class Document:
     def _extract(self):
         def writexml(e, out, indent='', context='block'):
@@ -218,8 +292,8 @@ class Document:
                 writexml(tree, out)
 
         save(self.document, 'original.xml')
-        save(self.styles, 'styles.xml')
-        save(self.numbering, 'numbering.xml')
+        #save(self.styles, 'styles.xml')
+        #save(self.numbering, 'numbering.xml')
 
     def _dump_styles(self):
         for cls, s in sorted(self.styles.items()):
@@ -233,14 +307,28 @@ class Document:
                         print("    " + prop + ": " + value + ";  /* inherited */")
             print("}\n")
 
+    def get_list_style_at(self, numId, ilvl):
+        num = self.numbering.num[numId]
+        ilvl = int(ilvl)
+        ov = num.overrides
+        if ilvl < len(ov) and ov[ilvl] is not None:
+            return ov[ilvl]
+        levels = self.numbering.abstract_num[num.abstract_num_id]
+        if ilvl >= len(levels):
+            # This can happen due to w:numStyleLink, which could be hooked up--
+            # it just involves looking in self.styles and chasing some pointers.
+            # Too lazy for now.
+            return None
+        return levels[ilvl]
+
 def load(filename):
     with zipfile.ZipFile("es6-draft.docx") as f:
         document_xml = f.read('word/document.xml')
-        numbering_xml = f.read('word/numbering.xml')
         styles_xml = f.read('word/styles.xml')
+        numbering_xml = f.read('word/numbering.xml')
 
     doc = Document()
     doc.document = ElementTree.fromstring(document_xml)
-    doc.numbering = ElementTree.fromstring(numbering_xml)
     doc.styles = parse_styles(ElementTree.fromstring(styles_xml))
+    doc.numbering = parse_numbering(ElementTree.fromstring(numbering_xml))
     return doc

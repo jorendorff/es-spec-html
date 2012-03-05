@@ -17,8 +17,18 @@ def all_parent_index_child_triples(e):
             for t in all_parent_index_child_triples(k):
                 yield t
 
-def fixup_list_styles(doc):
-    """ Make sure bullet lists are never p.Alg4.
+def has_bullet(docx, p):
+    if not p.style:
+        return False
+    numId = p.style.get('-ooxml-numId')
+    if numId is None:
+        return False
+    ilvl = p.style.get('-ooxml-ilvl')
+    s = docx.get_list_style_at(numId, ilvl)
+    return s is not None and s.numFmt == 'bullet'
+
+def fixup_list_styles(doc, docx):
+    """ Make sure bullet lists are never p.Alg4 or p.MathSpecialCase3.
 
     Alg4 style indicates a numbered list, with Times New Roman font. It's used
     for algorithms. However there are a few places in the Word document where
@@ -31,8 +41,11 @@ def fixup_list_styles(doc):
     Precedes fixup_formatting, which would spew a bunch of
     <span style="font-family: sans-serif"> if we did it first.
     """
+
+    wrong_types = ('Alg4', 'MathSpecialCase3')
+
     for p in findall(doc, 'p'):
-        if p.attrs.get("class") == "Alg4" and p.style and p.style.get("-ooxml-numId") == "28":
+        if p.attrs.get("class") in wrong_types and has_bullet(docx, p):
             p.attrs['class'] = "Normal"
 
 def fixup_formatting(doc, styles):
@@ -723,7 +736,7 @@ def fixup_notes(e):
 
     fixup_notes_in(e)
 
-def fixup_lists(e):
+def fixup_lists(e, docx):
     if e.name in ('ol', 'ul'):
         # This is already a list. I don't think there are any lists we don't
         # identify during transform phase that are nested in lists we do
@@ -732,7 +745,7 @@ def fixup_lists(e):
 
     have_list_items = False
     for _, k in e.kids():
-        fixup_lists(k)
+        fixup_lists(k, docx)
         if k.name == 'li':
             have_list_items = True
 
@@ -748,9 +761,12 @@ def fixup_lists(e):
                 del lists[:]
                 new_content.append(k)
             else:
-                # Oh no. It is a list item. Well, what is its depth?
+                # Oh no. It is a list item. Well, what is its depth? Does it
+                # have a bullet or numbering?
+                bullet = False
                 if k.style and '-ooxml-ilvl' in k.style:
                     depth = int(k.style['-ooxml-ilvl'])
+                    bullet = has_bullet(docx, k)
 
                     # While we're here, delete the magic style attributes.
                     del k.style['-ooxml-ilvl']
@@ -762,17 +778,24 @@ def fixup_lists(e):
                 while lists and lists[-1][0] > depth:
                     del lists[-1]
 
+                # If we have a list at equal depth, but it's the wrong kind, close it too.
+                if lists and lists[-1][0] == depth and bullet != (lists[-1][1].name == 'ul'):
+                    del lists[-1]
+
                 # If we don't already have a list at that depth, open one.
                 if not lists or depth > lists[-1][0]:
-                    new_list = html.ol(class_='block' if lists else 'proc')
+                    if bullet:
+                        new_list = html.ul()
+                    else:
+                        new_list = html.ol(class_='block' if lists else 'proc')
 
                     # If there is an enclosing list, add new_list to the last <li>
                     # of the enclosing list, not the enclosing list itself.
                     # If there is no enclosing list, add new_list to new_content.
-                    (lists[-1][1][-1].content if lists else new_content).append(new_list)
-                    lists.append((depth, new_list.content))
+                    (lists[-1][1].content[-1].content if lists else new_content).append(new_list)
+                    lists.append((depth, new_list))
 
-                lists[-1][1].append(k)
+                lists[-1][1].content.append(k)
 
         kids[:] = new_content
 
@@ -918,8 +941,11 @@ def fixup_links(doc):
 
     visit(doc_body(doc))
 
-def fixup(doc, styles):
-    fixup_list_styles(doc)
+def fixup(docx, doc):
+    styles = docx.styles
+    numbering = docx.numbering
+
+    fixup_list_styles(doc, docx)
     fixup_formatting(doc, styles)
     fixup_paragraph_classes(doc)
     fixup_element_spacing(doc)
@@ -931,7 +957,7 @@ def fixup(doc, styles):
     fixup_tables(doc)
     fixup_code(doc)
     fixup_notes(doc)
-    fixup_lists(doc)
+    fixup_lists(doc, docx)
     fixup_grammar(doc)
     fixup_picts(doc)
     fixup_figures(doc)
