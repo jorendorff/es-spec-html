@@ -831,6 +831,9 @@ def fixup_links(doc):
 
         # Match the second or subsequent section number in a parenthesized list.
         r', (SECTION)[,):]',
+
+        # Match "Clause 8" in "as defined in Clause 8 of this specification".
+        r'(?i)in (Clause ([1-9][0-9]*))'
     ]))
 
     def find_link(s):

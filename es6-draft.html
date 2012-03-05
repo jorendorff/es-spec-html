@@ -610,11 +610,11 @@
 <p>For the purposes of this document, the following terms and definitions apply.</p>
 <section id="sec-4.3.1">
 <h1><span class="secnum"><a href="#sec-4.3.1" title="link to this section">4.3.1</a></span> type</h1>
-<p>set of data values as defined in Clause 8 of this specification</p>
+<p>set of data values as defined in <a href="#sec-8">Clause 8</a> of this specification</p>
 </section>
 <section id="sec-4.3.2">
 <h1><span class="secnum"><a href="#sec-4.3.2" title="link to this section">4.3.2</a></span> primitive value</h1>
-<p>member of one of the types Undefined, Null, Boolean, Number, or String as defined in Clause 8</p>
+<p>member of one of the types Undefined, Null, Boolean, Number, or String as defined in <a href="#sec-8">Clause 8</a></p>
 <div class="note">
   <p><span class="nh">NOTE</span> A primitive value is a datum that is represented directly at the lowest level of the language implementation.</p>
 </div>
@@ -799,7 +799,7 @@
 </section>
 <section id="sec-5.1.2">
 <h1><span class="secnum"><a href="#sec-5.1.2" title="link to this section">5.1.2</a></span> The Lexical and RegExp Grammars</h1>
-<p>A <i>lexical grammar</i> for ECMAScript is given in clause 7. This grammar has as its terminal symbols characters (Unicode code units) that conform to the rules for <span style="font-family: Times New Roman; font-style: italic">SourceCharacter</span> defined in Clause 6. It defines a set of productions, starting from the goal symbol <span style="font-family: Times New Roman; font-style: italic">InputElementDiv</span> or <span style="font-family: Times New Roman; font-style: italic">InputElementRegExp</span>, that describe how sequences of such characters are translated into a sequence of input elements.</p>
+<p>A <i>lexical grammar</i> for ECMAScript is given in <a href="#sec-7">clause 7</a>. This grammar has as its terminal symbols characters (Unicode code units) that conform to the rules for <span style="font-family: Times New Roman; font-style: italic">SourceCharacter</span> defined in <a href="#sec-6">Clause 6</a>. It defines a set of productions, starting from the goal symbol <span style="font-family: Times New Roman; font-style: italic">InputElementDiv</span> or <span style="font-family: Times New Roman; font-style: italic">InputElementRegExp</span>, that describe how sequences of such characters are translated into a sequence of input elements.</p>
 <p>Input elements other than white space and comments form the terminal symbols for the syntactic grammar for ECMAScript and are called ECMAScript <i>tokens</i>. These tokens are the reserved words, identifiers, literals, and punctuators of the ECMAScript language. Moreover, line terminators, although not considered to be tokens, also become part of the stream of input elements and guide the process of automatic semicolon insertion (<a href="#sec-7.9">7.9</a>). Simple white space and single-line comments are discarded and do not appear in the stream of input elements for the syntactic grammar. A <span style="font-family: Times New Roman; font-style: italic">MultiLineComment</span> (that is, a comment of the form &ldquo;<span style="font-family: monospace">/*</span>&hellip;<span style="font-family: monospace">*/</span>&rdquo; regardless of whether it spans more than one line) is likewise simply discarded if it contains no line terminator; but if a <span style="font-family: Times New Roman; font-style: italic">MultiLineComment</span> contains one or more line terminators, then it is replaced by a single line terminator, which becomes part of the stream of input elements for the syntactic grammar.</p>
 <p>A <i>RegExp grammar</i> for ECMAScript is given in 15.10. This grammar also has as its terminal symbols the characters as defined by <span style="font-family: Times New Roman; font-style: italic">SourceCharacter</span>. It defines a set of productions, starting from the goal symbol <span style="font-family: Times New Roman; font-style: italic">Pattern</span>, that describe how sequences of characters are translated into regular expression patterns.</p>
 <p>Productions of the lexical and RegExp grammars are distinguished by having two colons &ldquo;<span style="font-family: sans-serif; font-weight: bold">::</span>&rdquo; as separating punctuation. The lexical and RegExp grammars share some productions.</p>
@@ -1915,7 +1915,7 @@
   <div class="lhs">UnicodeEscapeSequence <span style="font-family: sans-serif; font-weight: bold">::</span></div>
   <div class="rhs"><code>u</code> HexDigit HexDigit HexDigit HexDigit</div>
 </div>
-<p>The definition of the nonterminal <span style="font-family: Times New Roman; font-style: italic">HexDigit</span> is given in 7.8.3. <span style="font-family: Times New Roman; font-style: italic">SourceCharacter</span> is defined in clause 6.</p>
+<p>The definition of the nonterminal <span style="font-family: Times New Roman; font-style: italic">HexDigit</span> is given in 7.8.3. <span style="font-family: Times New Roman; font-style: italic">SourceCharacter</span> is defined in <a href="#sec-6">clause 6</a>.</p>
 <h2>Semantics</h2>
 <p>A string literal stands for a value of the String type. The String value (SV) of the literal is described in terms of character values (CV) contributed by the various parts of the string literal. As part of this process, some characters within the string literal are interpreted as having a mathematical value (MV), as described below or in 7.8.3.</p>
 <ol class="proc">
@@ -2483,7 +2483,7 @@
 <h1><span class="secnum"><a href="#sec-8.6.2" title="link to this section">8.6.2</a></span> Object Internal Properties and Methods</h1>
 <p>This specification uses various internal properties to define the semantics of object values. These internal properties are not part of the ECMAScript language. They are defined by this specification purely for expository purposes. An implementation of ECMAScript must behave as if it produced and operated upon internal properties in the manner described here. The names of internal properties are enclosed in double square brackets [[ ]]. When an algorithm uses an internal property of an object and the object does not implement the indicated internal property, a <b>TypeError</b> exception is thrown.</p>
 <p>The Table 8 summarises the internal properties used by this specification that are applicable to all ECMAScript objects. The Table 9 summarises the internal properties used by this specification that are only applicable to some ECMAScript objects. The descriptions in these tables indicate their behaviour for native ECMAScript objects, unless stated otherwise in this document for particular kinds of native ECMAScript objects. Host objects may support these internal properties with any implementation-dependent behaviour as long as it is consistent with the specific host object restrictions stated in this document.</p>
-<p>The &ldquo;Value Type Domain&rdquo; columns of the following tables define the types of values associated with internal properties. The type names refer to the types defined in Clause 8 augmented by the following additional names. &ldquo;<i>any</i>&rdquo; means the value may be any ECMAScript language type. &ldquo;<i>primitive</i>&rdquo; means Undefined, Null, Boolean, String, or Number. &ldquo;<i>SpecOp</i>&rdquo; means the internal property is an internal method, an implementation provided procedure defined by an abstract operation specification. &ldquo;SpecOp&rdquo; is followed by a list of descriptive parameter names. If a parameter name is the same as a type name then the name describes the type of the parameter. If a &ldquo;SpecOp&rdquo; returns a value, its parameter list is followed by the symbol &ldquo;&rarr;&rdquo; and the type of the returned value.</p>
+<p>The &ldquo;Value Type Domain&rdquo; columns of the following tables define the types of values associated with internal properties. The type names refer to the types defined in <a href="#sec-8">Clause 8</a> augmented by the following additional names. &ldquo;<i>any</i>&rdquo; means the value may be any ECMAScript language type. &ldquo;<i>primitive</i>&rdquo; means Undefined, Null, Boolean, String, or Number. &ldquo;<i>SpecOp</i>&rdquo; means the internal property is an internal method, an implementation provided procedure defined by an abstract operation specification. &ldquo;SpecOp&rdquo; is followed by a list of descriptive parameter names. If a parameter name is the same as a type name then the name describes the type of the parameter. If a &ldquo;SpecOp&rdquo; returns a value, its parameter list is followed by the symbol &ldquo;&rarr;&rdquo; and the type of the returned value.</p>
 <figure>
   <figcaption>Table&nbsp;8 &mdash; Internal Properties Common to All Objects</figcaption>
   <table class="real-table">
@@ -3294,7 +3294,7 @@
 </section>
 <section id="sec-8.11">
 <h1><span class="secnum"><a href="#sec-8.11" title="link to this section">8.11</a></span> The Lexical Environment and Environment Record Specification Types</h1>
-<p>The Lexical Environment and Environment Record types are used to explain the behaviour of name resolution in nested functions and blocks. These types and the operations upon them are defined in Clause 10.</p>
+<p>The Lexical Environment and Environment Record types are used to explain the behaviour of name resolution in nested functions and blocks. These types and the operations upon them are defined in <a href="#sec-10">Clause 10</a>.</p>
 </section>
 <section id="sec-8.12">
 <h1><span class="secnum"><a href="#sec-8.12" title="link to this section">8.12</a></span> Algorithms for Object Internal Methods</h1>
@@ -4732,7 +4732,7 @@
   <li>For each <i>FunctionDeclaration</i> <i>f</i> in <i>code</i>, in source text order do
     <ol class="block">
       <li>Let <i>fn</i> be the <i>Identifier</i> in <i>FunctionDeclaration</i> <i>f.</i></li>
-      <li>Let <i>fo</i> be the result of instantiating <i>FunctionDeclaration f</i> as described in Clause 13.</li>
+      <li>Let <i>fo</i> be the result of instantiating <i>FunctionDeclaration f</i> as described in <a href="#sec-13">Clause 13</a>.</li>
       <li>Let <i>funcAlreadyDeclared</i> be the result of calling <i>env&rsquo;s</i> HasBinding concrete method passing <i>fn</i> as the argument.</li>
       <li>If <i>funcAlreadyDeclared</i> is <b>false</b>, then
         <ol class="block">
@@ -4891,7 +4891,7 @@
       <li>If <i>fn</i> is not an element of <i>initializedFunctions,</i> then
         <ol class="block">
           <li>Append <i>fn</i> to <i>initializedFunctions</i>.</li>
-          <li>Let <i>fo</i> be the result of instantiating <i>FunctionDeclaration f</i> as described in Clause 13.</li>
+          <li>Let <i>fo</i> be the result of instantiating <i>FunctionDeclaration f</i> as described in <a href="#sec-13">Clause 13</a>.</li>
           <li>Call <i>env</i>&rsquo;s InitializeBinding concrete method passing <i>fn</i>, and <i>fo</i> as the arguments.</li>
         </ol>
         </li>
@@ -4927,7 +4927,7 @@
   <li>For each <i>FunctionDeclaration</i> <i>f</i> in <i>declarations</i>, in list order do
     <ol class="block">
       <li>Let <i>fn</i> be the sole element of the BoundNames of <i>f.</i></li>
-      <li>Let <i>fo</i> be the result of instantiating <i>FunctionDeclaration f</i> as described in Clause 13.</li>
+      <li>Let <i>fo</i> be the result of instantiating <i>FunctionDeclaration f</i> as described in <a href="#sec-13">Clause 13</a>.</li>
       <li>Call <i>env</i>&rsquo;s InitializeBinding concrete method passing <i>fn</i>, and <i>fo</i> as the arguments.</li>
     </ol>
     </li>
