@@ -1,4 +1,8 @@
 /* Basics */
+html {
+    padding-left: 6.8em;
+    padding-right: 1em;
+}
 body {
     margin: 0 auto;
     max-width: 800px;
