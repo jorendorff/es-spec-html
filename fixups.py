@@ -564,13 +564,13 @@ def fixup_toc(doc):
 
         output = []
 
-        # copy the content of the header.
+        # Copy the content of the header.
         # TODO - make this clone enough to rip out the h1>span>a title= attribute
         # TODO - make links when there isn't one
         i = 0
         output += h1.content[i:]  # shallow copy, nodes may appear in tree multiple times
 
-        # find any subsections.
+        # Find any subsections.
         if depth < 3:
             output += make_toc_list(sect, depth)
 
@@ -831,7 +831,7 @@ def fixup_figures(doc):
 def fixup_links(doc):
     all_ids = set([kid.attrs['id'] for _, _, kid in all_parent_index_child_triples(doc) if 'id' in kid.attrs])
 
-    SECTION = r'(\d+(?:\.\d+)+)'
+    SECTION = r'([1-9A-Z][0-9]*(?:\.[1-9][0-9]*)+)'
     def compile(re_source):
         return re.compile(re_source.replace("SECTION", SECTION))
 
@@ -840,7 +840,7 @@ def fixup_links(doc):
         # The space is to avoid matching "(3.5)" in "Math.round(3.5)".
         r' \(((?:see )?SECTION)\)',
 
-        # Map "(Clause 16)", "(see clause 6)".
+        # Match "(Clause 16)", "(see clause 6)".
         r'(?i)(?:)\((?:but )?((?:see\s+(?:also\s+)?)?clause\s+([1-9][0-9]*))\)',
 
         # Match the first section number in a parenthesized list "(13.3.5, 13.4, 13.6)"
@@ -853,7 +853,10 @@ def fixup_links(doc):
         r', (SECTION)[,):]',
 
         # Match "Clause 8" in "as defined in Clause 8 of this specification".
-        r'(?i)in (Clause ([1-9][0-9]*))'
+        r'(?i)in (Clause ([1-9][0-9]*))',
+
+        # Match 
+        r'in ((\b[1-9A-Z][0-9]*(?:\.[1-9][0-9]*)+))'
     ]))
 
     def find_link(s):

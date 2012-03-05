@@ -554,7 +554,7 @@
 <p>A conforming implementation of ECMAScript must provide and support all the types, values, objects, properties, functions, and program syntax and semantics described in this specification.</p>
 <p>A conforming implementation of this Standard shall interpret characters in conformance with the Unicode Standard, Version 3.0 or later and ISO/IEC 10646-1 with either UCS-2 or UTF-16 as the adopted encoding form, implementation level 3. If the adopted ISO/IEC 10646-1 subset is not otherwise specified, it is presumed to be the BMP subset, collection 300. If the adopted encoding form is not otherwise specified, it presumed to be the UTF-16 encoding form.</p>
 <p>A conforming implementation of ECMAScript is permitted to provide additional types, values, objects, properties, and functions beyond those described in this specification. In particular, a conforming implementation of ECMAScript is permitted to provide properties not described in this specification, and values for those properties, for objects that are described in this specification.</p>
-<p>A conforming implementation of ECMAScript is permitted to support program and regular expression syntax not described in this specification. In particular, a conforming implementation of ECMAScript is permitted to support program syntax that makes use of the &ldquo;future reserved words&rdquo; listed in 7.6.1.2 of this specification.</p>
+<p>A conforming implementation of ECMAScript is permitted to support program and regular expression syntax not described in this specification. In particular, a conforming implementation of ECMAScript is permitted to support program syntax that makes use of the &ldquo;future reserved words&rdquo; listed in <a href="#sec-7.6.1.2">7.6.1.2</a> of this specification.</p>
 </section>
 <section id="sec-3">
 <h1><span class="secnum"><a href="#sec-3" title="link to this section">3</a></span> Normative references</h1>
@@ -801,12 +801,12 @@
 <h1><span class="secnum"><a href="#sec-5.1.2" title="link to this section">5.1.2</a></span> The Lexical and RegExp Grammars</h1>
 <p>A <i>lexical grammar</i> for ECMAScript is given in <a href="#sec-7">clause 7</a>. This grammar has as its terminal symbols characters (Unicode code units) that conform to the rules for <span style="font-family: Times New Roman; font-style: italic">SourceCharacter</span> defined in <a href="#sec-6">Clause 6</a>. It defines a set of productions, starting from the goal symbol <span style="font-family: Times New Roman; font-style: italic">InputElementDiv</span> or <span style="font-family: Times New Roman; font-style: italic">InputElementRegExp</span>, that describe how sequences of such characters are translated into a sequence of input elements.</p>
 <p>Input elements other than white space and comments form the terminal symbols for the syntactic grammar for ECMAScript and are called ECMAScript <i>tokens</i>. These tokens are the reserved words, identifiers, literals, and punctuators of the ECMAScript language. Moreover, line terminators, although not considered to be tokens, also become part of the stream of input elements and guide the process of automatic semicolon insertion (<a href="#sec-7.9">7.9</a>). Simple white space and single-line comments are discarded and do not appear in the stream of input elements for the syntactic grammar. A <span style="font-family: Times New Roman; font-style: italic">MultiLineComment</span> (that is, a comment of the form &ldquo;<span style="font-family: monospace">/*</span>&hellip;<span style="font-family: monospace">*/</span>&rdquo; regardless of whether it spans more than one line) is likewise simply discarded if it contains no line terminator; but if a <span style="font-family: Times New Roman; font-style: italic">MultiLineComment</span> contains one or more line terminators, then it is replaced by a single line terminator, which becomes part of the stream of input elements for the syntactic grammar.</p>
-<p>A <i>RegExp grammar</i> for ECMAScript is given in 15.10. This grammar also has as its terminal symbols the characters as defined by <span style="font-family: Times New Roman; font-style: italic">SourceCharacter</span>. It defines a set of productions, starting from the goal symbol <span style="font-family: Times New Roman; font-style: italic">Pattern</span>, that describe how sequences of characters are translated into regular expression patterns.</p>
+<p>A <i>RegExp grammar</i> for ECMAScript is given in <a href="#sec-15.10">15.10</a>. This grammar also has as its terminal symbols the characters as defined by <span style="font-family: Times New Roman; font-style: italic">SourceCharacter</span>. It defines a set of productions, starting from the goal symbol <span style="font-family: Times New Roman; font-style: italic">Pattern</span>, that describe how sequences of characters are translated into regular expression patterns.</p>
 <p>Productions of the lexical and RegExp grammars are distinguished by having two colons &ldquo;<span style="font-family: sans-serif; font-weight: bold">::</span>&rdquo; as separating punctuation. The lexical and RegExp grammars share some productions.</p>
 </section>
 <section id="sec-5.1.3">
 <h1><span class="secnum"><a href="#sec-5.1.3" title="link to this section">5.1.3</a></span> The Numeric String Grammar</h1>
-<p>Another grammar is used for translating Strings into numeric values. This grammar is similar to the part of the lexical grammar having to do with numeric literals and has as its terminal symbols <span style="font-family: Times New Roman; font-style: italic">SourceCharacter</span>. This grammar appears in 9.3.1.</p>
+<p>Another grammar is used for translating Strings into numeric values. This grammar is similar to the part of the lexical grammar having to do with numeric literals and has as its terminal symbols <span style="font-family: Times New Roman; font-style: italic">SourceCharacter</span>. This grammar appears in <a href="#sec-9.3.1">9.3.1</a>.</p>
 <p>Productions of the numeric string grammar are distinguished by having three colons &ldquo;<span style="font-family: sans-serif; font-weight: bold">:::</span>&rdquo; as punctuation.</p>
 </section>
 <section id="sec-5.1.4">
@@ -819,7 +819,7 @@
 </section>
 <section id="sec-5.1.5">
 <h1><span class="secnum"><a href="#sec-5.1.5" title="link to this section">5.1.5</a></span> The JSON Grammar</h1>
-<p>The JSON grammar is used to translate a String describing a set of ECMAScript objects into actual objects. The JSON grammar is given in 15.12.1.</p>
+<p>The JSON grammar is used to translate a String describing a set of ECMAScript objects into actual objects. The JSON grammar is given in <a href="#sec-15.12.1">15.12.1</a>.</p>
 <p>The JSON grammar consists of the JSON lexical grammar and the JSON syntactic grammar. The JSON lexical grammar is used to translate character sequences into tokens and is similar to parts of the ECMAScript lexical grammar. The JSON syntactic grammar describes how sequences of tokens from the JSON lexical grammar can form syntactically correct JSON object descriptions.</p>
 <p>Productions of the JSON lexical grammar are distinguished by having two colons &ldquo;<span style="font-family: sans-serif; font-weight: bold">::</span>&rdquo; as separating punctuation. The JSON lexical grammar uses some productions from the ECMAScript lexical grammar. The JSON syntactic grammar is similar to parts of the ECMAScript syntactic grammar. Productions of the JSON syntactic grammar are distinguished by using one colon &ldquo;<span style="font-family: sans-serif; font-weight: bold">:</span>&rdquo; as separating punctuation.</p>
 </section>
@@ -1234,7 +1234,7 @@
   <div class="lhs">UnicodeConnectorPunctuation <span style="font-family: sans-serif; font-weight: bold">::</span></div>
   <div class="rhs"><span style="font-family: sans-serif">any character in the Unicode category &ldquo;Connector punctuation (Pc)&rdquo;</span></div>
 </div>
-<p>The definitions of the nonterminal <span style="font-family: Times New Roman; font-style: italic">UnicodeEscapeSequence</span> is given in 7.8.4</p>
+<p>The definitions of the nonterminal <span style="font-family: Times New Roman; font-style: italic">UnicodeEscapeSequence</span> is given in <a href="#sec-7.8.4">7.8.4</a></p>
 <p><b><span style="font-family: sans-serif">Static Semantics:</span> <span style="font-family: Times New Roman; font-style: italic">String Value</span></b></p>
 <p><span style="font-family: Times New Roman; font-style: italic">Identifier</span> <b>::</b> <span style="font-family: Times New Roman; font-style: italic">IdentifierName</span> <span style="font-family: sans-serif; font-weight: bold">but not</span> <span style="font-family: Times New Roman; font-style: italic">ReservedWord</span></p>
 <ol class="proc">
@@ -1572,12 +1572,12 @@
   <li><span style="font-family: sans-serif">The MV of</span> <i>HexIntegerLiteral</i> <span style="font-family: sans-serif; font-weight: bold">::</span> <code>0X</code> <i>HexDigit</i> <span style="font-family: sans-serif">is the MV of</span> <i>HexDigit</i>.</li>
   <li><span style="font-family: sans-serif">The MV of</span> <i>HexIntegerLiteral</i> <span style="font-family: sans-serif; font-weight: bold">::</span> <i>HexIntegerLiteral</i> <i>HexDigit</i> <span style="font-family: sans-serif">is (the MV of</span> <i>HexIntegerLiteral</i> <span style="font-family: sans-serif">times</span> 16<span style="font-family: sans-serif">) plus the MV of</span> <i>HexDigit</i><span style="font-family: sans-serif">.</span></li>
 </ol>
-<p>Once the exact MV for a numeric literal has been determined, it is then rounded to a value of the Number type. If the MV is 0, then the rounded value is <span style="font-family: Times New Roman; font-weight: bold">+0</span>; otherwise, the rounded value must be the Number value for the MV (as specified in 8.5), unless the literal is a <span style="font-family: Times New Roman; font-style: italic">DecimalLiteral</span> and the literal has more than 20 significant digits, in which case the Number value may be either the Number value for the MV of a literal produced by replacing each significant digit after the 20th with a <code>0</code> digit or the Number value for the MV of a literal produced by replacing each significant digit after the 20th with a <code>0</code> digit and then incrementing the literal at the 20th significant digit position. A digit is <i>significant</i> if it is not part of an <span style="font-family: Times New Roman; font-style: italic">ExponentPart</span> and</p>
+<p>Once the exact MV for a numeric literal has been determined, it is then rounded to a value of the Number type. If the MV is 0, then the rounded value is <span style="font-family: Times New Roman; font-weight: bold">+0</span>; otherwise, the rounded value must be the Number value for the MV (as specified in <a href="#sec-8.5">8.5</a>), unless the literal is a <span style="font-family: Times New Roman; font-style: italic">DecimalLiteral</span> and the literal has more than 20 significant digits, in which case the Number value may be either the Number value for the MV of a literal produced by replacing each significant digit after the 20th with a <code>0</code> digit or the Number value for the MV of a literal produced by replacing each significant digit after the 20th with a <code>0</code> digit and then incrementing the literal at the 20th significant digit position. A digit is <i>significant</i> if it is not part of an <span style="font-family: Times New Roman; font-style: italic">ExponentPart</span> and</p>
 <ol class="proc">
   <li><span style="font-family: sans-serif">it is not</span> <code>0</code><span style="font-family: sans-serif">; or</span></li>
   <li><span style="font-family: sans-serif">there is a nonzero digit to its left and there is a nonzero digit, not in the</span> <i>ExponentPart</i><span style="font-family: sans-serif">, to its right.</span></li>
 </ol>
-<p>A conforming implementation, when processing strict mode code (<a href="#sec-10.1.1">see 10.1.1</a>), must not extend the syntax of <span style="font-family: Times New Roman; font-style: italic">NumericLiteral</span> to include <span style="font-family: Times New Roman; font-style: italic">OctalIntegerLiteral</span> as described in B.1.1.</p>
+<p>A conforming implementation, when processing strict mode code (<a href="#sec-10.1.1">see 10.1.1</a>), must not extend the syntax of <span style="font-family: Times New Roman; font-style: italic">NumericLiteral</span> to include <span style="font-family: Times New Roman; font-style: italic">OctalIntegerLiteral</span> as described in <a href="#sec-B.1.1">B.1.1</a>.</p>
 </section>
 <section id="sec-7.8.4">
 <h1><span class="secnum"><a href="#sec-7.8.4" title="link to this section">7.8.4</a></span> String Literals</h1>
@@ -1635,9 +1635,9 @@
   <div class="lhs">UnicodeEscapeSequence <span style="font-family: sans-serif; font-weight: bold">::</span></div>
   <div class="rhs"><code>u</code> HexDigit HexDigit HexDigit HexDigit</div>
 </div>
-<p>The definition of the nonterminal <span style="font-family: Times New Roman; font-style: italic">HexDigit</span> is given in 7.8.3. <span style="font-family: Times New Roman; font-style: italic">SourceCharacter</span> is defined in <a href="#sec-6">clause 6</a>.</p>
+<p>The definition of the nonterminal <span style="font-family: Times New Roman; font-style: italic">HexDigit</span> is given in <a href="#sec-7.8.3">7.8.3</a>. <span style="font-family: Times New Roman; font-style: italic">SourceCharacter</span> is defined in <a href="#sec-6">clause 6</a>.</p>
 <h2>Semantics</h2>
-<p>A string literal stands for a value of the String type. The String value (SV) of the literal is described in terms of character values (CV) contributed by the various parts of the string literal. As part of this process, some characters within the string literal are interpreted as having a mathematical value (MV), as described below or in 7.8.3.</p>
+<p>A string literal stands for a value of the String type. The String value (SV) of the literal is described in terms of character values (CV) contributed by the various parts of the string literal. As part of this process, some characters within the string literal are interpreted as having a mathematical value (MV), as described below or in <a href="#sec-7.8.3">7.8.3</a>.</p>
 <ol class="proc">
   <li><span style="font-family: sans-serif">The SV of</span> <i>StringLiteral</i> <span style="font-family: sans-serif; font-weight: bold">::</span> <code>""</code> <span style="font-family: sans-serif">is the empty character sequence.</span></li>
   <li><span style="font-family: sans-serif">The SV of</span> <i>StringLiteral</i> <span style="font-family: sans-serif; font-weight: bold">::</span> <code>''</code> <span style="font-family: sans-serif">is the empty character sequence.</span></li>
@@ -1731,7 +1731,7 @@
   <li><span style="font-family: sans-serif">The CV of</span> <i>HexEscapeSequence</i> <span style="font-family: sans-serif; font-weight: bold">::</span> <code>x</code> <i>HexDigit</i> <i>HexDigit</i> <span style="font-family: sans-serif">is the character whose code unit value is (</span>16 <span style="font-family: sans-serif">times the MV of the first</span> <i>HexDigit</i><span style="font-family: sans-serif">) plus the MV of the second</span> <i>HexDigit</i>.</li>
   <li><span style="font-family: sans-serif">The CV of</span> <i>UnicodeEscapeSequence</i> <span style="font-family: sans-serif; font-weight: bold">::</span> <code>u</code> <i>HexDigit</i> <i>HexDigit</i> <i>HexDigit</i> <i>HexDigit</i> is <span style="font-family: sans-serif">the character whose code unit value is (</span>4096 <span style="font-family: sans-serif">times the MV of the first</span> <i>HexDigit</i><span style="font-family: sans-serif">) plus (</span>256 <span style="font-family: sans-serif">times the MV of the second</span> <i>HexDigit</i><span style="font-family: sans-serif">) plus (</span>16 <span style="font-family: sans-serif">times the MV of the third</span> <i>HexDigit</i><span style="font-family: sans-serif">) plus the MV of the fourth</span> <i>HexDigit</i>.</li>
 </ol>
-<p>A conforming implementation, when processing strict mode code (<a href="#sec-10.1.1">see 10.1.1</a>), may not extend the syntax of <span style="font-family: Times New Roman; font-style: italic">EscapeSequence</span> to include <span style="font-family: Times New Roman; font-style: italic">OctalEscapeSequence</span> as described in B.1.2.</p>
+<p>A conforming implementation, when processing strict mode code (<a href="#sec-10.1.1">see 10.1.1</a>), may not extend the syntax of <span style="font-family: Times New Roman; font-style: italic">EscapeSequence</span> to include <span style="font-family: Times New Roman; font-style: italic">OctalEscapeSequence</span> as described in <a href="#sec-B.1.2">B.1.2</a>.</p>
 <div class="note">
   <p><span class="nh">NOTE</span> A line terminator character cannot appear in a string literal, except as part of a <span style="font-family: Times New Roman; font-style: italic">LineContinuation</span> to produce the empty character sequence. The correct way to cause a line terminator character to be part of the String value of a string literal is to use an escape sequence such as <code>\n</code> or <code>\u000A</code>.</p>
 </div>
@@ -1789,7 +1789,7 @@
   <p><span class="nh">NOTE</span> Regular expression literals may not be empty; instead of representing an empty regular expression literal, the characters <code>//</code> start a single-line comment. To specify an empty regular expression, use:  <code>/(?:)/</code>.</p>
 </div>
 <h2>Semantics</h2>
-<p>A regular expression literal evaluates to a value of the Object type that is an instance of the standard built-in constructor RegExp. This value is determined in two steps: first, the characters comprising the regular expression's <span style="font-family: Times New Roman; font-style: italic">RegularExpressionBody</span> and <span style="font-family: Times New Roman; font-style: italic">RegularExpressionFlags</span> production expansions are collected uninterpreted into two Strings Pattern and Flags, respectively. Then each time the literal is evaluated, a new object is created as if by the expression <span style="font-family: monospace"><b>new RegExp(</b>Pattern, Flags<b>)</b></span> where RegExp is the standard built-in constructor with that name. The newly constructed object becomes the value of the <span style="font-family: Times New Roman; font-style: italic">RegularExpressionLiteral</span>. If the call to <code>new RegExp</code> would generate an error as specified in 15.10.4.1, the error must be treated as an early error (<a href="#sec-16">Clause 16</a>).</p>
+<p>A regular expression literal evaluates to a value of the Object type that is an instance of the standard built-in constructor RegExp. This value is determined in two steps: first, the characters comprising the regular expression's <span style="font-family: Times New Roman; font-style: italic">RegularExpressionBody</span> and <span style="font-family: Times New Roman; font-style: italic">RegularExpressionFlags</span> production expansions are collected uninterpreted into two Strings Pattern and Flags, respectively. Then each time the literal is evaluated, a new object is created as if by the expression <span style="font-family: monospace"><b>new RegExp(</b>Pattern, Flags<b>)</b></span> where RegExp is the standard built-in constructor with that name. The newly constructed object becomes the value of the <span style="font-family: Times New Roman; font-style: italic">RegularExpressionLiteral</span>. If the call to <code>new RegExp</code> would generate an error as specified in <a href="#sec-15.10.4.1">15.10.4.1</a>, the error must be treated as an early error (<a href="#sec-16">Clause 16</a>).</p>
 </section>
 </section>
 <section id="sec-7.9">
@@ -2123,7 +2123,7 @@
 <div class="note">
   <p><span class="nh">NOTE</span> This specification defines no ECMAScript language operators or built-in functions that permit a program to modify an object&rsquo;s [[Prototype]] internal properties or to change the value of [[Extensible]] from <b>false</b> to <b>true</b>. Implementation specific extensions that modify [[Prototype]] or [[Extensible]] must not violate the invariants defined in the preceding paragraph.</p>
 </div>
-<p>Unless otherwise specified, the common internal methods of native ECMAScript objects behave as described in 8.12. Array objects have a slightly different implementation of the [[DefineOwnProperty]] internal method (<a href="#sec-15.4.5.1">see 15.4.5.1</a>) and String objects have a slightly different implementation of the [[GetOwnProperty]] internal method (<a href="#sec-15.5.5.2">see 15.5.5.2</a>). Arguments objects (<a href="#sec-10.6">10.6</a>) have different implementations of [[Get]], [[GetOwnProperty]], [[DefineOwnProperty]], and [[Delete]]. Function objects (<a href="#sec-15.3">15.3</a>) have a different implementation of [[Get]].</p>
+<p>Unless otherwise specified, the common internal methods of native ECMAScript objects behave as described in <a href="#sec-8.12">8.12</a>. Array objects have a slightly different implementation of the [[DefineOwnProperty]] internal method (<a href="#sec-15.4.5.1">see 15.4.5.1</a>) and String objects have a slightly different implementation of the [[GetOwnProperty]] internal method (<a href="#sec-15.5.5.2">see 15.5.5.2</a>). Arguments objects (<a href="#sec-10.6">10.6</a>) have different implementations of [[Get]], [[GetOwnProperty]], [[DefineOwnProperty]], and [[Delete]]. Function objects (<a href="#sec-15.3">15.3</a>) have a different implementation of [[Get]].</p>
 <p>Host objects may implement these internal methods in any manner unless specified otherwise; for example, one possibility is that [[Get]] and [[Put]] for a particular host object indeed fetch and store property values but [[HasProperty]] always generates <b>false</b>. However, if any specified manipulation of a host object's internal properties is not supported by an implementation, that manipulation must throw a <b>TypeError</b> exception when attempted.</p>
 <p>The [[GetOwnProperty]] internal method of a host object must conform to the following invariants for each property of the host object:</p>
 <ol class="proc">
@@ -2483,7 +2483,7 @@
 </section>
 <section id="sec-8.10">
 <h1><span class="secnum"><a href="#sec-8.10" title="link to this section">8.10</a></span> The Property Descriptor and Property Identifier Specification Types</h1>
-<p>The Property Descriptor type is used to explain the manipulation and reification of named property attributes. Values of the Property Descriptor type are records composed of named fields where each field&rsquo;s name is an attribute name and its value is a corresponding attribute value as specified in 8.6.1. In addition, any field may be present or absent.</p>
+<p>The Property Descriptor type is used to explain the manipulation and reification of named property attributes. Values of the Property Descriptor type are records composed of named fields where each field&rsquo;s name is an attribute name and its value is a corresponding attribute value as specified in <a href="#sec-8.6.1">8.6.1</a>. In addition, any field may be present or absent.</p>
 <p>Property Descriptor values may be further classified as data property descriptors and accessor property descriptors based upon the existence or use of certain fields. A data property descriptor is one that includes any fields named either [[Value]] or [[Writable]]. An accessor property descriptor is one that includes any fields named either [[Get]] or [[Set]]. Any property descriptor may have fields named [[Enumerable]] and [[Configurable]]. A Property Descriptor value may not be both a data property descriptor and an accessor property descriptor; however, it may be neither. A generic property descriptor is a Property Descriptor value that is neither a data property descriptor nor an accessor property descriptor. A fully populated property descriptor is one that is either an accessor property descriptor or a data property descriptor and that has all of the fields that correspond to the property attributes defined in either 8.6.1 Table 5 or Table 6.</p>
 <p>For notational convenience within this specification, an object literal-like syntax can be used to define a property descriptor value. For example, Property Descriptor {[[Value]]: 42, [[Writable]]: <b>false</b>, [[Configurable]]: <b>true</b>} defines a data property descriptor. Field name order is not significant. Any fields that are not explicitly listed are considered to be absent.</p>
 <p>In specification text and algorithms, dot notation may be used to refer to a specific field of a Property Descriptor. For example, if D is a property descriptor then D.[[Value]] is shorthand for &ldquo;the field of D named [[Value]]&rdquo;.</p>
@@ -2631,7 +2631,7 @@
   <li>Set <i>D</i>.[[Configurable]] to the value of <i>X</i>&rsquo;s [[Configurable]] attribute.</li>
   <li>Return <i>D</i>.</li>
 </ol>
-<p>However, if <span style="font-family: Times New Roman; font-style: italic">O</span> is a String object it has a more elaborate [[GetOwnProperty]] internal method defined in 15.5.5.2.</p>
+<p>However, if <span style="font-family: Times New Roman; font-style: italic">O</span> is a String object it has a more elaborate [[GetOwnProperty]] internal method defined in <a href="#sec-15.5.5.2">15.5.5.2</a>.</p>
 </section>
 <section id="sec-8.12.2">
 <h1><span class="secnum"><a href="#sec-8.12.2" title="link to this section">8.12.2</a></span> [[GetProperty]] (P)</h1>
@@ -2884,7 +2884,7 @@
   <li>For each attribute field of <i>Desc</i> that is present, set the correspondingly named attribute of the property named <i>P</i> of object <i>O</i> to the value of the field.</li>
   <li>Return <b>true</b>.</li>
 </ol>
-<p>However, if <span style="font-family: Times New Roman; font-style: italic">O</span> has an [[NativeBrand]] internal property whose value is NativeArray <span style="font-family: Times New Roman; font-style: italic">O</span> also has a more elaborate [[DefineOwnProperty]] internal method defined in 15.4.5.1.</p>
+<p>However, if <span style="font-family: Times New Roman; font-style: italic">O</span> has an [[NativeBrand]] internal property whose value is NativeArray <span style="font-family: Times New Roman; font-style: italic">O</span> also has a more elaborate [[DefineOwnProperty]] internal method defined in <a href="#sec-15.4.5.1">15.4.5.1</a>.</p>
 <div class="note">
   <p><span class="nh">NOTE</span> Step 10.b allows any field of Desc to be different from the corresponding field of current if current&rsquo;s [[Configurable]] field is <b>true</b>. This even permits changing the [[Value]] of a property whose [[Writable]] attribute is <b>false</b>. This is allowed because a <b>true</b> [[Configurable]] attribute would permit an equivalent sequence of calls where [[Writable]] is first set to <b>true</b>, a new [[Value]] is set, and then [[Writable]] is set to <b>false</b>.</p>
 </div>
@@ -2970,7 +2970,7 @@
         <li><span style="font-family: Times New Roman">Let <i>default</i> be the result of calling the [[DefaultValue]] internal method of <i>argument</i>, passing the optional hint</span> <span style="font-family: Times New Roman"><i>PreferredType</i>.</span></li>
         <li><span style="font-family: Times New Roman">Return ToPrimitive(<i>default</i>).</span></li>
       </ol>
-      <p>The behaviour of the [[DefaultValue]] internal method is defined by this specification for all native ECMAScript objects in 8.12.8.</p>
+      <p>The behaviour of the [[DefaultValue]] internal method is defined by this specification for all native ECMAScript objects in <a href="#sec-8.12.8">8.12.8</a>.</p>
     </td>
   </tr>
 </table>
@@ -3102,7 +3102,7 @@
   <li><span style="font-family: sans-serif">The MV of</span> <i>HexIntegerLiteral</i> <b>:::</b> <code>0X</code> <i>HexDigit</i> <span style="font-family: sans-serif">is the MV of</span> <i>HexDigit</i>.</li>
   <li><span style="font-family: sans-serif">The MV of</span> <i>HexIntegerLiteral</i> <b>:::</b> <i>HexIntegerLiteral</i> <i>HexDigit</i> is (the MV of <i>HexIntegerLiteral</i> times 16) plus the MV of <i>HexDigit</i>.</li>
 </ol>
-<p>Once the exact MV for a String numeric literal has been determined, it is then rounded to a value of the Number type. If the MV is 0, then the rounded value is +0 unless the first non white space character in the String numeric literal is &lsquo;<code>-</code>&rsquo;, in which case the rounded value is &minus;0. Otherwise, the rounded value must be the Number value for the MV (in the sense defined in 8.5), unless the literal includes a <span style="font-family: Times New Roman; font-style: italic">StrUnsignedDecimalLiteral</span> and the literal has more than 20 significant digits, in which case the Number value may be either the Number value for the MV of a literal produced by replacing each significant digit after the 20th with a 0 digit or the Number value for the MV of a literal produced by replacing each significant digit after the 20th with a 0 digit and then incrementing the literal at the 20th digit position. A digit is <i>significant</i> if it is not part of an <span style="font-family: Times New Roman; font-style: italic">ExponentPart</span> and</p>
+<p>Once the exact MV for a String numeric literal has been determined, it is then rounded to a value of the Number type. If the MV is 0, then the rounded value is +0 unless the first non white space character in the String numeric literal is &lsquo;<code>-</code>&rsquo;, in which case the rounded value is &minus;0. Otherwise, the rounded value must be the Number value for the MV (in the sense defined in <a href="#sec-8.5">8.5</a>), unless the literal includes a <span style="font-family: Times New Roman; font-style: italic">StrUnsignedDecimalLiteral</span> and the literal has more than 20 significant digits, in which case the Number value may be either the Number value for the MV of a literal produced by replacing each significant digit after the 20th with a 0 digit or the Number value for the MV of a literal produced by replacing each significant digit after the 20th with a 0 digit and then incrementing the literal at the 20th digit position. A digit is <i>significant</i> if it is not part of an <span style="font-family: Times New Roman; font-style: italic">ExponentPart</span> and</p>
 <ol class="proc">
   <li><span style="font-family: sans-serif">it is not <b>0</b>; or</span></li>
   <li><span style="font-family: sans-serif">there is a nonzero digit to its left and there is a nonzero digit, not in the</span> <i>ExponentPart</i><span style="font-family: sans-serif">, to its right.</span></li>
@@ -3699,8 +3699,8 @@
 <h1><span class="secnum"><a href="#sec-10.4.1" title="link to this section">10.4.1</a></span> Entering Global Code</h1>
 <p>The following steps are performed when control enters the execution context for global code:</p>
 <ol class="proc">
-  <li>Initialise the execution context using the global code as described in 10.4.1.1.</li>
-  <li>Perform Declaration Binding Instantiation as described in 10.5 using the global code.</li>
+  <li>Initialise the execution context using the global code as described in <a href="#sec-10.4.1.1">10.4.1.1</a>.</li>
+  <li>Perform Declaration Binding Instantiation as described in <a href="#sec-10.5">10.5</a> using the global code.</li>
 </ol>
 <section id="sec-10.4.1.1">
 <h1><span class="secnum"><a href="#sec-10.4.1.1" title="link to this section">10.4.1.1</a></span> Initial Global Execution Context</h1>
@@ -3718,7 +3718,7 @@
 <ol class="proc">
   <li>If there is no calling context or if the eval code is not being evaluated by a direct call (<a href="#sec-15.1.2.1.1">15.1.2.1.1</a>) to the eval function then,
     <ol class="block">
-      <li>Initialise the execution context as if it was a global execution context using the eval code as <i>C</i> as described in 10.4.1.1.</li>
+      <li>Initialise the execution context as if it was a global execution context using the eval code as <i>C</i> as described in <a href="#sec-10.4.1.1">10.4.1.1</a>.</li>
     </ol>
     </li>
   <li>Else,
@@ -3735,7 +3735,7 @@
       <li>Set the VariableEnvironment to <i>strictVarEnv</i>.</li>
     </ol>
     </li>
-  <li>Perform Declaration Binding Instantiation as described in 10.5 using the eval code.</li>
+  <li>Perform Declaration Binding Instantiation as described in <a href="#sec-10.5">10.5</a> using the eval code.</li>
 </ol>
 <p>NOTE&#x9;The eval code cannot instantiate variable or function bindings in the variable environment of the calling context that invoked the eval if either the code of the calling context or the eval code is strict code. Instead such bindings are instantiated in a new VariableEnvironment that is only accessible to the eval code.</p>
 </section>
@@ -3751,7 +3751,7 @@
   <li>Let <i>localEnv</i> be the result of calling NewDeclarativeEnvironment  passing the value of the [[Scope]] internal property of <i>F</i> as the argument.</li>
   <li>Set the LexicalEnvironment to <i>localEnv</i>.</li>
   <li>Set the VariableEnvironment to <i>localEnv</i>.</li>
-  <li>Return the result of performing Function Declaration Binding Instantiation using the function <i>F</i>, <i>argumentsList</i> , and <i>localEnv</i> as described in 10.5.3.</li>
+  <li>Return the result of performing Function Declaration Binding Instantiation using the function <i>F</i>, <i>argumentsList</i> , and <i>localEnv</i> as described in <a href="#sec-10.5.3">10.5.3</a>.</li>
 </ol>
 </section>
 </section>
@@ -3972,7 +3972,7 @@
 </section>
 <section id="sec-10.6">
 <h1><span class="secnum"><a href="#sec-10.6" title="link to this section">10.6</a></span> Arguments Object</h1>
-<p>When control enters an execution context for function code, an arguments object is created unless (as specified in 10.5) the identifier <code>arguments</code> occurs as an <span style="font-family: Times New Roman; font-style: italic">Identifier</span> in the function&rsquo;s <span style="font-family: Times New Roman; font-style: italic">FormalParameterList</span> or occurs as the <span style="font-family: Times New Roman; font-style: italic">BindingIdentifier</span> of a <span style="font-family: Times New Roman; font-style: italic">Declaration</span> contained in the function code.</p>
+<p>When control enters an execution context for function code, an arguments object is created unless (as specified in <a href="#sec-10.5">10.5</a>) the identifier <code>arguments</code> occurs as an <span style="font-family: Times New Roman; font-style: italic">Identifier</span> in the function&rsquo;s <span style="font-family: Times New Roman; font-style: italic">FormalParameterList</span> or occurs as the <span style="font-family: Times New Roman; font-style: italic">BindingIdentifier</span> of a <span style="font-family: Times New Roman; font-style: italic">Declaration</span> contained in the function code.</p>
 <p>The abstract operation <i>CreateStrictArgumentsObject</i> called with argument list <span style="font-family: Times New Roman; font-style: italic">args</span> performs the following steps:</p>
 <ol class="proc">
   <li>Let <i>len</i> be the number of elements in <i>args</i>.</li>
@@ -3995,7 +3995,7 @@
   <li>Let <i>len</i> be the number of elements in <i>args</i>.</li>
   <li>Let <i>obj</i> be the result of the abstraction operation <i>InstantiateArgumentsObject</i> with argument <i>len</i>.</li>
   <li>Let <i>map</i> be the result of creating a new ECMAScript object.</li>
-  <li>Set all the internal methods of <i>map</i> as specified in 8.12.</li>
+  <li>Set all the internal methods of <i>map</i> as specified in <a href="#sec-8.12">8.12</a>.</li>
   <li>Let <i>mappedNames</i> be an empty List.</li>
   <li>Let <i>indx</i> = <i>len</i>  - 1.</li>
   <li>Repeat while <i>indx</i> &gt;= 0,
@@ -4030,7 +4030,7 @@
 <p>The abstract operation <i>InstantiateArgumentsObject</i> called with an argument <span style="font-family: Times New Roman; font-style: italic">len</span> performs the following steps:</p>
 <ol class="proc">
   <li>Let <i>obj</i> be the result of creating a new ECMAScript object.</li>
-  <li>Set all the internal methods of <i>obj</i> as specified in 8.12.</li>
+  <li>Set all the internal methods of <i>obj</i> as specified in <a href="#sec-8.12">8.12</a>.</li>
   <li>Add the [[NativeBrand]] internal propert to <i>obj</i> with value NativeArguments.</li>
   <li>Set the [[Prototype]] internal property of <i>obj</i> to the standard built-in Object prototype object (<a href="#sec-15.2.4">15.2.4</a>).</li>
   <li>Call the [[DefineOwnProperty]] internal method on <i>obj</i> passing <b>"<span style="font-family: monospace">length</span>"</b>, the Property Descriptor {[[Value]]: <i>len</i>, [[Writable]]: <b>true</b>, [[Enumerable]]: <b>false</b>, [[Configurable]]: <b>true</b>}, and <b>false</b> as arguments.</li>
@@ -4041,7 +4041,7 @@
   <li>Let <i>bodyText</i> be the result of concatenating the Strings "<code>return</code> ", <i>name</i>, and "<code>;</code>".</li>
   <li>Let <i>body</i> be the result of parsing <i>bodyText</i> using <i>FunctionBody</i> as the goal symbol.</li>
   <li>Let <i>parameters</i> be a <i>FormalParameterList</i> <b>:</b> [empty] production.</li>
-  <li>Return the result of creating a function object as described in 13.2 using <i>parameters</i> as <i>FormalParameterList</i>, <i>body</i> for <i>FunctionBody</i>, <i>env</i> as <i>Scope</i>, and <b>true</b> for <i>Strict</i>.</li>
+  <li>Return the result of creating a function object as described in <a href="#sec-13.2">13.2</a> using <i>parameters</i> as <i>FormalParameterList</i>, <i>body</i> for <i>FunctionBody</i>, <i>env</i> as <i>Scope</i>, and <b>true</b> for <i>Strict</i>.</li>
 </ol>
 <p>The abstract operation <i>MakeArgSetter</i> called with String <span style="font-family: Times New Roman; font-style: italic">name</span> and environment record <span style="font-family: Times New Roman; font-style: italic">env</span> creates a function object that when executed sets the value bound for <span style="font-family: Times New Roman; font-style: italic">name</span> in <span style="font-family: Times New Roman; font-style: italic">env</span>.  It performs the following steps:</p>
 <ol class="proc">
@@ -4049,7 +4049,7 @@
   <li>Let <i>parameters</i> be the result of parsing <i>paramText</i> using <i>FormalParameterList</i> as the goal symbol.</li>
   <li>Let <i>bodyText</i> be the String <b>"&lt;name&gt; <span style="font-family: monospace">=</span> &lt;param&gt;<span style="font-family: monospace">;</span>"</b> with <b>&lt;name&gt;</b> replaced by the value of <i>name</i> and <b>&lt;param&gt;</b> replaced by the value of <i>paramText</i>.</li>
   <li>Let <i>body</i> be the result of parsing <i>bodyText</i> using <i>FunctionBody</i> as the goal symbol.</li>
-  <li>Return the result of creating a function object as described in 13.2 using <i>parameters</i> as <i>FormalParameterList</i>, <i>body</i> for <i>FunctionBody</i>, <i>env</i> as <i>Scope</i>, and <b>true</b> for <i>Strict</i>.</li>
+  <li>Return the result of creating a function object as described in <a href="#sec-13.2">13.2</a> using <i>parameters</i> as <i>FormalParameterList</i>, <i>body</i> for <i>FunctionBody</i>, <i>env</i> as <i>Scope</i>, and <b>true</b> for <i>Strict</i>.</li>
 </ol>
 <p>The [[Get]] internal method of an arguments object for a non-strict mode function with formal parameters when called with a property name <span style="font-family: Times New Roman; font-style: italic">P</span> performs the following steps:</p>
 <ol class="proc">
@@ -4129,7 +4129,7 @@
   <li>Return <i>result</i>.</li>
 </ol>
 <div class="note">
-  <p><span class="nh">NOTE 1</span> For non-strict mode functions the array index (defined in 15.4) named data properties of an arguments object whose numeric name values are less than the number of formal parameters of the corresponding function object initially share their values with the corresponding argument bindings in the function&rsquo;s execution context. This means that changing the property changes the corresponding value of the argument binding and vice-versa. This correspondence is broken if such a property is deleted and then redefined or if the property is changed into an accessor property. For strict mode functions, the values of the arguments object&rsquo;s properties are simply a copy of the arguments passed to the function and there is no dynamic linkage between the property values and the formal parameter values.</p>
+  <p><span class="nh">NOTE 1</span> For non-strict mode functions the array index (defined in <a href="#sec-15.4">15.4</a>) named data properties of an arguments object whose numeric name values are less than the number of formal parameters of the corresponding function object initially share their values with the corresponding argument bindings in the function&rsquo;s execution context. This means that changing the property changes the corresponding value of the argument binding and vice-versa. This correspondence is broken if such a property is deleted and then redefined or if the property is changed into an accessor property. For strict mode functions, the values of the arguments object&rsquo;s properties are simply a copy of the arguments passed to the function and there is no dynamic linkage between the property values and the formal parameter values.</p>
 </div>
 <div class="note">
   <p><span class="nh">NOTE 2</span> The ParameterMap object and its property values are used as a device for specifying the arguments object correspondence to argument bindings. The ParameterMap object and the objects that are the values of its properties are not directly accessible from ECMAScript code. An ECMAScript implementation does not need to actually create or use such objects to implement the specified semantics.</p>
@@ -4147,10 +4147,10 @@
 </ol>
 </section><section id="sec-11.1.2"><h1><span class="secnum"><a href="#sec-11.1.2" title="link to this section">11.1.2</a></span> Identifier Reference</h1>
 <ol class="proc">
-  <li>Let <i>ref</i> be the result of performing Identifier Resolution as specified in 10.3.1 using the <i>IdentifierName</i> corresponding to <i>Identifier</i>.</li>
+  <li>Let <i>ref</i> be the result of performing Identifier Resolution as specified in <a href="#sec-10.3.1">10.3.1</a> using the <i>IdentifierName</i> corresponding to <i>Identifier</i>.</li>
   <li>Return <i>ref</i>.</li>
 </ol>
-<p>NOTE:&#x9;The result of evaluating an <span style="font-family: Times New Roman; font-style: italic">Identifier</span> is always a value of type Reference.</p></section><section id="sec-11.1.3"><h1><span class="secnum"><a href="#sec-11.1.3" title="link to this section">11.1.3</a></span> Literal Reference</h1><p>A <span style="font-family: Times New Roman; font-style: italic">Literal</span> is evaluated as described in 7.8.</p></section><section id="sec-11.1.4"><h1><span class="secnum"><a href="#sec-11.1.4" title="link to this section">11.1.4</a></span> Array Initialiser</h1><h2>Syntax</h2><div class="gp"><div class="lhs">SealedArrayInitialiser <span style="font-family: sans-serif; font-weight: bold">:</span></div><div class="rhs">ArrayInitialiser<code><br>#</code> ArrayInitialiser</div></div><div class="gp"><div class="lhs">ArrayInitialiser <span style="font-family: sans-serif; font-weight: bold">:</span></div><div class="rhs">ArrayLiteral<code><br></code>ArrayComprehension</div></div><section id="sec-11.1.4.1"><h1><span class="secnum"><a href="#sec-11.1.4.1" title="link to this section">11.1.4.1</a></span> Array Literal</h1><p>NOTE&#x9; An <span style="font-family: Times New Roman; font-style: italic">ArrayLiteral</span> is an expression describing the initialisation of an Array object, using a list, of zero or more expressions each of which represents an array element, enclosed in square brackets. The elements need not be literals; they are evaluated each time the array initialiser is evaluated.</p><p>Array elements may be elided at the beginning, middle or end of the element list. Whenever a comma in the element list is not preceded by an <span style="font-family: Times New Roman; font-style: italic">AssignmentExpression</span> (i.e., a comma at the beginning or after another comma), the missing array element contributes to the length of the Array and increases the index of subsequent elements. Elided array elements are not defined. If an element is elided at the end of an array, that element does not contribute to the length of the Array.</p><h2>Syntax</h2><div class="gp"><div class="lhs">ArrayLiteral <span style="font-family: sans-serif; font-weight: bold">:</span></div><div class="rhs"><code>[</code> Elision<sub>opt</sub> <code>]<br>[</code> ElementList <code>]<br>[</code> ElementList <code>,</code> Elision<sub>opt</sub> <code>]</code></div></div><div class="gp"><div class="lhs">ElementList <span style="font-family: sans-serif; font-weight: bold">:</span></div><div class="rhs">Elision<sub>opt</sub> AssignmentExpression<br>Elision<sub>opt</sub> <code>&hellip;</code> AssignmentExpression<br>ElementList <code>,</code> Elision<sub>opt</sub> AssignmentExpression<br>ElementList <code>,</code> Elision<sub>opt</sub> SpreadElement</div></div><div class="gp"><div class="lhs">Elision <span style="font-family: sans-serif; font-weight: bold">:</span></div><div class="rhs"><code>,</code><br>Elision <code>,</code></div></div><div class="gp"><div class="lhs">SpreadElement <span style="font-family: sans-serif; font-weight: bold">:</span></div><div class="rhs"><code>&hellip;</code> AssignmentExpression</div></div><div class="gp"><div class="lhs">ArrayComprehension <span style="font-family: sans-serif; font-weight: bold">:</span></div><div class="rhs">Expression ComprehensionForList<code><br></code>Expression ComprehensionForList  <code>if (</code> Expression <code>)</code></div></div><div class="gp"><div class="lhs">ComprehensionForList <span style="font-family: sans-serif; font-weight: bold">:</span></div><div class="rhs">ComprehensionFor<code><br></code>ComprehensionForList  ComprehensionFor</div></div><div class="gp"><div class="lhs">ComprehensionFor <span style="font-family: sans-serif; font-weight: bold">:</span></div><div class="rhs"><code>for (</code> LeftHandSideExpression <code>of</code> Expression <code>)</code></div></div><p><span style="font-family: sans-serif; font-weight: bold">Static Semantics</span></p><p><span style="font-family: sans-serif; font-weight: bold">Static Semantics:  Elision</span> <span style="font-family: sans-serif; font-weight: bold">Width</span></p><p><span style="font-family: Times New Roman; font-style: italic">Elision</span> <b>:</b>  [empty]</p>
+<p>NOTE:&#x9;The result of evaluating an <span style="font-family: Times New Roman; font-style: italic">Identifier</span> is always a value of type Reference.</p></section><section id="sec-11.1.3"><h1><span class="secnum"><a href="#sec-11.1.3" title="link to this section">11.1.3</a></span> Literal Reference</h1><p>A <span style="font-family: Times New Roman; font-style: italic">Literal</span> is evaluated as described in <a href="#sec-7.8">7.8</a>.</p></section><section id="sec-11.1.4"><h1><span class="secnum"><a href="#sec-11.1.4" title="link to this section">11.1.4</a></span> Array Initialiser</h1><h2>Syntax</h2><div class="gp"><div class="lhs">SealedArrayInitialiser <span style="font-family: sans-serif; font-weight: bold">:</span></div><div class="rhs">ArrayInitialiser<code><br>#</code> ArrayInitialiser</div></div><div class="gp"><div class="lhs">ArrayInitialiser <span style="font-family: sans-serif; font-weight: bold">:</span></div><div class="rhs">ArrayLiteral<code><br></code>ArrayComprehension</div></div><section id="sec-11.1.4.1"><h1><span class="secnum"><a href="#sec-11.1.4.1" title="link to this section">11.1.4.1</a></span> Array Literal</h1><p>NOTE&#x9; An <span style="font-family: Times New Roman; font-style: italic">ArrayLiteral</span> is an expression describing the initialisation of an Array object, using a list, of zero or more expressions each of which represents an array element, enclosed in square brackets. The elements need not be literals; they are evaluated each time the array initialiser is evaluated.</p><p>Array elements may be elided at the beginning, middle or end of the element list. Whenever a comma in the element list is not preceded by an <span style="font-family: Times New Roman; font-style: italic">AssignmentExpression</span> (i.e., a comma at the beginning or after another comma), the missing array element contributes to the length of the Array and increases the index of subsequent elements. Elided array elements are not defined. If an element is elided at the end of an array, that element does not contribute to the length of the Array.</p><h2>Syntax</h2><div class="gp"><div class="lhs">ArrayLiteral <span style="font-family: sans-serif; font-weight: bold">:</span></div><div class="rhs"><code>[</code> Elision<sub>opt</sub> <code>]<br>[</code> ElementList <code>]<br>[</code> ElementList <code>,</code> Elision<sub>opt</sub> <code>]</code></div></div><div class="gp"><div class="lhs">ElementList <span style="font-family: sans-serif; font-weight: bold">:</span></div><div class="rhs">Elision<sub>opt</sub> AssignmentExpression<br>Elision<sub>opt</sub> <code>&hellip;</code> AssignmentExpression<br>ElementList <code>,</code> Elision<sub>opt</sub> AssignmentExpression<br>ElementList <code>,</code> Elision<sub>opt</sub> SpreadElement</div></div><div class="gp"><div class="lhs">Elision <span style="font-family: sans-serif; font-weight: bold">:</span></div><div class="rhs"><code>,</code><br>Elision <code>,</code></div></div><div class="gp"><div class="lhs">SpreadElement <span style="font-family: sans-serif; font-weight: bold">:</span></div><div class="rhs"><code>&hellip;</code> AssignmentExpression</div></div><div class="gp"><div class="lhs">ArrayComprehension <span style="font-family: sans-serif; font-weight: bold">:</span></div><div class="rhs">Expression ComprehensionForList<code><br></code>Expression ComprehensionForList  <code>if (</code> Expression <code>)</code></div></div><div class="gp"><div class="lhs">ComprehensionForList <span style="font-family: sans-serif; font-weight: bold">:</span></div><div class="rhs">ComprehensionFor<code><br></code>ComprehensionForList  ComprehensionFor</div></div><div class="gp"><div class="lhs">ComprehensionFor <span style="font-family: sans-serif; font-weight: bold">:</span></div><div class="rhs"><code>for (</code> LeftHandSideExpression <code>of</code> Expression <code>)</code></div></div><p><span style="font-family: sans-serif; font-weight: bold">Static Semantics</span></p><p><span style="font-family: sans-serif; font-weight: bold">Static Semantics:  Elision</span> <span style="font-family: sans-serif; font-weight: bold">Width</span></p><p><span style="font-family: Times New Roman; font-style: italic">Elision</span> <b>:</b>  [empty]</p>
 <ol class="proc">
   <li>Return the numeric value 0.</li>
 </ol>
@@ -4369,7 +4369,7 @@
 <p><span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> <b>:</b> <span style="font-family: Times New Roman; font-style: italic">IdentifierName</span></p>
 <ol class="proc">
   <li>Let <i>propName</i> be PropName(<i>IdentifierName</i>).</li>
-  <li>Let <i>exprValue</i> be the result of performing Identifier Resolution as specified in 10.3.1 using <i>IdentifierName</i>.</li>
+  <li>Let <i>exprValue</i> be the result of performing Identifier Resolution as specified in <a href="#sec-10.3.1">10.3.1</a> using <i>IdentifierName</i>.</li>
   <li>Let <i>propValue</i> be GetValue(<i>exprValue</i>).</li>
   <li>If <i>propValue</i> is an abrupt completion, return <i>propValue</i>.</li>
   <li>Let <i>desc</i> be the Property Descriptor{[[Value]]: <i>propValue</i>, [[Writable]]: <b>true</b>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}</li>
@@ -4387,28 +4387,28 @@
 <p><span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> <b>:</b> <span style="font-family: Times New Roman; font-style: italic">PropertyName</span> <code>(</code> <span style="font-family: Times New Roman; font-style: italic">FormalParameterList</span> <code>) {</code> <span style="font-family: Times New Roman; font-style: italic">FunctionBody</span> <code>}</code></p>
 <ol class="proc">
   <li>Let <i>propName</i> be PropName of <i>PropertyName</i>.</li>
-  <li>Let <i>closure</i> be the result of creating a new Function object as specified in 13.1.1 using a <i>FormalParameterList</i> <b>:</b> [empty] production as the parameter list and body specified by <i>FunctionBody</i>. Pass in the LexicalEnvironment of the running execution context as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag. Pass object as the optional <i>homeObject</i> argument and propName as the optional <i>methodName</i> argument.</li>
+  <li>Let <i>closure</i> be the result of creating a new Function object as specified in <a href="#sec-13.1.1">13.1.1</a> using a <i>FormalParameterList</i> <b>:</b> [empty] production as the parameter list and body specified by <i>FunctionBody</i>. Pass in the LexicalEnvironment of the running execution context as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag. Pass object as the optional <i>homeObject</i> argument and propName as the optional <i>methodName</i> argument.</li>
   <li>Let <i>desc</i> be the Property Descriptor{[[Get]]: <i>closure</i>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}</li>
   <li>Return the result of calling the [[DefineOwnProperty]] internal method of <i>object</i> with arguments <i>propName</i>, <i>desc</i>, and <b>false</b>.</li>
 </ol>
 <p><span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> <b>:</b> <code>*</code> <span style="font-family: Times New Roman; font-style: italic">PropertyName</span> <code>(</code> <span style="font-family: Times New Roman; font-style: italic">FormalParameterList</span> <code>) {</code> <span style="font-family: Times New Roman; font-style: italic">FunctionBody</span> <code>}</code></p>
 <ol class="proc">
   <li>Let <i>propName</i> be PropName of <i>PropertyName</i>.</li>
-  <li>Let <i>closure</i> be the result of creating a new Generator object as specified in 13.2.xxx  using a <i>FormalParameterList</i> <b>:</b> [empty] production as the parameter list and body specified by <i>FunctionBody</i>. Pass in the LexicalEnvironment of the running execution context as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag. Pass object as the optional <i>homeObject</i> argument and propName as the optional <i>methodName</i> argument.</li>
+  <li>Let <i>closure</i> be the result of creating a new Generator object as specified in <a href="#sec-13.2">13.2</a>.xxx  using a <i>FormalParameterList</i> <b>:</b> [empty] production as the parameter list and body specified by <i>FunctionBody</i>. Pass in the LexicalEnvironment of the running execution context as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag. Pass object as the optional <i>homeObject</i> argument and propName as the optional <i>methodName</i> argument.</li>
   <li>Let <i>desc</i> be the Property Descriptor{[[Get]]: <i>closure</i>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}</li>
   <li>Return the result of calling the [[DefineOwnProperty]] internal method of <i>object</i> with arguments <i>propName</i>, <i>desc</i>, and <b>false</b>.</li>
 </ol>
 <p><span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> <b>:</b> <code>get</code> <span style="font-family: Times New Roman; font-style: italic">PropertyName</span> <code>( ) {</code> <span style="font-family: Times New Roman; font-style: italic">FunctionBody</span> <code>}</code></p>
 <ol class="proc">
   <li>Let <i>propName</i> be PropName(<i>PropertyName</i>).</li>
-  <li>Let <i>closure</i> be the result of creating a new Function object as specified in 13.2 using a <i>FormalParameterList</i> <b>:</b> [empty] production as the formal parameter list and body specified by <i>FunctionBody</i>. Pass in the LexicalEnvironment of the running execution context as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag if the <i>PropertyAssignment</i> is contained in strict code or if its <i>FunctionBody</i> is strict code. Pass object as the optional <i>homeObject</i> argument and propName as the optional <i>methodName</i> argument.</li>
+  <li>Let <i>closure</i> be the result of creating a new Function object as specified in <a href="#sec-13.2">13.2</a> using a <i>FormalParameterList</i> <b>:</b> [empty] production as the formal parameter list and body specified by <i>FunctionBody</i>. Pass in the LexicalEnvironment of the running execution context as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag if the <i>PropertyAssignment</i> is contained in strict code or if its <i>FunctionBody</i> is strict code. Pass object as the optional <i>homeObject</i> argument and propName as the optional <i>methodName</i> argument.</li>
   <li>Let <i>desc</i> be the Property Descriptor{[[Get]]: <i>closure</i>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}</li>
   <li>Return the result of calling the [[DefineOwnProperty]] internal method of <i>object</i> with arguments <i>propName</i>, <i>desc</i>, and <b>false</b>.</li>
 </ol>
 <p><span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> <b>:</b> <code>set</code> <span style="font-family: Times New Roman; font-style: italic">PropertyName</span> <code>(</code> <span style="font-family: Times New Roman; font-style: italic">PropertySetParameterList</span> <code>)</code> <code>{</code> <span style="font-family: Times New Roman; font-style: italic">FunctionBody</span> <code>}</code></p>
 <ol class="proc">
   <li>Let <i>propName</i> be PropName(<i>PropertyName</i>).</li>
-  <li>Let <i>closure</i> be the result of creating a new Function object as specified in 13.2 with parameters specified by <i>PropertySetParameterList</i> and body specified by <i>FunctionBody</i>. Pass in the LexicalEnvironment of the running execution context as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag if the <i>PropertyAssignment</i> is contained in strict code or if its <i>FunctionBody</i> is strict code. Pass object as the optional <i>homeObject</i> argument and propName as the optional <i>methodName</i> argument.</li>
+  <li>Let <i>closure</i> be the result of creating a new Function object as specified in <a href="#sec-13.2">13.2</a> with parameters specified by <i>PropertySetParameterList</i> and body specified by <i>FunctionBody</i>. Pass in the LexicalEnvironment of the running execution context as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag if the <i>PropertyAssignment</i> is contained in strict code or if its <i>FunctionBody</i> is strict code. Pass object as the optional <i>homeObject</i> argument and propName as the optional <i>methodName</i> argument.</li>
   <li>Let <i>desc</i> be the Property Descriptor{[[Set]]: <i>closure</i>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}</li>
   <li>Return the result of calling the [[DefineOwnProperty]] internal method of <i>object</i> with arguments <i>propName</i>, <i>desc</i>, and <b>false</b>.</li>
 </ol>
@@ -6140,7 +6140,7 @@
     </li>
   <li>Else
     <ol class="block">
-      <li>Let <i>lhs</i> be the result of evaluating <i>Identifier</i> as described in 11.1.2.</li>
+      <li>Let <i>lhs</i> be the result of evaluating <i>Identifier</i> as described in <a href="#sec-11.1.2">11.1.2</a>.</li>
       <li>Return PutValue(<i>lhs</i>, <i>value</i>).</li>
     </ol>
     </li>
@@ -8097,14 +8097,14 @@
 </ol>
 <p><span style="font-family: Times New Roman; font-style: italic">FunctionExpression</span> <b>:</b> <code>function</code> <code>(</code> <span style="font-family: Times New Roman; font-style: italic">FormalParameterList</span> <code>)</code> <code>{</code> <span style="font-family: Times New Roman; font-style: italic">FunctionBody</span> <code>}</code></p>
 <ol class="proc">
-  <li><span style="font-family: Times New Roman">Return the result of creating a new Function object as specified in 13.2 with parameters specified by <i>FormalParameterList</i> and body specified by <i>FunctionBody</i>. Pass in the LexicalEnvironment of the running execution context as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag if the <i>FunctionExpression</i> is contained in strict code or if its <i>FunctionBody</i> is strict code.</span></li>
+  <li><span style="font-family: Times New Roman">Return the result of creating a new Function object as specified in <a href="#sec-13.2">13.2</a> with parameters specified by <i>FormalParameterList</i> and body specified by <i>FunctionBody</i>. Pass in the LexicalEnvironment of the running execution context as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag if the <i>FunctionExpression</i> is contained in strict code or if its <i>FunctionBody</i> is strict code.</span></li>
 </ol>
 <p><span style="font-family: Times New Roman; font-style: italic">FunctionExpression</span> <b>:</b> <code>function</code> <span style="font-family: Times New Roman; font-style: italic">BindingIdentifier</span> <code>(</code> <span style="font-family: Times New Roman; font-style: italic">FormalParameterList</span> <code>)</code> <code>{</code> <span style="font-family: Times New Roman; font-style: italic">FunctionBody</span> <code>}</code></p>
 <ol class="proc">
   <li><span style="font-family: Times New Roman">Let <i>funcEnv</i> be the result of calling NewDeclarativeEnvironment passing the running execution context&rsquo;s Lexical Environment as the argument</span></li>
   <li><span style="font-family: Times New Roman">Let <i>envRec</i> be <i>funcEnv&rsquo;s</i> environment record.</span></li>
   <li><span style="font-family: Times New Roman">Call the CreateImmutableBinding concrete method of <i>envRec</i> passing the String value of <i>BindingIdentifier</i> as the argument.</span></li>
-  <li><span style="font-family: Times New Roman">Let <i>closure</i> be the result of creating a new Function object as specified in 13.2 with parameters specified by <i>FormalParameterList</i> and body specified by <i>FunctionBody</i>. Pass in <i>funcEnv</i> as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag if the <i>FunctionExpression</i> is contained in strict code or if its <i>FunctionBody</i> is strict code.</span></li>
+  <li><span style="font-family: Times New Roman">Let <i>closure</i> be the result of creating a new Function object as specified in <a href="#sec-13.2">13.2</a> with parameters specified by <i>FormalParameterList</i> and body specified by <i>FunctionBody</i>. Pass in <i>funcEnv</i> as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag if the <i>FunctionExpression</i> is contained in strict code or if its <i>FunctionBody</i> is strict code.</span></li>
   <li><span style="font-family: Times New Roman">Call the InitializeBinding concrete method of <i>envRec</i> passing the String value of <i>Identifier</i> and <i>closure</i> as the arguments.</span></li>
   <li><span style="font-family: Times New Roman">Return <i>closure</i>.</span></li>
 </ol>
@@ -8113,7 +8113,7 @@
 </div>
 <p><span style="font-family: Times New Roman; font-style: italic">FunctionBody</span> <b>:</b> <span style="font-family: Times New Roman; font-style: italic">StatementList</span><sub>opt</sub></p>
 <ol class="proc">
-  <li><span style="font-family: Times New Roman">The code of this <i>FunctionBody</i> is strict mode code if it is part of a <i>FunctionDeclaration</i> or <i>FunctionExpression</i> that is contained in strict mode code or if the Directive Prologue (<a href="#sec-14.1">14.1</a>) of its <i>StatementList</i> contains a Use Strict Directive or if any of the conditions in 10.1.1 apply.  If the code of this <i>FunctionBody</i> is strict mode code, <i>StatementList</i> is evaluated in the following steps as strict mode code. Otherwise, <i>StatementList</i> is evaluated in the following steps as non-strict mode code.</span></li>
+  <li><span style="font-family: Times New Roman">The code of this <i>FunctionBody</i> is strict mode code if it is part of a <i>FunctionDeclaration</i> or <i>FunctionExpression</i> that is contained in strict mode code or if the Directive Prologue (<a href="#sec-14.1">14.1</a>) of its <i>StatementList</i> contains a Use Strict Directive or if any of the conditions in <a href="#sec-10.1.1">10.1.1</a> apply.  If the code of this <i>FunctionBody</i> is strict mode code, <i>StatementList</i> is evaluated in the following steps as strict mode code. Otherwise, <i>StatementList</i> is evaluated in the following steps as non-strict mode code.</span></li>
   <li><span style="font-family: Times New Roman">If <i>StatementList</i> is present return the result of evaluating <i>StatementList</i>.</span></li>
   <li><span style="font-family: Times New Roman">Else return NormalCompletion(<b>undefined</b>).</span></li>
 </ol>
@@ -8123,13 +8123,13 @@
 <p>A Function object is constructed as follows given an parameter list specified by <span style="font-family: Times New Roman; font-style: italic">FormalParameterList</span>, a body specified by <span style="font-family: Times New Roman; font-style: italic">FunctionBody</span>, a Lexical Environment specified by <span style="font-family: Times New Roman; font-style: italic">Scope</span>, a Boolean flag <span style="font-family: Times New Roman; font-style: italic">Strict</span>, and optionally, an object <span style="font-family: Times New Roman; font-style: italic">homeObject</span> and a string <span style="font-family: Times New Roman; font-style: italic">methodName</span>:</p>
 <ol class="proc">
   <li><span style="font-family: Times New Roman">Create a new native ECMAScript object and let <i>F</i> be that object.</span></li>
-  <li><span style="font-family: Times New Roman">Set all the internal methods, except for [[Get]], of <i>F</i> as described in 8.12.</span></li>
+  <li><span style="font-family: Times New Roman">Set all the internal methods, except for [[Get]], of <i>F</i> as described in <a href="#sec-8.12">8.12</a>.</span></li>
   <li><span style="font-family: Times New Roman">Add the [[NativeBrand]] internal property with value NativeFunction</span> <span style="font-family: Times New Roman">to <i>F</i>.</span></li>
-  <li><span style="font-family: Times New Roman">Set the [[Prototype]] internal property of <i>F</i> to the standard built-in Function prototype object as specified in 15.3.3.1.</span></li>
-  <li><span style="font-family: Times New Roman">Set the [[Get]] internal property of <i>F</i> as described in 15.3.5.4.</span></li>
+  <li><span style="font-family: Times New Roman">Set the [[Prototype]] internal property of <i>F</i> to the standard built-in Function prototype object as specified in <a href="#sec-15.3.3.1">15.3.3.1</a>.</span></li>
+  <li><span style="font-family: Times New Roman">Set the [[Get]] internal property of <i>F</i> as described in <a href="#sec-15.3.5.4">15.3.5.4</a>.</span></li>
   <li><span style="font-family: Times New Roman">Set the [[Call]] internal property of <i>F</i> as described in 13.2.1.</span></li>
   <li><span style="font-family: Times New Roman">Set the [[Construct]] internal property of <i>F</i> as described in 13.2.2.</span></li>
-  <li><span style="font-family: Times New Roman">Set the [[HasInstance]] internal property of <i>F</i> as described in 15.3.5.3.</span></li>
+  <li><span style="font-family: Times New Roman">Set the [[HasInstance]] internal property of <i>F</i> as described in <a href="#sec-15.3.5.3">15.3.5.3</a>.</span></li>
   <li><span style="font-family: Times New Roman">Set the [[Scope]] internal property of <i>F</i> to the value of <i>Scope</i>.</span></li>
   <li><span style="font-family: Times New Roman">Set the [[FormalParameters]] internal property of <i>F</i> to <i>FormalParameterList</i>. .</span></li>
   <li><span style="font-family: Times New Roman">Set the [[Code]] internal property of <i>F</i> to <i>FunctionBody</i>.</span></li>
@@ -8159,7 +8159,7 @@
 <p>When the [[Call]] internal method for a Function object <span style="font-family: Times New Roman; font-style: italic">F</span> is called with a this value and a list of arguments, the following steps are taken:</p>
 <ol class="proc">
   <li>Let <i>callerContext</i> be the current execution context.</li>
-  <li>Let <i>status</i> be the result of establishing a new execution context for function code using <i>F</i>, the passed arguments List <i>args</i>, and the <b>this</b> value as described in 10.4.3.</li>
+  <li>Let <i>status</i> be the result of establishing a new execution context for function code using <i>F</i>, the passed arguments List <i>args</i>, and the <b>this</b> value as described in <a href="#sec-10.4.3">10.4.3</a>.</li>
   <li>If <i>status</i> is an abrupt completion, then
     <ol class="block">
       <li>Restore <i>callerContext</i> as the current execution context.</li>
@@ -8185,12 +8185,12 @@
 <p>When the [[Construct]] internal method for a Function object <span style="font-family: Times New Roman; font-style: italic">F</span> is called with a possibly empty list of arguments, the following steps are taken:</p>
 <ol class="proc">
   <li><span style="font-family: Times New Roman">Let <i>obj</i> be a newly created native ECMAScript object.</span></li>
-  <li><span style="font-family: Times New Roman">Set all the internal methods of <i>obj</i> as specified in 8.12.</span></li>
+  <li><span style="font-family: Times New Roman">Set all the internal methods of <i>obj</i> as specified in <a href="#sec-8.12">8.12</a>.</span></li>
   <li><span style="font-family: Times New Roman">Set the [[Extensible]] internal property of <i>obj</i> to <b>true</b>.</span></li>
   <li><span style="font-family: Times New Roman">Let <i>proto</i> be the value of calling the [[Get]] internal property of <i>F</i> with argument</span> <code>"prototype"</code><span style="font-family: Times New Roman">.</span></li>
   <li><span style="font-family: Times New Roman">ReturnIfAbrupt(<i>proto</i>).</span></li>
   <li><span style="font-family: Times New Roman">If Type(<i>proto</i>)</span> <span style="font-family: Times New Roman">is Object, set the [[Prototype]] internal property of <i>obj</i> to <i>proto</i>.</span></li>
-  <li><span style="font-family: Times New Roman">If Type(<i>proto</i>)</span> <span style="font-family: Times New Roman">is not Object, set the [[Prototype]] internal property of <i>obj</i> to the standard built-in Object prototype object as described in 15.2.4.</span></li>
+  <li><span style="font-family: Times New Roman">If Type(<i>proto</i>)</span> <span style="font-family: Times New Roman">is not Object, set the [[Prototype]] internal property of <i>obj</i> to the standard built-in Object prototype object as described in <a href="#sec-15.2.4">15.2.4</a>.</span></li>
   <li><span style="font-family: Times New Roman">Let <i>result</i> be the result of calling the [[Call]] internal property of <i>F</i>, providing <i>obj</i> as the <b>this</b> value and providing the argument list passed into [[Construct]] as <i>args</i>.</span></li>
   <li><span style="font-family: Times New Roman">ReturnIfAbrupt(<i>proto</i>).</span></li>
   <li><span style="font-family: Times New Roman">If Type(<i>result</i>.[[value]]) is Object then return <i>result</i>.</span></li>
@@ -8202,9 +8202,9 @@
 <p>The [[ThrowTypeError]] object is a unique function object that is defined once as follows:</p>
 <ol class="proc">
   <li><span style="font-family: Times New Roman">Create a new native ECMAScript object and let <i>F</i> be that object.</span></li>
-  <li><span style="font-family: Times New Roman">Set all the internal methods of <i>F</i> as described in 8.12.</span></li>
+  <li><span style="font-family: Times New Roman">Set all the internal methods of <i>F</i> as described in <a href="#sec-8.12">8.12</a>.</span></li>
   <li><span style="font-family: Times New Roman">Add the [[NativeBrand]] internal property with value NativeFunction</span> <span style="font-family: Times New Roman">to <i>F</i>.</span></li>
-  <li><span style="font-family: Times New Roman">Set the [[Prototype]] internal property of <i>F</i> to the standard built-in Function prototype object as specified in 15.3.3.1.</span></li>
+  <li><span style="font-family: Times New Roman">Set the [[Prototype]] internal property of <i>F</i> to the standard built-in Function prototype object as specified in <a href="#sec-15.3.3.1">15.3.3.1</a>.</span></li>
   <li><span style="font-family: Times New Roman">Set the [[Call]] internal property of <i>F</i> as described in 13.2.1.</span></li>
   <li><span style="font-family: Times New Roman">Set the [[Scope]] internal property of <i>F</i> to the Global Environment.</span></li>
   <li><span style="font-family: Times New Roman">Set the [[FormalParameters]] internal property of <i>F</i> to the</span> <span style="font-family: Times New Roman; font-style: italic">FormalParameterList</span> <b>:</b> [empty] <span style="font-family: Times New Roman">production.</span></li>
@@ -8245,7 +8245,7 @@
 <ol class="proc">
   <li>The code of this <i>Program</i> is strict mode code if the Directive Prologue (<a href="#sec-14.1">14.1</a>) of its <i>ProgramBody</i> contains a Use Strict Directive or if any of the conditions of 10.1.1 apply. If the code of this <i>Program</i> is strict mode code, <i>ProgramBody</i> is evaluated in the following steps as strict mode code.  Otherwise <i>ProgramBody</i> is evaluated in the following steps as non-strict mode code.</li>
   <li>If <i>ProgramBody</i> is not present, return NormalCompletion(<span style="font-family: sans-serif">empty</span>).</li>
-  <li>Let <i>progCxt</i> be a new execution context for global code as described in 10.4.1.</li>
+  <li>Let <i>progCxt</i> be a new execution context for global code as described in <a href="#sec-10.4.1">10.4.1</a>.</li>
   <li>Let <i>result</i> be the result of evaluating <i>ProgramBody</i>.</li>
   <li>Exit the execution context <i>progCxt</i>.</li>
   <li>Return <i>result</i>.</li>
@@ -8328,7 +8328,7 @@
 <h1><span class="secnum"><a href="#sec-15.1.2.1.1" title="link to this section">15.1.2.1.1</a></span> Direct Call to Eval</h1>
 <p>A direct call to the eval function is one that is expressed as a <span style="font-family: Times New Roman; font-style: italic">CallExpression</span> that meets the following two conditions:</p>
 <p>The Reference that is the result of evaluating the <span style="font-family: Times New Roman; font-style: italic">MemberExpression</span> in the <span style="font-family: Times New Roman; font-style: italic">CallExpression</span> has an environment record as its base value and its reference name is <span style="font-family: monospace">"<b>eval</b>"</span>.</p>
-<p>The result of calling the abstract operation GetValue with that Reference as the argument is the standard built-in function defined in 15.1.2.1.</p>
+<p>The result of calling the abstract operation GetValue with that Reference as the argument is the standard built-in function defined in <a href="#sec-15.1.2.1">15.1.2.1</a>.</p>
 </section>
 </section>
 <section id="sec-15.1.2.2">
@@ -8406,7 +8406,7 @@
 </section>
 <section id="sec-15.1.3">
 <h1><span class="secnum"><a href="#sec-15.1.3" title="link to this section">15.1.3</a></span> URI Handling Function Properties</h1>
-<p><span style="font-family: Times New Roman">Uniform Resource Identifiers, or URIs, are Strings that identify resources (e.g. web pages or files) and transport protocols by which to access them (e.g. HTTP or FTP) on the Internet. The ECMAScript language itself does not provide any support for using URIs except for functions that encode and decode URIs as described in 15.1.3.1, <a href="#sec-15.1.3.2">15.1.3.2</a>, 15.1.3.3 and 15.1.3.4.</span></p>
+<p><span style="font-family: Times New Roman">Uniform Resource Identifiers, or URIs, are Strings that identify resources (e.g. web pages or files) and transport protocols by which to access them (e.g. HTTP or FTP) on the Internet. The ECMAScript language itself does not provide any support for using URIs except for functions that encode and decode URIs as described in <a href="#sec-15.1.3.1">15.1.3.1</a>, <a href="#sec-15.1.3.2">15.1.3.2</a>, 15.1.3.3 and 15.1.3.4.</span></p>
 <div class="note">
   <p><span class="nh">NOTE</span> Many implementations of ECMAScript provide additional functions and methods that manipulate web pages; these functions are beyond the scope of this standard.</p>
 </div>
@@ -8852,7 +8852,7 @@
   <li>Let <i>obj</i> be a newly created native ECMAScript object.</li>
   <li>Set the [[Prototype]] internal property of <i>obj</i> to the standard built-in Object prototype object (<a href="#sec-15.2.4">15.2.4</a>).</li>
   <li>Set the [[Extensible]] internal property of <i>obj</i> to <b>true</b>.</li>
-  <li>Set all the internal methods of <i>obj</i> as specified in 8.12.</li>
+  <li>Set all the internal methods of <i>obj</i> as specified in <a href="#sec-8.12">8.12</a>.</li>
   <li>Return <i>obj</i>.</li>
 </ol>
 </section>
@@ -8899,7 +8899,7 @@
   <li>Return <i>array</i>.</li>
 </ol>
 <div class="note">
-  <p><span class="nh">NOTE</span> If <span style="font-family: Times New Roman; font-style: italic">O</span> is a String instance, the set of own properties processed in step 4 includes the implicit properties defined in 15.5.5.2 that correspond to character positions within the object&rsquo;s [[PrimitiveValue]] String.</p>
+  <p><span class="nh">NOTE</span> If <span style="font-family: Times New Roman; font-style: italic">O</span> is a String instance, the set of own properties processed in step 4 includes the implicit properties defined in <a href="#sec-15.5.5.2">15.5.5.2</a> that correspond to character positions within the object&rsquo;s [[PrimitiveValue]] String.</p>
 </div>
 </section>
 <section id="sec-15.2.3.5">
@@ -9260,8 +9260,8 @@
   <li>Let <i>parameters</i> be the result of parsing <i>P</i> using <i>FormalParameterList</i> as the goal symbol. Throw a <b>SyntaxError</b> exception if the parse fails.</li>
   <li>Let <i>body</i> be the result of parsing <i>bodyText</i> using <i>FunctionBody</i> as the goal symbol. Throw a <b>SyntaxError</b> exception if the parse fails.</li>
   <li>If <i>bodyText</i> is strict mode code (<a href="#sec-10.1.1">see 10.1.1</a>) then let <i>strict</i> be <b>true</b>, else let <i>strict</i> be <b>false</b>.</li>
-  <li>If <i>strict</i> is <b>true</b>, throw any exceptions specified in 13.1 that apply.</li>
-  <li>Return a new Function object created as specified in 13.2 passing <i>parameters</i> as the <i>FormalParameterList</i> and <i>body</i> as the <i>FunctionBody</i>. Pass in the Global Environment as the <i>Scope</i> parameter and <i>strict</i> as the <i>Strict</i> flag.</li>
+  <li>If <i>strict</i> is <b>true</b>, throw any exceptions specified in <a href="#sec-13.1">13.1</a> that apply.</li>
+  <li>Return a new Function object created as specified in <a href="#sec-13.2">13.2</a> passing <i>parameters</i> as the <i>FormalParameterList</i> and <i>body</i> as the <i>FunctionBody</i>. Pass in the Global Environment as the <i>Scope</i> parameter and <i>strict</i> as the <i>Strict</i> flag.</li>
 </ol>
 <p>A <code>prototype</code> property is automatically created for every function, to provide for the possibility that the function will be used as a constructor.</p>
 <div class="note">
@@ -9354,16 +9354,16 @@
   <li>If IsCallable(<i>Target</i>) is <b>false</b>, throw a <b>TypeError</b> exception.</li>
   <li>Let <i>A</i> be a new (possibly empty) internal list of all of the argument values provided after <i>thisArg</i> (<i>arg1</i>, <i>arg2</i> etc), in order.</li>
   <li>Let <i>F</i> be a new native ECMAScript object .</li>
-  <li>Set all the internal methods, except for [[Get]], of <i>F</i> as specified in 8.12.</li>
-  <li>Set the [[Get]] internal property of <i>F</i> as specified in 15.3.5.4.</li>
+  <li>Set all the internal methods, except for [[Get]], of <i>F</i> as specified in <a href="#sec-8.12">8.12</a>.</li>
+  <li>Set the [[Get]] internal property of <i>F</i> as specified in <a href="#sec-15.3.5.4">15.3.5.4</a>.</li>
   <li>Set the [[TargetFunction]] internal property of <i>F</i> to <i>Target</i>.</li>
   <li>Set the [[BoundThis]] internal property of <i>F</i> to the value of <i>thisArg</i>.</li>
   <li>Set the [[BoundArgs]] internal property of <i>F</i> to <i>A</i>.</li>
   <li>Add the [[NativeBrand]] internal property with value NativeFunction to <i>F</i>.</li>
-  <li>Set the [[Prototype]] internal property of <i>F</i> to the standard built-in Function prototype object as specified in 15.3.3.1.</li>
-  <li>Set the [[Call]] internal property of <i>F</i> as described in 15.3.4.5.1.</li>
-  <li>Set the [[Construct]] internal property of <i>F</i> as described in 15.3.4.5.2.</li>
-  <li>Set the [[HasInstance]] internal property of <i>F</i> as described in 15.3.4.5.3.</li>
+  <li>Set the [[Prototype]] internal property of <i>F</i> to the standard built-in Function prototype object as specified in <a href="#sec-15.3.3.1">15.3.3.1</a>.</li>
+  <li>Set the [[Call]] internal property of <i>F</i> as described in <a href="#sec-15.3.4.5.1">15.3.4.5.1</a>.</li>
+  <li>Set the [[Construct]] internal property of <i>F</i> as described in <a href="#sec-15.3.4.5.2">15.3.4.5.2</a>.</li>
+  <li>Set the [[HasInstance]] internal property of <i>F</i> as described in <a href="#sec-15.3.4.5.3">15.3.4.5.3</a>.</li>
   <li>If <i>Target</i> has the [[NativeBrand]] internal property with value NativeFunction, then
     <ol class="block">
       <li>Let <i>targetLen</i> be the result of calling the [[Get]] internal method of <i>Target</i> with argument <code>"length"</code>.</li>
@@ -9448,7 +9448,7 @@
     </li>
 </ol>
 <div class="note">
-  <p><span class="nh">NOTE</span> Function objects created using <code>Function.prototype.bind</code> have a different implementation of [[HasInstance]] defined in 15.3.4.5.3.</p>
+  <p><span class="nh">NOTE</span> Function objects created using <code>Function.prototype.bind</code> have a different implementation of [[HasInstance]] defined in <a href="#sec-15.3.4.5.3">15.3.4.5.3</a>.</p>
 </div>
 </section>
 <section id="sec-15.3.5.4">
@@ -9532,7 +9532,7 @@
 <section id="sec-15.4.4">
 <h1><span class="secnum"><a href="#sec-15.4.4" title="link to this section">15.4.4</a></span> Properties of the Array Prototype Object</h1>
 <p>The value of the [[Prototype]] internal property of the Array prototype object is the standard built-in Object prototype object (<a href="#sec-15.2.4">15.2.4</a>).</p>
-<p>The Array prototype object is itself an array; it has an [[NativeBrand]] internal property with value NativeArray, and it has a <code>length</code> property (whose initial value is <b>+0</b>) and the special [[DefineOwnProperty]] internal method described in 15.4.5.1.</p>
+<p>The Array prototype object is itself an array; it has an [[NativeBrand]] internal property with value NativeArray, and it has a <code>length</code> property (whose initial value is <b>+0</b>) and the special [[DefineOwnProperty]] internal method described in <a href="#sec-15.4.5.1">15.4.5.1</a>.</p>
 <p>In following descriptions of functions that are properties of the Array prototype object, the phrase &ldquo;this object&rdquo; refers to the object that is the <b>this</b> value for the invocation of the function. It is permitted for the <b>this</b> to be an object which does not have an [[NativeBrand]] internal property with value NativeArray.</p>
 <div class="note">
   <p><span class="nh">NOTE</span> The Array prototype object does not have a <code>valueOf</code> property of its own; however, it inherits the <code>valueOf</code> property from the standard built-in Object prototype Object.</p>
@@ -10774,7 +10774,7 @@
   <li>Let <i>S</i> be the result of calling ToString, giving it the <b>this</b> value as its argument.</li>
   <li>Let <i>That</i> be ToString(<i>that</i>).</li>
 </ol>
-<p>The <code>localeCompare</code> method, if considered as a function of two arguments <b>this</b> and <span style="font-family: Times New Roman; font-style: italic">that</span>, is a consistent comparison function (as defined in 15.4.4.11) on the set of all Strings.</p>
+<p>The <code>localeCompare</code> method, if considered as a function of two arguments <b>this</b> and <span style="font-family: Times New Roman; font-style: italic">that</span>, is a consistent comparison function (as defined in <a href="#sec-15.4.4.11">15.4.4.11</a>) on the set of all Strings.</p>
 <p>The actual return values are implementation-defined to permit implementers to encode additional information in the value, but the function is required to define a total ordering on all Strings and to return <code>0</code> when comparing Strings that are considered canonically equivalent by the Unicode standard.</p>
 <p>If no language-sensitive comparison at all is available from the host environment, this function may perform a bitwise comparison.</p>
 <div class="note">
@@ -10849,7 +10849,7 @@
   <li>Call CheckObjectCoercible passing the <b>this</b> value as its argument.</li>
   <li>Let <i>string</i> be the result of calling ToString, giving it the <b>this</b> value as its argument.</li>
 </ol>
-<p>If <span style="font-family: Times New Roman; font-style: italic">searchValue</span> is a regular expression (an object that has a [[NativeBrand]] internal property whose value is NativeRegExp), do the following: If <span style="font-family: Times New Roman; font-style: italic">searchValue</span>.global is <b>false</b>, then search <span style="font-family: Times New Roman; font-style: italic">string</span> for the first match of the regular expression <span style="font-family: Times New Roman; font-style: italic">searchValue</span>. If <span style="font-family: Times New Roman; font-style: italic">searchValue</span>.global is <b>true</b>, then search <span style="font-family: Times New Roman; font-style: italic">string</span> for all matches of the regular expression <span style="font-family: Times New Roman; font-style: italic">searchValue</span>. Do the search in the same manner as in <code>String.prototype.match</code>, including the update of <span style="font-family: Times New Roman; font-style: italic">searchValue</span>.<code>lastIndex</code>. Let <span style="font-family: Times New Roman; font-style: italic">m</span> be the number of left capturing parentheses in <span style="font-family: Times New Roman; font-style: italic">searchValue</span> (using <span style="font-family: Times New Roman; font-style: italic">NcapturingParens</span> as specified in 15.10.2.1).</p>
+<p>If <span style="font-family: Times New Roman; font-style: italic">searchValue</span> is a regular expression (an object that has a [[NativeBrand]] internal property whose value is NativeRegExp), do the following: If <span style="font-family: Times New Roman; font-style: italic">searchValue</span>.global is <b>false</b>, then search <span style="font-family: Times New Roman; font-style: italic">string</span> for the first match of the regular expression <span style="font-family: Times New Roman; font-style: italic">searchValue</span>. If <span style="font-family: Times New Roman; font-style: italic">searchValue</span>.global is <b>true</b>, then search <span style="font-family: Times New Roman; font-style: italic">string</span> for all matches of the regular expression <span style="font-family: Times New Roman; font-style: italic">searchValue</span>. Do the search in the same manner as in <code>String.prototype.match</code>, including the update of <span style="font-family: Times New Roman; font-style: italic">searchValue</span>.<code>lastIndex</code>. Let <span style="font-family: Times New Roman; font-style: italic">m</span> be the number of left capturing parentheses in <span style="font-family: Times New Roman; font-style: italic">searchValue</span> (using <span style="font-family: Times New Roman; font-style: italic">NcapturingParens</span> as specified in <a href="#sec-15.10.2.1">15.10.2.1</a>).</p>
 <p>If <span style="font-family: Times New Roman; font-style: italic">searchValue</span> is not a regular expression, let <span style="font-family: Times New Roman; font-style: italic">searchString</span> be <span style="font-family: Times New Roman">ToString(<i>searchValue</i>)</span> and search <span style="font-family: Times New Roman; font-style: italic">string</span> for the first occurrence of <span style="font-family: Times New Roman; font-style: italic">searchString</span>. Let <span style="font-family: Times New Roman; font-style: italic">m</span> be 0.</p>
 <p>If <span style="font-family: Times New Roman; font-style: italic">replaceValue</span> is a function, then for each matched substring, call the function with the following <span style="font-family: Times New Roman; font-style: italic">m</span> + 3 arguments. Argument 1 is the substring that matched. If <span style="font-family: Times New Roman; font-style: italic">searchValue</span> is a regular expression, the next <span style="font-family: Times New Roman; font-style: italic">m</span> arguments are all of the captures in the MatchResult (<a href="#sec-15.10.2.1">see 15.10.2.1</a>). Argument <span style="font-family: Times New Roman; font-style: italic">m</span> + 2 is the offset within <span style="font-family: Times New Roman; font-style: italic">string</span> where the match occurred, and argument <span style="font-family: Times New Roman; font-style: italic">m</span> + 3 is <span style="font-family: Times New Roman; font-style: italic">string</span>. The result is a String value derived from the original input by replacing each matched substring with the corresponding return value of the function call, converted to a String if need be.</p>
 <p>Otherwise, let <span style="font-family: Times New Roman; font-style: italic">newstring</span> denote the result of converting <span style="font-family: Times New Roman; font-style: italic">replaceValue</span> to a String. The result is a String value derived from the original input String by replacing each matched substring with a String derived from <span style="font-family: Times New Roman; font-style: italic">newstring</span> by replacing characters in <span style="font-family: Times New Roman; font-style: italic">newstring</span> by replacement text as specified in Table 24. These <code>$</code> replacements are done left-to-right, and, once such a replacement is performed, the new replacement text is not subject to further replacements. For example, <code>"$1,$2".replace(/(\$(\d))/g, "$$1-$1$2")</code> returns <code>"$1-$11,$1-$22"</code>. A <code>$</code> in <span style="font-family: Times New Roman; font-style: italic">newstring</span> that does not match any of the forms below is left as is.</p>
@@ -11503,7 +11503,7 @@
 <p>The Math object does not have a [[Construct]] internal property; it is not possible to use the Math object as a constructor with the <code>new</code> operator.</p>
 <p>The Math object does not have a [[Call]] internal property; it is not possible to invoke the Math object as a function.</p>
 <div class="note">
-  <p><span class="nh">NOTE</span> In this specification, the phrase &ldquo;the Number value for <span style="font-family: Times New Roman; font-style: italic">x</span>&rdquo; has a technical meaning defined in 8.5.</p>
+  <p><span class="nh">NOTE</span> In this specification, the phrase &ldquo;the Number value for <span style="font-family: Times New Roman; font-style: italic">x</span>&rdquo; has a technical meaning defined in <a href="#sec-8.5">8.5</a>.</p>
 </div>
 <section id="sec-15.8.1">
 <h1><span class="secnum"><a href="#sec-15.8.1" title="link to this section">15.8.1</a></span> Value Properties of the Math Object</h1>
@@ -11560,7 +11560,7 @@
 <section id="sec-15.8.2">
 <h1><span class="secnum"><a href="#sec-15.8.2" title="link to this section">15.8.2</a></span> Function Properties of the Math Object</h1>
 <p>Each of the following <code>Math</code> object functions applies the ToNumber abstract operator to each of its arguments (in left-to-right order if there is more than one) and then performs a computation on the resulting Number value(s).</p>
-<p>In the function descriptions below, the symbols NaN, &minus;0, +0, &minus;&infin; and +&infin; refer to the Number values described in 8.5.</p>
+<p>In the function descriptions below, the symbols NaN, &minus;0, +0, &minus;&infin; and +&infin; refer to the Number values described in <a href="#sec-8.5">8.5</a>.</p>
 <div class="note">
   <p><span class="nh">NOTE</span> The behaviour of the functions <code>acos</code>, <code>asin</code>, <code>atan</code>, <code>atan2</code>, <code>cos</code>, <code>exp</code>, <code>log</code>, <code>pow</code>, <code>sin</code>, <code>sqrt</code>, and <code>tan</code> is not precisely specified here except to require specific results for certain argument values that represent boundary cases of interest. For other argument values, these functions are intended to compute approximations to the results of familiar mathematical functions, but some latitude is allowed in the choice of approximation algorithms. The general intent is that an implementer should be able to use the same mathematical library for ECMAScript on a given hardware platform that is available to C programmers on that platform.</p>
 </div>
@@ -11805,7 +11805,7 @@
 <h1><span class="secnum"><a href="#sec-15.9" title="link to this section">15.9</a></span> Date Objects</h1>
 <section id="sec-15.9.1">
 <h1><span class="secnum"><a href="#sec-15.9.1" title="link to this section">15.9.1</a></span> Overview of Date Objects and Definitions of Abstract Operators</h1>
-<p>The following functions are abstract operations that operate on time values (defined in 15.9.1.1). Note that, in every case, if any argument to one of these functions is <b>NaN</b>, the result will be <b>NaN</b>.</p>
+<p>The following functions are abstract operations that operate on time values (defined in <a href="#sec-15.9.1.1">15.9.1.1</a>). Note that, in every case, if any argument to one of these functions is <b>NaN</b>, the result will be <b>NaN</b>.</p>
 <section id="sec-15.9.1.1">
 <h1><span class="secnum"><a href="#sec-15.9.1.1" title="link to this section">15.9.1.1</a></span> Time Values and Time Range</h1>
 <p>A Date object contains a Number indicating a particular instant in time to within a millisecond. Such a Number is called a <i>time value</i>. A time value may also be <b>NaN</b>, indicating that the Date object does not represent a specific instant of time.</p>
@@ -12491,12 +12491,12 @@ THH:mm:ss.sss</pre>
 <h1><span class="secnum"><a href="#sec-15.9.5.42" title="link to this section">15.9.5.42</a></span> Date.prototype.toUTCString ( )</h1>
 <p>This function returns a String value. The contents of the String are implementation-dependent, but are intended to represent the Date in a convenient, human-readable form in UTC.</p>
 <div class="note">
-  <p><span class="nh">NOTE</span> The intent is to produce a String representation of a date that is more readable than the format specified in 15.9.1.15. It is not essential that the chosen format be unambiguous or easily machine parsable. If an implementation does not have a preferred human-readable format it is recommended to use the format defined in 15.9.1.15 but with a space rather than a &ldquo;<span style="font-family: monospace">T</span>&rdquo; used to separate the date and time elements.</p>
+  <p><span class="nh">NOTE</span> The intent is to produce a String representation of a date that is more readable than the format specified in <a href="#sec-15.9.1.15">15.9.1.15</a>. It is not essential that the chosen format be unambiguous or easily machine parsable. If an implementation does not have a preferred human-readable format it is recommended to use the format defined in <a href="#sec-15.9.1.15">15.9.1.15</a> but with a space rather than a &ldquo;<span style="font-family: monospace">T</span>&rdquo; used to separate the date and time elements.</p>
 </div>
 </section>
 <section id="sec-15.9.5.43">
 <h1><span class="secnum"><a href="#sec-15.9.5.43" title="link to this section">15.9.5.43</a></span> Date.prototype.toISOString ( )</h1>
-<p>This function returns a String value represent the instance in time represented by this Date object. The format of the String is the Date Time string format defined in 15.9.1.15. All fields are present in the String. The time zone is always UTC, denoted by the suffix Z. If the time value of this object is not a finite Number a <b>RangeError</b> exception is thrown.</p>
+<p>This function returns a String value represent the instance in time represented by this Date object. The format of the String is the Date Time string format defined in <a href="#sec-15.9.1.15">15.9.1.15</a>. All fields are present in the String. The time zone is always UTC, denoted by the suffix Z. If the time value of this object is not a finite Number a <b>RangeError</b> exception is thrown.</p>
 </section>
 <section id="sec-15.9.5.44">
 <h1><span class="secnum"><a href="#sec-15.9.5.44" title="link to this section">15.9.5.44</a></span> Date.prototype.toJSON ( key )</h1>
@@ -12657,15 +12657,15 @@ THH:mm:ss.sss</pre>
 <ol class="proc">
   <li>Evaluate <i>Disjunction</i> to obtain a Matcher <i>m</i>.</li>
   <li>Return an internal closure that takes two arguments, a String <i>str</i> and an integer <i>index</i>, and performs the following:</li>
-  <li>Let <i>Input</i> be the given String <i>str</i>. This variable will be used throughout the algorithms in 15.10.2.</li>
-  <li>Let <i>InputLength</i> be the length of <i>Input</i>. This variable will be used throughout the algorithms in 15.10.2.</li>
+  <li>Let <i>Input</i> be the given String <i>str</i>. This variable will be used throughout the algorithms in <a href="#sec-15.10.2">15.10.2</a>.</li>
+  <li>Let <i>InputLength</i> be the length of <i>Input</i>. This variable will be used throughout the algorithms in <a href="#sec-15.10.2">15.10.2</a>.</li>
   <li>Let <i>c</i> be a Continuation that always returns its State argument as a successful MatchResult.</li>
   <li>Let <i>cap</i> be an internal array of <i>NcapturingParens</i> <b>undefined</b> values, indexed 1 through <i>NcapturingParens</i>.</li>
   <li>Let <i>x</i> be the State (<i>index</i>, <i>cap</i>).</li>
   <li>Call <i>m</i>(<i>x</i>, <i>c</i>) and return its result.</li>
 </ol>
 <div class="note">
-  <p><span class="nh">NOTE</span> A Pattern evaluates ("compiles") to an internal procedure value. <code>RegExp.prototype.exec</code> can then apply this procedure to a String and an offset within the String to determine whether the pattern would match starting at exactly that offset within the String, and, if it does match, what the values of the capturing parentheses would be. The algorithms in 15.10.2 are designed so that compiling a pattern may throw a <b>SyntaxError</b> exception; on the other hand, once the pattern is successfully compiled, applying its result internal procedure to find a match in a String cannot throw an exception (except for any host-defined exceptions that can occur anywhere such as out-of-memory).</p>
+  <p><span class="nh">NOTE</span> A Pattern evaluates ("compiles") to an internal procedure value. <code>RegExp.prototype.exec</code> can then apply this procedure to a String and an offset within the String to determine whether the pattern would match starting at exactly that offset within the String, and, if it does match, what the values of the capturing parentheses would be. The algorithms in <a href="#sec-15.10.2">15.10.2</a> are designed so that compiling a pattern may throw a <b>SyntaxError</b> exception; on the other hand, once the pattern is successfully compiled, applying its result internal procedure to find a match in a String cannot throw an exception (except for any host-defined exceptions that can occur anywhere such as out-of-memory).</p>
 </div>
 </section>
 <section id="sec-15.10.2.3">
@@ -13215,7 +13215,7 @@ THH:mm:ss.sss</pre>
   <li>If <i>i</i> is zero, return the EscapeValue consisting of a &lt;NUL&gt; character (Unicode value 0000).</li>
   <li>Return the EscapeValue consisting of the integer <i>i</i>.</li>
 </ol>
-<p>The definition of &ldquo;the MV of <span style="font-family: Times New Roman; font-style: italic">DecimalIntegerLiteral</span>&rdquo; is in 7.8.3.</p>
+<p>The definition of &ldquo;the MV of <span style="font-family: Times New Roman; font-style: italic">DecimalIntegerLiteral</span>&rdquo; is in <a href="#sec-7.8.3">7.8.3</a>.</p>
 <div class="note">
   <p><span class="nh">NOTE</span> If <code>\</code> is followed by a decimal number <span style="font-family: Times New Roman; font-style: italic">n</span> whose first digit is not <code>0</code>, then the escape sequence is considered to be a backreference. It is an error if <span style="font-family: Times New Roman; font-style: italic">n</span> is greater than the total number of left capturing parentheses in the entire regular expression. <code>\0</code> represents the &lt;NUL&gt; character and cannot be followed by a decimal digit.</p>
 </div>
@@ -13435,18 +13435,18 @@ THH:mm:ss.sss</pre>
 <section id="sec-15.10.4.1">
 <h1><span class="secnum"><a href="#sec-15.10.4.1" title="link to this section">15.10.4.1</a></span> new RegExp(pattern, flags)</h1>
 <p>If <span style="font-family: Times New Roman; font-style: italic">pattern</span> is an object <span style="font-family: Times New Roman; font-style: italic">R</span> that has a [[NativeBrand]] internal property whose value is NativeRegExp  and <span style="font-family: Times New Roman; font-style: italic">flags</span> is <b>undefined</b>, then let <span style="font-family: Times New Roman; font-style: italic">P</span> be the <span style="font-family: Times New Roman; font-style: italic">pattern</span> used to construct <span style="font-family: Times New Roman; font-style: italic">R</span> and let <span style="font-family: Times New Roman; font-style: italic">F</span> be the flags used to construct <span style="font-family: Times New Roman; font-style: italic">R</span>. If <span style="font-family: Times New Roman; font-style: italic">pattern</span> is an object <span style="font-family: Times New Roman; font-style: italic">R</span> that has a [[NativeBrand]] internal property whose value is NativeRegExp  and <span style="font-family: Times New Roman; font-style: italic">flags</span> is not <b>undefined</b>, then throw a <b>TypeError</b> exception. Otherwise, let <span style="font-family: Times New Roman; font-style: italic">P</span> be the empty String if <span style="font-family: Times New Roman; font-style: italic">pattern</span> is <b>undefined</b> and <span style="font-family: Times New Roman">ToString(<i>pattern</i>)</span> otherwise, and let <span style="font-family: Times New Roman; font-style: italic">F</span> be the empty String if <span style="font-family: Times New Roman; font-style: italic">flags</span> is <b>undefined</b> and <span style="font-family: Times New Roman">ToString(<i>flags</i>)</span> otherwise.</p>
-<p>If the characters of <span style="font-family: Times New Roman; font-style: italic">P</span> do not have the syntactic form <span style="font-family: Times New Roman; font-style: italic">Pattern</span>, then throw a <b>SyntaxError</b> exception. Otherwise let the newly constructed object have a [[Match]] internal property obtained by evaluating ("compiling") the characters of <span style="font-family: Times New Roman; font-style: italic">P</span> as a <span style="font-family: Times New Roman; font-style: italic">Pattern</span> as described in 15.10.2.</p>
+<p>If the characters of <span style="font-family: Times New Roman; font-style: italic">P</span> do not have the syntactic form <span style="font-family: Times New Roman; font-style: italic">Pattern</span>, then throw a <b>SyntaxError</b> exception. Otherwise let the newly constructed object have a [[Match]] internal property obtained by evaluating ("compiling") the characters of <span style="font-family: Times New Roman; font-style: italic">P</span> as a <span style="font-family: Times New Roman; font-style: italic">Pattern</span> as described in <a href="#sec-15.10.2">15.10.2</a>.</p>
 <p>If <span style="font-family: Times New Roman; font-style: italic">F</span> contains any character other than <code>"g"</code>, <code>"i"</code>, or <code>"m"</code>, or if it contains the same character more than once, then throw a <b>SyntaxError</b> exception.</p>
 <p>If a <b>SyntaxError</b> exception is not thrown, then:</p>
 <p>Let <span style="font-family: Times New Roman; font-style: italic">S</span> be a String in the form of a <span style="font-family: Times New Roman; font-style: italic">Pattern</span> equivalent to <span style="font-family: Times New Roman; font-style: italic">P</span>, in which certain characters are escaped as described below. <span style="font-family: Times New Roman; font-style: italic">S</span> may or may not be identical to <span style="font-family: Times New Roman; font-style: italic">P</span> or <span style="font-family: Times New Roman; font-style: italic">pattern</span>; however, the internal procedure that would result from evaluating <span style="font-family: Times New Roman; font-style: italic">S</span> as a <span style="font-family: Times New Roman; font-style: italic">Pattern</span> must behave identically to the internal procedure given by the constructed object's [[Match]] internal property.</p>
 <p>The characters <code>/</code> occurring in the pattern shall be escaped in <span style="font-family: Times New Roman; font-style: italic">S</span> as necessary to ensure that the String value formed by concatenating the Strings <code>"/"</code>, <span style="font-family: Times New Roman; font-style: italic">S</span>, <code>"/"</code>, and <span style="font-family: Times New Roman; font-style: italic">F</span> can be parsed (in an appropriate lexical context) as a <span style="font-family: Times New Roman; font-style: italic">RegularExpressionLiteral</span> that behaves identically to the constructed regular expression. For example, if <span style="font-family: Times New Roman; font-style: italic">P</span> is <code>"/"</code>, then <span style="font-family: Times New Roman; font-style: italic">S</span> could be <code>"\/"</code> or <code>"\u002F"</code>, among other possibilities, but not <code>"/"</code>, because <code>///</code> followed by <span style="font-family: Times New Roman; font-style: italic">F</span> would be parsed as a <span style="font-family: Times New Roman; font-style: italic">SingleLineComment</span> rather than a <span style="font-family: Times New Roman; font-style: italic">RegularExpressionLiteral</span>. If <span style="font-family: Times New Roman; font-style: italic">P</span> is the empty String, this specification can be met by letting <span style="font-family: Times New Roman; font-style: italic">S</span> be <code>"(?:)"</code>.</p>
-<p>The following properties of the newly constructed object are data properties with the attributes that are specified in 15.10.7. The [[Value]] of each property is set as follows:</p>
+<p>The following properties of the newly constructed object are data properties with the attributes that are specified in <a href="#sec-15.10.7">15.10.7</a>. The [[Value]] of each property is set as follows:</p>
 <p>The <code>source</code> property of the newly constructed object is set to <span style="font-family: Times New Roman; font-style: italic">S</span>.</p>
 <p>The <code>global</code> property of the newly constructed object is set to a Boolean value that is <b>true</b> if <span style="font-family: Times New Roman; font-style: italic">F</span> contains the character <code>"g"</code> and <b>false</b> otherwise.</p>
 <p>The <code>ignoreCase</code> property of the newly constructed object is set to a Boolean value that is <b>true</b> if <span style="font-family: Times New Roman; font-style: italic">F</span> contains the character <code>"i"</code> and <b>false</b> otherwise.</p>
 <p>The <code>multiline</code> property of the newly constructed object is set to a Boolean value that is <b>true</b> if <span style="font-family: Times New Roman; font-style: italic">F</span> contains the character <code>"m"</code> and <b>false</b> otherwise.</p>
 <p>The <code>lastIndex</code> property of the newly constructed object is set to <b>0</b>.</p>
-<p>The [[Prototype]] internal property of the newly constructed object is set to the standard built-in RegExp prototype object as specified in 15.10.6.</p>
+<p>The [[Prototype]] internal property of the newly constructed object is set to the standard built-in RegExp prototype object as specified in <a href="#sec-15.10.6">15.10.6</a>.</p>
 <p>The newly constructed object has a [[NativeBrand]] internal property whose value is NativeRegExp</p>
 <div class="note">
   <p><span class="nh">NOTE</span> If pattern is a <span style="font-family: Times New Roman; font-style: italic">StringLiteral</span>, the usual escape sequence substitutions are performed before the String is processed by RegExp. If pattern must contain an escape sequence to be recognised by RegExp, any backslash <code>\</code> characters must be escaped within the <span style="font-family: Times New Roman; font-style: italic">StringLiteral</span> to prevent them being removed when the contents of the <span style="font-family: Times New Roman; font-style: italic">StringLiteral</span> are formed.</p>
@@ -13649,7 +13649,7 @@ THH:mm:ss.sss</pre>
 </section>
 <section id="sec-15.11.6">
 <h1><span class="secnum"><a href="#sec-15.11.6" title="link to this section">15.11.6</a></span> Native Error Types Used in This Standard</h1>
-<p>One of the <i>NativeError</i> objects below is thrown when a runtime error is detected. All of these objects share the same structure, as described in 15.11.7.</p>
+<p>One of the <i>NativeError</i> objects below is thrown when a runtime error is detected. All of these objects share the same structure, as described in <a href="#sec-15.11.7">15.11.7</a>.</p>
 <section id="sec-15.11.6.1">
 <h1><span class="secnum"><a href="#sec-15.11.6.1" title="link to this section">15.11.6.1</a></span> EvalError</h1>
 <p>This exception is not currently used within this specification. This object remains for compatibility with previous editions of this specification.</p>
@@ -13677,7 +13677,7 @@ THH:mm:ss.sss</pre>
 </section>
 <section id="sec-15.11.7">
 <h1><span class="secnum"><a href="#sec-15.11.7" title="link to this section">15.11.7</a></span> <i>NativeError</i> Object Structure</h1>
-<p>When an ECMAScript implementation detects a runtime error, it throws an instance of one of the <i>NativeError</i> objects defined in 15.11.6. Each of these objects has the structure described below, differing only in the name used as the constructor name instead of <i>NativeError</i>, in the <b>name</b> property of the prototype object, and in the implementation-defined <code>message</code> property of the prototype object.</p>
+<p>When an ECMAScript implementation detects a runtime error, it throws an instance of one of the <i>NativeError</i> objects defined in <a href="#sec-15.11.6">15.11.6</a>. Each of these objects has the structure described below, differing only in the name used as the constructor name instead of <i>NativeError</i>, in the <b>name</b> property of the prototype object, and in the implementation-defined <code>message</code> property of the prototype object.</p>
 <p>For each error object, references to <i>NativeError</i> in the definition should be replaced with the appropriate error object name from 15.11.6.</p>
 <section id="sec-15.11.7.1">
 <h1><span class="secnum"><a href="#sec-15.11.7.1" title="link to this section">15.11.7.1</a></span> <i>NativeError</i> Constructors Called as Functions</h1>
@@ -13750,7 +13750,7 @@ THH:mm:ss.sss</pre>
 <p>The optional <i>reviver</i> parameter is a function that takes two parameters, (<i>key</i> and <i>value</i>). It can filter and transform the results. It is called with each of the <i>key</i>/<i>value</i> pairs produced by the parse, and its return value is used instead of the original value. If it returns what it received, the structure is not modified. If it returns <b>undefined</b> then the property is deleted from the result.</p>
 <ol class="proc">
   <li>Let <i>JText</i> be ToString(<i>text</i>).</li>
-  <li>Parse <i>JText</i> using the grammars in 15.12.1. Throw a <b>SyntaxError</b> exception if <i>JText</i> did not conform to the JSON grammar for the goal symbol <i>JSONText</i>.</li>
+  <li>Parse <i>JText</i> using the grammars in <a href="#sec-15.12.1">15.12.1</a>. Throw a <b>SyntaxError</b> exception if <i>JText</i> did not conform to the JSON grammar for the goal symbol <i>JSONText</i>.</li>
   <li>Let <i>unfiltered</i> be the result of parsing and evaluating <i>JText</i> as if it was the source text of an ECMAScript <i>Program</i> but using <i>JSONString</i> in place of <i>StringLiteral</i>. Note that since <i>JText</i> conforms to the JSON grammar this result will be either a primitive value or an object that is defined by either an <i>ArrayLiteral</i> or an <i>ObjectLiteral</i>.</li>
   <li>If IsCallable(<i>reviver</i>) is <b>true</b>, then
     <ol class="block">
@@ -15363,12 +15363,12 @@ THH:mm:ss.sss</pre>
 </section>
 <section id="sec-B.3.1.2">
 <h1><span class="secnum"><a href="#sec-B.3.1.2" title="link to this section">B.3.1.2</a></span>  Changes To Internal Methods__</h1>
-<p>The definition of the [[Get]] internal method given in 8.12.3 is replaced with the following:</p>
+<p>The definition of the [[Get]] internal method given in <a href="#sec-8.12.3">8.12.3</a> is replaced with the following:</p>
 <ol class="proc">
   <li>If <i>P</i> is the string value <code>"__proto__"</code> and UnderscoreProtoEnabled is <b>true</b>, then
     <ol class="block">
       <li>Let <i>desc</i> be the result of calling the [[GetProperty]] internal method of <i>O</i> with property name <i>P</i>.</li>
-      <li>If <i>desc</i> is not <b>undefined</b> and was create by step 1.a to describe the property defined in B.3.1.1 then,
+      <li>If <i>desc</i> is not <b>undefined</b> and was create by step 1.a to describe the property defined in <a href="#sec-B.3.1.1">B.3.1.1</a> then,
         <ol class="block">
           <li>Return the value of the [[Prototype]] internal property of <i>O</i>.</li>
         </ol>
@@ -15377,12 +15377,12 @@ THH:mm:ss.sss</pre>
     </li>
   <li>Continue by executing the steps of 8.12.3 starting with step 1.</li>
 </ol>
-<p>The definition of the [[Put]] internal method given in 8.12.5 is replaced with the following:</p>
+<p>The definition of the [[Put]] internal method given in <a href="#sec-8.12.5">8.12.5</a> is replaced with the following:</p>
 <ol class="proc">
   <li>If <i>P</i> is the string value <code>"__proto__"</code> and UnderscoreProtoEnabled is <b>true</b> and <i>O</i> is not the standard built-in Object prototype object, then
     <ol class="block">
       <li>Let <i>desc</i> be the result of calling the [[GetProperty]] internal method of <i>O</i> with property name <i>P</i>.</li>
-      <li>If <i>desc</i> is not <b>undefined</b> and was create by step 1.a to describe the property defined in B.3.1.1 then,
+      <li>If <i>desc</i> is not <b>undefined</b> and was create by step 1.a to describe the property defined in <a href="#sec-B.3.1.1">B.3.1.1</a> then,
         <ol class="block">
           <li>If the type of <i>V</i> is neither Object or Null, return</li>
           <li>Set the value of the [[Prototype]] internal property of O to V.</li>
@@ -15393,7 +15393,7 @@ THH:mm:ss.sss</pre>
     </li>
   <li>Continue by executing the steps of 8.12.5 starting with step 1.</li>
 </ol>
-<p>The definition of the [[Delete]] internal method given in 8.12.7 is replaced with the following:</p>
+<p>The definition of the [[Delete]] internal method given in <a href="#sec-8.12.7">8.12.7</a> is replaced with the following:</p>
 <ol class="proc">
   <li>If UnderscoreProtoEnabled is <b>true</b> and <i>P</i> is the string value <code>"__proto__"</code> and <i>O</i> is the standard built-in Object prototype object, then
     <ol class="block">
@@ -15402,7 +15402,7 @@ THH:mm:ss.sss</pre>
     </li>
   <li>Continue by executing the steps of 8.12.7 starting with step 1.</li>
 </ol>
-<p>The definition of the [[DefineOwnProperty]] internal method given in 8.12.9 is replaced with the following:</p>
+<p>The definition of the [[DefineOwnProperty]] internal method given in <a href="#sec-8.12.9">8.12.9</a> is replaced with the following:</p>
 <ol class="proc">
   <li>If UnderscoreProtoEnabled is <b>true</b> and <i>P</i> is the string value <code>"__proto__"</code> and <i>O</i> is the standard built-in Object prototype object, then
     <ol class="block">
@@ -15418,7 +15418,7 @@ THH:mm:ss.sss</pre>
 </section>
 <section id="sec-B.3.1.3">
 <h1><span class="secnum"><a href="#sec-B.3.1.3" title="link to this section">B.3.1.3</a></span> __proto___ Object Initialisers _</h1>
-<p>Definitions of two algorithms in 11.1.5 are replaced with the following:</p>
+<p>Definitions of two algorithms in <a href="#sec-11.1.5">11.1.5</a> are replaced with the following:</p>
 <p>The production  <span style="font-family: Times New Roman; font-style: italic">PropertyNameAndValueList</span> <b>:</b>  <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> is evaluated as follows:</p>
 <ol class="proc">
   <li>Let <i>obj</i> be the result of creating a new object as if by the expression <code>new Object()</code> where <code>Object</code> is the standard built-in constructor with that name.</li>
@@ -15475,8 +15475,8 @@ THH:mm:ss.sss</pre>
 <p><b>The strict mode restriction and exceptions</b></p>
 <ol class="proc">
   <li><span style="font-family: sans-serif">The identifiers "</span><code>implements</code><span style="font-family: sans-serif">", "</span><code>interface</code><span style="font-family: sans-serif">", "</span><code>let</code><span style="font-family: sans-serif">", "</span><code>package</code><span style="font-family: sans-serif">", "</span><code>private</code><span style="font-family: sans-serif">", "</span><code>protected</code><span style="font-family: sans-serif">", "</span><code>public</code><span style="font-family: sans-serif">", "</span><code>static</code><span style="font-family: sans-serif">", and "</span><code>yield</code><span style="font-family: sans-serif">" are classified as</span> <i>FutureReservedWord</i> <span style="font-family: sans-serif">tokens within strict mode code. (7.6.12).</span></li>
-  <li><span style="font-family: sans-serif">A conforming implementation, when processing strict mode code, may not extend the syntax of</span> <i>NumericLiteral</i> <span style="font-family: sans-serif">(7.8.3) to include</span> <i>OctalIntegerLiteral</i> <span style="font-family: sans-serif">as described in B.1.1.</span></li>
-  <li>A <span style="font-family: sans-serif">conforming implementation, when processing strict mode code (<a href="#sec-10.1.1">see 10.1.1</a>), may not extend the syntax of</span> <i>EscapeSequence</i> <span style="font-family: sans-serif">to include</span> <i>OctalEscapeSequence</i> <span style="font-family: sans-serif">as described in B.1.2.</span></li>
+  <li><span style="font-family: sans-serif">A conforming implementation, when processing strict mode code, may not extend the syntax of</span> <i>NumericLiteral</i> <span style="font-family: sans-serif">(7.8.3) to include</span> <i>OctalIntegerLiteral</i> <span style="font-family: sans-serif">as described in <a href="#sec-B.1.1">B.1.1</a>.</span></li>
+  <li>A <span style="font-family: sans-serif">conforming implementation, when processing strict mode code (<a href="#sec-10.1.1">see 10.1.1</a>), may not extend the syntax of</span> <i>EscapeSequence</i> <span style="font-family: sans-serif">to include</span> <i>OctalEscapeSequence</i> <span style="font-family: sans-serif">as described in <a href="#sec-B.1.2">B.1.2</a>.</span></li>
   <li><span style="font-family: sans-serif">Assignment to an undeclared identifier or otherwise unresolvable reference does not create a property in the global object. When a simple assignment occurs within strict mode code, its</span> <i>LeftHandSide</i> <span style="font-family: sans-serif">must not evaluate to an unresolvable Reference. If it does a <b>ReferenceError</b> exception is thrown (<a href="#sec-8.9.2">8.9.2</a>). The</span> <i>LeftHandSide</i> <span style="font-family: sans-serif">also may not be a reference to a data property with the attribute value {[[Writable]]:<b>false</b>}, to an accessor property with the attribute value {[[Set]]:<b>undefined</b>},</span>  <span style="font-family: sans-serif">nor to a non-existent property of an object whose [[Extensible]] internal property has the value <b>false</b>. In these cases a</span> <code>TypeError</code> <span style="font-family: sans-serif">exception is thrown (<a href="#sec-11.13.1">11.13.1</a>).</span></li>
   <li><span style="font-family: sans-serif">The identifier</span> <code>eval</code> <span style="font-family: sans-serif">or</span> <code>arguments</code> <span style="font-family: sans-serif">may not appear as the</span> <i>LeftHandSideExpression</i> <span style="font-family: sans-serif">of an Assignment operator (<a href="#sec-11.13">11.13</a>) or of a</span> <i>PostfixExpression</i> <span style="font-family: sans-serif">(11.3) or as the</span> <i>UnaryExpression</i> <span style="font-family: sans-serif">operated upon by a Prefix Increment (<a href="#sec-11.4.4">11.4.4</a>) or a Prefix Decrement (<a href="#sec-11.4.5">11.4.5</a>) operator.</span></li>
   <li><span style="font-family: sans-serif">Arguments objects for strict mode functions define non-configurable accessor properties named "</span><code>caller</code><span style="font-family: sans-serif">" and "</span><code>callee</code><span style="font-family: sans-serif">" which throw a <b>TypeError</b> exception on access (<a href="#sec-10.6">10.6</a>).</span></li>
@@ -15575,7 +15575,7 @@ THH:mm:ss.sss</pre>
 <p><a href="#sec-15.11.4.4">15.11.4.4</a>: Steps 6-10 modified/added to correctly deal with missing or empty <span style="font-family: monospace">message</span> property value.</p>
 <p>15.11.1.2: Removed requirement that the <span style="font-family: monospace">message</span> own property is set to the empty String when the <span style="font-family: Times New Roman; font-style: italic">message</span> argument is <span style="font-family: Times New Roman; font-weight: bold">undefined</span>.</p>
 <p><a href="#sec-15.12.3">15.12.3</a>: In step 10.b.iii of the <span style="font-family: Times New Roman; font-style: italic">JA</span> internal operation, the last element of the concatenation is &ldquo;<code>]</code>&rdquo;.</p>
-<p>B.2.1: Added to NOTE that the encoding is based upon RFC 1738 rather than the newer RFC 3986.</p>
+<p><a href="#sec-B.2.1">B.2.1</a>: Added to NOTE that the encoding is based upon RFC 1738 rather than the newer RFC 3986.</p>
 <p>Annex C: An item was added corresponding to 7.6.12 regarding <span style="font-family: Times New Roman; font-style: italic">FutureReservedWords</span> in strict mode.</p>
 </section>
 <section>
