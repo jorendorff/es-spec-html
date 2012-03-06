@@ -422,7 +422,7 @@ def insert_disclaimer(doc):
           a("http://wiki.ecmascript.org/doku.php?id=harmony:specification_drafts",
             href="http://wiki.ecmascript.org/doku.php?id=harmony:specification_drafts"),
           ". The program used to convert that Word doc to HTML is a custom-piled heap of hacks. "
-          "Currently it is pretty bad. It has stripped out most of the formatting that makes "
+          "It has stripped out or garbled some of the formatting that makes "
           "the specification comprehensible. You can help improve the program ",
           a("here", href="https://github.com/jorendorff/es-spec-html"),
           "."),
