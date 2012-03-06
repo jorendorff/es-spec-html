@@ -1074,6 +1074,9 @@ def fixup_links(doc):
         r'(?i)in (Clause ([1-9][0-9]*))',
     ]))
 
+    # Disallow . ( ) at the end since it's usually not meant as part of the URL.
+    url_re = re.compile(r'https?://[0-9A-Za-z;/?:@&=+$,_.!~*()\'-]+[0-9A-Za-z;/?:@&=+$,_!~*\'-]')
+
     def find_link(s):
         best = None
         for text, target in specific_links:
@@ -1097,6 +1100,13 @@ def fixup_links(doc):
                 if best is None or hit < best:
                     best = hit
                 break
+
+        m = url_re.search(s)
+        if m is not None:
+            hit = m.start(), m.end(), m.group(0)
+            if best is None or hit < best:
+                best = hit
+
         return best
 
     def linkify(parent, i, s):
