@@ -1071,6 +1071,10 @@ def fixup_links(doc):
         # Match the second or subsequent section number in a parenthesized list.
         r', (SECTION)[,):]',
 
+        # Match the penultimate section number in lists that don't use the
+        # Oxford comma, like "13.3, 13.4 and 13.5"
+        r' (SECTION) and\b',
+
         # Match "Clause 8" in "as defined in Clause 8 of this specification".
         r'(?i)in (Clause ([1-9][0-9]*))',
 
