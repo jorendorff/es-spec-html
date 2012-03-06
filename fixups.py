@@ -346,11 +346,6 @@ def fixup_element_spacing(doc):
     and move all end tags to the left of any adjacent whitespace.
     """
 
-    block_elements = {
-        'html', 'body', 'p', 'div', 'section',
-        'table', 'tbody', 'tr', 'th', 'td', 'li', 'ol', 'ul'
-    }
-
     def rebuild(parent):
         result = []
         def addstr(s):
@@ -366,7 +361,7 @@ def fixup_element_spacing(doc):
                 # Don't mess with spaces in a pre element.
                 result.append(k)
             else:
-                discard_space = k.name in block_elements
+                discard_space = k.is_block()
                 if k.content:
                     a = k.content[0]
                     if isinstance(a, str) and a[:1].isspace():
@@ -992,6 +987,17 @@ def fixup_links(doc):
 
     visit(doc_body(doc))
 
+def fixup_remove_hr(doc):
+    """ Remove all remaining hr elements. """
+    for parent, i, child in all_parent_index_child_triples(doc):
+        if child.name == 'hr':
+            del parent.content[i]
+
+def fixup_hgroup(doc):
+    for parent, i, child in all_parent_index_child_triples(doc):
+        if parent.name == 'p' and child.name == 'h1':
+            parent.name = 'hgroup'
+
 def fixup(docx, doc):
     styles = docx.styles
     numbering = docx.numbering
@@ -1014,4 +1020,6 @@ def fixup(docx, doc):
     fixup_picts(doc)
     fixup_figures(doc)
     fixup_links(doc)
+    fixup_remove_hr(doc)
+    fixup_hgroup(doc)
     return doc
