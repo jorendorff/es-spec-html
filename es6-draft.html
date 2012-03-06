@@ -17687,7 +17687,7 @@
       <section id="sec-15.9.1.2">
         <h1><span class="secnum"><a href="#sec-15.9.1.2" title="link to this section">15.9.1.2</a></span> Day Number and Time within Day</h1>
 
-        <p>A given time value <i>t</i> belongs to day number</p>
+        <p>A given <a href="#sec-15.9.1.1">time value</a> <i>t</i> belongs to day number</p>
 
         <div class="display">Day(<i>t</i>) = floor(<i>t</i> / msPerDay)</div>
 
@@ -17717,11 +17717,11 @@
 
         <div class="display">DayFromYear(<i>y</i>)&#x9;= 365 &times; (<i>y</i>&minus;1970) + floor((<i>y</i>&minus;1969)/4) &minus; floor((<i>y</i>&minus;1901)/100) + floor((<i>y</i>&minus;1601)/400)</div>
 
-        <p>The time value of the start of a year is:</p>
+        <p>The <a href="#sec-15.9.1.1">time value</a> of the start of a year is:</p>
 
-        <div class="display">TimeFromYear(<i>y</i>)&#x9;= msPerDay &times; DayFromYear(<i>y</i>)</div>
+        <div class="display">TimeFromYear(<i>y</i>)&#x9;= <a href="#sec-15.9.1.2">msPerDay</a> &times; DayFromYear(<i>y</i>)</div>
 
-        <p>A time value determines a year by:</p>
+        <p>A <a href="#sec-15.9.1.1">time value</a> determines a year by:</p>
 
         <div class="display">YearFromTime(<i>t</i>)&#x9;=  the largest integer <i>y</i> (closest to positive infinity) such that TimeFromYear(<i>y</i>) &le; <i>t</i></div>
 
@@ -17734,14 +17734,14 @@
         <h1><span class="secnum"><a href="#sec-15.9.1.4" title="link to this section">15.9.1.4</a></span> Month Number</h1>
 
         <p>Months are identified by an integer in the range <span style="font-family: Times New Roman">0</span> to <span
-        style="font-family: Times New Roman">11</span>, inclusive. The mapping MonthFromTime(<i>t</i>) from a time value <i>t</i>
-        to a month number is defined by:</p>
+        style="font-family: Times New Roman">11</span>, inclusive. The mapping MonthFromTime(<i>t</i>) from a <a
+        href="#sec-15.9.1.1">time value</a> <i>t</i> to a month number is defined by:</p>
 
-        <div class="display">MonthFromTime(<i>t</i>)&#x9;= 0&#x9;if&#x9;0&#x9;&le; DayWithinYear(<i>t</i>) &lt; 31<br>&#x9;&#x9;&#x9;= 1&#x9;if&#x9;31&#x9;&le; DayWithinYear (<i>t</i>) &lt; 59+InLeapYear(<i>t</i>)<br>&#x9;&#x9;&#x9;= 2&#x9;if&#x9;59+InLeapYear(<i>t</i>) &#x9;&le; DayWithinYear (<i>t</i>) &lt; 90+InLeapYear(<i>t</i>)<br>&#x9;&#x9;&#x9;= 3&#x9;if&#x9;90+InLeapYear(<i>t</i>) &#x9;&le; DayWithinYear (<i>t</i>) &lt; 120+InLeapYear(<i>t</i>)<br>&#x9;&#x9;&#x9;= 4&#x9;if&#x9;120+InLeapYear(<i>t</i>) &#x9;&le; DayWithinYear (<i>t</i>) &lt; 151+InLeapYear(<i>t</i>)<br>&#x9;&#x9;&#x9;= 5&#x9;if&#x9;151+InLeapYear(<i>t</i>) &#x9;&le; DayWithinYear (<i>t</i>) &lt; 181+InLeapYear(<i>t</i>)<br>&#x9;&#x9;&#x9;= 6&#x9;if&#x9;181+InLeapYear(<i>t</i>) &#x9;&le; DayWithinYear (<i>t</i>) &lt; 212+InLeapYear(<i>t</i>)<br>&#x9;&#x9;&#x9;= 7&#x9;if&#x9;212+InLeapYear(<i>t</i>) &#x9;&le; DayWithinYear (<i>t</i>) &lt; 243+InLeapYear(<i>t</i>)<br>&#x9;&#x9;&#x9;= 8&#x9;if&#x9;243+InLeapYear(<i>t</i>) &#x9;&le; DayWithinYear (<i>t</i>) &lt; 273+InLeapYear(<i>t</i>)<br>&#x9;&#x9;&#x9;= 9&#x9;if&#x9;273+InLeapYear(<i>t</i>) &#x9;&le; DayWithinYear (<i>t</i>) &lt; 304+InLeapYear(<i>t</i>)<br>&#x9;&#x9;&#x9;= 10&#x9;if&#x9;304+InLeapYear(<i>t</i>) &#x9;&le; DayWithinYear (<i>t</i>) &lt; 334+InLeapYear(<i>t</i>)<br>&#x9;&#x9;&#x9;= 11&#x9;if&#x9;334+InLeapYear(<i>t</i>) &#x9;&le; DayWithinYear (<i>t</i>) &lt; 365+InLeapYear(<i>t</i>)</div>
+        <div class="display">MonthFromTime(<i>t</i>)&#x9;= 0&#x9;if&#x9;0&#x9;&le; DayWithinYear(<i>t</i>) &lt; 31<br>&#x9;&#x9;&#x9;= 1&#x9;if&#x9;31&#x9;&le; DayWithinYear (<i>t</i>) &lt; 59+<a href="#sec-15.9.1.3">InLeapYear</a>(<i>t</i>)<br>&#x9;&#x9;&#x9;= 2&#x9;if&#x9;59+<a href="#sec-15.9.1.3">InLeapYear</a>(<i>t</i>) &#x9;&le; DayWithinYear (<i>t</i>) &lt; 90+<a href="#sec-15.9.1.3">InLeapYear</a>(<i>t</i>)<br>&#x9;&#x9;&#x9;= 3&#x9;if&#x9;90+<a href="#sec-15.9.1.3">InLeapYear</a>(<i>t</i>) &#x9;&le; DayWithinYear (<i>t</i>) &lt; 120+<a href="#sec-15.9.1.3">InLeapYear</a>(<i>t</i>)<br>&#x9;&#x9;&#x9;= 4&#x9;if&#x9;120+<a href="#sec-15.9.1.3">InLeapYear</a>(<i>t</i>) &#x9;&le; DayWithinYear (<i>t</i>) &lt; 151+<a href="#sec-15.9.1.3">InLeapYear</a>(<i>t</i>)<br>&#x9;&#x9;&#x9;= 5&#x9;if&#x9;151+<a href="#sec-15.9.1.3">InLeapYear</a>(<i>t</i>) &#x9;&le; DayWithinYear (<i>t</i>) &lt; 181+<a href="#sec-15.9.1.3">InLeapYear</a>(<i>t</i>)<br>&#x9;&#x9;&#x9;= 6&#x9;if&#x9;181+<a href="#sec-15.9.1.3">InLeapYear</a>(<i>t</i>) &#x9;&le; DayWithinYear (<i>t</i>) &lt; 212+<a href="#sec-15.9.1.3">InLeapYear</a>(<i>t</i>)<br>&#x9;&#x9;&#x9;= 7&#x9;if&#x9;212+<a href="#sec-15.9.1.3">InLeapYear</a>(<i>t</i>) &#x9;&le; DayWithinYear (<i>t</i>) &lt; 243+<a href="#sec-15.9.1.3">InLeapYear</a>(<i>t</i>)<br>&#x9;&#x9;&#x9;= 8&#x9;if&#x9;243+<a href="#sec-15.9.1.3">InLeapYear</a>(<i>t</i>) &#x9;&le; DayWithinYear (<i>t</i>) &lt; 273+<a href="#sec-15.9.1.3">InLeapYear</a>(<i>t</i>)<br>&#x9;&#x9;&#x9;= 9&#x9;if&#x9;273+<a href="#sec-15.9.1.3">InLeapYear</a>(<i>t</i>) &#x9;&le; DayWithinYear (<i>t</i>) &lt; 304+<a href="#sec-15.9.1.3">InLeapYear</a>(<i>t</i>)<br>&#x9;&#x9;&#x9;= 10&#x9;if&#x9;304+<a href="#sec-15.9.1.3">InLeapYear</a>(<i>t</i>) &#x9;&le; DayWithinYear (<i>t</i>) &lt; 334+<a href="#sec-15.9.1.3">InLeapYear</a>(<i>t</i>)<br>&#x9;&#x9;&#x9;= 11&#x9;if&#x9;334+<a href="#sec-15.9.1.3">InLeapYear</a>(<i>t</i>) &#x9;&le; DayWithinYear (<i>t</i>) &lt; 365+<a href="#sec-15.9.1.3">InLeapYear</a>(<i>t</i>)</div>
 
         <p>where</p>
 
-        <div class="display">DayWithinYear(<i>t</i>)&#x9;= Day(<i>t</i>)&minus;DayFromYear(YearFromTime(<i>t)</i>)</div>
+        <div class="display">DayWithinYear(<i>t</i>)&#x9;= Day(<i>t</i>)&minus;DayFromYear(<a href="#sec-15.9.1.3">YearFromTime</a>(<i>t)</i>)</div>
 
         <p>A month value of <span style="font-family: Times New Roman">0</span> specifies January; <span style="font-family: Times
         New Roman">1</span> specifies February; <span style="font-family: Times New Roman">2</span> specifies March; <span
@@ -17758,17 +17758,17 @@
         <h1><span class="secnum"><a href="#sec-15.9.1.5" title="link to this section">15.9.1.5</a></span> Date Number</h1>
 
         <p>A date number is identified by an integer in the range <span style="font-family: Times New Roman">1</span> through
-        <span style="font-family: Times New Roman">31</span>, inclusive. The mapping DateFromTime(<i>t</i>) from a time value
-        <i>t</i> to a month number is defined by:</p>
+        <span style="font-family: Times New Roman">31</span>, inclusive. The mapping DateFromTime(<i>t</i>) from a <a
+        href="#sec-15.9.1.1">time value</a> <i>t</i> to a month number is defined by:</p>
 
-        <div class="display">DateFromTime(<i>t</i>)&#x9;= DayWithinYear(<i>t</i>)+1&#x9;if MonthFromTime(<i>t</i>)=0<br>&#x9;= DayWithinYear(<i>t</i>)&minus;30&#x9;if MonthFromTime(<i>t</i>)=1<br>&#x9;= DayWithinYear(<i>t</i>)&minus;58&minus;InLeapYear(<i>t</i>)&#x9;if MonthFromTime(<i>t</i>)=2<br>&#x9;= DayWithinYear(<i>t</i>)&minus;89&minus;InLeapYear(<i>t</i>)&#x9;if MonthFromTime(<i>t</i>)=3<br>&#x9;= DayWithinYear(<i>t</i>)&minus;119&minus;InLeapYear(<i>t</i>)&#x9;if MonthFromTime(<i>t</i>)=4<br>&#x9;= DayWithinYear(<i>t</i>)&minus;150&minus;InLeapYear(<i>t</i>)&#x9;if MonthFromTime(<i>t</i>)=5<br>&#x9;= DayWithinYear(<i>t</i>)&minus;180&minus;InLeapYear(<i>t</i>)&#x9;if MonthFromTime(<i>t</i>)=6<br>&#x9;= DayWithinYear(<i>t</i>)&minus;211&minus;InLeapYear(<i>t</i>)&#x9;if MonthFromTime(<i>t</i>)=7<br>&#x9;= DayWithinYear(<i>t</i>)&minus;242&minus;InLeapYear(<i>t</i>)&#x9;if MonthFromTime(<i>t</i>)=8<br>&#x9;= DayWithinYear(<i>t</i>)&minus;272&minus;InLeapYear(<i>t</i>)&#x9;if MonthFromTime(<i>t</i>)=9<br>&#x9;= DayWithinYear(<i>t</i>)&minus;303&minus;InLeapYear(<i>t</i>)&#x9;if MonthFromTime(<i>t</i>)=10<br>&#x9;= DayWithinYear(<i>t</i>)&minus;333&minus;InLeapYear(<i>t</i>)&#x9;if MonthFromTime(<i>t</i>)=11</div>
+        <div class="display">DateFromTime(<i>t</i>)&#x9;= <a href="#sec-15.9.1.4">DayWithinYear</a>(<i>t</i>)+1&#x9;if <a href="#sec-15.9.1.4">MonthFromTime</a>(<i>t</i>)=0<br>&#x9;= <a href="#sec-15.9.1.4">DayWithinYear</a>(<i>t</i>)&minus;30&#x9;if <a href="#sec-15.9.1.4">MonthFromTime</a>(<i>t</i>)=1<br>&#x9;= <a href="#sec-15.9.1.4">DayWithinYear</a>(<i>t</i>)&minus;58&minus;<a href="#sec-15.9.1.3">InLeapYear</a>(<i>t</i>)&#x9;if <a href="#sec-15.9.1.4">MonthFromTime</a>(<i>t</i>)=2<br>&#x9;= <a href="#sec-15.9.1.4">DayWithinYear</a>(<i>t</i>)&minus;89&minus;<a href="#sec-15.9.1.3">InLeapYear</a>(<i>t</i>)&#x9;if <a href="#sec-15.9.1.4">MonthFromTime</a>(<i>t</i>)=3<br>&#x9;= <a href="#sec-15.9.1.4">DayWithinYear</a>(<i>t</i>)&minus;119&minus;<a href="#sec-15.9.1.3">InLeapYear</a>(<i>t</i>)&#x9;if <a href="#sec-15.9.1.4">MonthFromTime</a>(<i>t</i>)=4<br>&#x9;= <a href="#sec-15.9.1.4">DayWithinYear</a>(<i>t</i>)&minus;150&minus;<a href="#sec-15.9.1.3">InLeapYear</a>(<i>t</i>)&#x9;if <a href="#sec-15.9.1.4">MonthFromTime</a>(<i>t</i>)=5<br>&#x9;= <a href="#sec-15.9.1.4">DayWithinYear</a>(<i>t</i>)&minus;180&minus;<a href="#sec-15.9.1.3">InLeapYear</a>(<i>t</i>)&#x9;if <a href="#sec-15.9.1.4">MonthFromTime</a>(<i>t</i>)=6<br>&#x9;= <a href="#sec-15.9.1.4">DayWithinYear</a>(<i>t</i>)&minus;211&minus;<a href="#sec-15.9.1.3">InLeapYear</a>(<i>t</i>)&#x9;if <a href="#sec-15.9.1.4">MonthFromTime</a>(<i>t</i>)=7<br>&#x9;= <a href="#sec-15.9.1.4">DayWithinYear</a>(<i>t</i>)&minus;242&minus;<a href="#sec-15.9.1.3">InLeapYear</a>(<i>t</i>)&#x9;if <a href="#sec-15.9.1.4">MonthFromTime</a>(<i>t</i>)=8<br>&#x9;= <a href="#sec-15.9.1.4">DayWithinYear</a>(<i>t</i>)&minus;272&minus;<a href="#sec-15.9.1.3">InLeapYear</a>(<i>t</i>)&#x9;if <a href="#sec-15.9.1.4">MonthFromTime</a>(<i>t</i>)=9<br>&#x9;= <a href="#sec-15.9.1.4">DayWithinYear</a>(<i>t</i>)&minus;303&minus;<a href="#sec-15.9.1.3">InLeapYear</a>(<i>t</i>)&#x9;if <a href="#sec-15.9.1.4">MonthFromTime</a>(<i>t</i>)=10<br>&#x9;= <a href="#sec-15.9.1.4">DayWithinYear</a>(<i>t</i>)&minus;333&minus;<a href="#sec-15.9.1.3">InLeapYear</a>(<i>t</i>)&#x9;if <a href="#sec-15.9.1.4">MonthFromTime</a>(<i>t</i>)=11</div>
       </section>
 
       <section id="sec-15.9.1.6">
         <h1><span class="secnum"><a href="#sec-15.9.1.6" title="link to this section">15.9.1.6</a></span> Week Day</h1>
 
-        <p>The weekday for a particular time value <span style="font-family: Times New Roman; font-style: italic">t</span> is
-        defined as</p>
+        <p>The weekday for a particular <a href="#sec-15.9.1.1">time value</a> <span style="font-family: Times New Roman;
+        font-style: italic">t</span> is defined as</p>
 
         <div class="display">WeekDay(<i>t</i>)&#x9; = (Day(<i>t</i>) + 4) modulo 7</div>
 
@@ -17798,15 +17798,15 @@
 
         <p>(1) the time since the beginning of the year</p>
 
-        <div class="display"><i>t</i> &ndash; TimeFromYear(YearFromTime(<i>t</i>))</div>
+        <div class="display"><i>t</i> &ndash; <a href="#sec-15.9.1.3">TimeFromYear</a>(<a href="#sec-15.9.1.3">YearFromTime</a>(<i>t</i>))</div>
 
         <p>(2) whether <span style="font-family: Times New Roman; font-style: italic">t</span> is in a leap year</p>
 
-        <div class="display">InLeapYear<span style="font-family: sans-serif">(<i>t</i>)</span></div>
+        <div class="display"><a href="#sec-15.9.1.3">InLeapYear</a><span style="font-family: sans-serif">(<i>t</i>)</span></div>
 
         <p>(3) the week day of the beginning of the year</p>
 
-        <div class="display">WeekDay(TimeFromYear(YearFromTime(<i>t</i>)))</div>
+        <div class="display"><a href="#sec-15.9.1.6">WeekDay</a>(<a href="#sec-15.9.1.3">TimeFromYear</a>(<a href="#sec-15.9.1.3">YearFromTime</a>(<i>t</i>)))</div>
 
         <p>and (4) the geographic location.</p>
 
@@ -17826,11 +17826,11 @@
 
         <p>Conversion from UTC to local time is defined by</p>
 
-        <div class="display">LocalTime(<i>t</i>) = <i>t</i> + LocalTZA + DaylightSavingTA(<i>t</i>)</div>
+        <div class="display">LocalTime(<i>t</i>) = <i>t</i> + <a href="#sec-15.9.1.7">LocalTZA</a> + <a href="#sec-15.9.1.8">DaylightSavingTA</a>(<i>t</i>)</div>
 
         <p>Conversion from local time to UTC is defined by</p>
 
-        <div class="display">UTC(<i>t</i>) = <i>t</i> &ndash; LocalTZA &ndash; DaylightSavingTA(<i>t</i> &ndash; LocalTZA)</div>
+        <div class="display">UTC(<i>t</i>) = <i>t</i> &ndash; <a href="#sec-15.9.1.7">LocalTZA</a> &ndash; <a href="#sec-15.9.1.8">DaylightSavingTA</a>(<i>t</i> &ndash; <a href="#sec-15.9.1.7">LocalTZA</a>)</div>
 
         <p>Note that <span style="font-family: Times New Roman">UTC(LocalTime(<i>t</i>))</span> is not necessarily always equal to
         <i>t</i>.</p>
@@ -17868,7 +17868,7 @@
           <li>Let <i>m</i> be <a href="#sec-9.1.4">ToInteger</a>(<i>min</i>).</li>
           <li>Let <i>s</i> be <a href="#sec-9.1.4">ToInteger</a>(<i>sec</i>).</li>
           <li>Let <i>milli</i> be <a href="#sec-9.1.4">ToInteger</a>(<i>ms</i>).</li>
-          <li>Let <i>t</i> be <i>h</i> <code>*</code> msPerHour <code>+</code> <i>m</i> <code>*</code> msPerMinute <code>+</code> <i>s</i> <code>*</code> msPerSecond <code>+</code> <i>milli</i>, performing the arithmetic according to IEEE 754 rules (that is, as if using the ECMAScript operators <code>*</code> and <code>+</code>).</li>
+          <li>Let <i>t</i> be <i>h</i> <code>*</code> <a href="#sec-15.9.1.10">msPerHour</a> <code>+</code> <i>m</i> <code>*</code> <a href="#sec-15.9.1.10">msPerMinute</a> <code>+</code> <i>s</i> <code>*</code> <a href="#sec-15.9.1.10">msPerSecond</a> <code>+</code> <i>milli</i>, performing the arithmetic according to IEEE 754 rules (that is, as if using the ECMAScript operators <code>*</code> and <code>+</code>).</li>
           <li>Return <i>t</i>.</li>
         </ol>
       </section>
@@ -17886,7 +17886,7 @@
           <li>Let <i>dt</i> be <a href="#sec-9.1.4">ToInteger</a>(<i>date</i>).</li>
           <li>Let <i>ym</i> be <i>y</i> + floor(<i>m</i> /12).</li>
           <li>Let <i>mn</i> be <i>m</i> modulo 12.</li>
-          <li>Find a value <i>t</i> such that YearFromTime(<i>t</i>) <code>==</code> <i>ym</i> and MonthFromTime(<i>t</i>) <code>==</code> <i>mn</i> and DateFromTime(<i>t</i>) <code>==</code> 1; but if this is not possible (because some argument is out of range), return <b>NaN</b>.</li>
+          <li>Find a value <i>t</i> such that <a href="#sec-15.9.1.3">YearFromTime</a>(<i>t</i>) <code>==</code> <i>ym</i> and <a href="#sec-15.9.1.4">MonthFromTime</a>(<i>t</i>) <code>==</code> <i>mn</i> and <a href="#sec-15.9.1.5">DateFromTime</a>(<i>t</i>) <code>==</code> 1; but if this is not possible (because some argument is out of range), return <b>NaN</b>.</li>
           <li>Return Day(<i>t</i>) + <i>dt</i> &minus; 1.</li>
         </ol>
       </section>
@@ -17899,7 +17899,7 @@
 
         <ol class="proc">
           <li>If <i>day</i> is not finite or <i>time</i> is not finite, return <b>NaN</b>.</li>
-          <li>Return <i>day</i> &times; msPerDay + <i>time</i>.</li>
+          <li>Return <i>day</i> &times; <a href="#sec-15.9.1.2">msPerDay</a> + <i>time</i>.</li>
         </ol>
       </section>
 
@@ -18079,8 +18079,8 @@ THH:mm:ss.sss</pre>
           <li>If <i>seconds</i> is supplied then let <i>s</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>seconds</i>); else let <i>s</i> be <b>0</b>.</li>
           <li>If <i>ms</i> is supplied then let <i>milli</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>); else let <i>milli</i> be <b>0</b>.</li>
           <li>If&nbsp;<i>y</i>&nbsp;is&nbsp;not&nbsp;<b>NaN</b>&nbsp;and&nbsp;0&nbsp;&le;&nbsp;<a href="#sec-9.1.4">ToInteger</a>(<i>y</i>)&nbsp;&le;&nbsp;99,&nbsp;then let <i>yr</i> be&nbsp;1900+<a href="#sec-9.1.4">ToInteger</a>(<i>y</i>); otherwise, let <i>yr</i> be <i>y</i>.</li>
-          <li>Let <i>finalDate</i> be  MakeDate(MakeDay(<i>yr</i>, <i>m</i>, <i>dt</i>), MakeTime(<i>h</i>, <i>min</i>, <i>s</i>, <i>milli</i>)).</li>
-          <li>Set the [[PrimitiveValue]] internal property of the newly constructed object to TimeClip(UTC(<i>finalDate</i>)).</li>
+          <li>Let <i>finalDate</i> be  <a href="#sec-15.9.1.13">MakeDate</a>(<a href="#sec-15.9.1.12">MakeDay</a>(<i>yr</i>, <i>m</i>, <i>dt</i>), <a href="#sec-15.9.1.11">MakeTime</a>(<i>h</i>, <i>min</i>, <i>s</i>, <i>milli</i>)).</li>
+          <li>Set the [[PrimitiveValue]] internal property of the newly constructed object to <a href="#sec-15.9.1.14">TimeClip</a>(UTC(<i>finalDate</i>)).</li>
         </ol>
       </section>
 
@@ -18100,11 +18100,11 @@ THH:mm:ss.sss</pre>
           <li>Let <i>v</i> be <a href="#sec-9.1.1">ToPrimitive</a>(<i>value</i>).</li>
           <li>If Type(<i>v</i>) is String, then
             <ol class="block">
-              <li>Parse <i>v</i> as a date, in exactly the same manner as for the <code>parse</code> method (<a href="#sec-15.9.4.2">15.9.4.2</a>); let <i>V</i> be the time value for this date.</li>
+              <li>Parse <i>v</i> as a date, in exactly the same manner as for the <code>parse</code> method (<a href="#sec-15.9.4.2">15.9.4.2</a>); let <i>V</i> be the <a href="#sec-15.9.1.1">time value</a> for this date.</li>
             </ol>
           </li>
           <li>Else, let <i>V</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>v</i>).</li>
-          <li>Set the [[PrimitiveValue]] internal property of the newly constructed object to TimeClip(<i>V</i>) and return.</li>
+          <li>Set the [[PrimitiveValue]] internal property of the newly constructed object to <a href="#sec-15.9.1.14">TimeClip</a>(<i>V</i>) and return.</li>
         </ol>
       </section>
 
@@ -18118,8 +18118,8 @@ THH:mm:ss.sss</pre>
 
         <p>The [[Extensible]] internal property of the newly constructed object is set to <b>true</b>.</p>
 
-        <p>The [[PrimitiveValue]] internal property of the newly constructed object is set to the time value (UTC) identifying the
-        current time.</p>
+        <p>The [[PrimitiveValue]] internal property of the newly constructed object is set to the <a href="#sec-15.9.1.1">time
+        value</a> (UTC) identifying the current time.</p>
       </section>
     </section>
 
@@ -18146,12 +18146,13 @@ THH:mm:ss.sss</pre>
         <h1><span class="secnum"><a href="#sec-15.9.4.2" title="link to this section">15.9.4.2</a></span> Date.parse (string)</h1>
 
         <p>The <code>parse</code> function applies the <a href="#sec-9.1.8">ToString</a> operator to its argument and interprets
-        the resulting String as a date and time; it returns a Number, the UTC time value corresponding to the date and time. The
-        String may be interpreted as a local time, a UTC time, or a time in some other time zone, depending on the contents of the
-        String. The function first attempts to parse the format of the String according to the rules called out in Date Time
-        String Format (<a href="#sec-15.9.1.15">15.9.1.15</a>). If the String does not conform to that format the function may
-        fall back to any implementation-specific heuristics or implementation-specific date formats. Unrecognisable Strings or
-        dates containing illegal element values in the format String shall cause <code>Date.parse</code> to return <b>NaN</b>.</p>
+        the resulting String as a date and time; it returns a Number, the UTC <a href="#sec-15.9.1.1">time value</a> corresponding
+        to the date and time. The String may be interpreted as a local time, a UTC time, or a time in some other time zone,
+        depending on the contents of the String. The function first attempts to parse the format of the String according to the
+        rules called out in Date Time String Format (<a href="#sec-15.9.1.15">15.9.1.15</a>). If the String does not conform to
+        that format the function may fall back to any implementation-specific heuristics or implementation-specific date formats.
+        Unrecognisable Strings or dates containing illegal element values in the format String shall cause <code>Date.parse</code>
+        to return <b>NaN</b>.</p>
 
         <p>If <span style="font-family: Times New Roman; font-style: italic">x</span> is any Date object whose milliseconds amount
         is zero within a particular implementation of ECMAScript, then all of the following expressions should produce the same
@@ -18197,23 +18198,23 @@ THH:mm:ss.sss</pre>
           <li>If <i>seconds</i> is supplied then let <i>s</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>seconds</i>); else let <i>s</i> be <b>0</b>.</li>
           <li>If <i>ms</i> is supplied then let <i>milli</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>); else let <i>milli</i> be <b>0</b>.</li>
           <li>If&nbsp;<i>y</i>&nbsp;is&nbsp;not&nbsp;<b>NaN</b>&nbsp;and&nbsp;0&nbsp;&le;&nbsp;<a href="#sec-9.1.4">ToInteger</a>(<i>y</i>)&nbsp;&le;&nbsp;99,&nbsp;then let <i>yr</i> be&nbsp;1900+<a href="#sec-9.1.4">ToInteger</a>(<i>y</i>); otherwise, let <i>yr</i> be <i>y</i>.</li>
-          <li>Return TimeClip(MakeDate(MakeDay(<i>yr</i>, <i>m</i>, <i>dt</i>), MakeTime(<i>h</i>, <i>min</i>, <i>s</i>, <i>milli</i>))).</li>
+          <li>Return <a href="#sec-15.9.1.14">TimeClip</a>(<a href="#sec-15.9.1.13">MakeDate</a>(<a href="#sec-15.9.1.12">MakeDay</a>(<i>yr</i>, <i>m</i>, <i>dt</i>), <a href="#sec-15.9.1.11">MakeTime</a>(<i>h</i>, <i>min</i>, <i>s</i>, <i>milli</i>))).</li>
         </ol>
 
         <p>The <code>length</code> property of the <code>UTC</code> function is <b>7</b>.</p>
 
         <div class="note">
           <p><span class="nh">NOTE</span> The <span style="font-family: monospace">UTC</span> function differs from the <span
-          style="font-family: monospace">Date</span> constructor in two ways: it returns a time value as a Number, rather than
-          creating a Date object, and it interprets the arguments in UTC rather than as local time.</p>
+          style="font-family: monospace">Date</span> constructor in two ways: it returns a <a href="#sec-15.9.1.1">time value</a>
+          as a Number, rather than creating a Date object, and it interprets the arguments in UTC rather than as local time.</p>
         </div>
       </section>
 
       <section id="sec-15.9.4.4">
         <h1><span class="secnum"><a href="#sec-15.9.4.4" title="link to this section">15.9.4.4</a></span> Date.now ( )</h1>
 
-        <p>The <code>now</code> function return a Number value that is the time value designating the UTC date and time of the
-        occurrence of the call to <code>now</code>.</p>
+        <p>The <code>now</code> function return a Number value that is the <a href="#sec-15.9.1.1">time value</a> designating the
+        UTC date and time of the occurrence of the call to <code>now</code>.</p>
       </section>
     </section>
 
@@ -18229,9 +18230,9 @@ THH:mm:ss.sss</pre>
       <p>In following descriptions of functions that are properties of the Date prototype object, the phrase &ldquo;this Date
       object&rdquo; refers to the object that is the <b>this</b> value for the invocation of the function. Unless explicitly noted
       otherwise, none of these functions are generic; a <b>TypeError</b> exception is thrown if the <b>this</b> value is not an
-      object with a [[NativeBrand]] internal property whose value is NativeDate. Also, the phrase &ldquo;this time value&rdquo;
-      refers to the Number value for the time represented by this Date object, that is, the value of the [[PrimitiveValue]]
-      internal property of this Date object.</p>
+      object with a [[NativeBrand]] internal property whose value is NativeDate. Also, the phrase &ldquo;this <a
+      href="#sec-15.9.1.1">time value</a>&rdquo; refers to the Number value for the time represented by this Date object, that is,
+      the value of the [[PrimitiveValue]] internal property of this Date object.</p>
 
       <section id="sec-15.9.5.1">
         <h1><span class="secnum"><a href="#sec-15.9.5.1" title="link to this section">15.9.5.1</a></span> Date.prototype.constructor</h1>
@@ -18242,9 +18243,9 @@ THH:mm:ss.sss</pre>
       <section id="sec-15.9.5.2">
         <h1><span class="secnum"><a href="#sec-15.9.5.2" title="link to this section">15.9.5.2</a></span> Date.prototype.toString ( )</h1>
 
-        <p>This function returns a String value. If this time value is NaN, the String value is <code>&Prime;Invalid Date"</code>,
-        otherwise the contents of the String are implementation-dependent, but are intended to represent the Date in the current
-        time zone in a convenient, human-readable form.</p>
+        <p>This function returns a String value. If this <a href="#sec-15.9.1.1">time value</a> is NaN, the String value is
+        <code>&Prime;Invalid Date"</code>, otherwise the contents of the String are implementation-dependent, but are intended to
+        represent the Date in the current time zone in a convenient, human-readable form.</p>
 
         <div class="note">
           <p><span class="nh">NOTE</span> For any Date value <span style="font-family: monospace; font-style: italic">d</span>
@@ -18310,157 +18311,157 @@ THH:mm:ss.sss</pre>
       <section id="sec-15.9.5.8">
         <h1><span class="secnum"><a href="#sec-15.9.5.8" title="link to this section">15.9.5.8</a></span> Date.prototype.valueOf ( )</h1>
 
-        <p>The <code>valueOf</code> function returns a Number, which is this time value.</p>
+        <p>The <code>valueOf</code> function returns a Number, which is this <a href="#sec-15.9.1.1">time value</a>.</p>
       </section>
 
       <section id="sec-15.9.5.9">
         <h1><span class="secnum"><a href="#sec-15.9.5.9" title="link to this section">15.9.5.9</a></span> Date.prototype.getTime ( )</h1>
         <ol class="proc">
-          <li>Return this time value.</li>
+          <li>Return this <a href="#sec-15.9.1.1">time value</a>.</li>
         </ol>
       </section>
 
       <section id="sec-15.9.5.10">
         <h1><span class="secnum"><a href="#sec-15.9.5.10" title="link to this section">15.9.5.10</a></span> Date.prototype.getFullYear ( )</h1>
         <ol class="proc">
-          <li>Let <i>t</i> be this time value.</li>
+          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
           <li>If <i>t</i> is <b>NaN</b>, return <b>NaN</b>.</li>
-          <li>Return YearFromTime(LocalTime(<i>t</i>)).</li>
+          <li>Return <a href="#sec-15.9.1.3">YearFromTime</a>(<a href="#sec-15.9.1.9">LocalTime</a>(<i>t</i>)).</li>
         </ol>
       </section>
 
       <section id="sec-15.9.5.11">
         <h1><span class="secnum"><a href="#sec-15.9.5.11" title="link to this section">15.9.5.11</a></span> Date.prototype.getUTCFullYear ( )</h1>
         <ol class="proc">
-          <li>Let <i>t</i> be this time value.</li>
+          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
           <li>If <i>t</i> is <b>NaN</b>, return <b>NaN</b>.</li>
-          <li>Return YearFromTime(<i>t</i>).</li>
+          <li>Return <a href="#sec-15.9.1.3">YearFromTime</a>(<i>t</i>).</li>
         </ol>
       </section>
 
       <section id="sec-15.9.5.12">
         <h1><span class="secnum"><a href="#sec-15.9.5.12" title="link to this section">15.9.5.12</a></span> Date.prototype.getMonth ( )</h1>
         <ol class="proc">
-          <li>Let <i>t</i> be this time value.</li>
+          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
           <li>If <i>t</i> is <b>NaN</b>, return <b>NaN</b>.</li>
-          <li>Return MonthFromTime(LocalTime(<i>t</i>)).</li>
+          <li>Return <a href="#sec-15.9.1.4">MonthFromTime</a>(<a href="#sec-15.9.1.9">LocalTime</a>(<i>t</i>)).</li>
         </ol>
       </section>
 
       <section id="sec-15.9.5.13">
         <h1><span class="secnum"><a href="#sec-15.9.5.13" title="link to this section">15.9.5.13</a></span> Date.prototype.getUTCMonth ( )</h1>
         <ol class="proc">
-          <li>Let <i>t</i> be this time value.</li>
+          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
           <li>If <i>t</i> is <b>NaN</b>, return <b>NaN</b>.</li>
-          <li>Return MonthFromTime(<i>t</i>).</li>
+          <li>Return <a href="#sec-15.9.1.4">MonthFromTime</a>(<i>t</i>).</li>
         </ol>
       </section>
 
       <section id="sec-15.9.5.14">
         <h1><span class="secnum"><a href="#sec-15.9.5.14" title="link to this section">15.9.5.14</a></span> Date.prototype.getDate ( )</h1>
         <ol class="proc">
-          <li>Let <i>t</i> be this time value.</li>
+          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
           <li>If <i>t</i> is <b>NaN</b>, return <b>NaN</b>.</li>
-          <li>Return DateFromTime(LocalTime(<i>t</i>)).</li>
+          <li>Return <a href="#sec-15.9.1.5">DateFromTime</a>(<a href="#sec-15.9.1.9">LocalTime</a>(<i>t</i>)).</li>
         </ol>
       </section>
 
       <section id="sec-15.9.5.15">
         <h1><span class="secnum"><a href="#sec-15.9.5.15" title="link to this section">15.9.5.15</a></span> Date.prototype.getUTCDate ( )</h1>
         <ol class="proc">
-          <li>Let <i>t</i> be this time value.</li>
+          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
           <li>If <i>t</i> is <b>NaN</b>, return <b>NaN</b>.</li>
-          <li>Return DateFromTime(<i>t</i>).</li>
+          <li>Return <a href="#sec-15.9.1.5">DateFromTime</a>(<i>t</i>).</li>
         </ol>
       </section>
 
       <section id="sec-15.9.5.16">
         <h1><span class="secnum"><a href="#sec-15.9.5.16" title="link to this section">15.9.5.16</a></span> Date.prototype.getDay ( )</h1>
         <ol class="proc">
-          <li>Let <i>t</i> be this time value.</li>
+          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
           <li>If <i>t</i> is <b>NaN</b>, return <b>NaN</b>.</li>
-          <li>Return WeekDay(LocalTime(<i>t</i>)).</li>
+          <li>Return <a href="#sec-15.9.1.6">WeekDay</a>(<a href="#sec-15.9.1.9">LocalTime</a>(<i>t</i>)).</li>
         </ol>
       </section>
 
       <section id="sec-15.9.5.17">
         <h1><span class="secnum"><a href="#sec-15.9.5.17" title="link to this section">15.9.5.17</a></span> Date.prototype.getUTCDay ( )</h1>
         <ol class="proc">
-          <li>Let <i>t</i> be this time value.</li>
+          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
           <li>If <i>t</i> is <b>NaN</b>, return <b>NaN</b>.</li>
-          <li>Return WeekDay(<i>t</i>).</li>
+          <li>Return <a href="#sec-15.9.1.6">WeekDay</a>(<i>t</i>).</li>
         </ol>
       </section>
 
       <section id="sec-15.9.5.18">
         <h1><span class="secnum"><a href="#sec-15.9.5.18" title="link to this section">15.9.5.18</a></span> Date.prototype.getHours ( )</h1>
         <ol class="proc">
-          <li>Let <i>t</i> be this time value.</li>
+          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
           <li>If <i>t</i> is <b>NaN</b>, return <b>NaN</b>.</li>
-          <li>Return HourFromTime(LocalTime(<i>t</i>)).</li>
+          <li>Return <a href="#sec-15.9.1.10">HourFromTime</a>(<a href="#sec-15.9.1.9">LocalTime</a>(<i>t</i>)).</li>
         </ol>
       </section>
 
       <section id="sec-15.9.5.19">
         <h1><span class="secnum"><a href="#sec-15.9.5.19" title="link to this section">15.9.5.19</a></span> Date.prototype.getUTCHours ( )</h1>
         <ol class="proc">
-          <li>Let <i>t</i> be this time value.</li>
+          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
           <li>If <i>t</i> is <b>NaN</b>, return <b>NaN</b>.</li>
-          <li>Return HourFromTime(<i>t</i>).</li>
+          <li>Return <a href="#sec-15.9.1.10">HourFromTime</a>(<i>t</i>).</li>
         </ol>
       </section>
 
       <section id="sec-15.9.5.20">
         <h1><span class="secnum"><a href="#sec-15.9.5.20" title="link to this section">15.9.5.20</a></span> Date.prototype.getMinutes ( )</h1>
         <ol class="proc">
-          <li>Let <i>t</i> be this time value.</li>
+          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
           <li>If <i>t</i> is <b>NaN</b>, return <b>NaN</b>.</li>
-          <li>Return MinFromTime(LocalTime(<i>t</i>)).</li>
+          <li>Return <a href="#sec-15.9.1.10">MinFromTime</a>(<a href="#sec-15.9.1.9">LocalTime</a>(<i>t</i>)).</li>
         </ol>
       </section>
 
       <section id="sec-15.9.5.21">
         <h1><span class="secnum"><a href="#sec-15.9.5.21" title="link to this section">15.9.5.21</a></span> Date.prototype.getUTCMinutes ( )</h1>
         <ol class="proc">
-          <li>Let <i>t</i> be this time value.</li>
+          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
           <li>If <i>t</i> is <b>NaN</b>, return <b>NaN</b>.</li>
-          <li>Return MinFromTime(<i>t</i>).</li>
+          <li>Return <a href="#sec-15.9.1.10">MinFromTime</a>(<i>t</i>).</li>
         </ol>
       </section>
 
       <section id="sec-15.9.5.22">
         <h1><span class="secnum"><a href="#sec-15.9.5.22" title="link to this section">15.9.5.22</a></span> Date.prototype.getSeconds ( )</h1>
         <ol class="proc">
-          <li>Let <i>t</i> be this time value.</li>
+          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
           <li>If <i>t</i> is <b>NaN</b>, return <b>NaN</b>.</li>
-          <li>Return SecFromTime(LocalTime(<i>t</i>)).</li>
+          <li>Return <a href="#sec-15.9.1.10">SecFromTime</a>(<a href="#sec-15.9.1.9">LocalTime</a>(<i>t</i>)).</li>
         </ol>
       </section>
 
       <section id="sec-15.9.5.23">
         <h1><span class="secnum"><a href="#sec-15.9.5.23" title="link to this section">15.9.5.23</a></span> Date.prototype.getUTCSeconds ( )</h1>
         <ol class="proc">
-          <li>Let <i>t</i> be this time value.</li>
+          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
           <li>If <i>t</i> is <b>NaN</b>, return <b>NaN</b>.</li>
-          <li>Return SecFromTime(<i>t</i>).</li>
+          <li>Return <a href="#sec-15.9.1.10">SecFromTime</a>(<i>t</i>).</li>
         </ol>
       </section>
 
       <section id="sec-15.9.5.24">
         <h1><span class="secnum"><a href="#sec-15.9.5.24" title="link to this section">15.9.5.24</a></span> Date.prototype.getMilliseconds ( )</h1>
         <ol class="proc">
-          <li>Let <i>t</i> be this time value.</li>
+          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
           <li>If <i>t</i> is <b>NaN</b>, return <b>NaN</b>.</li>
-          <li>Return msFromTime(LocalTime(<i>t</i>)).</li>
+          <li>Return <a href="#sec-15.9.1.10">msFromTime</a>(<a href="#sec-15.9.1.9">LocalTime</a>(<i>t</i>)).</li>
         </ol>
       </section>
 
       <section id="sec-15.9.5.25">
         <h1><span class="secnum"><a href="#sec-15.9.5.25" title="link to this section">15.9.5.25</a></span> Date.prototype.getUTCMilliseconds ( )</h1>
         <ol class="proc">
-          <li>Let <i>t</i> be this time value.</li>
+          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
           <li>If <i>t</i> is <b>NaN</b>, return <b>NaN</b>.</li>
-          <li>Return msFromTime(<i>t</i>).</li>
+          <li>Return <a href="#sec-15.9.1.10">msFromTime</a>(<i>t</i>).</li>
         </ol>
       </section>
 
@@ -18470,16 +18471,16 @@ THH:mm:ss.sss</pre>
         <p>Returns the difference between local time and UTC time in minutes.</p>
 
         <ol class="proc">
-          <li>Let <i>t</i> be this time value.</li>
+          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
           <li>If <i>t</i> is <b>NaN</b>, return <b>NaN</b>.</li>
-          <li>Return (<i>t</i> &minus; LocalTime(<i>t</i>)) / msPerMinute.</li>
+          <li>Return (<i>t</i> &minus; <a href="#sec-15.9.1.9">LocalTime</a>(<i>t</i>)) / <a href="#sec-15.9.1.10">msPerMinute</a>.</li>
         </ol>
       </section>
 
       <section id="sec-15.9.5.27">
         <h1><span class="secnum"><a href="#sec-15.9.5.27" title="link to this section">15.9.5.27</a></span> Date.prototype.setTime (time)</h1>
         <ol class="proc">
-          <li>Let <i>v</i> be TimeClip(<a href="#sec-9.1.3">ToNumber</a>(<i>time</i>)).</li>
+          <li>Let <i>v</i> be <a href="#sec-15.9.1.14">TimeClip</a>(<a href="#sec-9.1.3">ToNumber</a>(<i>time</i>)).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>v</i>.</li>
           <li>Return <i>v</i>.</li>
         </ol>
@@ -18488,9 +18489,9 @@ THH:mm:ss.sss</pre>
       <section id="sec-15.9.5.28">
         <h1><span class="secnum"><a href="#sec-15.9.5.28" title="link to this section">15.9.5.28</a></span> Date.prototype.setMilliseconds (ms)</h1>
         <ol class="proc">
-          <li>Let <i>t</i> be the result of LocalTime(this time value).</li>
-          <li>Let <i>time</i> be MakeTime(HourFromTime(<i>t</i>), MinFromTime(<i>t</i>), SecFromTime(<i>t</i>), <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>)).</li>
-          <li>Let <i>u</i> be TimeClip(UTC(MakeDate(Day(<i>t</i>), <i>time</i>))).</li>
+          <li>Let <i>t</i> be the result of <a href="#sec-15.9.1.9">LocalTime</a>(this <a href="#sec-15.9.1.1">time value</a>).</li>
+          <li>Let <i>time</i> be <a href="#sec-15.9.1.11">MakeTime</a>(<a href="#sec-15.9.1.10">HourFromTime</a>(<i>t</i>), <a href="#sec-15.9.1.10">MinFromTime</a>(<i>t</i>), <a href="#sec-15.9.1.10">SecFromTime</a>(<i>t</i>), <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>)).</li>
+          <li>Let <i>u</i> be <a href="#sec-15.9.1.14">TimeClip</a>(UTC(<a href="#sec-15.9.1.13">MakeDate</a>(Day(<i>t</i>), <i>time</i>))).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>u</i>.</li>
           <li>Return <i>u</i>.</li>
         </ol>
@@ -18499,9 +18500,9 @@ THH:mm:ss.sss</pre>
       <section id="sec-15.9.5.29">
         <h1><span class="secnum"><a href="#sec-15.9.5.29" title="link to this section">15.9.5.29</a></span> Date.prototype.setUTCMilliseconds (ms)</h1>
         <ol class="proc">
-          <li>Let <i>t</i> be this time value.</li>
-          <li>Let <i>time</i> be MakeTime(HourFromTime(<i>t</i>), MinFromTime(<i>t</i>), SecFromTime(<i>t</i>), <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>)).</li>
-          <li>Let <i>v</i> be TimeClip(MakeDate(Day(<i>t</i>), <i>time</i>)).</li>
+          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
+          <li>Let <i>time</i> be <a href="#sec-15.9.1.11">MakeTime</a>(<a href="#sec-15.9.1.10">HourFromTime</a>(<i>t</i>), <a href="#sec-15.9.1.10">MinFromTime</a>(<i>t</i>), <a href="#sec-15.9.1.10">SecFromTime</a>(<i>t</i>), <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>)).</li>
+          <li>Let <i>v</i> be <a href="#sec-15.9.1.14">TimeClip</a>(<a href="#sec-15.9.1.13">MakeDate</a>(Day(<i>t</i>), <i>time</i>)).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>v</i>.</li>
           <li>Return <i>v</i>.</li>
         </ol>
@@ -18515,11 +18516,11 @@ THH:mm:ss.sss</pre>
         <code>getMilliseconds()</code>.</p>
 
         <ol class="proc">
-          <li>Let <i>t</i> be the result of LocalTime(this time value).</li>
+          <li>Let <i>t</i> be the result of <a href="#sec-15.9.1.9">LocalTime</a>(this <a href="#sec-15.9.1.1">time value</a>).</li>
           <li>Let <i>s</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>sec</i>).</li>
-          <li>If <i>ms</i> is not specified, then let <i>milli</i> be msFromTime(<i>t</i>); otherwise, let <i>milli</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>).</li>
-          <li>Let <i>date</i> be MakeDate(Day(<i>t</i>), MakeTime(HourFromTime(<i>t</i>), MinFromTime(<i>t</i>), <i>s</i>, <i>milli</i>)).</li>
-          <li>Let <i>u</i> be TimeClip(UTC(<i>date</i>)).</li>
+          <li>If <i>ms</i> is not specified, then let <i>milli</i> be <a href="#sec-15.9.1.10">msFromTime</a>(<i>t</i>); otherwise, let <i>milli</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>).</li>
+          <li>Let <i>date</i> be <a href="#sec-15.9.1.13">MakeDate</a>(Day(<i>t</i>), <a href="#sec-15.9.1.11">MakeTime</a>(<a href="#sec-15.9.1.10">HourFromTime</a>(<i>t</i>), <a href="#sec-15.9.1.10">MinFromTime</a>(<i>t</i>), <i>s</i>, <i>milli</i>)).</li>
+          <li>Let <i>u</i> be <a href="#sec-15.9.1.14">TimeClip</a>(UTC(<i>date</i>)).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>u</i>.</li>
           <li>Return <i>u</i>.</li>
         </ol>
@@ -18535,11 +18536,11 @@ THH:mm:ss.sss</pre>
         <code>getUTCMilliseconds()</code>.</p>
 
         <ol class="proc">
-          <li>Let <i>t</i> be this time value.</li>
+          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
           <li>Let <i>s</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>sec</i>).</li>
-          <li>If <i>ms</i> is not specified, then let <i>milli</i> be msFromTime(<i>t</i>); otherwise, let <i>milli</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>).</li>
-          <li>Let <i>date</i> be MakeDate(Day(<i>t</i>), MakeTime(HourFromTime(<i>t</i>), MinFromTime(<i>t</i>), <i>s</i>, <i>milli</i>)).</li>
-          <li>Let <i>v</i> be TimeClip(<i>date</i>).</li>
+          <li>If <i>ms</i> is not specified, then let <i>milli</i> be <a href="#sec-15.9.1.10">msFromTime</a>(<i>t</i>); otherwise, let <i>milli</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>).</li>
+          <li>Let <i>date</i> be <a href="#sec-15.9.1.13">MakeDate</a>(Day(<i>t</i>), <a href="#sec-15.9.1.11">MakeTime</a>(<a href="#sec-15.9.1.10">HourFromTime</a>(<i>t</i>), <a href="#sec-15.9.1.10">MinFromTime</a>(<i>t</i>), <i>s</i>, <i>milli</i>)).</li>
+          <li>Let <i>v</i> be <a href="#sec-15.9.1.14">TimeClip</a>(<i>date</i>).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>v</i>.</li>
           <li>Return <i>v</i>.</li>
         </ol>
@@ -18559,12 +18560,12 @@ THH:mm:ss.sss</pre>
         <code>getMilliseconds()</code>.</p>
 
         <ol class="proc">
-          <li>Let <i>t</i> be the result of LocalTime(this time value).</li>
+          <li>Let <i>t</i> be the result of <a href="#sec-15.9.1.9">LocalTime</a>(this <a href="#sec-15.9.1.1">time value</a>).</li>
           <li>Let <i>m</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>min</i>).</li>
-          <li>If <i>sec</i> is not specified, then let <i>s</i> be SecFromTime(<i>t</i>); otherwise, let <i>s</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>sec</i>).</li>
-          <li>If <i>ms</i> is not specified, then let <i>milli</i> be msFromTime(<i>t</i>); otherwise, let <i>milli</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>).</li>
-          <li>Let <i>date</i> be MakeDate(Day(<i>t</i>), MakeTime(HourFromTime(<i>t</i>), <i>m</i>, <i>s</i>, <i>milli</i>)).</li>
-          <li>Let <i>u</i> be TimeClip(UTC(<i>date</i>)).</li>
+          <li>If <i>sec</i> is not specified, then let <i>s</i> be <a href="#sec-15.9.1.10">SecFromTime</a>(<i>t</i>); otherwise, let <i>s</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>sec</i>).</li>
+          <li>If <i>ms</i> is not specified, then let <i>milli</i> be <a href="#sec-15.9.1.10">msFromTime</a>(<i>t</i>); otherwise, let <i>milli</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>).</li>
+          <li>Let <i>date</i> be <a href="#sec-15.9.1.13">MakeDate</a>(Day(<i>t</i>), <a href="#sec-15.9.1.11">MakeTime</a>(<a href="#sec-15.9.1.10">HourFromTime</a>(<i>t</i>), <i>m</i>, <i>s</i>, <i>milli</i>)).</li>
+          <li>Let <i>u</i> be <a href="#sec-15.9.1.14">TimeClip</a>(UTC(<i>date</i>)).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>u</i>.</li>
           <li>Return <i>u</i>.</li>
         </ol>
@@ -18584,12 +18585,12 @@ THH:mm:ss.sss</pre>
         <code>getUTCMilliseconds()</code>.</p>
 
         <ol class="proc">
-          <li>Let <i>t</i> be this time value.</li>
+          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
           <li>Let <i>m</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>min</i>).</li>
-          <li>If <i>sec</i> is not specified, then let <i>s</i> be SecFromTime(<i>t</i>); otherwise, let <i>s</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>sec</i>).</li>
-          <li>If <i>ms</i> is not specified, then let <i>milli</i> be msFromTime(<i>t</i>); otherwise, let <i>milli</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>).</li>
-          <li>Let <i>date</i> be MakeDate(Day(<i>t</i>), MakeTime(HourFromTime(<i>t</i>), <i>m</i>, <i>s</i>, <i>milli</i>)).</li>
-          <li>Let <i>v</i> be TimeClip(<i>date</i>).</li>
+          <li>If <i>sec</i> is not specified, then let <i>s</i> be <a href="#sec-15.9.1.10">SecFromTime</a>(<i>t</i>); otherwise, let <i>s</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>sec</i>).</li>
+          <li>If <i>ms</i> is not specified, then let <i>milli</i> be <a href="#sec-15.9.1.10">msFromTime</a>(<i>t</i>); otherwise, let <i>milli</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>).</li>
+          <li>Let <i>date</i> be <a href="#sec-15.9.1.13">MakeDate</a>(Day(<i>t</i>), <a href="#sec-15.9.1.11">MakeTime</a>(<a href="#sec-15.9.1.10">HourFromTime</a>(<i>t</i>), <i>m</i>, <i>s</i>, <i>milli</i>)).</li>
+          <li>Let <i>v</i> be <a href="#sec-15.9.1.14">TimeClip</a>(<i>date</i>).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>v</i>.</li>
           <li>Return <i>v</i>.</li>
         </ol>
@@ -18613,13 +18614,13 @@ THH:mm:ss.sss</pre>
         <code>getMilliseconds()</code>.</p>
 
         <ol class="proc">
-          <li>Let <i>t</i> be the result of LocalTime(this time value).</li>
+          <li>Let <i>t</i> be the result of <a href="#sec-15.9.1.9">LocalTime</a>(this <a href="#sec-15.9.1.1">time value</a>).</li>
           <li>Let <i>h</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>hour</i>).</li>
-          <li>If <i>min</i> is not specified, then let <i>m</i> be MinFromTime(<i>t</i>); otherwise, let <i>m</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>min</i>).</li>
-          <li>If If <i>sec</i> is not specified, then let <i>s</i> be SecFromTime(<i>t</i>); otherwise, let <i>s</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>sec</i>).</li>
-          <li>If <i>ms</i> is not specified, then let <i>milli</i> be msFromTime(<i>t</i>); otherwise, let <i>milli</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>).</li>
-          <li>Let <i>date</i> be MakeDate(Day(<i>t</i>), MakeTime(<i>h</i>, <i>m</i>, <i>s</i>, <i>milli</i>)).</li>
-          <li>Let <i>u</i> be TimeClip(UTC(<i>date</i>)).</li>
+          <li>If <i>min</i> is not specified, then let <i>m</i> be <a href="#sec-15.9.1.10">MinFromTime</a>(<i>t</i>); otherwise, let <i>m</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>min</i>).</li>
+          <li>If If <i>sec</i> is not specified, then let <i>s</i> be <a href="#sec-15.9.1.10">SecFromTime</a>(<i>t</i>); otherwise, let <i>s</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>sec</i>).</li>
+          <li>If <i>ms</i> is not specified, then let <i>milli</i> be <a href="#sec-15.9.1.10">msFromTime</a>(<i>t</i>); otherwise, let <i>milli</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>).</li>
+          <li>Let <i>date</i> be <a href="#sec-15.9.1.13">MakeDate</a>(Day(<i>t</i>), <a href="#sec-15.9.1.11">MakeTime</a>(<i>h</i>, <i>m</i>, <i>s</i>, <i>milli</i>)).</li>
+          <li>Let <i>u</i> be <a href="#sec-15.9.1.14">TimeClip</a>(UTC(<i>date</i>)).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>u</i>.</li>
           <li>Return <i>u</i>.</li>
         </ol>
@@ -18643,13 +18644,13 @@ THH:mm:ss.sss</pre>
         <code>getUTCMilliseconds()</code>.</p>
 
         <ol class="proc">
-          <li>Let <i>t</i> be this time value.</li>
+          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
           <li>Let <i>h</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>hour</i>).</li>
-          <li>If <i>min</i> is not specified, then let <i>m</i> be MinFromTime(<i>t</i>); otherwise, let <i>m</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>min</i>).</li>
-          <li>If <i>sec</i> is not specified, then let <i>s</i> be SecFromTime(<i>t</i>); otherwise, let <i>s</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>sec</i>).</li>
-          <li>If <i>ms</i> is not specified, then let <i>milli</i> be msFromTime(<i>t</i>); otherwise, let <i>milli</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>).</li>
-          <li>Let <i>newDate</i> be MakeDate(Day(<i>t</i>), MakeTime(<i>h</i>, <i>m</i>, <i>s</i>, <i>milli</i>)).</li>
-          <li>Let <i>v</i> be TimeClip(<i>newDate</i>).</li>
+          <li>If <i>min</i> is not specified, then let <i>m</i> be <a href="#sec-15.9.1.10">MinFromTime</a>(<i>t</i>); otherwise, let <i>m</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>min</i>).</li>
+          <li>If <i>sec</i> is not specified, then let <i>s</i> be <a href="#sec-15.9.1.10">SecFromTime</a>(<i>t</i>); otherwise, let <i>s</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>sec</i>).</li>
+          <li>If <i>ms</i> is not specified, then let <i>milli</i> be <a href="#sec-15.9.1.10">msFromTime</a>(<i>t</i>); otherwise, let <i>milli</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>).</li>
+          <li>Let <i>newDate</i> be <a href="#sec-15.9.1.13">MakeDate</a>(Day(<i>t</i>), <a href="#sec-15.9.1.11">MakeTime</a>(<i>h</i>, <i>m</i>, <i>s</i>, <i>milli</i>)).</li>
+          <li>Let <i>v</i> be <a href="#sec-15.9.1.14">TimeClip</a>(<i>newDate</i>).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>v</i>.</li>
           <li>Return <i>v</i>.</li>
         </ol>
@@ -18660,10 +18661,10 @@ THH:mm:ss.sss</pre>
       <section id="sec-15.9.5.36">
         <h1><span class="secnum"><a href="#sec-15.9.5.36" title="link to this section">15.9.5.36</a></span> Date.prototype.setDate (date)</h1>
         <ol class="proc">
-          <li>Let <i>t</i> be the result of LocalTime(this time value).</li>
+          <li>Let <i>t</i> be the result of <a href="#sec-15.9.1.9">LocalTime</a>(this <a href="#sec-15.9.1.1">time value</a>).</li>
           <li>Let <i>dt</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>date</i>).</li>
-          <li>Let <i>newDate</i> be MakeDate(MakeDay(YearFromTime(<i>t</i>), MonthFromTime(<i>t</i>), <i>dt</i>), TimeWithinDay(<i>t</i>)).</li>
-          <li>Let <i>u</i> be TimeClip(UTC(<i>newDate</i>)).</li>
+          <li>Let <i>newDate</i> be <a href="#sec-15.9.1.13">MakeDate</a>(<a href="#sec-15.9.1.12">MakeDay</a>(<a href="#sec-15.9.1.3">YearFromTime</a>(<i>t</i>), <a href="#sec-15.9.1.4">MonthFromTime</a>(<i>t</i>), <i>dt</i>), <a href="#sec-15.9.1.2">TimeWithinDay</a>(<i>t</i>)).</li>
+          <li>Let <i>u</i> be <a href="#sec-15.9.1.14">TimeClip</a>(UTC(<i>newDate</i>)).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>u</i>.</li>
           <li>Return <i>u</i>.</li>
         </ol>
@@ -18672,10 +18673,10 @@ THH:mm:ss.sss</pre>
       <section id="sec-15.9.5.37">
         <h1><span class="secnum"><a href="#sec-15.9.5.37" title="link to this section">15.9.5.37</a></span> Date.prototype.setUTCDate (date)</h1>
         <ol class="proc">
-          <li>Let <i>t</i> be this time value.</li>
+          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
           <li>Let <i>dt</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>date</i>).</li>
-          <li>Let <i>newDate</i> be MakeDate(MakeDay(YearFromTime(<i>t</i>), MonthFromTime(<i>t</i>), <i>dt</i>), TimeWithinDay(<i>t</i>)).</li>
-          <li>Let <i>v</i> be TimeClip(<i>newDate</i>).</li>
+          <li>Let <i>newDate</i> be <a href="#sec-15.9.1.13">MakeDate</a>(<a href="#sec-15.9.1.12">MakeDay</a>(<a href="#sec-15.9.1.3">YearFromTime</a>(<i>t</i>), <a href="#sec-15.9.1.4">MonthFromTime</a>(<i>t</i>), <i>dt</i>), <a href="#sec-15.9.1.2">TimeWithinDay</a>(<i>t</i>)).</li>
+          <li>Let <i>v</i> be <a href="#sec-15.9.1.14">TimeClip</a>(<i>newDate</i>).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>v</i>.</li>
           <li>Return <i>v</i>.</li>
         </ol>
@@ -18689,11 +18690,11 @@ THH:mm:ss.sss</pre>
         <code>getDate()</code>.</p>
 
         <ol class="proc">
-          <li>Let <i>t</i> be the result of LocalTime(this time value).</li>
+          <li>Let <i>t</i> be the result of <a href="#sec-15.9.1.9">LocalTime</a>(this <a href="#sec-15.9.1.1">time value</a>).</li>
           <li>Let <i>m</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>month</i>).</li>
-          <li>If <i>date</i> is not specified, then let <i>dt</i> be DateFromTime(<i>t</i>); otherwise, let <i>dt</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>date</i>).</li>
-          <li>Let <i>newDate</i> be MakeDate(MakeDay(YearFromTime(<i>t</i>), <i>m</i>, <i>dt</i>), TimeWithinDay(<i>t</i>)).</li>
-          <li>Let <i>u</i> be TimeClip(UTC(<i>newDate</i>)).</li>
+          <li>If <i>date</i> is not specified, then let <i>dt</i> be <a href="#sec-15.9.1.5">DateFromTime</a>(<i>t</i>); otherwise, let <i>dt</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>date</i>).</li>
+          <li>Let <i>newDate</i> be <a href="#sec-15.9.1.13">MakeDate</a>(<a href="#sec-15.9.1.12">MakeDay</a>(<a href="#sec-15.9.1.3">YearFromTime</a>(<i>t</i>), <i>m</i>, <i>dt</i>), <a href="#sec-15.9.1.2">TimeWithinDay</a>(<i>t</i>)).</li>
+          <li>Let <i>u</i> be <a href="#sec-15.9.1.14">TimeClip</a>(UTC(<i>newDate</i>)).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>u</i>.</li>
           <li>Return <i>u</i>.</li>
         </ol>
@@ -18709,11 +18710,11 @@ THH:mm:ss.sss</pre>
         <code>getUTCDate()</code>.</p>
 
         <ol class="proc">
-          <li>Let <i>t</i> be this time value.</li>
+          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
           <li>Let <i>m</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>month</i>).</li>
-          <li>If <i>date</i> is not specified, then let <i>dt</i> be DateFromTime(<i>t</i>); otherwise, let <i>dt</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>date</i>).</li>
-          <li>Let <i>newDate</i> be MakeDate(MakeDay(YearFromTime(<i>t</i>), <i>m</i>, <i>dt</i>), TimeWithinDay(<i>t</i>)).</li>
-          <li>Let <i>v</i> be TimeClip(<i>newDate</i>).</li>
+          <li>If <i>date</i> is not specified, then let <i>dt</i> be <a href="#sec-15.9.1.5">DateFromTime</a>(<i>t</i>); otherwise, let <i>dt</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>date</i>).</li>
+          <li>Let <i>newDate</i> be <a href="#sec-15.9.1.13">MakeDate</a>(<a href="#sec-15.9.1.12">MakeDay</a>(<a href="#sec-15.9.1.3">YearFromTime</a>(<i>t</i>), <i>m</i>, <i>dt</i>), <a href="#sec-15.9.1.2">TimeWithinDay</a>(<i>t</i>)).</li>
+          <li>Let <i>v</i> be <a href="#sec-15.9.1.14">TimeClip</a>(<i>newDate</i>).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>v</i>.</li>
           <li>Return <i>v</i>.</li>
         </ol>
@@ -18733,12 +18734,12 @@ THH:mm:ss.sss</pre>
         <code>getDate()</code>.</p>
 
         <ol class="proc">
-          <li>Let <i>t</i> be the result of LocalTime(this time value); but if this time value is <b>NaN</b>, let <i>t</i> be <b>+0</b>.</li>
+          <li>Let <i>t</i> be the result of <a href="#sec-15.9.1.9">LocalTime</a>(this <a href="#sec-15.9.1.1">time value</a>); but if this <a href="#sec-15.9.1.1">time value</a> is <b>NaN</b>, let <i>t</i> be <b>+0</b>.</li>
           <li>Let <i>y</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>year</i>).</li>
-          <li>If <i>month</i> is not specified, then let <i>m</i> be MonthFromTime(<i>t</i>); otherwise, let <i>m</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>month</i>).</li>
-          <li>If <i>date</i> is not specified, then let <i>dt</i> be DateFromTime(<i>t</i>); otherwise, let <i>dt</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>date</i>).</li>
-          <li>Let <i>newDate</i> be MakeDate(MakeDay(<i>y</i>, <i>m</i>, <i>dt</i>), TimeWithinDay(<i>t</i>)).</li>
-          <li>Let <i>u</i> be TimeClip(UTC(<i>newDate</i>)).</li>
+          <li>If <i>month</i> is not specified, then let <i>m</i> be <a href="#sec-15.9.1.4">MonthFromTime</a>(<i>t</i>); otherwise, let <i>m</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>month</i>).</li>
+          <li>If <i>date</i> is not specified, then let <i>dt</i> be <a href="#sec-15.9.1.5">DateFromTime</a>(<i>t</i>); otherwise, let <i>dt</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>date</i>).</li>
+          <li>Let <i>newDate</i> be <a href="#sec-15.9.1.13">MakeDate</a>(<a href="#sec-15.9.1.12">MakeDay</a>(<i>y</i>, <i>m</i>, <i>dt</i>), <a href="#sec-15.9.1.2">TimeWithinDay</a>(<i>t</i>)).</li>
+          <li>Let <i>u</i> be <a href="#sec-15.9.1.14">TimeClip</a>(UTC(<i>newDate</i>)).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>u</i>.</li>
           <li>Return <i>u</i>.</li>
         </ol>
@@ -18758,12 +18759,12 @@ THH:mm:ss.sss</pre>
         <code>getUTCDate()</code>.</p>
 
         <ol class="proc">
-          <li>Let <i>t</i> be this time value; but if this time value is <b>NaN</b>, let <i>t</i> be <b>+0</b>.</li>
+          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>; but if this <a href="#sec-15.9.1.1">time value</a> is <b>NaN</b>, let <i>t</i> be <b>+0</b>.</li>
           <li>Let <i>y</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>year</i>).</li>
-          <li>If <i>month</i> is not specified, then let <i>m</i> be MonthFromTime(<i>t</i>); otherwise, let <i>m</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>month</i>).</li>
-          <li>If <i>date</i> is not specified, then let <i>dt</i> be DateFromTime(<i>t</i>); otherwise, let <i>dt</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>date</i>).</li>
-          <li>Let <i>newDate</i> be MakeDate(MakeDay(<i>y</i>, <i>m</i>, <i>dt</i>), TimeWithinDay(<i>t</i>)).</li>
-          <li>Let <i>v</i> be TimeClip(<i>newDate</i>).</li>
+          <li>If <i>month</i> is not specified, then let <i>m</i> be <a href="#sec-15.9.1.4">MonthFromTime</a>(<i>t</i>); otherwise, let <i>m</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>month</i>).</li>
+          <li>If <i>date</i> is not specified, then let <i>dt</i> be <a href="#sec-15.9.1.5">DateFromTime</a>(<i>t</i>); otherwise, let <i>dt</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>date</i>).</li>
+          <li>Let <i>newDate</i> be <a href="#sec-15.9.1.13">MakeDate</a>(<a href="#sec-15.9.1.12">MakeDay</a>(<i>y</i>, <i>m</i>, <i>dt</i>), <a href="#sec-15.9.1.2">TimeWithinDay</a>(<i>t</i>)).</li>
+          <li>Let <i>v</i> be <a href="#sec-15.9.1.14">TimeClip</a>(<i>newDate</i>).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>v</i>.</li>
           <li>Return <i>v</i>.</li>
         </ol>
@@ -18791,8 +18792,8 @@ THH:mm:ss.sss</pre>
 
         <p>This function returns a String value represent the instance in time represented by this Date object. The format of the
         String is the Date Time string format defined in <a href="#sec-15.9.1.15">15.9.1.15</a>. All fields are present in the
-        String. The time zone is always UTC, denoted by the suffix Z. If the time value of this object is not a finite Number a
-        <b>RangeError</b> exception is thrown.</p>
+        String. The time zone is always UTC, denoted by the suffix Z. If the <a href="#sec-15.9.1.1">time value</a> of this object
+        is not a finite Number a <b>RangeError</b> exception is thrown.</p>
       </section>
 
       <section id="sec-15.9.5.44">
@@ -18830,7 +18831,7 @@ THH:mm:ss.sss</pre>
       <p>Date instances inherit properties from the Date prototype object and have a [[NativeBrand]] internal whose value is
       NativeDate. Date instances also have a [[PrimitiveValue]] internal property.</p>
 
-      <p>The [[PrimitiveValue]] internal property is time value represented by this Date object.</p>
+      <p>The [[PrimitiveValue]] internal property is <a href="#sec-15.9.1.1">time value</a> represented by this Date object.</p>
     </section>
   </section>
 
@@ -22611,9 +22612,9 @@ THH:mm:ss.sss</pre>
       <p>When the <b>getYear</b> method is called with no arguments, the following steps are taken:</p>
 
       <ol class="proc">
-        <li>Let <i>t</i> be this time value.</li>
+        <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
         <li>If <i>t</i> is <b>NaN</b>, return <b>NaN</b>.</li>
-        <li>Return YearFromTime(LocalTime(<i>t</i>)) &minus; 1900.</li>
+        <li>Return <a href="#sec-15.9.1.3">YearFromTime</a>(<a href="#sec-15.9.1.9">LocalTime</a>(<i>t</i>)) &minus; 1900.</li>
       </ol>
     </section>
 
@@ -22628,13 +22629,13 @@ THH:mm:ss.sss</pre>
       italic">year</span>, the following steps are taken:</p>
 
       <ol class="proc">
-        <li>Let <i>t</i> be the result of LocalTime(this time value); but if this time value is <b>NaN</b>, let <i>t</i> be <b>+0</b>.</li>
+        <li>Let <i>t</i> be the result of <a href="#sec-15.9.1.9">LocalTime</a>(this <a href="#sec-15.9.1.1">time value</a>); but if this <a href="#sec-15.9.1.1">time value</a> is <b>NaN</b>, let <i>t</i> be <b>+0</b>.</li>
         <li>Call <a href="#sec-9.1.3">ToNumber</a>(<i>year</i>).</li>
         <li>If Result(2) is <b>NaN</b>, set the [[PrimitiveValue]] internal property of the <b>this</b> value to <b>NaN</b> and return <b>NaN</b>.</li>
         <li>If Result(2) is not <b>NaN</b> and 0 &le; <a href="#sec-9.1.4">ToInteger</a>(Result(2)) &le; 99 then Result(4) is <a href="#sec-9.1.4">ToInteger</a>(Result(2)) +&nbsp;1900. Otherwise, Result(4) is Result(2).</li>
-        <li>Compute MakeDay(Result(4), MonthFromTime(<i>t</i>), DateFromTime(<i>t</i>)).</li>
-        <li>Compute UTC(MakeDate(Result(5), TimeWithinDay(<i>t</i>))).</li>
-        <li>Set the [[PrimitiveValue]] internal property of the <b>this</b> value to TimeClip(Result(6)).</li>
+        <li>Compute <a href="#sec-15.9.1.12">MakeDay</a>(Result(4), <a href="#sec-15.9.1.4">MonthFromTime</a>(<i>t</i>), <a href="#sec-15.9.1.5">DateFromTime</a>(<i>t</i>)).</li>
+        <li>Compute UTC(<a href="#sec-15.9.1.13">MakeDate</a>(Result(5), <a href="#sec-15.9.1.2">TimeWithinDay</a>(<i>t</i>))).</li>
+        <li>Set the [[PrimitiveValue]] internal property of the <b>this</b> value to <a href="#sec-15.9.1.14">TimeClip</a>(Result(6)).</li>
         <li>Return the value of the [[PrimitiveValue]] internal property of the <b>this</b> value.</li>
       </ol>
     </section>
