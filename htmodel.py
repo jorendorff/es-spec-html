@@ -2,6 +2,7 @@ import re
 import html as _html
 from html.entities import codepoint2name as _entities
 from io import StringIO
+import textwrap
 
 class Element:
     __slots__ = ['name', 'attrs', 'style', 'content']
@@ -54,7 +55,7 @@ def escape(s, quote=False):
     return re.sub('[^\n -~]', replace, s)
 
 empty_tags = {'meta', 'br', 'hr', 'link'}
-non_indenting_tags = {'html', 'body', 'section'}
+non_indenting_tags = {'html', 'body'}
 
 def save_html(filename, ht):
     assert ht.name == 'html'
@@ -64,6 +65,8 @@ def save_html(filename, ht):
         write_html(f, ht)
 
 def write_html(f, ht, indent='', strict=True):
+    WIDTH = 130
+
     def htmlify(name):
         """ Convert a pythonified tag name or attribute name back to HTML. """
         if name.endswith('_'):
@@ -111,7 +114,21 @@ def write_html(f, ht, indent='', strict=True):
     info = _tag_data[ht.name]
     content = ht.content
     assert info[1] != '0' or len(content) == 0  # empty tag is empty
-    if info[0] == 'B':
+
+    if ht.name == 'p':
+        tmpf = StringIO()
+        tmpf.write(start_tag(ht))
+        write_inline_content(tmpf, content, indent + '  ', False, strict)
+        tmpf.write('</{}>'.format(ht.name))
+        text = tmpf.getvalue()
+        if '\n' in text:
+            f.write(indent + text + "\n")
+        else:
+            f.write(textwrap.fill(text, WIDTH, expand_tabs=False, replace_whitespace=False,
+                                  initial_indent=indent, subsequent_indent=indent,
+                                  break_long_words=False, break_on_hyphens=False))
+            f.write("\n")
+    elif info[0] == 'B':
         # Block.
         f.write(indent + start_tag(ht))
         if info != 'B0':
@@ -130,13 +147,22 @@ def write_html(f, ht, indent='', strict=True):
                     if ht.name not in non_indenting_tags:
                         inner_indent += '  '
                     f.write('\n')
+                    prev_needs_space = False
+                    first = True
                     for kid in content:
                         if strict and is_ht_inline(kid):
                             if isinstance(kid, str):
                                 raise ValueError("<{}> element may contain either text or block content, not both".format(ht.name))
                             else:
-                                raise ValueError("<{}> element may contain either blocks (like <{}>) or inline content (like <{}>), not both".format(ht.name, content[0].name, kid.name))
+                                raise ValueError("<{}> element may contain either blocks (like <{}>) "
+                                                 "or inline content (like <{}>), not both".format(
+                                        ht.name, content[0].name, kid.name))
+                        needs_space = (strict or isinstance(kid, Element)) and kid.name in {'p', 'figure', 'section'}
+                        if not first and (prev_needs_space or needs_space):
+                            f.write('\n')
                         write_html(f, kid, inner_indent, strict)
+                        prev_needs_space = needs_space
+                        first = False
                     f.write(indent)
             f.write('</{}>'.format(ht.name))
         f.write('\n')
