@@ -5464,11 +5464,11 @@
       <h1><span class="secnum"><a href="#sec-10.3.1" title="link to this section">10.3.1</a></span> Identifier Resolution</h1>
 
       <p>Identifier resolution is the process of determining the binding of an <span style="font-family: Times New Roman;
-      font-style: italic">IdentifierName</span> using the LexicalEnvironment of the running execution context. During execution of
-      ECMAScript code, Identifier Resolution is performed using the following algorithm:</p>
+      font-style: italic">IdentifierName</span> using the <a href="#sec-10.3">LexicalEnvironment</a> of the running execution
+      context. During execution of ECMAScript code, Identifier Resolution is performed using the following algorithm:</p>
 
       <ol class="proc">
-        <li>Let <i>env</i> be the running execution context&rsquo;s LexicalEnvironment.</li>
+        <li>Let <i>env</i> be the running execution context&rsquo;s <a href="#sec-10.3">LexicalEnvironment</a>.</li>
         <li>If the syntactic production that is being evaluated is contained in a strict mode code, then let <i>strict</i> be <b>true</b>, else let <i>strict</i> be <b>false</b>.</li>
         <li>Return the result of calling <a href="#sec-10.2.2.1">GetIdentifierReference</a> abstract operation passing <i>env</i>, the String value containing the same sequence of characters as <i>IdentifierName</i>, and <i>strict</i> as arguments.</li>
       </ol>
@@ -5486,9 +5486,10 @@
     context, even if a function is calling itself recursively. Every return exits an execution context. A thrown exception may
     also exit one or more execution contexts.</p>
 
-    <p>When control enters an execution context, the execution context&rsquo;s ThisBinding is set, its VariableEnvironment and
-    initial LexicalEnvironment are defined, and declaration binding instantiation (<a href="#sec-10.5">10.5</a>) is performed. The
-    exact manner in which these actions occur depend on the type of code being entered.</p>
+    <p>When control enters an execution context, the execution context&rsquo;s <a href="#sec-10.3">ThisBinding</a> is set, its <a
+    href="#sec-10.3">VariableEnvironment</a> and initial <a href="#sec-10.3">LexicalEnvironment</a> are defined, and <a
+    href="#sec-10.5">declaration binding instantiation (10.5)</a> is performed. The exact manner in which these actions occur
+    depend on the type of code being entered.</p>
 
     <section id="sec-10.4.1">
       <h1><span class="secnum"><a href="#sec-10.4.1" title="link to this section">10.4.1</a></span> Entering Global Code</h1>
@@ -5497,7 +5498,7 @@
 
       <ol class="proc">
         <li>Initialise the execution context using the global code as described in <a href="#sec-10.4.1.1">10.4.1.1</a>.</li>
-        <li>Perform Declaration Binding Instantiation as described in <a href="#sec-10.5">10.5</a> using the global code.</li>
+        <li>Perform <a href="#sec-10.5">Declaration Binding Instantiation</a> as described in <a href="#sec-10.5">10.5</a> using the global code.</li>
       </ol>
 
       <section id="sec-10.4.1.1">
@@ -5507,9 +5508,9 @@
         style="font-family: Times New Roman; font-style: italic">C</span>:</p>
 
         <ol class="proc">
-          <li>Set the VariableEnvironment to <a href="#sec-10.2.3">the Global Environment</a>.</li>
-          <li>Set the LexicalEnvironment to <a href="#sec-10.2.3">the Global Environment</a>.</li>
-          <li>Set the ThisBinding to the global object.</li>
+          <li>Set the <a href="#sec-10.3">VariableEnvironment</a> to <a href="#sec-10.2.3">the Global Environment</a>.</li>
+          <li>Set the <a href="#sec-10.3">LexicalEnvironment</a> to <a href="#sec-10.2.3">the Global Environment</a>.</li>
+          <li>Set the <a href="#sec-10.3">ThisBinding</a> to the global object.</li>
         </ol>
       </section>
     </section>
@@ -5527,24 +5528,24 @@
         </li>
         <li>Else,
           <ol class="block">
-            <li>Set the ThisBinding to the same value as the ThisBinding of the calling execution context.</li>
-            <li>Set the LexicalEnvironment to the same value as the LexicalEnvironment of the calling execution context.</li>
-            <li>Set the VariableEnvironment to the same value as the VariableEnvironment of the calling execution context.</li>
+            <li>Set the <a href="#sec-10.3">ThisBinding</a> to the same value as the <a href="#sec-10.3">ThisBinding</a> of the calling execution context.</li>
+            <li>Set the <a href="#sec-10.3">LexicalEnvironment</a> to the same value as the <a href="#sec-10.3">LexicalEnvironment</a> of the calling execution context.</li>
+            <li>Set the <a href="#sec-10.3">VariableEnvironment</a> to the same value as the <a href="#sec-10.3">VariableEnvironment</a> of the calling execution context.</li>
           </ol>
         </li>
         <li>If the eval code is strict code, then
           <ol class="block">
-            <li>Let <i>strictVarEnv</i> be the result of calling <a href="#sec-10.2.2.2">NewDeclarativeEnvironment</a>  passing the LexicalEnvironment as the argument.</li>
-            <li>Set the LexicalEnvironment to <i>strictVarEnv</i>.</li>
-            <li>Set the VariableEnvironment to <i>strictVarEnv</i>.</li>
+            <li>Let <i>strictVarEnv</i> be the result of calling <a href="#sec-10.2.2.2">NewDeclarativeEnvironment</a>  passing the <a href="#sec-10.3">LexicalEnvironment</a> as the argument.</li>
+            <li>Set the <a href="#sec-10.3">LexicalEnvironment</a> to <i>strictVarEnv</i>.</li>
+            <li>Set the <a href="#sec-10.3">VariableEnvironment</a> to <i>strictVarEnv</i>.</li>
           </ol>
         </li>
-        <li>Perform Declaration Binding Instantiation as described in <a href="#sec-10.5">10.5</a> using the eval code.</li>
+        <li>Perform <a href="#sec-10.5">Declaration Binding Instantiation</a> as described in <a href="#sec-10.5">10.5</a> using the eval code.</li>
       </ol>
 
       <p>NOTE&#x9;The eval code cannot instantiate variable or function bindings in the variable environment of the calling
       context that invoked the eval if either the code of the calling context or the eval code is strict code. Instead such
-      bindings are instantiated in a new VariableEnvironment that is only accessible to the eval code.</p>
+      bindings are instantiated in a new <a href="#sec-10.3">VariableEnvironment</a> that is only accessible to the eval code.</p>
     </section>
 
     <section id="sec-10.4.3">
@@ -5557,14 +5558,14 @@
 
       <ol class="proc">
         <li>Let <i>strict</i> be the value of <i>F</i>&rsquo;s [[Strict]] internal property.</li>
-        <li>If <i>strict</i> is <b>true</b>, set the ThisBinding to <i>thisArg</i>.</li>
-        <li>Else if <i>thisArg</i> is <b>null</b> or <b>undefined</b>, set the ThisBinding to the global object.</li>
-        <li>Else if Type(<i>thisArg</i>) is not Object, set the ThisBinding to <a href="#sec-9.1.9">ToObject</a>(<i>thisArg</i>).</li>
-        <li>Else set the ThisBinding to <i>thisArg</i>.</li>
+        <li>If <i>strict</i> is <b>true</b>, set the <a href="#sec-10.3">ThisBinding</a> to <i>thisArg</i>.</li>
+        <li>Else if <i>thisArg</i> is <b>null</b> or <b>undefined</b>, set the <a href="#sec-10.3">ThisBinding</a> to the global object.</li>
+        <li>Else if Type(<i>thisArg</i>) is not Object, set the <a href="#sec-10.3">ThisBinding</a> to <a href="#sec-9.1.9">ToObject</a>(<i>thisArg</i>).</li>
+        <li>Else set the <a href="#sec-10.3">ThisBinding</a> to <i>thisArg</i>.</li>
         <li>Let <i>localEnv</i> be the result of calling <a href="#sec-10.2.2.2">NewDeclarativeEnvironment</a>  passing the value of the [[Scope]] internal property of <i>F</i> as the argument.</li>
-        <li>Set the LexicalEnvironment to <i>localEnv</i>.</li>
-        <li>Set the VariableEnvironment to <i>localEnv</i>.</li>
-        <li>Return the result of performing Function Declaration Binding Instantiation using the function <i>F</i>, <i>argumentsList</i> , and <i>localEnv</i> as described in <a href="#sec-10.5.3">10.5.3</a>.</li>
+        <li>Set the <a href="#sec-10.3">LexicalEnvironment</a> to <i>localEnv</i>.</li>
+        <li>Set the <a href="#sec-10.3">VariableEnvironment</a> to <i>localEnv</i>.</li>
+        <li>Return the result of performing <a href="#sec-10.5.3">Function Declaration Binding Instantiation</a> using the function <i>F</i>, <i>argumentsList</i> , and <i>localEnv</i> as described in <a href="#sec-10.5.3">10.5.3</a>.</li>
       </ol>
     </section>
   </section>
@@ -5576,13 +5577,13 @@
       <h1><span class="secnum"><a href="#sec-10.5.1" title="link to this section">10.5.1</a></span> Top-Level Declaration Instantiation</h1>
 
       <p>NOTE&#x9;When an execution context is established for evaluating non-function code declarations are instantiated in the
-      current <span style="font-family: Times New Roman">VariableEnvironment</span>.  Each top-level level variable, constant, or
-      function declarated in the code is instantiated.</p>
+      current <span style="font-family: Times New Roman"><a href="#sec-10.3">VariableEnvironment</a></span>.  Each top-level level
+      variable, constant, or function declarated in the code is instantiated.</p>
 
       <p>Top-level Declaration Instantiation for base code is performed as follows:</p>
 
       <ol class="proc">
-        <li>Let <i>env</i> be the environment record component of the running execution context&rsquo;s VariableEnvironment.</li>
+        <li>Let <i>env</i> be the environment record component of the running execution context&rsquo;s <a href="#sec-10.3">VariableEnvironment</a>.</li>
         <li>If <i>code</i> is eval code, then let <i>configurableBindings</i> be <b>true</b> else let <i>configurableBindings</i> be <b>false</b>.</li>
         <li>If <i>code</i> is strict code, then let <i>strict</i> be <b>true</b> else let <i>strict</i> be <b>false</b>.</li>
         <li>For each <i>FunctionDeclaration</i> <i>f</i> in <i>code</i>, in source text order do
@@ -6063,14 +6064,14 @@
 
       <div class="gp">PrimaryExpression <span style="font-family: sans-serif; font-weight: bold">:</span>  <code>this</code></div>
       <ol class="proc">
-        <li><span style="font-family: Times New Roman">Return the value of the ThisBinding of the current execution context.</span></li>
+        <li><span style="font-family: Times New Roman">Return the value of the <a href="#sec-10.3">ThisBinding</a> of the current execution context.</span></li>
       </ol>
     </section>
 
     <section id="sec-11.1.2">
       <h1><span class="secnum"><a href="#sec-11.1.2" title="link to this section">11.1.2</a></span> Identifier Reference</h1>
       <ol class="proc">
-        <li>Let <i>ref</i> be the result of performing Identifier Resolution as specified in <a href="#sec-10.3.1">10.3.1</a> using the <i>IdentifierName</i> corresponding to <i>Identifier</i>.</li>
+        <li>Let <i>ref</i> be the result of performing <a href="#sec-10.3.1">Identifier Resolution as specified in 10.3.1</a> using the <i>IdentifierName</i> corresponding to <i>Identifier</i>.</li>
         <li>Return <i>ref</i>.</li>
       </ol>
 
@@ -6594,7 +6595,7 @@
 
         <ol class="proc">
           <li>Let <i>propName</i> be PropName(<i>IdentifierName</i>).</li>
-          <li>Let <i>exprValue</i> be the result of performing Identifier Resolution as specified in <a href="#sec-10.3.1">10.3.1</a> using <i>IdentifierName</i>.</li>
+          <li>Let <i>exprValue</i> be the result of performing <a href="#sec-10.3.1">Identifier Resolution as specified in 10.3.1</a> using <i>IdentifierName</i>.</li>
           <li>Let <i>propValue</i> be <a href="#sec-8.9.1">GetValue</a>(<i>exprValue</i>).</li>
           <li>If <i>propValue</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>propValue</i>.</li>
           <li>Let <i>desc</i> be the <a href="#sec-8.10">Property Descriptor</a>{[[Value]]: <i>propValue</i>, [[Writable]]: <b>true</b>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}</li>
@@ -6621,7 +6622,7 @@
 
         <ol class="proc">
           <li>Let <i>propName</i> be PropName of <i>PropertyName</i>.</li>
-          <li>Let <i>closure</i> be the result of creating a new Function object as specified in <a href="#sec-13.1.1">13.1.1</a> using a <i>FormalParameterList</i> <b>:</b> [empty] production as the parameter list and body specified by <i>FunctionBody</i>. Pass in the LexicalEnvironment of the running execution context as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag. Pass object as the optional <i>homeObject</i> argument and propName as the optional <i>methodName</i> argument.</li>
+          <li>Let <i>closure</i> be the result of creating a new Function object as specified in <a href="#sec-13.1.1">13.1.1</a> using a <i>FormalParameterList</i> <b>:</b> [empty] production as the parameter list and body specified by <i>FunctionBody</i>. Pass in the <a href="#sec-10.3">LexicalEnvironment</a> of the running execution context as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag. Pass object as the optional <i>homeObject</i> argument and propName as the optional <i>methodName</i> argument.</li>
           <li>Let <i>desc</i> be the <a href="#sec-8.10">Property Descriptor</a>{[[Get]]: <i>closure</i>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}</li>
           <li>Return the result of calling the [[DefineOwnProperty]] internal method of <i>object</i> with arguments <i>propName</i>, <i>desc</i>, and <b>false</b>.</li>
         </ol>
@@ -6633,7 +6634,7 @@
 
         <ol class="proc">
           <li>Let <i>propName</i> be PropName of <i>PropertyName</i>.</li>
-          <li>Let <i>closure</i> be the result of creating a new Generator object as specified in <a href="#sec-13.2">13.2</a>.xxx  using a <i>FormalParameterList</i> <b>:</b> [empty] production as the parameter list and body specified by <i>FunctionBody</i>. Pass in the LexicalEnvironment of the running execution context as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag. Pass object as the optional <i>homeObject</i> argument and propName as the optional <i>methodName</i> argument.</li>
+          <li>Let <i>closure</i> be the result of creating a new Generator object as specified in <a href="#sec-13.2">13.2</a>.xxx  using a <i>FormalParameterList</i> <b>:</b> [empty] production as the parameter list and body specified by <i>FunctionBody</i>. Pass in the <a href="#sec-10.3">LexicalEnvironment</a> of the running execution context as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag. Pass object as the optional <i>homeObject</i> argument and propName as the optional <i>methodName</i> argument.</li>
           <li>Let <i>desc</i> be the <a href="#sec-8.10">Property Descriptor</a>{[[Get]]: <i>closure</i>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}</li>
           <li>Return the result of calling the [[DefineOwnProperty]] internal method of <i>object</i> with arguments <i>propName</i>, <i>desc</i>, and <b>false</b>.</li>
         </ol>
@@ -6644,7 +6645,7 @@
 
         <ol class="proc">
           <li>Let <i>propName</i> be PropName(<i>PropertyName</i>).</li>
-          <li>Let <i>closure</i> be the result of creating a new Function object as specified in <a href="#sec-13.2">13.2</a> using a <i>FormalParameterList</i> <b>:</b> [empty] production as the formal parameter list and body specified by <i>FunctionBody</i>. Pass in the LexicalEnvironment of the running execution context as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag if the <i>PropertyAssignment</i> is contained in strict code or if its <i>FunctionBody</i> is strict code. Pass object as the optional <i>homeObject</i> argument and propName as the optional <i>methodName</i> argument.</li>
+          <li>Let <i>closure</i> be the result of creating a new Function object as specified in <a href="#sec-13.2">13.2</a> using a <i>FormalParameterList</i> <b>:</b> [empty] production as the formal parameter list and body specified by <i>FunctionBody</i>. Pass in the <a href="#sec-10.3">LexicalEnvironment</a> of the running execution context as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag if the <i>PropertyAssignment</i> is contained in strict code or if its <i>FunctionBody</i> is strict code. Pass object as the optional <i>homeObject</i> argument and propName as the optional <i>methodName</i> argument.</li>
           <li>Let <i>desc</i> be the <a href="#sec-8.10">Property Descriptor</a>{[[Get]]: <i>closure</i>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}</li>
           <li>Return the result of calling the [[DefineOwnProperty]] internal method of <i>object</i> with arguments <i>propName</i>, <i>desc</i>, and <b>false</b>.</li>
         </ol>
@@ -6656,7 +6657,7 @@
 
         <ol class="proc">
           <li>Let <i>propName</i> be PropName(<i>PropertyName</i>).</li>
-          <li>Let <i>closure</i> be the result of creating a new Function object as specified in <a href="#sec-13.2">13.2</a> with parameters specified by <i>PropertySetParameterList</i> and body specified by <i>FunctionBody</i>. Pass in the LexicalEnvironment of the running execution context as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag if the <i>PropertyAssignment</i> is contained in strict code or if its <i>FunctionBody</i> is strict code. Pass object as the optional <i>homeObject</i> argument and propName as the optional <i>methodName</i> argument.</li>
+          <li>Let <i>closure</i> be the result of creating a new Function object as specified in <a href="#sec-13.2">13.2</a> with parameters specified by <i>PropertySetParameterList</i> and body specified by <i>FunctionBody</i>. Pass in the <a href="#sec-10.3">LexicalEnvironment</a> of the running execution context as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag if the <i>PropertyAssignment</i> is contained in strict code or if its <i>FunctionBody</i> is strict code. Pass object as the optional <i>homeObject</i> argument and propName as the optional <i>methodName</i> argument.</li>
           <li>Let <i>desc</i> be the <a href="#sec-8.10">Property Descriptor</a>{[[Set]]: <i>closure</i>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}</li>
           <li>Return the result of calling the [[DefineOwnProperty]] internal method of <i>object</i> with arguments <i>propName</i>, <i>desc</i>, and <b>false</b>.</li>
         </ol>
@@ -8488,7 +8489,7 @@
 
         <ol class="proc">
           <li>Let <i>v</i> be the result of calling the [[Get]] internal method of <i>obj</i> with the <i>Identifier</i> string as the argument.</li>
-          <li>Let <i>lref</i> be the result of performing Identifier Resolution(10.3.1) with the <i>IdentifierName</i> corresponding to <i>Identifier</i>.</li>
+          <li>Let <i>lref</i> be the result of performing <a href="#sec-10.3.1">Identifier Resolution(10.3.1)</a> with the <i>IdentifierName</i> corresponding to <i>Identifier</i>.</li>
           <li>Return <a href="#sec-8.9.2">PutValue</a>(<i>lref</i>,<i>v</i>).</li>
         </ol>
 
@@ -8966,17 +8967,17 @@
       style="font-family: Times New Roman; font-style: italic">StatementList</span> <code>}</code></p>
 
       <ol class="proc">
-        <li>Let <i>oldEnv</i> be the running execution context&rsquo;s LexicalEnvironment.</li>
+        <li>Let <i>oldEnv</i> be the running execution context&rsquo;s <a href="#sec-10.3">LexicalEnvironment</a>.</li>
         <li>Let <i>blockEnv</i> be the result of calling <a href="#sec-10.2.2.2">NewDeclarativeEnvironment</a> passing <i>oldEnv</i> as the argument.</li>
         <li>Perform Block Declaration Instantiation using <i>StatementList</i> and <i>blockEnv</i>.</li>
-        <li>Set the running execution context&rsquo;s LexicalEnvironment to <i>blockEnv</i>.</li>
+        <li>Set the running execution context&rsquo;s <a href="#sec-10.3">LexicalEnvironment</a> to <i>blockEnv</i>.</li>
         <li>Let <i>blockValue</i> be the result of evaluating <i>StatementList</i>.</li>
-        <li>Set the running execution context&rsquo;s LexicalEnvironment to <i>oldEnv</i>.</li>
+        <li>Set the running execution context&rsquo;s <a href="#sec-10.3">LexicalEnvironment</a> to <i>oldEnv</i>.</li>
         <li>Return <i>blockValue</i>.</li>
       </ol>
       <div class="note">
         <p><span class="nh">NOTE</span> No matter how control leaves the <span style="font-family: Times New Roman; font-style:
-        italic">Block</span> the LexicalEnvironment is always restored to its former state.</p>
+        italic">Block</span> the <a href="#sec-10.3">LexicalEnvironment</a> is always restored to its former state.</p>
       </div>
 
       <p><span style="font-family: Times New Roman; font-style: italic">StatementList</span> <b>:</b> <span style="font-family:
@@ -9032,17 +9033,17 @@
       <h1><span class="secnum"><a href="#sec-12.2.1" title="link to this section">12.2.1</a></span> Let and Const Declarations</h1>
 
       <p>NOTE&#x9;A <code>let</code> and <code>const</code> declarations define variables that are scoped to the current execution
-      context&rsquo;s LexicalEnvironment. The variables are created when their containing Lexical Environment is instantiated but
-      may not be accssed in any way until the variable&rsquo;s <span style="font-family: Times New Roman; font-style:
-      italic">LexicalBinding</span> is evaluated. A variable defined by a <span style="font-family: Times New Roman; font-style:
-      italic">LexicalBinding</span> with an <span style="font-family: Times New Roman; font-style: italic">Initialiser</span> is
-      assigned the value of its <span style="font-family: Times New Roman"><i>Initialiser</i>&rsquo;s</span> <span
-      style="font-family: Times New Roman; font-style: italic">AssignmentExpression</span> when the <span style="font-family:
-      Times New Roman; font-style: italic">LetBinding</span> is evaluated, not when the variable is created. If a <span
-      style="font-family: Times New Roman; font-style: italic">LexicalBinding</span> in a <code>let</code> declaration does not
-      have an an <span style="font-family: Times New Roman; font-style: italic">Initialiser</span> the variable is assigned the
-      value <b>undefined</b> when the <span style="font-family: Times New Roman; font-style: italic">LetBinding</span> is
-      executed.</p>
+      context&rsquo;s <a href="#sec-10.3">LexicalEnvironment</a>. The variables are created when their containing Lexical
+      Environment is instantiated but may not be accssed in any way until the variable&rsquo;s <span style="font-family: Times New
+      Roman; font-style: italic">LexicalBinding</span> is evaluated. A variable defined by a <span style="font-family: Times New
+      Roman; font-style: italic">LexicalBinding</span> with an <span style="font-family: Times New Roman; font-style:
+      italic">Initialiser</span> is assigned the value of its <span style="font-family: Times New
+      Roman"><i>Initialiser</i>&rsquo;s</span> <span style="font-family: Times New Roman; font-style:
+      italic">AssignmentExpression</span> when the <span style="font-family: Times New Roman; font-style:
+      italic">LetBinding</span> is evaluated, not when the variable is created. If a <span style="font-family: Times New Roman;
+      font-style: italic">LexicalBinding</span> in a <code>let</code> declaration does not have an an <span style="font-family:
+      Times New Roman; font-style: italic">Initialiser</span> the variable is assigned the value <b>undefined</b> when the <span
+      style="font-family: Times New Roman; font-style: italic">LetBinding</span> is executed.</p>
 
       <h2>Syntax</h2>
       <div class="gp">
@@ -9269,7 +9270,7 @@
         Times New Roman; font-style: italic">BindingIdentifier</span></p>
 
         <ol class="proc">
-          <li>Let <i>env</i> be the running execution context&rsquo;s LexicalEnvironment.</li>
+          <li>Let <i>env</i> be the running execution context&rsquo;s <a href="#sec-10.3">LexicalEnvironment</a>.</li>
           <li>Return the result of performing Binding Initialisation for <i>BindingIdentifier</i> passing <b>undefined</b> and <i>env</i> as the arguments.</li>
         </ol>
 
@@ -9283,7 +9284,7 @@
           <li>Let <i>rhs</i> be the result of evaluating <i>Initialiser</i>.</li>
           <li>Let <i>value</i> be <a href="#sec-8.9.1">GetValue</a>(<i>rhs</i>).</li>
           <li>If <i>value</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>rval</i>.</li>
-          <li>Let <i>env</i> be the running execution context&rsquo;s LexicalEnvironment.</li>
+          <li>Let <i>env</i> be the running execution context&rsquo;s <a href="#sec-10.3">LexicalEnvironment</a>.</li>
           <li>Return the result of performing Binding Initialisation for <i>BindingIdentifier</i> passing <i>value</i> and <i>env</i> as the arguments.</li>
         </ol>
 
@@ -9294,7 +9295,7 @@
           <li>Let <i>rhs</i> be the result of evaluating <i>Initialiser</i>.</li>
           <li>Let <i>rval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>rhs</i>).</li>
           <li>If <i>rval</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>rval</i>.</li>
-          <li>Let <i>env</i> be the running execution context&rsquo;s LexicalEnvironment.</li>
+          <li>Let <i>env</i> be the running execution context&rsquo;s <a href="#sec-10.3">LexicalEnvironment</a>.</li>
           <li>Return the result of performing Binding Initialisation for <i>BindingPattern</i> using <i>rval</i> as the <i>obj</i> parameter and <i>env</i> as the <i>environment</i> parameter.</li>
         </ol>
 
@@ -9310,16 +9311,16 @@
     <section id="sec-12.2.2">
       <h1><span class="secnum"><a href="#sec-12.2.2" title="link to this section">12.2.2</a></span> Variable Statement</h1>
 
-      <p>NOTE&#x9;A <code>var</code> statement declares variables that are scoped to the current execution context&rsquo;s
-      VariableEnvironment. Var variables are created when their containing Lexical Environment is instantiated and are initialised
-      to <b>undefined</b> when created. Within the scope of any VariableEnvironemnt a common <span style="font-family: Times New
-      Roman; font-style: italic">Identifier</span> may appear in more than one <span style="font-family: Times New Roman;
-      font-style: italic">VariableDeclaration</span> but those declarations collective define only one variable. A variable
-      defined by a <span style="font-family: Times New Roman; font-style: italic">VariableDeclaration</span> with an <span
-      style="font-family: Times New Roman; font-style: italic">Initialiser</span> is assigned the value of its <span
-      style="font-family: Times New Roman"><i>Initialiser</i>&rsquo;s</span> <span style="font-family: Times New Roman;
-      font-style: italic">AssignmentExpression</span> when the <span style="font-family: Times New Roman; font-style:
-      italic">VariableDeclaration</span> is executed, not when the variable is created.</p>
+      <p>NOTE&#x9;A <code>var</code> statement declares variables that are scoped to the current execution context&rsquo;s <a
+      href="#sec-10.3">VariableEnvironment</a>. Var variables are created when their containing Lexical Environment is
+      instantiated and are initialised to <b>undefined</b> when created. Within the scope of any VariableEnvironemnt a common
+      <span style="font-family: Times New Roman; font-style: italic">Identifier</span> may appear in more than one <span
+      style="font-family: Times New Roman; font-style: italic">VariableDeclaration</span> but those declarations collective define
+      only one variable. A variable defined by a <span style="font-family: Times New Roman; font-style:
+      italic">VariableDeclaration</span> with an <span style="font-family: Times New Roman; font-style: italic">Initialiser</span>
+      is assigned the value of its <span style="font-family: Times New Roman"><i>Initialiser</i>&rsquo;s</span> <span
+      style="font-family: Times New Roman; font-style: italic">AssignmentExpression</span> when the <span style="font-family:
+      Times New Roman; font-style: italic">VariableDeclaration</span> is executed, not when the variable is created.</p>
 
       <h2>Syntax</h2>
       <div class="gp">
@@ -9484,8 +9485,8 @@
           italic">VariableDeclaration</span> is nested within a with statement and the <i>Identifier</i> in the <span
           style="font-family: Times New Roman; font-style: italic">VariableDeclaration</span> is the same as a property name of
           the binding object of the with statement&rsquo;s object environment record, then step 3 will assign value to the
-          property instead of to the VariableEnvironment binding of the <span style="font-family: Times New Roman; font-style:
-          italic">Identifier</span>.</p>
+          property instead of to the <a href="#sec-10.3">VariableEnvironment</a> binding of the <span style="font-family: Times
+          New Roman; font-style: italic">Identifier</span>.</p>
         </div>
 
         <p><span style="font-family: Times New Roman; font-style: italic">VariableDeclaration</span> <b>:</b> <span
@@ -10422,7 +10423,7 @@
         style="font-family: Times New Roman; font-style: italic">Statement</span></p>
 
         <ol class="proc">
-          <li>Let <i>oldEnv</i> be the running execution context&rsquo;s LexicalEnvironment.</li>
+          <li>Let <i>oldEnv</i> be the running execution context&rsquo;s <a href="#sec-10.3">LexicalEnvironment</a>.</li>
           <li>Let <i>loopEnv</i> be the result of calling <a href="#sec-10.2.2.2">NewDeclarativeEnvironment</a> passing <i>oldEnv</i> as the argument.</li>
           <li>Let <i>isConst</i> be the the result of performing IsConstantDeclaration of <i>d</i>.</li>
           <li>For each element <i>dn</i> of the BoundNames of <i>LexicalDeclarationNoIn</i> do
@@ -10439,16 +10440,16 @@
               </li>
             </ol>
           </li>
-          <li>Set the running <b>execution</b> context&rsquo;s LexicalEnvironment to <i>loopEnv</i>.</li>
+          <li>Set the running <b>execution</b> context&rsquo;s <a href="#sec-10.3">LexicalEnvironment</a> to <i>loopEnv</i>.</li>
           <li>Let <i>forDcl</i> be the result of evaluating <i>LexicalDeclarationNoIn</i>.</li>
           <li>If loopContinues(<i>varDcl</i>,<i>labelSet</i>) is <b>false</b>, then
             <ol class="block">
-              <li>Set the running <b>execution</b> context&rsquo;s LexicalEnvironment to <i>oldEnv</i>.</li>
+              <li>Set the running <b>execution</b> context&rsquo;s <a href="#sec-10.3">LexicalEnvironment</a> to <i>oldEnv</i>.</li>
               <li>Return <i>varDcl</i>.</li>
             </ol>
           </li>
           <li>Let <i>bodyResult</i> be the result of performing For Body Evaluation with the first <i>Expression</i> as the <i>incrementExpr</i> argument, the second <i>Expression</i> as the <i>testExpr</i> argument and with <i>labelSet</i>.</li>
-          <li>Set the running <b>execution</b> context&rsquo;s LexicalEnvironment to <i>oldEnv</i>.</li>
+          <li>Set the running <b>execution</b> context&rsquo;s <a href="#sec-10.3">LexicalEnvironment</a> to <i>oldEnv</i>.</li>
           <li>Return  <i>bodyResult</i>.</li>
         </ol>
       </section>
@@ -10774,7 +10775,7 @@
         font-style: italic">labelSet</span> is performed as follows:</p>
 
         <ol class="proc">
-          <li>Let <i>oldEnv</i> be the running execution context&rsquo;s LexicalEnvironment.</li>
+          <li>Let <i>oldEnv</i> be the running execution context&rsquo;s <a href="#sec-10.3">LexicalEnvironment</a>.</li>
           <li>Let <i>V</i> = <b>undefined</b>).</li>
           <li>Repeat
             <ol class="block">
@@ -10815,7 +10816,7 @@
                       <li>Let <i>iterationEnv</i> be the result of calling <a href="#sec-10.2.2.2">NewDeclarativeEnvironment</a> passing <i>oldEnv</i> as the argument.</li>
                       <li>Perform Binding Instantiation for <i>lhs</i> passing <i>nextValue</i> and <i>iterationEnv</i> as arguments.</li>
                       <li>Let <i>status</i> be NormalCompletion(<span style="font-family: sans-serif">empty</span>)</li>
-                      <li>Set the running <b>execution</b> context&rsquo;s LexicalEnvironment to <i>iterationEnv</i>.</li>
+                      <li>Set the running <b>execution</b> context&rsquo;s <a href="#sec-10.3">LexicalEnvironment</a> to <i>iterationEnv</i>.</li>
                     </ol>
                   </li>
                   <li>If <i>status</i>.[[type]] is <span style="font-family: sans-serif">normal</span>, then
@@ -10828,7 +10829,7 @@
                       </li>
                     </ol>
                   </li>
-                  <li>Set the running <b>execution</b> context&rsquo;s LexicalEnvironment to <i>oldEnv</i>.</li>
+                  <li>Set the running <b>execution</b> context&rsquo;s <a href="#sec-10.3">LexicalEnvironment</a> to <i>oldEnv</i>.</li>
                   <li>If <i>status</i> is an <a href="#sec-8.8">abrupt completion</a> and  loopContinues(<i>status</i>,<i>labelSet</i>) is <b>false</b>, then return <i>status</i>.</li>
                 </ol>
               </li>
@@ -11032,10 +11033,10 @@
         <li>Let <i>val</i> be the result of evaluating <i>Expression</i>.</li>
         <li>Let <i>obj</i> be <a href="#sec-9.1.9">ToObject</a>(<a href="#sec-8.9.1">GetValue</a>(<i>val</i>)).</li>
         <li>If <i>obj</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>obj</i>.</li>
-        <li>Let <i>oldEnv</i> be the running execution context&rsquo;s LexicalEnvironment.</li>
+        <li>Let <i>oldEnv</i> be the running execution context&rsquo;s <a href="#sec-10.3">LexicalEnvironment</a>.</li>
         <li>Let <i>newEnv</i> be the result of calling <a href="#sec-10.2.2.3">NewObjectEnvironment</a> passing <i>obj</i> and <i>oldEnv</i> as the arguments.</li>
         <li>Set the <i>provideThis</i> flag of <i>newEnv</i> to <b>true</b>.</li>
-        <li>Set the running execution context&rsquo;s LexicalEnvironment to <i>newEnv</i>.</li>
+        <li>Set the running execution context&rsquo;s <a href="#sec-10.3">LexicalEnvironment</a> to <i>newEnv</i>.</li>
         <li>Let <i>C</i> be the result of evaluating <i>Statement</i>.</li>
         <li>Set the running execution context&rsquo;s Lexical Environment to <i>oldEnv</i>.</li>
         <li>Return <i>C</i>.</li>
@@ -11043,7 +11044,7 @@
       <div class="note">
         <p><span class="nh">NOTE</span> No matter how control leaves the embedded <span style="font-family: Times New Roman;
         font-style: italic">Statement</span>, whether normally or by some form of <a href="#sec-8.8">abrupt completion</a> or
-        exception, the LexicalEnvironment is always restored to its former state.</p>
+        exception, the <a href="#sec-10.3">LexicalEnvironment</a> is always restored to its former state.</p>
       </div>
     </section>
   </section>
@@ -11421,16 +11422,16 @@
         <li>Let <i>exprRef</i> be the result of evaluating <i>Expression</i>.</li>
         <li>Let <i>switchValue</i> be <a href="#sec-8.9.1">GetValue</a>(<i>exprRef</i>).</li>
         <li>If <i>switchValue</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>switchValue</i>.</li>
-        <li>Let <i>oldEnv</i> be the running execution context&rsquo;s LexicalEnvironment.</li>
+        <li>Let <i>oldEnv</i> be the running execution context&rsquo;s <a href="#sec-10.3">LexicalEnvironment</a>.</li>
         <li>Let <i>blockEnv</i> be the result of calling <a href="#sec-10.2.2.2">NewDeclarativeEnvironment</a> passing <i>oldEnv</i> as the argument.</li>
         <li>Perform Block Declaration Instantiation using <i>CaseBlock</i> and <i>blockEnv</i>.</li>
         <li>Let <i>R</i> be the result of performing Case Evaluation <i>CaseBlock</i> with argument <i>switchValue</i>.</li>
-        <li>Set the running execution context&rsquo;s LexicalEnvironment to <i>oldEnv</i>.</li>
+        <li>Set the running execution context&rsquo;s <a href="#sec-10.3">LexicalEnvironment</a> to <i>oldEnv</i>.</li>
         <li>Return <i>R</i>.</li>
       </ol>
       <div class="note">
         <p><span class="nh">NOTE</span> No matter how control leaves the <span style="font-family: Times New Roman; font-style:
-        italic">SwitchStatement</span> the LexicalEnvironment is always restored to its former state.</p>
+        italic">SwitchStatement</span> the <a href="#sec-10.3">LexicalEnvironment</a> is always restored to its former state.</p>
       </div>
 
       <p><span style="font-family: Times New Roman; font-style: italic">CaseClause</span> <b>:</b> <code>case</code> <span
@@ -11698,7 +11699,7 @@
       style="font-family: Times New Roman; font-style: italic">Block</span></p>
 
       <ol class="proc">
-        <li>Let <i>oldEnv</i> be the running execution context&rsquo;s LexicalEnvironment.</li>
+        <li>Let <i>oldEnv</i> be the running execution context&rsquo;s <a href="#sec-10.3">LexicalEnvironment</a>.</li>
         <li>Let <i>catchEnv</i> be the result of calling <a href="#sec-10.2.2.2">NewDeclarativeEnvironment</a> passing <i>oldEnv</i> as the argument.</li>
         <li>For each element <i>argName</i> of the BoundNames of <i>CatchParameter, do</i>
           <ol class="block">
@@ -11707,14 +11708,14 @@
         </li>
         <li>Let <i>status</i> be the result of performing Binding Initialisation for <i>CatchParameter</i> passing <i>thrownValue</i> and <i>catchEnv</i> as arguments.</li>
         <li>If <i>status</i> is an <a href="#sec-8.8">abrupt completion</a>, then return <i>status</i>.</li>
-        <li>Set the running execution context&rsquo;s LexicalEnvironment to <i>catchEnv</i>.</li>
+        <li>Set the running execution context&rsquo;s <a href="#sec-10.3">LexicalEnvironment</a> to <i>catchEnv</i>.</li>
         <li>Let <i>B</i> be the result of evaluating <i>Block</i>.</li>
-        <li>Set the running execution context&rsquo;s LexicalEnvironment to <i>oldEnv</i>.</li>
+        <li>Set the running execution context&rsquo;s <a href="#sec-10.3">LexicalEnvironment</a> to <i>oldEnv</i>.</li>
         <li>Return <i>B</i>.</li>
       </ol>
       <div class="note">
         <p><span class="nh">NOTE</span> No matter how control leaves the <span style="font-family: Times New Roman; font-style:
-        italic">Block</span> the LexicalEnvironment is always restored to its former state.</p>
+        italic">Block</span> the <a href="#sec-10.3">LexicalEnvironment</a> is always restored to its former state.</p>
       </div>
 
       <p><b>Runtime Semantics: Evaluation</b></p>
@@ -12149,7 +12150,7 @@
       <code>{</code> <span style="font-family: Times New Roman; font-style: italic">FunctionBody</span> <code>}</code></p>
 
       <ol class="proc">
-        <li><span style="font-family: Times New Roman">Return the result of creating a new Function object as specified in <a href="#sec-13.2">13.2</a> with parameters specified by <i>FormalParameterList</i> and body specified by <i>FunctionBody</i>. Pass in the LexicalEnvironment of the running execution context as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag if the <i>FunctionExpression</i> is contained in strict code or if its <i>FunctionBody</i> is strict code.</span></li>
+        <li><span style="font-family: Times New Roman">Return the result of creating a new Function object as specified in <a href="#sec-13.2">13.2</a> with parameters specified by <i>FormalParameterList</i> and body specified by <i>FunctionBody</i>. Pass in the <a href="#sec-10.3">LexicalEnvironment</a> of the running execution context as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag if the <i>FunctionExpression</i> is contained in strict code or if its <i>FunctionBody</i> is strict code.</span></li>
       </ol>
 
       <p><span style="font-family: Times New Roman; font-style: italic">FunctionExpression</span> <b>:</b> <code>function</code>

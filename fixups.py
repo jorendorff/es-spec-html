@@ -912,12 +912,6 @@ def fixup_figures(doc):
             figure.content.insert(0, child)
 
 def fixup_links(doc):
-    all_ids = set([kid.attrs['id'] for _, _, kid in all_parent_index_child_triples(doc) if 'id' in kid.attrs])
-
-    SECTION = r'([1-9A-Z][0-9]*(?:\.[1-9][0-9]*)+)'
-    def compile(re_source):
-        return re.compile(re_source.replace("SECTION", SECTION))
-
     sections_by_title = {}
     for sect in findall(doc, 'section'):
         if 'id' in sect.attrs and sect.content and sect.content[0].name == 'h1':
@@ -964,9 +958,29 @@ def fixup_links(doc):
         ('SameValue', 'The SameValue Algorithm'),
         ("the SameValue algorithm (9.12)", "The SameValue Algorithm"),
 
-        # clause 10
+        # 10.2
         ('strict mode code (see 10.1.1)', 'Strict Mode Code'),
         ('environment record (10.2.1)', 'Environment Records'),
+        ("declarative environment record", "Declarative Environment Records"),
+        ("Declarative Environment Record", "Declarative Environment Records"),
+        ("Object Environment Record", "Object Environment Records"),
+        ("GetIdentifierReference", "GetIdentifierReference (lex, name, strict)"),
+        ("NewDeclarativeEnvironment", "NewDeclarativeEnvironment (E)"),
+        ("NewObjectEnvironment", "NewObjectEnvironment (O, E)"),
+        ("the global environment", "The Global Environment"),
+        ("the Global Environment", "The Global Environment"),
+
+        # 10.3
+        ("LexicalEnvironment", "Execution Contexts"),
+        ("VariableEnvironment", "Execution Contexts"),
+        ("ThisBinding", "Execution Contexts"),
+        ("Identifier Resolution as specified in 10.3.1", "Identifier Resolution"),
+        ("Identifier Resolution(10.3.1)", "Identifier Resolution"),
+
+        # 10.5
+        ("Declaration Binding Instantiation", "Declaration Binding Instantiation"),
+        ("declaration binding instantiation (10.5)", "Declaration Binding Instantiation"),
+        ("Function Declaration Binding Instantiation", "Function Declaration Instantiation"),
 
         # clause 14
         ('Directive Prologue', 'Directive Prologues and the Use Strict Directive'),
@@ -1002,16 +1016,7 @@ def fixup_links(doc):
         ("MakeTime", "MakeTime (hour, min, sec, ms)"),
         ("MakeDay", "MakeDay (year, month, date)"),
         ("MakeDate", "MakeDate (day, time)"),
-        ("TimeClip", "TimeClip (time)"),
-
-        ("declarative environment record", "Declarative Environment Records"),
-        ("Declarative Environment Record", "Declarative Environment Records"),
-        ("Object Environment Record", "Object Environment Records"),
-        ("GetIdentifierReference", "GetIdentifierReference (lex, name, strict)"),
-        ("NewDeclarativeEnvironment", "NewDeclarativeEnvironment (E)"),
-        ("NewObjectEnvironment", "NewObjectEnvironment (O, E)"),
-        ("the global environment", "The Global Environment"),
-        ("the Global Environment", "The Global Environment"),
+        ("TimeClip", "TimeClip (time)")
     ]
 
     specific_links = [(text, sections_by_title[title]) for text, title in specific_link_source_data]
@@ -1027,6 +1032,12 @@ def fixup_links(doc):
         if m is not None:
             if target != '#sec-' + m.group(1):
                 print("OH NO, expected " + repr(m.group(1)) + ", got " + repr(target))
+
+    all_ids = set([kid.attrs['id'] for _, _, kid in all_parent_index_child_triples(doc) if 'id' in kid.attrs])
+
+    SECTION = r'([1-9A-Z][0-9]*(?:\.[1-9][0-9]*)+)'
+    def compile(re_source):
+        return re.compile(re_source.replace("SECTION", SECTION))
 
     section_link_regexes = list(map(compile, [
         # Match " (11.1.5)" and " (see 7.9)"
