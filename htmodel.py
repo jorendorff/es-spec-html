@@ -157,7 +157,10 @@ def write_html(f, ht, indent='', strict=True):
                                 raise ValueError("<{}> element may contain either blocks (like <{}>) "
                                                  "or inline content (like <{}>), not both".format(
                                         ht.name, content[0].name, kid.name))
-                        needs_space = (strict or isinstance(kid, Element)) and kid.name in {'p', 'figure', 'section'}
+                        needs_space = ((strict or isinstance(kid, Element))
+                                       and (kid.name in {'p', 'figure', 'section'}
+                                            or (kid.name in {'div', 'li', 'td'}
+                                                and kid.content and not is_ht_inline(kid.content[0]))))
                         if not first and (prev_needs_space or needs_space):
                             f.write('\n')
                         write_html(f, kid, inner_indent, strict)

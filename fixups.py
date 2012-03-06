@@ -292,7 +292,7 @@ def fixup_paragraph_classes(doc):
         'M20': 'div.math-display',
         'MathDefinition4': 'div.display',
         'MathSpecialCase3': 'li',
-        'Note': 'div.note',  # TODO needs default_tag *also*
+        'Note': '.Note',
         'RefNorm': 'p.formal-reference',
         'StandardNumber': 'h1',
         'StandardTitle': 'h1',
@@ -303,7 +303,7 @@ def fixup_paragraph_classes(doc):
         'SyntaxRule2': 'div.gp',
         'Tabletitle': 'figcaption',
         'TermNum': 'h1',
-        'Terms': 'p.Terms',  # TODO needs later fixup
+        'Terms': 'p.Terms',
         'zzBiblio': 'h1',
         'zzSTDTitle': 'div.inner-title'
     }
@@ -322,18 +322,14 @@ def fixup_paragraph_classes(doc):
 
             if cls in ('ANNEX', 'a2', 'a3', 'a4'):
                 munge_annex_heading(e, cls)
-            elif cls == 'Note':
-                # Total special case. Wrap in div.note.
-                e.name = 'div'
-                e.content = [html.Element(default_tag, e.attrs, e.style, e.content)]
-                e.style = None
-                e.attrs = {'class': 'note'}
             else:
                 tag = tag_names.get(cls)
                 if tag is None:
                     tag = default_tag
                 elif '.' in tag:
                     tag, _, e.attrs['class'] = tag.partition('.')
+                    if tag == '':
+                        tag = default_tag
                 e.name = tag
         else:
             e.name = default_tag
@@ -681,67 +677,61 @@ def fixup_code(e):
             e.name = 'pre'
             e.content[:] = [s]
 
-def fixup_notes(e):
-    """ Apply several fixes to div.note elements throughout the document. """
+def fixup_notes(doc):
+    """ Wrap each NOTE in div.note and wrap the labels "NOTE", "NOTE 2", etc. in span.nh. """
 
-    def find_nh(div, verbose=False):
-        first_para = div.content[0]
-        s = first_para.content[0]
+    def find_nh(p, strict=False):
+        s = p.content[0]
         if not isinstance(s, str):
-            if verbose: print("warning in fixup_notes: div.note paragraph does not start with a string")
+            if strict:
+                warn("warning in fixup_notes: p.Note paragraph does not start with a string ")
             return None
         else:
             left, tab, right = s.partition('\t')
             if tab is None:
-                if verbose: print('warning in fixup_notes: no tab in div.note:', repr(s))
+                if strict:
+                    warn('warning in fixup_notes: no tab in NOTE: ' + repr(s))
                 return None
             elif not left.startswith('NOTE'):
-                if verbose: print('warning in fixup_notes: no "NOTE" in div.note:', repr(s))
+                if strict:
+                    warn('warning in fixup_notes: no "NOTE" in p.Note: ' + repr(s))
                 return None
             else:
-                return first_para, left, right
+                return left, right
 
-    def can_be_eaten(next_sibling):
-        if isinstance(next_sibling, str):
-            return False
-        return next_sibling.name == 'pre'
+    def can_be_included(next_sibling):
+        return (next_sibling.name == 'pre'
+                or (next_sibling.name in ('p', 'li')
+                    and next_sibling.attrs.get("class") == "Note"
+                    and find_nh(next_sibling, strict=False) is None))
 
-    def can_be_combined(next_sibling):
-        return (not isinstance(next_sibling, str)
-                and next_sibling.name == 'div'
-                and next_sibling.attrs.get("class") == "note"
-                and find_nh(next_sibling) is None)
-
-    def fixup_notes_in(e):
-        for i, k in e.kids():
-            if k.name == 'div' and k.attrs.get('class') == 'note':
+    for parent, i, p in all_parent_index_child_triples(doc):
+        if p.name == 'p':
+            has_note_class = p.attrs.get('class') == 'Note'
+            nh_info = find_nh(p, strict=has_note_class)
+            if nh_info or has_note_class:
                 # This is a note! See if the word "NOTE" or "NOTE 1" can be divided out into
                 # a span.nh element. This should ordinarily be the case.
-                nh_info = find_nh(k, verbose=True)
-                if nh_info is not None:
-                    container, nh, rest = nh_info
-                    assert container.content[0] == nh + '\t' + rest
-                    container.content[0] = ' ' + rest
-                    container.content.insert(0, html.span(nh, class_="nh"))
+                if nh_info:
+                    nh, rest = nh_info
+                    assert p.content[0] == nh + '\t' + rest
+                    p.content[0] = ' ' + rest
+                    p.content.insert(0, html.span(nh, class_="nh"))
 
-                # Now look for neighboring div.note elements. These normally are
-                # other paragraphs belonging to the same note--in which case, merge
-                # them.
-                while i + 1 < len(e.content):
-                    next_sibling = e.content[i + 1]
-                    if can_be_eaten(next_sibling):
-                        k.content.append(next_sibling)
-                        del e.content[i + 1]
-                    elif can_be_combined(next_sibling):
-                        k.content += next_sibling.content
-                        del e.content[i + 1]
-                    else:
-                        break
-            else:
-                # Recurse.
-                fixup_notes(k)
+                # We don't need .Note anymore; remove it.
+                if has_note_class:
+                    del p.attrs['class']
 
-    fixup_notes_in(e)
+                # Look for sibling elements that belong to the same note.
+                j = i + 1
+                while j < len(parent.content) and can_be_included(parent.content[j]):
+                    if parent.content[j].attrs.get('class') == 'Note':
+                        del parent.content[j].attrs['class']
+                    j += 1
+
+                # Wrap the whole note in a div.note element.
+                parent.content[i:j] = [html.div(*parent.content[i:j], class_="note")]
+
 
 def ht_text(ht):
     if isinstance(ht, str):
@@ -1049,7 +1039,7 @@ def fixup_links(doc):
         m = re.search(r'\((?:see )?([1-9][0-9]*(?:\.[1-9][0-9]*)*)\)', text)
         if m is not None:
             if target != '#sec-' + m.group(1):
-                print("OH NO, expected " + repr(m.group(1)) + ", got " + repr(target))
+                warn("text refers to section number " + repr(m.group(1)) + ", but actual section is " + repr(target))
 
     all_ids = set([kid.attrs['id'] for _, _, kid in all_parent_index_child_triples(doc) if 'id' in kid.attrs])
 

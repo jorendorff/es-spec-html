@@ -110,14 +110,14 @@ def parse_pr(e):
             if color is not None and re.match(r'^[0-9a-fA-F]{6}$', color):
                 put('background-color', '#' + color)
 
-        # todo: jc, ind, spacing, contextualSpacing
-        # todo: pBdr
-
         elif name == 'sz':
             if list(k.keys()) == [k_val]:
-                v = k.get(k_val)
-                float(v)  # throw if sz is not a number
-                #put('font-size', v + 'pt')
+                # The unit of w:sz is half-points lol.
+                v = float(k.get(k_val)) / 2
+                #put('font-size', str(v) + 'pt')
+
+        # todo: jc, ind, spacing, contextualSpacing
+        # todo: pBdr
 
         elif name == 'ind':
             left = k.get(k_left)
