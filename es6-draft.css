@@ -1,7 +1,7 @@
 /* Basics */
 html {
     padding-left: 6.8em;
-    padding-right: 1em;
+    padding-right: 6.8em;  /* It would be nice to have this collapse as the window gets small. */
 }
 body {
     margin: 0 auto;

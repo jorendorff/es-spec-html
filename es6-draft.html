@@ -981,7 +981,7 @@
 <p>The source text of an ECMAScript program is first converted into a sequence of input elements, which are tokens, line terminators, comments, or white space. The source text is scanned from left to right, repeatedly taking the longest possible sequence of characters as the next input element.</p>
 <p>There are two goal symbols for the lexical grammar. The <span style="font-family: Times New Roman; font-style: italic">InputElementDiv</span> symbol is used in those syntactic grammar contexts where a leading division (<code>/</code>) or division-assignment (<code>/=</code>) operator is permitted. The <span style="font-family: Times New Roman; font-style: italic">InputElementRegExp</span> symbol is used in other syntactic grammar contexts.</p>
 <div class="note">
-  <p><span class="nh">NOTE</span> There are no syntactic grammar contexts where both a leading division or division-assignment, and a leading <span style="font-family: Times New Roman; font-style: italic">RegularExpressionLiteral</span> are permitted. This is not affected by semicolon insertion (<a href="#sec-7.9">see 7.9</a>); in examples such as the following:</p>
+  <p><span class="nh">NOTE</span> There are no syntactic grammar contexts where both a leading division or division-assignment, and a leading <span style="font-family: Times New Roman; font-style: italic">RegularExpressionLiteral</span> are permitted. This is not affected by <a href="#sec-7.9">semicolon insertion (see 7.9)</a>; in examples such as the following:</p>
   <pre>a = b
 /hi/g.exec(c).map(d);</pre>
   <p>where the first non-whitespace, non-comment character after a <span style="font-family: Times New Roman; font-style: italic">LineTerminator</span> is slash (<code>/</code>) and the syntactic context allows division or division-assignment, no semicolon is inserted at the <span style="font-family: Times New Roman; font-style: italic">LineTerminator</span>. That is, the above example is interpreted in the same way as:</p>
@@ -1143,7 +1143,7 @@
 <section id="sec-7.4">
 <h1><span class="secnum"><a href="#sec-7.4" title="link to this section">7.4</a></span> Comments</h1>
 <p>Comments can be either single or multi-line. Multi-line comments cannot nest.</p>
-<p>Because a single-line comment can contain any character except a <span style="font-family: Times New Roman; font-style: italic">LineTerminator</span> character, and because of the general rule that a token is always as long as possible, a single-line comment always consists of all characters from the <code>//</code> marker to the end of the line. However, the <span style="font-family: Times New Roman; font-style: italic">LineTerminator</span> at the end of the line is not considered to be part of the single-line comment; it is recognised separately by the lexical grammar and becomes part of the stream of input elements for the syntactic grammar. This point is very important, because it implies that the presence or absence of single-line comments does not affect the process of automatic semicolon insertion (<a href="#sec-7.9">see 7.9</a>).</p>
+<p>Because a single-line comment can contain any character except a <span style="font-family: Times New Roman; font-style: italic">LineTerminator</span> character, and because of the general rule that a token is always as long as possible, a single-line comment always consists of all characters from the <code>//</code> marker to the end of the line. However, the <span style="font-family: Times New Roman; font-style: italic">LineTerminator</span> at the end of the line is not considered to be part of the single-line comment; it is recognised separately by the lexical grammar and becomes part of the stream of input elements for the syntactic grammar. This point is very important, because it implies that the presence or absence of single-line comments does not affect the process of <a href="#sec-7.9">automatic semicolon insertion (see 7.9)</a>.</p>
 <p>Comments behave like white space and are discarded except that, if a <span style="font-family: Times New Roman; font-style: italic">MultiLineComment</span> contains a line terminator character, then the entire comment is considered to be a <span style="font-family: Times New Roman; font-style: italic">LineTerminator</span> for purposes of parsing by the syntactic grammar.</p>
 <h2>Syntax</h2>
 <div class="gp">
@@ -1331,7 +1331,7 @@
     </tr>
   </table>
 </figure>
-<p>The following tokens are also considered to be <span style="font-family: Times New Roman; font-style: italic">FutureReservedWords</span> when they occur within strict mode code (<a href="#sec-10.1.1">see 10.1.1</a>). The occurrence of any of these tokens within strict mode code in any context where the occurrence of a <span style="font-family: Times New Roman; font-style: italic">FutureReservedWord</span> would produce an error must also produce an equivalent error:</p>
+<p>The following tokens are also considered to be <span style="font-family: Times New Roman; font-style: italic">FutureReservedWords</span> when they occur within <a href="#sec-10.1.1">strict mode code (see 10.1.1)</a>. The occurrence of any of these tokens within strict mode code in any context where the occurrence of a <span style="font-family: Times New Roman; font-style: italic">FutureReservedWord</span> would produce an error must also produce an equivalent error:</p>
 <figure>
   <table class="real-table">
     <tr>
@@ -1577,7 +1577,7 @@
   <li>it is not <code>0</code>; or</li>
   <li>there is a nonzero digit to its left and there is a nonzero digit, not in the <i>ExponentPart</i>, to its right.</li>
 </ul>
-<p>A conforming implementation, when processing strict mode code (<a href="#sec-10.1.1">see 10.1.1</a>), must not extend the syntax of <span style="font-family: Times New Roman; font-style: italic">NumericLiteral</span> to include <span style="font-family: Times New Roman; font-style: italic">OctalIntegerLiteral</span> as described in <a href="#sec-B.1.1">B.1.1</a>.</p>
+<p>A conforming implementation, when processing <a href="#sec-10.1.1">strict mode code (see 10.1.1)</a>, must not extend the syntax of <span style="font-family: Times New Roman; font-style: italic">NumericLiteral</span> to include <span style="font-family: Times New Roman; font-style: italic">OctalIntegerLiteral</span> as described in <a href="#sec-B.1.1">B.1.1</a>.</p>
 </section>
 <section id="sec-7.8.4">
 <h1><span class="secnum"><a href="#sec-7.8.4" title="link to this section">7.8.4</a></span> String Literals</h1>
@@ -1731,7 +1731,7 @@
   <li>The CV of <i>HexEscapeSequence</i> <b>::</b> <code>x</code> <i>HexDigit</i> <i>HexDigit</i> is the character whose code unit value is (16 times the MV of the first <i>HexDigit</i>) plus the MV of the second <i>HexDigit</i>.</li>
   <li>The CV of <i>UnicodeEscapeSequence</i> <b>::</b> <code>u</code> <span style="font-family: Times New Roman; font-style: italic">HexDigit</span> <i>HexDigit</i> <i>HexDigit</i> <i>HexDigit</i> is the character whose code unit value is (4096 times the MV of the first <i>HexDigit</i>) plus (256 times the MV of the second <i>HexDigit</i>) plus (16 times the MV of the third <i>HexDigit</i>) plus the MV of the fourth <i>HexDigit</i>.</li>
 </ul>
-<p>A conforming implementation, when processing strict mode code (<a href="#sec-10.1.1">see 10.1.1</a>), may not extend the syntax of <span style="font-family: Times New Roman; font-style: italic">EscapeSequence</span> to include <span style="font-family: Times New Roman; font-style: italic">OctalEscapeSequence</span> as described in <a href="#sec-B.1.2">B.1.2</a>.</p>
+<p>A conforming implementation, when processing <a href="#sec-10.1.1">strict mode code (see 10.1.1)</a>, may not extend the syntax of <span style="font-family: Times New Roman; font-style: italic">EscapeSequence</span> to include <span style="font-family: Times New Roman; font-style: italic">OctalEscapeSequence</span> as described in <a href="#sec-B.1.2">B.1.2</a>.</p>
 <div class="note">
   <p><span class="nh">NOTE</span> A line terminator character cannot appear in a string literal, except as part of a <span style="font-family: Times New Roman; font-style: italic">LineContinuation</span> to produce the empty character sequence. The correct way to cause a line terminator character to be part of the String value of a string literal is to use an escape sequence such as <code>\n</code> or <code>\u000A</code>.</p>
 </div>
@@ -3370,7 +3370,7 @@
 <p>An ECMAScript <span style="font-family: Times New Roman; font-style: italic">Program</span> syntactic unit may be processed using either unrestricted or strict mode syntax and semantics. When processed using strict mode the three types of ECMAScript code are referred to as strict global code, strict eval code, and strict function code. Code is interpreted as strict mode code in the following situations:</p>
 <ul>
   <li>Global code is strict global code if it begins with a Directive Prologue that contains a Use Strict Directive (<a href="#sec-14.1">see 14.1</a>).</li>
-  <li>Eval code is strict eval code if it begins with a Directive Prologue that contains a Use Strict Directive or if the call to eval is a direct call (<a href="#sec-15.1.2.1.1">see 15.1.2.1.1</a>) to the eval function that is contained in strict mode code.</li>
+  <li>Eval code is strict eval code if it begins with a Directive Prologue that contains a Use Strict Directive or if the call to eval is a <a href="#sec-15.1.2.1.1">direct call (see 15.1.2.1.1) to the eval function</a> that is contained in strict mode code.</li>
   <li>Function code that is part of a <span style="font-family: Times New Roman; font-style: italic">FunctionDeclaration</span>, <span style="font-family: Times New Roman; font-style: italic">FunctionExpression</span>, or accessor <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> is strict function code if its <span style="font-family: Times New Roman; font-style: italic">FunctionDeclaration</span>, <span style="font-family: Times New Roman; font-style: italic">FunctionExpression</span>, or <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> is contained in strict mode code or if the function code begins with a Directive Prologue that contains a Use Strict Directive.</li>
   <li>Function code that is supplied as the last argument to the built-in Function constructor is strict function code if the last argument is a String that when processed as a <span style="font-family: Times New Roman; font-style: italic">FunctionBody</span> begins with a Directive Prologue that contains a Use Strict Directive.</li>
   <li>Unless specified otherwise, extended code (10.1.2) is also strict mode code.</li>
@@ -9257,7 +9257,7 @@
   <li>Let <i>bodyText</i> be ToString(<i>bodyText</i>).</li>
   <li>Let <i>parameters</i> be the result of parsing <i>P</i> using <i>FormalParameterList</i> as the goal symbol. Throw a <b>SyntaxError</b> exception if the parse fails.</li>
   <li>Let <i>body</i> be the result of parsing <i>bodyText</i> using <i>FunctionBody</i> as the goal symbol. Throw a <b>SyntaxError</b> exception if the parse fails.</li>
-  <li>If <i>bodyText</i> is strict mode code (<a href="#sec-10.1.1">see 10.1.1</a>) then let <i>strict</i> be <b>true</b>, else let <i>strict</i> be <b>false</b>.</li>
+  <li>If <i>bodyText</i> is <a href="#sec-10.1.1">strict mode code (see 10.1.1)</a> then let <i>strict</i> be <b>true</b>, else let <i>strict</i> be <b>false</b>.</li>
   <li>If <i>strict</i> is <b>true</b>, throw any exceptions specified in <a href="#sec-13.1">13.1</a> that apply.</li>
   <li>Return a new Function object created as specified in <a href="#sec-13.2">13.2</a> passing <i>parameters</i> as the <i>FormalParameterList</i> and <i>body</i> as the <i>FunctionBody</i>. Pass in the Global Environment as the <i>Scope</i> parameter and <i>strict</i> as the <i>Strict</i> flag.</li>
 </ol>
@@ -14335,7 +14335,7 @@ THH:mm:ss.sss</pre>
     </tr>
   </table>
 </figure>
-<p>The following tokens are also considered to be <span style="font-family: Times New Roman; font-style: italic">FutureReservedWords</span> when parsing strict mode code (<a href="#sec-10.1.1">see 10.1.1</a>).</p>
+<p>The following tokens are also considered to be <span style="font-family: Times New Roman; font-style: italic">FutureReservedWords</span> when parsing <a href="#sec-10.1.1">strict mode code (see 10.1.1)</a>.</p>
 <figure>
   <table class="real-table">
     <tr>
@@ -15474,7 +15474,7 @@ THH:mm:ss.sss</pre>
 <ul>
   <li>The identifiers "<code>implements</code>", "<code>interface</code>", "<code>let</code>", "<code>package</code>", "<code>private</code>", "<code>protected</code>", "<code>public</code>", "<code>static</code>", and "<code>yield</code>" are classified as <i>FutureReservedWord</i> tokens within strict mode code. (7.6.12).</li>
   <li>A conforming implementation, when processing strict mode code, may not extend the syntax of <i>NumericLiteral</i> (<a href="#sec-7.8.3">7.8.3</a>) to include <i>OctalIntegerLiteral</i> as described in <a href="#sec-B.1.1">B.1.1</a>.</li>
-  <li>A conforming implementation, when processing strict mode code (<a href="#sec-10.1.1">see 10.1.1</a>), may not extend the syntax of <i>EscapeSequence</i> to include <i>OctalEscapeSequence</i> as described in <a href="#sec-B.1.2">B.1.2</a>.</li>
+  <li>A conforming implementation, when processing <a href="#sec-10.1.1">strict mode code (see 10.1.1)</a>, may not extend the syntax of <i>EscapeSequence</i> to include <i>OctalEscapeSequence</i> as described in <a href="#sec-B.1.2">B.1.2</a>.</li>
   <li>Assignment to an undeclared identifier or otherwise unresolvable reference does not create a property in the global object. When a simple assignment occurs within strict mode code, its <i>LeftHandSide</i> must not evaluate to an unresolvable Reference. If it does a <b>ReferenceError</b> exception is thrown (<a href="#sec-8.9.2">8.9.2</a>). The <i>LeftHandSide</i> also may not be a reference to a data property with the attribute value {[[Writable]]:<b>false</b>}, to an accessor property with the attribute value {[[Set]]:<b>undefined</b>},  nor to a non-existent property of an object whose [[Extensible]] internal property has the value <b>false</b>. In these cases a <code>TypeError</code> exception is thrown (<a href="#sec-11.13.1">11.13.1</a>).</li>
   <li>The identifier <code>eval</code> or <code>arguments</code> may not appear as the <i>LeftHandSideExpression</i> of an Assignment operator (<a href="#sec-11.13">11.13</a>) or of a <i>PostfixExpression</i> (<a href="#sec-11.3">11.3</a>) or as the <i>UnaryExpression</i> operated upon by a Prefix Increment (<a href="#sec-11.4.4">11.4.4</a>) or a Prefix Decrement (<a href="#sec-11.4.5">11.4.5</a>) operator.</li>
   <li>Arguments objects for strict mode functions define non-configurable accessor properties named "<code>caller</code>" and "<code>callee</code>" which throw a <b>TypeError</b> exception on access (<a href="#sec-10.6">10.6</a>).</li>

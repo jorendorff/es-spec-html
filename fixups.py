@@ -913,6 +913,10 @@ def fixup_links(doc):
 
     specific_links = [
         ('automatic semicolon insertion (7.9)', '#sec-7.9'),
+        ('automatic semicolon insertion (see 7.9)', '#sec-7.9'),
+        ('semicolon insertion (see 7.9)', '#sec-7.9'),
+        ('strict mode code (see 10.1.1)', '#sec-10.1.1'),
+        ('direct call (see 15.1.2.1.1) to the eval function', '#sec-15.1.2.1.1')
     ]
 
     section_link_regexes = list(map(compile, [
