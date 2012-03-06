@@ -35,7 +35,7 @@ h2 { font-size: 100%; margin-bottom: 1em; }
 
 h1 > span.section-status { display: block; }
 
-p {
+section > p, div > p {
     text-align: justify;
 }
 

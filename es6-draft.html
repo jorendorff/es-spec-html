@@ -800,11 +800,12 @@
       have local effect within such a code unit. Strict mode does not restrict or modify any aspect of the ECMAScript semantics
       that must operate consistently across multiple code units. A complete ECMAScript program may be composed for both strict
       mode and non-strict mode ECMAScript code units. In this case, strict mode only applies when actually executing code that is
-      defined within a strict mode code unit.</p>
+      defined within a <a href="#sec-10.1.1">strict mode code</a> unit.</p>
 
       <p>In order to conform to this specification, an ECMAScript implementation must implement both the full unrestricted
       ECMAScript language and the strict mode variant of the ECMAScript language as defined by this specification. In addition, an
-      implementation must support the combination of unrestricted and strict mode code units into a single composite program.</p>
+      implementation must support the combination of unrestricted and <a href="#sec-10.1.1">strict mode code</a> units into a
+      single composite program.</p>
     </section>
   </section>
 
@@ -2086,9 +2087,9 @@
 
         <p>The following tokens are also considered to be <span style="font-family: Times New Roman; font-style:
         italic">FutureReservedWords</span> when they occur within <a href="#sec-10.1.1">strict mode code (see 10.1.1)</a>. The
-        occurrence of any of these tokens within strict mode code in any context where the occurrence of a <span
-        style="font-family: Times New Roman; font-style: italic">FutureReservedWord</span> would produce an error must also
-        produce an equivalent error:</p>
+        occurrence of any of these tokens within <a href="#sec-10.1.1">strict mode code</a> in any context where the occurrence of
+        a <span style="font-family: Times New Roman; font-style: italic">FutureReservedWord</span> would produce an error must
+        also produce an equivalent error:</p>
 
         <figure>
           <table class="real-table">
@@ -3275,7 +3276,7 @@
 
       <ul>
         <li>If a property is described as a data property and it may return different values over time, then either or both of the [[Writable]] and [[Configurable]] attributes must be <b>true</b> even if no mechanism to change the value is exposed via the other internal methods.</li>
-        <li>If a property is described as a data property and its [[Writable]] and [[Configurable]] are both <b>false</b>, then the <a href="#sec-9.2.3">SameValue</a> (according to 9.12) must be returned for the [[Value]] attribute of the property on all calls to [[GetOwnProperty]].</li>
+        <li>If a property is described as a data property and its [[Writable]] and [[Configurable]] are both <b>false</b>, then the <a href="#sec-9.2.3">SameValue (according to 9.12)</a> must be returned for the [[Value]] attribute of the property on all calls to [[GetOwnProperty]].</li>
         <li>If the attributes other than [[Writable]] may change over time or if the property might disappear, then the [[Configurable]] attribute must be <b>true</b>.</li>
         <li>If the [[Writable]] attribute may change from <b>false</b> to <b>true</b>, then the [[Configurable]] attribute must be <b>true</b>.</li>
         <li>If the value of the host object&rsquo;s [[Extensible]] internal property has been observed by ECMAScript code to be <b>false</b>, then if a call to [[GetOwnProperty]] describes a property as non-existent all subsequent calls must also describe that property as non-existent.</li>
@@ -3604,8 +3605,8 @@
       <h1><span class="secnum"><a href="#sec-8.9.1" title="link to this section">8.9.1</a></span> GetValue (V)</h1>
       <ol class="proc">
         <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>V</i>).</li>
-        <li>Let <i>V</i> be NormalValue(<i>V</i>).</li>
-        <li>If Type(<i>V</i>) is not <a href="#sec-8.9">Reference</a>, return <i>V</i>.</li>
+        <li>Let <i>V</i> be <a href="#sec-8.8">NormalValue</a>(<i>V</i>).</li>
+        <li>If <a href="#sec-8">Type</a>(<i>V</i>) is not <a href="#sec-8.9">Reference</a>, return <i>V</i>.</li>
         <li>Let <i>base</i> be the result of calling <a href="#sec-8.9">GetBase</a>(<i>V</i>).</li>
         <li>If <a href="#sec-8.9">IsUnresolvableReference</a>(<i>V</i>), throw a <b>ReferenceError</b> exception.</li>
         <li>If <a href="#sec-8.9">IsPropertyReference</a>(<i>V</i>), then
@@ -3648,9 +3649,9 @@
       <ol class="proc">
         <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>V</i>).</li>
         <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>W</i>).</li>
-        <li>Let <i>V</i> be NormalValue(<i>V</i>).</li>
-        <li>Let <i>W</i> be NormalValue(<i>W</i>).</li>
-        <li>If Type(<i>V</i>) is not <a href="#sec-8.9">Reference</a>, throw a <b>ReferenceError</b> exception.</li>
+        <li>Let <i>V</i> be <a href="#sec-8.8">NormalValue</a>(<i>V</i>).</li>
+        <li>Let <i>W</i> be <a href="#sec-8.8">NormalValue</a>(<i>W</i>).</li>
+        <li>If <a href="#sec-8">Type</a>(<i>V</i>) is not <a href="#sec-8.9">Reference</a>, throw a <b>ReferenceError</b> exception.</li>
         <li>Let <i>base</i> be the result of calling <a href="#sec-8.9">GetBase</a>(<i>V</i>).</li>
         <li>If <a href="#sec-8.9">IsUnresolvableReference</a>(<i>V</i>), then
           <ol class="block">
@@ -3833,7 +3834,7 @@
 
       <ol class="proc">
         <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>Obj</i>).</li>
-        <li>If Type(<i>Obj</i>) is not Object throw a <b>TypeError</b> exception.</li>
+        <li>If <a href="#sec-8">Type</a>(<i>Obj</i>) is not Object throw a <b>TypeError</b> exception.</li>
         <li>Let <i>desc</i> be the result of creating a new <a href="#sec-8.10">Property Descriptor</a> that initially has no fields.</li>
         <li>If the result of calling the [[HasProperty]] internal method of <i>Obj</i> with argument "<code>enumerable</code>" is <b>true</b>, then
           <ol class="block">
@@ -5012,10 +5013,10 @@
         <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>y</i>).</li>
         <li>If <i>x</i> is an <a href="#sec-8.8">Completion Record</a>, let <i>x</i> be <i>x</i>.[[value]].</li>
         <li>If <i>y</i> is an <a href="#sec-8.8">Completion Record</a>, let <i>y</i> be <i>y</i>.[[value]].</li>
-        <li>If Type(<i>x</i>) is different from Type(<i>y</i>), return <b>false</b>.</li>
-        <li>If Type(<i>x</i>) is Undefined, return <b>true</b>.</li>
-        <li>If Type(<i>x</i>) is Null, return <b>true</b>.</li>
-        <li>If Type(<i>x</i>) is Number, then.
+        <li>If <a href="#sec-8">Type</a>(<i>x</i>) is different from <a href="#sec-8">Type</a>(<i>y</i>), return <b>false</b>.</li>
+        <li>If <a href="#sec-8">Type</a>(<i>x</i>) is Undefined, return <b>true</b>.</li>
+        <li>If <a href="#sec-8">Type</a>(<i>x</i>) is Null, return <b>true</b>.</li>
+        <li>If <a href="#sec-8">Type</a>(<i>x</i>) is Number, then.
           <ol class="block">
             <li>If <i>x</i> is NaN and <i>y</i> is NaN, return <b>true</b>.</li>
             <li>If <i>x</i> is +0 and <i>y</i> is -0, return <b>false</b>.</li>
@@ -5024,8 +5025,8 @@
             <li>Return <b>false</b>.</li>
           </ol>
         </li>
-        <li>If Type(<i>x</i>) is String, then return <b>true</b> if <i>x</i> and <i>y</i> are exactly the same sequence of characters (same length and same characters in corresponding positions); otherwise, return <b>false</b>.</li>
-        <li>If Type(<i>x</i>) is Boolean, return <b>true</b> if <i>x</i> and <i>y</i> are both <b>true</b> or both <b>false</b>; otherwise, return <b>false</b>.</li>
+        <li>If <a href="#sec-8">Type</a>(<i>x</i>) is String, then return <b>true</b> if <i>x</i> and <i>y</i> are exactly the same sequence of characters (same length and same characters in corresponding positions); otherwise, return <b>false</b>.</li>
+        <li>If <a href="#sec-8">Type</a>(<i>x</i>) is Boolean, return <b>true</b> if <i>x</i> and <i>y</i> are both <b>true</b> or both <b>false</b>; otherwise, return <b>false</b>.</li>
         <li>Return true if <i>x</i> and <i>y</i> are the same Object value. Otherwise, return <b>false</b>.</li>
       </ol>
     </section>
@@ -5596,7 +5597,7 @@
 
       <ol class="proc">
         <li>Let <i>env</i> be the running execution context&rsquo;s <a href="#sec-10.3">LexicalEnvironment</a>.</li>
-        <li>If the syntactic production that is being evaluated is contained in a strict mode code, then let <i>strict</i> be <b>true</b>, else let <i>strict</i> be <b>false</b>.</li>
+        <li>If the syntactic production that is being evaluated is contained in a <a href="#sec-10.1.1">strict mode code</a>, then let <i>strict</i> be <b>true</b>, else let <i>strict</i> be <b>false</b>.</li>
         <li>Return the result of calling <a href="#sec-10.2.2.1">GetIdentifierReference</a> abstract operation passing <i>env</i>, the String value containing the same sequence of characters as <i>IdentifierName</i>, and <i>strict</i> as arguments.</li>
       </ol>
 
@@ -5660,7 +5661,7 @@
             <li>Set the <a href="#sec-10.3">VariableEnvironment</a> to the same value as the <a href="#sec-10.3">VariableEnvironment</a> of the calling execution context.</li>
           </ol>
         </li>
-        <li>If the eval code is strict code, then
+        <li>If the eval code is <a href="#sec-10.1.1">strict code</a>, then
           <ol class="block">
             <li>Let <i>strictVarEnv</i> be the result of calling <a href="#sec-10.2.2.2">NewDeclarativeEnvironment</a>  passing the <a href="#sec-10.3">LexicalEnvironment</a> as the argument.</li>
             <li>Set the <a href="#sec-10.3">LexicalEnvironment</a> to <i>strictVarEnv</i>.</li>
@@ -5672,9 +5673,9 @@
 
       <div class="note">
         <p><span class="nh">NOTE</span> The eval code cannot instantiate variable or function bindings in the variable environment
-        of the calling context that invoked the eval if either the code of the calling context or the eval code is strict code.
-        Instead such bindings are instantiated in a new <a href="#sec-10.3">VariableEnvironment</a> that is only accessible to the
-        eval code.</p>
+        of the calling context that invoked the eval if either the code of the calling context or the eval code is <a
+        href="#sec-10.1.1">strict code</a>. Instead such bindings are instantiated in a new <a
+        href="#sec-10.3">VariableEnvironment</a> that is only accessible to the eval code.</p>
       </div>
     </section>
 
@@ -5690,7 +5691,7 @@
         <li>Let <i>strict</i> be the value of <i>F</i>&rsquo;s [[Strict]] internal property.</li>
         <li>If <i>strict</i> is <b>true</b>, set the <a href="#sec-10.3">ThisBinding</a> to <i>thisArg</i>.</li>
         <li>Else if <i>thisArg</i> is <b>null</b> or <b>undefined</b>, set the <a href="#sec-10.3">ThisBinding</a> to the global object.</li>
-        <li>Else if Type(<i>thisArg</i>) is not Object, set the <a href="#sec-10.3">ThisBinding</a> to <a href="#sec-9.1.9">ToObject</a>(<i>thisArg</i>).</li>
+        <li>Else if <a href="#sec-8">Type</a>(<i>thisArg</i>) is not Object, set the <a href="#sec-10.3">ThisBinding</a> to <a href="#sec-9.1.9">ToObject</a>(<i>thisArg</i>).</li>
         <li>Else set the <a href="#sec-10.3">ThisBinding</a> to <i>thisArg</i>.</li>
         <li>Let <i>localEnv</i> be the result of calling <a href="#sec-10.2.2.2">NewDeclarativeEnvironment</a>  passing the value of the [[Scope]] internal property of <i>F</i> as the argument.</li>
         <li>Set the <a href="#sec-10.3">LexicalEnvironment</a> to <i>localEnv</i>.</li>
@@ -5717,7 +5718,7 @@
       <ol class="proc">
         <li>Let <i>env</i> be the environment record component of the running execution context&rsquo;s <a href="#sec-10.3">VariableEnvironment</a>.</li>
         <li>If <i>code</i> is eval code, then let <i>configurableBindings</i> be <b>true</b> else let <i>configurableBindings</i> be <b>false</b>.</li>
-        <li>If <i>code</i> is strict code, then let <i>strict</i> be <b>true</b> else let <i>strict</i> be <b>false</b>.</li>
+        <li>If <i>code</i> is <a href="#sec-10.1.1">strict code</a>, then let <i>strict</i> be <b>true</b> else let <i>strict</i> be <b>false</b>.</li>
         <li>For each <i>FunctionDeclaration</i> <i>f</i> in <i>code</i>, in source text order do
           <ol class="block">
             <li>Let <i>fn</i> be the <i>Identifier</i> in <i>FunctionDeclaration</i> <i>f.</i></li>
@@ -5805,7 +5806,7 @@
         <li>For each String <i>argName</i> in <i>parameterNames</i>, in list order do
           <ol class="block">
             <li>Let <i>alreadyDeclared</i> be the result of calling <i>env&rsquo;s</i> HasBinding concrete method passing <i>argName</i> as the argument.</li>
-            <li><span style="font-family: sans-serif">NOTE</span>   <span style="font-family: sans-serif">Duplicate parameter names can only occur in non-strict code.</span></li>
+            <li><span style="font-family: sans-serif">NOTE</span>   <span style="font-family: sans-serif">Duplicate parameter names can only occur in non-<a href="#sec-10.1.1">strict code</a>.</span></li>
             <li>If <i>alreadyDeclared</i> is <b>false</b>, then
               <ol class="block">
                 <li>Call <i>env&rsquo;s</i> CreateMutableBinding concrete method passing <i>argName</i> as the argument.</li>
@@ -6519,7 +6520,7 @@
         style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span></p>
 
         <ul>
-          <li>It is a Syntax Error if this production is contained in strict code,  <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> is the production <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> <b>:</b> <span style="font-family: Times New Roman; font-style: italic">PropertyName</span> <code>:</code> <span style="font-family: Times New Roman; font-style: italic">AssignmentExpression,</span> and <span style="font-family: Times New Roman">PropertyDefinitionList</span>(<span style="font-family: Times New Roman">PropName</span> of <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span>) of <span style="font-family: Times New Roman; font-style: italic">PropertyNameAndValueList</span> is not the empty <a href="#sec-8.7">List</a>.</li>
+          <li>It is a Syntax Error if this production is contained in <a href="#sec-10.1.1">strict code</a>,  <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> is the production <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> <b>:</b> <span style="font-family: Times New Roman; font-style: italic">PropertyName</span> <code>:</code> <span style="font-family: Times New Roman; font-style: italic">AssignmentExpression,</span> and <span style="font-family: Times New Roman">PropertyDefinitionList</span>(<span style="font-family: Times New Roman">PropName</span> of <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span>) of <span style="font-family: Times New Roman; font-style: italic">PropertyNameAndValueList</span> is not the empty <a href="#sec-8.7">List</a>.</li>
           <li>It is a Syntax Error if <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> is the production <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> <b>:</b> <span style="font-family: Times New Roman; font-style: italic">IdentifierName</span> and <span style="font-family: Times New Roman">PropertyDefinitionList</span>(<span style="font-family: Times New Roman">PropName</span> of <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span>) of <span style="font-family: Times New Roman; font-style: italic">PropertyNameAndValueList</span> is not the empty <a href="#sec-8.7">List</a>.</li>
           <li>It is a Syntax Error if <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> is the production <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> <b>:</b> <span style="font-family: Times New Roman; font-style: italic">PropertyName</span> <code>(</code> <span style="font-family: Times New Roman; font-style: italic">FormalParameterList</span> <code>) {</code> <span style="font-family: Times New Roman; font-style: italic">FunctionBody</span> <code>}</code> and <span style="font-family: Times New Roman">PropertyDefinitionList</span>(<span style="font-family: Times New Roman">PropName</span> of <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span>) of <span style="font-family: Times New Roman; font-style: italic">PropertyNameAndValueList</span> is not the empty <a href="#sec-8.7">List</a>.</li>
           <li>It is a Syntax Error if <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> is the production <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> <b>:</b> <code>*</code> <span style="font-family: Times New Roman; font-style: italic">PropertyName</span> <code>(</code> <span style="font-family: Times New Roman; font-style: italic">FormalParameterList</span> <code>) {</code> <span style="font-family: Times New Roman; font-style: italic">FunctionBody</span> <code>}</code> and <span style="font-family: Times New Roman">PropertyDefinitionList</span>(<span style="font-family: Times New Roman">PropName</span> of <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span>) of <span style="font-family: Times New Roman; font-style: italic">PropertyNameAndValueList</span> is not the empty <a href="#sec-8.7">List</a>.</li>
@@ -6811,7 +6812,7 @@
 
         <ol class="proc">
           <li>Let <i>propName</i> be PropName(<i>PropertyName</i>).</li>
-          <li>Let <i>closure</i> be the result of creating a new Function object as specified in <a href="#sec-13.2">13.2</a> using a <i>FormalParameterList</i> <b>:</b> [empty] production as the formal parameter list and body specified by <i>FunctionBody</i>. Pass in the <a href="#sec-10.3">LexicalEnvironment</a> of the running execution context as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag if the <i>PropertyAssignment</i> is contained in strict code or if its <i>FunctionBody</i> is strict code. Pass object as the optional <i>homeObject</i> argument and propName as the optional <i>methodName</i> argument.</li>
+          <li>Let <i>closure</i> be the result of creating a new Function object as specified in <a href="#sec-13.2">13.2</a> using a <i>FormalParameterList</i> <b>:</b> [empty] production as the formal parameter list and body specified by <i>FunctionBody</i>. Pass in the <a href="#sec-10.3">LexicalEnvironment</a> of the running execution context as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag if the <i>PropertyAssignment</i> is contained in <a href="#sec-10.1.1">strict code</a> or if its <i>FunctionBody</i> is <a href="#sec-10.1.1">strict code</a>. Pass object as the optional <i>homeObject</i> argument and propName as the optional <i>methodName</i> argument.</li>
           <li>Let <i>desc</i> be the <a href="#sec-8.10">Property Descriptor</a>{[[Get]]: <i>closure</i>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}</li>
           <li>Return the result of calling the [[DefineOwnProperty]] internal method of <i>object</i> with arguments <i>propName</i>, <i>desc</i>, and <b>false</b>.</li>
         </ol>
@@ -6823,7 +6824,7 @@
 
         <ol class="proc">
           <li>Let <i>propName</i> be PropName(<i>PropertyName</i>).</li>
-          <li>Let <i>closure</i> be the result of creating a new Function object as specified in <a href="#sec-13.2">13.2</a> with parameters specified by <i>PropertySetParameterList</i> and body specified by <i>FunctionBody</i>. Pass in the <a href="#sec-10.3">LexicalEnvironment</a> of the running execution context as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag if the <i>PropertyAssignment</i> is contained in strict code or if its <i>FunctionBody</i> is strict code. Pass object as the optional <i>homeObject</i> argument and propName as the optional <i>methodName</i> argument.</li>
+          <li>Let <i>closure</i> be the result of creating a new Function object as specified in <a href="#sec-13.2">13.2</a> with parameters specified by <i>PropertySetParameterList</i> and body specified by <i>FunctionBody</i>. Pass in the <a href="#sec-10.3">LexicalEnvironment</a> of the running execution context as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag if the <i>PropertyAssignment</i> is contained in <a href="#sec-10.1.1">strict code</a> or if its <i>FunctionBody</i> is <a href="#sec-10.1.1">strict code</a>. Pass object as the optional <i>homeObject</i> argument and propName as the optional <i>methodName</i> argument.</li>
           <li>Let <i>desc</i> be the <a href="#sec-8.10">Property Descriptor</a>{[[Set]]: <i>closure</i>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}</li>
           <li>Return the result of calling the [[DefineOwnProperty]] internal method of <i>object</i> with arguments <i>propName</i>, <i>desc</i>, and <b>false</b>.</li>
         </ol>
@@ -6968,7 +6969,7 @@
         <li>If <i>propertyNameValue</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>propertyNameValue</i>.</li>
         <li>If the result of <a href="#sec-9.2.1">CheckObjectCoercible</a>(<i>baseValue</i>) is an <a href="#sec-8.8">abrupt completion</a>, return that result.</li>
         <li>Let <i>propertyNameString</i> be <a href="#sec-9.1.8">ToString</a>(<i>propertyNameValue</i>).</li>
-        <li>If the code matched by the syntactic production that is being evaluated is strict mode code, let <i>strict</i> be <b>true</b>, else let <i>strict</i> be <b>false</b>.</li>
+        <li>If the code matched by the syntactic production that is being evaluated is <a href="#sec-10.1.1">strict mode code</a>, let <i>strict</i> be <b>true</b>, else let <i>strict</i> be <b>false</b>.</li>
         <li>Return a value of type <a href="#sec-8.9">Reference</a> whose base value is <i>baseValue</i> and whose referenced name is <i>propertyNameString</i>, and whose strict mode flag is <i>strict</i>.</li>
       </ol>
 
@@ -6995,7 +6996,7 @@
         <li>Let <i>ref</i> be the result of evaluating <i>NewExpression</i>.</li>
         <li>Let <i>constructor</i> be <a href="#sec-8.9.1">GetValue</a>(<i>ref</i>).</li>
         <li>If <i>constructor</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>constructor</i>.</li>
-        <li>If Type(<i>constructor</i>) is not Object, throw a <b>TypeError</b> exception.</li>
+        <li>If <a href="#sec-8">Type</a>(<i>constructor</i>) is not Object, throw a <b>TypeError</b> exception.</li>
         <li>If <i>constructor</i> does not implement the [[Construct]] internal method, throw a <b>TypeError</b> exception.</li>
         <li>Return the result of calling the [[Construct]] internal method on <i>constructor</i>, providing no arguments (that is, an empty list of arguments).</li>
       </ol>
@@ -7010,7 +7011,7 @@
         <li>If <i>constructor</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>constructor</i>.</li>
         <li>Let <i>argList</i> be the result of evaluating <i>Arguments</i>, producing an internal list of argument values (<a href="#sec-11.2.4">11.2.4</a>).</li>
         <li>If <i>argList</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>argList</i>.</li>
-        <li>If Type(<i>constructor</i>) is not Object, throw a <b>TypeError</b> exception.</li>
+        <li>If <a href="#sec-8">Type</a>(<i>constructor</i>) is not Object, throw a <b>TypeError</b> exception.</li>
         <li>If <i>constructor</i> does not implement the [[Construct]] internal method, throw a <b>TypeError</b> exception.</li>
         <li>Return the result of calling the [[Construct]] internal method on <i>constructor</i>, providing the list <i>argList</i> as the argument values.</li>
       </ol>
@@ -7031,9 +7032,9 @@
         <li>If <i>func</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>func</i>.</li>
         <li>Let <i>argList</i> be the result of evaluating <i>Arguments</i>, producing an internal list of argument values (<a href="#sec-11.2.4">see 11.2.4</a>).</li>
         <li>If <i>argList</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>argList</i>.</li>
-        <li>If Type(<i>func</i>) is not Object, throw a <b>TypeError</b> exception.</li>
+        <li>If <a href="#sec-8">Type</a>(<i>func</i>) is not Object, throw a <b>TypeError</b> exception.</li>
         <li>If <a href="#sec-9.2.2">IsCallable</a>(<i>func</i>) is <b>false</b>, throw a <b>TypeError</b> exception.</li>
-        <li>If Type(<i>ref</i>) is <a href="#sec-8.9">Reference</a>, then
+        <li>If <a href="#sec-8">Type</a>(<i>ref</i>) is <a href="#sec-8.9">Reference</a>, then
           <ol class="block">
             <li>If <a href="#sec-8.9">IsPropertyReference</a>(<i>ref</i>) is <b>true</b>, then
               <ol class="block">
@@ -7047,7 +7048,7 @@
             </li>
           </ol>
         </li>
-        <li>Else, Type(<i>ref</i>) is not <a href="#sec-8.9">Reference</a>.
+        <li>Else, <a href="#sec-8">Type</a>(<i>ref</i>) is not <a href="#sec-8.9">Reference</a>.
           <ol class="block">
             <li>Let <i>thisValue</i> be <b>undefined</b>.</li>
           </ol>
@@ -7110,7 +7111,7 @@
         <li>Let <i>propertyNameValue</i> be <a href="#sec-8.9.1">GetValue</a>(<i>propertyNameReference</i>).</li>
         <li>Call <a href="#sec-9.2.1">CheckObjectCoercible</a>(<i>baseValue</i>).</li>
         <li>Let <i>propertyNameString</i> be <a href="#sec-9.1.8">ToString</a>(<i>propertyNameValue</i>).</li>
-        <li>If the code matched by the syntactic production that is being evaluated is strict mode code, let <i>strict</i> be <b>true</b>, else let <i>strict</i> be <b>false</b>.</li>
+        <li>If the code matched by the syntactic production that is being evaluated is <a href="#sec-10.1.1">strict mode code</a>, let <i>strict</i> be <b>true</b>, else let <i>strict</i> be <b>false</b>.</li>
         <li>Return a value of type <a href="#sec-8.9">Reference</a> whose base value is <i>baseValue</i> and whose referenced name is <i>propertyNameString</i>, and whose strict mode flag is <i>strict</i>.</li>
       </ol>
     </section>
@@ -7228,7 +7229,7 @@
     </div>
 
     <ul>
-      <li>It is a Syntax Error if the <span style="font-family: Times New Roman; font-style: italic">PostfixExpression</span> is contained in strict code and <span style="font-family: Times New Roman; font-style: italic">LeftHandSideExpression</span> is the <span style="font-family: Times New Roman; font-style: italic">Identifier</span> <code>eval</code> or the <span style="font-family: Times New Roman; font-style: italic">Identifier</span> <code>arguments</code>.</li>
+      <li>It is a Syntax Error if the <span style="font-family: Times New Roman; font-style: italic">PostfixExpression</span> is contained in <a href="#sec-10.1.1">strict code</a> and <span style="font-family: Times New Roman; font-style: italic">LeftHandSideExpression</span> is the <span style="font-family: Times New Roman; font-style: italic">Identifier</span> <code>eval</code> or the <span style="font-family: Times New Roman; font-style: italic">Identifier</span> <code>arguments</code>.</li>
       <li>It is a Syntax Error if the <span style="font-family: Times New Roman; font-style: italic">LeftHandSideExpression</span> is <span style="font-family: Times New Roman; font-style: italic">PrimaryExpression : <b>(</b> Expression</span> <code>)</code> and <span style="font-family: Times New Roman; font-style: italic">Expression</span> derived a production that if used in place of <span style="font-family: Times New Roman; font-style: italic">LeftHandSideExpression</span> would produce a Syntax Error according to these rules. This rule is recursively applied.</li>
     </ul>
 
@@ -7289,7 +7290,7 @@
     </div>
 
     <ul>
-      <li>It is a Syntax Error if the <span style="font-family: Times New Roman; font-style: italic">UnaryExpression</span> is contained in strict code and the derived <span style="font-family: Times New Roman; font-style: italic">UnaryExpression</span> is the <span style="font-family: Times New Roman; font-style: italic">Identifier</span> <code>eval</code> or the <span style="font-family: Times New Roman; font-style: italic">Identifier</span> <code>arguments</code>.</li>
+      <li>It is a Syntax Error if the <span style="font-family: Times New Roman; font-style: italic">UnaryExpression</span> is contained in <a href="#sec-10.1.1">strict code</a> and the derived <span style="font-family: Times New Roman; font-style: italic">UnaryExpression</span> is the <span style="font-family: Times New Roman; font-style: italic">Identifier</span> <code>eval</code> or the <span style="font-family: Times New Roman; font-style: italic">Identifier</span> <code>arguments</code>.</li>
       <li>It is a Syntax Error if the derived <span style="font-family: Times New Roman; font-style: italic">UnaryExpression</span> is <span style="font-family: Times New Roman; font-style: italic">PrimaryExpression : <b>(</b> Expression</span> <code>)</code> and <span style="font-family: Times New Roman; font-style: italic">Expression</span> derived a production that if used in place of <span style="font-family: Times New Roman; font-style: italic">LeftHandSideExpression</span> would produce a Syntax Error according to these rules. This rule is recursively applied.</li>
     </ul>
 
@@ -7302,7 +7303,7 @@
       style="font-family: Times New Roman; font-style: italic">UnaryExpression</span></p>
 
       <ul>
-        <li>It is a Syntax Error if the <span style="font-family: Times New Roman; font-style: italic">UnaryExpression</span> is contained in strict code and the <span style="font-family: Times New Roman; font-style: italic">UnaryExpression</span> derives an <span style="font-family: Times New Roman; font-style: italic">Identifier that statically resolves to a environment record.</span></li>
+        <li>It is a Syntax Error if the <span style="font-family: Times New Roman; font-style: italic">UnaryExpression</span> is contained in <a href="#sec-10.1.1">strict code</a> and the <span style="font-family: Times New Roman; font-style: italic">UnaryExpression</span> derives an <span style="font-family: Times New Roman; font-style: italic">Identifier that statically resolves to a environment record.</span></li>
       </ul>
 
       <p><b>Runtime Semantics: Evaluation</b></p>
@@ -7313,7 +7314,7 @@
       <ol class="proc">
         <li>Let <i>ref</i> be the result of evaluating <i>UnaryExpression</i>.</li>
         <li>If <i>ref</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>ref</i>.</li>
-        <li>If Type(<i>ref</i>) is not <a href="#sec-8.9">Reference</a>, return <b>true</b>.</li>
+        <li>If <a href="#sec-8">Type</a>(<i>ref</i>) is not <a href="#sec-8.9">Reference</a>, return <b>true</b>.</li>
         <li>If <a href="#sec-8.9">IsUnresolvableReference</a>(<i>ref</i>) is <b>true</b>, then,
           <ol class="block">
             <li>If <a href="#sec-8.9">IsStrictReference</a>(<i>ref</i>) is <b>true</b>, throw a <b>SyntaxError</b> exception.</li>
@@ -7334,11 +7335,11 @@
       </ol>
 
       <div class="note">
-        <p><span class="nh">NOTE</span> When a <code>delete</code> operator occurs within strict mode code, a <b>SyntaxError</b>
-        exception is thrown if its <span style="font-family: Times New Roman; font-style: italic">UnaryExpression</span> is a
-        direct reference to a variable, function argument, or function name. In addition, if a <code>delete</code> operator occurs
-        within strict mode code and the property to be deleted has the attribute { [[Configurable]]: <b>false</b> }, a
-        <b>TypeError</b> exception is thrown.</p>
+        <p><span class="nh">NOTE</span> When a <code>delete</code> operator occurs within <a href="#sec-10.1.1">strict mode
+        code</a>, a <b>SyntaxError</b> exception is thrown if its <span style="font-family: Times New Roman; font-style:
+        italic">UnaryExpression</span> is a direct reference to a variable, function argument, or function name. In addition, if a
+        <code>delete</code> operator occurs within <a href="#sec-10.1.1">strict mode code</a> and the property to be deleted has
+        the attribute { [[Configurable]]: <b>false</b> }, a <b>TypeError</b> exception is thrown.</p>
       </div>
     </section>
 
@@ -7373,14 +7374,14 @@
 
       <ol class="proc">
         <li>Let <i>val</i> be the result of evaluating <i>UnaryExpression</i>.</li>
-        <li>If Type(<i>val</i>) is <a href="#sec-8.9">Reference</a>, then
+        <li>If <a href="#sec-8">Type</a>(<i>val</i>) is <a href="#sec-8.9">Reference</a>, then
           <ol class="block">
             <li>If <a href="#sec-8.9">IsUnresolvableReference</a>(<i>val</i>) is <b>true</b>, return <code>"undefined"</code>.</li>
             <li>Let <i>val</i> be <a href="#sec-8.9.1">GetValue</a>(<i>val</i>).</li>
           </ol>
         </li>
         <li>If <i>val</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>val</i>.</li>
-        <li>Return a String determined by Type(<i>val</i>) according to Table 21.</li>
+        <li>Return a String determined by <a href="#sec-8">Type</a>(<i>val</i>) according to Table 21.</li>
       </ol>
 
       <figure>
@@ -7671,7 +7672,7 @@
         <li>If <i>lprim</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>lprim</i>.</li>
         <li>Let <i>rprim</i> be <a href="#sec-9.1.1">ToPrimitive</a>(<i>rval</i>).</li>
         <li>If <i>rprim</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>rprim</i>.</li>
-        <li>If Type(<i>lprim</i>) is String or Type(<i>rprim</i>) is String, then
+        <li>If <a href="#sec-8">Type</a>(<i>lprim</i>) is String or <a href="#sec-8">Type</a>(<i>rprim</i>) is String, then
           <ol class="block">
             <li>Return the String that is the result of concatenating <a href="#sec-9.1.8">ToString</a>(<i>lprim</i>) followed by <a href="#sec-9.1.8">ToString</a>(<i>rprim</i>)</li>
           </ol>
@@ -7920,7 +7921,7 @@
             <li><span style="font-family: Times New Roman">If p<i>x</i> is an <a href="#sec-8.8">abrupt completion</a>, return p<i>x</i>.</span></li>
           </ol>
         </li>
-        <li>If it is not the case that both Type(<i>px</i>) is String and Type(<i>py</i>) is String, then
+        <li>If it is not the case that both <a href="#sec-8">Type</a>(<i>px</i>) is String and <a href="#sec-8">Type</a>(<i>py</i>) is String, then
           <ol class="block">
             <li>Let <i>nx</i> be the result of calling <a href="#sec-9.1.3">ToNumber</a>(<i>px</i>). Because <i>px</i> and <i>py</i> are primitive values evaluation order is not important.</li>
             <li>Let <i>ny</i> be the result of calling <a href="#sec-9.1.3">ToNumber</a>(<i>py</i>).</li>
@@ -8031,7 +8032,7 @@
         <li>Let <i>rref</i> be the result of evaluating <i>ShiftExpression</i>.</li>
         <li>Let <i>rval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>rref</i>).</li>
         <li>If <i>rval</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>rval</i>.</li>
-        <li>If Type(<i>rval</i>) is not Object, throw a <b>TypeError</b> exception.</li>
+        <li>If <a href="#sec-8">Type</a>(<i>rval</i>) is not Object, throw a <b>TypeError</b> exception.</li>
         <li>If <i>rval</i> does not have a [[HasInstance]] internal method, throw a <b>TypeError</b> exception.</li>
         <li>Return the result of calling the [[HasInstance]] internal method of <i>rval</i> with argument <i>lval</i>.</li>
       </ol>
@@ -8047,7 +8048,7 @@
         <li>Let <i>rref</i> be the result of evaluating <i>ShiftExpression</i>.</li>
         <li>Let <i>rval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>rref</i>).</li>
         <li>If <i>rval</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>rval</i>.</li>
-        <li>If Type(<i>rval</i>) is not Object, throw a <b>TypeError</b> exception.</li>
+        <li>If <a href="#sec-8">Type</a>(<i>rval</i>) is not Object, throw a <b>TypeError</b> exception.</li>
         <li>Return the result of calling the [[HasProperty]] internal method of <i>rval</i> with argument <a href="#sec-9.1.8">ToString</a>(<i>lval</i>).</li>
       </ol>
     </section>
@@ -8094,11 +8095,11 @@
       <ol class="proc">
         <li>If <i>x</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>x</i>.</li>
         <li>If <i>y</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>y</i>.</li>
-        <li>If Type(<i>x</i>) is the same as Type(<i>y</i>), then
+        <li>If <a href="#sec-8">Type</a>(<i>x</i>) is the same as <a href="#sec-8">Type</a>(<i>y</i>), then
           <ol class="block">
-            <li>If Type(<i>x</i>) is Undefined, return <b>true</b>.</li>
-            <li>If Type(<i>x</i>) is Null, return <b>true</b>.</li>
-            <li>If Type(<i>x</i>) is Number, then
+            <li>If <a href="#sec-8">Type</a>(<i>x</i>) is Undefined, return <b>true</b>.</li>
+            <li>If <a href="#sec-8">Type</a>(<i>x</i>) is Null, return <b>true</b>.</li>
+            <li>If <a href="#sec-8">Type</a>(<i>x</i>) is Number, then
               <ol class="block">
                 <li>If <i>x</i> is <b>NaN</b>, return <b>false</b>.</li>
                 <li>If <i>y</i> is <b>NaN</b>, return <b>false</b>.</li>
@@ -8108,19 +8109,19 @@
                 <li>Return <b>false</b>.</li>
               </ol>
             </li>
-            <li>If Type(<i>x</i>) is String, then return <b>true</b> if <i>x</i> and <i>y</i> are exactly the same sequence of characters (same length and same characters in corresponding positions). Otherwise, return <b>false</b>.</li>
-            <li>If Type(<i>x</i>) is Boolean, return <b>true</b> if <i>x</i> and <i>y</i> are both <b>true</b> or both <b>false</b>. Otherwise, return <b>false</b>.</li>
+            <li>If <a href="#sec-8">Type</a>(<i>x</i>) is String, then return <b>true</b> if <i>x</i> and <i>y</i> are exactly the same sequence of characters (same length and same characters in corresponding positions). Otherwise, return <b>false</b>.</li>
+            <li>If <a href="#sec-8">Type</a>(<i>x</i>) is Boolean, return <b>true</b> if <i>x</i> and <i>y</i> are both <b>true</b> or both <b>false</b>. Otherwise, return <b>false</b>.</li>
             <li>Return <b>true</b> if <i>x</i> and <i>y</i> are the same Object value. Otherwise, return <b>false</b>.</li>
           </ol>
         </li>
         <li>If <i>x</i> is <b>null</b> and <i>y</i> is <b>undefined</b>, return <b>true</b>.</li>
         <li>If <i>x</i> is <b>undefined</b> and <i>y</i> is <b>null</b>, return <b>true</b>.</li>
-        <li>If Type(<i>x</i>) is Number and Type(<i>y</i>) is String,<br>return the result of the comparison <i>x</i> == <a href="#sec-9.1.3">ToNumber</a>(<i>y</i>).</li>
-        <li>If Type(<i>x</i>) is String and Type(<i>y</i>) is Number,<br>return the result of the comparison <a href="#sec-9.1.3">ToNumber</a>(<i>x</i>) == <i>y</i>.</li>
-        <li>If Type(<i>x</i>) is Boolean, return the result of the comparison <a href="#sec-9.1.3">ToNumber</a>(<i>x</i>) == <i>y</i>.</li>
-        <li>If Type(<i>y</i>) is Boolean, return the result of the comparison <i>x</i> == <a href="#sec-9.1.3">ToNumber</a>(<i>y</i>).</li>
-        <li>If Type(<i>x</i>) is either String or Number and Type(<i>y</i>) is Object,<br>return the result of the comparison <i>x</i> == <a href="#sec-9.1.1">ToPrimitive</a>(<i>y</i>).</li>
-        <li>If Type(<i>x</i>) is Object and Type(<i>y</i>) is either String or Number,<br>return the result of the comparison <a href="#sec-9.1.1">ToPrimitive</a>(<i>x</i>) == <i>y</i>.</li>
+        <li>If <a href="#sec-8">Type</a>(<i>x</i>) is Number and <a href="#sec-8">Type</a>(<i>y</i>) is String,<br>return the result of the comparison <i>x</i> == <a href="#sec-9.1.3">ToNumber</a>(<i>y</i>).</li>
+        <li>If <a href="#sec-8">Type</a>(<i>x</i>) is String and <a href="#sec-8">Type</a>(<i>y</i>) is Number,<br>return the result of the comparison <a href="#sec-9.1.3">ToNumber</a>(<i>x</i>) == <i>y</i>.</li>
+        <li>If <a href="#sec-8">Type</a>(<i>x</i>) is Boolean, return the result of the comparison <a href="#sec-9.1.3">ToNumber</a>(<i>x</i>) == <i>y</i>.</li>
+        <li>If <a href="#sec-8">Type</a>(<i>y</i>) is Boolean, return the result of the comparison <i>x</i> == <a href="#sec-9.1.3">ToNumber</a>(<i>y</i>).</li>
+        <li>If <a href="#sec-8">Type</a>(<i>x</i>) is either String or Number and <a href="#sec-8">Type</a>(<i>y</i>) is Object,<br>return the result of the comparison <i>x</i> == <a href="#sec-9.1.1">ToPrimitive</a>(<i>y</i>).</li>
+        <li>If <a href="#sec-8">Type</a>(<i>x</i>) is Object and <a href="#sec-8">Type</a>(<i>y</i>) is either String or Number,<br>return the result of the comparison <a href="#sec-9.1.1">ToPrimitive</a>(<i>x</i>) == <i>y</i>.</li>
         <li>Return <b>false</b>.</li>
       </ol>
 
@@ -8172,10 +8173,10 @@
       <ol class="proc">
         <li>If <i>x</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>x</i>.</li>
         <li>If <i>y</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>y</i>.</li>
-        <li>If Type(<i>x</i>) is different from Type(<i>y</i>), return <b>false</b>.</li>
-        <li>If Type(<i>x</i>) is Undefined, return <b>true</b>.</li>
-        <li>If Type(<i>x</i>) is Null, return <b>true</b>.</li>
-        <li>If Type(<i>x</i>) is Number, then
+        <li>If <a href="#sec-8">Type</a>(<i>x</i>) is different from <a href="#sec-8">Type</a>(<i>y</i>), return <b>false</b>.</li>
+        <li>If <a href="#sec-8">Type</a>(<i>x</i>) is Undefined, return <b>true</b>.</li>
+        <li>If <a href="#sec-8">Type</a>(<i>x</i>) is Null, return <b>true</b>.</li>
+        <li>If <a href="#sec-8">Type</a>(<i>x</i>) is Number, then
           <ol class="block">
             <li>If <i>x</i> is <b>NaN</b>, return <b>false</b>.</li>
             <li>If <i>y</i> is <b>NaN</b>, return <b>false</b>.</li>
@@ -8185,13 +8186,13 @@
             <li>Return <b>false</b>.</li>
           </ol>
         </li>
-        <li>If Type(<i>x</i>) is String, then return <b>true</b> if <i>x</i> and <i>y</i> are exactly the same sequence of characters (same length and same characters in corresponding positions); otherwise, return <b>false</b>.</li>
-        <li>If Type(<i>x</i>) is Boolean, return <b>true</b> if <i>x</i> and <i>y</i> are both <b>true</b> or both <b>false</b>; otherwise, return <b>false</b>.</li>
+        <li>If <a href="#sec-8">Type</a>(<i>x</i>) is String, then return <b>true</b> if <i>x</i> and <i>y</i> are exactly the same sequence of characters (same length and same characters in corresponding positions); otherwise, return <b>false</b>.</li>
+        <li>If <a href="#sec-8">Type</a>(<i>x</i>) is Boolean, return <b>true</b> if <i>x</i> and <i>y</i> are both <b>true</b> or both <b>false</b>; otherwise, return <b>false</b>.</li>
         <li>Return <b>true</b> if <i>x</i> and <i>y</i> are the same Object value. Otherwise, return <b>false</b>.</li>
       </ol>
 
       <div class="note">
-        <p><span class="nh">NOTE</span> This algorithm differs from the <a href="#sec-9.2.3">SameValue</a> Algorithm (9.12) in its
+        <p><span class="nh">NOTE</span> This algorithm differs from <a href="#sec-9.2.3">the SameValue Algorithm (9.12)</a> in its
         treatment of signed zeroes and NaNs.</p>
       </div>
 
@@ -8519,7 +8520,7 @@
       </div>
 
       <ul>
-        <li>It is a Syntax Error if the <span style="font-family: Times New Roman; font-style: italic">AssignmentExpression</span> is contained in strict code and <span style="font-family: Times New Roman; font-style: italic">LeftHandSideExpression</span> is the <span style="font-family: Times New Roman; font-style: italic">Identifier</span> <code>eval</code> or the <span style="font-family: Times New Roman; font-style: italic">Identifier</span> <code>arguments</code>.</li>
+        <li>It is a Syntax Error if the <span style="font-family: Times New Roman; font-style: italic">AssignmentExpression</span> is contained in <a href="#sec-10.1.1">strict code</a> and <span style="font-family: Times New Roman; font-style: italic">LeftHandSideExpression</span> is the <span style="font-family: Times New Roman; font-style: italic">Identifier</span> <code>eval</code> or the <span style="font-family: Times New Roman; font-style: italic">Identifier</span> <code>arguments</code>.</li>
         <li>It is a Syntax Error if the <span style="font-family: Times New Roman; font-style: italic">LeftHandSideExpression</span> is an <span style="font-family: Times New Roman; font-style: italic">Identifier that statically resolves to a <a href="#sec-10.2.1">declarative environment record</a> binding and the resolved binding is an immutable binding.</span></li>
         <li>It is a Syntax Error if the <span style="font-family: Times New Roman; font-style: italic">LeftHandSideExpression</span> is <span style="font-family: Times New Roman; font-style: italic">PrimaryExpression : <b>(</b> Expression</span> <code>)</code> and <span style="font-family: Times New Roman; font-style: italic">Expression</span> derived a production that would produce a Syntax Error according to these rules. This rule is recursively applied.</li>
       </ul>
@@ -8577,14 +8578,14 @@
       </ol>
 
       <div class="note">
-        <p><span class="nh">NOTE</span> When an assignment occurs within strict mode code, it is an runtime error if <span
-        style="font-family: Times New Roman; font-style: italic">lref</span> in step 1.e of the first algorithm or step 9 of the
-        second algorithm it is an unresolvable reference. If it is, a <b>ReferenceError</b> exception is thrown. The <span
-        style="font-family: Times New Roman; font-style: italic">LeftHandSide</span> also may not be a reference to a data
-        property with the attribute value <span style="font-family: Times New Roman">{[[Writable]]:<b>false</b>}</span>, to an
-        accessor property with the attribute value <span style="font-family: Times New Roman">{[[Set]]:<b>undefined</b>}</span>,
-        nor to a non-existent property of an object whose [[Extensible]] internal property has the value <b>false</b>. In these
-        cases a <b>TypeError</b> exception is thrown.</p>
+        <p><span class="nh">NOTE</span> When an assignment occurs within <a href="#sec-10.1.1">strict mode code</a>, it is an
+        runtime error if <span style="font-family: Times New Roman; font-style: italic">lref</span> in step 1.e of the first
+        algorithm or step 9 of the second algorithm it is an unresolvable reference. If it is, a <b>ReferenceError</b> exception
+        is thrown. The <span style="font-family: Times New Roman; font-style: italic">LeftHandSide</span> also may not be a
+        reference to a data property with the attribute value <span style="font-family: Times New
+        Roman">{[[Writable]]:<b>false</b>}</span>, to an accessor property with the attribute value <span style="font-family:
+        Times New Roman">{[[Set]]:<b>undefined</b>}</span>, nor to a non-existent property of an object whose [[Extensible]]
+        internal property has the value <b>false</b>. In these cases a <b>TypeError</b> exception is thrown.</p>
       </div>
     </section>
 
@@ -9397,7 +9398,7 @@
         style="font-family: Times New Roman; font-style: italic">Identifier</span></p>
 
         <ul>
-          <li>It is a Syntax Error if the <span style="font-family: Times New Roman; font-style: italic">BindingIdentifier</span> is contained in strict code and if the <span style="font-family: Times New Roman; font-style: italic">Identifier</span> is <code>eval</code> or <code>arguments</code>.</li>
+          <li>It is a Syntax Error if the <span style="font-family: Times New Roman; font-style: italic">BindingIdentifier</span> is contained in <a href="#sec-10.1.1">strict code</a> and if the <span style="font-family: Times New Roman; font-style: italic">Identifier</span> is <code>eval</code> or <code>arguments</code>.</li>
         </ul>
 
         <p><b>Static Semantics:  Bound</b> <b>Names</b></p>
@@ -10802,7 +10803,7 @@
         italic">Statement</span></p>
 
         <ul>
-          <li>It is a Syntax Error if the <span style="font-family: Times New Roman; font-style: italic">IterationStatement</span> is contained in strict code and <span style="font-family: Times New Roman; font-style: italic">LeftHandSideExpression</span> is the <span style="font-family: Times New Roman; font-style: italic">Identifier</span> <code>eval</code> or the <span style="font-family: Times New Roman; font-style: italic">Identifier</span> <code>arguments</code>.</li>
+          <li>It is a Syntax Error if the <span style="font-family: Times New Roman; font-style: italic">IterationStatement</span> is contained in <a href="#sec-10.1.1">strict code</a> and <span style="font-family: Times New Roman; font-style: italic">LeftHandSideExpression</span> is the <span style="font-family: Times New Roman; font-style: italic">Identifier</span> <code>eval</code> or the <span style="font-family: Times New Roman; font-style: italic">Identifier</span> <code>arguments</code>.</li>
           <li>It is a Syntax Error if the <span style="font-family: Times New Roman; font-style: italic">LeftHandSideExpression</span> is an <span style="font-family: Times New Roman; font-style: italic">Identifier that statically resolves to a <a href="#sec-10.2.1">declarative environment record</a> binding and the resolved binding is an immutable binding.</span></li>
           <li>It is a Syntax Error if the <span style="font-family: Times New Roman; font-style: italic">LeftHandSideExpression</span> is <span style="font-family: Times New Roman; font-style: italic">PrimaryExpression : <b>(</b> Expression</span> <code>)</code> and <span style="font-family: Times New Roman; font-style: italic">Expression</span> derived a production that would produce a Syntax Error according to these rules. This rule is recursively applied.</li>
           <li>It is a Syntax Error if the <span style="font-family: Times New Roman; font-style: italic">LeftHandSideExpression</span> is an <span style="font-family: Times New Roman; font-style: italic">ObjectLiteral</span> or an <span style="font-family: Times New Roman; font-style: italic">ArrayLiteral</span> and the source code corresponding to <span style="font-family: Times New Roman; font-style: italic">LeftHandSideExpression</span> cannot be parsed using <span style="font-family: Times New Roman; font-style: italic">AssignmentPattern</span> as the goal symbol.</li>
@@ -11344,7 +11345,7 @@
     style="font-family: Times New Roman; font-style: italic">Statement</span></p>
 
     <ul>
-      <li>It is a Syntax Error if the code that matches this production is contained in strict code.</li>
+      <li>It is a Syntax Error if the code that matches this production is contained in <a href="#sec-10.1.1">strict code</a>.</li>
     </ul>
 
     <p><b>Static Semantics:  VarDeclaredNames</b></p>
@@ -12252,7 +12253,7 @@
       italic">FormalParameter</span></p>
 
       <ul>
-        <li>It is a Syntax Error if the source code matching this production is strict code and <span style="font-family: Times New Roman">BoundNames of <i>FormalsList</i></span> contains an element which is also contained in <span style="font-family: Times New Roman">BoundNames</span> of  <span style="font-family: Times New Roman; font-style: italic">FormalParameter</span>.</li>
+        <li>It is a Syntax Error if the source code matching this production is <a href="#sec-10.1.1">strict code</a> and <span style="font-family: Times New Roman">BoundNames of <i>FormalsList</i></span> contains an element which is also contained in <span style="font-family: Times New Roman">BoundNames</span> of  <span style="font-family: Times New Roman; font-style: italic">FormalParameter</span>.</li>
       </ul>
 
       <p><span style="font-family: Times New Roman; font-style: italic">FunctionRestParameter</span> <b>:</b>  <code>...</code>
@@ -12526,7 +12527,7 @@
       <code>{</code> <span style="font-family: Times New Roman; font-style: italic">FunctionBody</span> <code>}</code></p>
 
       <ol class="proc">
-        <li><span style="font-family: Times New Roman">Return the result of creating a new Function object as specified in <a href="#sec-13.2">13.2</a> with parameters specified by <i>FormalParameterList</i> and body specified by <i>FunctionBody</i>. Pass in the <a href="#sec-10.3">LexicalEnvironment</a> of the running execution context as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag if the <i>FunctionExpression</i> is contained in strict code or if its <i>FunctionBody</i> is strict code.</span></li>
+        <li><span style="font-family: Times New Roman">Return the result of creating a new Function object as specified in <a href="#sec-13.2">13.2</a> with parameters specified by <i>FormalParameterList</i> and body specified by <i>FunctionBody</i>. Pass in the <a href="#sec-10.3">LexicalEnvironment</a> of the running execution context as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag if the <i>FunctionExpression</i> is contained in <a href="#sec-10.1.1">strict code</a> or if its <i>FunctionBody</i> is <a href="#sec-10.1.1">strict code</a>.</span></li>
       </ol>
 
       <p><span style="font-family: Times New Roman; font-style: italic">FunctionExpression</span> <b>:</b> <code>function</code>
@@ -12538,7 +12539,7 @@
         <li><span style="font-family: Times New Roman">Let <i>funcEnv</i> be the result of calling <a href="#sec-10.2.2.2">NewDeclarativeEnvironment</a> passing the running execution context&rsquo;s <a href="#sec-10.2">Lexical Environment</a> as the argument</span></li>
         <li><span style="font-family: Times New Roman">Let <i>envRec</i> be <i>funcEnv&rsquo;s</i> environment record.</span></li>
         <li><span style="font-family: Times New Roman">Call the CreateImmutableBinding concrete method of <i>envRec</i> passing the String value of <i>BindingIdentifier</i> as the argument.</span></li>
-        <li><span style="font-family: Times New Roman">Let <i>closure</i> be the result of creating a new Function object as specified in <a href="#sec-13.2">13.2</a> with parameters specified by <i>FormalParameterList</i> and body specified by <i>FunctionBody</i>. Pass in <i>funcEnv</i> as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag if the <i>FunctionExpression</i> is contained in strict code or if its <i>FunctionBody</i> is strict code.</span></li>
+        <li><span style="font-family: Times New Roman">Let <i>closure</i> be the result of creating a new Function object as specified in <a href="#sec-13.2">13.2</a> with parameters specified by <i>FormalParameterList</i> and body specified by <i>FunctionBody</i>. Pass in <i>funcEnv</i> as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag if the <i>FunctionExpression</i> is contained in <a href="#sec-10.1.1">strict code</a> or if its <i>FunctionBody</i> is <a href="#sec-10.1.1">strict code</a>.</span></li>
         <li><span style="font-family: Times New Roman">Call the InitializeBinding concrete method of <i>envRec</i> passing the String value of <i>Identifier</i> and <i>closure</i> as the arguments.</span></li>
         <li><span style="font-family: Times New Roman">Return <i>closure</i>.</span></li>
       </ol>
@@ -12559,7 +12560,7 @@
       Times New Roman; font-style: italic">StatementList</span><sub>opt</sub></p>
 
       <ol class="proc">
-        <li><span style="font-family: Times New Roman">The code of this <i>FunctionBody</i> is strict mode code if it is part of a <i>FunctionDeclaration</i> or <i>FunctionExpression</i> that is contained in strict mode code or if the <a href="#sec-14.1">Directive Prologue</a> (<a href="#sec-14.1">14.1</a>) of its <i>StatementList</i> contains a <a href="#sec-14.1">Use Strict Directive</a> or if any of the conditions in <a href="#sec-10.1.1">10.1.1</a> apply.  If the code of this <i>FunctionBody</i> is strict mode code, <i>StatementList</i> is evaluated in the following steps as strict mode code. Otherwise, <i>StatementList</i> is evaluated in the following steps as non-strict mode code.</span></li>
+        <li><span style="font-family: Times New Roman">The code of this <i>FunctionBody</i> is <a href="#sec-10.1.1">strict mode code</a> if it is part of a <i>FunctionDeclaration</i> or <i>FunctionExpression</i> that is contained in <a href="#sec-10.1.1">strict mode code</a> or if the <a href="#sec-14.1">Directive Prologue</a> (<a href="#sec-14.1">14.1</a>) of its <i>StatementList</i> contains a <a href="#sec-14.1">Use Strict Directive</a> or if any of the conditions in <a href="#sec-10.1.1">10.1.1</a> apply.  If the code of this <i>FunctionBody</i> is <a href="#sec-10.1.1">strict mode code</a>, <i>StatementList</i> is evaluated in the following steps as <a href="#sec-10.1.1">strict mode code</a>. Otherwise, <i>StatementList</i> is evaluated in the following steps as non-<a href="#sec-10.1.1">strict mode code</a>.</span></li>
         <li><span style="font-family: Times New Roman">If <i>StatementList</i> is present return the result of evaluating <i>StatementList</i>.</span></li>
         <li><span style="font-family: Times New Roman">Else return <a href="#sec-8.8">NormalCompletion</a>(<b>undefined</b>).</span></li>
       </ol>
@@ -12653,11 +12654,11 @@
           <li><span style="font-family: Times New Roman">Set the [[Extensible]] internal property of <i>obj</i> to <b>true</b>.</span></li>
           <li><span style="font-family: Times New Roman">Let <i>proto</i> be the value of calling the [[Get]] internal property of <i>F</i> with argument</span> <code>"prototype"</code><span style="font-family: Times New Roman">.</span></li>
           <li><span style="font-family: Times New Roman"><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>proto</i>).</span></li>
-          <li><span style="font-family: Times New Roman">If Type(<i>proto</i>)</span> <span style="font-family: Times New Roman">is Object, set the [[Prototype]] internal property of <i>obj</i> to <i>proto</i>.</span></li>
-          <li><span style="font-family: Times New Roman">If Type(<i>proto</i>)</span> <span style="font-family: Times New Roman">is not Object, set the [[Prototype]] internal property of <i>obj</i> to the standard built-in Object prototype object as described in <a href="#sec-15.2.4">15.2.4</a>.</span></li>
+          <li><span style="font-family: Times New Roman">If <a href="#sec-8">Type</a>(<i>proto</i>)</span> <span style="font-family: Times New Roman">is Object, set the [[Prototype]] internal property of <i>obj</i> to <i>proto</i>.</span></li>
+          <li><span style="font-family: Times New Roman">If <a href="#sec-8">Type</a>(<i>proto</i>)</span> <span style="font-family: Times New Roman">is not Object, set the [[Prototype]] internal property of <i>obj</i> to the standard built-in Object prototype object as described in <a href="#sec-15.2.4">15.2.4</a>.</span></li>
           <li><span style="font-family: Times New Roman">Let <i>result</i> be the result of calling the [[Call]] internal property of <i>F</i>, providing <i>obj</i> as the <b>this</b> value and providing the argument list passed into [[Construct]] as <i>args</i>.</span></li>
           <li><span style="font-family: Times New Roman"><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>proto</i>).</span></li>
-          <li><span style="font-family: Times New Roman">If Type(<i>result</i>.[[value]]) is Object then return <i>result</i>.</span></li>
+          <li><span style="font-family: Times New Roman">If <a href="#sec-8">Type</a>(<i>result</i>.[[value]]) is Object then return <i>result</i>.</span></li>
           <li><span style="font-family: Times New Roman">Return <a href="#sec-8.8">NormalCompletion</a>(<i>obj</i>).</span></li>
         </ol>
       </section>
@@ -12720,7 +12721,7 @@
   style="font-family: Times New Roman; font-style: italic">ProgramBody</span><sub>opt</sub> is evaluated as follows:</p>
 
   <ol class="proc">
-    <li>The code of this <i>Program</i> is strict mode code if the <a href="#sec-14.1">Directive Prologue</a> (<a href="#sec-14.1">14.1</a>) of its <i>ProgramBody</i> contains a <a href="#sec-14.1">Use Strict Directive</a> or if any of the conditions of <a href="#sec-10.1.1">10.1.1</a> apply. If the code of this <i>Program</i> is strict mode code, <i>ProgramBody</i> is evaluated in the following steps as strict mode code.  Otherwise <i>ProgramBody</i> is evaluated in the following steps as non-strict mode code.</li>
+    <li>The code of this <i>Program</i> is <a href="#sec-10.1.1">strict mode code</a> if the <a href="#sec-14.1">Directive Prologue</a> (<a href="#sec-14.1">14.1</a>) of its <i>ProgramBody</i> contains a <a href="#sec-14.1">Use Strict Directive</a> or if any of the conditions of <a href="#sec-10.1.1">10.1.1</a> apply. If the code of this <i>Program</i> is <a href="#sec-10.1.1">strict mode code</a>, <i>ProgramBody</i> is evaluated in the following steps as <a href="#sec-10.1.1">strict mode code</a>.  Otherwise <i>ProgramBody</i> is evaluated in the following steps as non-<a href="#sec-10.1.1">strict mode code</a>.</li>
     <li>If <i>ProgramBody</i> is not present, return <a href="#sec-8.8">NormalCompletion</a>(<span style="font-family: sans-serif">empty</span>).</li>
     <li>Let <i>progCxt</i> be a new execution context for global code as described in <a href="#sec-10.4.1">10.4.1</a>.</li>
     <li>Let <i>result</i> be the result of evaluating <i>ProgramBody</i>.</li>
@@ -12899,7 +12900,7 @@
         italic">x</span>, the following steps are taken:</p>
 
         <ol class="proc">
-          <li><span style="font-family: Times New Roman">If Type(<i>x</i>) is not String, return <i>x</i>.</span></li>
+          <li><span style="font-family: Times New Roman">If <a href="#sec-8">Type</a>(<i>x</i>) is not String, return <i>x</i>.</span></li>
           <li><span style="font-family: Times New Roman">Let <i>prog</i> be the ECMAScript code that is the result of parsing <i>x</i> as a <i>Program</i>. If the parse fails, throw a <b>SyntaxError</b> exception (but <a href="#sec-16">see also clause 16</a>).</span></li>
           <li><span style="font-family: Times New Roman">Let <i>evalCtx</i> be the result of establishing a new execution context (<a href="#sec-10.4.2">10.4.2</a>) for the eval code <i>prog</i>.</span></li>
           <li><span style="font-family: Times New Roman">Let <i>result</i> be the result of evaluating the program <i>prog</i>.</span></li>
@@ -13606,15 +13607,15 @@
         <ol class="proc">
           <li>If <i>value</i> is supplied, then
             <ol class="block">
-              <li>If Type(<i>value</i>)  is Object, then
+              <li>If <a href="#sec-8">Type</a>(<i>value</i>)  is Object, then
                 <ol class="block">
                   <li>If the <i>value</i> is a native ECMAScript object, do not create a new object but simply return <i>value</i>.</li>
                   <li>If the <i>value</i> is a host object, then actions are taken and a result is returned in an implementation-dependent manner that may depend on the host object.</li>
                 </ol>
               </li>
-              <li>If Type(<i>value</i>) is String, return <a href="#sec-9.1.9">ToObject</a>(<i>value</i>).</li>
-              <li>If Type(<i>value</i>) is Boolean, return <a href="#sec-9.1.9">ToObject</a>(<i>value</i>).</li>
-              <li>If Type(<i>value</i>) is Number, return <a href="#sec-9.1.9">ToObject</a>(<i>value</i>).</li>
+              <li>If <a href="#sec-8">Type</a>(<i>value</i>) is String, return <a href="#sec-9.1.9">ToObject</a>(<i>value</i>).</li>
+              <li>If <a href="#sec-8">Type</a>(<i>value</i>) is Boolean, return <a href="#sec-9.1.9">ToObject</a>(<i>value</i>).</li>
+              <li>If <a href="#sec-8">Type</a>(<i>value</i>) is Number, return <a href="#sec-9.1.9">ToObject</a>(<i>value</i>).</li>
             </ol>
           </li>
           <li>Assert: The argument <i>value</i> was not supplied or its type was Null or Undefined.</li>
@@ -13652,7 +13653,7 @@
         font-style: italic">O</span>, the following steps are taken:</p>
 
         <ol class="proc">
-          <li>If Type(<i>O</i>) is not Object throw a <b>TypeError</b> exception.</li>
+          <li>If <a href="#sec-8">Type</a>(<i>O</i>) is not Object throw a <b>TypeError</b> exception.</li>
           <li>Return the value of the [[Prototype]] internal property of <i>O</i>.</li>
         </ol>
       </section>
@@ -13663,7 +13664,7 @@
         <p>When the <b>getOwnPropertyDescriptor</b> function is called, the following steps are taken:</p>
 
         <ol class="proc">
-          <li>If Type(<i>O</i>) is not Object throw a <b>TypeError</b> exception.</li>
+          <li>If <a href="#sec-8">Type</a>(<i>O</i>) is not Object throw a <b>TypeError</b> exception.</li>
           <li>Let <i>name</i> be <a href="#sec-9.1.8">ToString</a>(<i>P</i>).</li>
           <li>Let <i>desc</i> be the result of calling the [[GetOwnProperty]] internal method of <i>O</i> with argument <i>name</i>.</li>
           <li>Return the result of calling <a href="#sec-8.10.4">FromPropertyDescriptor</a>(<i>desc</i>) (<a href="#sec-8.10.4">8.10.4</a>).</li>
@@ -13676,7 +13677,7 @@
         <p>When the <b>getOwnPropertyNames</b> function is called, the following steps are taken:</p>
 
         <ol class="proc">
-          <li>If Type(<i>O</i>) is not Object throw a <b>TypeError</b> exception.</li>
+          <li>If <a href="#sec-8">Type</a>(<i>O</i>) is not Object throw a <b>TypeError</b> exception.</li>
           <li>Let <i>array</i> be the result of creating a new object as if by the expression <code>new Array ()</code> where <code>Array</code> is the standard built-in constructor with that name.</li>
           <li>Let <i>n</i> be 0.</li>
           <li>For each named own property <i>P</i> of <i>O</i>
@@ -13704,7 +13705,7 @@
         the following steps are taken:</p>
 
         <ol class="proc">
-          <li>If Type(<i>O</i>) is not Object or Null throw a <b>TypeError</b> exception.</li>
+          <li>If <a href="#sec-8">Type</a>(<i>O</i>) is not Object or Null throw a <b>TypeError</b> exception.</li>
           <li>Let <i>obj</i> be the result of creating a new object as if by the expression new Object() where Object is the standard built-in constructor with that name</li>
           <li>Set the [[Prototype]] internal property of <i>obj</i> to <i>O</i>.</li>
           <li>If the argument <i>Properties</i> is present and not <b>undefined</b>, add own properties to <i>obj</i> as if by calling the standard built-in function <code>Object.defineProperties</code> with arguments <i>obj</i> and <i>Properties</i>.</li>
@@ -13719,7 +13720,7 @@
         property of an object. When the <b>defineProperty</b> function is called, the following steps are taken:</p>
 
         <ol class="proc">
-          <li>If Type(<i>O</i>) is not Object throw a <b>TypeError</b> exception.</li>
+          <li>If <a href="#sec-8">Type</a>(<i>O</i>) is not Object throw a <b>TypeError</b> exception.</li>
           <li>Let <i>name</i> be <a href="#sec-9.1.8">ToString</a>(<i>P</i>).</li>
           <li>Let <i>desc</i> be the result of calling <a href="#sec-8.10.5">ToPropertyDescriptor</a> with <i>Attributes</i> as the argument.</li>
           <li>Call the [[DefineOwnProperty]] internal method of <i>O</i> with arguments <i>name</i>, <i>desc</i>, and <b>true</b>.</li>
@@ -13734,7 +13735,7 @@
         properties of an object. When the <b>defineProperties</b> function is called, the following steps are taken:</p>
 
         <ol class="proc">
-          <li>If Type(<i>O</i>) is not Object throw a <b>TypeError</b> exception.</li>
+          <li>If <a href="#sec-8">Type</a>(<i>O</i>) is not Object throw a <b>TypeError</b> exception.</li>
           <li>Let <i>props</i> be <a href="#sec-9.1.9">ToObject</a>(<i>Properties</i>).</li>
           <li>Let <i>names</i> be an internal list containing the names of each enumerable own property of <i>props.</i></li>
           <li>Let <i>descriptors</i> be an empty internal <a href="#sec-8.7">List</a>.</li>
@@ -13765,7 +13766,7 @@
         <p>When the <b>seal</b> function is called, the following steps are taken:</p>
 
         <ol class="proc">
-          <li>If Type(<i>O</i>) is not Object throw a <b>TypeError</b> exception.</li>
+          <li>If <a href="#sec-8">Type</a>(<i>O</i>) is not Object throw a <b>TypeError</b> exception.</li>
           <li>For each named own property name <i>P</i> of <i>O</i>,
             <ol class="block">
               <li>Let <i>desc</i> be the result of calling the [[GetOwnProperty]] internal method of <i>O</i> with <i>P</i>.</li>
@@ -13784,7 +13785,7 @@
         <p>When the <b>freeze</b> function is called, the following steps are taken:</p>
 
         <ol class="proc">
-          <li>If Type(<i>O</i>) is not Object throw a <b>TypeError</b> exception.</li>
+          <li>If <a href="#sec-8">Type</a>(<i>O</i>) is not Object throw a <b>TypeError</b> exception.</li>
           <li>For each named own property name <i>P</i> of <i>O</i>,
             <ol class="block">
               <li>Let <i>desc</i> be the result of calling the [[GetOwnProperty]] internal method of <i>O</i> with <i>P</i>.</li>
@@ -13808,7 +13809,7 @@
         <p>When the <b>preventExtensions</b> function is called, the following steps are taken:</p>
 
         <ol class="proc">
-          <li>If Type(<i>O</i>) is not Object throw a <b>TypeError</b> exception.</li>
+          <li>If <a href="#sec-8">Type</a>(<i>O</i>) is not Object throw a <b>TypeError</b> exception.</li>
           <li>Set the [[Extensible]] internal property of <i>O</i> to <b>false</b>.</li>
           <li>Return <i>O</i>.</li>
         </ol>
@@ -13821,7 +13822,7 @@
         italic">O</span>, the following steps are taken:</p>
 
         <ol class="proc">
-          <li>If Type(<i>O</i>) is not Object throw a <b>TypeError</b> exception.</li>
+          <li>If <a href="#sec-8">Type</a>(<i>O</i>) is not Object throw a <b>TypeError</b> exception.</li>
           <li>For each named own property name <i>P</i> of <i>O</i>,
             <ol class="block">
               <li>Let <i>desc</i> be the result of calling the [[GetOwnProperty]] internal method of <i>O</i> with <i>P</i>.</li>
@@ -13840,7 +13841,7 @@
         italic">O</span>, the following steps are taken:</p>
 
         <ol class="proc">
-          <li>If Type(<i>O</i>) is not Object throw a <b>TypeError</b> exception.</li>
+          <li>If <a href="#sec-8">Type</a>(<i>O</i>) is not Object throw a <b>TypeError</b> exception.</li>
           <li>For each named own property name <i>P</i> of <i>O</i>,
             <ol class="block">
               <li>Let <i>desc</i> be the result of calling the [[GetOwnProperty]] internal method of <i>O</i> with <i>P</i>.</li>
@@ -13864,7 +13865,7 @@
         italic">O</span>, the following steps are taken:</p>
 
         <ol class="proc">
-          <li>If Type(<i>O</i>) is not Object throw a <b>TypeError</b> exception.</li>
+          <li>If <a href="#sec-8">Type</a>(<i>O</i>) is not Object throw a <b>TypeError</b> exception.</li>
           <li>Return the Boolean value of the [[Extensible]] internal property of <i>O</i>.</li>
         </ol>
       </section>
@@ -13876,7 +13877,7 @@
         italic">O</span>, the following steps are taken:</p>
 
         <ol class="proc">
-          <li>If the Type(<i>O</i>) is not Object, throw a <b>TypeError</b> exception.</li>
+          <li>If the <a href="#sec-8">Type</a>(<i>O</i>) is not Object, throw a <b>TypeError</b> exception.</li>
           <li>Let <i>n</i> be the number of own enumerable properties of <i>O</i></li>
           <li>Let <i>array</i> be the result of creating a new Object as if by the expression <code>new Array(n)</code> where <code>Array</code> is the standard built-in constructor with that name.</li>
           <li>Let <i>index</i> be 0.</li>
@@ -14264,7 +14265,7 @@
               <li>Return the result of calling the [[Call]] internal method of <i>func</i>, providing <i>thisArg</i> as the <b>this</b> value and an empty list of arguments.</li>
             </ol>
           </li>
-          <li>If Type(<i>argArray</i>) is not Object, then throw a <b>TypeError</b> exception.</li>
+          <li>If <a href="#sec-8">Type</a>(<i>argArray</i>) is not Object, then throw a <b>TypeError</b> exception.</li>
           <li>Let <i>len</i> be the result of calling the [[Get]] internal method of <i>argArray</i> with argument <code>"length"</code>.</li>
           <li>Let <i>n</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>len</i>).</li>
           <li>Let <i>argList</i>  be an empty <a href="#sec-8.7">List</a>.</li>
@@ -14458,7 +14459,7 @@
         <ol class="proc">
           <li>If <i>V</i> is not an object, return <b>false</b>.</li>
           <li>Let <i>O</i> be the result of calling the [[Get]] internal method of <i>F</i> with property name <code>"prototype"</code>.</li>
-          <li>If Type(<i>O</i>) is not Object, throw a <b>TypeError</b> exception.</li>
+          <li>If <a href="#sec-8">Type</a>(<i>O</i>) is not Object, throw a <b>TypeError</b> exception.</li>
           <li>Repeat
             <ol class="block">
               <li>Let <i>V</i> be the value of the [[Prototype]] internal property of <i>V</i>.</li>
@@ -14628,7 +14629,7 @@
         otherwise it returns <b>false</b>. The following steps are taken:</p>
 
         <ol class="proc">
-          <li>If Type(<i>arg</i>) is not Object, return <b>false</b>.</li>
+          <li>If <a href="#sec-8">Type</a>(<i>arg</i>) is not Object, return <b>false</b>.</li>
           <li>If <i>arg</i> has the [[NativeBrand]] internal property with value NativeArray, then return <b>true</b>.</li>
           <li>Return <b>false</b>.</li>
         </ol>
@@ -15191,7 +15192,7 @@
         means <span style="font-family: Times New Roman"><i>comparefn</i>(<i>a</i>,<i>b</i>)&nbsp;&gt;&nbsp;0</span>.</p>
 
         <ul>
-          <li><span style="font-family: Times New Roman">Calling <i>comparefn</i>(<i>a</i>,<i>b</i>) always returns the same value <i>v</i> when given a specific pair of values <i>a</i> and <i>b</i> as its two arguments. Furthermore, Type(<i>v</i>) is Number, and <i>v</i> is not NaN. Note that this implies that exactly one of <i>a</i>&nbsp;&lt;<sub>CF</sub></span>&nbsp;<span style="font-family: Times New Roman"><i>b</i>, <i>a</i>&nbsp;=<sub>CF</sub></span>&nbsp;<span style="font-family: Times New Roman"><i>b</i>, and <i>a</i>&nbsp;&gt;<sub>CF</sub></span>&nbsp;<span style="font-family: Times New Roman"><i>b</i> will be true for a given pair of <i>a</i> and <i>b</i>.</span></li>
+          <li><span style="font-family: Times New Roman">Calling <i>comparefn</i>(<i>a</i>,<i>b</i>) always returns the same value <i>v</i> when given a specific pair of values <i>a</i> and <i>b</i> as its two arguments. Furthermore, <a href="#sec-8">Type</a>(<i>v</i>) is Number, and <i>v</i> is not NaN. Note that this implies that exactly one of <i>a</i>&nbsp;&lt;<sub>CF</sub></span>&nbsp;<span style="font-family: Times New Roman"><i>b</i>, <i>a</i>&nbsp;=<sub>CF</sub></span>&nbsp;<span style="font-family: Times New Roman"><i>b</i>, and <i>a</i>&nbsp;&gt;<sub>CF</sub></span>&nbsp;<span style="font-family: Times New Roman"><i>b</i> will be true for a given pair of <i>a</i> and <i>b</i>.</span></li>
           <li><span style="font-family: Times New Roman">Calling <i>comparefn</i>(<i>a</i>,<i>b</i>) does not modify the <b>this</b> object.</span></li>
           <li><span style="font-family: Times New Roman"><i>a</i>&nbsp;=<sub>CF</sub></span>&nbsp;<span style="font-family: Times New Roman"><i>a</i>   (reflexivity)</span></li>
           <li><span style="font-family: Times New Roman">If <i>a</i>&nbsp;=<sub>CF</sub></span>&nbsp;<span style="font-family: Times New Roman"><i>b</i>, then <i>b</i>&nbsp;=<sub>CF</sub></span>&nbsp;<span style="font-family: Times New Roman"><i>a</i>   (symmetry)</span></li>
@@ -16523,7 +16524,7 @@
         <ol class="proc">
           <li>Call <a href="#sec-9.2.1">CheckObjectCoercible</a> passing the <b>this</b> value as its argument.</li>
           <li>Let <i>S</i> be the result of calling <a href="#sec-9.1.8">ToString</a>, giving it the <b>this</b> value as its argument.</li>
-          <li>If Type(<i>regexp</i>) is Object and <i>regexp</i> has a [[NativeBrand]] internal property whose value is NativeRegExp, then let <i>rx</i> be <i>regexp</i>;</li>
+          <li>If <a href="#sec-8">Type</a>(<i>regexp</i>) is Object and <i>regexp</i> has a [[NativeBrand]] internal property whose value is NativeRegExp, then let <i>rx</i> be <i>regexp</i>;</li>
           <li>Else, let <i>rx</i> be a new RegExp object created as if by the expression <code>new RegExp(</code><i>regexp</i><code>)</code> where <code>RegExp</code> is the standard built-in constructor with that name.</li>
           <li>Let <i>global</i> be the result of calling the [[Get]] internal method of <i>rx</i> with argument <code>"global"</code>.</li>
           <li>Let <i>exec</i> be the standard built-in function <code>RegExp.prototype.exec</code> (<a href="#sec-15.10.6.2">see 15.10.6.2</a>)</li>
@@ -16673,7 +16674,7 @@
         <ol class="proc">
           <li>Call <a href="#sec-9.2.1">CheckObjectCoercible</a> passing the <b>this</b> value as its argument.</li>
           <li>Let <i>string</i> be the result of calling <a href="#sec-9.1.8">ToString</a>, giving it the <b>this</b> value as its argument.</li>
-          <li>If Type(<i>regexp</i>) is Object and <i>regexp</i> has a [[NativeBrand]] internal property whose value is NativeRegExp , then let <i>rx</i> be <i>regexp</i>;</li>
+          <li>If <a href="#sec-8">Type</a>(<i>regexp</i>) is Object and <i>regexp</i> has a [[NativeBrand]] internal property whose value is NativeRegExp , then let <i>rx</i> be <i>regexp</i>;</li>
           <li>Else, let <i>rx</i> be a new RegExp object created as if by the expression <code>new RegExp(</code><i>regexp</i><code>)</code> where <code>RegExp</code> is the standard built-in constructor with that name.</li>
           <li>Search the value <i>string</i> from its beginning for an occurrence of the regular expression pattern <i>rx</i>. Let <i>result</i> be a Number indicating the offset within <i>string</i> where the pattern matched, or &ndash;1 if there was no match. The <code>lastIndex</code> and <code>global</code> properties of <i>regexp</i> are ignored when performing the search. The <code>lastIndex</code> property of <i>regexp</i> is left unchanged.</li>
           <li>Return <i>result</i>.</li>
@@ -16840,7 +16841,7 @@
               <li>Call the [[Match]] internal method of <i>R</i> giving it the arguments <i>S</i> and <i>q</i>, and return the MatchResult result.</li>
             </ol>
           </li>
-          <li>Type(<i>R</i>) must be String. Let <i>r</i> be the number of characters in <i>R</i>.</li>
+          <li><a href="#sec-8">Type</a>(<i>R</i>) must be String. Let <i>r</i> be the number of characters in <i>R</i>.</li>
           <li>Let <i>s</i> be the number of characters in <i>S</i>.</li>
           <li>If <i>q</i>+<i>r</i> &gt; <i>s</i> then return the MatchResult <b>failure</b>.</li>
           <li>If there exists an integer <i>i</i> between 0 (inclusive) and <i>r</i> (exclusive) such that the character at position <i>q</i>+<i>i</i> of <i>S</i> is different from the character at position <i>i</i> of <i>R</i>, then return <b>failure</b>.</li>
@@ -17142,8 +17143,8 @@
 
         <ol class="proc">
           <li>Let <i>B</i> be the <b>this</b> value.</li>
-          <li>If Type(<i>B</i>) is Boolean, then let <i>b</i> be <i>B</i>.</li>
-          <li>Else if Type(<i>B</i>) is Object and <i>B</i> has a [[NativeWrapper]] internal property whose value is BooleanWrapper, then let <i>b</i> be the value of the [[PrimitiveValue]] internal property of <i>B</i>.</li>
+          <li>If <a href="#sec-8">Type</a>(<i>B</i>) is Boolean, then let <i>b</i> be <i>B</i>.</li>
+          <li>Else if <a href="#sec-8">Type</a>(<i>B</i>) is Object and <i>B</i> has a [[NativeWrapper]] internal property whose value is BooleanWrapper, then let <i>b</i> be the value of the [[PrimitiveValue]] internal property of <i>B</i>.</li>
           <li>Else throw a <b>TypeError</b> exception.</li>
           <li>If <i>b</i> is <b>true</b>, then return <code>"true"</code>; else return <code>"false"</code>.</li>
         </ol>
@@ -17156,8 +17157,8 @@
 
         <ol class="proc">
           <li>Let <i>B</i> be the <b>this</b> value.</li>
-          <li>If Type(<i>B</i>) is Boolean, then let <i>b</i> be <i>B</i>.</li>
-          <li>Else if Type(<i>B</i>) is Object and <i>B</i> has a [[NativeWrapper]] internal property whose value is BooleanWrapper, then let <i>b</i> be the value of the [[PrimitiveValue]] internal property of <i>B</i>.</li>
+          <li>If <a href="#sec-8">Type</a>(<i>B</i>) is Boolean, then let <i>b</i> be <i>B</i>.</li>
+          <li>Else if <a href="#sec-8">Type</a>(<i>B</i>) is Object and <i>B</i> has a [[NativeWrapper]] internal property whose value is BooleanWrapper, then let <i>b</i> be the value of the [[PrimitiveValue]] internal property of <i>B</i>.</li>
           <li>Else throw a <b>TypeError</b> exception.</li>
           <li>Return <i>b</i>.</li>
         </ol>
@@ -17294,13 +17295,13 @@
       NumberWrapper.</p>
 
       <p>In the following descriptions of functions that are properties of the Number prototype object, the phrase &ldquo;this
-      Number object&rdquo; refers to either the object that is the <b>this</b> value for the invocation of the function or, if
-      Type(<b>this</b> value) is Number,  an object that is created as if by the expression <b><span style="font-family:
-      monospace">new Number(</span>this</b> value<code>)</code> where <code>Number</code> is the standard built-in constructor
-      with that name.  Also, the phrase &ldquo;this Number value&rdquo; refers to either the Number value represented by this
-      Number object, that is, the value of the [[PrimitiveValue]] internal property of this Number object or the <b>this</b> value
-      if its type is Number.  A <b>TypeError</b> exception is thrown if the <b>this</b> value is neither an object that has a
-      [[NativeBrand]] internal property whose value is NumberWrapper or a value whose type is Number.</p>
+      Number object&rdquo; refers to either the object that is the <b>this</b> value for the invocation of the function or, if <a
+      href="#sec-8">Type</a>(<b>this</b> value) is Number,  an object that is created as if by the expression <b><span
+      style="font-family: monospace">new Number(</span>this</b> value<code>)</code> where <code>Number</code> is the standard
+      built-in constructor with that name.  Also, the phrase &ldquo;this Number value&rdquo; refers to either the Number value
+      represented by this Number object, that is, the value of the [[PrimitiveValue]] internal property of this Number object or
+      the <b>this</b> value if its type is Number.  A <b>TypeError</b> exception is thrown if the <b>this</b> value is neither an
+      object that has a [[NativeBrand]] internal property whose value is NumberWrapper or a value whose type is Number.</p>
 
       <section id="sec-15.7.4.1">
         <h1><span class="secnum"><a href="#sec-15.7.4.1" title="link to this section">15.7.4.1</a></span> Number.prototype.constructor</h1>
@@ -18545,7 +18546,7 @@ THH:mm:ss.sss</pre>
 
         <ol class="proc">
           <li>Let <i>v</i> be <a href="#sec-9.1.1">ToPrimitive</a>(<i>value</i>).</li>
-          <li>If Type(<i>v</i>) is String, then
+          <li>If <a href="#sec-8">Type</a>(<i>v</i>) is String, then
             <ol class="block">
               <li>Parse <i>v</i> as a date, in exactly the same manner as for the <code>parse</code> method (<a href="#sec-15.9.4.2">15.9.4.2</a>); let <i>V</i> be the <a href="#sec-15.9.1.1">time value</a> for this date.</li>
             </ol>
@@ -21065,7 +21066,7 @@ THH:mm:ss.sss</pre>
 
         <ol class="proc">
           <li>Let <i>O</i> be the <b>this</b> value.</li>
-          <li>If Type(<i>O</i>) is not Object, throw a <b>TypeError</b> exception.</li>
+          <li>If <a href="#sec-8">Type</a>(<i>O</i>) is not Object, throw a <b>TypeError</b> exception.</li>
           <li>Let <i>name</i> be the result of calling the [[Get]] internal method of <i>O</i> with argument <span style="font-family: monospace">"<b>name</b>"</span>.</li>
           <li>If <i>name</i> is <b>undefined</b>, then let <i>name</i> be <span style="font-family: monospace">"<b>Error</b>"</span>; else let <i>name</i> be <a href="#sec-9.1.8">ToString</a>(<i>name</i>).</li>
           <li>Let <i>msg</i> be the result of calling the [[Get]] internal method of <i>O</i> with argument <span style="font-family: monospace">"<b>message</b>"</span>.</li>
@@ -21487,7 +21488,7 @@ THH:mm:ss.sss</pre>
         <li>Let <i>stack</i> be an empty <a href="#sec-8.7">List</a>.</li>
         <li>Let <i>indent</i> be the empty String.</li>
         <li>Let <i>PropertyList</i> and <i>ReplacerFunction</i> be <b>undefined</b>.</li>
-        <li>If Type(<i>replacer</i>) is Object, then
+        <li>If <a href="#sec-8">Type</a>(<i>replacer</i>) is Object, then
           <ol class="block">
             <li>If <a href="#sec-9.2.2">IsCallable</a>(<i>replacer</i>) is <b>true</b>, then
               <ol class="block">
@@ -21500,9 +21501,9 @@ THH:mm:ss.sss</pre>
                 <li>For each value <i>v</i> of a property of <i>replacer</i> that has an array index property name. The properties are enumerated in the ascending array index order of their names.
                   <ol class="block">
                     <li>Let <i>item</i> be <b>undefined</b>.</li>
-                    <li>If Type(<i>v</i>) is String then let <i>item</i> be <i>v.</i></li>
-                    <li>Else if Type(<i>v</i>) is Number then let <i>item</i> be <a href="#sec-9.1.8">ToString</a>(<i>v</i>).</li>
-                    <li>Else if Type(<i>v</i>) is Object then,
+                    <li>If <a href="#sec-8">Type</a>(<i>v</i>) is String then let <i>item</i> be <i>v.</i></li>
+                    <li>Else if <a href="#sec-8">Type</a>(<i>v</i>) is Number then let <i>item</i> be <a href="#sec-9.1.8">ToString</a>(<i>v</i>).</li>
+                    <li>Else if <a href="#sec-8">Type</a>(<i>v</i>) is Object then,
                       <ol class="block">
                         <li>If <i>v</i> has either an [[NativeBrand]] internal property whose value is either StringWrapper or NumberWrapper then let <i>item</i> be <a href="#sec-9.1.8">ToString</a>(<i>v</i>).</li>
                       </ol>
@@ -21518,7 +21519,7 @@ THH:mm:ss.sss</pre>
             </li>
           </ol>
         </li>
-        <li>If Type(<i>space</i>) is Object then,
+        <li>If <a href="#sec-8">Type</a>(<i>space</i>) is Object then,
           <ol class="block">
             <li>If <i>space</i> has a [[NativeBrand]] internal property whose value is NumberWrapper  then,
               <ol class="block">
@@ -21532,13 +21533,13 @@ THH:mm:ss.sss</pre>
             </li>
           </ol>
         </li>
-        <li>If Type(<i>space</i>) is Number
+        <li>If <a href="#sec-8">Type</a>(<i>space</i>) is Number
           <ol class="block">
             <li>Let <i>space</i> be min(10, <a href="#sec-9.1.4">ToInteger</a>(<i>space</i>)).</li>
             <li>Set <i>gap</i> to a String containing <i>space</i> space characters. This will be the empty String if <i>space</i> is less than 1.</li>
           </ol>
         </li>
-        <li>Else if Type(<i>space)</i> is String
+        <li>Else if <a href="#sec-8">Type</a>(<i>space)</i> is String
           <ol class="block">
             <li>If the number of characters in <i>space</i> is 10 or less, set <i>gap</i> to <i>space</i> otherwise set <i>gap</i> to a String consisting of the first 10 characters of <i>space</i>.</li>
           </ol>
@@ -21559,7 +21560,7 @@ THH:mm:ss.sss</pre>
 
       <ol class="proc">
         <li>Let <i>value</i> be the result of calling the [[Get]] internal method of <i>holder</i> with argument <i>key</i>.</li>
-        <li>If Type(<i>value</i>) is Object, then
+        <li>If <a href="#sec-8">Type</a>(<i>value</i>) is Object, then
           <ol class="block">
             <li>Let <i>toJSON</i> be the result of calling the [[Get]] internal method of <i>value</i> with argument <code>"toJSON"</code>.</li>
             <li>If <a href="#sec-9.2.2">IsCallable</a>(<i>toJSON</i>) is <b>true</b>
@@ -21574,7 +21575,7 @@ THH:mm:ss.sss</pre>
             <li>Let <i>value</i> be the result of calling the [[Call]] internal method of <i>ReplacerFunction</i> passing <i>holder</i> as the <b>this</b> value and with an argument list consisting of <i>key</i> and <i>value</i>.</li>
           </ol>
         </li>
-        <li>If Type(<i>value</i>) is Object then,
+        <li>If <a href="#sec-8">Type</a>(<i>value</i>) is Object then,
           <ol class="block">
             <li>If <i>value</i> has an [[NativeBrand]] internal property with value NumberWrapper  then,
               <ol class="block">
@@ -21596,14 +21597,14 @@ THH:mm:ss.sss</pre>
         <li>If <i>value</i> is <b>null</b> then return <code>"null"</code>.</li>
         <li>If <i>value</i> is <b>true</b> then return <code>"true"</code>.</li>
         <li>If <i>value</i> is <b>false</b> then return <code>"false"</code>.</li>
-        <li>If Type(<i>value</i>) is String, then return the result of calling the abstract operation <i>Quote</i> with argument <i>value</i>.</li>
-        <li>If Type(<i>value</i>) is Number
+        <li>If <a href="#sec-8">Type</a>(<i>value</i>) is String, then return the result of calling the abstract operation <i>Quote</i> with argument <i>value</i>.</li>
+        <li>If <a href="#sec-8">Type</a>(<i>value</i>) is Number
           <ol class="block">
             <li>If <i>value</i> is finite then return <a href="#sec-9.1.8">ToString</a>(<i>value</i>).</li>
             <li>Else, return <code>"null"</code>.</li>
           </ol>
         </li>
-        <li>If Type(<i>value</i>) is Object, and <a href="#sec-9.2.2">IsCallable</a>(<i>value</i>) is <b>false</b>
+        <li>If <a href="#sec-8">Type</a>(<i>value</i>) is Object, and <a href="#sec-9.2.2">IsCallable</a>(<i>value</i>) is <b>false</b>
           <ol class="block">
             <li>If <i>value</i> has an [[NativeBrand]] internal property with value NativeArray  then
               <ol class="block">
@@ -21866,8 +21867,8 @@ THH:mm:ss.sss</pre>
     <li>Attempts to define an <span style="font-family: Times New Roman; font-style: italic">ObjectLiteral</span> that has multiple <b>get</b> property assignments with the same name or multiple <b>set</b> property assignments with the same name.</li>
     <li>Attempts to define an <span style="font-family: Times New Roman; font-style: italic">ObjectLiteral</span> that has both a data property assignment and a <b>get</b> or <b>set</b> property assignment with the same name.</li>
     <li>Errors in regular expression literals that are not implementation-defined syntax extensions.</li>
-    <li>Attempts in strict mode code to define an <span style="font-family: Times New Roman; font-style: italic">ObjectLiteral</span> that has multiple data property assignments with the same name.</li>
-    <li>The occurrence of a <span style="font-family: Times New Roman; font-style: italic">WithStatement</span> in strict mode code.</li>
+    <li>Attempts in <a href="#sec-10.1.1">strict mode code</a> to define an <span style="font-family: Times New Roman; font-style: italic">ObjectLiteral</span> that has multiple data property assignments with the same name.</li>
+    <li>The occurrence of a <span style="font-family: Times New Roman; font-style: italic">WithStatement</span> in <a href="#sec-10.1.1">strict mode code</a>.</li>
     <li>The occurrence of an <span style="font-family: Times New Roman; font-style: italic">Identifier</span> value appearing more than once within a <span style="font-family: Times New Roman; font-style: italic">FormalParameterList</span> of an individual strict mode <span style="font-family: Times New Roman; font-style: italic">FunctionDeclaration</span> or <span style="font-family: Times New Roman; font-style: italic">FunctionExpression</span>.</li>
     <li>Improper uses of <code>return</code>, <code>break</code>, and <code>continue</code>.</li>
     <li>Attempts to call <a href="#sec-8.9.2">PutValue</a> on any value for which an early determination can be made that the value is not a <a href="#sec-8.9">Reference</a> (for example, executing the assignment statement <span style="font-family: monospace">3=4</span>).</li>
@@ -23092,7 +23093,7 @@ THH:mm:ss.sss</pre>
       <h1><span class="secnum"><a href="#sec-B.1.1" title="link to this section">B.1.1</a></span> Numeric Literals</h1>
 
       <p>The syntax and semantics of <a href="#sec-7.8.3">7.8.3</a> is extended as follows except that this extension is not
-      allowed for strict mode code:</p>
+      allowed for <a href="#sec-10.1.1">strict mode code</a>:</p>
 
       <h2>Syntax</h2>
 
@@ -23132,7 +23133,7 @@ THH:mm:ss.sss</pre>
       <h1><span class="secnum"><a href="#sec-B.1.2" title="link to this section">B.1.2</a></span> String Literals</h1>
 
       <p>The syntax and semantics of <a href="#sec-7.8.4">7.8.4</a> is extended as follows except that this extension is not
-      allowed for strict mode code:</p>
+      allowed for <a href="#sec-10.1.1">strict mode code</a>:</p>
 
       <h2>Syntax</h2>
 
@@ -23470,7 +23471,7 @@ THH:mm:ss.sss</pre>
           <li>Let <i>previous</i> be the result of calling the [[GetOwnProperty]] internal method of <i>obj</i> with argument <i>propId</i>.name.</li>
           <li>If <i>previous</i> is not <b>undefined</b> then throw a <b>SyntaxError</b> exception if any of the following conditions are true
             <ol class="block">
-              <li>This production is contained in strict code and <a href="#sec-8.10.2">IsDataDescriptor</a>(<i>previous</i>) is <b>true</b> and <a href="#sec-8.10.2">IsDataDescriptor</a>(<i>propId</i>.descriptor) is <b>true</b>.</li>
+              <li>This production is contained in <a href="#sec-10.1.1">strict code</a> and <a href="#sec-8.10.2">IsDataDescriptor</a>(<i>previous</i>) is <b>true</b> and <a href="#sec-8.10.2">IsDataDescriptor</a>(<i>propId</i>.descriptor) is <b>true</b>.</li>
               <li><a href="#sec-8.10.2">IsDataDescriptor</a>(<i>previous</i>) is <b>true</b> and <a href="#sec-8.10.1">IsAccessorDescriptor</a>(<i>propId</i>.descriptor) is <b>true.</b></li>
               <li><a href="#sec-8.10.1">IsAccessorDescriptor</a>(<i>previous</i>) is <b>true</b> and <a href="#sec-8.10.2">IsDataDescriptor</a>(<i>propId</i>.descriptor) is <b>true</b>.</li>
               <li><a href="#sec-8.10.1">IsAccessorDescriptor</a>(<i>previous</i>) is <b>true</b> and <a href="#sec-8.10.1">IsAccessorDescriptor</a>(<i>propId</i>.descriptor) is <b>true</b> and either both <i>previous</i> and <i>propId</i>.descriptor have [[Get]] fields or both <i>previous</i> and <i>propId</i>.descriptor have [[Set]] fields</li>
@@ -23502,27 +23503,27 @@ THH:mm:ss.sss</pre>
   <p><b>The strict mode restriction and exceptions</b></p>
 
   <ul>
-    <li>The identifiers "<code>implements</code>", "<code>interface</code>", "<code>let</code>", "<code>package</code>", "<code>private</code>", "<code>protected</code>", "<code>public</code>", "<code>static</code>", and "<code>yield</code>" are classified as <i>FutureReservedWord</i> tokens within strict mode code. (7.6.12).</li>
-    <li>A conforming implementation, when processing strict mode code, may not extend the syntax of <i>NumericLiteral</i> (<a href="#sec-7.8.3">7.8.3</a>) to include <i>OctalIntegerLiteral</i> as described in <a href="#sec-B.1.1">B.1.1</a>.</li>
+    <li>The identifiers "<code>implements</code>", "<code>interface</code>", "<code>let</code>", "<code>package</code>", "<code>private</code>", "<code>protected</code>", "<code>public</code>", "<code>static</code>", and "<code>yield</code>" are classified as <i>FutureReservedWord</i> tokens within <a href="#sec-10.1.1">strict mode code</a>. (7.6.12).</li>
+    <li>A conforming implementation, when processing <a href="#sec-10.1.1">strict mode code</a>, may not extend the syntax of <i>NumericLiteral</i> (<a href="#sec-7.8.3">7.8.3</a>) to include <i>OctalIntegerLiteral</i> as described in <a href="#sec-B.1.1">B.1.1</a>.</li>
     <li>A conforming implementation, when processing <a href="#sec-10.1.1">strict mode code (see 10.1.1)</a>, may not extend the syntax of <i>EscapeSequence</i> to include <i>OctalEscapeSequence</i> as described in <a href="#sec-B.1.2">B.1.2</a>.</li>
-    <li>Assignment to an undeclared identifier or otherwise unresolvable reference does not create a property in the global object. When a simple assignment occurs within strict mode code, its <i>LeftHandSide</i> must not evaluate to an <a href="#sec-8.9">unresolvable Reference</a>. If it does a <b>ReferenceError</b> exception is thrown (<a href="#sec-8.9.2">8.9.2</a>). The <i>LeftHandSide</i> also may not be a reference to a data property with the attribute value {[[Writable]]:<b>false</b>}, to an accessor property with the attribute value {[[Set]]:<b>undefined</b>},  nor to a non-existent property of an object whose [[Extensible]] internal property has the value <b>false</b>. In these cases a <code>TypeError</code> exception is thrown (<a href="#sec-11.13.1">11.13.1</a>).</li>
+    <li>Assignment to an undeclared identifier or otherwise unresolvable reference does not create a property in the global object. When a simple assignment occurs within <a href="#sec-10.1.1">strict mode code</a>, its <i>LeftHandSide</i> must not evaluate to an <a href="#sec-8.9">unresolvable Reference</a>. If it does a <b>ReferenceError</b> exception is thrown (<a href="#sec-8.9.2">8.9.2</a>). The <i>LeftHandSide</i> also may not be a reference to a data property with the attribute value {[[Writable]]:<b>false</b>}, to an accessor property with the attribute value {[[Set]]:<b>undefined</b>},  nor to a non-existent property of an object whose [[Extensible]] internal property has the value <b>false</b>. In these cases a <code>TypeError</code> exception is thrown (<a href="#sec-11.13.1">11.13.1</a>).</li>
     <li>The identifier <code>eval</code> or <code>arguments</code> may not appear as the <i>LeftHandSideExpression</i> of an Assignment operator (<a href="#sec-11.13">11.13</a>) or of a <i>PostfixExpression</i> (<a href="#sec-11.3">11.3</a>) or as the <i>UnaryExpression</i> operated upon by a Prefix Increment (<a href="#sec-11.4.4">11.4.4</a>) or a Prefix Decrement (<a href="#sec-11.4.5">11.4.5</a>) operator.</li>
     <li>Arguments objects for strict mode functions define non-configurable accessor properties named "<code>caller</code>" and "<code>callee</code>" which throw a <b>TypeError</b> exception on access (<a href="#sec-10.6">10.6</a>).</li>
     <li>Arguments objects for strict mode functions do not dynamically share their array indexed property values with the corresponding formal parameter bindings of their functions. (<a href="#sec-10.6">10.6</a>).</li>
     <li>For strict mode functions, if an arguments object is created the binding of the local identifier <code>arguments</code> to the arguments object is immutable and hence may not be the target of an assignment expression. (<a href="#sec-10.5">10.5</a>).</li>
-    <li>It is a <b>SyntaxError</b> if strict mode code contains an <i>ObjectLiteral</i> with more than one definition of any data property (<a href="#sec-11.1.5">11.1.5</a>).</li>
-    <li>It is a <b>SyntaxError</b> if the <i>Identifier</i> <code>"eval"</code> or the <i>Identifier</i> <code>"arguments"</code> occurs as the <i>Identifier</i> in a <span style="font-family: Times New Roman; font-style: italic">PropertySetParameterList</span> of a <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> that is contained in strict code or if its <i>FunctionBody</i> is strict code (<a href="#sec-11.1.5">11.1.5</a>).</li>
+    <li>It is a <b>SyntaxError</b> if <a href="#sec-10.1.1">strict mode code</a> contains an <i>ObjectLiteral</i> with more than one definition of any data property (<a href="#sec-11.1.5">11.1.5</a>).</li>
+    <li>It is a <b>SyntaxError</b> if the <i>Identifier</i> <code>"eval"</code> or the <i>Identifier</i> <code>"arguments"</code> occurs as the <i>Identifier</i> in a <span style="font-family: Times New Roman; font-style: italic">PropertySetParameterList</span> of a <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> that is contained in <a href="#sec-10.1.1">strict code</a> or if its <i>FunctionBody</i> is <a href="#sec-10.1.1">strict code</a> (<a href="#sec-11.1.5">11.1.5</a>).</li>
     <li>Strict mode eval code cannot instantiate variables or functions in the variable environment of the caller to eval. Instead, a new variable environment is created and that environment is used for declaration binding instantiation for the eval code (<a href="#sec-10.4.2">10.4.2</a>).</li>
-    <li>If <b>this</b> is evaluated within strict mode code, then the <b>this</b> value is not coerced to an object. A <b>this</b> value of <b>null</b> or <b>undefined</b> is not converted to the global object and primitive values are not converted to wrapper objects. The <b>this</b> value passed via a function call (including calls made using <code>Function.prototype.apply</code> and <b><span style="font-family: monospace">Function.prototype.call</span>)</b> do not coerce the passed this value to an object (<a href="#sec-10.4.3">10.4.3</a>, <a href="#sec-11.1.1">11.1.1</a>, <a href="#sec-15.3.4.3">15.3.4.3</a>, <a href="#sec-15.3.4.4">15.3.4.4</a>).</li>
-    <li>When a <code>delete</code> operator occurs within strict mode code, a <b>SyntaxError</b> is thrown if its <i>UnaryExpression</i> is a direct reference to a variable, function argument, or function name(11.4.1).</li>
-    <li>When a <code>delete</code> operator occurs within strict mode code, a <b>TypeError</b> is thrown if the property to be deleted has the attribute { [[Configurable]]:<b>false</b> } (<a href="#sec-11.4.1">11.4.1</a>).</li>
-    <li>It is a <b>SyntaxError</b> if a <i>VariableDeclaration</i> or <i>VariableDeclarationNoIn</i> occurs within strict code and its  <i>Identifier</i> is <code>eval</code> or <code>arguments</code> (<a href="#sec-12.2.1">12.2.1</a>).</li>
+    <li>If <b>this</b> is evaluated within <a href="#sec-10.1.1">strict mode code</a>, then the <b>this</b> value is not coerced to an object. A <b>this</b> value of <b>null</b> or <b>undefined</b> is not converted to the global object and primitive values are not converted to wrapper objects. The <b>this</b> value passed via a function call (including calls made using <code>Function.prototype.apply</code> and <b><span style="font-family: monospace">Function.prototype.call</span>)</b> do not coerce the passed this value to an object (<a href="#sec-10.4.3">10.4.3</a>, <a href="#sec-11.1.1">11.1.1</a>, <a href="#sec-15.3.4.3">15.3.4.3</a>, <a href="#sec-15.3.4.4">15.3.4.4</a>).</li>
+    <li>When a <code>delete</code> operator occurs within <a href="#sec-10.1.1">strict mode code</a>, a <b>SyntaxError</b> is thrown if its <i>UnaryExpression</i> is a direct reference to a variable, function argument, or function name(11.4.1).</li>
+    <li>When a <code>delete</code> operator occurs within <a href="#sec-10.1.1">strict mode code</a>, a <b>TypeError</b> is thrown if the property to be deleted has the attribute { [[Configurable]]:<b>false</b> } (<a href="#sec-11.4.1">11.4.1</a>).</li>
+    <li>It is a <b>SyntaxError</b> if a <i>VariableDeclaration</i> or <i>VariableDeclarationNoIn</i> occurs within <a href="#sec-10.1.1">strict code</a> and its  <i>Identifier</i> is <code>eval</code> or <code>arguments</code> (<a href="#sec-12.2.1">12.2.1</a>).</li>
     <li>Strict mode code may not include a <i>WithStatement</i>. The occurrence of a <i>WithStatement</i> in such a context is an <b>SyntaxError</b> (<a href="#sec-12.10">12.10</a>).</li>
-    <li>It is a <b>SyntaxError</b> if a <span style="font-family: Times New Roman; font-style: italic">TryStatement</span> with a  <span style="font-family: Times New Roman; font-style: italic">Catch</span> occurs within strict code and the <span style="font-family: Times New Roman; font-style: italic">Identifier</span> of the <span style="font-family: Times New Roman; font-style: italic">Catch</span> production is <code>eval</code> or <code>arguments</code> (12.14.1)</li>
+    <li>It is a <b>SyntaxError</b> if a <span style="font-family: Times New Roman; font-style: italic">TryStatement</span> with a  <span style="font-family: Times New Roman; font-style: italic">Catch</span> occurs within <a href="#sec-10.1.1">strict code</a> and the <span style="font-family: Times New Roman; font-style: italic">Identifier</span> of the <span style="font-family: Times New Roman; font-style: italic">Catch</span> production is <code>eval</code> or <code>arguments</code> (12.14.1)</li>
     <li>It is a <b>SyntaxError</b> if  the identifier <code>eval</code> or <code>arguments</code> appears within a <span style="font-family: Times New Roman; font-style: italic">FormalParameterList</span> of a strict mode <span style="font-family: Times New Roman; font-style: italic">FunctionDeclaration</span> or <span style="font-family: Times New Roman; font-style: italic">FunctionExpression</span> (<a href="#sec-13.1">13.1</a>)</li>
     <li>A strict mode function may not have two or more formal parameters that have the same name. An attempt to create such a function using a <i>FunctionDeclaration</i>, <i>FunctionExpression</i>, or <code>Function</code> constructor is a <b>SyntaxError</b> (<a href="#sec-13.1">13.1</a>, <a href="#sec-15.3.2">15.3.2</a>).</li>
     <li>An implementation may not extend, beyond that defined in this specification, the meanings within strict mode functions of properties named <code>caller</code> or <code>arguments</code> of function instances. ECMAScript code may not create or modify properties with these names on function objects that correspond to strict mode functions (<a href="#sec-10.6">10.6</a>, <a href="#sec-13.2">13.2</a>, <a href="#sec-15.3.4.5.3">15.3.4.5.3</a>).</li>
-    <li>It is a <b>SyntaxError</b> to use within strict mode code the identifiers <code>eval</code> or <code>arguments</code> as the <i>Identifier</i> of a <i>FunctionDeclaration</i> or <i>FunctionExpression</i> or as a formal parameter name (<a href="#sec-13.1">13.1</a>). Attempting to dynamically define such a strict mode function using the <code>Function</code> constructor (<a href="#sec-15.3.2">15.3.2</a>) will throw a <b>SyntaxError</b> exception.</li>
+    <li>It is a <b>SyntaxError</b> to use within <a href="#sec-10.1.1">strict mode code</a> the identifiers <code>eval</code> or <code>arguments</code> as the <i>Identifier</i> of a <i>FunctionDeclaration</i> or <i>FunctionExpression</i> or as a formal parameter name (<a href="#sec-13.1">13.1</a>). Attempting to dynamically define such a strict mode function using the <code>Function</code> constructor (<a href="#sec-15.3.2">15.3.2</a>) will throw a <b>SyntaxError</b> exception.</li>
   </ul>
 </section>
 

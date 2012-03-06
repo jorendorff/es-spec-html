@@ -921,9 +921,11 @@ def fixup_links(doc):
         ("semicolon insertion (see 7.9)", "Automatic Semicolon Insertion"),
 
         # clause 8
+        ("Type(", "Types"),
         ("List", "The List and Record Specification Type"),
         ("Completion Record", "The Completion Record Specification Type"),
         ("Completion", "The Completion Record Specification Type"),
+        ("NormalValue", "The Completion Record Specification Type"),
         ("NormalCompletion", "The Completion Record Specification Type"),
         ("abrupt completion", "The Completion Record Specification Type"),
         ("ReturnIfAbrupt", "The Completion Record Specification Type"),
@@ -960,11 +962,15 @@ def fixup_links(doc):
         ("ToObject", "ToObject"),
         ("CheckObjectCoercible", "CheckObjectCoercible"),
         ("IsCallable", "IsCallable"),
+        ("SameValue (according to 9.12)", "The SameValue Algorithm"),
         ("SameValue", "The SameValue Algorithm"),
         ("the SameValue algorithm (9.12)", "The SameValue Algorithm"),
+        ("the SameValue Algorithm (9.12)", "The SameValue Algorithm"),
 
         # 10.1
         ("strict mode code (see 10.1.1)", "Strict Mode Code"),
+        ("strict mode code", "Strict Mode Code"),
+        ("strict code", "Strict Mode Code"),
         ("base code", "Strict Mode Code"),
 
         # 10.2
@@ -1039,8 +1045,8 @@ def fixup_links(doc):
     # Assert that the specific_links above make sense; that is, that each link
     # with a "(7.9)" or "(see 7.9)" in it actually points to the named section.
     #
-    # If any of these assertions fails, it means sections were renumbered. Any
-    # number of things can be wrong in the wake of such a change. :)
+    # A warning here means sections were renumbered. Any number of things can
+    # be wrong in the wake of such a change. :)
     #
     for text, target in specific_links:
         m = re.search(r'\((?:see )?([1-9][0-9]*(?:\.[1-9][0-9]*)*)\)', text)
@@ -1059,7 +1065,7 @@ def fixup_links(doc):
         # The space is to avoid matching "(3.5)" in "Math.round(3.5)".
         r' \(((?:see )?SECTION)\)',
 
-        r'(?:see|See|in|of|and) (SECTION)(?:$|\.$|[,:) ]|\.[^0-9])',
+        r'(?:see|See|in|of|to|and) (SECTION)(?:$|\.$|[,:) ]|\.[^0-9])',
 
         # Match "(Clause 16)", "(see clause 6)".
         r'(?i)(?:)\((?:but )?((?:see\s+(?:also\s+)?)?clause\s+([1-9][0-9]*))\)',
