@@ -925,15 +925,33 @@ def fixup_links(doc):
             sections_by_title[title] = '#' + sect.attrs['id']
 
     specific_link_source_data = [
+        # clause 7
         ('automatic semicolon insertion (7.9)', 'Automatic Semicolon Insertion'),
         ('automatic semicolon insertion (see 7.9)', 'Automatic Semicolon Insertion'),
         ('semicolon insertion (see 7.9)', 'Automatic Semicolon Insertion'),
-        ('strict mode code (see 10.1.1)', 'Strict Mode Code'),
-        ('direct call (see 15.1.2.1.1) to the eval function', 'Direct Call to Eval'),
 
+        # clause 8
         ('abrupt completion', 'The Completion Record Specification Type'),
+        ("GetBase", "The Reference Specification Type"),
+        ("GetReferencedName", "The Reference Specification Type"),
+        ("IsStrictReference", "The Reference Specification Type"),
+        ("HasPrimitiveBase", "The Reference Specification Type"),
+        ("IsPropertyReference", "The Reference Specification Type"),
+        ("IsUnresolvableReference", "The Reference Specification Type"),
+        ("IsSuperReference", "The Reference Specification Type"),
+        ("GetValue", "GetValue (V)"),
+        ("PutValue", "PutValue (V, W)"),
+        ("Property Descriptor", "The Property Descriptor and Property Identifier Specification Types"),
+        ("IsAccessorDescriptor", "IsAccessorDescriptor ( Desc )"),
+        ("IsDataDescriptor", "IsDataDescriptor ( Desc )"),
+        ("IsGenericDescriptor", "IsGenericDescriptor ( Desc )"),
+        ("FromPropertyDescriptor", "FromPropertyDescriptor ( Desc )"),
+        ("ToPropertyDescriptor", "ToPropertyDescriptor ( Obj )"),
 
+        # clause 9
         ('ToPrimitive', 'ToPrimitive'),
+        #('ToBoolean', 'ToBoolean'),
+        #('ToNumber', 'ToNumber'),
         ('ToInteger', 'ToInteger'),
         ('ToInt32', 'ToInt32: (Signed 32 Bit Integer)'),
         ('ToUint32', 'ToUint32: (Unsigned 32 Bit Integer)'),
@@ -944,12 +962,27 @@ def fixup_links(doc):
         ('CheckObjectCoercible', 'CheckObjectCoercible'),
         ('IsCallable', 'IsCallable'),
         ('SameValue', 'The SameValue Algorithm'),
+        ("the SameValue algorithm (9.12)", "The SameValue Algorithm"),
 
-        ('[[Iterate]]', '[[Iterate]] ( )'),
+        # clause 10
+        ('strict mode code (see 10.1.1)', 'Strict Mode Code'),
         ('environment record (10.2.1)', 'Environment Records'),
 
+        # clause 14
         ('Directive Prologue', 'Directive Prologues and the Use Strict Directive'),
         ('Use Strict Directive', 'Directive Prologues and the Use Strict Directive'),
+
+        # clause 15
+        ('direct call (see 15.1.2.1.1) to the eval function', 'Direct Call to Eval'),
+
+        ("declarative environment record", "Declarative Environment Records"),
+        ("Declarative Environment Record", "Declarative Environment Records"),
+        ("Object Environment Record", "Object Environment Records"),
+        ("GetIdentifierReference", "GetIdentifierReference (lex, name, strict)"),
+        ("NewDeclarativeEnvironment", "NewDeclarativeEnvironment (E)"),
+        ("NewObjectEnvironment", "NewObjectEnvironment (O, E)"),
+        ("the global environment", "The Global Environment"),
+        ("the Global Environment", "The Global Environment"),
     ]
 
     specific_links = [(text, sections_by_title[title]) for text, title in specific_link_source_data]
