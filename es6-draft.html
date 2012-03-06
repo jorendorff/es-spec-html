@@ -2762,11 +2762,12 @@
   ECMAScript language. The ECMAScript language types are Undefined, Null, Boolean, String, Number, and Object.</p>
 
   <p>A specification type corresponds to meta-values that are used within algorithms to describe the semantics of ECMAScript
-  language constructs and ECMAScript language types. The specification types are Reference, List, Completion, <a
-  href="#sec-8.10">Property Descriptor</a>, Property Identifier, Lexical Environment, and Environment Record. Specification type
-  values are specification artefacts that do not necessarily correspond to any specific entity within an ECMAScript
-  implementation. Specification type values may be used to describe intermediate results of ECMAScript expression evaluation but
-  such values cannot be stored as properties of objects or values of ECMAScript language variables.</p>
+  language constructs and ECMAScript language types. The specification types are Reference, List, <a
+  href="#sec-8.8">Completion</a>, <a href="#sec-8.10">Property Descriptor</a>, <a href="#sec-8.10">Property Identifier</a>, <a
+  href="#sec-10.2">Lexical Environment</a>, and <a href="#sec-10.2.1">Environment Record</a>. Specification type values are
+  specification artefacts that do not necessarily correspond to any specific entity within an ECMAScript implementation.
+  Specification type values may be used to describe intermediate results of ECMAScript expression evaluation but such values
+  cannot be stored as properties of objects or values of ECMAScript language variables.</p>
 
   <p>Within this specification, the notation &ldquo;<span style="font-family: Times New Roman">Type(<i>x</i>)</span>&rdquo; is
   used as shorthand for &ldquo;<span style="font-family: Times New Roman">the type of <i>x</i></span>&rdquo; where &ldquo;<span
@@ -3234,8 +3235,8 @@
           </tr>
           <tr>
             <td>[[Scope]]</td>
-            <td>Lexical Environment</td>
-            <td>A lexical environment that is the environment in which a Function object is executed. Of the standard built-in ECMAScript objects, only Function objects implement [[Scope]].</td>
+            <td><a href="#sec-10.2">Lexical Environment</a></td>
+            <td>A <a href="#sec-10.2">lexical environment</a> that is the environment in which a Function object is executed. Of the standard built-in ECMAScript objects, only Function objects implement [[Scope]].</td>
           </tr>
           <tr>
             <td>[[FormalParameters]]</td>
@@ -3511,7 +3512,7 @@
     <section id="sec-8.9.1">
       <h1><span class="secnum"><a href="#sec-8.9.1" title="link to this section">8.9.1</a></span> GetValue (V)</h1>
       <ol class="proc">
-        <li>ReturnIfAbrupt(<i>V</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>V</i>).</li>
         <li>Let <i>V</i> be NormalValue(<i>V</i>).</li>
         <li>If Type(<i>V</i>) is not Reference, return <i>V</i>.</li>
         <li>Let <i>base</i> be the result of calling <a href="#sec-8.9">GetBase</a>(<i>V</i>).</li>
@@ -3553,8 +3554,8 @@
     <section id="sec-8.9.2">
       <h1><span class="secnum"><a href="#sec-8.9.2" title="link to this section">8.9.2</a></span> PutValue (V, W)</h1>
       <ol class="proc">
-        <li>ReturnIfAbrupt(<i>V</i>).</li>
-        <li>ReturnIfAbrupt(<i>W</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>V</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>W</i>).</li>
         <li>Let <i>V</i> be NormalValue(<i>V</i>).</li>
         <li>Let <i>W</i> be NormalValue(<i>W</i>).</li>
         <li>If Type(<i>V</i>) is not Reference, throw a <b>ReferenceError</b> exception.</li>
@@ -3738,41 +3739,41 @@
       font-style: italic">Obj</span>, the following steps are taken:</p>
 
       <ol class="proc">
-        <li>ReturnIfAbrupt(<i>Obj</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>Obj</i>).</li>
         <li>If Type(<i>Obj</i>) is not Object throw a <b>TypeError</b> exception.</li>
         <li>Let <i>desc</i> be the result of creating a new <a href="#sec-8.10">Property Descriptor</a> that initially has no fields.</li>
         <li>If the result of calling the [[HasProperty]] internal method of <i>Obj</i> with argument "<code>enumerable</code>" is <b>true</b>, then
           <ol class="block">
             <li>Let <i>enum</i> be the result of calling the [[Get]] internal method of <i>Obj</i> with "<code>enumerable</code>".</li>
-            <li>ReturnIfAbrupt(<i>enum</i>).</li>
+            <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>enum</i>).</li>
             <li>Set the [[Enumerable]] field of <i>desc</i> to <a href="#sec-9.1.2">ToBoolean</a>(<i>enum</i>).</li>
           </ol>
         </li>
         <li>If the result of calling the [[HasProperty]] internal method of <i>Obj</i> with argument "<code>configurable</code>" is <b>true</b>, then
           <ol class="block">
             <li>Let <i>conf</i>  be the result of calling the [[Get]] internal method of <i>Obj</i> with argument "<code>configurable</code>".</li>
-            <li>ReturnIfAbrupt(cong).</li>
+            <li><a href="#sec-8.8">ReturnIfAbrupt</a>(cong).</li>
             <li>Set the [[Configurable]] field of <i>desc</i> to <a href="#sec-9.1.2">ToBoolean</a>(<i>conf</i>).</li>
           </ol>
         </li>
         <li>If the result of calling the [[HasProperty]] internal method of <i>Obj</i> with argument "<code>value</code>" is <b>true</b>, then
           <ol class="block">
             <li>Let <i>value</i> be the result of calling the [[Get]] internal method of <i>Obj</i> with argument &ldquo;<code>value</code>&rdquo;.</li>
-            <li>ReturnIfAbrupt(<i>value</i>).</li>
+            <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>value</i>).</li>
             <li>Set the [[Value]] field of <i>desc</i> to <i>value</i>.</li>
           </ol>
         </li>
         <li>If the result of calling the [[HasProperty]] internal method of <i>Obj</i> with argument "<code>writable</code>" is <b>true</b>, then
           <ol class="block">
             <li>Let <i>writable</i> be the result of calling the [[Get]] internal method of <i>Obj</i> with argument "<code>writable</code>".</li>
-            <li>ReturnIfAbrupt(<i>writable</i>).</li>
+            <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>writable</i>).</li>
             <li>Set the [[Writable]] field of <i>desc</i> to <a href="#sec-9.1.2">ToBoolean</a>(<i>writable</i>).</li>
           </ol>
         </li>
         <li>If the result of calling the [[HasProperty]] internal method of <i>Obj</i> with argument "<code>get</code>" is <b>true</b>, then
           <ol class="block">
             <li>Let <i>getter</i> be the result of calling the [[Get]] internal method of <i>Obj</i> with argument "<code>get</code>".</li>
-            <li>ReturnIfAbrupt(<i>getter</i>).</li>
+            <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>getter</i>).</li>
             <li>If <a href="#sec-9.2.2">IsCallable</a>(<i>getter</i>) is <b>false</b> and <i>getter</i> is not <b>undefined</b>, then throw a <b>TypeError</b> exception.</li>
             <li>Set the [[Get]] field of <i>desc</i> to <i>getter</i>.</li>
           </ol>
@@ -3780,7 +3781,7 @@
         <li>If the result of calling the [[HasProperty]] internal method of <i>Obj</i> with argument "<code>set</code>" is <b>true</b>, then
           <ol class="block">
             <li>Let <i>setter</i> be the result of calling the [[Get]] internal method of <i>Obj</i> with argument "<code>set</code>".</li>
-            <li>ReturnIfAbrupt(<i>setter</i>).</li>
+            <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>setter</i>).</li>
             <li>If <a href="#sec-9.2.2">IsCallable</a>(<i>setter</i>) is <b>false</b> and <i>setter</i> is not <b>undefined</b>, then throw a <b>TypeError</b> exception.</li>
             <li>Set the [[Set]] field of <i>desc</i> to <i>setter</i>.</li>
           </ol>
@@ -3798,8 +3799,9 @@
   <section id="sec-8.11">
     <h1><span class="secnum"><a href="#sec-8.11" title="link to this section">8.11</a></span> The Lexical Environment and Environment Record Specification Types</h1>
 
-    <p>The Lexical Environment and Environment Record types are used to explain the behaviour of name resolution in nested
-    functions and blocks. These types and the operations upon them are defined in <a href="#sec-10">Clause 10</a>.</p>
+    <p>The <a href="#sec-10.2">Lexical Environment</a> and <a href="#sec-10.2.1">Environment Record</a> types are used to explain
+    the behaviour of name resolution in nested functions and blocks. These types and the operations upon them are defined in <a
+    href="#sec-10">Clause 10</a>.</p>
   </section>
 
   <section id="sec-8.12">
@@ -3818,7 +3820,7 @@
       taken:</p>
 
       <ol class="proc">
-        <li>ReturnIfAbrupt(<i>O</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>O</i>).</li>
         <li>If <i>O</i> doesn&rsquo;t have an own property with name <i>P</i>, return <b>undefined</b>.</li>
         <li>Let <i>D</i> be a newly created <a href="#sec-8.10">Property Descriptor</a> with no fields.</li>
         <li>Let <i>X</i> be <i>O</i>&rsquo;s own property named <i>P</i>.</li>
@@ -3851,7 +3853,7 @@
       taken:</p>
 
       <ol class="proc">
-        <li>ReturnIfAbrupt(<i>O</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>O</i>).</li>
         <li>Let <i>prop</i> be the result of calling the [[GetOwnProperty]] internal method of <i>O</i> with property name <i>P</i>.</li>
         <li>If <i>prop</i> is not <b>undefined</b>, return <i>prop</i>.</li>
         <li>Let <i>proto</i> be the value of the [[Prototype]] internal property of <i>O.</i></li>
@@ -3868,7 +3870,7 @@
       taken:</p>
 
       <ol class="proc">
-        <li>ReturnIfAbrupt(<i>O</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>O</i>).</li>
         <li>Let <i>desc</i> be the result of calling the [[GetProperty]] internal method of <i>O</i> with property name <i>P</i>.</li>
         <li>If <i>desc</i> is <b>undefined</b>, return <b>undefined</b>.</li>
         <li>If <a href="#sec-8.10.2">IsDataDescriptor</a>(<i>desc</i>) is <b>true</b>, return <i>desc</i>.[[Value]].</li>
@@ -3886,7 +3888,7 @@
       taken:</p>
 
       <ol class="proc">
-        <li>ReturnIfAbrupt(<i>O</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>O</i>).</li>
         <li>Let <i>desc</i> be the result of calling the [[GetOwnProperty]] internal method of <i>O</i> with argument <i>P</i>.</li>
         <li>If <i>desc</i> is not <b>undefined</b>, then
           <ol class="block">
@@ -3931,7 +3933,7 @@
       italic">Throw</span>, the following steps are taken:</p>
 
       <ol class="proc">
-        <li>ReturnIfAbrupt(<i>O</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>O</i>).</li>
         <li>If the result of calling the [[CanPut]] internal method of <i>O</i> with argument <i>P</i> is <b>false</b>, then
           <ol class="block">
             <li>If <i>Throw</i> is <b>true</b>, then throw a <b>TypeError</b> exception.</li>
@@ -3970,7 +3972,7 @@
       taken:</p>
 
       <ol class="proc">
-        <li>ReturnIfAbrupt(<i>O</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>O</i>).</li>
         <li>Let <i>desc</i> be the result of calling the [[GetProperty]] internal method of <i>O</i> with property name <i>P</i>.</li>
         <li>If <i>desc</i> is <b>undefined</b>, then return <b>false</b>.</li>
         <li>Else return <b>true</b>.</li>
@@ -3985,7 +3987,7 @@
       style="font-family: Times New Roman; font-style: italic">Throw</span>, the following steps are taken:</p>
 
       <ol class="proc">
-        <li>ReturnIfAbrupt(<i>O</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>O</i>).</li>
         <li>Let <i>desc</i> be the result of calling the [[GetOwnProperty]] internal method of <i>O</i> with property name <i>P</i>.</li>
         <li>If <i>desc</i> is <b>undefined</b>, then return <b>true</b>.</li>
         <li>If <i>desc</i>.[[Configurable]] is <b>true</b>, then
@@ -4006,22 +4008,22 @@
       called with hint String, the following steps are taken:</p>
 
       <ol class="proc">
-        <li>ReturnIfAbrupt(<i>O</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>O</i>).</li>
         <li>Let <i>toString</i> be the result of calling the [[Get]] internal method of object <i>O</i> with argument "<code>toString</code>".</li>
-        <li>ReturnIfAbrupt(<i>toString</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>toString</i>).</li>
         <li>If <a href="#sec-9.2.2">IsCallable</a>(<i>toString)</i> is <b>true</b> then,
           <ol class="block">
             <li>Let <i>str</i> be the result of calling the [[Call]] internal method of <i>toString</i>, with <i>O</i> as the <b>this</b> value and an empty argument list.</li>
-            <li>ReturnIfAbrupt(<i>str</i>).</li>
+            <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>str</i>).</li>
             <li>If <i>str</i> is a primitive value, return <i>str</i>.</li>
           </ol>
         </li>
         <li>Let <i>valueOf</i> be the result of calling the [[Get]] internal method of object <i>O</i> with argument "<code>valueOf</code>".</li>
-        <li>ReturnIfAbrupt(<i>valueOf</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>valueOf</i>).</li>
         <li>If <a href="#sec-9.2.2">IsCallable</a>(<i>valueOf)</i> is <b>true</b> then,
           <ol class="block">
             <li>Let <i>val</i> be the result of calling the [[Call]] internal method of <i>valueOf</i>, with <i>O</i> as the this value and an empty argument list.</li>
-            <li>ReturnIfAbrupt(<i>val</i>).</li>
+            <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>val</i>).</li>
             <li>If <i>val</i> is a primitive value, return <i>val</i>.</li>
           </ol>
         </li>
@@ -4032,22 +4034,22 @@
       called with hint Number, the following steps are taken:</p>
 
       <ol class="proc">
-        <li>ReturnIfAbrupt(<i>O</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>O</i>).</li>
         <li>Let <i>valueOf</i> be the result of calling the [[Get]] internal method of object <i>O</i> with argument "<code>valueOf</code>".</li>
-        <li>ReturnIfAbrupt(<i>valueOf</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>valueOf</i>).</li>
         <li>If <a href="#sec-9.2.2">IsCallable</a>(<i>valueOf)</i> is <b>true</b> then,
           <ol class="block">
             <li>Let <i>val</i> be the result of calling the [[Call]] internal method of <i>valueOf</i>, with <i>O</i> as the <b>this</b> value and an empty argument list.</li>
-            <li>ReturnIfAbrupt(<i>val</i>).</li>
+            <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>val</i>).</li>
             <li>If <i>val</i> is a primitive value, return <i>val</i>.</li>
           </ol>
         </li>
         <li>Let <i>toString</i> be the result of calling the [[Get]] internal method of object <i>O</i> with argument "<code>toString</code>".</li>
-        <li>ReturnIfAbrupt(<i>toString</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>toString</i>).</li>
         <li>If <a href="#sec-9.2.2">IsCallable</a>(<i>toString)</i> is <b>true</b> then,
           <ol class="block">
             <li>Let <i>str</i> be the result of calling the [[Call]] internal method of <i>toString</i>, with <i>O</i> as the this value and an empty argument list.</li>
-            <li>ReturnIfAbrupt(<i>str</i>).</li>
+            <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>str</i>).</li>
             <li>If <i>str</i> is a primitive value, return <i>str</i>.</li>
           </ol>
         </li>
@@ -4080,7 +4082,7 @@
       New Roman; font-style: italic">Throw</span>, the following steps are taken:</p>
 
       <ol class="proc">
-        <li>ReturnIfAbrupt(<i>O</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>O</i>).</li>
         <li>Let <i>current</i> be the result of calling the [[GetOwnProperty]] internal method of <i>O</i> with property name <i>P</i>.</li>
         <li>Let <i>extensible</i> be the value of the [[Extensible]] internal property of <i>O</i>.</li>
         <li>If <i>current</i> is <b>undefined</b> and <i>extensible</i> is <b>false</b>, then Reject.</li>
@@ -4260,7 +4262,7 @@
             <th>Result</th>
           </tr>
           <tr>
-            <td>Completion Record</td>
+            <td><a href="#sec-8.8">Completion Record</a></td>
             <td>If <i>argument</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>argument</i>. Otherwise return ToPrimitive(<i>argument</i>.[[value]])</td>
           </tr>
           <tr>
@@ -4314,7 +4316,7 @@
             <th>Result</th>
           </tr>
           <tr>
-            <td>Completion Record</td>
+            <td><a href="#sec-8.8">Completion Record</a></td>
             <td>If <i>argument</i> is an <a href="#sec-8.8">abrupt completion</a>, return the argument. Otherwise return ToBoolean(<i>argument</i>.[[value]])</td>
           </tr>
           <tr>
@@ -4358,7 +4360,7 @@
             <th>Result</th>
           </tr>
           <tr>
-            <td>Completion Record</td>
+            <td><a href="#sec-8.8">Completion Record</a></td>
             <td>If <i>argument</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>argument</i>. Otherwise return ToNumber(<i>argument</i>.[[value]])</td>
           </tr>
           <tr>
@@ -4544,7 +4546,7 @@
 
       <ol class="proc">
         <li>Let <i>number</i> be the result of calling <a href="#sec-9.1.3">ToNumber</a> on the input argument.</li>
-        <li>ReturnIfAbrupt(<i>number</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>number</i>).</li>
         <li>If <i>number</i> is <b>NaN</b>, return <b>+0</b>.</li>
         <li>If <i>number</i> is <b>+0</b>, <b>&minus;0</b>, <b>+&infin;,</b> or <b>&minus;&infin;</b>, return <i>number</i>.</li>
         <li>Return the result of computing sign(<i>number</i>) &times; floor(abs(<i>number</i>)).</li>
@@ -4561,7 +4563,7 @@
 
       <ol class="proc">
         <li>Let <i>number</i> be the result of calling <a href="#sec-9.1.3">ToNumber</a> on the input argument.</li>
-        <li>ReturnIfAbrupt(<i>number</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>number</i>).</li>
         <li>If <i>number</i> is <b>NaN</b>, <b>+0</b>, <b>&minus;0</b>, <b>+&infin;</b>, or <b>&minus;&infin;</b>, return <b>+0</b>.</li>
         <li>Let <i>posInt</i> be sign(<i>number</i>) * floor(abs(<i>number</i>)).</li>
         <li>Let <i>int32bit</i> be <i>posInt</i> modulo 2<sup>32</sup>; that is, a finite integer value k of Number type with positive sign and less than 2<sup>32</sup> in magnitude such that the mathematical difference of <i>posInt</i> and k is mathematically an integer multiple of 2<sup>32</sup>.</li>
@@ -4588,7 +4590,7 @@
 
       <ol class="proc">
         <li>Let <i>number</i> be the result of calling <a href="#sec-9.1.3">ToNumber</a> on the input argument.</li>
-        <li>ReturnIfAbrupt(<i>number</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>number</i>).</li>
         <li>If <i>number</i> is <b>NaN</b>, +0, &minus;0, +<b>&infin;</b>, or &minus;<b>&infin;</b>, return <b>+0</b>.</li>
         <li>Let <i>posInt</i> be sign(<i>number</i>) &times; floor(abs(<i>number</i>)).</li>
         <li>Let <i>int32bit</i> be <i>posInt</i> modulo 2<sup>32</sup>; that is, a finite integer value k of Number type with positive sign and less than 2<sup>32</sup> in magnitude such that the mathematical difference of <i>posInt</i> and k is mathematically an integer multiple of 2<sup>32</sup>.</li>
@@ -4616,7 +4618,7 @@
 
       <ol class="proc">
         <li>Let <i>number</i> be the result of calling <a href="#sec-9.1.3">ToNumber</a> on the input argument.</li>
-        <li>ReturnIfAbrupt(<i>number</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>number</i>).</li>
         <li>If <i>number</i> is <b>NaN</b>, +0, &minus;0, +<b>&infin;</b>, or &minus;<b>&infin;</b>, return <b>+0</b>.</li>
         <li>Let <i>posInt</i> be sign(<i>number</i>) &times; floor(abs(<i>number</i>)).</li>
         <li>Let <i>int16bit</i> be <i>posInt</i> modulo 2<sup>16</sup>; that is, a finite integer value <i>k</i> of Number type with positive sign and less than 2<sup>16</sup> in magnitude such that the mathematical difference of <i>posInt</i> and <i>k</i> is mathematically an integer multiple of 2<sup>16</sup>.</li>
@@ -4645,7 +4647,7 @@
             <th>Result</th>
           </tr>
           <tr>
-            <td>Completion Record</td>
+            <td><a href="#sec-8.8">Completion Record</a></td>
             <td>If <i>argument</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>argument</i>. Otherwise return ToString(<i>argument</i>.[[value]])</td>
           </tr>
           <tr>
@@ -4753,7 +4755,7 @@
             <th>Result</th>
           </tr>
           <tr>
-            <td>Completion Record</td>
+            <td><a href="#sec-8.8">Completion Record</a></td>
             <td>If <i>argument</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>argument</i>. Otherwise return ToObject(<i>argument</i>.[[value]])</td>
           </tr>
           <tr>
@@ -4802,7 +4804,7 @@
             <th>Result</th>
           </tr>
           <tr>
-            <td>Completion Record</td>
+            <td><a href="#sec-8.8">Completion Record</a></td>
             <td>If <i>argument</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>argument</i>. Otherwise return CheckObjectCoercible(<i>argument</i>.[[value]])</td>
           </tr>
           <tr>
@@ -4847,7 +4849,7 @@
             <th>Result</th>
           </tr>
           <tr>
-            <td>Completion Record</td>
+            <td><a href="#sec-8.8">Completion Record</a></td>
             <td>If <i>argument</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>argument</i>. Otherwise return IsCallable(<i>argument</i>.[[value]])</td>
           </tr>
           <tr>
@@ -4887,10 +4889,10 @@
       are ECMAScript language values, produces <b>true</b> or <b>false</b>. Such a comparison is performed as follows:</p>
 
       <ol class="proc">
-        <li>ReturnIfAbrupt(<i>x</i>).</li>
-        <li>ReturnIfAbrupt(<i>y</i>).</li>
-        <li>If <i>x</i> is an Completion Record, let <i>x</i> be <i>x</i>.[[value]].</li>
-        <li>If <i>y</i> is an Completion Record, let <i>y</i> be <i>y</i>.[[value]].</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>x</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>y</i>).</li>
+        <li>If <i>x</i> is an <a href="#sec-8.8">Completion Record</a>, let <i>x</i> be <i>x</i>.[[value]].</li>
+        <li>If <i>y</i> is an <a href="#sec-8.8">Completion Record</a>, let <i>y</i> be <i>y</i>.[[value]].</li>
         <li>If Type(<i>x</i>) is different from Type(<i>y</i>), return <b>false</b>.</li>
         <li>If Type(<i>x</i>) is Undefined, return <b>true</b>.</li>
         <li>If Type(<i>x</i>) is Null, return <b>true</b>.</li>
@@ -4926,9 +4928,9 @@
 
       <ol class="proc">
         <li>Let <i>obj</i> be <a href="#sec-9.1.9">ToObject</a>(<i>O</i>).</li>
-        <li>ReturnIfAbrupt(<i>obj</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>obj</i>).</li>
         <li>Let <i>func</i> be the result of calling the [[Get]] internal method of <i>obj</i> passing <i>P</i> as the argument.</li>
-        <li>ReturnIfAbrupt(<i>func</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>func</i>).</li>
         <li>If <a href="#sec-9.2.2">IsCallable</a>(<i>func</i>) is <b>false</b>, throw a <b>TypeError</b> exception.</li>
         <li>Return the result of calling the [[Call]] internal method of <i>func</i> passing <i>O</i> as the <b>this</b> value and argument list <i>args</i>.</li>
       </ol>
@@ -4975,15 +4977,15 @@
 
     <p>A <i>Lexical Environment</i> is a specification type used to define the association of <span style="font-family: Times New
     Roman; font-style: italic">Identifiers</span> to specific variables and functions based upon the lexical nesting structure of
-    ECMAScript code. A Lexical Environment consists of an Environment Record and a possibly null reference to an <i>outer</i>
-    Lexical Environment. Usually a Lexical Environment is associated with some specific syntactic structure of ECMAScript code
-    such as a <span style="font-family: Times New Roman; font-style: italic">FunctionDeclaration</span>, a <span
-    style="font-family: Times New Roman; font-style: italic">WithStatement</span>, or a <span style="font-family: Times New Roman;
-    font-style: italic">Catch</span> clause of a <span style="font-family: Times New Roman; font-style:
-    italic">TryStatement</span> and a new Lexical Environment is created each time such code is evaluated.</p>
+    ECMAScript code. A Lexical Environment consists of an <a href="#sec-10.2.1">Environment Record</a> and a possibly null
+    reference to an <i>outer</i> Lexical Environment. Usually a Lexical Environment is associated with some specific syntactic
+    structure of ECMAScript code such as a <span style="font-family: Times New Roman; font-style:
+    italic">FunctionDeclaration</span>, a <span style="font-family: Times New Roman; font-style: italic">WithStatement</span>, or
+    a <span style="font-family: Times New Roman; font-style: italic">Catch</span> clause of a <span style="font-family: Times New
+    Roman; font-style: italic">TryStatement</span> and a new Lexical Environment is created each time such code is evaluated.</p>
 
-    <p>An <i>Environment Record</i> records the identifier bindings that are created within the scope of its associated Lexical
-    Environment.</p>
+    <p>An <i><a href="#sec-10.2.1">Environment Record</a></i> records the identifier bindings that are created within the scope of
+    its associated Lexical Environment.</p>
 
     <p>The outer environment reference is used to model the logical nesting of Lexical Environment values. The outer reference of
     a (inner) Lexical Environment is a reference to the Lexical Environment that logically surrounds the inner Lexical
@@ -4993,9 +4995,9 @@
     font-style: italic">FunctionDeclarations</span> then the Lexical Environments of each of the nested functions will have as
     their outer Lexical Environment the Lexical Environment of the current execution of the surrounding function.</p>
 
-    <p>Lexical Environments and Environment Record values are purely specification mechanisms and need not correspond to any
-    specific artefact of an ECMAScript implementation. It is impossible for an ECMAScript program to directly access or manipulate
-    such values.</p>
+    <p>Lexical Environments and <a href="#sec-10.2.1">Environment Record</a> values are purely specification mechanisms and need
+    not correspond to any specific artefact of an ECMAScript implementation. It is impossible for an ECMAScript program to
+    directly access or manipulate such values.</p>
 
     <section id="sec-10.2.1">
       <h1><span class="secnum"><a href="#sec-10.2.1" title="link to this section">10.2.1</a></span> Environment Records</h1>
@@ -5010,9 +5012,9 @@
       italic">WithStatement</span> that associate identifier bindings with the properties of some object.</p>
 
       <p>For specification purposes Environment Record values can be thought of as existing in a simple object-oriented hierarchy
-      where Environment Record is an abstract class with two concrete subclasses, <a href="#sec-10.2.1.1">declarative environment
-      record</a> and object environment record. The abstract class includes the abstract specification methods defined in Table
-      18. These abstract methods have distinct concrete algorithms for each of the concrete subclasses.</p>
+      where Environment Record is an abstract class with two concrete subclasses, declarative environment record and object
+      environment record. The abstract class includes the abstract specification methods defined in Table 18. These abstract
+      methods have distinct concrete algorithms for each of the concrete subclasses.</p>
 
       <figure>
         <figcaption>Table&nbsp;18 &mdash; Abstract Methods of Environment Records</figcaption>
@@ -5051,9 +5053,9 @@
       <section id="sec-10.2.1.1">
         <h1><span class="secnum"><a href="#sec-10.2.1.1" title="link to this section">10.2.1.1</a></span> Declarative Environment Records</h1>
 
-        <p>Each declarative environment record is associated with an ECMAScript program scope containing variable, constant,
-        and/or function declarations. A declarative environment record binds the set of identifiers defined by the declarations
-        contained within its scope.</p>
+        <p>Each <a href="#sec-10.2.1">declarative environment record</a> is associated with an ECMAScript program scope containing
+        variable, constant, and/or function declarations. A <a href="#sec-10.2.1">declarative environment record</a> binds the set
+        of identifiers defined by the declarations contained within its scope.</p>
 
         <p>In addition to the mutable bindings supported by all Environment Records, declarative environment records also provide
         for immutable bindings.  An immutable binding is one where the association between an identifier and a value may not be
@@ -5089,7 +5091,7 @@
           argument identifier is one of the identifiers bound by the record:</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1.1">declarative environment record</a> for which the method was invoked.</li>
+            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1">declarative environment record</a> for which the method was invoked.</li>
             <li>If <i>envRec</i> has a binding for the name that is the value of <i>N</i>, return <b>true</b>.</li>
             <li>If it does not have such a binding, return <b>false</b>.</li>
           </ol>
@@ -5098,14 +5100,15 @@
         <section id="sec-10.2.1.1.2">
           <h1><span class="secnum"><a href="#sec-10.2.1.1.2" title="link to this section">10.2.1.1.2</a></span> CreateMutableBinding (N, D)</h1>
 
-          <p>The concrete Environment Record method CreateMutableBinding for declarative environment records creates a new mutable
-          binding for the name <span style="font-family: Times New Roman; font-style: italic">N</span> that is initialised to the
-          value <b>undefined</b>.  A binding must not already exist in this Environment Record for <span style="font-family: Times
-          New Roman; font-style: italic">N</span>. If Boolean argument <span style="font-family: Times New Roman; font-style:
-          italic">D</span> is provided and has the value <b>true</b> the new binding is marked as being subject to deletion.</p>
+          <p>The concrete <a href="#sec-10.2.1">Environment Record</a> method CreateMutableBinding for declarative environment
+          records creates a new mutable binding for the name <span style="font-family: Times New Roman; font-style:
+          italic">N</span> that is initialised to the value <b>undefined</b>.  A binding must not already exist in this <a
+          href="#sec-10.2.1">Environment Record</a> for <span style="font-family: Times New Roman; font-style: italic">N</span>.
+          If Boolean argument <span style="font-family: Times New Roman; font-style: italic">D</span> is provided and has the
+          value <b>true</b> the new binding is marked as being subject to deletion.</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1.1">declarative environment record</a> for which the method was invoked.</li>
+            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1">declarative environment record</a> for which the method was invoked.</li>
             <li>Assert: <i>envRec</i> does not already have a binding for <i>N</i>.</li>
             <li>Create a mutable binding in <i>envRec</i> for <i>N</i> and and record that it is uninitialised. If <i>D</i> is true record that the newly created binding may be deleted by a subsequent DeleteBinding call.</li>
           </ol>
@@ -5114,15 +5117,16 @@
         <section id="sec-10.2.1.1.3">
           <h1><span class="secnum"><a href="#sec-10.2.1.1.3" title="link to this section">10.2.1.1.3</a></span> SetMutableBinding (N,V,S)</h1>
 
-          <p>The concrete Environment Record method SetMutableBinding for declarative environment records attempts to change the
-          bound value of the current binding of the identifier whose name is the value of the argument <span style="font-family:
-          Times New Roman; font-style: italic">N</span> to the value of argument <span style="font-family: Times New Roman;
-          font-style: italic">V</span>. A binding for <span style="font-family: Times New Roman; font-style: italic">N</span> must
-          already exist. If the binding is an immutable binding, a <b>TypeError</b> is thrown if <span style="font-family: Times
-          New Roman">S</span> is <span style="font-family: Times New Roman; font-weight: bold">true</span>.</p>
+          <p>The concrete <a href="#sec-10.2.1">Environment Record</a> method SetMutableBinding for declarative environment
+          records attempts to change the bound value of the current binding of the identifier whose name is the value of the
+          argument <span style="font-family: Times New Roman; font-style: italic">N</span> to the value of argument <span
+          style="font-family: Times New Roman; font-style: italic">V</span>. A binding for <span style="font-family: Times New
+          Roman; font-style: italic">N</span> must already exist. If the binding is an immutable binding, a <b>TypeError</b> is
+          thrown if <span style="font-family: Times New Roman">S</span> is <span style="font-family: Times New Roman; font-weight:
+          bold">true</span>.</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1.1">declarative environment record</a> for which the method was invoked.</li>
+            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1">declarative environment record</a> for which the method was invoked.</li>
             <li>Assert: <i>envRec</i> must have a binding for <i>N</i>.</li>
             <li>Assert: The binding for <i>N</i> in <i>envRec</i> has already been initialised.</li>
             <li>If the binding for <i>N</i> in <i>envRec</i> is a mutable binding, change its bound value to <i>V</i>.</li>
@@ -5134,14 +5138,14 @@
         <section id="sec-10.2.1.1.4">
           <h1><span class="secnum"><a href="#sec-10.2.1.1.4" title="link to this section">10.2.1.1.4</a></span> GetBindingValue(N,S)</h1>
 
-          <p>The concrete Environment Record method GetBindingValue for declarative environment records simply returns the value
-          of its bound identifier whose name is the value of the argument <span style="font-family: Times New Roman; font-style:
-          italic">N</span>. The binding must already exist. If <span style="font-family: Times New Roman; font-style:
-          italic">S</span> is <b>true</b> and the binding is an uninitialised immutable binding throw a <b>ReferenceError</b>
-          exception.</p>
+          <p>The concrete <a href="#sec-10.2.1">Environment Record</a> method GetBindingValue for declarative environment records
+          simply returns the value of its bound identifier whose name is the value of the argument <span style="font-family: Times
+          New Roman; font-style: italic">N</span>. The binding must already exist. If <span style="font-family: Times New Roman;
+          font-style: italic">S</span> is <b>true</b> and the binding is an uninitialised immutable binding throw a
+          <b>ReferenceError</b> exception.</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1.1">declarative environment record</a> for which the method was invoked.</li>
+            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1">declarative environment record</a> for which the method was invoked.</li>
             <li>Assert: <i>envRec</i> has a binding for <i>N</i>.</li>
             <li>If the binding for <i>N</i> in <i>envRec</i> is an uninitialised binding, then
               <ol class="block">
@@ -5155,11 +5159,11 @@
         <section id="sec-10.2.1.1.5">
           <h1><span class="secnum"><a href="#sec-10.2.1.1.5" title="link to this section">10.2.1.1.5</a></span> DeleteBinding (N)</h1>
 
-          <p>The concrete Environment Record method DeleteBinding for declarative environment records can only delete bindings
-          that have been explicitly designated as being subject to deletion.</p>
+          <p>The concrete <a href="#sec-10.2.1">Environment Record</a> method DeleteBinding for declarative environment records
+          can only delete bindings that have been explicitly designated as being subject to deletion.</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1.1">declarative environment record</a> for which the method was invoked.</li>
+            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1">declarative environment record</a> for which the method was invoked.</li>
             <li>If <i>envRec</i> does not have a binding for the name that is the value of <i>N</i>, return <b>true</b>.</li>
             <li>If the binding for <i>N</i> in <i>envRec</i> is cannot be deleted, return <b>false</b>.</li>
             <li>Remove the binding for <i>N</i> from <i>envRec</i>.</li>
@@ -5180,13 +5184,13 @@
         <section id="sec-10.2.1.1.7">
           <h1><span class="secnum"><a href="#sec-10.2.1.1.7" title="link to this section">10.2.1.1.7</a></span> CreateImmutableBinding (N)</h1>
 
-          <p>The concrete Environment Record method CreateImmutableBinding for declarative environment records creates a new
-          immutable binding for the name <span style="font-family: Times New Roman; font-style: italic">N</span> that is
-          initialised to the value <b>undefined</b>.  A binding must not already exist in this environment record for <span
-          style="font-family: Times New Roman; font-style: italic">N</span>.</p>
+          <p>The concrete <a href="#sec-10.2.1">Environment Record</a> method CreateImmutableBinding for declarative environment
+          records creates a new immutable binding for the name <span style="font-family: Times New Roman; font-style:
+          italic">N</span> that is initialised to the value <b>undefined</b>.  A binding must not already exist in this
+          environment record for <span style="font-family: Times New Roman; font-style: italic">N</span>.</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1.1">declarative environment record</a> for which the method was invoked.</li>
+            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1">declarative environment record</a> for which the method was invoked.</li>
             <li>Assert: <i>envRec</i> does not already have a binding for <i>N</i>.</li>
             <li>Create an immutable binding in <i>envRec</i> for <i>N</i> and record that it is uninitialised.</li>
           </ol>
@@ -5195,14 +5199,14 @@
         <section id="sec-10.2.1.1.8">
           <h1><span class="secnum"><a href="#sec-10.2.1.1.8" title="link to this section">10.2.1.1.8</a></span> InitializeBinding (N,V)</h1>
 
-          <p>The concrete Environment Record method InitializeBinding for declarative environment records is used to set the bound
-          value of the current binding of the identifier whose name is the value of the argument <span style="font-family: Times
-          New Roman; font-style: italic">N</span> to the value of argument <span style="font-family: Times New Roman; font-style:
-          italic">V</span>. An uninitialised binding for <span style="font-family: Times New Roman; font-style: italic">N</span>
-          must already exist.</p>
+          <p>The concrete <a href="#sec-10.2.1">Environment Record</a> method InitializeBinding for declarative environment
+          records is used to set the bound value of the current binding of the identifier whose name is the value of the argument
+          <span style="font-family: Times New Roman; font-style: italic">N</span> to the value of argument <span
+          style="font-family: Times New Roman; font-style: italic">V</span>. An uninitialised binding for <span
+          style="font-family: Times New Roman; font-style: italic">N</span> must already exist.</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1.1">declarative environment record</a> for which the method was invoked.</li>
+            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1">declarative environment record</a> for which the method was invoked.</li>
             <li>Assert: <i>envRec</i> must have an uninitialised binding for N.</li>
             <li>Set the bound value for <i>N</i> in <i>envRec</i> to <i>V</i>.</li>
             <li>Record that the binding for <i>N</i> in <i>envRec</i> has been initialised.</li>
@@ -5213,22 +5217,22 @@
       <section id="sec-10.2.1.2">
         <h1><span class="secnum"><a href="#sec-10.2.1.2" title="link to this section">10.2.1.2</a></span> Object Environment Records</h1>
 
-        <p>Each object environment record is associated with an object called its <i>binding object</i>. An object environment
-        record binds the set of identifier names that directly correspond to the property names of its binding object. Property
-        names that are not an <span style="font-family: Times New Roman; font-style: italic">IdentifierName</span> are not
-        included in the set of bound identifiers. Both own and inherited properties are included in the set regardless of the
-        setting of their [[Enumerable]] attribute. Because properties can be dynamically added and deleted from objects, the set
-        of identifiers bound by an object environment record may potentially change as a side-effect of any operation that adds or
-        deletes properties. Any bindings that are created as a result of such a side-effect are considered to be a mutable binding
-        even if the Writable attribute of the corresponding property has the value <b>false</b>. Immutable bindings do not exist
-        for object environment records.</p>
+        <p>Each <a href="#sec-10.2.1">object environment record</a> is associated with an object called its <i>binding object</i>.
+        An <a href="#sec-10.2.1">object environment record</a> binds the set of identifier names that directly correspond to the
+        property names of its binding object. Property names that are not an <span style="font-family: Times New Roman;
+        font-style: italic">IdentifierName</span> are not included in the set of bound identifiers. Both own and inherited
+        properties are included in the set regardless of the setting of their [[Enumerable]] attribute. Because properties can be
+        dynamically added and deleted from objects, the set of identifiers bound by an <a href="#sec-10.2.1">object environment
+        record</a> may potentially change as a side-effect of any operation that adds or deletes properties. Any bindings that are
+        created as a result of such a side-effect are considered to be a mutable binding even if the Writable attribute of the
+        corresponding property has the value <b>false</b>. Immutable bindings do not exist for object environment records.</p>
 
         <p>Object environment records can be configured to provide their binding object as an implicit this value for use in
         function calls. This capability is used to specify the behaviour of With Statement (<a href="#sec-12.10">12.10</a>)
         induced bindings. The capability is controlled by a <span style="font-family: Times New Roman; font-style:
-        italic">provideThis</span> Boolean value that is associated with each object environment record.  By default, the value of
-        <span style="font-family: Times New Roman; font-style: italic">provideThis</span> is <b>false</b> for any object
-        environment record.</p>
+        italic">provideThis</span> Boolean value that is associated with each <a href="#sec-10.2.1">object environment record</a>.
+        By default, the value of <span style="font-family: Times New Roman; font-style: italic">provideThis</span> is <b>false</b>
+        for any <a href="#sec-10.2.1">object environment record</a>.</p>
 
         <p>The behaviour of the concrete specification methods for Object Environment Records is defined by the following
         algorithms.</p>
@@ -5236,12 +5240,12 @@
         <section id="sec-10.2.1.2.1">
           <h1><span class="secnum"><a href="#sec-10.2.1.2.1" title="link to this section">10.2.1.2.1</a></span> HasBinding(N)</h1>
 
-          <p>The concrete Environment Record method HasBinding for object environment records determines if its associated binding
-          object has a property whose name is the value of the argument <span style="font-family: Times New Roman; font-style:
-          italic">N</span>:</p>
+          <p>The concrete <a href="#sec-10.2.1">Environment Record</a> method HasBinding for object environment records determines
+          if its associated binding object has a property whose name is the value of the argument <span style="font-family: Times
+          New Roman; font-style: italic">N</span>:</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be the object environment record for which the method was invoked.</li>
+            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1">object environment record</a> for which the method was invoked.</li>
             <li>Let <i>bindings</i> be the binding object for <i>envRec</i>.</li>
             <li>Return the result of calling the [[HasProperty]] internal method of <i>bindings</i>, passing <i>N</i> as the property name.</li>
           </ol>
@@ -5250,15 +5254,15 @@
         <section id="sec-10.2.1.2.2">
           <h1><span class="secnum"><a href="#sec-10.2.1.2.2" title="link to this section">10.2.1.2.2</a></span> CreateMutableBinding (N, D)</h1>
 
-          <p>The concrete Environment Record method CreateMutableBinding for object environment records creates in an environment
-          record&rsquo;s associated binding object a property whose name is the String value and initialises it to the value
-          <b>undefined</b>. A property named <span style="font-family: Times New Roman; font-style: italic">N</span> must not
-          already exist in the binding object. If Boolean argument <span style="font-family: Times New Roman; font-style:
-          italic">D</span> is provided and has the value <b>true</b> the new property&rsquo;s [[Configurable]] attribute is set to
-          <b>true</b>, otherwise it is set to <b>false</b>.</p>
+          <p>The concrete <a href="#sec-10.2.1">Environment Record</a> method CreateMutableBinding for object environment records
+          creates in an environment record&rsquo;s associated binding object a property whose name is the String value and
+          initialises it to the value <b>undefined</b>. A property named <span style="font-family: Times New Roman; font-style:
+          italic">N</span> must not already exist in the binding object. If Boolean argument <span style="font-family: Times New
+          Roman; font-style: italic">D</span> is provided and has the value <b>true</b> the new property&rsquo;s [[Configurable]]
+          attribute is set to <b>true</b>, otherwise it is set to <b>false</b>.</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be the object environment record for which the method was invoked.</li>
+            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1">object environment record</a> for which the method was invoked.</li>
             <li>Let <i>bindings</i> be the binding object for <i>envRec</i>.</li>
             <li>Assert: The result of calling the [[HasProperty]] internal method of <i>bindings</i>, passing <i>N</i> as the property name, is <b>false</b>.</li>
             <li>If  D is <b>true</b> then let <i>configValue</i> be <b>true</b> otherwise let <i>configValue</i> be <b>false</b>.</li>
@@ -5269,15 +5273,16 @@
         <section id="sec-10.2.1.2.3">
           <h1><span class="secnum"><a href="#sec-10.2.1.2.3" title="link to this section">10.2.1.2.3</a></span> SetMutableBinding (N,V,S)</h1>
 
-          <p>The concrete Environment Record method SetMutableBinding for object environment records attempts to set the value of
-          the environment record&rsquo;s associated binding object&rsquo;s property whose name is the value of the argument <span
-          style="font-family: Times New Roman; font-style: italic">N</span> to the value of argument <span style="font-family:
-          Times New Roman; font-style: italic">V</span>. A property named <span style="font-family: Times New Roman; font-style:
-          italic">N</span> should already exist but if it does not or is not currently writable, error handling is determined by
-          the value of the Boolean argument <span style="font-family: Times New Roman; font-style: italic">S</span>.</p>
+          <p>The concrete <a href="#sec-10.2.1">Environment Record</a> method SetMutableBinding for object environment records
+          attempts to set the value of the environment record&rsquo;s associated binding object&rsquo;s property whose name is the
+          value of the argument <span style="font-family: Times New Roman; font-style: italic">N</span> to the value of argument
+          <span style="font-family: Times New Roman; font-style: italic">V</span>. A property named <span style="font-family:
+          Times New Roman; font-style: italic">N</span> should already exist but if it does not or is not currently writable,
+          error handling is determined by the value of the Boolean argument <span style="font-family: Times New Roman; font-style:
+          italic">S</span>.</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be the object environment record for which the method was invoked.</li>
+            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1">object environment record</a> for which the method was invoked.</li>
             <li>Let <i>bindings</i> be the binding object for <i>envRec</i>.</li>
             <li>Call the [[Put]] internal method of <i>bindings</i> with arguments <i>N</i>, <i>V</i>, and <i>S</i>.</li>
           </ol>
@@ -5286,14 +5291,14 @@
         <section id="sec-10.2.1.2.4">
           <h1><span class="secnum"><a href="#sec-10.2.1.2.4" title="link to this section">10.2.1.2.4</a></span> GetBindingValue(N,S)</h1>
 
-          <p>The concrete Environment Record method GetBindingValue for object environment records returns the value of its
-          associated binding object&rsquo;s property whose name is the String value of the argument identifier <span
-          style="font-family: Times New Roman; font-style: italic">N</span>. The property should already exist but if it does not
-          the result depends upon the value of the <span style="font-family: Times New Roman; font-style: italic">S</span>
-          argument:</p>
+          <p>The concrete <a href="#sec-10.2.1">Environment Record</a> method GetBindingValue for object environment records
+          returns the value of its associated binding object&rsquo;s property whose name is the String value of the argument
+          identifier <span style="font-family: Times New Roman; font-style: italic">N</span>. The property should already exist
+          but if it does not the result depends upon the value of the <span style="font-family: Times New Roman; font-style:
+          italic">S</span> argument:</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be the object environment record for which the method was invoked.</li>
+            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1">object environment record</a> for which the method was invoked.</li>
             <li>Let <i>bindings</i> be the binding object for <i>envRec</i>.</li>
             <li>Let <i>value</i> be the result of calling the [[HasProperty]] internal method of <i>bindings</i>, passing <i>N</i> as the property name.</li>
             <li>If <i>value</i> is <b>false</b>, then
@@ -5308,11 +5313,12 @@
         <section id="sec-10.2.1.2.5">
           <h1><span class="secnum"><a href="#sec-10.2.1.2.5" title="link to this section">10.2.1.2.5</a></span> DeleteBinding (N)</h1>
 
-          <p>The concrete Environment Record method DeleteBinding for object environment records can only delete bindings that
-          correspond to properties of the environment object whose [[Configurable]] attribute have the value <b>true</b>.</p>
+          <p>The concrete <a href="#sec-10.2.1">Environment Record</a> method DeleteBinding for object environment records can
+          only delete bindings that correspond to properties of the environment object whose [[Configurable]] attribute have the
+          value <b>true</b>.</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be the object environment record for which the method was invoked.</li>
+            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1">object environment record</a> for which the method was invoked.</li>
             <li>Let <i>bindings</i> be the binding object for <i>envRec</i>.</li>
             <li>Return the result of calling the [[Delete]] internal method of <i>bindings</i>, passing <i>N</i> and <b>false</b> as arguments.</li>
           </ol>
@@ -5325,7 +5331,7 @@
           Times New Roman; font-style: italic">provideThis</span> flag is <b>true</b>.</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be the object environment record for which the method was invoked.</li>
+            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1">object environment record</a> for which the method was invoked.</li>
             <li>If the <i>provideThis</i> flag of <i>envRec</i> is <b>true</b>, return the binding object for <i>envRec</i>.</li>
             <li>Otherwise, return <b>undefined</b>.</li>
           </ol>
@@ -5341,11 +5347,11 @@
       <section id="sec-10.2.2.1">
         <h1><span class="secnum"><a href="#sec-10.2.2.1" title="link to this section">10.2.2.1</a></span> GetIdentifierReference (lex, name, strict)</h1>
 
-        <p>The abstract operation GetIdentifierReference is called with a Lexical Environment <span style="font-family: Times New
-        Roman; font-style: italic">lex</span>, a String <span style="font-family: Times New Roman; font-style:
-        italic">name</span>, and a Boolean flag <span style="font-family: Times New Roman; font-style: italic">strict.</span> The
-        value of <span style="font-family: Times New Roman; font-style: italic">lex</span> may be <b>null</b>. When called, the
-        following steps are performed:</p>
+        <p>The abstract operation GetIdentifierReference is called with a <a href="#sec-10.2">Lexical Environment</a> <span
+        style="font-family: Times New Roman; font-style: italic">lex</span>, a String <span style="font-family: Times New Roman;
+        font-style: italic">name</span>, and a Boolean flag <span style="font-family: Times New Roman; font-style:
+        italic">strict.</span> The value of <span style="font-family: Times New Roman; font-style: italic">lex</span> may be
+        <b>null</b>. When called, the following steps are performed:</p>
 
         <ol class="proc">
           <li>If <i>lex</i> is the value <b>null</b>, then
@@ -5362,7 +5368,7 @@
           </li>
           <li>Else
             <ol class="block">
-              <li>Let <i>outer</i> be the value of <i>lex&rsquo;s</i> outer environment reference.</li>
+              <li>Let <i>outer</i> be the value of <i>lex&rsquo;s</i> <a href="#sec-10.2">outer environment reference</a>.</li>
               <li>Return the result of calling GetIdentifierReference passing <i>outer</i>, <i>name</i>, and <i>strict</i> as arguments.</li>
             </ol>
           </li>
@@ -5372,14 +5378,15 @@
       <section id="sec-10.2.2.2">
         <h1><span class="secnum"><a href="#sec-10.2.2.2" title="link to this section">10.2.2.2</a></span> NewDeclarativeEnvironment (E)</h1>
 
-        <p>When the abstract operation NewDeclarativeEnvironment is called with either a Lexical Environment or <b>null</b> as
-        argument <span style="font-family: Times New Roman; font-style: italic">E</span> the following steps are performed:</p>
+        <p>When the abstract operation NewDeclarativeEnvironment is called with either a <a href="#sec-10.2">Lexical
+        Environment</a> or <b>null</b> as argument <span style="font-family: Times New Roman; font-style: italic">E</span> the
+        following steps are performed:</p>
 
         <ol class="proc">
-          <li>Let <i>env</i> be a new Lexical Environment.</li>
-          <li>Let <i>envRec</i> be a new <a href="#sec-10.2.1.1">declarative environment record</a> containing no bindings.</li>
+          <li>Let <i>env</i> be a new <a href="#sec-10.2">Lexical Environment</a>.</li>
+          <li>Let <i>envRec</i> be a new <a href="#sec-10.2.1">declarative environment record</a> containing no bindings.</li>
           <li>Set <i>env&rsquo;s</i> environment record to be <i>envRec</i>.</li>
-          <li>Set the outer lexical environment reference of <i>env</i> to <i>E</i>.</li>
+          <li>Set the <a href="#sec-10.2">outer lexical environment reference</a> of <i>env</i> to <i>E</i>.</li>
           <li>Return <i>env</i>.</li>
         </ol>
       </section>
@@ -5388,14 +5395,14 @@
         <h1><span class="secnum"><a href="#sec-10.2.2.3" title="link to this section">10.2.2.3</a></span> NewObjectEnvironment (O, E)</h1>
 
         <p>When the abstract operation NewObjectEnvironment is called with an Object <span style="font-family: Times New Roman;
-        font-style: italic">O</span> and a Lexical Environment <span style="font-family: Times New Roman; font-style:
-        italic">E</span> (or <b>null)</b> as arguments, the following steps are performed:</p>
+        font-style: italic">O</span> and a <a href="#sec-10.2">Lexical Environment</a> <span style="font-family: Times New Roman;
+        font-style: italic">E</span> (or <b>null)</b> as arguments, the following steps are performed:</p>
 
         <ol class="proc">
-          <li>Let <i>env</i> be a new Lexical Environment.</li>
-          <li>Let <i>envRec</i> be a new object environment record containing <i>O</i> as the binding object.</li>
+          <li>Let <i>env</i> be a new <a href="#sec-10.2">Lexical Environment</a>.</li>
+          <li>Let <i>envRec</i> be a new <a href="#sec-10.2.1">object environment record</a> containing <i>O</i> as the binding object.</li>
           <li>Set <i>env&rsquo;s</i> environment record to be <i>envRec</i>.</li>
-          <li>Set the outer lexical environment reference of <i>env</i> to <i>E</i>.</li>
+          <li>Set the <a href="#sec-10.2">outer lexical environment reference</a> of <i>env</i> to <i>E</i>.</li>
           <li>Return <i>env</i>.</li>
         </ol>
       </section>
@@ -5404,9 +5411,10 @@
     <section id="sec-10.2.3">
       <h1><span class="secnum"><a href="#sec-10.2.3" title="link to this section">10.2.3</a></span> The Global Environment</h1>
 
-      <p>The <i>global environment</i> is a unique Lexical Environment which is created before any ECMAScript code is executed.
-      The global environment&rsquo;s Environment Record is an object environment record whose binding object is the global object
-      (<a href="#sec-15.1">15.1</a>). The global environment&rsquo;s outer environment reference is <b>null</b>.</p>
+      <p>The <i>global environment</i> is a unique <a href="#sec-10.2">Lexical Environment</a> which is created before any
+      ECMAScript code is executed. The global environment&rsquo;s <a href="#sec-10.2.1">Environment Record</a> is an <a
+      href="#sec-10.2.1">object environment record</a> whose binding object is the global object (<a href="#sec-15.1">15.1</a>).
+      The global environment&rsquo;s <a href="#sec-10.2">outer environment reference</a> is <b>null</b>.</p>
 
       <p>As ECMAScript code is executed, additional properties may be added to the global object and the initial properties may be
       modified.</p>
@@ -5434,11 +5442,11 @@
         </tr>
         <tr>
           <td>LexicalEnvironment</td>
-          <td>Identifies the Lexical Environment used to resolve identifier references made by code within this execution context.</td>
+          <td>Identifies the <a href="#sec-10.2">Lexical Environment</a> used to resolve identifier references made by code within this execution context.</td>
         </tr>
         <tr>
           <td>VariableEnvironment</td>
-          <td>Identifies the Lexical Environment whose environment record holds bindings created by <span style="font-family: Times New Roman; font-style: italic">VariableStatements</span> and <span style="font-family: Times New Roman; font-style: italic">FunctionDeclarations</span> within this execution context.</td>
+          <td>Identifies the <a href="#sec-10.2">Lexical Environment</a> whose environment record holds bindings created by <span style="font-family: Times New Roman; font-style: italic">VariableStatements</span> and <span style="font-family: Times New Roman; font-style: italic">FunctionDeclarations</span> within this execution context.</td>
         </tr>
         <tr>
           <td>ThisBinding</td>
@@ -5650,7 +5658,7 @@
     <section id="sec-10.5.3">
       <h1><span class="secnum"><a href="#sec-10.5.3" title="link to this section">10.5.3</a></span> Function Declaration Instantiation</h1>
 
-      <p>NOTE&#x9;When an execution context is established for evaluating function code a new <a href="#sec-10.2.1.1">Declarative
+      <p>NOTE&#x9;When an execution context is established for evaluating function code a new <a href="#sec-10.2.1">Declarative
       Environment Record</a> is created and bindings for each formal parameter, and each function level variable, constant, or
       function declarated in the function are instantiated in the environment record. Formal parameters and functions are
       initialized as part of this process.  All other bindings are initialized during execution of the function code.</p>
@@ -5659,7 +5667,7 @@
       font-style: italic">func,</span> <span style="font-family: Times New Roman; font-style: italic">argumentsList</span>, and
       <span style="font-family: Times New Roman; font-style: italic">env</span>. <span style="font-family: Times New Roman;
       font-style: italic">func</span> is the function object that for which the execution context is being established.  <span
-      style="font-family: Times New Roman; font-style: italic">env</span> is the <a href="#sec-10.2.1.1">declarative environment
+      style="font-family: Times New Roman; font-style: italic">env</span> is the <a href="#sec-10.2.1">declarative environment
       record</a> in which bindings are to be created.</p>
 
       <ol class="proc">
@@ -5699,7 +5707,7 @@
           </ol>
         </li>
         <li><span style="font-family: sans-serif">NOTE</span>&#x9;<span style="font-family: sans-serif">Binding Initialisation for</span> <i>formals</i> <span style="font-family: sans-serif">is perform prior to to instantiating any non-parameter declarations in order to ensure that any such local declarations are not visible to any parameter Initialisation code that may be evaluated.</span></li>
-        <li>ReturnIfAbrupt(<i>formalStatus</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>formalStatus</i>).</li>
         <li>For each element <i>d</i> in <i>declarations</i> do
           <ol class="block">
             <li>For each element <i>dn</i> of the BoundNames of <i>d</i> do
@@ -5767,7 +5775,7 @@
             </li>
           </ol>
         </li>
-        <li>Return NormalCompletion(<span style="font-family: sans-serif">empty</span>)..</li>
+        <li>Return <a href="#sec-8.8">NormalCompletion</a>(<span style="font-family: sans-serif">empty</span>)..</li>
       </ol>
     </section>
 
@@ -5775,7 +5783,7 @@
       <h1><span class="secnum"><a href="#sec-10.5.4" title="link to this section">10.5.4</a></span> Block Declaration Instantiation</h1>
 
       <p>NOTE&#x9; When a <span style="font-family: Times New Roman; font-style: italic">Block</span> or <span style="font-family:
-      Times New Roman; font-style: italic">CaseBlock</span> production is evaluated a new <a href="#sec-10.2.1.1">Declarative
+      Times New Roman; font-style: italic">CaseBlock</span> production is evaluated a new <a href="#sec-10.2.1">Declarative
       Environment Record</a> is created and bindings for each block scoped variable, constant, or function declarated in the block
       are instantiated in the environment record.</p>
 
@@ -5783,7 +5791,7 @@
       font-style: italic">code</span> and <span style="font-family: Times New Roman; font-style: italic">env</span>. <span
       style="font-family: Times New Roman; font-style: italic">code</span> is the grammar production corresponding to the body of
       the block.  <span style="font-family: Times New Roman; font-style: italic">env</span> is the <a
-      href="#sec-10.2.1.1">declarative environment record</a> in which bindings are to be.</p>
+      href="#sec-10.2.1">declarative environment record</a> in which bindings are to be.</p>
 
       <ol class="proc">
         <li>Let <i>declarations</i> be the LexicalDeclarations of <i>code</i>.</li>
@@ -6863,7 +6871,7 @@
                 <li>Let <i>thisValue</i> be <a href="#sec-8.9">GetBase</a>(<i>ref</i>).</li>
               </ol>
             </li>
-            <li>Else, the base of <i>ref</i> is an Environment Record
+            <li>Else, the base of <i>ref</i> is an <a href="#sec-10.2.1">Environment Record</a>
               <ol class="block">
                 <li>Let <i>thisValue</i> be the result of calling the ImplicitThisValue concrete method of <a href="#sec-8.9">GetBase</a>(<i>ref</i>).</li>
               </ol>
@@ -7066,7 +7074,7 @@
         <li>Let <i>oldValue</i> be <a href="#sec-9.1.3">ToNumber</a>(<a href="#sec-8.9.1">GetValue</a>(<i>lhs</i>)).</li>
         <li>If <i>oldValue</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>oldValue</i>.</li>
         <li>Let <i>newValue</i> be the result of adding the value <code>1</code> to <i>oldValue</i>, using the same rules as for the <code>+</code> operator (<a href="#sec-11.6.3">see 11.6.3</a>).</li>
-        <li>If  <a href="#sec-8.9.2">PutValue</a>(<i>lhs</i>, <i>newValue</i>) is an <a href="#sec-8.8">abrupt completion</a>, return that Completion Record.</li>
+        <li>If  <a href="#sec-8.9.2">PutValue</a>(<i>lhs</i>, <i>newValue</i>) is an <a href="#sec-8.8">abrupt completion</a>, return that <a href="#sec-8.8">Completion Record</a>.</li>
         <li>Return <i>oldValue</i>.</li>
       </ol>
     </section>
@@ -7084,7 +7092,7 @@
         <li>Let <i>lhs</i> be the result of evaluating <i>LeftHandSideExpression</i>.</li>
         <li>Let <i>oldValue</i> be <a href="#sec-9.1.3">ToNumber</a>(<a href="#sec-8.9.1">GetValue</a>(<i>lhs</i>)).</li>
         <li>Let <i>newValue</i> be the result of subtracting the value <code>1</code> from <i>oldValue</i>, using the same rules as for the <code>-</code> operator (<a href="#sec-11.6.3">11.6.3</a>).</li>
-        <li>If  Call <a href="#sec-8.9.2">PutValue</a>(<i>lhs</i>, <i>newValue</i>) ) is an <a href="#sec-8.8">abrupt completion</a>, return that Completion Record.</li>
+        <li>If  Call <a href="#sec-8.9.2">PutValue</a>(<i>lhs</i>, <i>newValue</i>) ) is an <a href="#sec-8.8">abrupt completion</a>, return that <a href="#sec-8.8">Completion Record</a>.</li>
         <li>Return <i>oldValue</i>.</li>
       </ol>
     </section>
@@ -7143,7 +7151,7 @@
             <li>Return the result of calling the [[Delete]] internal method on <a href="#sec-9.1.9">ToObject</a>(<a href="#sec-8.9">GetBase</a>(<i>ref)</i>) providing <a href="#sec-8.9">GetReferencedName</a>(<i>ref</i>) and <a href="#sec-8.9">IsStrictReference</a>(<i>ref</i>) as the arguments.</li>
           </ol>
         </li>
-        <li>Else, <i>ref</i> is a Reference to an Environment Record binding, so
+        <li>Else, <i>ref</i> is a Reference to an <a href="#sec-10.2.1">Environment Record</a> binding, so
           <ol class="block">
             <li>Let <i>bindings</i> be <a href="#sec-8.9">GetBase</a>(<i>ref</i>).</li>
             <li>Return the result of calling the DeleteBinding concrete method of <i>bindings</i>, providing <a href="#sec-8.9">GetReferencedName</a>(<i>ref</i>) as the argument.</li>
@@ -7255,7 +7263,7 @@
         <li>Let <i>oldValue</i> be <a href="#sec-9.1.3">ToNumber</a>(<a href="#sec-8.9.1">GetValue</a>(<i>expr</i>)).</li>
         <li>If <i>oldValue</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>oldValue</i>.</li>
         <li>Let <i>newValue</i> be the result of adding the value <code>1</code> to <i>oldValue</i>, using the same rules as for the <code>+</code> operator (<a href="#sec-11.6.3">see 11.6.3</a>).</li>
-        <li>If <a href="#sec-8.9.2">PutValue</a>(<i>expr</i>, <i>newValue</i>) is an <a href="#sec-8.8">abrupt completion</a>, return that Completion Record.</li>
+        <li>If <a href="#sec-8.9.2">PutValue</a>(<i>expr</i>, <i>newValue</i>) is an <a href="#sec-8.8">abrupt completion</a>, return that <a href="#sec-8.8">Completion Record</a>.</li>
         <li>Return <i>newValue</i>.</li>
       </ol>
     </section>
@@ -7273,7 +7281,7 @@
         <li>Let <i>oldValue</i> be <a href="#sec-9.1.3">ToNumber</a>(<a href="#sec-8.9.1">GetValue</a>(<i>expr</i>)).</li>
         <li>If <i>oldValue</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>oldValue</i>.</li>
         <li>Let <i>newValue</i> be the result of  subtracting the value <code>1</code> from <i>oldValue</i>, using the same rules as for the <code>-</code> operator (<a href="#sec-11.6.3">see 11.6.3</a>).</li>
-        <li>If <a href="#sec-8.9.2">PutValue</a>(<i>expr</i>, <i>newValue</i>) is an <a href="#sec-8.8">abrupt completion</a>, return that Completion Record.</li>
+        <li>If <a href="#sec-8.9.2">PutValue</a>(<i>expr</i>, <i>newValue</i>) is an <a href="#sec-8.8">abrupt completion</a>, return that <a href="#sec-8.8">Completion Record</a>.</li>
         <li>Return <i>newValue</i>.</li>
       </ol>
     </section>
@@ -8284,7 +8292,7 @@
       </div>
       <ul>
         <li>It is a Syntax Error if the <span style="font-family: Times New Roman; font-style: italic">AssignmentExpression</span> is contained in strict code and <span style="font-family: Times New Roman; font-style: italic">LeftHandSideExpression</span> is the <span style="font-family: Times New Roman; font-style: italic">Identifier</span> <code>eval</code> or the <span style="font-family: Times New Roman; font-style: italic">Identifier</span> <code>arguments</code>.</li>
-        <li>It is a Syntax Error if the <span style="font-family: Times New Roman; font-style: italic">LeftHandSideExpression</span> is an <span style="font-family: Times New Roman; font-style: italic">Identifier that statically resolves to a <a href="#sec-10.2.1.1">declarative environment record</a> binding and the resolved binding is an immutable binding.</span></li>
+        <li>It is a Syntax Error if the <span style="font-family: Times New Roman; font-style: italic">LeftHandSideExpression</span> is an <span style="font-family: Times New Roman; font-style: italic">Identifier that statically resolves to a <a href="#sec-10.2.1">declarative environment record</a> binding and the resolved binding is an immutable binding.</span></li>
         <li>It is a Syntax Error if the <span style="font-family: Times New Roman; font-style: italic">LeftHandSideExpression</span> is <span style="font-family: Times New Roman; font-style: italic">PrimaryExpression : <b>(</b> Expression</span> <code>)</code> and <span style="font-family: Times New Roman; font-style: italic">Expression</span> derived a production that would produce a Syntax Error according to these rules. This rule is recursively applied.</li>
       </ul>
       <div class="gp">AssignmentExpression <span style="font-family: sans-serif; font-weight: bold">:</span> LeftHandSideExpression  <code>=</code> AssignmentExpression</div>
@@ -8409,7 +8417,7 @@
           <li>It is a Syntax Error if <span style="font-family: Times New Roman; font-style: italic">LeftHandSideExpression</span> is the <span style="font-family: Times New Roman; font-style: italic">Identifier</span> <code>eval</code> or the <span style="font-family: Times New Roman; font-style: italic">Identifier</span> <code>arguments</code>.</li>
           <li>It is a Syntax Error if <span style="font-family: Times New Roman; font-style: italic">LeftHandSideExpression</span> is the <span style="font-family: Times New Roman; font-style: italic">Identifier</span> <code>this</code> or the <span style="font-family: Times New Roman; font-style: italic">Identifier</span> <code>super</code>.</li>
           <li>It is a Syntax Error if the <span style="font-family: Times New Roman; font-style: italic">LeftHandSideExpression</span> is a <span style="font-family: Times New Roman; font-style: italic">Literal</span>, a <span style="font-family: Times New Roman; font-style: italic">FunctionExpression or a ClassExpression</span>.</li>
-          <li>It is a Syntax Error if the <span style="font-family: Times New Roman; font-style: italic">LeftHandSideExpression</span> is an <span style="font-family: Times New Roman; font-style: italic">Identifier</span> <span style="font-family: Times New Roman; font-style: italic">that does not statically resolve to a <a href="#sec-10.2.1.1">declarative environment record</a> binding or if the resolved binding is an immutable binding.</span></li>
+          <li>It is a Syntax Error if the <span style="font-family: Times New Roman; font-style: italic">LeftHandSideExpression</span> is an <span style="font-family: Times New Roman; font-style: italic">Identifier</span> <span style="font-family: Times New Roman; font-style: italic">that does not statically resolve to a <a href="#sec-10.2.1">declarative environment record</a> binding or if the resolved binding is an immutable binding.</span></li>
           <li>It is a Syntax Error if the <span style="font-family: Times New Roman; font-style: italic">LeftHandSideExpression</span> is an <span style="font-family: Times New Roman; font-style: italic">ObjectLiteral</span> or an <span style="font-family: Times New Roman; font-style: italic">ArrayLiteral</span> and the source code corresponding to <span style="font-family: Times New Roman; font-style: italic">LeftHandSideExpression</span> cannot be parsed using <span style="font-family: Times New Roman; font-style: italic">AssignmentPattern</span> as the goal symbol.</li>
           <li>It is a Syntax Error if the <span style="font-family: Times New Roman; font-style: italic">LeftHandSideExpression</span> is <span style="font-family: Times New Roman; font-style: italic">PrimaryExpression : <b>(</b> Expression</span> <code>)</code> and <span style="font-family: Times New Roman; font-style: italic">Expression</span> derived a production that would produce a Syntax Error according to these rules. This rule is recursively applied.</li>
         </ul>
@@ -8421,7 +8429,7 @@
           <li>It is a Syntax Error if <span style="font-family: Times New Roman; font-style: italic">LeftHandSideExpression</span> is the <span style="font-family: Times New Roman; font-style: italic">Identifier</span> <code>eval</code> or the <span style="font-family: Times New Roman; font-style: italic">Identifier</span> <code>arguments</code>.</li>
           <li>It is a Syntax Error if <span style="font-family: Times New Roman; font-style: italic">LeftHandSideExpression</span> is the <span style="font-family: Times New Roman; font-style: italic">Identifier</span> <code>this</code> or the <span style="font-family: Times New Roman; font-style: italic">Identifier</span> <code>super</code>.</li>
           <li>It is a Syntax Error if the <span style="font-family: Times New Roman; font-style: italic">LeftHandSideExpression</span> is a <span style="font-family: Times New Roman; font-style: italic">Literal,</span> an <span style="font-family: Times New Roman; font-style: italic">ObjectLiteral,</span> an <span style="font-family: Times New Roman; font-style: italic">ArrayLiteral,</span> a <span style="font-family: Times New Roman; font-style: italic">FunctionExpression,</span> or a <span style="font-family: Times New Roman; font-style: italic">ClassExpression</span>.</li>
-          <li>It is a Syntax Error if the <span style="font-family: Times New Roman; font-style: italic">LeftHandSideExpression</span> is an <span style="font-family: Times New Roman; font-style: italic">Identifier</span> that does not statically resolve to a <a href="#sec-10.2.1.1">declarative environment record</a> binding or if the resolved binding an immutable binding<span style="font-family: Times New Roman; font-style: italic">.</span></li>
+          <li>It is a Syntax Error if the <span style="font-family: Times New Roman; font-style: italic">LeftHandSideExpression</span> is an <span style="font-family: Times New Roman; font-style: italic">Identifier</span> that does not statically resolve to a <a href="#sec-10.2.1">declarative environment record</a> binding or if the resolved binding an immutable binding<span style="font-family: Times New Roman; font-style: italic">.</span></li>
           <li>It is a Syntax Error if the <span style="font-family: Times New Roman; font-style: italic">LeftHandSideExpression</span> is <span style="font-family: Times New Roman; font-style: italic">PrimaryExpression : <b>(</b> Expression</span> <code>)</code> and <span style="font-family: Times New Roman; font-style: italic">Expression</span> derived a production that would produce a Syntax Error according to these rules. This rule is recursively applied.</li>
         </ul>
       </section>
@@ -8729,7 +8737,7 @@
       <li>Let <i>stmtResult</i> be the result performing Labelled Evaluation of <i>IterationStatement</i> wth argument <i>labelSet</i>.</li>
       <li>If <i>stmtResult</i>.[[type]] is <span style="font-family: sans-serif">break</span> and <i>stmtResult</i>.[[target]] is <span style="font-family: sans-serif">empty</span>, then
         <ol class="block">
-          <li>Let <i>stmtResult</i> be NormalCompletion(<i>stmtResult</i>.[[value]])</li>
+          <li>Let <i>stmtResult</i> be <a href="#sec-8.8">NormalCompletion</a>(<i>stmtResult</i>.[[value]])</li>
         </ol>
       </li>
       <li>Return <i>stmtResult</i>.</li>
@@ -8742,7 +8750,7 @@
       <li>Let <i>stmtResult</i> be the result of evaluating <i>SwitchStatement</i>.</li>
       <li>If <i>stmtResult</i>.[[type]] is <span style="font-family: sans-serif">break</span> and <i>stmtResult</i>.[[target]] is <span style="font-family: sans-serif">empty</span>, then
         <ol class="block">
-          <li>Let <i>stmtResult</i> be NormalCompletion(<i>stmtResult</i>.[[value]])</li>
+          <li>Let <i>stmtResult</i> be <a href="#sec-8.8">NormalCompletion</a>(<i>stmtResult</i>.[[value]])</li>
         </ol>
       </li>
       <li>Return <i>stmtResult</i>.</li>
@@ -8770,7 +8778,8 @@
     </ol>
 
     <p>NOTE&#x9;The result of evaluating a <span style="font-family: Times New Roman; font-style: italic">Statement</span> or
-    <span style="font-family: Times New Roman; font-style: italic">Declaration</span> is always a Completion value.</p>
+    <span style="font-family: Times New Roman; font-style: italic">Declaration</span> is always a <a
+    href="#sec-8.8">Completion</a> value.</p>
 
     <div class="gp">
       <div class="lhs">BreakableStatement <span style="font-family: sans-serif; font-weight: bold">:</span></div>
@@ -8960,7 +8969,7 @@
       <p><span style="font-family: Times New Roman; font-style: italic">Block</span> <b>:</b> <code>{</code> <code>}</code></p>
 
       <ol class="proc">
-        <li>Return NormalCompletion (<span style="font-family: sans-serif; font-weight: bold">empty</span>).</li>
+        <li>Return <a href="#sec-8.8">NormalCompletion</a> (<span style="font-family: sans-serif; font-weight: bold">empty</span>).</li>
       </ol>
 
       <p><span style="font-family: Times New Roman; font-style: italic">Block</span> <b>:</b> <code>{</code> <span
@@ -8997,7 +9006,7 @@
         <li>Let <i>s</i> be the result of evaluating <i>Statement</i>.</li>
         <li>If s.[[type]] is <span style="font-family: sans-serif">throw</span>,  return <i>s</i>.</li>
         <li>If <i>s</i>.[[value]] is <span style="font-family: sans-serif">empty</span>, let <i>V</i> = <i>sl</i>.[[value]], otherwise let <i>V</i> = <i>s</i>.[[value]].</li>
-        <li>Return Completion {[[type]]: <i>s</i>.[[type]], [[value]]: <i>V</i>, [[target]]: <i>s</i>.[[target]]}.</li>
+        <li>Return <a href="#sec-8.8">Completion</a> {[[type]]: <i>s</i>.[[type]], [[value]]: <i>V</i>, [[target]]: <i>s</i>.[[target]]}.</li>
       </ol>
       <div class="note">
         <p><span class="nh">NOTE</span> Steps 4 and 5 of the above algoritm ensure that the value of a <span style="font-family:
@@ -9033,11 +9042,11 @@
       <h1><span class="secnum"><a href="#sec-12.2.1" title="link to this section">12.2.1</a></span> Let and Const Declarations</h1>
 
       <p>NOTE&#x9;A <code>let</code> and <code>const</code> declarations define variables that are scoped to the current execution
-      context&rsquo;s <a href="#sec-10.3">LexicalEnvironment</a>. The variables are created when their containing Lexical
-      Environment is instantiated but may not be accssed in any way until the variable&rsquo;s <span style="font-family: Times New
-      Roman; font-style: italic">LexicalBinding</span> is evaluated. A variable defined by a <span style="font-family: Times New
-      Roman; font-style: italic">LexicalBinding</span> with an <span style="font-family: Times New Roman; font-style:
-      italic">Initialiser</span> is assigned the value of its <span style="font-family: Times New
+      context&rsquo;s <a href="#sec-10.3">LexicalEnvironment</a>. The variables are created when their containing <a
+      href="#sec-10.2">Lexical Environment</a> is instantiated but may not be accssed in any way until the variable&rsquo;s <span
+      style="font-family: Times New Roman; font-style: italic">LexicalBinding</span> is evaluated. A variable defined by a <span
+      style="font-family: Times New Roman; font-style: italic">LexicalBinding</span> with an <span style="font-family: Times New
+      Roman; font-style: italic">Initialiser</span> is assigned the value of its <span style="font-family: Times New
       Roman"><i>Initialiser</i>&rsquo;s</span> <span style="font-family: Times New Roman; font-style:
       italic">AssignmentExpression</span> when the <span style="font-family: Times New Roman; font-style:
       italic">LetBinding</span> is evaluated, not when the variable is created. If a <span style="font-family: Times New Roman;
@@ -9246,7 +9255,7 @@
         <ol class="proc">
           <li>Let <i>next</i> be the result of evaluating <i>BindingList</i>.</li>
           <li>If <i>next</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>next</i>.</li>
-          <li>Return NormalCompletion(<span style="font-family: sans-serif">empty</span>).</li>
+          <li>Return <a href="#sec-8.8">NormalCompletion</a>(<span style="font-family: sans-serif">empty</span>).</li>
         </ol>
 
         <p><span style="font-family: Times New Roman; font-style: italic">BindingList</span> <b>:</b> <span style="font-family:
@@ -9312,15 +9321,16 @@
       <h1><span class="secnum"><a href="#sec-12.2.2" title="link to this section">12.2.2</a></span> Variable Statement</h1>
 
       <p>NOTE&#x9;A <code>var</code> statement declares variables that are scoped to the current execution context&rsquo;s <a
-      href="#sec-10.3">VariableEnvironment</a>. Var variables are created when their containing Lexical Environment is
-      instantiated and are initialised to <b>undefined</b> when created. Within the scope of any VariableEnvironemnt a common
-      <span style="font-family: Times New Roman; font-style: italic">Identifier</span> may appear in more than one <span
-      style="font-family: Times New Roman; font-style: italic">VariableDeclaration</span> but those declarations collective define
-      only one variable. A variable defined by a <span style="font-family: Times New Roman; font-style:
-      italic">VariableDeclaration</span> with an <span style="font-family: Times New Roman; font-style: italic">Initialiser</span>
-      is assigned the value of its <span style="font-family: Times New Roman"><i>Initialiser</i>&rsquo;s</span> <span
-      style="font-family: Times New Roman; font-style: italic">AssignmentExpression</span> when the <span style="font-family:
-      Times New Roman; font-style: italic">VariableDeclaration</span> is executed, not when the variable is created.</p>
+      href="#sec-10.3">VariableEnvironment</a>. Var variables are created when their containing <a href="#sec-10.2">Lexical
+      Environment</a> is instantiated and are initialised to <b>undefined</b> when created. Within the scope of any
+      VariableEnvironemnt a common <span style="font-family: Times New Roman; font-style: italic">Identifier</span> may appear in
+      more than one <span style="font-family: Times New Roman; font-style: italic">VariableDeclaration</span> but those
+      declarations collective define only one variable. A variable defined by a <span style="font-family: Times New Roman;
+      font-style: italic">VariableDeclaration</span> with an <span style="font-family: Times New Roman; font-style:
+      italic">Initialiser</span> is assigned the value of its <span style="font-family: Times New
+      Roman"><i>Initialiser</i>&rsquo;s</span> <span style="font-family: Times New Roman; font-style:
+      italic">AssignmentExpression</span> when the <span style="font-family: Times New Roman; font-style:
+      italic">VariableDeclaration</span> is executed, not when the variable is created.</p>
 
       <h2>Syntax</h2>
       <div class="gp">
@@ -9444,7 +9454,7 @@
         <ol class="proc">
           <li>Let <i>next</i> be the result of evaluating <i>VariableDeclarationList</i>.</li>
           <li>If <i>next</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>next</i>.</li>
-          <li>Return NormalCompletion( <span style="font-family: sans-serif">empty</span>).</li>
+          <li>Return <a href="#sec-8.8">NormalCompletion</a>( <span style="font-family: sans-serif">empty</span>).</li>
         </ol>
 
         <p><span style="font-family: Times New Roman; font-style: italic">VariableDeclarationList</span> <b>:</b><span
@@ -9468,7 +9478,7 @@
         style="font-family: Times New Roman; font-style: italic">BindingIdentifier</span></p>
 
         <ol class="proc">
-          <li>Return NormalCompletion(<span style="font-family: sans-serif">empty</span>).</li>
+          <li>Return <a href="#sec-8.8">NormalCompletion</a>(<span style="font-family: sans-serif">empty</span>).</li>
         </ol>
 
         <p><span style="font-family: Times New Roman; font-style: italic">VariableDeclaration</span> <b>:</b> <span
@@ -9484,9 +9494,9 @@
           <p><span class="nh">NOTE </span> If a <span style="font-family: Times New Roman; font-style:
           italic">VariableDeclaration</span> is nested within a with statement and the <i>Identifier</i> in the <span
           style="font-family: Times New Roman; font-style: italic">VariableDeclaration</span> is the same as a property name of
-          the binding object of the with statement&rsquo;s object environment record, then step 3 will assign value to the
-          property instead of to the <a href="#sec-10.3">VariableEnvironment</a> binding of the <span style="font-family: Times
-          New Roman; font-style: italic">Identifier</span>.</p>
+          the binding object of the with statement&rsquo;s <a href="#sec-10.2.1">object environment record</a>, then step 3 will
+          assign value to the property instead of to the <a href="#sec-10.3">VariableEnvironment</a> binding of the <span
+          style="font-family: Times New Roman; font-style: italic">Identifier</span>.</p>
         </div>
 
         <p><span style="font-family: Times New Roman; font-style: italic">VariableDeclaration</span> <b>:</b> <span
@@ -10075,7 +10085,7 @@
       <p><span style="font-family: Times New Roman; font-style: italic">EmptyStatement</span> <b>:</b> <code>;</code></p>
 
       <ol class="proc">
-        <li>Return NormalCompletion(<span style="font-family: sans-serif">empty</span>)<span style="font-family: sans-serif">.</span></li>
+        <li>Return <a href="#sec-8.8">NormalCompletion</a>(<span style="font-family: sans-serif">empty</span>)<span style="font-family: sans-serif">.</span></li>
       </ol>
     </section>
   </section>
@@ -10108,7 +10118,7 @@
         <li>Let <i>exprRef</i> be the result of evaluating <i>Expression</i>.</li>
         <li>Let <i>value</i> be <a href="#sec-8.9.1">GetValue</a>(<i>exprRef</i>).</li>
         <li>If <i>value</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>value</i>.</li>
-        <li>Return NormalCompletion(<i>value</i>).</li>
+        <li>Return <a href="#sec-8.8">NormalCompletion</a>(<i>value</i>).</li>
       </ol>
     </section>
   </section>
@@ -10179,7 +10189,7 @@
         <li>Let <i>exprRef</i> be the result of evaluating <i>Expression</i>.</li>
         <li>Let <i>exprValue</i> be <a href="#sec-9.1.2">ToBoolean</a>(<a href="#sec-8.9.1">GetValue</a>(<i>exprRef</i>)).</li>
         <li>If <i>exprValue</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>exprValue</i>.</li>
-        <li>If <i>exprValue</i> is <b>false</b>, return NormalCompletion(<b>undefined</b>).</li>
+        <li>If <i>exprValue</i> is <b>false</b>, return <a href="#sec-8.8">NormalCompletion</a>(<b>undefined</b>).</li>
         <li>Return the result of evaluating <i>Statement</i><span style="font-family: sans-serif">.</span></li>
       </ol>
     </section>
@@ -10252,8 +10262,8 @@
               <li>If <i>stmt</i> is an <a href="#sec-8.8">abrupt completion</a> and loopContinues (<i>stmt</i>,<i>labelSet</i>) is <b>false</b>, return <i>stmt</i>.</li>
               <li>Let <i>exprRef</i> be the result of evaluating <i>Expression</i>.</li>
               <li>Let <i>exprValue</i> be <a href="#sec-9.1.2">ToBoolean</a>(<a href="#sec-8.9.1">GetValue</a>(<i>exprRef</i>)).</li>
-              <li>If <i>exprValue</i> is <b>false</b>, Return NormalCompletion(<i>V</i>).</li>
-              <li>Else if <i>exprValue</i> is a Completion Record, then
+              <li>If <i>exprValue</i> is <b>false</b>, Return <a href="#sec-8.8">NormalCompletion</a>(<i>V</i>).</li>
+              <li>Else if <i>exprValue</i> is a <a href="#sec-8.8">Completion Record</a>, then
                 <ol class="block">
                   <li>Assert: <i>exprValue</i> is an <a href="#sec-8.8">abrupt completion</a>.</li>
                   <li>If  loopContinues (<i>exprValue</i>,<i>labelSet</i>) is <b>false</b>, return <i>exprValue.</i></li>
@@ -10294,8 +10304,8 @@
             <ol class="block">
               <li>Let <i>exprRef</i> be the result of evaluating <i>Expression</i>.</li>
               <li>Let <i>exprValue</i> be <a href="#sec-9.1.2">ToBoolean</a>(<a href="#sec-8.9.1">GetValue</a>(<i>exprRef</i>)).</li>
-              <li>If <i>exprValue</i> is <b>false</b>, return NormalCompletion(<i>V</i>).</li>
-              <li>Else if <i>exprValue</i> is a Completion Record, then
+              <li>If <i>exprValue</i> is <b>false</b>, return <a href="#sec-8.8">NormalCompletion</a>(<i>V</i>).</li>
+              <li>Else if <i>exprValue</i> is a <a href="#sec-8.8">Completion Record</a>, then
                 <ol class="block">
                   <li>Assert: <i>exprValue</i> is an <a href="#sec-8.8">abrupt completion</a>.</li>
                   <li>If  loopContinues (<i>exprValue</i>,<i>labelSet</i>) is <b>false</b>, return <i>exprValue.</i></li>
@@ -10385,7 +10395,7 @@
                 <ol class="block">
                   <li>Let <i>testExprRef</i> be the result of evaluating <i>testExpr</i>.</li>
                   <li>Let <i>testExprValue</i> be <a href="#sec-9.1.2">ToBoolean</a>(<a href="#sec-8.9.1">GetValue</a>(<i>testExprRef</i>))</li>
-                  <li>If <i>testExprValue</i> is <b>false</b>, return NormalCompletion(<i>V</i>).</li>
+                  <li>If <i>testExprValue</i> is <b>false</b>, return <a href="#sec-8.8">NormalCompletion</a>(<i>V</i>).</li>
                   <li>Else loopContinues (<i>testExprValue</i>,<i>labelSet</i>) is <b>false</b>, return <i>testExprValue.</i></li>
                 </ol>
               </li>
@@ -10477,7 +10487,7 @@
 
         <ul>
           <li>It is a Syntax Error if the <span style="font-family: Times New Roman; font-style: italic">IterationStatement</span> is contained in strict code and <span style="font-family: Times New Roman; font-style: italic">LeftHandSideExpression</span> is the <span style="font-family: Times New Roman; font-style: italic">Identifier</span> <code>eval</code> or the <span style="font-family: Times New Roman; font-style: italic">Identifier</span> <code>arguments</code>.</li>
-          <li>It is a Syntax Error if the <span style="font-family: Times New Roman; font-style: italic">LeftHandSideExpression</span> is an <span style="font-family: Times New Roman; font-style: italic">Identifier that statically resolves to a <a href="#sec-10.2.1.1">declarative environment record</a> binding and the resolved binding is an immutable binding.</span></li>
+          <li>It is a Syntax Error if the <span style="font-family: Times New Roman; font-style: italic">LeftHandSideExpression</span> is an <span style="font-family: Times New Roman; font-style: italic">Identifier that statically resolves to a <a href="#sec-10.2.1">declarative environment record</a> binding and the resolved binding is an immutable binding.</span></li>
           <li>It is a Syntax Error if the <span style="font-family: Times New Roman; font-style: italic">LeftHandSideExpression</span> is <span style="font-family: Times New Roman; font-style: italic">PrimaryExpression : <b>(</b> Expression</span> <code>)</code> and <span style="font-family: Times New Roman; font-style: italic">Expression</span> derived a production that would produce a Syntax Error according to these rules. This rule is recursively applied.</li>
           <li>It is a Syntax Error if the <span style="font-family: Times New Roman; font-style: italic">LeftHandSideExpression</span> is an <span style="font-family: Times New Roman; font-style: italic">ObjectLiteral</span> or an <span style="font-family: Times New Roman; font-style: italic">ArrayLiteral</span> and the source code corresponding to <span style="font-family: Times New Roman; font-style: italic">LeftHandSideExpression</span> cannot be parsed using <span style="font-family: Times New Roman; font-style: italic">AssignmentPattern</span> as the goal symbol.</li>
         </ul>
@@ -10674,7 +10684,7 @@
 
         <ol class="proc">
           <li>Let <i>keyResult</i> be the result of performing For In/Of Expression Evalation with  <i>Statement</i>, <span style="font-family: sans-serif">enumerate</span>, and <i>labelSet</i>.</li>
-          <li>ReturnIfAbrupt(<i>keyResult</i>).</li>
+          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>keyResult</i>).</li>
           <li>Return the result of performing For In/Of Body Evalation with  <i>LeftHandSideExpression</i>, <i>Statement</i>, <i>keyResult</i>.[[value]],  <span style="font-family: sans-serif">assignment</span>, and <i>labelSet</i>.</li>
         </ol>
 
@@ -10685,7 +10695,7 @@
 
         <ol class="proc">
           <li>Let <i>keyResult</i> be the result of performing For In/Of Expression Evalation with  <i>Statement</i>, <span style="font-family: sans-serif">enumerate</span>, and <i>labelSet</i>.</li>
-          <li>ReturnIfAbrupt(<i>keyResult</i>).</li>
+          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>keyResult</i>).</li>
           <li>Return the result of performing For In/Of Body Evalation with  <i>BindingIdentifier</i>, <i>Statement</i>, <i>keyResult</i>.[[value]],  <span style="font-family: sans-serif">varBinding</span>, and <i>labelSet</i>.</li>
         </ol>
 
@@ -10696,7 +10706,7 @@
 
         <ol class="proc">
           <li>Let <i>keyResult</i> be the result of performing For In/Of Expression Evalation with  <i>Statement</i>, <span style="font-family: sans-serif">enumerate</span>, and <i>labelSet</i>.</li>
-          <li>ReturnIfAbrupt(<i>keyResult</i>).</li>
+          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>keyResult</i>).</li>
           <li>Return the result of performing For In/Of Body Evalation with  <i>ForDeclaration</i>, <i>Statement</i>, <i>keyResult</i>.[[value]],  <span style="font-family: sans-serif">ForDeclaration</span>, and <i>labelSet</i>.</li>
         </ol>
 
@@ -10707,7 +10717,7 @@
 
         <ol class="proc">
           <li>Let <i>keyResult</i> be the result of performing For In/Of Expression Evalation with  <i>Statement</i>, <span style="font-family: sans-serif">iterate</span>, and <i>labelSet</i>.</li>
-          <li>ReturnIfAbrupt(<i>keyResult</i>).</li>
+          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>keyResult</i>).</li>
           <li>Return the result of performing For In/Of Body Evalation with  <i>LeftHandSideExpression</i>, <i>Statement</i>, <i>keyResult</i>.[[value]],  <span style="font-family: sans-serif">assignment</span>, and <i>labelSet</i>.</li>
         </ol>
 
@@ -10718,7 +10728,7 @@
 
         <ol class="proc">
           <li>Let <i>keyResult</i> be the result of performing For In/Of Expression Evalation with  <i>Statement</i>, <span style="font-family: sans-serif">iterate</span>, and <i>labelSet</i>.</li>
-          <li>ReturnIfAbrupt(<i>keyResult</i>).</li>
+          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>keyResult</i>).</li>
           <li>Return the result of performing For In/Of Body Evalation with  <i>BindingIdentifier</i>, <i>Statement</i>, <i>keyResult</i>.[[value]],  <span style="font-family: sans-serif">varBinding</span>, and <i>labelSet</i>.</li>
         </ol>
 
@@ -10729,7 +10739,7 @@
 
         <ol class="proc">
           <li>Let <i>keyResult</i> be the result of performing For In/Of Expression Evalation with  <i>Statement</i>, <span style="font-family: sans-serif">iterate</span>, and <i>labelSet</i>.</li>
-          <li>ReturnIfAbrupt(<i>keyResult</i>).</li>
+          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>keyResult</i>).</li>
           <li>Return the result of performing For In/Of Body Evalation with  <i>ForDeclaration</i>, <i>Statement</i>, <i>keyResult</i>.[[value]],  <span style="font-family: sans-serif">ForDeclaration</span>, and <i>labelSet</i>.</li>
         </ol>
 
@@ -10743,10 +10753,10 @@
           <li>If <i>experValue</i> is an <a href="#sec-8.8">abrupt completion</a>, then return
             <ol class="block">
               <li>If loopContinues(<i>experValue</i>,<i>labelSet</i>) is <b>false</b>, then return <i>experValue</i>.</li>
-              <li>Else, return Completion{type: <span style="font-family: sans-serif">break</span>, value: <b>undefined</b>, target: <span style="font-family: sans-serif">empty</span>}.</li>
+              <li>Else, return <a href="#sec-8.8">Completion</a>{type: <span style="font-family: sans-serif">break</span>, value: <b>undefined</b>, target: <span style="font-family: sans-serif">empty</span>}.</li>
             </ol>
           </li>
-          <li>If <i>experValue</i>.[value]] is <b>null</b> or <b>undefined</b>, return Completion{type: <span style="font-family: sans-serif">break</span>, value: <b>undefined</b>, target: <span style="font-family: sans-serif">empty</span>}..</li>
+          <li>If <i>experValue</i>.[value]] is <b>null</b> or <b>undefined</b>, return <a href="#sec-8.8">Completion</a>{type: <span style="font-family: sans-serif">break</span>, value: <b>undefined</b>, target: <span style="font-family: sans-serif">empty</span>}..</li>
           <li>Let <i>obj</i> be <a href="#sec-9.1.9">ToObject</a>(<i>experValue</i>).</li>
           <li>If <i>iterationKind</i> is <span style="font-family: sans-serif">enumerate</span>, then
             <ol class="block">
@@ -10763,7 +10773,7 @@
             <ol class="block">
               <li>If LoopContinues(<i>experValue</i>,<i>labelSet</i>) is <b>false</b>, then return <i>experValue</i>.</li>
               <li>Asset:   <i>keys</i>.[[type]] is <span style="font-family: sans-serif">continue</span></li>
-              <li>Return Completion{type: <span style="font-family: sans-serif">break</span>, value: <b>undefined</b>, target: <span style="font-family: sans-serif">empty</span>}.</li>
+              <li>Return <a href="#sec-8.8">Completion</a>{type: <span style="font-family: sans-serif">break</span>, value: <b>undefined</b>, target: <span style="font-family: sans-serif">empty</span>}.</li>
             </ol>
           </li>
           <li>Return <i>keys</i>.</li>
@@ -10780,7 +10790,7 @@
           <li>Repeat
             <ol class="block">
               <li>Let <i>next</i> be the result of performing Invoke with arguments <b>"<span style="font-family: monospace">next</span>"</b>, <i>keys</i>, and an empty arguments List.</li>
-              <li>If IteratorComplete(<i>next</i>) is <i>true</i>, the return NormalCompletion(<i>V</i>).</li>
+              <li>If IteratorComplete(<i>next</i>) is <i>true</i>, the return <a href="#sec-8.8">NormalCompletion</a>(<i>V</i>).</li>
               <li>If loopContinues(<i>next</i>,<i>labelSet</i>) is <b>false</b>, then return <i>next</i>.</li>
               <li>If <i>next</i> is an <a href="#sec-8.8">abrupt completion</a>, then let <i>status</i> be next.</li>
               <li>Else,
@@ -10815,7 +10825,7 @@
                       <li>Asset <i>lhsKind</i> is <span style="font-family: sans-serif">ForDeclaration</span>.</li>
                       <li>Let <i>iterationEnv</i> be the result of calling <a href="#sec-10.2.2.2">NewDeclarativeEnvironment</a> passing <i>oldEnv</i> as the argument.</li>
                       <li>Perform Binding Instantiation for <i>lhs</i> passing <i>nextValue</i> and <i>iterationEnv</i> as arguments.</li>
-                      <li>Let <i>status</i> be NormalCompletion(<span style="font-family: sans-serif">empty</span>)</li>
+                      <li>Let <i>status</i> be <a href="#sec-8.8">NormalCompletion</a>(<span style="font-family: sans-serif">empty</span>)</li>
                       <li>Set the running <b>execution</b> context&rsquo;s <a href="#sec-10.3">LexicalEnvironment</a> to <i>iterationEnv</i>.</li>
                     </ol>
                   </li>
@@ -10878,7 +10888,7 @@
       ;</code></p>
 
       <ol class="proc">
-        <li>Return Completion {[[type]]: <span style="font-family: sans-serif">continue</span>, [[value]]: <span style="font-family: sans-serif">empty</span>, [[target]]: <span style="font-family: sans-serif">empty</span>}.</li>
+        <li>Return <a href="#sec-8.8">Completion</a> {[[type]]: <span style="font-family: sans-serif">continue</span>, [[value]]: <span style="font-family: sans-serif">empty</span>, [[target]]: <span style="font-family: sans-serif">empty</span>}.</li>
       </ol>
 
       <p><span style="font-family: Times New Roman; font-style: italic">ContinueStatement</span> <b>:</b> <code>continue</code>
@@ -10886,7 +10896,7 @@
       Times New Roman; font-style: italic">Identifier</span><code>;</code></p>
 
       <ol class="proc">
-        <li>Return Completion {[[type]]: <span style="font-family: sans-serif">continue</span>, [[value]]: <span style="font-family: sans-serif">empty</span>, [[target]]: <i>Identifier</i>}.</li>
+        <li>Return <a href="#sec-8.8">Completion</a> {[[type]]: <span style="font-family: sans-serif">continue</span>, [[value]]: <span style="font-family: sans-serif">empty</span>, [[target]]: <i>Identifier</i>}.</li>
       </ol>
     </section>
   </section>
@@ -10927,7 +10937,7 @@
       <p><span style="font-family: Times New Roman; font-style: italic">BreakStatement</span> <b>:</b> <code>break ;</code></p>
 
       <ol class="proc">
-        <li>Return Completion {[[type]]: <span style="font-family: sans-serif">break</span>, [[value]]: <span style="font-family: sans-serif">empty</span>, [[target]]: <span style="font-family: sans-serif">empty</span>}.</li>
+        <li>Return <a href="#sec-8.8">Completion</a> {[[type]]: <span style="font-family: sans-serif">break</span>, [[value]]: <span style="font-family: sans-serif">empty</span>, [[target]]: <span style="font-family: sans-serif">empty</span>}.</li>
       </ol>
 
       <p><span style="font-family: Times New Roman; font-style: italic">BreakStatement</span> <b>:</b> <code>break</code> [no
@@ -10935,7 +10945,7 @@
       New Roman; font-style: italic">Identifier</span><code>;</code></p>
 
       <ol class="proc">
-        <li>Return Completion {[[type]]: <span style="font-family: sans-serif">break</span>, [[value]]: <span style="font-family: sans-serif">empty</span>, [[target]]: <i>Identifier</i>}.</li>
+        <li>Return <a href="#sec-8.8">Completion</a> {[[type]]: <span style="font-family: sans-serif">break</span>, [[value]]: <span style="font-family: sans-serif">empty</span>, [[target]]: <i>Identifier</i>}.</li>
       </ol>
     </section>
   </section>
@@ -10970,7 +10980,7 @@
       ;</code></p>
 
       <ol class="proc">
-        <li>Return Completion {[[type]]: <span style="font-family: sans-serif">return</span>, [[value]]:  <b>undefined</b>, [[target]]:  <span style="font-family: sans-serif">empty</span>}.</li>
+        <li>Return <a href="#sec-8.8">Completion</a> {[[type]]: <span style="font-family: sans-serif">return</span>, [[value]]:  <b>undefined</b>, [[target]]:  <span style="font-family: sans-serif">empty</span>}.</li>
       </ol>
 
       <p><span style="font-family: Times New Roman; font-style: italic">ReturnStatement</span> <b>:</b> <code>return</code> [no
@@ -10981,7 +10991,7 @@
         <li>Let <i>exprRef</i> be the result of evaluating <i>Expression</i>.</li>
         <li>Let <i>exprValue</i> be <a href="#sec-8.9.1">GetValue</a>(<i>exprRef</i>).</li>
         <li>If <i>exprValue</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>exprValue</i>.</li>
-        <li>Return Completion {[[type]]: <span style="font-family: sans-serif">return</span>, [[value]]:  <i>exprValue</i>, [[target]]: <span style="font-family: sans-serif">empty</span>}.</li>
+        <li>Return <a href="#sec-8.8">Completion</a> {[[type]]: <span style="font-family: sans-serif">return</span>, [[value]]:  <i>exprValue</i>, [[target]]: <span style="font-family: sans-serif">empty</span>}.</li>
       </ol>
     </section>
   </section>
@@ -10994,9 +11004,10 @@
       <div class="rhs"><code>with</code> <code>(</code> Expression <code>)</code> Statement</div>
     </div>
 
-    <p>NOTE&#x9;The <code>with</code> statement adds an object environment record for a computed object to the lexical environment
-    of the current execution context. It then executes a statement using this augmented lexical environment. Finally, it restores
-    the original lexical environment.</p>
+    <p>NOTE&#x9;The <code>with</code> statement adds an <a href="#sec-10.2.1">object environment record</a> for a computed object
+    to the <a href="#sec-10.2">lexical environment</a> of the current execution context. It then executes a statement using this
+    augmented <a href="#sec-10.2">lexical environment</a>. Finally, it restores the original <a href="#sec-10.2">lexical
+    environment</a>.</p>
 
     <p><b>Static Semantics</b></p>
 
@@ -11038,7 +11049,7 @@
         <li>Set the <i>provideThis</i> flag of <i>newEnv</i> to <b>true</b>.</li>
         <li>Set the running execution context&rsquo;s <a href="#sec-10.3">LexicalEnvironment</a> to <i>newEnv</i>.</li>
         <li>Let <i>C</i> be the result of evaluating <i>Statement</i>.</li>
-        <li>Set the running execution context&rsquo;s Lexical Environment to <i>oldEnv</i>.</li>
+        <li>Set the running execution context&rsquo;s <a href="#sec-10.2">Lexical Environment</a> to <i>oldEnv</i>.</li>
         <li>Return <i>C</i>.</li>
       </ol>
       <div class="note">
@@ -11294,7 +11305,7 @@
         <li><span style="font-family: Times New Roman">Let <i>searching</i> be <b>true</b>.</span></li>
         <li><span style="font-family: Times New Roman">Repeat, while <i>searching</i> is <b>true</b></span>
           <ol class="block">
-            <li><span style="font-family: Times New Roman">Let <i>C</i> be the next <i>CaseClause</i> in <i>A</i>. If there is no such <i>CaseClause</i>, return</span> NormalCompletion(<span style="font-family: Times New Roman"><i>V</i>).</span></li>
+            <li><span style="font-family: Times New Roman">Let <i>C</i> be the next <i>CaseClause</i> in <i>A</i>. If there is no such <i>CaseClause</i>, return</span> <a href="#sec-8.8">NormalCompletion</a>(<span style="font-family: Times New Roman"><i>V</i>).</span></li>
             <li><span style="font-family: Times New Roman">Let <i>clauseSelector</i> be the result of evaluating <i>C</i>.</span></li>
             <li>If <i>clauseSelector</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>clauseSelector</i>.</li>
             <li><span style="font-family: Times New Roman">If <i>input</i> is equal to <i>clauseSelector</i> as defined by the Strict Equality Comparision Algorithm (<a href="#sec-11.9.1">11.9.1</a>), then</span>
@@ -11313,12 +11324,12 @@
         </li>
         <li><span style="font-family: Times New Roman">Repeat</span>
           <ol class="block">
-            <li><span style="font-family: Times New Roman">Let <i>C</i> be the next <i>CaseClause</i> in <i>A</i>. If there is no such <i>CaseClause</i>, return</span> NormalCompletion(<span style="font-family: Times New Roman"><i>V</i>).</span></li>
+            <li><span style="font-family: Times New Roman">Let <i>C</i> be the next <i>CaseClause</i> in <i>A</i>. If there is no such <i>CaseClause</i>, return</span> <a href="#sec-8.8">NormalCompletion</a>(<span style="font-family: Times New Roman"><i>V</i>).</span></li>
             <li><span style="font-family: Times New Roman">If <i>C</i> has a <i>StatementList</i>, then</span>
               <ol class="block">
                 <li><span style="font-family: Times New Roman">Evaluate <i>C</i>&rsquo;s <i>StatementList</i> and let <i>R</i> be the result.</span></li>
                 <li><span style="font-family: Times New Roman">If <i>R</i>.[[value]] is not</span> empty<span style="font-family: Times New Roman">, then let <i>V</i> = <i>R</i>.[[value]].</span></li>
-                <li><span style="font-family: Times New Roman">If <i>R</i> is an <a href="#sec-8.8">abrupt completion</a>, then return Completion</span> <span style="font-family: Times New Roman">{[[type]]:</span> <span style="font-family: Times New Roman"><i>R</i>.[[type]],</span> <span style="font-family: Times New Roman">[[value]]:</span>  <span style="font-family: Times New Roman"><i>V</i>,</span> <span style="font-family: Times New Roman">[[target]]:</span>  <span style="font-family: Times New Roman"><i>R</i>.[[target]]}.</span></li>
+                <li><span style="font-family: Times New Roman">If <i>R</i> is an <a href="#sec-8.8">abrupt completion</a>, then return <a href="#sec-8.8">Completion</a></span> <span style="font-family: Times New Roman">{[[type]]:</span> <span style="font-family: Times New Roman"><i>R</i>.[[type]],</span> <span style="font-family: Times New Roman">[[value]]:</span>  <span style="font-family: Times New Roman"><i>V</i>,</span> <span style="font-family: Times New Roman">[[target]]:</span>  <span style="font-family: Times New Roman"><i>R</i>.[[target]]}.</span></li>
               </ol>
             </li>
           </ol>
@@ -11342,7 +11353,7 @@
                 <li><span style="font-family: Times New Roman">Let <i>clauseSelector</i> be the result of evaluating <i>C</i>.</span></li>
                 <li>If <i>clauseSelector</i> is an <a href="#sec-8.8">abrupt completion</a>, then
                   <ol class="block">
-                    <li>If <i>clauseSelector</i>.[[value]] is <span style="font-family: sans-serif">empty</span>, then return Completion {[[type]]: <i>clauseSelector</i>.[[type]], [[value]]:  <b>undefined</b>, [[target]]:  <i>clauseSelector</i>.[[target]]}.</li>
+                    <li>If <i>clauseSelector</i>.[[value]] is <span style="font-family: sans-serif">empty</span>, then return <a href="#sec-8.8">Completion</a> {[[type]]: <i>clauseSelector</i>.[[type]], [[value]]:  <b>undefined</b>, [[target]]:  <i>clauseSelector</i>.[[target]]}.</li>
                     <li>Else, return <i>clauseSelector</i>.</li>
                   </ol>
                 </li>
@@ -11355,7 +11366,7 @@
                   <ol class="block">
                     <li><span style="font-family: Times New Roman">Evaluate <i>C</i>&rsquo;s <i>StatementList</i> and let <i>R</i> be the result.</span></li>
                     <li><span style="font-family: Times New Roman">If <i>R</i>.[[value]] is not</span> empty<span style="font-family: Times New Roman">, then let <i>V</i> = <i>R</i>.[[value]].</span></li>
-                    <li><span style="font-family: Times New Roman">If <i>R</i> is an <a href="#sec-8.8">abrupt completion</a>, then return Completion</span> <span style="font-family: Times New Roman">{[[type]]:</span> <span style="font-family: Times New Roman"><i>R</i>.[[type]],</span> <span style="font-family: Times New Roman">[[value]]:</span>  <span style="font-family: Times New Roman"><i>V</i>,</span> <span style="font-family: Times New Roman">[[target]]:</span>  <span style="font-family: Times New Roman"><i>R</i>.[[target]]}.</span></li>
+                    <li><span style="font-family: Times New Roman">If <i>R</i> is an <a href="#sec-8.8">abrupt completion</a>, then return <a href="#sec-8.8">Completion</a></span> <span style="font-family: Times New Roman">{[[type]]:</span> <span style="font-family: Times New Roman"><i>R</i>.[[type]],</span> <span style="font-family: Times New Roman">[[value]]:</span>  <span style="font-family: Times New Roman"><i>V</i>,</span> <span style="font-family: Times New Roman">[[target]]:</span>  <span style="font-family: Times New Roman"><i>R</i>.[[target]]}.</span></li>
                   </ol>
                 </li>
               </ol>
@@ -11371,7 +11382,7 @@
                 <li><span style="font-family: Times New Roman">Let <i>clauseSelector</i> be the result of evaluating <i>C</i>.</span></li>
                 <li>If <i>clauseSelector</i> is an <a href="#sec-8.8">abrupt completion</a>, then.
                   <ol class="block">
-                    <li>If <i>clauseSelector</i>.[[value]] is <span style="font-family: sans-serif">empty</span>, then return Completion {[[type]]: <i>clauseSelector</i>.[[type]], [[value]]:  <b>undefined</b>, [[target]]:  <i>clauseSelector</i>.[[target]]}.</li>
+                    <li>If <i>clauseSelector</i>.[[value]] is <span style="font-family: sans-serif">empty</span>, then return <a href="#sec-8.8">Completion</a> {[[type]]: <i>clauseSelector</i>.[[type]], [[value]]:  <b>undefined</b>, [[target]]:  <i>clauseSelector</i>.[[target]]}.</li>
                     <li>Else, return <i>clauseSelector</i>.</li>
                   </ol>
                 </li>
@@ -11382,7 +11393,7 @@
                       <ol class="block">
                         <li><span style="font-family: Times New Roman">Evaluate <i>C</i>&rsquo;s <i>StatementList</i> and let <i>R</i> be the result.</span></li>
                         <li><span style="font-family: Times New Roman">If <i>R</i>.[[value]] is not</span> empty<span style="font-family: Times New Roman">, then let <i>V</i> = <i>R</i>.[[value]].</span></li>
-                        <li><span style="font-family: Times New Roman">If <i>R</i> is an <a href="#sec-8.8">abrupt completion</a>, then return Completion</span> <span style="font-family: Times New Roman">{[[type]]:</span> <span style="font-family: Times New Roman"><i>R</i>.[[type]],</span> <span style="font-family: Times New Roman">[[value]]:</span>  <span style="font-family: Times New Roman"><i>V</i>,</span> <span style="font-family: Times New Roman">[[target]]:</span>  <span style="font-family: Times New Roman"><i>R</i>.[[target]]}.</span></li>
+                        <li><span style="font-family: Times New Roman">If <i>R</i> is an <a href="#sec-8.8">abrupt completion</a>, then return <a href="#sec-8.8">Completion</a></span> <span style="font-family: Times New Roman">{[[type]]:</span> <span style="font-family: Times New Roman"><i>R</i>.[[type]],</span> <span style="font-family: Times New Roman">[[value]]:</span>  <span style="font-family: Times New Roman"><i>V</i>,</span> <span style="font-family: Times New Roman">[[target]]:</span>  <span style="font-family: Times New Roman"><i>R</i>.[[target]]}.</span></li>
                       </ol>
                     </li>
                   </ol>
@@ -11395,17 +11406,17 @@
           <ol class="block">
             <li><span style="font-family: Times New Roman">Evaluate the <i>DefaultClause&rsquo;s</i></span> <span style="font-family: Times New Roman"><i>StatementList</i> and let <i>R</i> be the result.</span></li>
             <li><span style="font-family: Times New Roman">If <i>R</i>.[[value]] is not</span> empty<span style="font-family: Times New Roman">, then let <i>V</i> = <i>R</i>.[[value]].</span></li>
-            <li><span style="font-family: Times New Roman">If <i>R</i> is an <a href="#sec-8.8">abrupt completion</a>, then return Completion</span> <span style="font-family: Times New Roman">{[[type]]:</span> <span style="font-family: Times New Roman"><i>R</i>.[[type]],</span> <span style="font-family: Times New Roman">[[value]]:</span>  <span style="font-family: Times New Roman"><i>V</i>,</span> <span style="font-family: Times New Roman">[[target]]:</span>  <span style="font-family: Times New Roman"><i>R</i>.[[target]]}.</span></li>
+            <li><span style="font-family: Times New Roman">If <i>R</i> is an <a href="#sec-8.8">abrupt completion</a>, then return <a href="#sec-8.8">Completion</a></span> <span style="font-family: Times New Roman">{[[type]]:</span> <span style="font-family: Times New Roman"><i>R</i>.[[type]],</span> <span style="font-family: Times New Roman">[[value]]:</span>  <span style="font-family: Times New Roman"><i>V</i>,</span> <span style="font-family: Times New Roman">[[target]]:</span>  <span style="font-family: Times New Roman"><i>R</i>.[[target]]}.</span></li>
           </ol>
         </li>
         <li><span style="font-family: Times New Roman">Repeat (Note that if step 7.a.i has been performed this loop does not start at the beginning of <i>B</i>)</span>
           <ol class="block">
-            <li><span style="font-family: Times New Roman">Let <i>C</i> be the next <i>CaseClause</i> in <i>B</i>. If there is no such <i>CaseClause</i>, return</span> NormalCompletion(<span style="font-family: Times New Roman"><i>V</i>).</span></li>
+            <li><span style="font-family: Times New Roman">Let <i>C</i> be the next <i>CaseClause</i> in <i>B</i>. If there is no such <i>CaseClause</i>, return</span> <a href="#sec-8.8">NormalCompletion</a>(<span style="font-family: Times New Roman"><i>V</i>).</span></li>
             <li><span style="font-family: Times New Roman">If <i>C</i> has a <i>StatementList</i>, then</span>
               <ol class="block">
                 <li><span style="font-family: Times New Roman">Evaluate <i>C</i>&rsquo;s <i>StatementList</i> and let <i>R</i> be the result.</span></li>
                 <li><span style="font-family: Times New Roman">If <i>R</i>.[[value]] is not</span> empty<span style="font-family: Times New Roman">, then let <i>V</i> = <i>R</i>.[[value]].</span></li>
-                <li><span style="font-family: Times New Roman">If <i>R</i> is an <a href="#sec-8.8">abrupt completion</a>, then Completion</span> <span style="font-family: Times New Roman">{[[type]]:</span> <span style="font-family: Times New Roman"><i>R</i>.[[type]],</span> <span style="font-family: Times New Roman">[[value]]:</span>  <span style="font-family: Times New Roman"><i>V</i>,</span> <span style="font-family: Times New Roman">[[target]]:</span>  <span style="font-family: Times New Roman"><i>R</i>.[[target]]}.</span></li>
+                <li><span style="font-family: Times New Roman">If <i>R</i> is an <a href="#sec-8.8">abrupt completion</a>, then <a href="#sec-8.8">Completion</a></span> <span style="font-family: Times New Roman">{[[type]]:</span> <span style="font-family: Times New Roman"><i>R</i>.[[type]],</span> <span style="font-family: Times New Roman">[[value]]:</span>  <span style="font-family: Times New Roman"><i>V</i>,</span> <span style="font-family: Times New Roman">[[target]]:</span>  <span style="font-family: Times New Roman"><i>R</i>.[[target]]}.</span></li>
               </ol>
             </li>
           </ol>
@@ -11519,7 +11530,7 @@
         </li>
         <li>If <i>stmtResult</i>.[[type]] is <b>break</b>  and  <i>stmtResult</i>.[[target]] is the same value as <i>label</i>, then
           <ol class="block">
-            <li>Let result be NormalCompletion(<i>stmtResult</i>.[[value]]).</li>
+            <li>Let result be <a href="#sec-8.8">NormalCompletion</a>(<i>stmtResult</i>.[[value]]).</li>
           </ol>
         </li>
         <li>Else, let <i>result</i> be <i>stmtResult</i>.</li>
@@ -11793,12 +11804,12 @@
       <li>If an implementation defined debugging facility is available and enabled, then
         <ol class="block">
           <li>Perform an implementation defined debugging action.</li>
-          <li>Let <i>result</i> be an implementation defined Completion value.</li>
+          <li>Let <i>result</i> be an implementation defined <a href="#sec-8.8">Completion</a> value.</li>
         </ol>
       </li>
       <li>Else
         <ol class="block">
-          <li>Let <i>result</i> be NormalCompletion(<span style="font-family: sans-serif">empty</span>).</li>
+          <li>Let <i>result</i> be <a href="#sec-8.8">NormalCompletion</a>(<span style="font-family: sans-serif">empty</span>).</li>
         </ol>
       </li>
       <li>Return <i>result</i>.</li>
@@ -12075,7 +12086,7 @@
 
       <div class="gp">FormalParameterList <span style="font-family: sans-serif; font-weight: bold">:</span> <span style="font-family: sans-serif">[empty]</span></div>
       <ol class="proc">
-        <li>Return NormalCompletion(<span style="font-family: sans-serif">empty</span>).</li>
+        <li>Return <a href="#sec-8.8">NormalCompletion</a>(<span style="font-family: sans-serif">empty</span>).</li>
       </ol>
       <div class="gp">FormalParameterList <span style="font-family: sans-serif; font-weight: bold">:</span> FunctionRestParameter</div>
       <ol class="proc">
@@ -12090,7 +12101,7 @@
       <div class="gp">FormalParameterList <span style="font-family: sans-serif; font-weight: bold">:</span> FormalsList <code>,</code> FunctionRestParameter</div>
       <ol class="proc">
         <li>Let <i>restIndex</i> be the result of performing Indexed Binding Initialisation for <i>FormalsList</i> using <i>value</i>, <i>lenValue</i>, 0, and <i>environment</i> as the arguments.</li>
-        <li>ReturnIfAbrupt(<i>restIndex</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>restIndex</i>).</li>
         <li>Return the result of performing Indexed Binding Initialisation for <i>FunctionRestParameter</i> using <i>value</i>, <i>lenValue</i>, <i>restIndex</i>.[[value]], and <i>environment</i> as the arguments.</li>
       </ol>
 
@@ -12103,14 +12114,14 @@
       <div class="gp">FormalsList <span style="font-family: sans-serif; font-weight: bold">:</span> FormalParameter</div>
       <ol class="proc">
         <li>Let <i>status</i> be the result of performing Binding Initialisation for <i>FormalParameter</i> using <i>value</i>, <i>env</i>,  and <i>index</i> as the arguments.</li>
-        <li>ReturnIfAbrupt(<i>status</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>status</i>).</li>
         <li>Return <i>index</i> + 1.</li>
       </ol>
       <div class="gp">FormalsList <span style="font-family: sans-serif; font-weight: bold">:</span> FormalsList <code>,</code> FormalParameter</div>
       <ol class="proc">
         <li>Let <i>lastIndex</i> be the result of performing Indexed Binding Initialisation for <i>FormalsList</i> using <i>value</i>,  <i>lenValue</i>, <i>nextIndex</i>, and <i>environment</i> as the arguments.</li>
         <li>Let status be the result of performing Indexed Binding Initialisation for <i>FormalParameter</i> using <i>value</i>, <i>lenValue</i>, <i>lastIndex</i>, and <i>environment</i> as the arguments.</li>
-        <li>ReturnIfAbrupt(status).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(status).</li>
         <li>Return <i>lastIndex</i> + 1.</li>
       </ol>
       <div class="gp">FunctionRestParameter <b><span style="font-family: sans-serif">:</span> <span style="font-family: monospace">...</span></b> BindingIdentifier</div>
@@ -12159,7 +12170,7 @@
       style="font-family: Times New Roman; font-style: italic">FunctionBody</span> <code>}</code></p>
 
       <ol class="proc">
-        <li><span style="font-family: Times New Roman">Let <i>funcEnv</i> be the result of calling <a href="#sec-10.2.2.2">NewDeclarativeEnvironment</a> passing the running execution context&rsquo;s Lexical Environment as the argument</span></li>
+        <li><span style="font-family: Times New Roman">Let <i>funcEnv</i> be the result of calling <a href="#sec-10.2.2.2">NewDeclarativeEnvironment</a> passing the running execution context&rsquo;s <a href="#sec-10.2">Lexical Environment</a> as the argument</span></li>
         <li><span style="font-family: Times New Roman">Let <i>envRec</i> be <i>funcEnv&rsquo;s</i> environment record.</span></li>
         <li><span style="font-family: Times New Roman">Call the CreateImmutableBinding concrete method of <i>envRec</i> passing the String value of <i>BindingIdentifier</i> as the argument.</span></li>
         <li><span style="font-family: Times New Roman">Let <i>closure</i> be the result of creating a new Function object as specified in <a href="#sec-13.2">13.2</a> with parameters specified by <i>FormalParameterList</i> and body specified by <i>FunctionBody</i>. Pass in <i>funcEnv</i> as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag if the <i>FunctionExpression</i> is contained in strict code or if its <i>FunctionBody</i> is strict code.</span></li>
@@ -12184,7 +12195,7 @@
       <ol class="proc">
         <li><span style="font-family: Times New Roman">The code of this <i>FunctionBody</i> is strict mode code if it is part of a <i>FunctionDeclaration</i> or <i>FunctionExpression</i> that is contained in strict mode code or if the <a href="#sec-14.1">Directive Prologue</a> (<a href="#sec-14.1">14.1</a>) of its <i>StatementList</i> contains a <a href="#sec-14.1">Use Strict Directive</a> or if any of the conditions in <a href="#sec-10.1.1">10.1.1</a> apply.  If the code of this <i>FunctionBody</i> is strict mode code, <i>StatementList</i> is evaluated in the following steps as strict mode code. Otherwise, <i>StatementList</i> is evaluated in the following steps as non-strict mode code.</span></li>
         <li><span style="font-family: Times New Roman">If <i>StatementList</i> is present return the result of evaluating <i>StatementList</i>.</span></li>
-        <li><span style="font-family: Times New Roman">Else return NormalCompletion(<b>undefined</b>).</span></li>
+        <li><span style="font-family: Times New Roman">Else return <a href="#sec-8.8">NormalCompletion</a>(<b>undefined</b>).</span></li>
       </ol>
     </section>
 
@@ -12193,9 +12204,9 @@
 
       <p>A Function object is constructed as follows given an parameter list specified by <span style="font-family: Times New
       Roman; font-style: italic">FormalParameterList</span>, a body specified by <span style="font-family: Times New Roman;
-      font-style: italic">FunctionBody</span>, a Lexical Environment specified by <span style="font-family: Times New Roman;
-      font-style: italic">Scope</span>, a Boolean flag <span style="font-family: Times New Roman; font-style:
-      italic">Strict</span>, and optionally, an object <span style="font-family: Times New Roman; font-style:
+      font-style: italic">FunctionBody</span>, a <a href="#sec-10.2">Lexical Environment</a> specified by <span
+      style="font-family: Times New Roman; font-style: italic">Scope</span>, a Boolean flag <span style="font-family: Times New
+      Roman; font-style: italic">Strict</span>, and optionally, an object <span style="font-family: Times New Roman; font-style:
       italic">homeObject</span> and a string <span style="font-family: Times New Roman; font-style: italic">methodName</span>:</p>
 
       <ol class="proc">
@@ -12250,7 +12261,7 @@
           </li>
           <li>If <i>F</i> does not have a [[Code]] internal property, then
             <ol class="block">
-              <li>Let <i>result</i> be NormalCompletion(<span style="font-family: sans-serif">undefined</span>).</li>
+              <li>Let <i>result</i> be <a href="#sec-8.8">NormalCompletion</a>(<span style="font-family: sans-serif">undefined</span>).</li>
             </ol>
           </li>
           <li>Else,
@@ -12274,13 +12285,13 @@
           <li><span style="font-family: Times New Roman">Set all the internal methods of <i>obj</i> as specified in <a href="#sec-8.12">8.12</a>.</span></li>
           <li><span style="font-family: Times New Roman">Set the [[Extensible]] internal property of <i>obj</i> to <b>true</b>.</span></li>
           <li><span style="font-family: Times New Roman">Let <i>proto</i> be the value of calling the [[Get]] internal property of <i>F</i> with argument</span> <code>"prototype"</code><span style="font-family: Times New Roman">.</span></li>
-          <li><span style="font-family: Times New Roman">ReturnIfAbrupt(<i>proto</i>).</span></li>
+          <li><span style="font-family: Times New Roman"><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>proto</i>).</span></li>
           <li><span style="font-family: Times New Roman">If Type(<i>proto</i>)</span> <span style="font-family: Times New Roman">is Object, set the [[Prototype]] internal property of <i>obj</i> to <i>proto</i>.</span></li>
           <li><span style="font-family: Times New Roman">If Type(<i>proto</i>)</span> <span style="font-family: Times New Roman">is not Object, set the [[Prototype]] internal property of <i>obj</i> to the standard built-in Object prototype object as described in <a href="#sec-15.2.4">15.2.4</a>.</span></li>
           <li><span style="font-family: Times New Roman">Let <i>result</i> be the result of calling the [[Call]] internal property of <i>F</i>, providing <i>obj</i> as the <b>this</b> value and providing the argument list passed into [[Construct]] as <i>args</i>.</span></li>
-          <li><span style="font-family: Times New Roman">ReturnIfAbrupt(<i>proto</i>).</span></li>
+          <li><span style="font-family: Times New Roman"><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>proto</i>).</span></li>
           <li><span style="font-family: Times New Roman">If Type(<i>result</i>.[[value]]) is Object then return <i>result</i>.</span></li>
-          <li><span style="font-family: Times New Roman">Return NormalCompletion(<i>obj</i>).</span></li>
+          <li><span style="font-family: Times New Roman">Return <a href="#sec-8.8">NormalCompletion</a>(<i>obj</i>).</span></li>
         </ol>
       </section>
 
@@ -12338,7 +12349,7 @@
 
   <ol class="proc">
     <li>The code of this <i>Program</i> is strict mode code if the <a href="#sec-14.1">Directive Prologue</a> (<a href="#sec-14.1">14.1</a>) of its <i>ProgramBody</i> contains a <a href="#sec-14.1">Use Strict Directive</a> or if any of the conditions of <a href="#sec-10.1.1">10.1.1</a> apply. If the code of this <i>Program</i> is strict mode code, <i>ProgramBody</i> is evaluated in the following steps as strict mode code.  Otherwise <i>ProgramBody</i> is evaluated in the following steps as non-strict mode code.</li>
-    <li>If <i>ProgramBody</i> is not present, return NormalCompletion(<span style="font-family: sans-serif">empty</span>).</li>
+    <li>If <i>ProgramBody</i> is not present, return <a href="#sec-8.8">NormalCompletion</a>(<span style="font-family: sans-serif">empty</span>).</li>
     <li>Let <i>progCxt</i> be a new execution context for global code as described in <a href="#sec-10.4.1">10.4.1</a>.</li>
     <li>Let <i>result</i> be the result of evaluating <i>ProgramBody</i>.</li>
     <li>Exit the execution context <i>progCxt</i>.</li>
@@ -12395,7 +12406,8 @@
   <h1><span class="secnum"><a href="#sec-15" title="link to this section">15</a></span> Standard Built-in ECMAScript Objects</h1>
 
   <p>There are certain built-in objects available whenever an ECMAScript program begins execution. One, the global object, is part
-  of the lexical environment of the executing program. Others are accessible as initial properties of the global object.</p>
+  of the <a href="#sec-10.2">lexical environment</a> of the executing program. Others are accessible as initial properties of the
+  global object.</p>
 
   <p>Unless specified otherwise, a built-in object has the [[NativeBrand]] internal property with value NativeFunction if that
   built-in object has a [[Call]] internal property. Unless specified otherwise, the [[Extensible]] internal property of a built-in
@@ -14281,7 +14293,7 @@
           <li>Let <i>array</i> be the result of calling <a href="#sec-9.1.9">ToObject</a> passing the <b>this</b> value as the argument.</li>
           <li>Let <i>arrayLen</i> be the result of calling the [[Get]] internal method of <i>array</i> with argument <code>"length"</code>.</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>arrayLen</i>).</li>
-          <li>ReturnIfAbrupt(<i>len</i>).</li>
+          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>len</i>).</li>
           <li>Let <i>separator</i> be the String value for the list-separator String appropriate for the host environment&rsquo;s current locale (this is derived in an implementation-defined way).</li>
           <li>If <i>len</i> is zero, return the empty String.</li>
           <li>Let <i>firstElement</i> be the result of calling the [[Get]] internal method of <i>array</i> with argument <code>"0"</code>.</li>
@@ -14401,7 +14413,7 @@
           <li>Let <i>O</i> be the result of calling <a href="#sec-9.1.9">ToObject</a> passing the <b>this</b> value as the argument.</li>
           <li>Let <i>lenVal</i> be the result of calling the [[Get]] internal method of <i>O</i> with argument <code>"length"</code>.</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenVal</i>).</li>
-          <li>ReturnIfAbrupt(<i>len</i>).</li>
+          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>len</i>).</li>
           <li>If <i>separator</i> is <b>undefined</b>, let <i>separator</i> be the single-character String <code>","</code>.</li>
           <li>Let <i>sep</i> be <a href="#sec-9.1.8">ToString</a>(<i>separator</i>).</li>
           <li>If <i>len</i> is zero, return the empty String.</li>
@@ -14440,7 +14452,7 @@
           <li>Let <i>O</i> be the result of calling <a href="#sec-9.1.9">ToObject</a> passing the <b>this</b> value as the argument.</li>
           <li>Let <i>lenVal</i> be the result of calling the [[Get]] internal method of <i>O</i> with argument <span style="font-family: monospace">"<b>length</b>"</span>.</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenVal</i>).</li>
-          <li>ReturnIfAbrupt(<i>len</i>).</li>
+          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>len</i>).</li>
           <li>If <i>len</i> is zero,
             <ol class="block">
               <li>Let <i>putStatus</i> be the result of calling the [[Put]] internal method of <i>O</i> with arguments <span style="font-family: monospace">"<b>length</b>"</span>, 0, and <b>true</b>.</li>
@@ -14483,7 +14495,7 @@
           <li>Let <i>O</i> be the result of calling <a href="#sec-9.1.9">ToObject</a> passing the <b>this</b> value as the argument.</li>
           <li>Let <i>lenVal</i> be the result of calling the [[Get]] internal method of <i>O</i> with argument <span style="font-family: monospace">"<b>length</b>"</span>.</li>
           <li>Let <i>n</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenVal</i>).</li>
-          <li>ReturnIfAbrupt(<i>len</i>).</li>
+          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>len</i>).</li>
           <li>Let <i>items</i> be an internal List whose elements are, in left to right order, the arguments that were passed to this function invocation.</li>
           <li>Repeat, while <i>items</i> is not empty
             <ol class="block">
@@ -14517,7 +14529,7 @@
           <li>Let <i>O</i> be the result of calling <a href="#sec-9.1.9">ToObject</a> passing the <b>this</b> value as the argument.</li>
           <li>Let <i>lenVal</i> be the result of calling the [[Get]] internal method of <i>O</i> with argument <code>"length"</code>.</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenVal</i>).</li>
-          <li>ReturnIfAbrupt(<i>len</i>).</li>
+          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>len</i>).</li>
           <li>Let <i>middle</i> be  floor(<i>len</i>/2).</li>
           <li>Let <i>lower</i> be <b>0</b>.</li>
           <li>Repeat, while <i>lower</i> &ne; <i>middle</i>
@@ -14581,7 +14593,7 @@
           <li>Let <i>O</i> be the result of calling <a href="#sec-9.1.9">ToObject</a> passing the <b>this</b> value as the argument.</li>
           <li>Let <i>lenVal</i> be the result of calling the [[Get]] internal method of <i>O</i> with argument <span style="font-family: monospace">"<b>length</b>"</span>.</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenVal</i>).</li>
-          <li>ReturnIfAbrupt(<i>len</i>).</li>
+          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>len</i>).</li>
           <li>If <i>len</i> is zero, then
             <ol class="block">
               <li>Let <i>putStatus</i> be the result of calling the [[Put]] internal method of <i>O</i> with arguments <span style="font-family: monospace">"<b>length</b>"</span>, 0, and <b>true</b>.</li>
@@ -14647,7 +14659,7 @@
           <li>Let <i>A</i> be a new array created as if by the expression <code>new Array()</code> where <code>Array</code> is the standard built-in constructor with that name.</li>
           <li>Let <i>lenVal</i> be the result of calling the [[Get]] internal method of <i>O</i> with argument <span style="font-family: monospace">"<b>length</b>"</span>.</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenVal</i>).</li>
-          <li>ReturnIfAbrupt(<i>len</i>).</li>
+          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>len</i>).</li>
           <li>Let <i>relativeStart</i> be <a href="#sec-9.1.4">ToInteger</a>(<i>start</i>).</li>
           <li>If <i>relativeStart</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>relativeStart</i>.</li>
           <li>If <i>relativeStart</i> is negative, let <i>k</i> be max((<i>len</i> + <i>relativeStart</i>),0); else let <i>k</i> be min(<i>relativeStart</i>, <i>len</i>).</li>
@@ -14842,7 +14854,7 @@
           <li>Let <i>A</i> be a new array created as if by the expression <code>new Array()</code>where <code>Array</code> is the standard built-in constructor with that name.</li>
           <li>Let <i>lenVal</i> be the result of calling the [[Get]] internal method of <i>O</i> with argument <span style="font-family: monospace">"<b>length</b>"</span>.</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenVal</i>).</li>
-          <li>ReturnIfAbrupt(<i>len</i>).</li>
+          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>len</i>).</li>
           <li>Let <i>relativeStart</i> be <a href="#sec-9.1.4">ToInteger</a>(<i>start</i>).</li>
           <li>If <i>relativeStart</i> is negative, let <i>actualStart</i> be max((<i>len</i> + <i>relativeStart</i>),0); else let <i>actualStart</i> be min(<i>relativeStart</i>, <i>len</i>).</li>
           <li>Let <i>actualDeleteCount</i> be min(max(<a href="#sec-9.1.4">ToInteger</a>(<i>deleteCount</i>),0), <i>len</i> &ndash; <i>actualStart</i>).</li>
@@ -14952,7 +14964,7 @@
           <li>Let <i>O</i> be the result of calling <a href="#sec-9.1.9">ToObject</a> passing the <b>this</b> value as the argument.</li>
           <li>Let <i>lenVal</i> be the result of calling the  [[Get]] internal method of <i>O</i> with argument <span style="font-family: monospace">"<b>length</b>"</span>.</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenVal</i>).</li>
-          <li>ReturnIfAbrupt(<i>len</i>).</li>
+          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>len</i>).</li>
           <li>Let <i>argCount</i> be the number of actual arguments.</li>
           <li>Let <i>k</i> be <i>len</i>.</li>
           <li>Repeat, while <i>k</i> &gt; 0,
@@ -15016,7 +15028,7 @@
           <li>Let <i>O</i> be the result of calling <a href="#sec-9.1.9">ToObject</a> passing the <b>this</b> value as the argument.</li>
           <li>Let <i>lenValue</i>  be the result of calling the [[Get]] internal method of <i>O</i> with the argument <span style="font-family: monospace">"<b>length</b>"</span>.</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenValue</i>).</li>
-          <li>ReturnIfAbrupt(<i>len</i>).</li>
+          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>len</i>).</li>
           <li>If <i>len</i> is 0, return -1.</li>
           <li>If argument <i>fromIndex</i> was passed let <i>n</i> be <a href="#sec-9.1.4">ToInteger</a>(<i>fromIndex</i>); else let <i>n</i> be 0.</li>
           <li>If <i>n</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>n</i>.</li>
@@ -15078,7 +15090,7 @@
           <li>Let <i>O</i> be the result of calling <a href="#sec-9.1.9">ToObject</a> passing the <b>this</b> value as the argument.</li>
           <li>Let <i>lenValue</i>  be the result of calling the [[Get]] internal method of <i>O</i> with the argument <span style="font-family: monospace">"<b>length</b>"</span>.</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenValue</i>).</li>
-          <li>ReturnIfAbrupt(<i>len</i>).</li>
+          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>len</i>).</li>
           <li>If <i>len</i> is 0, return -1.</li>
           <li>If argument <i>fromIndex</i> was passed let <i>n</i> be <a href="#sec-9.1.4">ToInteger</a>(<i>fromIndex</i>); else let <i>n</i> be <i>len</i>-1.</li>
           <li>If <i>n</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>n</i>.</li>
@@ -15153,7 +15165,7 @@
           <li>Let <i>O</i> be the result of calling <a href="#sec-9.1.9">ToObject</a> passing the <b>this</b> value as the argument.</li>
           <li>Let <i>lenValue</i>  be the result of calling the [[Get]] internal method of <i>O</i> with the argument <code>"length"</code>.</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenValue</i>).</li>
-          <li>ReturnIfAbrupt(<i>len</i>).</li>
+          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>len</i>).</li>
           <li>If <a href="#sec-9.2.2">IsCallable</a>(<i>callbackfn</i>) is <b>false</b>, throw a <b>TypeError</b> exception.</li>
           <li>If <i>thisArg</i> was supplied, let <i>T</i> be <i>thisArg</i>; else let <i>T</i> be <b>undefined</b>.</li>
           <li>Let <i>k</i> be 0.</li>
@@ -15222,7 +15234,7 @@
           <li>Let <i>O</i> be the result of calling <a href="#sec-9.1.9">ToObject</a> passing the <b>this</b> value as the argument.</li>
           <li>Let <i>lenValue</i>  be the result of calling the [[Get]] internal method of <i>O</i> with the argument <code>"length"</code>.</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenValue</i>).</li>
-          <li>ReturnIfAbrupt(<i>len</i>).</li>
+          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>len</i>).</li>
           <li>If <a href="#sec-9.2.2">IsCallable</a>(<i>callbackfn</i>) is <b>false</b>, throw a <b>TypeError</b> exception.</li>
           <li>If <i>thisArg</i> was supplied, let <i>T</i> be <i>thisArg</i>; else let <i>T</i> be <b>undefined</b>.</li>
           <li>Let <i>k</i> be 0.</li>
@@ -15286,7 +15298,7 @@
           <li>Let <i>O</i> be the result of calling <a href="#sec-9.1.9">ToObject</a> passing the <b>this</b> value as the argument.</li>
           <li>Let <i>lenValue</i>  be the result of calling the [[Get]] internal method of <i>O</i> with the argument <code>"length"</code>.</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenValue</i>).</li>
-          <li>ReturnIfAbrupt(<i>len</i>).</li>
+          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>len</i>).</li>
           <li>If <a href="#sec-9.2.2">IsCallable</a>(<i>callbackfn</i>) is <b>false</b>, throw a <b>TypeError</b> exception.</li>
           <li>If <i>thisArg</i> was supplied, let <i>T</i> be <i>thisArg</i>; else let <i>T</i> be <b>undefined</b>.</li>
           <li>Let <i>k</i> be 0.</li>
@@ -15349,7 +15361,7 @@
           <li>Let <i>O</i> be the result of calling <a href="#sec-9.1.9">ToObject</a> passing the <b>this</b> value as the argument.</li>
           <li>Let <i>lenValue</i>  be the result of calling the [[Get]] internal method of <i>O</i> with the argument <code>"length"</code>.</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenValue</i>).</li>
-          <li>ReturnIfAbrupt(<i>len</i>).</li>
+          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>len</i>).</li>
           <li>If <a href="#sec-9.2.2">IsCallable</a>(<i>callbackfn</i>) is <b>false</b>, throw a <b>TypeError</b> exception.</li>
           <li>If <i>thisArg</i> was supplied, let <i>T</i> be <i>thisArg</i>; else let <i>T</i> be <b>undefined</b>.</li>
           <li>Let <i>A</i> be a new array created as if by the expression <code>new Array(</code><i>len</i><code>)</code> where <code>Array</code> is the standard built-in constructor with that name and <i>len</i> is the value of <i>len</i>.</li>
@@ -15361,11 +15373,11 @@
               <li>If <i>kPresent</i> is <b>true</b>, then
                 <ol class="block">
                   <li>Let <i>kValue</i> be the result of calling the [[Get]] internal method of <i>O</i> with argument <i>Pk</i>.</li>
-                  <li>ReturnIfAbrupt(<i>kValue</i>).</li>
+                  <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>kValue</i>).</li>
                   <li>Let <i>mappedValue</i> be the result of calling the [[Call]] internal method of <i>callbackfn</i> with <i>T</i> as the <b>this</b> value and argument List containing <i>kValue</i>, <i>k</i>, and <i>O</i>.</li>
-                  <li>ReturnIfAbrupt(<i>mappedValue</i>).</li>
+                  <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>mappedValue</i>).</li>
                   <li>Let <i>defineResult</i> be the result of calling the [[DefineOwnProperty]] internal method of <i>A</i> with arguments <i>Pk</i>, <a href="#sec-8.10">Property Descriptor</a> {[[Value]]: <i>mappedValue</i>, [[Writable]]: <b>true</b>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}, and <b>false</b>.</li>
-                  <li>ReturnIfAbrupt(<i>defineResult</i>).</li>
+                  <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>defineResult</i>).</li>
                 </ol>
               </li>
               <li>Increase <i>k</i> by 1.</li>
@@ -15418,7 +15430,7 @@
           <li>Let <i>O</i> be the result of calling <a href="#sec-9.1.9">ToObject</a> passing the <b>this</b> value as the argument.</li>
           <li>Let <i>lenValue</i>  be the result of calling the [[Get]] internal method of <i>O</i> with the argument <code>"length"</code>.</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenValue</i>).</li>
-          <li>ReturnIfAbrupt(<i>len</i>).</li>
+          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>len</i>).</li>
           <li>If <a href="#sec-9.2.2">IsCallable</a>(<i>callbackfn</i>) is <b>false</b>, throw a <b>TypeError</b> exception.</li>
           <li>If <i>thisArg</i> was supplied, let <i>T</i> be <i>thisArg</i>; else let <i>T</i> be <b>undefined</b>.</li>
           <li>Let <i>A</i> be a new array created as if by the expression <code>new Array()</code> where <code>Array</code> is the standard built-in constructor with that name.</li>
@@ -15493,7 +15505,7 @@
           <li>Let <i>O</i> be the result of calling <a href="#sec-9.1.9">ToObject</a> passing the <b>this</b> value as the argument.</li>
           <li>Let <i>lenValue</i>  be the result of calling the [[Get]] internal method of <i>O</i> with the argument <code>"length"</code>.</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenValue</i>).</li>
-          <li>ReturnIfAbrupt(<i>len</i>).</li>
+          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>len</i>).</li>
           <li>If <a href="#sec-9.2.2">IsCallable</a>(<i>callbackfn</i>) is <b>false</b>, throw a <b>TypeError</b> exception.</li>
           <li>If len is 0 and <i>initialValue</i> is not present, throw a <b>TypeError</b> exception.</li>
           <li>Let <i>k</i> be 0.</li>
@@ -15589,7 +15601,7 @@
           <li>Let <i>O</i> be the result of calling <a href="#sec-9.1.9">ToObject</a> passing the <b>this</b> value as the argument.</li>
           <li>Let <i>lenValue</i>  be the result of calling the [[Get]] internal method of <i>O</i> with the argument <code>"length"</code>.</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenValue</i>).</li>
-          <li>ReturnIfAbrupt(<i>len</i>).</li>
+          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>len</i>).</li>
           <li>If <a href="#sec-9.2.2">IsCallable</a>(<i>callbackfn</i>) is <b>false</b>, throw a <b>TypeError</b> exception.</li>
           <li>If len is 0 and <i>initialValue</i> is not present, throw a <b>TypeError</b> exception.</li>
           <li>Let <i>k</i> be <i>len</i>-1.</li>
@@ -15673,7 +15685,7 @@
         taken:</p>
 
         <ol class="proc">
-          <li>ReturnIfAbrupt(<i>A</i>).</li>
+          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>A</i>).</li>
           <li>Let <i>oldLenDesc</i> be the result of calling the [[GetOwnProperty]] internal method of <i>A</i> passing <b>"<span style="font-family: monospace">length</span>"</b> as the argument.  The result will never be <b>undefined</b> or an accessor descriptor because Array objects are created with a length data property that cannot be deleted or reconfigured.</li>
           <li>Let <i>oldLen</i> be <i>oldLenDesc</i>.[[Value]].</li>
           <li>If <i>P</i> is <b>"<span style="font-family: monospace">length</span>"</b>, then
@@ -22817,7 +22829,7 @@ THH:mm:ss.sss</pre>
     <li>The identifiers "<code>implements</code>", "<code>interface</code>", "<code>let</code>", "<code>package</code>", "<code>private</code>", "<code>protected</code>", "<code>public</code>", "<code>static</code>", and "<code>yield</code>" are classified as <i>FutureReservedWord</i> tokens within strict mode code. (7.6.12).</li>
     <li>A conforming implementation, when processing strict mode code, may not extend the syntax of <i>NumericLiteral</i> (<a href="#sec-7.8.3">7.8.3</a>) to include <i>OctalIntegerLiteral</i> as described in <a href="#sec-B.1.1">B.1.1</a>.</li>
     <li>A conforming implementation, when processing <a href="#sec-10.1.1">strict mode code (see 10.1.1)</a>, may not extend the syntax of <i>EscapeSequence</i> to include <i>OctalEscapeSequence</i> as described in <a href="#sec-B.1.2">B.1.2</a>.</li>
-    <li>Assignment to an undeclared identifier or otherwise unresolvable reference does not create a property in the global object. When a simple assignment occurs within strict mode code, its <i>LeftHandSide</i> must not evaluate to an unresolvable Reference. If it does a <b>ReferenceError</b> exception is thrown (<a href="#sec-8.9.2">8.9.2</a>). The <i>LeftHandSide</i> also may not be a reference to a data property with the attribute value {[[Writable]]:<b>false</b>}, to an accessor property with the attribute value {[[Set]]:<b>undefined</b>},  nor to a non-existent property of an object whose [[Extensible]] internal property has the value <b>false</b>. In these cases a <code>TypeError</code> exception is thrown (<a href="#sec-11.13.1">11.13.1</a>).</li>
+    <li>Assignment to an undeclared identifier or otherwise unresolvable reference does not create a property in the global object. When a simple assignment occurs within strict mode code, its <i>LeftHandSide</i> must not evaluate to an <a href="#sec-8.9">unresolvable Reference</a>. If it does a <b>ReferenceError</b> exception is thrown (<a href="#sec-8.9.2">8.9.2</a>). The <i>LeftHandSide</i> also may not be a reference to a data property with the attribute value {[[Writable]]:<b>false</b>}, to an accessor property with the attribute value {[[Set]]:<b>undefined</b>},  nor to a non-existent property of an object whose [[Extensible]] internal property has the value <b>false</b>. In these cases a <code>TypeError</code> exception is thrown (<a href="#sec-11.13.1">11.13.1</a>).</li>
     <li>The identifier <code>eval</code> or <code>arguments</code> may not appear as the <i>LeftHandSideExpression</i> of an Assignment operator (<a href="#sec-11.13">11.13</a>) or of a <i>PostfixExpression</i> (<a href="#sec-11.3">11.3</a>) or as the <i>UnaryExpression</i> operated upon by a Prefix Increment (<a href="#sec-11.4.4">11.4.4</a>) or a Prefix Decrement (<a href="#sec-11.4.5">11.4.5</a>) operator.</li>
     <li>Arguments objects for strict mode functions define non-configurable accessor properties named "<code>caller</code>" and "<code>callee</code>" which throw a <b>TypeError</b> exception on access (<a href="#sec-10.6">10.6</a>).</li>
     <li>Arguments objects for strict mode functions do not dynamically share their array indexed property values with the corresponding formal parameter bindings of their functions. (<a href="#sec-10.6">10.6</a>).</li>
@@ -22874,7 +22886,7 @@ THH:mm:ss.sss</pre>
   function. The identifier resolution rules (10.1.4 in Edition 3) when applied to such an object will, if necessary, follow the
   object&rsquo;s prototype chain when attempting to resolve an identifier.  This means all the properties of Object.prototype are
   visible as identifiers within that scope.  In practice most implementations of Edition 3 have not implemented this semantics.
-  Edition 5 changes the specified semantics by using a <a href="#sec-10.2.1.1">Declarative Environment Record</a> to bind the name
+  Edition 5 changes the specified semantics by using a <a href="#sec-10.2.1">Declarative Environment Record</a> to bind the name
   of the function.</p>
 
   <p>14: In Edition 3, the algorithm for the production <span style="font-family: Times New Roman; font-style:
@@ -22918,9 +22930,9 @@ THH:mm:ss.sss</pre>
   have been interpreted as the final character of the literal.</p>
 
   <p><a href="#sec-10.4.2">10.4.2</a>: In Edition 5, indirect calls to the <code>eval</code> function use <a
-  href="#sec-10.2.3">the global environment</a> as both the variable environment and lexical environment for the eval code.  In
-  Edition 3, the variable and lexical environments of the caller of an indirect <code>eval</code> was used as the environments for
-  the eval code.</p>
+  href="#sec-10.2.3">the global environment</a> as both the variable environment and <a href="#sec-10.2">lexical environment</a>
+  for the eval code.  In Edition 3, the variable and lexical environments of the caller of an indirect <code>eval</code> was used
+  as the environments for the eval code.</p>
 
   <p><a href="#sec-15.4.4">15.4.4</a>: In Edition 5 all methods of <code>Array.prototype</code> are intentionally generic. In
   Edition 3 <code>toString</code> and <code>toLocaleString</code> were not generic and would throw a <code>TypeError</code>

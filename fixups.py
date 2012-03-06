@@ -925,17 +925,24 @@ def fixup_links(doc):
         ('semicolon insertion (see 7.9)', 'Automatic Semicolon Insertion'),
 
         # clause 8
+        ("Completion Record", 'The Completion Record Specification Type'),
+        ("Completion", 'The Completion Record Specification Type'),
+        ("NormalCompletion", 'The Completion Record Specification Type'),
         ('abrupt completion', 'The Completion Record Specification Type'),
+        ("ReturnIfAbrupt", 'The Completion Record Specification Type'),
         ("GetBase", "The Reference Specification Type"),
         ("GetReferencedName", "The Reference Specification Type"),
         ("IsStrictReference", "The Reference Specification Type"),
         ("HasPrimitiveBase", "The Reference Specification Type"),
         ("IsPropertyReference", "The Reference Specification Type"),
         ("IsUnresolvableReference", "The Reference Specification Type"),
+        ("unresolvable Reference", "The Reference Specification Type"),
+        ("Unresolvable Reference", "The Reference Specification Type"),
         ("IsSuperReference", "The Reference Specification Type"),
         ("GetValue", "GetValue (V)"),
         ("PutValue", "PutValue (V, W)"),
         ("Property Descriptor", "The Property Descriptor and Property Identifier Specification Types"),
+        ("Property Identifier", "The Property Descriptor and Property Identifier Specification Types"),
         ("IsAccessorDescriptor", "IsAccessorDescriptor ( Desc )"),
         ("IsDataDescriptor", "IsDataDescriptor ( Desc )"),
         ("IsGenericDescriptor", "IsGenericDescriptor ( Desc )"),
@@ -959,11 +966,17 @@ def fixup_links(doc):
         ("the SameValue algorithm (9.12)", "The SameValue Algorithm"),
 
         # 10.2
+        ("Lexical Environment", "Lexical Environments"),
+        ("lexical environment", "Lexical Environments"),
+        ("outer environment reference", "Lexical Environments"),
+        ("outer lexical environment reference", "Lexical Environments"),
         ('strict mode code (see 10.1.1)', 'Strict Mode Code'),
         ('environment record (10.2.1)', 'Environment Records'),
-        ("declarative environment record", "Declarative Environment Records"),
-        ("Declarative Environment Record", "Declarative Environment Records"),
-        ("Object Environment Record", "Object Environment Records"),
+        ("Environment Record", "Environment Records"),
+        ("declarative environment record", "Environment Records"),
+        ("Declarative Environment Record", "Environment Records"),
+        ("Object Environment Record", "Environment Records"),
+        ("object environment record", "Environment Records"),
         ("GetIdentifierReference", "GetIdentifierReference (lex, name, strict)"),
         ("NewDeclarativeEnvironment", "NewDeclarativeEnvironment (E)"),
         ("NewObjectEnvironment", "NewObjectEnvironment (O, E)"),
@@ -1119,6 +1132,9 @@ def fixup_links(doc):
         for i, kid in enumerate(e.content):
             if isinstance(kid, str):
                 linkify(e, i, kid)
+            elif kid.name == 'a' and 'href' in kid.attrs:
+                # Yo dawg. No links in links.
+                pass
             elif kid.name == 'h1' or (kid.name == 'ol' and kid.attrs.get('class') == 'toc'):
                 # Don't linkify headings or the table of contents.
                 pass
