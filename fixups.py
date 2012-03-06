@@ -976,6 +976,7 @@ def fixup_links(doc):
         ('direct call (see 15.1.2.1.1) to the eval function', 'Direct Call to Eval'),
 
         # 15.9
+        ("this time value", "Properties of the Date Prototype Object"),
         ("time value", "Time Values and Time Range"),
         ("msPerDay", "Day Number and Time within Day"),
         ("TimeWithinDay", "Day Number and Time within Day"),
@@ -1056,7 +1057,7 @@ def fixup_links(doc):
         for text, target in specific_links:
             i = s.find(text)
             if (i != -1
-                and target not in current_elements  # don't link sections to themselves
+                and target != current_section  # don't link sections to themselves
                 and (i == 0 or not s[i-1].isalnum())  # check for word break before
                 and (i + len(text) == len(s) or not s[i + len(text)].isalnum())  # and after
                 and (best is None or i < best[0])):
@@ -1094,12 +1095,13 @@ def fixup_links(doc):
                 break
             s = s[stop:]
 
-    current_elements = set()
+    current_section = None
     def visit(e):
+        nonlocal current_section
+
         id = e.attrs.get('id')
         if id is not None:
-            id = '#' + id
-            current_elements.add(id)
+            current_section = '#' + id
 
         for i, kid in enumerate(e.content):
             if isinstance(kid, str):
@@ -1111,7 +1113,7 @@ def fixup_links(doc):
                 visit(kid)
 
         if id is not None:
-            current_elements.remove(id)
+            current_section = None
 
     visit(doc_body(doc))
 

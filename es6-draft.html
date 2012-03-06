@@ -3514,17 +3514,17 @@
         <li>ReturnIfAbrupt(<i>V</i>).</li>
         <li>Let <i>V</i> be NormalValue(<i>V</i>).</li>
         <li>If Type(<i>V</i>) is not Reference, return <i>V</i>.</li>
-        <li>Let <i>base</i> be the result of calling GetBase(<i>V</i>).</li>
-        <li>If IsUnresolvableReference(<i>V</i>), throw a <b>ReferenceError</b> exception.</li>
-        <li>If IsPropertyReference(<i>V</i>), then
+        <li>Let <i>base</i> be the result of calling <a href="#sec-8.9">GetBase</a>(<i>V</i>).</li>
+        <li>If <a href="#sec-8.9">IsUnresolvableReference</a>(<i>V</i>), throw a <b>ReferenceError</b> exception.</li>
+        <li>If <a href="#sec-8.9">IsPropertyReference</a>(<i>V</i>), then
           <ol class="block">
-            <li>If HasPrimitiveBase(<i>V</i>) is <b>false</b>, then let <i>get</i> be the [[Get]] internal method of <i>base</i>, otherwise let <i>get</i> be the special [[Get]] internal method defined below.</li>
-            <li>Return the result of calling <i>get</i> as an internal method of <i>base</i> passing GetReferencedName(<i>V</i>) for the argument.</li>
+            <li>If <a href="#sec-8.9">HasPrimitiveBase</a>(<i>V</i>) is <b>false</b>, then let <i>get</i> be the [[Get]] internal method of <i>base</i>, otherwise let <i>get</i> be the special [[Get]] internal method defined below.</li>
+            <li>Return the result of calling <i>get</i> as an internal method of <i>base</i> passing <a href="#sec-8.9">GetReferencedName</a>(<i>V</i>) for the argument.</li>
           </ol>
         </li>
         <li>Else, <i>base</i> must be an environment record.
           <ol class="block">
-            <li>Return the result of calling the GetBindingValue (<a href="#sec-10.2.1">see 10.2.1</a>)  concrete method of <i>base</i> passing GetReferencedName(<i>V</i>) and IsStrictReference(<i>V</i>) as arguments.</li>
+            <li>Return the result of calling the GetBindingValue (<a href="#sec-10.2.1">see 10.2.1</a>)  concrete method of <i>base</i> passing <a href="#sec-8.9">GetReferencedName</a>(<i>V</i>) and <a href="#sec-8.9">IsStrictReference</a>(<i>V</i>) as arguments.</li>
           </ol>
         </li>
       </ol>
@@ -3558,26 +3558,26 @@
         <li>Let <i>V</i> be NormalValue(<i>V</i>).</li>
         <li>Let <i>W</i> be NormalValue(<i>W</i>).</li>
         <li>If Type(<i>V</i>) is not Reference, throw a <b>ReferenceError</b> exception.</li>
-        <li>Let <i>base</i> be the result of calling GetBase(<i>V</i>).</li>
-        <li>If IsUnresolvableReference(<i>V</i>), then
+        <li>Let <i>base</i> be the result of calling <a href="#sec-8.9">GetBase</a>(<i>V</i>).</li>
+        <li>If <a href="#sec-8.9">IsUnresolvableReference</a>(<i>V</i>), then
           <ol class="block">
-            <li>If IsStrictReference(<i>V</i>) is <b>true</b>, then
+            <li>If <a href="#sec-8.9">IsStrictReference</a>(<i>V</i>) is <b>true</b>, then
               <ol class="block">
                 <li>Throw <b>ReferenceError</b> exception.</li>
               </ol>
             </li>
-            <li>Return the result of calling the [[Put]] internal method of the global object, passing GetReferencedName(<i>V</i>) for the property name, <i>W</i> for the value, and <b>false</b> for the <i>Throw</i> flag.</li>
+            <li>Return the result of calling the [[Put]] internal method of the global object, passing <a href="#sec-8.9">GetReferencedName</a>(<i>V</i>) for the property name, <i>W</i> for the value, and <b>false</b> for the <i>Throw</i> flag.</li>
           </ol>
         </li>
-        <li>Else if IsPropertyReference(<i>V</i>), then
+        <li>Else if <a href="#sec-8.9">IsPropertyReference</a>(<i>V</i>), then
           <ol class="block">
-            <li>If HasPrimitiveBase(<i>V</i>) is <b>false</b>, then let <i>put</i> be the [[Put]] internal method of <i>base</i>, otherwise let <i>put</i> be the special [[Put]] internal method defined below.</li>
-            <li>Return the result of calling <i>put</i> as an internal method of <i>base</i> passing GetReferencedName(<i>V</i>) for the property name, <i>W</i> for the value, and IsStrictReference(<i>V</i>) for the <i>Throw</i> flag.</li>
+            <li>If <a href="#sec-8.9">HasPrimitiveBase</a>(<i>V</i>) is <b>false</b>, then let <i>put</i> be the [[Put]] internal method of <i>base</i>, otherwise let <i>put</i> be the special [[Put]] internal method defined below.</li>
+            <li>Return the result of calling <i>put</i> as an internal method of <i>base</i> passing <a href="#sec-8.9">GetReferencedName</a>(<i>V</i>) for the property name, <i>W</i> for the value, and <a href="#sec-8.9">IsStrictReference</a>(<i>V</i>) for the <i>Throw</i> flag.</li>
           </ol>
         </li>
         <li>Else <i>base</i> must be a reference whose base is an environment record. So,
           <ol class="block">
-            <li>Return the result of calling the SetMutableBinding (<a href="#sec-10.2.1">10.2.1</a>) concrete method of <i>base</i>, passing GetReferencedName(<i>V</i>), <i>W</i>, and IsStrictReference(<i>V</i>) as arguments.</li>
+            <li>Return the result of calling the SetMutableBinding (<a href="#sec-10.2.1">10.2.1</a>) concrete method of <i>base</i>, passing <a href="#sec-8.9">GetReferencedName</a>(<i>V</i>), <i>W</i>, and <a href="#sec-8.9">IsStrictReference</a>(<i>V</i>) as arguments.</li>
           </ol>
         </li>
         <li>Return <b>undefined</b>.</li>
@@ -3707,26 +3707,26 @@
       Roman; font-style: italic">Desc</span>, the following steps are taken:</p>
 
       <p>The following algorithm assumes that <span style="font-family: Times New Roman; font-style: italic">Desc</span> is a
-      fully populated Property Descriptor, such as that returned from [[GetOwnProperty]] (<a href="#sec-8.12.1">see
-      8.12.1</a>).</p>
+      fully populated <a href="#sec-8.10">Property Descriptor</a>, such as that returned from [[GetOwnProperty]] (<a
+      href="#sec-8.12.1">see 8.12.1</a>).</p>
 
       <ol class="proc">
         <li><span style="font-family: Times New Roman">If <i>Desc</i> is <b>undefined</b>, then return <b>undefined</b>.</span></li>
         <li><span style="font-family: Times New Roman">Let <i>obj</i> be the result of creating a new object as if by the expression <b>new Object()</b> where <b>Object</b> is the standard built-in constructor with that name.</span></li>
         <li><span style="font-family: Times New Roman">If <a href="#sec-8.10.2">IsDataDescriptor</a>(<i>Desc</i>) is <b>true</b>, then</span>
           <ol class="block">
-            <li><span style="font-family: Times New Roman">Call the [[DefineOwnProperty]] internal method of <i>obj</i> with arguments "</span><code>value</code><span style="font-family: Times New Roman">", Property Descriptor {[[Value]]: <i>Desc</i>.[[Value]], [[Writable]]: <b>true</b>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}, and <b>false</b>.</span></li>
-            <li><span style="font-family: Times New Roman">Call the [[DefineOwnProperty]] internal method of <i>obj</i> with arguments "</span><code>writable</code><span style="font-family: Times New Roman">", Property Descriptor {[[Value]]: <i>Desc</i>.[[Writable]], [[Writable]]: <b>true</b>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}, and <b>false</b>.</span></li>
+            <li><span style="font-family: Times New Roman">Call the [[DefineOwnProperty]] internal method of <i>obj</i> with arguments "</span><code>value</code><span style="font-family: Times New Roman">", <a href="#sec-8.10">Property Descriptor</a> {[[Value]]: <i>Desc</i>.[[Value]], [[Writable]]: <b>true</b>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}, and <b>false</b>.</span></li>
+            <li><span style="font-family: Times New Roman">Call the [[DefineOwnProperty]] internal method of <i>obj</i> with arguments "</span><code>writable</code><span style="font-family: Times New Roman">", <a href="#sec-8.10">Property Descriptor</a> {[[Value]]: <i>Desc</i>.[[Writable]], [[Writable]]: <b>true</b>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}, and <b>false</b>.</span></li>
           </ol>
         </li>
         <li><span style="font-family: Times New Roman">Else, <a href="#sec-8.10.1">IsAccessorDescriptor</a>(<i>Desc</i>) must be <b>true</b>, so</span>
           <ol class="block">
-            <li><span style="font-family: Times New Roman">Call the [[DefineOwnProperty]] internal method of <i>obj</i> with arguments "</span><code>get"</code><span style="font-family: Times New Roman">, Property Descriptor {[[Value]]: <i>Desc</i>.[[Get]], [[Writable]]: <b>true</b>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}, and <b>false</b>.</span></li>
-            <li><span style="font-family: Times New Roman">Call the [[DefineOwnProperty]] internal method of <i>obj</i> with arguments "</span><code>set</code><span style="font-family: Times New Roman">", Property Descriptor {[[Value]]: <i>Desc</i>.[[Set]], [[Writable]]: <b>true</b>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}, and <b>false</b>.</span></li>
+            <li><span style="font-family: Times New Roman">Call the [[DefineOwnProperty]] internal method of <i>obj</i> with arguments "</span><code>get"</code><span style="font-family: Times New Roman">, <a href="#sec-8.10">Property Descriptor</a> {[[Value]]: <i>Desc</i>.[[Get]], [[Writable]]: <b>true</b>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}, and <b>false</b>.</span></li>
+            <li><span style="font-family: Times New Roman">Call the [[DefineOwnProperty]] internal method of <i>obj</i> with arguments "</span><code>set</code><span style="font-family: Times New Roman">", <a href="#sec-8.10">Property Descriptor</a> {[[Value]]: <i>Desc</i>.[[Set]], [[Writable]]: <b>true</b>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}, and <b>false</b>.</span></li>
           </ol>
         </li>
-        <li><span style="font-family: Times New Roman">Call the [[DefineOwnProperty]] internal method of <i>obj</i> with arguments "</span><code>enumerable</code><span style="font-family: Times New Roman">", Property Descriptor {[[Value]]: <i>Desc</i>.[[Enumerable]], [[Writable]]: <b>true</b>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}, and <b>false</b>.</span></li>
-        <li><span style="font-family: Times New Roman">Call the [[DefineOwnProperty]] internal method of <i>obj</i> with arguments "</span><code>configurable</code><span style="font-family: Times New Roman">", Property Descriptor {[[Value]]: <i>Desc</i>.[[Configurable]], [[Writable]]: <b>true</b>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}, and <b>false</b>.</span></li>
+        <li><span style="font-family: Times New Roman">Call the [[DefineOwnProperty]] internal method of <i>obj</i> with arguments "</span><code>enumerable</code><span style="font-family: Times New Roman">", <a href="#sec-8.10">Property Descriptor</a> {[[Value]]: <i>Desc</i>.[[Enumerable]], [[Writable]]: <b>true</b>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}, and <b>false</b>.</span></li>
+        <li><span style="font-family: Times New Roman">Call the [[DefineOwnProperty]] internal method of <i>obj</i> with arguments "</span><code>configurable</code><span style="font-family: Times New Roman">", <a href="#sec-8.10">Property Descriptor</a> {[[Value]]: <i>Desc</i>.[[Configurable]], [[Writable]]: <b>true</b>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}, and <b>false</b>.</span></li>
         <li><span style="font-family: Times New Roman">Return <i>obj</i>.</span></li>
       </ol>
     </section>
@@ -3740,7 +3740,7 @@
       <ol class="proc">
         <li>ReturnIfAbrupt(<i>Obj</i>).</li>
         <li>If Type(<i>Obj</i>) is not Object throw a <b>TypeError</b> exception.</li>
-        <li>Let <i>desc</i> be the result of creating a new Property Descriptor that initially has no fields.</li>
+        <li>Let <i>desc</i> be the result of creating a new <a href="#sec-8.10">Property Descriptor</a> that initially has no fields.</li>
         <li>If the result of calling the [[HasProperty]] internal method of <i>Obj</i> with argument "<code>enumerable</code>" is <b>true</b>, then
           <ol class="block">
             <li>Let <i>enum</i> be the result of calling the [[Get]] internal method of <i>Obj</i> with "<code>enumerable</code>".</li>
@@ -4398,9 +4398,9 @@
       <section id="sec-9.1.3.1">
         <h1><span class="secnum"><a href="#sec-9.1.3.1" title="link to this section">9.1.3.1</a></span> ToNumber Applied to the String Type</h1>
 
-        <p>ToNumber applied to Strings applies the following grammar to the input String. If the grammar cannot interpret the
-        String as an expansion of <span style="font-family: Times New Roman; font-style: italic">StringNumericLiteral</span>, then
-        the result of ToNumber is <b>NaN</b>.</p>
+        <p><a href="#sec-9.1.3">ToNumber</a> applied to Strings applies the following grammar to the input String. If the grammar
+        cannot interpret the String as an expansion of <span style="font-family: Times New Roman; font-style:
+        italic">StringNumericLiteral</span>, then the result of <a href="#sec-9.1.3">ToNumber</a> is <b>NaN</b>.</p>
 
         <h2>Syntax</h2>
         <div class="gp">
@@ -4689,13 +4689,13 @@
       <section id="sec-9.1.8.1">
         <h1><span class="secnum"><a href="#sec-9.1.8.1" title="link to this section">9.1.8.1</a></span> ToString Applied to the Number Type</h1>
 
-        <p>The abstract operation ToString converts a Number <span style="font-family: Times New Roman; font-style:
-        italic">m</span> to String format as follows:</p>
+        <p>The abstract operation <a href="#sec-9.1.8">ToString</a> converts a Number <span style="font-family: Times New Roman;
+        font-style: italic">m</span> to String format as follows:</p>
 
         <ol class="proc">
           <li>If <i>m</i> is <b>NaN</b>, return the String <code>"NaN"</code>.</li>
           <li>If <i>m</i> is <b>+0</b> or <b>&minus;0</b>, return the String <code>"0"</code>.</li>
-          <li>If <i>m</i> is less than zero, return the String concatenation of the String <code>"-"</code> and ToString(&minus;<i>m</i>).</li>
+          <li>If <i>m</i> is less than zero, return the String concatenation of the String <code>"-"</code> and <a href="#sec-9.1.8">ToString</a>(&minus;<i>m</i>).</li>
           <li>If <i>m</i> is infinity, return the String <code>"Infinity"</code>.</li>
           <li>Otherwise, let <i>n</i>, <i>k</i>, and <i>s</i> be integers such that <i>k</i> &ge; 1, 10<sup><i>k</i>&minus;1</sup> &le; <i>s</i> &lt; 10<span style="font-style: italic; vertical-align: super">k</span>, the Number value for <i>s</i> &times; 10<span style="font-style: italic; vertical-align: super">n&minus;k</span> is <i>m</i>, and <i>k</i> is as small as possible. Note that <i>k</i> is the number of digits in the decimal representation of <i>s</i>, that <i>s</i> is not divisible by 10, and that the least significant digit of <i>s</i> is not necessarily uniquely determined by these criteria.</li>
           <li>If <i>k</i> &le; <i>n</i> &le; 21, return the String consisting of the <i>k</i> digits of the decimal representation of s (in order, with no leading zeroes), followed by <i>n&minus;k</i> occurrences of the character &lsquo;<code>0</code>&rsquo;.</li>
@@ -4709,7 +4709,7 @@
           not part of the normative requirements of this Standard:</p>
 
           <ul>
-            <li>If x is any Number value other than <b>&minus;0</b>, then <a href="#sec-9.1.3">ToNumber</a>(ToString(x)) is exactly the same Number value as x.</li>
+            <li>If x is any Number value other than <b>&minus;0</b>, then <a href="#sec-9.1.3">ToNumber</a>(<a href="#sec-9.1.8">ToString</a>(x)) is exactly the same Number value as x.</li>
             <li>The least significant digit of s is not always uniquely determined by the requirements listed in step 5.</li>
           </ul>
         </div>
@@ -5089,7 +5089,7 @@
           argument identifier is one of the identifiers bound by the record:</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be the declarative environment record for which the method was invoked.</li>
+            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1.1">declarative environment record</a> for which the method was invoked.</li>
             <li>If <i>envRec</i> has a binding for the name that is the value of <i>N</i>, return <b>true</b>.</li>
             <li>If it does not have such a binding, return <b>false</b>.</li>
           </ol>
@@ -5105,7 +5105,7 @@
           italic">D</span> is provided and has the value <b>true</b> the new binding is marked as being subject to deletion.</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be the declarative environment record for which the method was invoked.</li>
+            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1.1">declarative environment record</a> for which the method was invoked.</li>
             <li>Assert: <i>envRec</i> does not already have a binding for <i>N</i>.</li>
             <li>Create a mutable binding in <i>envRec</i> for <i>N</i> and and record that it is uninitialised. If <i>D</i> is true record that the newly created binding may be deleted by a subsequent DeleteBinding call.</li>
           </ol>
@@ -5122,7 +5122,7 @@
           New Roman">S</span> is <span style="font-family: Times New Roman; font-weight: bold">true</span>.</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be the declarative environment record for which the method was invoked.</li>
+            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1.1">declarative environment record</a> for which the method was invoked.</li>
             <li>Assert: <i>envRec</i> must have a binding for <i>N</i>.</li>
             <li>Assert: The binding for <i>N</i> in <i>envRec</i> has already been initialised.</li>
             <li>If the binding for <i>N</i> in <i>envRec</i> is a mutable binding, change its bound value to <i>V</i>.</li>
@@ -5141,7 +5141,7 @@
           exception.</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be the declarative environment record for which the method was invoked.</li>
+            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1.1">declarative environment record</a> for which the method was invoked.</li>
             <li>Assert: <i>envRec</i> has a binding for <i>N</i>.</li>
             <li>If the binding for <i>N</i> in <i>envRec</i> is an uninitialised binding, then
               <ol class="block">
@@ -5159,7 +5159,7 @@
           that have been explicitly designated as being subject to deletion.</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be the declarative environment record for which the method was invoked.</li>
+            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1.1">declarative environment record</a> for which the method was invoked.</li>
             <li>If <i>envRec</i> does not have a binding for the name that is the value of <i>N</i>, return <b>true</b>.</li>
             <li>If the binding for <i>N</i> in <i>envRec</i> is cannot be deleted, return <b>false</b>.</li>
             <li>Remove the binding for <i>N</i> from <i>envRec</i>.</li>
@@ -5186,7 +5186,7 @@
           style="font-family: Times New Roman; font-style: italic">N</span>.</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be the declarative environment record for which the method was invoked.</li>
+            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1.1">declarative environment record</a> for which the method was invoked.</li>
             <li>Assert: <i>envRec</i> does not already have a binding for <i>N</i>.</li>
             <li>Create an immutable binding in <i>envRec</i> for <i>N</i> and record that it is uninitialised.</li>
           </ol>
@@ -5202,7 +5202,7 @@
           must already exist.</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be the declarative environment record for which the method was invoked.</li>
+            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1.1">declarative environment record</a> for which the method was invoked.</li>
             <li>Assert: <i>envRec</i> must have an uninitialised binding for N.</li>
             <li>Set the bound value for <i>N</i> in <i>envRec</i> to <i>V</i>.</li>
             <li>Record that the binding for <i>N</i> in <i>envRec</i> has been initialised.</li>
@@ -18243,7 +18243,7 @@ THH:mm:ss.sss</pre>
       <section id="sec-15.9.5.2">
         <h1><span class="secnum"><a href="#sec-15.9.5.2" title="link to this section">15.9.5.2</a></span> Date.prototype.toString ( )</h1>
 
-        <p>This function returns a String value. If this <a href="#sec-15.9.1.1">time value</a> is NaN, the String value is
+        <p>This function returns a String value. If <a href="#sec-15.9.5">this time value</a> is NaN, the String value is
         <code>&Prime;Invalid Date"</code>, otherwise the contents of the String are implementation-dependent, but are intended to
         represent the Date in the current time zone in a convenient, human-readable form.</p>
 
@@ -18311,20 +18311,20 @@ THH:mm:ss.sss</pre>
       <section id="sec-15.9.5.8">
         <h1><span class="secnum"><a href="#sec-15.9.5.8" title="link to this section">15.9.5.8</a></span> Date.prototype.valueOf ( )</h1>
 
-        <p>The <code>valueOf</code> function returns a Number, which is this <a href="#sec-15.9.1.1">time value</a>.</p>
+        <p>The <code>valueOf</code> function returns a Number, which is <a href="#sec-15.9.5">this time value</a>.</p>
       </section>
 
       <section id="sec-15.9.5.9">
         <h1><span class="secnum"><a href="#sec-15.9.5.9" title="link to this section">15.9.5.9</a></span> Date.prototype.getTime ( )</h1>
         <ol class="proc">
-          <li>Return this <a href="#sec-15.9.1.1">time value</a>.</li>
+          <li>Return <a href="#sec-15.9.5">this time value</a>.</li>
         </ol>
       </section>
 
       <section id="sec-15.9.5.10">
         <h1><span class="secnum"><a href="#sec-15.9.5.10" title="link to this section">15.9.5.10</a></span> Date.prototype.getFullYear ( )</h1>
         <ol class="proc">
-          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
+          <li>Let <i>t</i> be <a href="#sec-15.9.5">this time value</a>.</li>
           <li>If <i>t</i> is <b>NaN</b>, return <b>NaN</b>.</li>
           <li>Return <a href="#sec-15.9.1.3">YearFromTime</a>(<a href="#sec-15.9.1.9">LocalTime</a>(<i>t</i>)).</li>
         </ol>
@@ -18333,7 +18333,7 @@ THH:mm:ss.sss</pre>
       <section id="sec-15.9.5.11">
         <h1><span class="secnum"><a href="#sec-15.9.5.11" title="link to this section">15.9.5.11</a></span> Date.prototype.getUTCFullYear ( )</h1>
         <ol class="proc">
-          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
+          <li>Let <i>t</i> be <a href="#sec-15.9.5">this time value</a>.</li>
           <li>If <i>t</i> is <b>NaN</b>, return <b>NaN</b>.</li>
           <li>Return <a href="#sec-15.9.1.3">YearFromTime</a>(<i>t</i>).</li>
         </ol>
@@ -18342,7 +18342,7 @@ THH:mm:ss.sss</pre>
       <section id="sec-15.9.5.12">
         <h1><span class="secnum"><a href="#sec-15.9.5.12" title="link to this section">15.9.5.12</a></span> Date.prototype.getMonth ( )</h1>
         <ol class="proc">
-          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
+          <li>Let <i>t</i> be <a href="#sec-15.9.5">this time value</a>.</li>
           <li>If <i>t</i> is <b>NaN</b>, return <b>NaN</b>.</li>
           <li>Return <a href="#sec-15.9.1.4">MonthFromTime</a>(<a href="#sec-15.9.1.9">LocalTime</a>(<i>t</i>)).</li>
         </ol>
@@ -18351,7 +18351,7 @@ THH:mm:ss.sss</pre>
       <section id="sec-15.9.5.13">
         <h1><span class="secnum"><a href="#sec-15.9.5.13" title="link to this section">15.9.5.13</a></span> Date.prototype.getUTCMonth ( )</h1>
         <ol class="proc">
-          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
+          <li>Let <i>t</i> be <a href="#sec-15.9.5">this time value</a>.</li>
           <li>If <i>t</i> is <b>NaN</b>, return <b>NaN</b>.</li>
           <li>Return <a href="#sec-15.9.1.4">MonthFromTime</a>(<i>t</i>).</li>
         </ol>
@@ -18360,7 +18360,7 @@ THH:mm:ss.sss</pre>
       <section id="sec-15.9.5.14">
         <h1><span class="secnum"><a href="#sec-15.9.5.14" title="link to this section">15.9.5.14</a></span> Date.prototype.getDate ( )</h1>
         <ol class="proc">
-          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
+          <li>Let <i>t</i> be <a href="#sec-15.9.5">this time value</a>.</li>
           <li>If <i>t</i> is <b>NaN</b>, return <b>NaN</b>.</li>
           <li>Return <a href="#sec-15.9.1.5">DateFromTime</a>(<a href="#sec-15.9.1.9">LocalTime</a>(<i>t</i>)).</li>
         </ol>
@@ -18369,7 +18369,7 @@ THH:mm:ss.sss</pre>
       <section id="sec-15.9.5.15">
         <h1><span class="secnum"><a href="#sec-15.9.5.15" title="link to this section">15.9.5.15</a></span> Date.prototype.getUTCDate ( )</h1>
         <ol class="proc">
-          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
+          <li>Let <i>t</i> be <a href="#sec-15.9.5">this time value</a>.</li>
           <li>If <i>t</i> is <b>NaN</b>, return <b>NaN</b>.</li>
           <li>Return <a href="#sec-15.9.1.5">DateFromTime</a>(<i>t</i>).</li>
         </ol>
@@ -18378,7 +18378,7 @@ THH:mm:ss.sss</pre>
       <section id="sec-15.9.5.16">
         <h1><span class="secnum"><a href="#sec-15.9.5.16" title="link to this section">15.9.5.16</a></span> Date.prototype.getDay ( )</h1>
         <ol class="proc">
-          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
+          <li>Let <i>t</i> be <a href="#sec-15.9.5">this time value</a>.</li>
           <li>If <i>t</i> is <b>NaN</b>, return <b>NaN</b>.</li>
           <li>Return <a href="#sec-15.9.1.6">WeekDay</a>(<a href="#sec-15.9.1.9">LocalTime</a>(<i>t</i>)).</li>
         </ol>
@@ -18387,7 +18387,7 @@ THH:mm:ss.sss</pre>
       <section id="sec-15.9.5.17">
         <h1><span class="secnum"><a href="#sec-15.9.5.17" title="link to this section">15.9.5.17</a></span> Date.prototype.getUTCDay ( )</h1>
         <ol class="proc">
-          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
+          <li>Let <i>t</i> be <a href="#sec-15.9.5">this time value</a>.</li>
           <li>If <i>t</i> is <b>NaN</b>, return <b>NaN</b>.</li>
           <li>Return <a href="#sec-15.9.1.6">WeekDay</a>(<i>t</i>).</li>
         </ol>
@@ -18396,7 +18396,7 @@ THH:mm:ss.sss</pre>
       <section id="sec-15.9.5.18">
         <h1><span class="secnum"><a href="#sec-15.9.5.18" title="link to this section">15.9.5.18</a></span> Date.prototype.getHours ( )</h1>
         <ol class="proc">
-          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
+          <li>Let <i>t</i> be <a href="#sec-15.9.5">this time value</a>.</li>
           <li>If <i>t</i> is <b>NaN</b>, return <b>NaN</b>.</li>
           <li>Return <a href="#sec-15.9.1.10">HourFromTime</a>(<a href="#sec-15.9.1.9">LocalTime</a>(<i>t</i>)).</li>
         </ol>
@@ -18405,7 +18405,7 @@ THH:mm:ss.sss</pre>
       <section id="sec-15.9.5.19">
         <h1><span class="secnum"><a href="#sec-15.9.5.19" title="link to this section">15.9.5.19</a></span> Date.prototype.getUTCHours ( )</h1>
         <ol class="proc">
-          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
+          <li>Let <i>t</i> be <a href="#sec-15.9.5">this time value</a>.</li>
           <li>If <i>t</i> is <b>NaN</b>, return <b>NaN</b>.</li>
           <li>Return <a href="#sec-15.9.1.10">HourFromTime</a>(<i>t</i>).</li>
         </ol>
@@ -18414,7 +18414,7 @@ THH:mm:ss.sss</pre>
       <section id="sec-15.9.5.20">
         <h1><span class="secnum"><a href="#sec-15.9.5.20" title="link to this section">15.9.5.20</a></span> Date.prototype.getMinutes ( )</h1>
         <ol class="proc">
-          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
+          <li>Let <i>t</i> be <a href="#sec-15.9.5">this time value</a>.</li>
           <li>If <i>t</i> is <b>NaN</b>, return <b>NaN</b>.</li>
           <li>Return <a href="#sec-15.9.1.10">MinFromTime</a>(<a href="#sec-15.9.1.9">LocalTime</a>(<i>t</i>)).</li>
         </ol>
@@ -18423,7 +18423,7 @@ THH:mm:ss.sss</pre>
       <section id="sec-15.9.5.21">
         <h1><span class="secnum"><a href="#sec-15.9.5.21" title="link to this section">15.9.5.21</a></span> Date.prototype.getUTCMinutes ( )</h1>
         <ol class="proc">
-          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
+          <li>Let <i>t</i> be <a href="#sec-15.9.5">this time value</a>.</li>
           <li>If <i>t</i> is <b>NaN</b>, return <b>NaN</b>.</li>
           <li>Return <a href="#sec-15.9.1.10">MinFromTime</a>(<i>t</i>).</li>
         </ol>
@@ -18432,7 +18432,7 @@ THH:mm:ss.sss</pre>
       <section id="sec-15.9.5.22">
         <h1><span class="secnum"><a href="#sec-15.9.5.22" title="link to this section">15.9.5.22</a></span> Date.prototype.getSeconds ( )</h1>
         <ol class="proc">
-          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
+          <li>Let <i>t</i> be <a href="#sec-15.9.5">this time value</a>.</li>
           <li>If <i>t</i> is <b>NaN</b>, return <b>NaN</b>.</li>
           <li>Return <a href="#sec-15.9.1.10">SecFromTime</a>(<a href="#sec-15.9.1.9">LocalTime</a>(<i>t</i>)).</li>
         </ol>
@@ -18441,7 +18441,7 @@ THH:mm:ss.sss</pre>
       <section id="sec-15.9.5.23">
         <h1><span class="secnum"><a href="#sec-15.9.5.23" title="link to this section">15.9.5.23</a></span> Date.prototype.getUTCSeconds ( )</h1>
         <ol class="proc">
-          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
+          <li>Let <i>t</i> be <a href="#sec-15.9.5">this time value</a>.</li>
           <li>If <i>t</i> is <b>NaN</b>, return <b>NaN</b>.</li>
           <li>Return <a href="#sec-15.9.1.10">SecFromTime</a>(<i>t</i>).</li>
         </ol>
@@ -18450,7 +18450,7 @@ THH:mm:ss.sss</pre>
       <section id="sec-15.9.5.24">
         <h1><span class="secnum"><a href="#sec-15.9.5.24" title="link to this section">15.9.5.24</a></span> Date.prototype.getMilliseconds ( )</h1>
         <ol class="proc">
-          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
+          <li>Let <i>t</i> be <a href="#sec-15.9.5">this time value</a>.</li>
           <li>If <i>t</i> is <b>NaN</b>, return <b>NaN</b>.</li>
           <li>Return <a href="#sec-15.9.1.10">msFromTime</a>(<a href="#sec-15.9.1.9">LocalTime</a>(<i>t</i>)).</li>
         </ol>
@@ -18459,7 +18459,7 @@ THH:mm:ss.sss</pre>
       <section id="sec-15.9.5.25">
         <h1><span class="secnum"><a href="#sec-15.9.5.25" title="link to this section">15.9.5.25</a></span> Date.prototype.getUTCMilliseconds ( )</h1>
         <ol class="proc">
-          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
+          <li>Let <i>t</i> be <a href="#sec-15.9.5">this time value</a>.</li>
           <li>If <i>t</i> is <b>NaN</b>, return <b>NaN</b>.</li>
           <li>Return <a href="#sec-15.9.1.10">msFromTime</a>(<i>t</i>).</li>
         </ol>
@@ -18471,7 +18471,7 @@ THH:mm:ss.sss</pre>
         <p>Returns the difference between local time and UTC time in minutes.</p>
 
         <ol class="proc">
-          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
+          <li>Let <i>t</i> be <a href="#sec-15.9.5">this time value</a>.</li>
           <li>If <i>t</i> is <b>NaN</b>, return <b>NaN</b>.</li>
           <li>Return (<i>t</i> &minus; <a href="#sec-15.9.1.9">LocalTime</a>(<i>t</i>)) / <a href="#sec-15.9.1.10">msPerMinute</a>.</li>
         </ol>
@@ -18489,7 +18489,7 @@ THH:mm:ss.sss</pre>
       <section id="sec-15.9.5.28">
         <h1><span class="secnum"><a href="#sec-15.9.5.28" title="link to this section">15.9.5.28</a></span> Date.prototype.setMilliseconds (ms)</h1>
         <ol class="proc">
-          <li>Let <i>t</i> be the result of <a href="#sec-15.9.1.9">LocalTime</a>(this <a href="#sec-15.9.1.1">time value</a>).</li>
+          <li>Let <i>t</i> be the result of <a href="#sec-15.9.1.9">LocalTime</a>(<a href="#sec-15.9.5">this time value</a>).</li>
           <li>Let <i>time</i> be <a href="#sec-15.9.1.11">MakeTime</a>(<a href="#sec-15.9.1.10">HourFromTime</a>(<i>t</i>), <a href="#sec-15.9.1.10">MinFromTime</a>(<i>t</i>), <a href="#sec-15.9.1.10">SecFromTime</a>(<i>t</i>), <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>)).</li>
           <li>Let <i>u</i> be <a href="#sec-15.9.1.14">TimeClip</a>(UTC(<a href="#sec-15.9.1.13">MakeDate</a>(Day(<i>t</i>), <i>time</i>))).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>u</i>.</li>
@@ -18500,7 +18500,7 @@ THH:mm:ss.sss</pre>
       <section id="sec-15.9.5.29">
         <h1><span class="secnum"><a href="#sec-15.9.5.29" title="link to this section">15.9.5.29</a></span> Date.prototype.setUTCMilliseconds (ms)</h1>
         <ol class="proc">
-          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
+          <li>Let <i>t</i> be <a href="#sec-15.9.5">this time value</a>.</li>
           <li>Let <i>time</i> be <a href="#sec-15.9.1.11">MakeTime</a>(<a href="#sec-15.9.1.10">HourFromTime</a>(<i>t</i>), <a href="#sec-15.9.1.10">MinFromTime</a>(<i>t</i>), <a href="#sec-15.9.1.10">SecFromTime</a>(<i>t</i>), <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>)).</li>
           <li>Let <i>v</i> be <a href="#sec-15.9.1.14">TimeClip</a>(<a href="#sec-15.9.1.13">MakeDate</a>(Day(<i>t</i>), <i>time</i>)).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>v</i>.</li>
@@ -18516,7 +18516,7 @@ THH:mm:ss.sss</pre>
         <code>getMilliseconds()</code>.</p>
 
         <ol class="proc">
-          <li>Let <i>t</i> be the result of <a href="#sec-15.9.1.9">LocalTime</a>(this <a href="#sec-15.9.1.1">time value</a>).</li>
+          <li>Let <i>t</i> be the result of <a href="#sec-15.9.1.9">LocalTime</a>(<a href="#sec-15.9.5">this time value</a>).</li>
           <li>Let <i>s</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>sec</i>).</li>
           <li>If <i>ms</i> is not specified, then let <i>milli</i> be <a href="#sec-15.9.1.10">msFromTime</a>(<i>t</i>); otherwise, let <i>milli</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>).</li>
           <li>Let <i>date</i> be <a href="#sec-15.9.1.13">MakeDate</a>(Day(<i>t</i>), <a href="#sec-15.9.1.11">MakeTime</a>(<a href="#sec-15.9.1.10">HourFromTime</a>(<i>t</i>), <a href="#sec-15.9.1.10">MinFromTime</a>(<i>t</i>), <i>s</i>, <i>milli</i>)).</li>
@@ -18536,7 +18536,7 @@ THH:mm:ss.sss</pre>
         <code>getUTCMilliseconds()</code>.</p>
 
         <ol class="proc">
-          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
+          <li>Let <i>t</i> be <a href="#sec-15.9.5">this time value</a>.</li>
           <li>Let <i>s</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>sec</i>).</li>
           <li>If <i>ms</i> is not specified, then let <i>milli</i> be <a href="#sec-15.9.1.10">msFromTime</a>(<i>t</i>); otherwise, let <i>milli</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>).</li>
           <li>Let <i>date</i> be <a href="#sec-15.9.1.13">MakeDate</a>(Day(<i>t</i>), <a href="#sec-15.9.1.11">MakeTime</a>(<a href="#sec-15.9.1.10">HourFromTime</a>(<i>t</i>), <a href="#sec-15.9.1.10">MinFromTime</a>(<i>t</i>), <i>s</i>, <i>milli</i>)).</li>
@@ -18560,7 +18560,7 @@ THH:mm:ss.sss</pre>
         <code>getMilliseconds()</code>.</p>
 
         <ol class="proc">
-          <li>Let <i>t</i> be the result of <a href="#sec-15.9.1.9">LocalTime</a>(this <a href="#sec-15.9.1.1">time value</a>).</li>
+          <li>Let <i>t</i> be the result of <a href="#sec-15.9.1.9">LocalTime</a>(<a href="#sec-15.9.5">this time value</a>).</li>
           <li>Let <i>m</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>min</i>).</li>
           <li>If <i>sec</i> is not specified, then let <i>s</i> be <a href="#sec-15.9.1.10">SecFromTime</a>(<i>t</i>); otherwise, let <i>s</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>sec</i>).</li>
           <li>If <i>ms</i> is not specified, then let <i>milli</i> be <a href="#sec-15.9.1.10">msFromTime</a>(<i>t</i>); otherwise, let <i>milli</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>).</li>
@@ -18585,7 +18585,7 @@ THH:mm:ss.sss</pre>
         <code>getUTCMilliseconds()</code>.</p>
 
         <ol class="proc">
-          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
+          <li>Let <i>t</i> be <a href="#sec-15.9.5">this time value</a>.</li>
           <li>Let <i>m</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>min</i>).</li>
           <li>If <i>sec</i> is not specified, then let <i>s</i> be <a href="#sec-15.9.1.10">SecFromTime</a>(<i>t</i>); otherwise, let <i>s</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>sec</i>).</li>
           <li>If <i>ms</i> is not specified, then let <i>milli</i> be <a href="#sec-15.9.1.10">msFromTime</a>(<i>t</i>); otherwise, let <i>milli</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>).</li>
@@ -18614,7 +18614,7 @@ THH:mm:ss.sss</pre>
         <code>getMilliseconds()</code>.</p>
 
         <ol class="proc">
-          <li>Let <i>t</i> be the result of <a href="#sec-15.9.1.9">LocalTime</a>(this <a href="#sec-15.9.1.1">time value</a>).</li>
+          <li>Let <i>t</i> be the result of <a href="#sec-15.9.1.9">LocalTime</a>(<a href="#sec-15.9.5">this time value</a>).</li>
           <li>Let <i>h</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>hour</i>).</li>
           <li>If <i>min</i> is not specified, then let <i>m</i> be <a href="#sec-15.9.1.10">MinFromTime</a>(<i>t</i>); otherwise, let <i>m</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>min</i>).</li>
           <li>If If <i>sec</i> is not specified, then let <i>s</i> be <a href="#sec-15.9.1.10">SecFromTime</a>(<i>t</i>); otherwise, let <i>s</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>sec</i>).</li>
@@ -18644,7 +18644,7 @@ THH:mm:ss.sss</pre>
         <code>getUTCMilliseconds()</code>.</p>
 
         <ol class="proc">
-          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
+          <li>Let <i>t</i> be <a href="#sec-15.9.5">this time value</a>.</li>
           <li>Let <i>h</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>hour</i>).</li>
           <li>If <i>min</i> is not specified, then let <i>m</i> be <a href="#sec-15.9.1.10">MinFromTime</a>(<i>t</i>); otherwise, let <i>m</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>min</i>).</li>
           <li>If <i>sec</i> is not specified, then let <i>s</i> be <a href="#sec-15.9.1.10">SecFromTime</a>(<i>t</i>); otherwise, let <i>s</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>sec</i>).</li>
@@ -18661,7 +18661,7 @@ THH:mm:ss.sss</pre>
       <section id="sec-15.9.5.36">
         <h1><span class="secnum"><a href="#sec-15.9.5.36" title="link to this section">15.9.5.36</a></span> Date.prototype.setDate (date)</h1>
         <ol class="proc">
-          <li>Let <i>t</i> be the result of <a href="#sec-15.9.1.9">LocalTime</a>(this <a href="#sec-15.9.1.1">time value</a>).</li>
+          <li>Let <i>t</i> be the result of <a href="#sec-15.9.1.9">LocalTime</a>(<a href="#sec-15.9.5">this time value</a>).</li>
           <li>Let <i>dt</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>date</i>).</li>
           <li>Let <i>newDate</i> be <a href="#sec-15.9.1.13">MakeDate</a>(<a href="#sec-15.9.1.12">MakeDay</a>(<a href="#sec-15.9.1.3">YearFromTime</a>(<i>t</i>), <a href="#sec-15.9.1.4">MonthFromTime</a>(<i>t</i>), <i>dt</i>), <a href="#sec-15.9.1.2">TimeWithinDay</a>(<i>t</i>)).</li>
           <li>Let <i>u</i> be <a href="#sec-15.9.1.14">TimeClip</a>(UTC(<i>newDate</i>)).</li>
@@ -18673,7 +18673,7 @@ THH:mm:ss.sss</pre>
       <section id="sec-15.9.5.37">
         <h1><span class="secnum"><a href="#sec-15.9.5.37" title="link to this section">15.9.5.37</a></span> Date.prototype.setUTCDate (date)</h1>
         <ol class="proc">
-          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
+          <li>Let <i>t</i> be <a href="#sec-15.9.5">this time value</a>.</li>
           <li>Let <i>dt</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>date</i>).</li>
           <li>Let <i>newDate</i> be <a href="#sec-15.9.1.13">MakeDate</a>(<a href="#sec-15.9.1.12">MakeDay</a>(<a href="#sec-15.9.1.3">YearFromTime</a>(<i>t</i>), <a href="#sec-15.9.1.4">MonthFromTime</a>(<i>t</i>), <i>dt</i>), <a href="#sec-15.9.1.2">TimeWithinDay</a>(<i>t</i>)).</li>
           <li>Let <i>v</i> be <a href="#sec-15.9.1.14">TimeClip</a>(<i>newDate</i>).</li>
@@ -18690,7 +18690,7 @@ THH:mm:ss.sss</pre>
         <code>getDate()</code>.</p>
 
         <ol class="proc">
-          <li>Let <i>t</i> be the result of <a href="#sec-15.9.1.9">LocalTime</a>(this <a href="#sec-15.9.1.1">time value</a>).</li>
+          <li>Let <i>t</i> be the result of <a href="#sec-15.9.1.9">LocalTime</a>(<a href="#sec-15.9.5">this time value</a>).</li>
           <li>Let <i>m</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>month</i>).</li>
           <li>If <i>date</i> is not specified, then let <i>dt</i> be <a href="#sec-15.9.1.5">DateFromTime</a>(<i>t</i>); otherwise, let <i>dt</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>date</i>).</li>
           <li>Let <i>newDate</i> be <a href="#sec-15.9.1.13">MakeDate</a>(<a href="#sec-15.9.1.12">MakeDay</a>(<a href="#sec-15.9.1.3">YearFromTime</a>(<i>t</i>), <i>m</i>, <i>dt</i>), <a href="#sec-15.9.1.2">TimeWithinDay</a>(<i>t</i>)).</li>
@@ -18710,7 +18710,7 @@ THH:mm:ss.sss</pre>
         <code>getUTCDate()</code>.</p>
 
         <ol class="proc">
-          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
+          <li>Let <i>t</i> be <a href="#sec-15.9.5">this time value</a>.</li>
           <li>Let <i>m</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>month</i>).</li>
           <li>If <i>date</i> is not specified, then let <i>dt</i> be <a href="#sec-15.9.1.5">DateFromTime</a>(<i>t</i>); otherwise, let <i>dt</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>date</i>).</li>
           <li>Let <i>newDate</i> be <a href="#sec-15.9.1.13">MakeDate</a>(<a href="#sec-15.9.1.12">MakeDay</a>(<a href="#sec-15.9.1.3">YearFromTime</a>(<i>t</i>), <i>m</i>, <i>dt</i>), <a href="#sec-15.9.1.2">TimeWithinDay</a>(<i>t</i>)).</li>
@@ -18734,7 +18734,7 @@ THH:mm:ss.sss</pre>
         <code>getDate()</code>.</p>
 
         <ol class="proc">
-          <li>Let <i>t</i> be the result of <a href="#sec-15.9.1.9">LocalTime</a>(this <a href="#sec-15.9.1.1">time value</a>); but if this <a href="#sec-15.9.1.1">time value</a> is <b>NaN</b>, let <i>t</i> be <b>+0</b>.</li>
+          <li>Let <i>t</i> be the result of <a href="#sec-15.9.1.9">LocalTime</a>(<a href="#sec-15.9.5">this time value</a>); but if <a href="#sec-15.9.5">this time value</a> is <b>NaN</b>, let <i>t</i> be <b>+0</b>.</li>
           <li>Let <i>y</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>year</i>).</li>
           <li>If <i>month</i> is not specified, then let <i>m</i> be <a href="#sec-15.9.1.4">MonthFromTime</a>(<i>t</i>); otherwise, let <i>m</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>month</i>).</li>
           <li>If <i>date</i> is not specified, then let <i>dt</i> be <a href="#sec-15.9.1.5">DateFromTime</a>(<i>t</i>); otherwise, let <i>dt</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>date</i>).</li>
@@ -18759,7 +18759,7 @@ THH:mm:ss.sss</pre>
         <code>getUTCDate()</code>.</p>
 
         <ol class="proc">
-          <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>; but if this <a href="#sec-15.9.1.1">time value</a> is <b>NaN</b>, let <i>t</i> be <b>+0</b>.</li>
+          <li>Let <i>t</i> be <a href="#sec-15.9.5">this time value</a>; but if <a href="#sec-15.9.5">this time value</a> is <b>NaN</b>, let <i>t</i> be <b>+0</b>.</li>
           <li>Let <i>y</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>year</i>).</li>
           <li>If <i>month</i> is not specified, then let <i>m</i> be <a href="#sec-15.9.1.4">MonthFromTime</a>(<i>t</i>); otherwise, let <i>m</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>month</i>).</li>
           <li>If <i>date</i> is not specified, then let <i>dt</i> be <a href="#sec-15.9.1.5">DateFromTime</a>(<i>t</i>); otherwise, let <i>dt</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>date</i>).</li>
@@ -22612,7 +22612,7 @@ THH:mm:ss.sss</pre>
       <p>When the <b>getYear</b> method is called with no arguments, the following steps are taken:</p>
 
       <ol class="proc">
-        <li>Let <i>t</i> be this <a href="#sec-15.9.1.1">time value</a>.</li>
+        <li>Let <i>t</i> be <a href="#sec-15.9.5">this time value</a>.</li>
         <li>If <i>t</i> is <b>NaN</b>, return <b>NaN</b>.</li>
         <li>Return <a href="#sec-15.9.1.3">YearFromTime</a>(<a href="#sec-15.9.1.9">LocalTime</a>(<i>t</i>)) &minus; 1900.</li>
       </ol>
@@ -22629,7 +22629,7 @@ THH:mm:ss.sss</pre>
       italic">year</span>, the following steps are taken:</p>
 
       <ol class="proc">
-        <li>Let <i>t</i> be the result of <a href="#sec-15.9.1.9">LocalTime</a>(this <a href="#sec-15.9.1.1">time value</a>); but if this <a href="#sec-15.9.1.1">time value</a> is <b>NaN</b>, let <i>t</i> be <b>+0</b>.</li>
+        <li>Let <i>t</i> be the result of <a href="#sec-15.9.1.9">LocalTime</a>(<a href="#sec-15.9.5">this time value</a>); but if <a href="#sec-15.9.5">this time value</a> is <b>NaN</b>, let <i>t</i> be <b>+0</b>.</li>
         <li>Call <a href="#sec-9.1.3">ToNumber</a>(<i>year</i>).</li>
         <li>If Result(2) is <b>NaN</b>, set the [[PrimitiveValue]] internal property of the <b>this</b> value to <b>NaN</b> and return <b>NaN</b>.</li>
         <li>If Result(2) is not <b>NaN</b> and 0 &le; <a href="#sec-9.1.4">ToInteger</a>(Result(2)) &le; 99 then Result(4) is <a href="#sec-9.1.4">ToInteger</a>(Result(2)) +&nbsp;1900. Otherwise, Result(4) is Result(2).</li>
