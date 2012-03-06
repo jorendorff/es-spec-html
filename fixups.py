@@ -416,17 +416,17 @@ def insert_disclaimer(doc):
           a("http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-262.pdf",
             href="http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-262.pdf"),
           "."),
-        p("This is a draft of the next version of the standard. If all goes well it will become "
-          "ECMAScript Edition 6."),
-        p("This is an HTML version of the current working draft published at ",
+        p("This is a draft of the next edition of the standard."),
+        p("This page is based on the current working draft published at ",
           a("http://wiki.ecmascript.org/doku.php?id=harmony:specification_drafts",
             href="http://wiki.ecmascript.org/doku.php?id=harmony:specification_drafts"),
           ". The program used to convert that Word doc to HTML is a custom-piled heap of hacks. "
-          "It has stripped out or garbled some of the formatting that makes "
+          "It has doubtlessly stripped out or garbled some of the formatting that makes "
           "the specification comprehensible. You can help improve the program ",
           a("here", href="https://github.com/jorendorff/es-spec-html"),
           "."),
-        p("For copyright information, see ECMA's legal disclaimer in the document itself."),
+        # (U+2019 is RIGHT SINGLE QUOTATION MARK, the character you're supposed to use for an apostrophe.)
+        p("For copyright information, see ECMA\u2019s legal disclaimer in the document itself."),
         id="unofficial")
     doc_body(doc).content.insert(0, disclaimer)
 
@@ -993,10 +993,24 @@ def fixup_remove_hr(doc):
         if child.name == 'hr':
             del parent.content[i]
 
-def fixup_hgroup(doc):
+def fixup_title_page(doc):
+    """ Apply a handful of fixups to the junk gleaned from the title page. """
     for parent, i, child in all_parent_index_child_triples(doc):
         if parent.name == 'p' and child.name == 'h1':
+            # A p element shouldn't contain an h1, so make this an hgroup.
             parent.name = 'hgroup'
+            assert len(parent.content) == 6
+            h = parent.content[1]
+
+            # One of the lines has an ugly typo that I don't want right up
+            # front in large type.
+            s = h.content[-1]
+            assert s.endswith(' , 2012')
+            h.content[-1] = s.replace(' , 2012', ', 2012')
+
+            # A few of the lines here are redundant.
+            del parent.content[3:]
+
 
 def fixup(docx, doc):
     styles = docx.styles
@@ -1021,5 +1035,5 @@ def fixup(docx, doc):
     fixup_figures(doc)
     fixup_links(doc)
     fixup_remove_hr(doc)
-    fixup_hgroup(doc)
+    fixup_title_page(doc)
     return doc
