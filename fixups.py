@@ -909,6 +909,12 @@ def fixup_links(doc):
             sections_by_title[title] = '#' + sect.attrs['id']
 
     specific_link_source_data = [
+        # 5.2
+        ("abs(", "Algorithm Conventions"),
+        ("sign(", "Algorithm Conventions"),
+        ("modulo", "Algorithm Conventions"),
+        ("floor(", "Algorithm Conventions"),
+
         # clause 7
         ("automatic semicolon insertion (7.9)", "Automatic Semicolon Insertion"),
         ("automatic semicolon insertion (see 7.9)", "Automatic Semicolon Insertion"),
@@ -1000,6 +1006,7 @@ def fixup_links(doc):
         # 15.9
         ("this time value", "Properties of the Date Prototype Object"),
         ("time value", "Time Values and Time Range"),
+        ("Day(", "Day Number and Time within Day"),
         ("msPerDay", "Day Number and Time within Day"),
         ("TimeWithinDay", "Day Number and Time within Day"),
         ("DaysInYear", "Year Number"),
@@ -1013,7 +1020,7 @@ def fixup_links(doc):
         ("LocalTZA", "Local Time Zone Adjustment"),
         ("DaylightSavingTA", "Daylight Saving Time Adjustment"),
         ("LocalTime", "Local Time"),
-        #("UTC", "Local Time"),  # This should be linkified only when it's the function.
+        ("UTC(", "Local Time"),
         ("HourFromTime", "Hours, Minutes, Second, and Milliseconds"),
         ("MinFromTime", "Hours, Minutes, Second, and Milliseconds"),
         ("SecFromTime", "Hours, Minutes, Second, and Milliseconds"),
@@ -1084,9 +1091,15 @@ def fixup_links(doc):
             if (i != -1
                 and target != current_section  # don't link sections to themselves
                 and (i == 0 or not s[i-1].isalnum())  # check for word break before
-                and (i + len(text) == len(s) or not s[i + len(text)].isalnum())  # and after
+                and (text.endswith('(')
+                     or i + len(text) == len(s)
+                     or not s[i + len(text)].isalnum())  # and after
                 and (best is None or i < best[0])):
-                best = i, i + len(text), target
+                # New best hit.
+                n = len(text)
+                if text.endswith('('):
+                    n -= 1
+                best = i, i + n, target
 
         for link_re in section_link_regexes:
             m = link_re.search(s)
@@ -1095,11 +1108,11 @@ def fixup_links(doc):
                 if id not in all_ids:
                     warn("no such section: " + m.group(2))
                     m = link_re.search(s, m.end(1))
-                    continue
-                hit = m.start(1), m.end(1), "#sec-" + m.group(2)
-                if best is None or hit < best:
-                    best = hit
-                break
+                else:
+                    hit = m.start(1), m.end(1), "#sec-" + m.group(2)
+                    if best is None or hit < best:
+                        best = hit
+                    break
 
         m = url_re.search(s)
         if m is not None:

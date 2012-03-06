@@ -4658,7 +4658,7 @@
         <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>number</i>).</li>
         <li>If <i>number</i> is <b>NaN</b>, return <b>+0</b>.</li>
         <li>If <i>number</i> is <b>+0</b>, <b>&minus;0</b>, <b>+&infin;,</b> or <b>&minus;&infin;</b>, return <i>number</i>.</li>
-        <li>Return the result of computing sign(<i>number</i>) &times; floor(abs(<i>number</i>)).</li>
+        <li>Return the result of computing <a href="#sec-5.2">sign</a>(<i>number</i>) &times; <a href="#sec-5.2">floor</a>(<a href="#sec-5.2">abs</a>(<i>number</i>)).</li>
       </ol>
     </section>
 
@@ -4674,8 +4674,8 @@
         <li>Let <i>number</i> be the result of calling <a href="#sec-9.1.3">ToNumber</a> on the input argument.</li>
         <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>number</i>).</li>
         <li>If <i>number</i> is <b>NaN</b>, <b>+0</b>, <b>&minus;0</b>, <b>+&infin;</b>, or <b>&minus;&infin;</b>, return <b>+0</b>.</li>
-        <li>Let <i>posInt</i> be sign(<i>number</i>) * floor(abs(<i>number</i>)).</li>
-        <li>Let <i>int32bit</i> be <i>posInt</i> modulo 2<sup>32</sup>; that is, a finite integer value k of Number type with positive sign and less than 2<sup>32</sup> in magnitude such that the mathematical difference of <i>posInt</i> and k is mathematically an integer multiple of 2<sup>32</sup>.</li>
+        <li>Let <i>posInt</i> be <a href="#sec-5.2">sign</a>(<i>number</i>) * <a href="#sec-5.2">floor</a>(<a href="#sec-5.2">abs</a>(<i>number</i>)).</li>
+        <li>Let <i>int32bit</i> be <i>posInt</i> <a href="#sec-5.2">modulo</a> 2<sup>32</sup>; that is, a finite integer value k of Number type with positive sign and less than 2<sup>32</sup> in magnitude such that the mathematical difference of <i>posInt</i> and k is mathematically an integer multiple of 2<sup>32</sup>.</li>
         <li>If <i>int32bit</i> is greater than or equal to 2<sup>31</sup>, return <i>int32bit</i> &minus; 2<sup>32</sup>, otherwise return <i>int32bit</i>.</li>
       </ol>
 
@@ -4702,8 +4702,8 @@
         <li>Let <i>number</i> be the result of calling <a href="#sec-9.1.3">ToNumber</a> on the input argument.</li>
         <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>number</i>).</li>
         <li>If <i>number</i> is <b>NaN</b>, +0, &minus;0, +<b>&infin;</b>, or &minus;<b>&infin;</b>, return <b>+0</b>.</li>
-        <li>Let <i>posInt</i> be sign(<i>number</i>) &times; floor(abs(<i>number</i>)).</li>
-        <li>Let <i>int32bit</i> be <i>posInt</i> modulo 2<sup>32</sup>; that is, a finite integer value k of Number type with positive sign and less than 2<sup>32</sup> in magnitude such that the mathematical difference of <i>posInt</i> and k is mathematically an integer multiple of 2<sup>32</sup>.</li>
+        <li>Let <i>posInt</i> be <a href="#sec-5.2">sign</a>(<i>number</i>) &times; <a href="#sec-5.2">floor</a>(<a href="#sec-5.2">abs</a>(<i>number</i>)).</li>
+        <li>Let <i>int32bit</i> be <i>posInt</i> <a href="#sec-5.2">modulo</a> 2<sup>32</sup>; that is, a finite integer value k of Number type with positive sign and less than 2<sup>32</sup> in magnitude such that the mathematical difference of <i>posInt</i> and k is mathematically an integer multiple of 2<sup>32</sup>.</li>
         <li>Return <i>int32bit</i>.</li>
       </ol>
 
@@ -4731,8 +4731,8 @@
         <li>Let <i>number</i> be the result of calling <a href="#sec-9.1.3">ToNumber</a> on the input argument.</li>
         <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>number</i>).</li>
         <li>If <i>number</i> is <b>NaN</b>, +0, &minus;0, +<b>&infin;</b>, or &minus;<b>&infin;</b>, return <b>+0</b>.</li>
-        <li>Let <i>posInt</i> be sign(<i>number</i>) &times; floor(abs(<i>number</i>)).</li>
-        <li>Let <i>int16bit</i> be <i>posInt</i> modulo 2<sup>16</sup>; that is, a finite integer value <i>k</i> of Number type with positive sign and less than 2<sup>16</sup> in magnitude such that the mathematical difference of <i>posInt</i> and <i>k</i> is mathematically an integer multiple of 2<sup>16</sup>.</li>
+        <li>Let <i>posInt</i> be <a href="#sec-5.2">sign</a>(<i>number</i>) &times; <a href="#sec-5.2">floor</a>(<a href="#sec-5.2">abs</a>(<i>number</i>)).</li>
+        <li>Let <i>int16bit</i> be <i>posInt</i> <a href="#sec-5.2">modulo</a> 2<sup>16</sup>; that is, a finite integer value <i>k</i> of Number type with positive sign and less than 2<sup>16</sup> in magnitude such that the mathematical difference of <i>posInt</i> and <i>k</i> is mathematically an integer multiple of 2<sup>16</sup>.</li>
         <li>Return <i>int16bit</i>.</li>
       </ol>
 
@@ -4817,8 +4817,8 @@
           <li>If <i>k</i> &le; <i>n</i> &le; 21, return the String consisting of the <i>k</i> digits of the decimal representation of s (in order, with no leading zeroes), followed by <i>n&minus;k</i> occurrences of the character &lsquo;<code>0</code>&rsquo;.</li>
           <li>If 0 &lt; n &le; 21, return the String consisting of the most significant <i>n</i> digits of the decimal representation of <i>s</i>, followed by a decimal point &lsquo;<code>.</code>&rsquo;, followed by the remaining <i>k&minus;n</i> digits of the decimal representation of <i>s</i>.</li>
           <li>If &minus;6 &lt; n &le; 0, return the String consisting of the character &lsquo;<code>0</code>&rsquo;, followed by a decimal point &lsquo;<code>.</code>&rsquo;, followed by &minus;<i>n</i> occurrences of the character &lsquo;<code>0</code>&rsquo;, followed by the <i>k</i> digits of the decimal representation of <i>s</i>.</li>
-          <li>Otherwise, if <i>k</i> = 1, return the String consisting of the single digit of <i>s</i>, followed by lowercase character &lsquo;<code>e</code>&rsquo;, followed by a plus sign &lsquo;<code>+</code>&rsquo; or minus sign &lsquo;<code>&minus;</code>&rsquo; according to whether <i>n</i>&minus;1 is positive or negative, followed by the decimal representation of the integer abs(<i>n</i>&minus;1) (with no leading zeroes).</li>
-          <li>Return the String consisting of the most significant digit of the decimal representation of <i>s</i>, followed by a decimal point &lsquo;.&rsquo;, followed by the remaining <i>k</i>&minus;1 digits of the decimal representation of <i>s</i>, followed by the lowercase character &lsquo;<code>e</code>&rsquo;, followed by a plus sign &lsquo;<code>+</code>&rsquo; or minus sign &lsquo;<code>&minus;</code>&rsquo; according to whether <i>n</i>&minus;1 is positive or negative, followed by the decimal representation of the integer abs(<i>n</i>&minus;1) (with no leading zeroes).</li>
+          <li>Otherwise, if <i>k</i> = 1, return the String consisting of the single digit of <i>s</i>, followed by lowercase character &lsquo;<code>e</code>&rsquo;, followed by a plus sign &lsquo;<code>+</code>&rsquo; or minus sign &lsquo;<code>&minus;</code>&rsquo; according to whether <i>n</i>&minus;1 is positive or negative, followed by the decimal representation of the integer <a href="#sec-5.2">abs</a>(<i>n</i>&minus;1) (with no leading zeroes).</li>
+          <li>Return the String consisting of the most significant digit of the decimal representation of <i>s</i>, followed by a decimal point &lsquo;.&rsquo;, followed by the remaining <i>k</i>&minus;1 digits of the decimal representation of <i>s</i>, followed by the lowercase character &lsquo;<code>e</code>&rsquo;, followed by a plus sign &lsquo;<code>+</code>&rsquo; or minus sign &lsquo;<code>&minus;</code>&rsquo; according to whether <i>n</i>&minus;1 is positive or negative, followed by the decimal representation of the integer <a href="#sec-5.2">abs</a>(<i>n</i>&minus;1) (with no leading zeroes).</li>
         </ol>
 
         <div class="note">
@@ -14938,7 +14938,7 @@
           <li>Let <i>lenVal</i> be the result of calling the [[Get]] internal method of <i>O</i> with argument <code>"length"</code>.</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenVal</i>).</li>
           <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>len</i>).</li>
-          <li>Let <i>middle</i> be  floor(<i>len</i>/2).</li>
+          <li>Let <i>middle</i> be  <a href="#sec-5.2">floor</a>(<i>len</i>/2).</li>
           <li>Let <i>lower</i> be <b>0</b>.</li>
           <li>Repeat, while <i>lower</i> &ne; <i>middle</i>
             <ol class="block">
@@ -15453,7 +15453,7 @@
           </li>
           <li>Else, <i>n</i>&lt;0
             <ol class="block">
-              <li>Let <i>k</i> be <i>len</i> - abs(<i>n</i>).</li>
+              <li>Let <i>k</i> be <i>len</i> - <a href="#sec-5.2">abs</a>(<i>n</i>).</li>
               <li>If <i>k</i> is less than 0, then let <i>k</i> be 0.</li>
             </ol>
           </li>
@@ -15510,7 +15510,7 @@
           <li>If <i>n</i> &ge; <i>0</i>, then let <i>k</i> be min(<i>n</i>, <i>len</i> &ndash; 1).</li>
           <li>Else,  <i>n</i> &lt; 0
             <ol class="block">
-              <li>Let <i>k</i> be <i>len</i> - abs(<i>n</i>).</li>
+              <li>Let <i>k</i> be <i>len</i> - <a href="#sec-5.2">abs</a>(<i>n</i>).</li>
             </ol>
           </li>
           <li>Repeat, while <i>k</i>&ge; <i>0</i>
@@ -17051,7 +17051,7 @@
         <ol class="proc">
           <li>Let <i>desc</i> be the result of calling the default [[GetOwnProperty]] internal method (<a href="#sec-8.12.1">8.12.1</a>) on <i>S</i> with argument <i>P</i>.</li>
           <li>If <i>desc</i> is not <b>undefined</b> return <i>desc</i>.</li>
-          <li>If <a href="#sec-9.1.8">ToString</a>(abs(<a href="#sec-9.1.4">ToInteger</a>(<i>P</i>))) is not the same value as <i>P</i>, return <b>undefined</b>.</li>
+          <li>If <a href="#sec-9.1.8">ToString</a>(<a href="#sec-5.2">abs</a>(<a href="#sec-9.1.4">ToInteger</a>(<i>P</i>))) is not the same value as <i>P</i>, return <b>undefined</b>.</li>
           <li>Let <i>str</i> be the String value of the [[PrimitiveValue]] internal property of <i>S</i>.</li>
           <li>Let <i>index</i> be <a href="#sec-9.1.4">ToInteger</a>(<i>P</i>).</li>
           <li>Let <i>len</i> be the number of characters in <i>str</i>.</li>
@@ -17878,7 +17878,8 @@
           <li><span style="font-family: Times New Roman">If <i>x</i> is less than 0 but greater than -1, the result is &minus;0.</span></li>
         </ul>
 
-        <p>The value of <code>Math.ceil(x)</code> is the same as the value of <code>-Math.floor(-x)</code>.</p>
+        <p>The value of <code>Math.ceil(x)</code> is the same as the value of <code>-Math.<a
+        href="#sec-5.2">floor</a>(-x)</code>.</p>
       </section>
 
       <section id="sec-15.8.2.7">
@@ -17931,8 +17932,8 @@
         </ul>
 
         <div class="note">
-          <p><span class="nh">NOTE</span> The value of <code>Math.floor(x)</code> is the same as the value of
-          <code>-Math.ceil(-x)</code>.</p>
+          <p><span class="nh">NOTE</span> The value of <code>Math.<a href="#sec-5.2">floor</a>(x)</code> is the same as the value
+          of <code>-Math.ceil(-x)</code>.</p>
         </div>
       </section>
 
@@ -17989,12 +17990,12 @@
           <li><span style="font-family: Times New Roman">If <i>y</i> is +0, the result is 1, even if <i>x</i> is NaN.</span></li>
           <li><span style="font-family: Times New Roman">If <i>y</i> is &minus;0, the result is 1, even if <i>x</i> is NaN.</span></li>
           <li><span style="font-family: Times New Roman">If <i>x</i> is NaN and <i>y</i> is nonzero, the result is NaN.</span></li>
-          <li><span style="font-family: Times New Roman">If abs(<i>x</i>)&gt;1 and <i>y</i> is +&infin;, the result is +&infin;.</span></li>
-          <li><span style="font-family: Times New Roman">If abs(<i>x</i>)&gt;1 and <i>y</i> is &minus;&infin;, the result is +0.</span></li>
-          <li><span style="font-family: Times New Roman">If abs(<i>x</i>)==1 and <i>y</i> is +&infin;, the result is NaN.</span></li>
-          <li><span style="font-family: Times New Roman">If abs(<i>x</i>)==1 and <i>y</i> is &minus;&infin;, the result is NaN.</span></li>
-          <li><span style="font-family: Times New Roman">If abs(<i>x</i>)&lt;1 and <i>y</i> is +&infin;, the result is +0.</span></li>
-          <li><span style="font-family: Times New Roman">If abs(<i>x</i>)&lt;1 and <i>y</i> is &minus;&infin;, the result is +&infin;.</span></li>
+          <li><span style="font-family: Times New Roman">If <a href="#sec-5.2">abs</a>(<i>x</i>)&gt;1 and <i>y</i> is +&infin;, the result is +&infin;.</span></li>
+          <li><span style="font-family: Times New Roman">If <a href="#sec-5.2">abs</a>(<i>x</i>)&gt;1 and <i>y</i> is &minus;&infin;, the result is +0.</span></li>
+          <li><span style="font-family: Times New Roman">If <a href="#sec-5.2">abs</a>(<i>x</i>)==1 and <i>y</i> is +&infin;, the result is NaN.</span></li>
+          <li><span style="font-family: Times New Roman">If <a href="#sec-5.2">abs</a>(<i>x</i>)==1 and <i>y</i> is &minus;&infin;, the result is NaN.</span></li>
+          <li><span style="font-family: Times New Roman">If <a href="#sec-5.2">abs</a>(<i>x</i>)&lt;1 and <i>y</i> is +&infin;, the result is +0.</span></li>
+          <li><span style="font-family: Times New Roman">If <a href="#sec-5.2">abs</a>(<i>x</i>)&lt;1 and <i>y</i> is &minus;&infin;, the result is +&infin;.</span></li>
           <li><span style="font-family: Times New Roman">If <i>x</i> is +&infin; and <i>y</i>&gt;0, the result is +&infin;.</span></li>
           <li><span style="font-family: Times New Roman">If <i>x</i> is +&infin; and <i>y</i>&lt;0, the result is +0.</span></li>
           <li><span style="font-family: Times New Roman">If <i>x</i> is &minus;&infin; and <i>y</i>&gt;0 and <i>y</i> is an odd integer, the result is &minus;&infin;.</span></li>
@@ -18045,12 +18046,12 @@
         </div>
 
         <div class="note">
-          <p><span class="nh">NOTE 2</span> The value of <code>Math.round(x)</code> is the same as the value of
-          <code>Math.floor(x+0.5)</code>, except when <code>x</code> is <span style="font-family: Times New Roman">&minus;0</span>
-          or is less than <span style="font-family: Times New Roman">0</span> but greater than or equal to <span
-          style="font-family: Times New Roman">-0.5</span>; for these cases <code>Math.round(x)</code> returns <span
-          style="font-family: Times New Roman">&minus;0</span>, but <code>Math.floor(x+0.5)</code> returns <span
-          style="font-family: Times New Roman">+0</span>.</p>
+          <p><span class="nh">NOTE 2</span> The value of <code>Math.round(x)</code> is the same as the value of <code>Math.<a
+          href="#sec-5.2">floor</a>(x+0.5)</code>, except when <code>x</code> is <span style="font-family: Times New
+          Roman">&minus;0</span> or is less than <span style="font-family: Times New Roman">0</span> but greater than or equal to
+          <span style="font-family: Times New Roman">-0.5</span>; for these cases <code>Math.round(x)</code> returns <span
+          style="font-family: Times New Roman">&minus;0</span>, but <code>Math.<a href="#sec-5.2">floor</a>(x+0.5)</code> returns
+          <span style="font-family: Times New Roman">+0</span>.</p>
         </div>
       </section>
 
@@ -18133,7 +18134,7 @@
 
         <p>A given <a href="#sec-15.9.1.1">time value</a> <i>t</i> belongs to day number</p>
 
-        <div class="display">Day(<i>t</i>) = floor(<i>t</i> / msPerDay)</div>
+        <div class="display">Day(<i>t</i>) = <a href="#sec-5.2">floor</a>(<i>t</i> / msPerDay)</div>
 
         <p>where the number of milliseconds per day is</p>
 
@@ -18141,7 +18142,7 @@
 
         <p>The remainder is called the time within the day:</p>
 
-        <div class="display">TimeWithinDay(<i>t</i>) = <i>t</i> modulo msPerDay</div>
+        <div class="display">TimeWithinDay(<i>t</i>) = <i>t</i> <a href="#sec-5.2">modulo</a> msPerDay</div>
       </section>
 
       <section id="sec-15.9.1.3">
@@ -18153,13 +18154,13 @@
         <span style="font-family: Times New Roman">400</span>)). The number of days in year number <span style="font-family: Times
         New Roman; font-style: italic">y</span> is therefore defined by</p>
 
-        <div class="display">DaysInYear(<i>y</i>) &#x9;= 365  if (<i>y</i> modulo 4) &ne; 0<br>= 366  if (<i>y</i> modulo 4) = 0 and (y modulo 100) &ne; 0<br>= 365  if (<i>y</i> modulo 100) = 0 and (y modulo 400) &ne; 0<br>= 366  if (<i>y</i> modulo 400) = 0</div>
+        <div class="display">DaysInYear(<i>y</i>) &#x9;= 365  if (<i>y</i> <a href="#sec-5.2">modulo</a> 4) &ne; 0<br>= 366  if (<i>y</i> <a href="#sec-5.2">modulo</a> 4) = 0 and (y <a href="#sec-5.2">modulo</a> 100) &ne; 0<br>= 365  if (<i>y</i> <a href="#sec-5.2">modulo</a> 100) = 0 and (y <a href="#sec-5.2">modulo</a> 400) &ne; 0<br>= 366  if (<i>y</i> <a href="#sec-5.2">modulo</a> 400) = 0</div>
 
         <p>All non-leap years have <span style="font-family: Times New Roman">365</span> days with the usual number of days per
         month and leap years have an extra day in February. The day number of the first day of year <span style="font-family:
         Times New Roman; font-style: italic">y</span> is given by:</p>
 
-        <div class="display">DayFromYear(<i>y</i>)&#x9;= 365 &times; (<i>y</i>&minus;1970) + floor((<i>y</i>&minus;1969)/4) &minus; floor((<i>y</i>&minus;1901)/100) + floor((<i>y</i>&minus;1601)/400)</div>
+        <div class="display">DayFromYear(<i>y</i>)&#x9;= 365 &times; (<i>y</i>&minus;1970) + <a href="#sec-5.2">floor</a>((<i>y</i>&minus;1969)/4) &minus; <a href="#sec-5.2">floor</a>((<i>y</i>&minus;1901)/100) + <a href="#sec-5.2">floor</a>((<i>y</i>&minus;1601)/400)</div>
 
         <p>The <a href="#sec-15.9.1.1">time value</a> of the start of a year is:</p>
 
@@ -18185,7 +18186,7 @@
 
         <p>where</p>
 
-        <div class="display">DayWithinYear(<i>t</i>)&#x9;= Day(<i>t</i>)&minus;DayFromYear(<a href="#sec-15.9.1.3">YearFromTime</a>(<i>t)</i>)</div>
+        <div class="display">DayWithinYear(<i>t</i>)&#x9;= <a href="#sec-15.9.1.2">Day</a>(<i>t</i>)&minus;DayFromYear(<a href="#sec-15.9.1.3">YearFromTime</a>(<i>t)</i>)</div>
 
         <p>A month value of <span style="font-family: Times New Roman">0</span> specifies January; <span style="font-family: Times
         New Roman">1</span> specifies February; <span style="font-family: Times New Roman">2</span> specifies March; <span
@@ -18214,7 +18215,7 @@
         <p>The weekday for a particular <a href="#sec-15.9.1.1">time value</a> <span style="font-family: Times New Roman;
         font-style: italic">t</span> is defined as</p>
 
-        <div class="display">WeekDay(<i>t</i>)&#x9; = (Day(<i>t</i>) + 4) modulo 7</div>
+        <div class="display">WeekDay(<i>t</i>)&#x9; = (<a href="#sec-15.9.1.2">Day</a>(<i>t</i>) + 4) <a href="#sec-5.2">modulo</a> 7</div>
 
         <p>A weekday value of <span style="font-family: Times New Roman">0</span> specifies Sunday; <span style="font-family:
         Times New Roman">1</span> specifies Monday; <span style="font-family: Times New Roman">2</span> specifies Tuesday; <span
@@ -18285,10 +18286,10 @@
 
         <p>The following functions are useful in decomposing time values:</p>
 
-        <div class="display">HourFromTime(<i>t</i>)&#x9;= floor(<i>t</i> / msPerHour) modulo HoursPerDay</div>
-        <div class="display">MinFromTime(<i>t</i>)&#x9;= floor(<i>t</i> / msPerMinute) modulo MinutesPerHour</div>
-        <div class="display">SecFromTime(<i>t</i>)&#x9;= floor(<i>t</i> / msPerSecond) modulo SecondsPerMinute</div>
-        <div class="display">msFromTime(<i>t</i>)&#x9;= t modulo msPerSecond</div>
+        <div class="display">HourFromTime(<i>t</i>)&#x9;= <a href="#sec-5.2">floor</a>(<i>t</i> / msPerHour) <a href="#sec-5.2">modulo</a> HoursPerDay</div>
+        <div class="display">MinFromTime(<i>t</i>)&#x9;= <a href="#sec-5.2">floor</a>(<i>t</i> / msPerMinute) <a href="#sec-5.2">modulo</a> MinutesPerHour</div>
+        <div class="display">SecFromTime(<i>t</i>)&#x9;= <a href="#sec-5.2">floor</a>(<i>t</i> / msPerSecond) <a href="#sec-5.2">modulo</a> SecondsPerMinute</div>
+        <div class="display">msFromTime(<i>t</i>)&#x9;= t <a href="#sec-5.2">modulo</a> msPerSecond</div>
 
         <p>where</p>
 
@@ -18328,10 +18329,10 @@
           <li>Let <i>y</i> be <a href="#sec-9.1.4">ToInteger</a>(<i>year</i>).</li>
           <li>Let <i>m</i> be <a href="#sec-9.1.4">ToInteger</a>(<i>month</i>).</li>
           <li>Let <i>dt</i> be <a href="#sec-9.1.4">ToInteger</a>(<i>date</i>).</li>
-          <li>Let <i>ym</i> be <i>y</i> + floor(<i>m</i> /12).</li>
-          <li>Let <i>mn</i> be <i>m</i> modulo 12.</li>
+          <li>Let <i>ym</i> be <i>y</i> + <a href="#sec-5.2">floor</a>(<i>m</i> /12).</li>
+          <li>Let <i>mn</i> be <i>m</i> <a href="#sec-5.2">modulo</a> 12.</li>
           <li>Find a value <i>t</i> such that <a href="#sec-15.9.1.3">YearFromTime</a>(<i>t</i>) <code>==</code> <i>ym</i> and <a href="#sec-15.9.1.4">MonthFromTime</a>(<i>t</i>) <code>==</code> <i>mn</i> and <a href="#sec-15.9.1.5">DateFromTime</a>(<i>t</i>) <code>==</code> 1; but if this is not possible (because some argument is out of range), return <b>NaN</b>.</li>
-          <li>Return Day(<i>t</i>) + <i>dt</i> &minus; 1.</li>
+          <li>Return <a href="#sec-15.9.1.2">Day</a>(<i>t</i>) + <i>dt</i> &minus; 1.</li>
         </ol>
       </section>
 
@@ -18355,7 +18356,7 @@
 
         <ol class="proc">
           <li>If <i>time</i> is not finite, return <b>NaN</b>.</li>
-          <li>If abs(<i>time</i>) &gt; 8.64&nbsp;<span style="font-family: sans-serif">x</span>&nbsp;10<sup>15</sup>, return <b>NaN</b>.</li>
+          <li>If <a href="#sec-5.2">abs</a>(<i>time</i>) &gt; 8.64&nbsp;<span style="font-family: sans-serif">x</span>&nbsp;10<sup>15</sup>, return <b>NaN</b>.</li>
           <li>Return an implementation-dependent choice of either <a href="#sec-9.1.4">ToInteger</a>(<i>time</i>) or <a href="#sec-9.1.4">ToInteger</a>(<i>time</i>) + (<b>+0</b>). (Adding a positive zero converts <b>&minus;0</b> to <b>+0</b>.)</li>
         </ol>
 
@@ -18526,7 +18527,7 @@ THH:mm:ss.sss</pre>
           <li>If <i>ms</i> is supplied then let <i>milli</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>); else let <i>milli</i> be <b>0</b>.</li>
           <li>If&nbsp;<i>y</i>&nbsp;is&nbsp;not&nbsp;<b>NaN</b>&nbsp;and&nbsp;0&nbsp;&le;&nbsp;<a href="#sec-9.1.4">ToInteger</a>(<i>y</i>)&nbsp;&le;&nbsp;99,&nbsp;then let <i>yr</i> be&nbsp;1900+<a href="#sec-9.1.4">ToInteger</a>(<i>y</i>); otherwise, let <i>yr</i> be <i>y</i>.</li>
           <li>Let <i>finalDate</i> be  <a href="#sec-15.9.1.13">MakeDate</a>(<a href="#sec-15.9.1.12">MakeDay</a>(<i>yr</i>, <i>m</i>, <i>dt</i>), <a href="#sec-15.9.1.11">MakeTime</a>(<i>h</i>, <i>min</i>, <i>s</i>, <i>milli</i>)).</li>
-          <li>Set the [[PrimitiveValue]] internal property of the newly constructed object to <a href="#sec-15.9.1.14">TimeClip</a>(UTC(<i>finalDate</i>)).</li>
+          <li>Set the [[PrimitiveValue]] internal property of the newly constructed object to <a href="#sec-15.9.1.14">TimeClip</a>(<a href="#sec-15.9.1.9">UTC</a>(<i>finalDate</i>)).</li>
         </ol>
       </section>
 
@@ -18937,7 +18938,7 @@ THH:mm:ss.sss</pre>
         <ol class="proc">
           <li>Let <i>t</i> be the result of <a href="#sec-15.9.1.9">LocalTime</a>(<a href="#sec-15.9.5">this time value</a>).</li>
           <li>Let <i>time</i> be <a href="#sec-15.9.1.11">MakeTime</a>(<a href="#sec-15.9.1.10">HourFromTime</a>(<i>t</i>), <a href="#sec-15.9.1.10">MinFromTime</a>(<i>t</i>), <a href="#sec-15.9.1.10">SecFromTime</a>(<i>t</i>), <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>)).</li>
-          <li>Let <i>u</i> be <a href="#sec-15.9.1.14">TimeClip</a>(UTC(<a href="#sec-15.9.1.13">MakeDate</a>(Day(<i>t</i>), <i>time</i>))).</li>
+          <li>Let <i>u</i> be <a href="#sec-15.9.1.14">TimeClip</a>(<a href="#sec-15.9.1.9">UTC</a>(<a href="#sec-15.9.1.13">MakeDate</a>(<a href="#sec-15.9.1.2">Day</a>(<i>t</i>), <i>time</i>))).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>u</i>.</li>
           <li>Return <i>u</i>.</li>
         </ol>
@@ -18948,7 +18949,7 @@ THH:mm:ss.sss</pre>
         <ol class="proc">
           <li>Let <i>t</i> be <a href="#sec-15.9.5">this time value</a>.</li>
           <li>Let <i>time</i> be <a href="#sec-15.9.1.11">MakeTime</a>(<a href="#sec-15.9.1.10">HourFromTime</a>(<i>t</i>), <a href="#sec-15.9.1.10">MinFromTime</a>(<i>t</i>), <a href="#sec-15.9.1.10">SecFromTime</a>(<i>t</i>), <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>)).</li>
-          <li>Let <i>v</i> be <a href="#sec-15.9.1.14">TimeClip</a>(<a href="#sec-15.9.1.13">MakeDate</a>(Day(<i>t</i>), <i>time</i>)).</li>
+          <li>Let <i>v</i> be <a href="#sec-15.9.1.14">TimeClip</a>(<a href="#sec-15.9.1.13">MakeDate</a>(<a href="#sec-15.9.1.2">Day</a>(<i>t</i>), <i>time</i>)).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>v</i>.</li>
           <li>Return <i>v</i>.</li>
         </ol>
@@ -18965,8 +18966,8 @@ THH:mm:ss.sss</pre>
           <li>Let <i>t</i> be the result of <a href="#sec-15.9.1.9">LocalTime</a>(<a href="#sec-15.9.5">this time value</a>).</li>
           <li>Let <i>s</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>sec</i>).</li>
           <li>If <i>ms</i> is not specified, then let <i>milli</i> be <a href="#sec-15.9.1.10">msFromTime</a>(<i>t</i>); otherwise, let <i>milli</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>).</li>
-          <li>Let <i>date</i> be <a href="#sec-15.9.1.13">MakeDate</a>(Day(<i>t</i>), <a href="#sec-15.9.1.11">MakeTime</a>(<a href="#sec-15.9.1.10">HourFromTime</a>(<i>t</i>), <a href="#sec-15.9.1.10">MinFromTime</a>(<i>t</i>), <i>s</i>, <i>milli</i>)).</li>
-          <li>Let <i>u</i> be <a href="#sec-15.9.1.14">TimeClip</a>(UTC(<i>date</i>)).</li>
+          <li>Let <i>date</i> be <a href="#sec-15.9.1.13">MakeDate</a>(<a href="#sec-15.9.1.2">Day</a>(<i>t</i>), <a href="#sec-15.9.1.11">MakeTime</a>(<a href="#sec-15.9.1.10">HourFromTime</a>(<i>t</i>), <a href="#sec-15.9.1.10">MinFromTime</a>(<i>t</i>), <i>s</i>, <i>milli</i>)).</li>
+          <li>Let <i>u</i> be <a href="#sec-15.9.1.14">TimeClip</a>(<a href="#sec-15.9.1.9">UTC</a>(<i>date</i>)).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>u</i>.</li>
           <li>Return <i>u</i>.</li>
         </ol>
@@ -18985,7 +18986,7 @@ THH:mm:ss.sss</pre>
           <li>Let <i>t</i> be <a href="#sec-15.9.5">this time value</a>.</li>
           <li>Let <i>s</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>sec</i>).</li>
           <li>If <i>ms</i> is not specified, then let <i>milli</i> be <a href="#sec-15.9.1.10">msFromTime</a>(<i>t</i>); otherwise, let <i>milli</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>).</li>
-          <li>Let <i>date</i> be <a href="#sec-15.9.1.13">MakeDate</a>(Day(<i>t</i>), <a href="#sec-15.9.1.11">MakeTime</a>(<a href="#sec-15.9.1.10">HourFromTime</a>(<i>t</i>), <a href="#sec-15.9.1.10">MinFromTime</a>(<i>t</i>), <i>s</i>, <i>milli</i>)).</li>
+          <li>Let <i>date</i> be <a href="#sec-15.9.1.13">MakeDate</a>(<a href="#sec-15.9.1.2">Day</a>(<i>t</i>), <a href="#sec-15.9.1.11">MakeTime</a>(<a href="#sec-15.9.1.10">HourFromTime</a>(<i>t</i>), <a href="#sec-15.9.1.10">MinFromTime</a>(<i>t</i>), <i>s</i>, <i>milli</i>)).</li>
           <li>Let <i>v</i> be <a href="#sec-15.9.1.14">TimeClip</a>(<i>date</i>).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>v</i>.</li>
           <li>Return <i>v</i>.</li>
@@ -19010,8 +19011,8 @@ THH:mm:ss.sss</pre>
           <li>Let <i>m</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>min</i>).</li>
           <li>If <i>sec</i> is not specified, then let <i>s</i> be <a href="#sec-15.9.1.10">SecFromTime</a>(<i>t</i>); otherwise, let <i>s</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>sec</i>).</li>
           <li>If <i>ms</i> is not specified, then let <i>milli</i> be <a href="#sec-15.9.1.10">msFromTime</a>(<i>t</i>); otherwise, let <i>milli</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>).</li>
-          <li>Let <i>date</i> be <a href="#sec-15.9.1.13">MakeDate</a>(Day(<i>t</i>), <a href="#sec-15.9.1.11">MakeTime</a>(<a href="#sec-15.9.1.10">HourFromTime</a>(<i>t</i>), <i>m</i>, <i>s</i>, <i>milli</i>)).</li>
-          <li>Let <i>u</i> be <a href="#sec-15.9.1.14">TimeClip</a>(UTC(<i>date</i>)).</li>
+          <li>Let <i>date</i> be <a href="#sec-15.9.1.13">MakeDate</a>(<a href="#sec-15.9.1.2">Day</a>(<i>t</i>), <a href="#sec-15.9.1.11">MakeTime</a>(<a href="#sec-15.9.1.10">HourFromTime</a>(<i>t</i>), <i>m</i>, <i>s</i>, <i>milli</i>)).</li>
+          <li>Let <i>u</i> be <a href="#sec-15.9.1.14">TimeClip</a>(<a href="#sec-15.9.1.9">UTC</a>(<i>date</i>)).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>u</i>.</li>
           <li>Return <i>u</i>.</li>
         </ol>
@@ -19035,7 +19036,7 @@ THH:mm:ss.sss</pre>
           <li>Let <i>m</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>min</i>).</li>
           <li>If <i>sec</i> is not specified, then let <i>s</i> be <a href="#sec-15.9.1.10">SecFromTime</a>(<i>t</i>); otherwise, let <i>s</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>sec</i>).</li>
           <li>If <i>ms</i> is not specified, then let <i>milli</i> be <a href="#sec-15.9.1.10">msFromTime</a>(<i>t</i>); otherwise, let <i>milli</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>).</li>
-          <li>Let <i>date</i> be <a href="#sec-15.9.1.13">MakeDate</a>(Day(<i>t</i>), <a href="#sec-15.9.1.11">MakeTime</a>(<a href="#sec-15.9.1.10">HourFromTime</a>(<i>t</i>), <i>m</i>, <i>s</i>, <i>milli</i>)).</li>
+          <li>Let <i>date</i> be <a href="#sec-15.9.1.13">MakeDate</a>(<a href="#sec-15.9.1.2">Day</a>(<i>t</i>), <a href="#sec-15.9.1.11">MakeTime</a>(<a href="#sec-15.9.1.10">HourFromTime</a>(<i>t</i>), <i>m</i>, <i>s</i>, <i>milli</i>)).</li>
           <li>Let <i>v</i> be <a href="#sec-15.9.1.14">TimeClip</a>(<i>date</i>).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>v</i>.</li>
           <li>Return <i>v</i>.</li>
@@ -19065,8 +19066,8 @@ THH:mm:ss.sss</pre>
           <li>If <i>min</i> is not specified, then let <i>m</i> be <a href="#sec-15.9.1.10">MinFromTime</a>(<i>t</i>); otherwise, let <i>m</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>min</i>).</li>
           <li>If If <i>sec</i> is not specified, then let <i>s</i> be <a href="#sec-15.9.1.10">SecFromTime</a>(<i>t</i>); otherwise, let <i>s</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>sec</i>).</li>
           <li>If <i>ms</i> is not specified, then let <i>milli</i> be <a href="#sec-15.9.1.10">msFromTime</a>(<i>t</i>); otherwise, let <i>milli</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>).</li>
-          <li>Let <i>date</i> be <a href="#sec-15.9.1.13">MakeDate</a>(Day(<i>t</i>), <a href="#sec-15.9.1.11">MakeTime</a>(<i>h</i>, <i>m</i>, <i>s</i>, <i>milli</i>)).</li>
-          <li>Let <i>u</i> be <a href="#sec-15.9.1.14">TimeClip</a>(UTC(<i>date</i>)).</li>
+          <li>Let <i>date</i> be <a href="#sec-15.9.1.13">MakeDate</a>(<a href="#sec-15.9.1.2">Day</a>(<i>t</i>), <a href="#sec-15.9.1.11">MakeTime</a>(<i>h</i>, <i>m</i>, <i>s</i>, <i>milli</i>)).</li>
+          <li>Let <i>u</i> be <a href="#sec-15.9.1.14">TimeClip</a>(<a href="#sec-15.9.1.9">UTC</a>(<i>date</i>)).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>u</i>.</li>
           <li>Return <i>u</i>.</li>
         </ol>
@@ -19095,7 +19096,7 @@ THH:mm:ss.sss</pre>
           <li>If <i>min</i> is not specified, then let <i>m</i> be <a href="#sec-15.9.1.10">MinFromTime</a>(<i>t</i>); otherwise, let <i>m</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>min</i>).</li>
           <li>If <i>sec</i> is not specified, then let <i>s</i> be <a href="#sec-15.9.1.10">SecFromTime</a>(<i>t</i>); otherwise, let <i>s</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>sec</i>).</li>
           <li>If <i>ms</i> is not specified, then let <i>milli</i> be <a href="#sec-15.9.1.10">msFromTime</a>(<i>t</i>); otherwise, let <i>milli</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>).</li>
-          <li>Let <i>newDate</i> be <a href="#sec-15.9.1.13">MakeDate</a>(Day(<i>t</i>), <a href="#sec-15.9.1.11">MakeTime</a>(<i>h</i>, <i>m</i>, <i>s</i>, <i>milli</i>)).</li>
+          <li>Let <i>newDate</i> be <a href="#sec-15.9.1.13">MakeDate</a>(<a href="#sec-15.9.1.2">Day</a>(<i>t</i>), <a href="#sec-15.9.1.11">MakeTime</a>(<i>h</i>, <i>m</i>, <i>s</i>, <i>milli</i>)).</li>
           <li>Let <i>v</i> be <a href="#sec-15.9.1.14">TimeClip</a>(<i>newDate</i>).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>v</i>.</li>
           <li>Return <i>v</i>.</li>
@@ -19110,7 +19111,7 @@ THH:mm:ss.sss</pre>
           <li>Let <i>t</i> be the result of <a href="#sec-15.9.1.9">LocalTime</a>(<a href="#sec-15.9.5">this time value</a>).</li>
           <li>Let <i>dt</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>date</i>).</li>
           <li>Let <i>newDate</i> be <a href="#sec-15.9.1.13">MakeDate</a>(<a href="#sec-15.9.1.12">MakeDay</a>(<a href="#sec-15.9.1.3">YearFromTime</a>(<i>t</i>), <a href="#sec-15.9.1.4">MonthFromTime</a>(<i>t</i>), <i>dt</i>), <a href="#sec-15.9.1.2">TimeWithinDay</a>(<i>t</i>)).</li>
-          <li>Let <i>u</i> be <a href="#sec-15.9.1.14">TimeClip</a>(UTC(<i>newDate</i>)).</li>
+          <li>Let <i>u</i> be <a href="#sec-15.9.1.14">TimeClip</a>(<a href="#sec-15.9.1.9">UTC</a>(<i>newDate</i>)).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>u</i>.</li>
           <li>Return <i>u</i>.</li>
         </ol>
@@ -19140,7 +19141,7 @@ THH:mm:ss.sss</pre>
           <li>Let <i>m</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>month</i>).</li>
           <li>If <i>date</i> is not specified, then let <i>dt</i> be <a href="#sec-15.9.1.5">DateFromTime</a>(<i>t</i>); otherwise, let <i>dt</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>date</i>).</li>
           <li>Let <i>newDate</i> be <a href="#sec-15.9.1.13">MakeDate</a>(<a href="#sec-15.9.1.12">MakeDay</a>(<a href="#sec-15.9.1.3">YearFromTime</a>(<i>t</i>), <i>m</i>, <i>dt</i>), <a href="#sec-15.9.1.2">TimeWithinDay</a>(<i>t</i>)).</li>
-          <li>Let <i>u</i> be <a href="#sec-15.9.1.14">TimeClip</a>(UTC(<i>newDate</i>)).</li>
+          <li>Let <i>u</i> be <a href="#sec-15.9.1.14">TimeClip</a>(<a href="#sec-15.9.1.9">UTC</a>(<i>newDate</i>)).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>u</i>.</li>
           <li>Return <i>u</i>.</li>
         </ol>
@@ -19185,7 +19186,7 @@ THH:mm:ss.sss</pre>
           <li>If <i>month</i> is not specified, then let <i>m</i> be <a href="#sec-15.9.1.4">MonthFromTime</a>(<i>t</i>); otherwise, let <i>m</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>month</i>).</li>
           <li>If <i>date</i> is not specified, then let <i>dt</i> be <a href="#sec-15.9.1.5">DateFromTime</a>(<i>t</i>); otherwise, let <i>dt</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>date</i>).</li>
           <li>Let <i>newDate</i> be <a href="#sec-15.9.1.13">MakeDate</a>(<a href="#sec-15.9.1.12">MakeDay</a>(<i>y</i>, <i>m</i>, <i>dt</i>), <a href="#sec-15.9.1.2">TimeWithinDay</a>(<i>t</i>)).</li>
-          <li>Let <i>u</i> be <a href="#sec-15.9.1.14">TimeClip</a>(UTC(<i>newDate</i>)).</li>
+          <li>Let <i>u</i> be <a href="#sec-15.9.1.14">TimeClip</a>(<a href="#sec-15.9.1.9">UTC</a>(<i>newDate</i>)).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>u</i>.</li>
           <li>Return <i>u</i>.</li>
         </ol>
@@ -23320,7 +23321,7 @@ THH:mm:ss.sss</pre>
         <li>If Result(2) is <b>NaN</b>, set the [[PrimitiveValue]] internal property of the <b>this</b> value to <b>NaN</b> and return <b>NaN</b>.</li>
         <li>If Result(2) is not <b>NaN</b> and 0 &le; <a href="#sec-9.1.4">ToInteger</a>(Result(2)) &le; 99 then Result(4) is <a href="#sec-9.1.4">ToInteger</a>(Result(2)) +&nbsp;1900. Otherwise, Result(4) is Result(2).</li>
         <li>Compute <a href="#sec-15.9.1.12">MakeDay</a>(Result(4), <a href="#sec-15.9.1.4">MonthFromTime</a>(<i>t</i>), <a href="#sec-15.9.1.5">DateFromTime</a>(<i>t</i>)).</li>
-        <li>Compute UTC(<a href="#sec-15.9.1.13">MakeDate</a>(Result(5), <a href="#sec-15.9.1.2">TimeWithinDay</a>(<i>t</i>))).</li>
+        <li>Compute <a href="#sec-15.9.1.9">UTC</a>(<a href="#sec-15.9.1.13">MakeDate</a>(Result(5), <a href="#sec-15.9.1.2">TimeWithinDay</a>(<i>t</i>))).</li>
         <li>Set the [[PrimitiveValue]] internal property of the <b>this</b> value to <a href="#sec-15.9.1.14">TimeClip</a>(Result(6)).</li>
         <li>Return the value of the [[PrimitiveValue]] internal property of the <b>this</b> value.</li>
       </ol>
