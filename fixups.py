@@ -950,8 +950,8 @@ def fixup_links(doc):
 
         # clause 9
         ('ToPrimitive', 'ToPrimitive'),
-        #('ToBoolean', 'ToBoolean'),
-        #('ToNumber', 'ToNumber'),
+        ('ToBoolean', 'ToBoolean'),
+        ('ToNumber', 'ToNumber'),
         ('ToInteger', 'ToInteger'),
         ('ToInt32', 'ToInt32: (Signed 32 Bit Integer)'),
         ('ToUint32', 'ToUint32: (Unsigned 32 Bit Integer)'),

@@ -3745,14 +3745,14 @@
           <ol class="block">
             <li>Let <i>enum</i> be the result of calling the [[Get]] internal method of <i>Obj</i> with "<code>enumerable</code>".</li>
             <li>ReturnIfAbrupt(<i>enum</i>).</li>
-            <li>Set the [[Enumerable]] field of <i>desc</i> to ToBoolean(<i>enum</i>).</li>
+            <li>Set the [[Enumerable]] field of <i>desc</i> to <a href="#sec-9.1.2">ToBoolean</a>(<i>enum</i>).</li>
           </ol>
         </li>
         <li>If the result of calling the [[HasProperty]] internal method of <i>Obj</i> with argument "<code>configurable</code>" is <b>true</b>, then
           <ol class="block">
             <li>Let <i>conf</i>  be the result of calling the [[Get]] internal method of <i>Obj</i> with argument "<code>configurable</code>".</li>
             <li>ReturnIfAbrupt(cong).</li>
-            <li>Set the [[Configurable]] field of <i>desc</i> to ToBoolean(<i>conf</i>).</li>
+            <li>Set the [[Configurable]] field of <i>desc</i> to <a href="#sec-9.1.2">ToBoolean</a>(<i>conf</i>).</li>
           </ol>
         </li>
         <li>If the result of calling the [[HasProperty]] internal method of <i>Obj</i> with argument "<code>value</code>" is <b>true</b>, then
@@ -3766,7 +3766,7 @@
           <ol class="block">
             <li>Let <i>writable</i> be the result of calling the [[Get]] internal method of <i>Obj</i> with argument "<code>writable</code>".</li>
             <li>ReturnIfAbrupt(<i>writable</i>).</li>
-            <li>Set the [[Writable]] field of <i>desc</i> to ToBoolean(<i>writable</i>).</li>
+            <li>Set the [[Writable]] field of <i>desc</i> to <a href="#sec-9.1.2">ToBoolean</a>(<i>writable</i>).</li>
           </ol>
         </li>
         <li>If the result of calling the [[HasProperty]] internal method of <i>Obj</i> with argument "<code>get</code>" is <b>true</b>, then
@@ -4543,7 +4543,7 @@
       follows:</p>
 
       <ol class="proc">
-        <li>Let <i>number</i> be the result of calling ToNumber on the input argument.</li>
+        <li>Let <i>number</i> be the result of calling <a href="#sec-9.1.3">ToNumber</a> on the input argument.</li>
         <li>ReturnIfAbrupt(<i>number</i>).</li>
         <li>If <i>number</i> is <b>NaN</b>, return <b>+0</b>.</li>
         <li>If <i>number</i> is <b>+0</b>, <b>&minus;0</b>, <b>+&infin;,</b> or <b>&minus;&infin;</b>, return <i>number</i>.</li>
@@ -4560,7 +4560,7 @@
       inclusive. This abstract operation functions as follows:</p>
 
       <ol class="proc">
-        <li>Let <i>number</i> be the result of calling ToNumber on the input argument.</li>
+        <li>Let <i>number</i> be the result of calling <a href="#sec-9.1.3">ToNumber</a> on the input argument.</li>
         <li>ReturnIfAbrupt(<i>number</i>).</li>
         <li>If <i>number</i> is <b>NaN</b>, <b>+0</b>, <b>&minus;0</b>, <b>+&infin;</b>, or <b>&minus;&infin;</b>, return <b>+0</b>.</li>
         <li>Let <i>posInt</i> be sign(<i>number</i>) * floor(abs(<i>number</i>)).</li>
@@ -4587,7 +4587,7 @@
       follows:</p>
 
       <ol class="proc">
-        <li>Let <i>number</i> be the result of calling ToNumber on the input argument.</li>
+        <li>Let <i>number</i> be the result of calling <a href="#sec-9.1.3">ToNumber</a> on the input argument.</li>
         <li>ReturnIfAbrupt(<i>number</i>).</li>
         <li>If <i>number</i> is <b>NaN</b>, +0, &minus;0, +<b>&infin;</b>, or &minus;<b>&infin;</b>, return <b>+0</b>.</li>
         <li>Let <i>posInt</i> be sign(<i>number</i>) &times; floor(abs(<i>number</i>)).</li>
@@ -4615,7 +4615,7 @@
       follows:</p>
 
       <ol class="proc">
-        <li>Let <i>number</i> be the result of calling ToNumber on the input argument.</li>
+        <li>Let <i>number</i> be the result of calling <a href="#sec-9.1.3">ToNumber</a> on the input argument.</li>
         <li>ReturnIfAbrupt(<i>number</i>).</li>
         <li>If <i>number</i> is <b>NaN</b>, +0, &minus;0, +<b>&infin;</b>, or &minus;<b>&infin;</b>, return <b>+0</b>.</li>
         <li>Let <i>posInt</i> be sign(<i>number</i>) &times; floor(abs(<i>number</i>)).</li>
@@ -4709,7 +4709,7 @@
           not part of the normative requirements of this Standard:</p>
 
           <ul>
-            <li>If x is any Number value other than <b>&minus;0</b>, then ToNumber(ToString(x)) is exactly the same Number value as x.</li>
+            <li>If x is any Number value other than <b>&minus;0</b>, then <a href="#sec-9.1.3">ToNumber</a>(ToString(x)) is exactly the same Number value as x.</li>
             <li>The least significant digit of s is not always uniquely determined by the requirements listed in step 5.</li>
           </ul>
         </div>
@@ -7062,7 +7062,7 @@
 
       <ol class="proc">
         <li>Let <i>lhs</i> be the result of evaluating <i>LeftHandSideExpression</i>.</li>
-        <li>Let <i>oldValue</i> be ToNumber(<a href="#sec-8.9.1">GetValue</a>(<i>lhs</i>)).</li>
+        <li>Let <i>oldValue</i> be <a href="#sec-9.1.3">ToNumber</a>(<a href="#sec-8.9.1">GetValue</a>(<i>lhs</i>)).</li>
         <li>If <i>oldValue</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>oldValue</i>.</li>
         <li>Let <i>newValue</i> be the result of adding the value <code>1</code> to <i>oldValue</i>, using the same rules as for the <code>+</code> operator (<a href="#sec-11.6.3">see 11.6.3</a>).</li>
         <li>If  <a href="#sec-8.9.2">PutValue</a>(<i>lhs</i>, <i>newValue</i>) is an <a href="#sec-8.8">abrupt completion</a>, return that Completion Record.</li>
@@ -7081,7 +7081,7 @@
 
       <ol class="proc">
         <li>Let <i>lhs</i> be the result of evaluating <i>LeftHandSideExpression</i>.</li>
-        <li>Let <i>oldValue</i> be ToNumber(<a href="#sec-8.9.1">GetValue</a>(<i>lhs</i>)).</li>
+        <li>Let <i>oldValue</i> be <a href="#sec-9.1.3">ToNumber</a>(<a href="#sec-8.9.1">GetValue</a>(<i>lhs</i>)).</li>
         <li>Let <i>newValue</i> be the result of subtracting the value <code>1</code> from <i>oldValue</i>, using the same rules as for the <code>-</code> operator (<a href="#sec-11.6.3">11.6.3</a>).</li>
         <li>If  Call <a href="#sec-8.9.2">PutValue</a>(<i>lhs</i>, <i>newValue</i>) ) is an <a href="#sec-8.8">abrupt completion</a>, return that Completion Record.</li>
         <li>Return <i>oldValue</i>.</li>
@@ -7251,7 +7251,7 @@
 
       <ol class="proc">
         <li>Let <i>expr</i> be the result of evaluating UnaryExpression.</li>
-        <li>Let <i>oldValue</i> be ToNumber(<a href="#sec-8.9.1">GetValue</a>(<i>expr</i>)).</li>
+        <li>Let <i>oldValue</i> be <a href="#sec-9.1.3">ToNumber</a>(<a href="#sec-8.9.1">GetValue</a>(<i>expr</i>)).</li>
         <li>If <i>oldValue</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>oldValue</i>.</li>
         <li>Let <i>newValue</i> be the result of adding the value <code>1</code> to <i>oldValue</i>, using the same rules as for the <code>+</code> operator (<a href="#sec-11.6.3">see 11.6.3</a>).</li>
         <li>If <a href="#sec-8.9.2">PutValue</a>(<i>expr</i>, <i>newValue</i>) is an <a href="#sec-8.8">abrupt completion</a>, return that Completion Record.</li>
@@ -7269,7 +7269,7 @@
 
       <ol class="proc">
         <li>Let <i>expr</i> be the result of evaluating UnaryExpression.</li>
-        <li>Let <i>oldValue</i> be ToNumber(<a href="#sec-8.9.1">GetValue</a>(<i>expr</i>)).</li>
+        <li>Let <i>oldValue</i> be <a href="#sec-9.1.3">ToNumber</a>(<a href="#sec-8.9.1">GetValue</a>(<i>expr</i>)).</li>
         <li>If <i>oldValue</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>oldValue</i>.</li>
         <li>Let <i>newValue</i> be the result of  subtracting the value <code>1</code> from <i>oldValue</i>, using the same rules as for the <code>-</code> operator (<a href="#sec-11.6.3">see 11.6.3</a>).</li>
         <li>If <a href="#sec-8.9.2">PutValue</a>(<i>expr</i>, <i>newValue</i>) is an <a href="#sec-8.8">abrupt completion</a>, return that Completion Record.</li>
@@ -7289,7 +7289,7 @@
 
       <ol class="proc">
         <li>Let <i>expr</i> be the result of evaluating UnaryExpression.</li>
-        <li>Return ToNumber(<a href="#sec-8.9.1">GetValue</a>(<i>expr</i>)).</li>
+        <li>Return <a href="#sec-9.1.3">ToNumber</a>(<a href="#sec-8.9.1">GetValue</a>(<i>expr</i>)).</li>
       </ol>
     </section>
 
@@ -7306,7 +7306,7 @@
 
       <ol class="proc">
         <li>Let <i>expr</i> be the result of evaluating UnaryExpression.</li>
-        <li>Let <i>oldValue</i> be ToNumber(<a href="#sec-8.9.1">GetValue</a>(<i>expr</i>)).</li>
+        <li>Let <i>oldValue</i> be <a href="#sec-9.1.3">ToNumber</a>(<a href="#sec-8.9.1">GetValue</a>(<i>expr</i>)).</li>
         <li>If <i>oldValue</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>oldValue</i>.</li>
         <li>If <i>oldValue</i> is <b>NaN</b>, return <b>NaN</b>.</li>
         <li>Return the result of negating <i>oldValue</i>; that is, compute a Number with the same magnitude but opposite sign.</li>
@@ -7339,7 +7339,7 @@
 
       <ol class="proc">
         <li>Let <i>expr</i> be the result of evaluating <i>UnaryExpression</i>.</li>
-        <li>Let <i>oldValue</i> be ToBoolean(<a href="#sec-8.9.1">GetValue</a>(<i>expr</i>)).</li>
+        <li>Let <i>oldValue</i> be <a href="#sec-9.1.2">ToBoolean</a>(<a href="#sec-8.9.1">GetValue</a>(<i>expr</i>)).</li>
         <li>If <i>oldValue</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>oldValue</i>.</li>
         <li>If <i>oldValue</i> is <b>true</b>, return <b>false</b>.</li>
         <li>Return <b>true</b>.</li>
@@ -7368,9 +7368,9 @@
       <li>If <i>leftValue</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>leftValue</i>.</li>
       <li>Let <i>right</i> be the result of evaluating UnaryExpression.</li>
       <li>Let <i>rightValue</i> be <a href="#sec-8.9.1">GetValue</a>(<i>right</i>).</li>
-      <li>Let <i>leftNum</i> be ToNumber(<i>leftValue</i>).</li>
+      <li>Let <i>leftNum</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>leftValue</i>).</li>
       <li>If <i>leftNum</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>leftNum</i>.</li>
-      <li>Let <i>rightNum</i> be ToNumber(<i>rightValue</i>).</li>
+      <li>Let <i>rightNum</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>rightValue</i>).</li>
       <li>If <i>rightNum</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>rightNum</i>.</li>
       <li>Return the result of applying the specified operation (*, /, or %) to <i>leftNum</i> and <i>rightNum</i>. See the Notes below 11.5.1, <a href="#sec-11.5.2">11.5.2</a>, 11.5.3.</li>
     </ol>
@@ -7483,7 +7483,7 @@
             <li>Return the String that is the result of concatenating <a href="#sec-9.1.8">ToString</a>(<i>lprim</i>) followed by <a href="#sec-9.1.8">ToString</a>(<i>rprim</i>)</li>
           </ol>
         </li>
-        <li>Return the result of applying the addition operation to ToNumber(<i>lprim</i>) and ToNumber(<i>rprim</i>). See the Note below 11.6.3.</li>
+        <li>Return the result of applying the addition operation to <a href="#sec-9.1.3">ToNumber</a>(<i>lprim</i>) and <a href="#sec-9.1.3">ToNumber</a>(<i>rprim</i>). See the Note below 11.6.3.</li>
       </ol>
       <div class="note">
         <p><span class="nh">NOTE 1</span> No hint is provided in the calls to <a href="#sec-9.1.1">ToPrimitive</a> in steps 5 and
@@ -7513,9 +7513,9 @@
         <li>Let <i>rref</i> be the result of evaluating MultiplicativeExpression.</li>
         <li>Let <i>rval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>rref</i>).</li>
         <li>If <i>rval</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>rval</i>.</li>
-        <li>Let <i>lnum</i> be ToNumber(<i>lval</i>).</li>
+        <li>Let <i>lnum</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>lval</i>).</li>
         <li>If <i>lnum</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>lnum</i>.</li>
-        <li>Let <i>rnum</i> be ToNumber(<i>rval</i>).</li>
+        <li>Let <i>rnum</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>rval</i>).</li>
         <li>If <i>rnum</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>rnum</i>.</li>
         <li>Return the result of applying the subtraction operation to <i>lnum</i> and <i>rnum</i>. See the note below 11.6.3.</li>
       </ol>
@@ -7715,8 +7715,8 @@
         </li>
         <li>If it is not the case that both Type(<i>px</i>) is String and Type(<i>py</i>) is String, then
           <ol class="block">
-            <li>Let <i>nx</i> be the result of calling ToNumber(<i>px</i>). Because <i>px</i> and <i>py</i> are primitive values evaluation order is not important.</li>
-            <li>Let <i>ny</i> be the result of calling ToNumber(<i>py</i>).</li>
+            <li>Let <i>nx</i> be the result of calling <a href="#sec-9.1.3">ToNumber</a>(<i>px</i>). Because <i>px</i> and <i>py</i> are primitive values evaluation order is not important.</li>
+            <li>Let <i>ny</i> be the result of calling <a href="#sec-9.1.3">ToNumber</a>(<i>py</i>).</li>
             <li>If <i>nx</i> is <b>NaN</b>, return <b>undefined</b>.</li>
             <li>If <i>ny</i> is <b>NaN</b>, return <b>undefined</b>.</li>
             <li>If <i>nx</i> and <i>ny</i> are the same Number value, return <b>false</b>.</li>
@@ -7902,10 +7902,10 @@
         </li>
         <li>If <i>x</i> is <b>null</b> and <i>y</i> is <b>undefined</b>, return <b>true</b>.</li>
         <li>If <i>x</i> is <b>undefined</b> and <i>y</i> is <b>null</b>, return <b>true</b>.</li>
-        <li>If Type(<i>x</i>) is Number and Type(<i>y</i>) is String,<br>return the result of the comparison <i>x</i> == ToNumber(<i>y</i>).</li>
-        <li>If Type(<i>x</i>) is String and Type(<i>y</i>) is Number,<br>return the result of the comparison ToNumber(<i>x</i>) == <i>y</i>.</li>
-        <li>If Type(<i>x</i>) is Boolean, return the result of the comparison ToNumber(<i>x</i>) == <i>y</i>.</li>
-        <li>If Type(<i>y</i>) is Boolean, return the result of the comparison <i>x</i> == ToNumber(<i>y</i>).</li>
+        <li>If Type(<i>x</i>) is Number and Type(<i>y</i>) is String,<br>return the result of the comparison <i>x</i> == <a href="#sec-9.1.3">ToNumber</a>(<i>y</i>).</li>
+        <li>If Type(<i>x</i>) is String and Type(<i>y</i>) is Number,<br>return the result of the comparison <a href="#sec-9.1.3">ToNumber</a>(<i>x</i>) == <i>y</i>.</li>
+        <li>If Type(<i>x</i>) is Boolean, return the result of the comparison <a href="#sec-9.1.3">ToNumber</a>(<i>x</i>) == <i>y</i>.</li>
+        <li>If Type(<i>y</i>) is Boolean, return the result of the comparison <i>x</i> == <a href="#sec-9.1.3">ToNumber</a>(<i>y</i>).</li>
         <li>If Type(<i>x</i>) is either String or Number and Type(<i>y</i>) is Object,<br>return the result of the comparison <i>x</i> == <a href="#sec-9.1.1">ToPrimitive</a>(<i>y</i>).</li>
         <li>If Type(<i>x</i>) is Object and Type(<i>y</i>) is either String or Number,<br>return the result of the comparison <a href="#sec-9.1.1">ToPrimitive</a>(<i>x</i>) == <i>y</i>.</li>
         <li>Return <b>false</b>.</li>
@@ -8156,7 +8156,7 @@
 
     <ol class="proc">
       <li>Let <i>lref</i> be the result of evaluating <i>LogicalANDExpression</i>.</li>
-      <li>Let <i>lval</i> be ToBoolean(<a href="#sec-8.9.1">GetValue</a>(<i>lref</i>)).</li>
+      <li>Let <i>lval</i> be <a href="#sec-9.1.2">ToBoolean</a>(<a href="#sec-8.9.1">GetValue</a>(<i>lref</i>)).</li>
       <li>If <i>lval</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>lval</i>.</li>
       <li>If <i>lval</i> is <b>false</b>, return <i>lval</i>.</li>
       <li>Let <i>rref</i> be the result of evaluating <i>BitwiseORExpression</i>.</li>
@@ -8169,7 +8169,7 @@
 
     <ol class="proc">
       <li>Let <i>lref</i> be the result of evaluating <i>LogicalORExpression</i>.</li>
-      <li>Let <i>lval</i> be ToBoolean(<a href="#sec-8.9.1">GetValue</a>(<i>lref</i>)).</li>
+      <li>Let <i>lval</i> be <a href="#sec-9.1.2">ToBoolean</a>(<a href="#sec-8.9.1">GetValue</a>(<i>lref</i>)).</li>
       <li>If <i>lval</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>lval</i>.</li>
       <li>If <i>lval</i> is <b>true</b>, return <i>lval</i>.</li>
       <li>Let <i>rref</i> be the result of evaluating <i>LogicalANDExpression</i>.</li>
@@ -8216,7 +8216,7 @@
 
     <ol class="proc">
       <li>Let <i>lref</i> be the result of evaluating <i>LogicalORExpression</i>.</li>
-      <li>Let <i>lval</i> be ToBoolean(<a href="#sec-8.9.1">GetValue</a>(<i>lref</i>)).</li>
+      <li>Let <i>lval</i> be <a href="#sec-9.1.2">ToBoolean</a>(<a href="#sec-8.9.1">GetValue</a>(<i>lref</i>)).</li>
       <li>If <i>lval</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>lval</i>.</li>
       <li>If <i>lval</i> is <b>true</b>, then
         <ol class="block">
@@ -10156,7 +10156,7 @@
 
       <ol class="proc">
         <li>Let <i>exprRef</i> be the result of evaluating <i>Expression</i>.</li>
-        <li>Let <i>exprValue</i> be ToBoolean(<a href="#sec-8.9.1">GetValue</a>(<i>exprRef</i>)).</li>
+        <li>Let <i>exprValue</i> be <a href="#sec-9.1.2">ToBoolean</a>(<a href="#sec-8.9.1">GetValue</a>(<i>exprRef</i>)).</li>
         <li>If <i>exprValue</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>exprValue</i>.</li>
         <li>If <i>exprValue</i> is <b>true</b>, then
           <ol class="block">
@@ -10176,7 +10176,7 @@
 
       <ol class="proc">
         <li>Let <i>exprRef</i> be the result of evaluating <i>Expression</i>.</li>
-        <li>Let <i>exprValue</i> be ToBoolean(<a href="#sec-8.9.1">GetValue</a>(<i>exprRef</i>)).</li>
+        <li>Let <i>exprValue</i> be <a href="#sec-9.1.2">ToBoolean</a>(<a href="#sec-8.9.1">GetValue</a>(<i>exprRef</i>)).</li>
         <li>If <i>exprValue</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>exprValue</i>.</li>
         <li>If <i>exprValue</i> is <b>false</b>, return NormalCompletion(<b>undefined</b>).</li>
         <li>Return the result of evaluating <i>Statement</i><span style="font-family: sans-serif">.</span></li>
@@ -10250,7 +10250,7 @@
               <li>If <i>stmt</i>.[[value]] is not <span style="font-family: sans-serif">empty</span>, let <i>V</i> = <i>stmt</i>.[[value]]<i>.</i></li>
               <li>If <i>stmt</i> is an <a href="#sec-8.8">abrupt completion</a> and loopContinues (<i>stmt</i>,<i>labelSet</i>) is <b>false</b>, return <i>stmt</i>.</li>
               <li>Let <i>exprRef</i> be the result of evaluating <i>Expression</i>.</li>
-              <li>Let <i>exprValue</i> be ToBoolean(<a href="#sec-8.9.1">GetValue</a>(<i>exprRef</i>)).</li>
+              <li>Let <i>exprValue</i> be <a href="#sec-9.1.2">ToBoolean</a>(<a href="#sec-8.9.1">GetValue</a>(<i>exprRef</i>)).</li>
               <li>If <i>exprValue</i> is <b>false</b>, Return NormalCompletion(<i>V</i>).</li>
               <li>Else if <i>exprValue</i> is a Completion Record, then
                 <ol class="block">
@@ -10292,7 +10292,7 @@
           <li>Repeat
             <ol class="block">
               <li>Let <i>exprRef</i> be the result of evaluating <i>Expression</i>.</li>
-              <li>Let <i>exprValue</i> be ToBoolean(<a href="#sec-8.9.1">GetValue</a>(<i>exprRef</i>)).</li>
+              <li>Let <i>exprValue</i> be <a href="#sec-9.1.2">ToBoolean</a>(<a href="#sec-8.9.1">GetValue</a>(<i>exprRef</i>)).</li>
               <li>If <i>exprValue</i> is <b>false</b>, return NormalCompletion(<i>V</i>).</li>
               <li>Else if <i>exprValue</i> is a Completion Record, then
                 <ol class="block">
@@ -10383,7 +10383,7 @@
               <li>If <i>testExpr</i> is not [empty], then
                 <ol class="block">
                   <li>Let <i>testExprRef</i> be the result of evaluating <i>testExpr</i>.</li>
-                  <li>Let <i>testExprValue</i> be ToBoolean(<a href="#sec-8.9.1">GetValue</a>(<i>testExprRef</i>))</li>
+                  <li>Let <i>testExprValue</i> be <a href="#sec-9.1.2">ToBoolean</a>(<a href="#sec-8.9.1">GetValue</a>(<i>testExprRef</i>))</li>
                   <li>If <i>testExprValue</i> is <b>false</b>, return NormalCompletion(<i>V</i>).</li>
                   <li>Else loopContinues (<i>testExprValue</i>,<i>labelSet</i>) is <b>false</b>, return <i>testExprValue.</i></li>
                 </ol>
@@ -12620,7 +12620,7 @@
         <p>Returns <b>true</b> if the argument coerces to <b>NaN</b>, and otherwise returns <b>false</b>.</p>
 
         <ol class="proc">
-          <li>If ToNumber(<i>number</i>) is <b>NaN</b>, return <b>true</b>.</li>
+          <li>If <a href="#sec-9.1.3">ToNumber</a>(<i>number</i>) is <b>NaN</b>, return <b>true</b>.</li>
           <li>Otherwise, return <b>false</b>.</li>
         </ol>
         <div class="note">
@@ -12637,7 +12637,7 @@
         returns <b>true</b>.</p>
 
         <ol class="proc">
-          <li>If ToNumber(<i>number</i>) is <b>NaN</b>, <b>+&infin;</b>, or <b>&minus;&infin;</b>, return <b>false</b>.</li>
+          <li>If <a href="#sec-9.1.3">ToNumber</a>(<i>number</i>) is <b>NaN</b>, <b>+&infin;</b>, or <b>&minus;&infin;</b>, return <b>false</b>.</li>
           <li>Otherwise, return <b>true</b>.</li>
         </ol>
       </section>
@@ -15165,7 +15165,7 @@
                   <li>If <i>kValue</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>kValue</i>.</li>
                   <li>Let <i>testResult</i> be the result of calling the [[Call]] internal method of <i>callbackfn</i> with <i>T</i> as the <b>this</b> value and argument list containing <i>kValue</i>, <i>k</i>, and <i>O</i>.</li>
                   <li>If <i>testResult</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>testResult</i>.</li>
-                  <li>If ToBoolean(<i>testResult)</i> is <b>false</b>, return <b>false</b>.</li>
+                  <li>If <a href="#sec-9.1.2">ToBoolean</a>(<i>testResult)</i> is <b>false</b>, return <b>false</b>.</li>
                 </ol>
               </li>
               <li>Increase <i>k</i> by 1.</li>
@@ -15234,7 +15234,7 @@
                   <li>If <i>kValue</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>kValue</i>.</li>
                   <li>Let <i>testResult</i> be the result of calling the [[Call]] internal method of <i>callbackfn</i> with <i>T</i> as the <b>this</b> value and argument list containing <i>kValue</i>, <i>k</i>, and <i>O</i>.</li>
                   <li>If <i>testResult</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>testResult</i>.</li>
-                  <li>If ToBoolean(<i>testResult)</i> is <b>true</b>, return <b>true</b>.</li>
+                  <li>If <a href="#sec-9.1.2">ToBoolean</a>(<i>testResult)</i> is <b>true</b>, return <b>true</b>.</li>
                 </ol>
               </li>
               <li>Increase <i>k</i> by 1.</li>
@@ -15432,7 +15432,7 @@
                   <li>If <i>kValue</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>kValue</i>.</li>
                   <li>Let <i>selected</i> be the result of calling the [[Call]] internal method of <i>callbackfn</i> with <i>T</i> as the <b>this</b> value and argument list containing <i>kValue</i>, <i>k</i>, and <i>O</i>.</li>
                   <li>If <i>selected</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>selected</i>.</li>
-                  <li>If ToBoolean(<i>selected</i>) is <b>true</b>, then
+                  <li>If <a href="#sec-9.1.2">ToBoolean</a>(<i>selected</i>) is <b>true</b>, then
                     <ol class="block">
                       <li>Call the [[DefineOwnProperty]] internal method of <i>A</i> with arguments <a href="#sec-9.1.8">ToString</a>(<i>to</i>), <a href="#sec-8.10">Property Descriptor</a> {[[Value]]: <i>kValue</i>, [[Writable]]: <b>true</b>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}, and <b>false</b>.</li>
                       <li>Increase <i>to</i> by 1.</li>
@@ -15683,7 +15683,7 @@
               </li>
               <li>Let <i>newLenDesc</i> be a copy of <i>Desc</i>.</li>
               <li>Let <i>newLen</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>Desc</i>.[[Value]]).</li>
-              <li>If <i>newLen</i> is not equal to ToNumber( <i>Desc</i>.[[Value]]), throw a <b>RangeError</b> exception.</li>
+              <li>If <i>newLen</i> is not equal to <a href="#sec-9.1.3">ToNumber</a>( <i>Desc</i>.[[Value]]), throw a <b>RangeError</b> exception.</li>
               <li>Set <i>newLenDesc</i>.[[Value]] to <i>newLen</i>.</li>
               <li>If <i>newLen</i> &ge;<i>oldLen</i>, then
                 <ol class="block">
@@ -16008,7 +16008,7 @@
           <li>Call <a href="#sec-9.2.1">CheckObjectCoercible</a> passing the <b>this</b> value as its argument.</li>
           <li>Let <i>S</i> be the result of calling <a href="#sec-9.1.8">ToString</a>, giving it the <b>this</b> value as its argument.</li>
           <li>Let <i>searchStr</i> be <a href="#sec-9.1.8">ToString</a>(<i>searchString</i>).</li>
-          <li>Let <i>numPos</i> be ToNumber(<i>position</i>). (If <i>position</i> is <b>undefined</b>, this step produces the value <b>NaN</b>).</li>
+          <li>Let <i>numPos</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>position</i>). (If <i>position</i> is <b>undefined</b>, this step produces the value <b>NaN</b>).</li>
           <li>If <i>numPos</i> is <b>NaN</b>, let <i>pos</i> be <b>+&infin;</b>; otherwise, let <i>pos</i> be <a href="#sec-9.1.4">ToInteger</a>(<i>numPos</i>).</li>
           <li>Let <i>len</i> be the number of characters in <i>S</i>.</li>
           <li>Let <i>start</i> min(max(<i>pos</i>, 0), <i>len</i>).</li>
@@ -16634,8 +16634,8 @@
       <section id="sec-15.6.1.1">
         <h1><span class="secnum"><a href="#sec-15.6.1.1" title="link to this section">15.6.1.1</a></span> Boolean (value)</h1>
 
-        <p>Returns a Boolean value (not a Boolean object) computed by <span style="font-family: Times New
-        Roman">ToBoolean(<i>value</i>)</span>.</p>
+        <p>Returns a Boolean value (not a Boolean object) computed by <span style="font-family: Times New Roman"><a
+        href="#sec-9.1.2">ToBoolean</a>(<i>value</i>)</span>.</p>
       </section>
     </section>
 
@@ -16654,7 +16654,7 @@
         <p>The newly constructed Boolean object has a [[NativeBrand]] internal property with value BooleanWrapper.</p>
 
         <p>The [[PrimitiveValue]] internal property of the newly constructed Boolean object is set to <span style="font-family:
-        Times New Roman">ToBoolean(<i>value</i>)</span>.</p>
+        Times New Roman"><a href="#sec-9.1.2">ToBoolean</a>(<i>value</i>)</span>.</p>
 
         <p>The [[Extensible]] internal property of the newly constructed object is set to <b>true</b>.</p>
       </section>
@@ -16745,9 +16745,9 @@
       <section id="sec-15.7.1.1">
         <h1><span class="secnum"><a href="#sec-15.7.1.1" title="link to this section">15.7.1.1</a></span> Number ( [ value ] )</h1>
 
-        <p>Returns a Number value (not a Number object) computed by <span style="font-family: Times New
-        Roman">ToNumber(<i>value</i>)</span> if <span style="font-family: Times New Roman; font-style: italic">value</span> was
-        supplied, else returns <b>+0</b>.</p>
+        <p>Returns a Number value (not a Number object) computed by <span style="font-family: Times New Roman"><a
+        href="#sec-9.1.3">ToNumber</a>(<i>value</i>)</span> if <span style="font-family: Times New Roman; font-style:
+        italic">value</span> was supplied, else returns <b>+0</b>.</p>
       </section>
     </section>
 
@@ -16766,8 +16766,8 @@
         <p>The newly constructed object is has a [[NativeBrand]] internal property whose value is NumberWrapper.</p>
 
         <p>The [[PrimitiveValue]] internal property of the newly constructed object is set to <span style="font-family: Times New
-        Roman">ToNumber(<i>value</i>)</span> if <span style="font-family: Times New Roman; font-style: italic">value</span> was
-        supplied, else to +0.</p>
+        Roman"><a href="#sec-9.1.3">ToNumber</a>(<i>value</i>)</span> if <span style="font-family: Times New Roman; font-style:
+        italic">value</span> was supplied, else to +0.</p>
 
         <p>The [[Extensible]] internal property of the newly constructed object is set to <b>true</b>.</p>
       </section>
@@ -17298,8 +17298,9 @@
     <section id="sec-15.8.2">
       <h1><span class="secnum"><a href="#sec-15.8.2" title="link to this section">15.8.2</a></span> Function Properties of the Math Object</h1>
 
-      <p>Each of the following <code>Math</code> object functions applies the ToNumber abstract operator to each of its arguments
-      (in left-to-right order if there is more than one) and then performs a computation on the resulting Number value(s).</p>
+      <p>Each of the following <code>Math</code> object functions applies the <a href="#sec-9.1.3">ToNumber</a> abstract operator
+      to each of its arguments (in left-to-right order if there is more than one) and then performs a computation on the resulting
+      Number value(s).</p>
 
       <p>In the function descriptions below, the symbols NaN, &minus;0, +0, &minus;&infin; and +&infin; refer to the Number values
       described in <a href="#sec-8.5">8.5</a>.</p>
@@ -17508,8 +17509,8 @@
       <section id="sec-15.8.2.11">
         <h1><span class="secnum"><a href="#sec-15.8.2.11" title="link to this section">15.8.2.11</a></span> max ( [ value1 [ , value2 [ , &hellip; ] ] ] )</h1>
 
-        <p>Given zero or more arguments, calls ToNumber on each of the arguments and returns the largest of the resulting
-        values.</p>
+        <p>Given zero or more arguments, calls <a href="#sec-9.1.3">ToNumber</a> on each of the arguments and returns the largest
+        of the resulting values.</p>
 
         <ul>
           <li><span style="font-family: Times New Roman">If no arguments are given, the result is &minus;&infin;.</span></li>
@@ -17523,8 +17524,8 @@
       <section id="sec-15.8.2.12">
         <h1><span class="secnum"><a href="#sec-15.8.2.12" title="link to this section">15.8.2.12</a></span> min ( [ value1 [ , value2 [ , &hellip; ] ] ] )</h1>
 
-        <p>Given zero or more arguments, calls ToNumber on each of the arguments and returns the smallest of the resulting
-        values.</p>
+        <p>Given zero or more arguments, calls <a href="#sec-9.1.3">ToNumber</a> on each of the arguments and returns the smallest
+        of the resulting values.</p>
 
         <ul>
           <li><span style="font-family: Times New Roman">If no arguments are given, the result is +&infin;.</span></li>
@@ -18070,13 +18071,13 @@ THH:mm:ss.sss</pre>
         <p>The [[PrimitiveValue]] internal property of the newly constructed object is set as follows:</p>
 
         <ol class="proc">
-          <li>Let <i>y</i> be ToNumber(<i>year</i>).</li>
-          <li>Let <i>m</i> be ToNumber(<i>month</i>).</li>
-          <li>If <i>date</i> is supplied then let <i>dt</i> be ToNumber(<i>date</i>); else let <i>dt</i> be <b>1</b>.</li>
-          <li>If <i>hours</i> is supplied then let <i>h</i> be ToNumber(<i>hours</i>); else let <i>h</i> be <b>0</b>.</li>
-          <li>If <i>minutes</i> is supplied then let <i>min</i> be ToNumber(<i>minutes</i>); else let <i>min</i> be <b>0</b>.</li>
-          <li>If <i>seconds</i> is supplied then let <i>s</i> be ToNumber(<i>seconds</i>); else let <i>s</i> be <b>0</b>.</li>
-          <li>If <i>ms</i> is supplied then let <i>milli</i> be ToNumber(<i>ms</i>); else let <i>milli</i> be <b>0</b>.</li>
+          <li>Let <i>y</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>year</i>).</li>
+          <li>Let <i>m</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>month</i>).</li>
+          <li>If <i>date</i> is supplied then let <i>dt</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>date</i>); else let <i>dt</i> be <b>1</b>.</li>
+          <li>If <i>hours</i> is supplied then let <i>h</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>hours</i>); else let <i>h</i> be <b>0</b>.</li>
+          <li>If <i>minutes</i> is supplied then let <i>min</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>minutes</i>); else let <i>min</i> be <b>0</b>.</li>
+          <li>If <i>seconds</i> is supplied then let <i>s</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>seconds</i>); else let <i>s</i> be <b>0</b>.</li>
+          <li>If <i>ms</i> is supplied then let <i>milli</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>); else let <i>milli</i> be <b>0</b>.</li>
           <li>If&nbsp;<i>y</i>&nbsp;is&nbsp;not&nbsp;<b>NaN</b>&nbsp;and&nbsp;0&nbsp;&le;&nbsp;<a href="#sec-9.1.4">ToInteger</a>(<i>y</i>)&nbsp;&le;&nbsp;99,&nbsp;then let <i>yr</i> be&nbsp;1900+<a href="#sec-9.1.4">ToInteger</a>(<i>y</i>); otherwise, let <i>yr</i> be <i>y</i>.</li>
           <li>Let <i>finalDate</i> be  MakeDate(MakeDay(<i>yr</i>, <i>m</i>, <i>dt</i>), MakeTime(<i>h</i>, <i>min</i>, <i>s</i>, <i>milli</i>)).</li>
           <li>Set the [[PrimitiveValue]] internal property of the newly constructed object to TimeClip(UTC(<i>finalDate</i>)).</li>
@@ -18102,7 +18103,7 @@ THH:mm:ss.sss</pre>
               <li>Parse <i>v</i> as a date, in exactly the same manner as for the <code>parse</code> method (<a href="#sec-15.9.4.2">15.9.4.2</a>); let <i>V</i> be the time value for this date.</li>
             </ol>
           </li>
-          <li>Else, let <i>V</i> be ToNumber(<i>v</i>).</li>
+          <li>Else, let <i>V</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>v</i>).</li>
           <li>Set the [[PrimitiveValue]] internal property of the newly constructed object to TimeClip(<i>V</i>) and return.</li>
         </ol>
       </section>
@@ -18188,13 +18189,13 @@ THH:mm:ss.sss</pre>
         following steps are taken:</p>
 
         <ol class="proc">
-          <li>Let <i>y</i> be ToNumber(<i>year</i>).</li>
-          <li>Let <i>m</i> be ToNumber(<i>month</i>).</li>
-          <li>If <i>date</i> is supplied then let <i>dt</i> be ToNumber(<i>date</i>); else let <i>dt</i> be <b>1</b>.</li>
-          <li>If <i>hours</i> is supplied then let <i>h</i> be ToNumber(<i>hours</i>); else let <i>h</i> be <b>0</b>.</li>
-          <li>If <i>minutes</i> is supplied then let <i>min</i> be ToNumber(<i>minutes</i>); else let <i>min</i> be <b>0</b>.</li>
-          <li>If <i>seconds</i> is supplied then let <i>s</i> be ToNumber(<i>seconds</i>); else let <i>s</i> be <b>0</b>.</li>
-          <li>If <i>ms</i> is supplied then let <i>milli</i> be ToNumber(<i>ms</i>); else let <i>milli</i> be <b>0</b>.</li>
+          <li>Let <i>y</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>year</i>).</li>
+          <li>Let <i>m</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>month</i>).</li>
+          <li>If <i>date</i> is supplied then let <i>dt</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>date</i>); else let <i>dt</i> be <b>1</b>.</li>
+          <li>If <i>hours</i> is supplied then let <i>h</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>hours</i>); else let <i>h</i> be <b>0</b>.</li>
+          <li>If <i>minutes</i> is supplied then let <i>min</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>minutes</i>); else let <i>min</i> be <b>0</b>.</li>
+          <li>If <i>seconds</i> is supplied then let <i>s</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>seconds</i>); else let <i>s</i> be <b>0</b>.</li>
+          <li>If <i>ms</i> is supplied then let <i>milli</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>); else let <i>milli</i> be <b>0</b>.</li>
           <li>If&nbsp;<i>y</i>&nbsp;is&nbsp;not&nbsp;<b>NaN</b>&nbsp;and&nbsp;0&nbsp;&le;&nbsp;<a href="#sec-9.1.4">ToInteger</a>(<i>y</i>)&nbsp;&le;&nbsp;99,&nbsp;then let <i>yr</i> be&nbsp;1900+<a href="#sec-9.1.4">ToInteger</a>(<i>y</i>); otherwise, let <i>yr</i> be <i>y</i>.</li>
           <li>Return TimeClip(MakeDate(MakeDay(<i>yr</i>, <i>m</i>, <i>dt</i>), MakeTime(<i>h</i>, <i>min</i>, <i>s</i>, <i>milli</i>))).</li>
         </ol>
@@ -18478,7 +18479,7 @@ THH:mm:ss.sss</pre>
       <section id="sec-15.9.5.27">
         <h1><span class="secnum"><a href="#sec-15.9.5.27" title="link to this section">15.9.5.27</a></span> Date.prototype.setTime (time)</h1>
         <ol class="proc">
-          <li>Let <i>v</i> be TimeClip(ToNumber(<i>time</i>)).</li>
+          <li>Let <i>v</i> be TimeClip(<a href="#sec-9.1.3">ToNumber</a>(<i>time</i>)).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>v</i>.</li>
           <li>Return <i>v</i>.</li>
         </ol>
@@ -18488,7 +18489,7 @@ THH:mm:ss.sss</pre>
         <h1><span class="secnum"><a href="#sec-15.9.5.28" title="link to this section">15.9.5.28</a></span> Date.prototype.setMilliseconds (ms)</h1>
         <ol class="proc">
           <li>Let <i>t</i> be the result of LocalTime(this time value).</li>
-          <li>Let <i>time</i> be MakeTime(HourFromTime(<i>t</i>), MinFromTime(<i>t</i>), SecFromTime(<i>t</i>), ToNumber(<i>ms</i>)).</li>
+          <li>Let <i>time</i> be MakeTime(HourFromTime(<i>t</i>), MinFromTime(<i>t</i>), SecFromTime(<i>t</i>), <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>)).</li>
           <li>Let <i>u</i> be TimeClip(UTC(MakeDate(Day(<i>t</i>), <i>time</i>))).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>u</i>.</li>
           <li>Return <i>u</i>.</li>
@@ -18499,7 +18500,7 @@ THH:mm:ss.sss</pre>
         <h1><span class="secnum"><a href="#sec-15.9.5.29" title="link to this section">15.9.5.29</a></span> Date.prototype.setUTCMilliseconds (ms)</h1>
         <ol class="proc">
           <li>Let <i>t</i> be this time value.</li>
-          <li>Let <i>time</i> be MakeTime(HourFromTime(<i>t</i>), MinFromTime(<i>t</i>), SecFromTime(<i>t</i>), ToNumber(<i>ms</i>)).</li>
+          <li>Let <i>time</i> be MakeTime(HourFromTime(<i>t</i>), MinFromTime(<i>t</i>), SecFromTime(<i>t</i>), <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>)).</li>
           <li>Let <i>v</i> be TimeClip(MakeDate(Day(<i>t</i>), <i>time</i>)).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>v</i>.</li>
           <li>Return <i>v</i>.</li>
@@ -18515,8 +18516,8 @@ THH:mm:ss.sss</pre>
 
         <ol class="proc">
           <li>Let <i>t</i> be the result of LocalTime(this time value).</li>
-          <li>Let <i>s</i> be ToNumber(<i>sec</i>).</li>
-          <li>If <i>ms</i> is not specified, then let <i>milli</i> be msFromTime(<i>t</i>); otherwise, let <i>milli</i> be ToNumber(<i>ms</i>).</li>
+          <li>Let <i>s</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>sec</i>).</li>
+          <li>If <i>ms</i> is not specified, then let <i>milli</i> be msFromTime(<i>t</i>); otherwise, let <i>milli</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>).</li>
           <li>Let <i>date</i> be MakeDate(Day(<i>t</i>), MakeTime(HourFromTime(<i>t</i>), MinFromTime(<i>t</i>), <i>s</i>, <i>milli</i>)).</li>
           <li>Let <i>u</i> be TimeClip(UTC(<i>date</i>)).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>u</i>.</li>
@@ -18535,8 +18536,8 @@ THH:mm:ss.sss</pre>
 
         <ol class="proc">
           <li>Let <i>t</i> be this time value.</li>
-          <li>Let <i>s</i> be ToNumber(<i>sec</i>).</li>
-          <li>If <i>ms</i> is not specified, then let <i>milli</i> be msFromTime(<i>t</i>); otherwise, let <i>milli</i> be ToNumber(<i>ms</i>).</li>
+          <li>Let <i>s</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>sec</i>).</li>
+          <li>If <i>ms</i> is not specified, then let <i>milli</i> be msFromTime(<i>t</i>); otherwise, let <i>milli</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>).</li>
           <li>Let <i>date</i> be MakeDate(Day(<i>t</i>), MakeTime(HourFromTime(<i>t</i>), MinFromTime(<i>t</i>), <i>s</i>, <i>milli</i>)).</li>
           <li>Let <i>v</i> be TimeClip(<i>date</i>).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>v</i>.</li>
@@ -18559,9 +18560,9 @@ THH:mm:ss.sss</pre>
 
         <ol class="proc">
           <li>Let <i>t</i> be the result of LocalTime(this time value).</li>
-          <li>Let <i>m</i> be ToNumber(<i>min</i>).</li>
-          <li>If <i>sec</i> is not specified, then let <i>s</i> be SecFromTime(<i>t</i>); otherwise, let <i>s</i> be ToNumber(<i>sec</i>).</li>
-          <li>If <i>ms</i> is not specified, then let <i>milli</i> be msFromTime(<i>t</i>); otherwise, let <i>milli</i> be ToNumber(<i>ms</i>).</li>
+          <li>Let <i>m</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>min</i>).</li>
+          <li>If <i>sec</i> is not specified, then let <i>s</i> be SecFromTime(<i>t</i>); otherwise, let <i>s</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>sec</i>).</li>
+          <li>If <i>ms</i> is not specified, then let <i>milli</i> be msFromTime(<i>t</i>); otherwise, let <i>milli</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>).</li>
           <li>Let <i>date</i> be MakeDate(Day(<i>t</i>), MakeTime(HourFromTime(<i>t</i>), <i>m</i>, <i>s</i>, <i>milli</i>)).</li>
           <li>Let <i>u</i> be TimeClip(UTC(<i>date</i>)).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>u</i>.</li>
@@ -18584,9 +18585,9 @@ THH:mm:ss.sss</pre>
 
         <ol class="proc">
           <li>Let <i>t</i> be this time value.</li>
-          <li>Let <i>m</i> be ToNumber(<i>min</i>).</li>
-          <li>If <i>sec</i> is not specified, then let <i>s</i> be SecFromTime(<i>t</i>); otherwise, let <i>s</i> be ToNumber(<i>sec</i>).</li>
-          <li>If <i>ms</i> is not specified, then let <i>milli</i> be msFromTime(<i>t</i>); otherwise, let <i>milli</i> be ToNumber(<i>ms</i>).</li>
+          <li>Let <i>m</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>min</i>).</li>
+          <li>If <i>sec</i> is not specified, then let <i>s</i> be SecFromTime(<i>t</i>); otherwise, let <i>s</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>sec</i>).</li>
+          <li>If <i>ms</i> is not specified, then let <i>milli</i> be msFromTime(<i>t</i>); otherwise, let <i>milli</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>).</li>
           <li>Let <i>date</i> be MakeDate(Day(<i>t</i>), MakeTime(HourFromTime(<i>t</i>), <i>m</i>, <i>s</i>, <i>milli</i>)).</li>
           <li>Let <i>v</i> be TimeClip(<i>date</i>).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>v</i>.</li>
@@ -18613,10 +18614,10 @@ THH:mm:ss.sss</pre>
 
         <ol class="proc">
           <li>Let <i>t</i> be the result of LocalTime(this time value).</li>
-          <li>Let <i>h</i> be ToNumber(<i>hour</i>).</li>
-          <li>If <i>min</i> is not specified, then let <i>m</i> be MinFromTime(<i>t</i>); otherwise, let <i>m</i> be ToNumber(<i>min</i>).</li>
-          <li>If If <i>sec</i> is not specified, then let <i>s</i> be SecFromTime(<i>t</i>); otherwise, let <i>s</i> be ToNumber(<i>sec</i>).</li>
-          <li>If <i>ms</i> is not specified, then let <i>milli</i> be msFromTime(<i>t</i>); otherwise, let <i>milli</i> be ToNumber(<i>ms</i>).</li>
+          <li>Let <i>h</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>hour</i>).</li>
+          <li>If <i>min</i> is not specified, then let <i>m</i> be MinFromTime(<i>t</i>); otherwise, let <i>m</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>min</i>).</li>
+          <li>If If <i>sec</i> is not specified, then let <i>s</i> be SecFromTime(<i>t</i>); otherwise, let <i>s</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>sec</i>).</li>
+          <li>If <i>ms</i> is not specified, then let <i>milli</i> be msFromTime(<i>t</i>); otherwise, let <i>milli</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>).</li>
           <li>Let <i>date</i> be MakeDate(Day(<i>t</i>), MakeTime(<i>h</i>, <i>m</i>, <i>s</i>, <i>milli</i>)).</li>
           <li>Let <i>u</i> be TimeClip(UTC(<i>date</i>)).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>u</i>.</li>
@@ -18643,10 +18644,10 @@ THH:mm:ss.sss</pre>
 
         <ol class="proc">
           <li>Let <i>t</i> be this time value.</li>
-          <li>Let <i>h</i> be ToNumber(<i>hour</i>).</li>
-          <li>If <i>min</i> is not specified, then let <i>m</i> be MinFromTime(<i>t</i>); otherwise, let <i>m</i> be ToNumber(<i>min</i>).</li>
-          <li>If <i>sec</i> is not specified, then let <i>s</i> be SecFromTime(<i>t</i>); otherwise, let <i>s</i> be ToNumber(<i>sec</i>).</li>
-          <li>If <i>ms</i> is not specified, then let <i>milli</i> be msFromTime(<i>t</i>); otherwise, let <i>milli</i> be ToNumber(<i>ms</i>).</li>
+          <li>Let <i>h</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>hour</i>).</li>
+          <li>If <i>min</i> is not specified, then let <i>m</i> be MinFromTime(<i>t</i>); otherwise, let <i>m</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>min</i>).</li>
+          <li>If <i>sec</i> is not specified, then let <i>s</i> be SecFromTime(<i>t</i>); otherwise, let <i>s</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>sec</i>).</li>
+          <li>If <i>ms</i> is not specified, then let <i>milli</i> be msFromTime(<i>t</i>); otherwise, let <i>milli</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>ms</i>).</li>
           <li>Let <i>newDate</i> be MakeDate(Day(<i>t</i>), MakeTime(<i>h</i>, <i>m</i>, <i>s</i>, <i>milli</i>)).</li>
           <li>Let <i>v</i> be TimeClip(<i>newDate</i>).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>v</i>.</li>
@@ -18660,7 +18661,7 @@ THH:mm:ss.sss</pre>
         <h1><span class="secnum"><a href="#sec-15.9.5.36" title="link to this section">15.9.5.36</a></span> Date.prototype.setDate (date)</h1>
         <ol class="proc">
           <li>Let <i>t</i> be the result of LocalTime(this time value).</li>
-          <li>Let <i>dt</i> be ToNumber(<i>date</i>).</li>
+          <li>Let <i>dt</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>date</i>).</li>
           <li>Let <i>newDate</i> be MakeDate(MakeDay(YearFromTime(<i>t</i>), MonthFromTime(<i>t</i>), <i>dt</i>), TimeWithinDay(<i>t</i>)).</li>
           <li>Let <i>u</i> be TimeClip(UTC(<i>newDate</i>)).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>u</i>.</li>
@@ -18672,7 +18673,7 @@ THH:mm:ss.sss</pre>
         <h1><span class="secnum"><a href="#sec-15.9.5.37" title="link to this section">15.9.5.37</a></span> Date.prototype.setUTCDate (date)</h1>
         <ol class="proc">
           <li>Let <i>t</i> be this time value.</li>
-          <li>Let <i>dt</i> be ToNumber(<i>date</i>).</li>
+          <li>Let <i>dt</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>date</i>).</li>
           <li>Let <i>newDate</i> be MakeDate(MakeDay(YearFromTime(<i>t</i>), MonthFromTime(<i>t</i>), <i>dt</i>), TimeWithinDay(<i>t</i>)).</li>
           <li>Let <i>v</i> be TimeClip(<i>newDate</i>).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>v</i>.</li>
@@ -18689,8 +18690,8 @@ THH:mm:ss.sss</pre>
 
         <ol class="proc">
           <li>Let <i>t</i> be the result of LocalTime(this time value).</li>
-          <li>Let <i>m</i> be ToNumber(<i>month</i>).</li>
-          <li>If <i>date</i> is not specified, then let <i>dt</i> be DateFromTime(<i>t</i>); otherwise, let <i>dt</i> be ToNumber(<i>date</i>).</li>
+          <li>Let <i>m</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>month</i>).</li>
+          <li>If <i>date</i> is not specified, then let <i>dt</i> be DateFromTime(<i>t</i>); otherwise, let <i>dt</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>date</i>).</li>
           <li>Let <i>newDate</i> be MakeDate(MakeDay(YearFromTime(<i>t</i>), <i>m</i>, <i>dt</i>), TimeWithinDay(<i>t</i>)).</li>
           <li>Let <i>u</i> be TimeClip(UTC(<i>newDate</i>)).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>u</i>.</li>
@@ -18709,8 +18710,8 @@ THH:mm:ss.sss</pre>
 
         <ol class="proc">
           <li>Let <i>t</i> be this time value.</li>
-          <li>Let <i>m</i> be ToNumber(<i>month</i>).</li>
-          <li>If <i>date</i> is not specified, then let <i>dt</i> be DateFromTime(<i>t</i>); otherwise, let <i>dt</i> be ToNumber(<i>date</i>).</li>
+          <li>Let <i>m</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>month</i>).</li>
+          <li>If <i>date</i> is not specified, then let <i>dt</i> be DateFromTime(<i>t</i>); otherwise, let <i>dt</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>date</i>).</li>
           <li>Let <i>newDate</i> be MakeDate(MakeDay(YearFromTime(<i>t</i>), <i>m</i>, <i>dt</i>), TimeWithinDay(<i>t</i>)).</li>
           <li>Let <i>v</i> be TimeClip(<i>newDate</i>).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>v</i>.</li>
@@ -18733,9 +18734,9 @@ THH:mm:ss.sss</pre>
 
         <ol class="proc">
           <li>Let <i>t</i> be the result of LocalTime(this time value); but if this time value is <b>NaN</b>, let <i>t</i> be <b>+0</b>.</li>
-          <li>Let <i>y</i> be ToNumber(<i>year</i>).</li>
-          <li>If <i>month</i> is not specified, then let <i>m</i> be MonthFromTime(<i>t</i>); otherwise, let <i>m</i> be ToNumber(<i>month</i>).</li>
-          <li>If <i>date</i> is not specified, then let <i>dt</i> be DateFromTime(<i>t</i>); otherwise, let <i>dt</i> be ToNumber(<i>date</i>).</li>
+          <li>Let <i>y</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>year</i>).</li>
+          <li>If <i>month</i> is not specified, then let <i>m</i> be MonthFromTime(<i>t</i>); otherwise, let <i>m</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>month</i>).</li>
+          <li>If <i>date</i> is not specified, then let <i>dt</i> be DateFromTime(<i>t</i>); otherwise, let <i>dt</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>date</i>).</li>
           <li>Let <i>newDate</i> be MakeDate(MakeDay(<i>y</i>, <i>m</i>, <i>dt</i>), TimeWithinDay(<i>t</i>)).</li>
           <li>Let <i>u</i> be TimeClip(UTC(<i>newDate</i>)).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>u</i>.</li>
@@ -18758,9 +18759,9 @@ THH:mm:ss.sss</pre>
 
         <ol class="proc">
           <li>Let <i>t</i> be this time value; but if this time value is <b>NaN</b>, let <i>t</i> be <b>+0</b>.</li>
-          <li>Let <i>y</i> be ToNumber(<i>year</i>).</li>
-          <li>If <i>month</i> is not specified, then let <i>m</i> be MonthFromTime(<i>t</i>); otherwise, let <i>m</i> be ToNumber(<i>month</i>).</li>
-          <li>If <i>date</i> is not specified, then let <i>dt</i> be DateFromTime(<i>t</i>); otherwise, let <i>dt</i> be ToNumber(<i>date</i>).</li>
+          <li>Let <i>y</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>year</i>).</li>
+          <li>If <i>month</i> is not specified, then let <i>m</i> be MonthFromTime(<i>t</i>); otherwise, let <i>m</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>month</i>).</li>
+          <li>If <i>date</i> is not specified, then let <i>dt</i> be DateFromTime(<i>t</i>); otherwise, let <i>dt</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>date</i>).</li>
           <li>Let <i>newDate</i> be MakeDate(MakeDay(<i>y</i>, <i>m</i>, <i>dt</i>), TimeWithinDay(<i>t</i>)).</li>
           <li>Let <i>v</i> be TimeClip(<i>newDate</i>).</li>
           <li>Set the [[PrimitiveValue]] internal property of this Date object to <i>v</i>.</li>
@@ -21033,7 +21034,7 @@ THH:mm:ss.sss</pre>
           <ol class="block">
             <li>If <i>space</i> has a [[NativeBrand]] internal property whose value is NumberWrapper  then,
               <ol class="block">
-                <li>Let <i>space</i> be ToNumber(<i>space</i>).</li>
+                <li>Let <i>space</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>space</i>).</li>
               </ol>
             </li>
             <li>Else if <i>space</i> has a [[NativeBrand]] internal property with value StringWrapper  then,
@@ -21089,7 +21090,7 @@ THH:mm:ss.sss</pre>
           <ol class="block">
             <li>If <i>value</i> has an [[NativeBrand]] internal property with value NumberWrapper  then,
               <ol class="block">
-                <li>Let <i>value</i> be ToNumber(<i>value</i>).</li>
+                <li>Let <i>value</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>value</i>).</li>
               </ol>
             </li>
             <li>Else if <i>value</i> has an [[NativeBrand]] internal property with value StringWrapper  then,
@@ -22628,7 +22629,7 @@ THH:mm:ss.sss</pre>
 
       <ol class="proc">
         <li>Let <i>t</i> be the result of LocalTime(this time value); but if this time value is <b>NaN</b>, let <i>t</i> be <b>+0</b>.</li>
-        <li>Call ToNumber(<i>year</i>).</li>
+        <li>Call <a href="#sec-9.1.3">ToNumber</a>(<i>year</i>).</li>
         <li>If Result(2) is <b>NaN</b>, set the [[PrimitiveValue]] internal property of the <b>this</b> value to <b>NaN</b> and return <b>NaN</b>.</li>
         <li>If Result(2) is not <b>NaN</b> and 0 &le; <a href="#sec-9.1.4">ToInteger</a>(Result(2)) &le; 99 then Result(4) is <a href="#sec-9.1.4">ToInteger</a>(Result(2)) +&nbsp;1900. Otherwise, Result(4) is Result(2).</li>
         <li>Compute MakeDay(Result(4), MonthFromTime(<i>t</i>), DateFromTime(<i>t</i>)).</li>
@@ -23029,7 +23030,7 @@ THH:mm:ss.sss</pre>
 
   <p><a href="#sec-11.5.3">11.5.3</a>: In the final bullet item, use of IEEE 754 round-to-nearest mode is specified.</p>
 
-  <p><a href="#sec-12.6.3">12.6.3</a>: Missing ToBoolean restored in step 3.a.ii of both algorithms.</p>
+  <p><a href="#sec-12.6.3">12.6.3</a>: Missing <a href="#sec-9.1.2">ToBoolean</a> restored in step 3.a.ii of both algorithms.</p>
 
   <p><a href="#sec-12.6.4">12.6.4</a>: Additional final sentences in each of the last two paragraphs clarify certain property
   enumeration requirements.</p>
