@@ -2762,12 +2762,12 @@
   ECMAScript language. The ECMAScript language types are Undefined, Null, Boolean, String, Number, and Object.</p>
 
   <p>A specification type corresponds to meta-values that are used within algorithms to describe the semantics of ECMAScript
-  language constructs and ECMAScript language types. The specification types are <a href="#sec-8.9">Reference</a>, List, <a
-  href="#sec-8.8">Completion</a>, <a href="#sec-8.10">Property Descriptor</a>, <a href="#sec-8.10">Property Identifier</a>, <a
-  href="#sec-10.2">Lexical Environment</a>, and <a href="#sec-10.2.1">Environment Record</a>. Specification type values are
-  specification artefacts that do not necessarily correspond to any specific entity within an ECMAScript implementation.
-  Specification type values may be used to describe intermediate results of ECMAScript expression evaluation but such values
-  cannot be stored as properties of objects or values of ECMAScript language variables.</p>
+  language constructs and ECMAScript language types. The specification types are <a href="#sec-8.9">Reference</a>, <a
+  href="#sec-8.7">List</a>, <a href="#sec-8.8">Completion</a>, <a href="#sec-8.10">Property Descriptor</a>, <a
+  href="#sec-8.10">Property Identifier</a>, <a href="#sec-10.2">Lexical Environment</a>, and <a href="#sec-10.2.1">Environment
+  Record</a>. Specification type values are specification artefacts that do not necessarily correspond to any specific entity
+  within an ECMAScript implementation. Specification type values may be used to describe intermediate results of ECMAScript
+  expression evaluation but such values cannot be stored as properties of objects or values of ECMAScript language variables.</p>
 
   <p>Within this specification, the notation &ldquo;<span style="font-family: Times New Roman">Type(<i>x</i>)</span>&rdquo; is
   used as shorthand for &ldquo;<span style="font-family: Times New Roman">the type of <i>x</i></span>&rdquo; where &ldquo;<span
@@ -3220,12 +3220,12 @@
           </tr>
           <tr>
             <td>[[Construct]]</td>
-            <td>SpecOp(a List of <i>any</i>) <span style="font-family: Times New Roman; font-style: italic; font-weight: bold">&rarr;</span> Object</td>
+            <td>SpecOp(a <a href="#sec-8.7">List</a> of <i>any</i>) <span style="font-family: Times New Roman; font-style: italic; font-weight: bold">&rarr;</span> Object</td>
             <td>Creates an object. Invoked via the <code>new</code> operator. The arguments to the SpecOp are the arguments passed to the <b>new</b> operator. Objects that implement this internal method are called <i>constructors</i>.</td>
           </tr>
           <tr>
             <td>[[Call]]</td>
-            <td>SpecOp(<i>any</i>, a List of <i>any</i>) <span style="font-family: Times New Roman; font-style: italic; font-weight: bold">&rarr;</span> <i>any</i> or <a href="#sec-8.9">Reference</a></td>
+            <td>SpecOp(<i>any</i>, a <a href="#sec-8.7">List</a> of <i>any</i>) <span style="font-family: Times New Roman; font-style: italic; font-weight: bold">&rarr;</span> <i>any</i> or <a href="#sec-8.9">Reference</a></td>
             <td>Executes code associated with the object. Invoked via a function call expression. The arguments to the SpecOp are this object and a list containing the arguments passed to the function call expression. Objects that implement this internal method are <i>callable</i>. Only callable objects that are host objects may return <a href="#sec-8.9">Reference</a> values.</td>
           </tr>
           <tr>
@@ -3265,7 +3265,7 @@
           </tr>
           <tr>
             <td>[[BoundArguments]]</td>
-            <td>List of <i>any</i></td>
+            <td><a href="#sec-8.7">List</a> of <i>any</i></td>
             <td>The pre-bound argument values of a function Object created by the standard built-in Function.prototype.bind method. Only objects created by Function.prototype.bind have a [[BoundArguments]] internal property.</td>
           </tr>
           <tr>
@@ -4197,7 +4197,7 @@
         <li>Let <i>proto</i> be the value of the [[Prototype]] internal property of <i>O</i>.</li>
         <li>If <i>includePrototype</i> is false or <i>proto</i> is the value <b>null</b>, then
           <ol class="block">
-            <li>Let <i>propList</i> be a new empty List.</li>
+            <li>Let <i>propList</i> be a new empty <a href="#sec-8.7">List</a>.</li>
           </ol>
         </li>
         <li>Else
@@ -4224,7 +4224,7 @@
       the following steps are taken:</p>
 
       <ol class="proc">
-        <li>Let <i>itr</i> be the result of performing Invoke with arguments %iterator%, <i>O</i> and an empty argument List.</li>
+        <li>Let <i>itr</i> be the result of performing Invoke with arguments %iterator%, <i>O</i> and an empty argument <a href="#sec-8.7">List</a>.</li>
         <li>Return <i>itr</i>.</li>
       </ol>
     </section>
@@ -5854,8 +5854,8 @@
       <li>Return <i>obj</i></li>
     </ol>
 
-    <p>The abstract operation <i>CreateMappedArgumentsObject</i> called with List <span style="font-family: Times New Roman;
-    font-style: italic">names</span>, environment record <span style="font-family: Times New Roman; font-style:
+    <p>The abstract operation <i>CreateMappedArgumentsObject</i> called with <a href="#sec-8.7">List</a> <span style="font-family:
+    Times New Roman; font-style: italic">names</span>, environment record <span style="font-family: Times New Roman; font-style:
     italic">env</span>, and argument list <span style="font-family: Times New Roman; font-style: italic">args</span> performs the
     following steps:</p>
 
@@ -5864,7 +5864,7 @@
       <li>Let <i>obj</i> be the result of the abstraction operation <i>InstantiateArgumentsObject</i> with argument <i>len</i>.</li>
       <li>Let <i>map</i> be the result of creating a new ECMAScript object.</li>
       <li>Set all the internal methods of <i>map</i> as specified in <a href="#sec-8.12">8.12</a>.</li>
-      <li>Let <i>mappedNames</i> be an empty List.</li>
+      <li>Let <i>mappedNames</i> be an empty <a href="#sec-8.7">List</a>.</li>
       <li>Let <i>indx</i> = <i>len</i>  - 1.</li>
       <li>Repeat while <i>indx</i> &gt;= 0,
         <ol class="block">
@@ -6361,10 +6361,10 @@
         style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span></p>
 
         <ul>
-          <li>It is a Syntax Error if this production is contained in strict code,  <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> is the production <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> <b>:</b> <span style="font-family: Times New Roman; font-style: italic">PropertyName</span> <code>:</code> <span style="font-family: Times New Roman; font-style: italic">AssignmentExpression,</span> and <span style="font-family: Times New Roman">PropertyDefinitionList</span>(<span style="font-family: Times New Roman">PropName</span> of <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span>) of <span style="font-family: Times New Roman; font-style: italic">PropertyNameAndValueList</span> is not the empty List.</li>
-          <li>It is a Syntax Error if <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> is the production <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> <b>:</b> <span style="font-family: Times New Roman; font-style: italic">IdentifierName</span> and <span style="font-family: Times New Roman">PropertyDefinitionList</span>(<span style="font-family: Times New Roman">PropName</span> of <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span>) of <span style="font-family: Times New Roman; font-style: italic">PropertyNameAndValueList</span> is not the empty List.</li>
-          <li>It is a Syntax Error if <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> is the production <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> <b>:</b> <span style="font-family: Times New Roman; font-style: italic">PropertyName</span> <code>(</code> <span style="font-family: Times New Roman; font-style: italic">FormalParameterList</span> <code>) {</code> <span style="font-family: Times New Roman; font-style: italic">FunctionBody</span> <code>}</code> and <span style="font-family: Times New Roman">PropertyDefinitionList</span>(<span style="font-family: Times New Roman">PropName</span> of <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span>) of <span style="font-family: Times New Roman; font-style: italic">PropertyNameAndValueList</span> is not the empty List.</li>
-          <li>It is a Syntax Error if <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> is the production <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> <b>:</b> <code>*</code> <span style="font-family: Times New Roman; font-style: italic">PropertyName</span> <code>(</code> <span style="font-family: Times New Roman; font-style: italic">FormalParameterList</span> <code>) {</code> <span style="font-family: Times New Roman; font-style: italic">FunctionBody</span> <code>}</code> and <span style="font-family: Times New Roman">PropertyDefinitionList</span>(<span style="font-family: Times New Roman">PropName</span> of <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span>) of <span style="font-family: Times New Roman; font-style: italic">PropertyNameAndValueList</span> is not the empty List.</li>
+          <li>It is a Syntax Error if this production is contained in strict code,  <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> is the production <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> <b>:</b> <span style="font-family: Times New Roman; font-style: italic">PropertyName</span> <code>:</code> <span style="font-family: Times New Roman; font-style: italic">AssignmentExpression,</span> and <span style="font-family: Times New Roman">PropertyDefinitionList</span>(<span style="font-family: Times New Roman">PropName</span> of <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span>) of <span style="font-family: Times New Roman; font-style: italic">PropertyNameAndValueList</span> is not the empty <a href="#sec-8.7">List</a>.</li>
+          <li>It is a Syntax Error if <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> is the production <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> <b>:</b> <span style="font-family: Times New Roman; font-style: italic">IdentifierName</span> and <span style="font-family: Times New Roman">PropertyDefinitionList</span>(<span style="font-family: Times New Roman">PropName</span> of <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span>) of <span style="font-family: Times New Roman; font-style: italic">PropertyNameAndValueList</span> is not the empty <a href="#sec-8.7">List</a>.</li>
+          <li>It is a Syntax Error if <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> is the production <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> <b>:</b> <span style="font-family: Times New Roman; font-style: italic">PropertyName</span> <code>(</code> <span style="font-family: Times New Roman; font-style: italic">FormalParameterList</span> <code>) {</code> <span style="font-family: Times New Roman; font-style: italic">FunctionBody</span> <code>}</code> and <span style="font-family: Times New Roman">PropertyDefinitionList</span>(<span style="font-family: Times New Roman">PropName</span> of <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span>) of <span style="font-family: Times New Roman; font-style: italic">PropertyNameAndValueList</span> is not the empty <a href="#sec-8.7">List</a>.</li>
+          <li>It is a Syntax Error if <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> is the production <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> <b>:</b> <code>*</code> <span style="font-family: Times New Roman; font-style: italic">PropertyName</span> <code>(</code> <span style="font-family: Times New Roman; font-style: italic">FormalParameterList</span> <code>) {</code> <span style="font-family: Times New Roman; font-style: italic">FunctionBody</span> <code>}</code> and <span style="font-family: Times New Roman">PropertyDefinitionList</span>(<span style="font-family: Times New Roman">PropName</span> of <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span>) of <span style="font-family: Times New Roman; font-style: italic">PropertyNameAndValueList</span> is not the empty <a href="#sec-8.7">List</a>.</li>
           <li>It is a Syntax Error if <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> is the production<br>   <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> <b>:</b> <code>get</code> <span style="font-family: Times New Roman; font-style: italic">PropertyName</span> <code>( ) {</code> <span style="font-family: Times New Roman; font-style: italic">FunctionBody</span> <code>}</code><span style="font-family: Times New Roman; font-style: italic"><br></span>and <span style="font-family: Times New Roman">PropertyDefinitionList</span> (<span style="font-family: Times New Roman">PropName</span> of <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span>) of <span style="font-family: Times New Roman; font-style: italic">PropertyNameAndValueList</span> includes a production of the form <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> <b>:</b> <span style="font-family: Times New Roman; font-style: italic">PropertyName</span> <code>:</code> <span style="font-family: Times New Roman; font-style: italic">AssignmentExpression</span>.</li>
           <li>It is a Syntax Error if <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> is the production<br>   <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> <b>:</b> <code>set</code> <span style="font-family: Times New Roman; font-style: italic">PropertyName</span> <code>(</code> <span style="font-family: Times New Roman; font-style: italic">PropertySetParameterList</span> <code>)</code> <code>{</code> <span style="font-family: Times New Roman; font-style: italic">FunctionBody</span> <code>}</code><span style="font-family: Times New Roman; font-style: italic"><br></span>and <span style="font-family: Times New Roman">PropertyDefinitionList</span> (<span style="font-family: Times New Roman">PropName</span> of <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span>) of <span style="font-family: Times New Roman; font-style: italic">PropertyNameAndValueList</span> includes a production of the form <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> <b>:</b> <span style="font-family: Times New Roman; font-style: italic">PropertyName</span> <code>:</code> <span style="font-family: Times New Roman; font-style: italic">AssignmentExpression</span>.</li>
           <li>It is a Syntax Error if <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> is the production<br>   <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> <b>:</b> <code>get</code> <span style="font-family: Times New Roman; font-style: italic">PropertyName</span> <code>( ) {</code> <span style="font-family: Times New Roman; font-style: italic">FunctionBody</span> <code>}</code><br>and <span style="font-family: Times New Roman">PropertyDefinitionList</span> (<span style="font-family: Times New Roman">PropName</span> of <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span>) of <span style="font-family: Times New Roman; font-style: italic">PropertyNameAndValueList</span> includes a production of the form <span style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span> <b>:</b> <code>get</code> <span style="font-family: Times New Roman; font-style: italic">PropertyName</span> <code>( ) {</code> <span style="font-family: Times New Roman; font-style: italic">FunctionBody</span> <code>}</code>.</li>
@@ -6460,8 +6460,8 @@
         style="font-family: Times New Roman; font-style: italic">PropertyAssignment</span></p>
 
         <ol class="proc">
-          <li>If PropName of <i>PropertyAssignment</i> is not <i>name</i> return the empty List.</li>
-          <li>Return a List containing <i>PropertyAssignment</i>.</li>
+          <li>If PropName of <i>PropertyAssignment</i> is not <i>name</i> return the empty <a href="#sec-8.7">List</a>.</li>
+          <li>Return a <a href="#sec-8.7">List</a> containing <i>PropertyAssignment</i>.</li>
         </ol>
 
         <p><span style="font-family: Times New Roman; font-style: italic">PropertyNameAndValueList</span> <b>:</b>  <span
@@ -6948,7 +6948,7 @@
     <section id="sec-11.2.5">
       <h1><span class="secnum"><a href="#sec-11.2.5" title="link to this section">11.2.5</a></span> Argument Lists</h1>
 
-      <p>The evaluation of an argument list produces a List of values (<a href="#sec-8.7">see 8.7</a>).</p>
+      <p>The evaluation of an argument list produces a <a href="#sec-8.7">List</a> of values (<a href="#sec-8.7">see 8.7</a>).</p>
 
       <section>
         <h1>Runtime Semantics</h1>
@@ -6958,7 +6958,7 @@
         <p><span style="font-family: Times New Roman; font-style: italic">Arguments</span> <b>:</b> <code>( )</code></p>
 
         <ol class="proc">
-          <li>Return an empty List.</li>
+          <li>Return an empty <a href="#sec-8.7">List</a>.</li>
         </ol>
 
         <p><span style="font-family: Times New Roman; font-style: italic">Arguments</span> <b>:</b> <code>(</code> <span
@@ -6975,14 +6975,14 @@
           <li>Let <i>ref</i> be the result of evaluating <i>AssignmentExpression</i>.</li>
           <li>Let <i>arg</i> be <a href="#sec-8.9.1">GetValue</a>(<i>ref</i>).</li>
           <li>If <i>arg</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>arg</i>.</li>
-          <li>Return a List whose sole item is <i>arg</i>.</li>
+          <li>Return a <a href="#sec-8.7">List</a> whose sole item is <i>arg</i>.</li>
         </ol>
 
         <p><span style="font-family: Times New Roman; font-style: italic">ArgumentList</span> <b>:</b> <i><code>&hellip;</code>
         <span style="font-family: Times New Roman">AssignmentExpression</span></i></p>
 
         <ol class="proc">
-          <li>Let <i>list</i> be an empty List.</li>
+          <li>Let <i>list</i> be an empty <a href="#sec-8.7">List</a>.</li>
           <li>Let <i>spreadRef</i> be the result of evaluating <i>AssignmentExpression</i>.</li>
           <li>Let <i>spreadValue</i> be <a href="#sec-8.9.1">GetValue</a>(<i>spreadRef</i>).</li>
           <li>Let <i>spreadObj</i> be <a href="#sec-9.1.9">ToObject</a>(<i>spreadValue</i>).</li>
@@ -7010,7 +7010,7 @@
           <li>Let <i>ref</i> be the result of evaluating <i>AssignmentExpression</i>.</li>
           <li>Let <i>arg</i> be <a href="#sec-8.9.1">GetValue</a>(<i>ref</i>).</li>
           <li>If <i>arg</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>arg</i>.</li>
-          <li>Return a List whose length is one greater than the length of <i>precedingArgs</i> and whose items are the items of <i>precedingArgs</i>, in order, followed at the end by <i>arg</i> which is the last item of the new list.</li>
+          <li>Return a <a href="#sec-8.7">List</a> whose length is one greater than the length of <i>precedingArgs</i> and whose items are the items of <i>precedingArgs</i>, in order, followed at the end by <i>arg</i> which is the last item of the new list.</li>
         </ol>
 
         <p><span style="font-family: Times New Roman; font-style: italic">ArgumentList</span> <b>:</b> <span style="font-family:
@@ -7018,7 +7018,7 @@
         New Roman">AssignmentExpression</span></i></p>
 
         <ol class="proc">
-          <li>Let <i>precedingArgs</i> be an empty List.</li>
+          <li>Let <i>precedingArgs</i> be an empty <a href="#sec-8.7">List</a>.</li>
           <li>Let <i>spreadRef</i> be the result of evaluating <i>AssignmentExpression</i>.</li>
           <li>Let <i>spreadValue</i> be <a href="#sec-8.9.1">GetValue</a>(<i>spreadRef</i>).</li>
           <li>Let <i>spreadObj</i> be <a href="#sec-9.1.9">ToObject</a>(<i>spreadValue</i>).</li>
@@ -8705,7 +8705,7 @@
       <div class="rhs">EmptyStatement<br>ExpressionStatement<br>ContinueStatement<br>BreakStatement<br>ReturnStatement<br>ThrowStatement<br>DebuggerStatement</div>
     </div>
     <ol class="proc">
-      <li>Return a new empty List.</li>
+      <li>Return a new empty <a href="#sec-8.7">List</a>.</li>
     </ol>
     <div class="gp">
       <div class="lhs">Statement <span style="font-family: sans-serif; font-weight: bold">:</span></div>
@@ -8786,7 +8786,7 @@
       <div class="rhs">IterationStatement<br>SwitchStatement</div>
     </div>
     <ol class="proc">
-      <li>Let <i>newLabelSet</i>  be a new empty List.</li>
+      <li>Let <i>newLabelSet</i>  be a new empty <a href="#sec-8.7">List</a>.</li>
       <li>Return the result of performing Labelled Evaluation of this <i>BreakableStatement</i> wth argument <i>newLabelSet</i>.</li>
     </ol>
   </section>
@@ -8846,14 +8846,14 @@
       style="font-family: Times New Roman; font-style: italic">Statement</span></p>
 
       <ol class="proc">
-        <li>Return a new empty List.</li>
+        <li>Return a new empty <a href="#sec-8.7">List</a>.</li>
       </ol>
 
       <p><span style="font-family: Times New Roman; font-style: italic">StatementListItem</span> <b>:</b> <span
       style="font-family: Times New Roman; font-style: italic">Declaration</span></p>
 
       <ol class="proc">
-        <li>Return return a new List containing <i>Declaration</i>.</li>
+        <li>Return return a new <a href="#sec-8.7">List</a> containing <i>Declaration</i>.</li>
       </ol>
 
       <p><b>Static Semantics:  LexicallyDeclaredNames</b></p>
@@ -8861,7 +8861,7 @@
       <p><span style="font-family: Times New Roman; font-style: italic">Block</span> <b>:</b> <code>{</code> <code>}</code></p>
 
       <ol class="proc">
-        <li>Return a new empty List.</li>
+        <li>Return a new empty <a href="#sec-8.7">List</a>.</li>
       </ol>
 
       <p><span style="font-family: Times New Roman; font-style: italic">Block</span> <b>:</b> <code>{</code> <span
@@ -8891,7 +8891,7 @@
       style="font-family: Times New Roman; font-style: italic">Statement</span></p>
 
       <ol class="proc">
-        <li>Return a new empty List.</li>
+        <li>Return a new empty <a href="#sec-8.7">List</a>.</li>
       </ol>
 
       <p><span style="font-family: Times New Roman; font-style: italic">StatementListItem</span> <b>:</b> <span
@@ -8913,7 +8913,7 @@
       <p><span style="font-family: Times New Roman; font-style: italic">Block</span> <b>:</b> <code>{</code> <code>}</code></p>
 
       <ol class="proc">
-        <li>Return a new empty List.</li>
+        <li>Return a new empty <a href="#sec-8.7">List</a>.</li>
       </ol>
 
       <p><span style="font-family: Times New Roman; font-style: italic">Block</span> <b>:</b> <code>{</code> <span
@@ -8950,7 +8950,7 @@
       style="font-family: Times New Roman; font-style: italic">Declaration</span></p>
 
       <ol class="proc">
-        <li>Return a new empty List.</li>
+        <li>Return a new empty <a href="#sec-8.7">List</a>.</li>
       </ol>
     </section>
 
@@ -9174,7 +9174,7 @@
         style="font-family: Times New Roman; font-style: italic">Identifier</span></p>
 
         <ol class="proc">
-          <li>Return a new List containing the String Value of <i>Identifier</i>.</li>
+          <li>Return a new <a href="#sec-8.7">List</a> containing the String Value of <i>Identifier</i>.</li>
         </ol>
 
         <p><b>Static Semantics:  IsConstantDeclaration</b></p>
@@ -9590,7 +9590,7 @@
         style="font-family: Times New Roman; font-style: italic; font-weight: bold">{ }</span></p>
 
         <ol class="proc">
-          <li>Return an empty List.</li>
+          <li>Return an empty <a href="#sec-8.7">List</a>.</li>
         </ol>
         <div class="gp">
           <div class="lhs">ObjectBindingPattern <span style="font-family: sans-serif; font-weight: bold">:</span></div>
@@ -9604,7 +9604,7 @@
         style="font-family: Times New Roman; font-style: italic">Elision</span><sub>opt</sub> <code>]</code></p>
 
         <ol class="proc">
-          <li>Return an empty List.</li>
+          <li>Return an empty <a href="#sec-8.7">List</a>.</li>
         </ol>
 
         <p><span style="font-family: Times New Roman; font-style: italic">ArrayBindingPattern</span> <b>:</b> <code>[</code> <span
@@ -10789,7 +10789,7 @@
           <li>Let <i>V</i> = <b>undefined</b>).</li>
           <li>Repeat
             <ol class="block">
-              <li>Let <i>next</i> be the result of performing Invoke with arguments <b>"<span style="font-family: monospace">next</span>"</b>, <i>keys</i>, and an empty arguments List.</li>
+              <li>Let <i>next</i> be the result of performing Invoke with arguments <b>"<span style="font-family: monospace">next</span>"</b>, <i>keys</i>, and an empty arguments <a href="#sec-8.7">List</a>.</li>
               <li>If IteratorComplete(<i>next</i>) is <i>true</i>, the return <a href="#sec-8.8">NormalCompletion</a>(<i>V</i>).</li>
               <li>If loopContinues(<i>next</i>,<i>labelSet</i>) is <b>false</b>, then return <i>next</i>.</li>
               <li>If <i>next</i> is an <a href="#sec-8.8">abrupt completion</a>, then let <i>status</i> be next.</li>
@@ -11103,7 +11103,7 @@
       <code>}</code></p>
 
       <ol class="proc">
-        <li>Return a new empty List.</li>
+        <li>Return a new empty <a href="#sec-8.7">List</a>.</li>
       </ol>
 
       <p><span style="font-family: Times New Roman; font-style: italic">CaseBlock</span> <b>:</b> <code>{</code> <span
@@ -11119,7 +11119,7 @@
 
       <ol class="proc">
         <li>If the first <i>CaseClauses</i> is present, let <i>declarations</i> be the LexicalDeclarations of the first <i>CaseClauses</i>.</li>
-        <li>Else let <i>declarations</i> be a new empty List.</li>
+        <li>Else let <i>declarations</i> be a new empty <a href="#sec-8.7">List</a>.</li>
         <li>Append to <i>declarations</i> the elements of the LexicallyDeclaredNames of the <i>DefaultClause.</i></li>
         <li>If the second <i>CaseClauses</i> is not present, return <i>names</i>.</li>
         <li>Else return the result of append to <i>names</i> the elements of the the LexicallyDeclaredNames of the second <i>CaseClauses</i>.</li>
@@ -11147,7 +11147,7 @@
 
       <ol class="proc">
         <li>If the <i>StatementList</i> is present, return the LexicalDeclarations of <i>StatementList</i>.</li>
-        <li>Else return a new empty List.</li>
+        <li>Else return a new empty <a href="#sec-8.7">List</a>.</li>
       </ol>
 
       <p><span style="font-family: Times New Roman; font-style: italic">DefaultClause</span> <b>:</b> <code>default :</code> <span
@@ -11155,7 +11155,7 @@
 
       <ol class="proc">
         <li>If the <i>StatementList</i> is present, return the LexicalDeclarations of <i>StatementList</i>.</li>
-        <li>Else return a new empty List.</li>
+        <li>Else return a new empty <a href="#sec-8.7">List</a>.</li>
       </ol>
 
       <p><b>Static Semantics:  LexicallyDeclaredNames</b></p>
@@ -11164,7 +11164,7 @@
       <code>}</code></p>
 
       <ol class="proc">
-        <li>Return a new empty List.</li>
+        <li>Return a new empty <a href="#sec-8.7">List</a>.</li>
       </ol>
 
       <p><span style="font-family: Times New Roman; font-style: italic">CaseBlock</span> <b>:</b> <code>{</code> <span
@@ -11180,7 +11180,7 @@
 
       <ol class="proc">
         <li>If the first <i>CaseClauses</i> is present, let <i>names</i> be the LexicallyDeclaredNames of the first <i>CaseClauses</i>.</li>
-        <li>Else let <i>names</i> be a new empty List.</li>
+        <li>Else let <i>names</i> be a new empty <a href="#sec-8.7">List</a>.</li>
         <li>Append to <i>names</i> the elements of the LexicallyDeclaredNames of the <i>DefaultClause.</i></li>
         <li>If the second <i>CaseClauses</i> is not present, return <i>names</i>.</li>
         <li>Else return the result of append to <i>names</i> the elements of the the LexicallyDeclaredNames of the second <i>CaseClauses</i>.</li>
@@ -11208,7 +11208,7 @@
 
       <ol class="proc">
         <li>If the <i>StatementList</i> is present, return the LexicallyDeclaredNames of <i>StatementList</i>.</li>
-        <li>Else return a new empty List.</li>
+        <li>Else return a new empty <a href="#sec-8.7">List</a>.</li>
       </ol>
 
       <p><span style="font-family: Times New Roman; font-style: italic">DefaultClause</span> <b>:</b> <code>default :</code> <span
@@ -11216,7 +11216,7 @@
 
       <ol class="proc">
         <li>If the <i>StatementList</i> is present, return the LexicallyDeclaredNames of <i>StatementList</i>.</li>
-        <li>Else return a new empty List.</li>
+        <li>Else return a new empty <a href="#sec-8.7">List</a>.</li>
       </ol>
 
       <p><b>Static Semantics:  VarDeclaredNames</b></p>
@@ -11233,7 +11233,7 @@
       <code>}</code></p>
 
       <ol class="proc">
-        <li>Return a new empty List.</li>
+        <li>Return a new empty <a href="#sec-8.7">List</a>.</li>
       </ol>
 
       <p><span style="font-family: Times New Roman; font-style: italic">CaseBlock</span> <b>:</b> <code>{</code> <span
@@ -11249,7 +11249,7 @@
 
       <ol class="proc">
         <li>If the first <i>CaseClauses</i> is present, let <i>names</i> be the VarDeclaredNames of the first <i>CaseClauses</i>.</li>
-        <li>Else let <i>names</i> be a new empty List.</li>
+        <li>Else let <i>names</i> be a new empty <a href="#sec-8.7">List</a>.</li>
         <li>Append to <i>names</i> the elements of the VarDeclaredNames of the <i>DefaultClause.</i></li>
         <li>If the second <i>CaseClauses</i> is not present, return <i>names</i>.</li>
         <li>Else return the result of append to <i>names</i> the elements of the the VarDeclaredNames of the second <i>CaseClauses</i>.</li>
@@ -11277,7 +11277,7 @@
 
       <ol class="proc">
         <li>If the <i>StatementList</i> is present, return the VarDeclaredNames of <i>StatementList</i>.</li>
-        <li>Else return a new empty List.</li>
+        <li>Else return a new empty <a href="#sec-8.7">List</a>.</li>
       </ol>
 
       <p><span style="font-family: Times New Roman; font-style: italic">DefaultClause</span> <b>:</b> <code>default :</code> <span
@@ -11285,7 +11285,7 @@
 
       <ol class="proc">
         <li>If the <i>StatementList</i> is present, return the VarDeclaredNames of <i>StatementList</i>.</li>
-        <li>Else return a new empty List.</li>
+        <li>Else return a new empty <a href="#sec-8.7">List</a>.</li>
       </ol>
     </section>
 
@@ -11517,7 +11517,7 @@
 
       <ol class="proc">
         <li>Let <i>label</i> be the StringValue of <i>Identifier</i>.</li>
-        <li>Let <i>newLabelSet</i>  be a new List containing  <i>label</i> and the elements of  <i>labelSet</i>.</li>
+        <li>Let <i>newLabelSet</i>  be a new <a href="#sec-8.7">List</a> containing  <i>label</i> and the elements of  <i>labelSet</i>.</li>
         <li>If Statement is either <i>LabelledStatement</i> or <i>BreakableStatement</i>, then
           <ol class="block">
             <li>Let <i>stmtResult</i> be the result of performing Labelled Evaluation of <i>Statement</i> with argument <i>newLabelSet</i>.</li>
@@ -11544,7 +11544,7 @@
       New Roman; font-style: italic">Statement</span></p>
 
       <ol class="proc">
-        <li>Let <i>newLabelSet</i>  be a new empty List.</li>
+        <li>Let <i>newLabelSet</i>  be a new empty <a href="#sec-8.7">List</a>.</li>
         <li>Return the result of performing Labelled Evaluation of this <i>LabelledStatement</i> wth argument <i>newLabelSet</i>.</li>
       </ol>
     </section>
@@ -11924,7 +11924,7 @@
       </ol>
       <div class="gp">FormalParameterList <span style="font-family: sans-serif"><b>:</b> [empty]</span></div>
       <ol class="proc">
-        <li>Return an empty List.</li>
+        <li>Return an empty <a href="#sec-8.7">List</a>.</li>
       </ol>
       <div class="gp">FormalParameterList <span style="font-family: sans-serif; font-weight: bold">:</span> FunctionRestParameter</div>
       <ol class="proc">
@@ -12043,7 +12043,7 @@
 
       <div class="gp">FunctionBody <span style="font-family: sans-serif"><b>:</b> [empty]</span></div>
       <ol class="proc">
-        <li>Return an empty List.</li>
+        <li>Return an empty <a href="#sec-8.7">List</a>.</li>
       </ol>
       <div class="gp">FunctionBody <span style="font-family: sans-serif; font-weight: bold">:</span> StatementList</div>
       <ol class="proc">
@@ -12058,11 +12058,11 @@
       style="font-family: Times New Roman; font-style: italic">FunctionBody</span> <code>}</code></p>
 
       <ol class="proc">
-        <li>Return an empty List.</li>
+        <li>Return an empty <a href="#sec-8.7">List</a>.</li>
       </ol>
       <div class="gp">FunctionBody <span style="font-family: sans-serif"><b>:</b> [empty]</span></div>
       <ol class="proc">
-        <li>Return an empty List.</li>
+        <li>Return an empty <a href="#sec-8.7">List</a>.</li>
       </ol>
       <div class="gp">FunctionBody <span style="font-family: sans-serif; font-weight: bold">:</span> StatementList</div>
       <ol class="proc">
@@ -12252,7 +12252,7 @@
 
         <ol class="proc">
           <li>Let <i>callerContext</i> be the current execution context.</li>
-          <li>Let <i>status</i> be the result of establishing a new execution context for function code using <i>F</i>, the passed arguments List <i>args</i>, and the <b>this</b> value as described in <a href="#sec-10.4.3">10.4.3</a>.</li>
+          <li>Let <i>status</i> be the result of establishing a new execution context for function code using <i>F</i>, the passed arguments <a href="#sec-8.7">List</a> <i>args</i>, and the <b>this</b> value as described in <a href="#sec-10.4.3">10.4.3</a>.</li>
           <li>If <i>status</i> is an <a href="#sec-8.8">abrupt completion</a>, then
             <ol class="block">
               <li>Restore <i>callerContext</i> as the current execution context.</li>
@@ -13345,12 +13345,12 @@
           <li>If Type(<i>O</i>) is not Object throw a <b>TypeError</b> exception.</li>
           <li>Let <i>props</i> be <a href="#sec-9.1.9">ToObject</a>(<i>Properties</i>).</li>
           <li>Let <i>names</i> be an internal list containing the names of each enumerable own property of <i>props.</i></li>
-          <li>Let <i>descriptors</i> be an empty internal List.</li>
+          <li>Let <i>descriptors</i> be an empty internal <a href="#sec-8.7">List</a>.</li>
           <li>For each element <i>P</i> of <i>names</i> in list order,
             <ol class="block">
               <li>Let <i>descObj</i> be the result of calling the [[Get]] internal method of <i>props</i> with <i>P</i> as the argument.</li>
               <li>Let <i>desc</i> be the result of calling <a href="#sec-8.10.5">ToPropertyDescriptor</a> with <i>descObj</i> as the argument.</li>
-              <li>Append the pair (a two element List) consisting of <i>P</i> and <i>desc</i> to the end of <i>descriptors</i>.</li>
+              <li>Append the pair (a two element <a href="#sec-8.7">List</a>) consisting of <i>P</i> and <i>desc</i> to the end of <i>descriptors</i>.</li>
             </ol>
           </li>
           <li>For  each <i>pair</i> from <i>descriptors</i> in list order,
@@ -13592,7 +13592,7 @@
 
         <ol class="proc">
           <li>Let <i>O</i> be the <b>this</b> value.</li>
-          <li>Return the result of calling Invoke with arguments <b><span style="font-family: monospace">"toString"</span>,</b> <i>O</i>, and an empty arguments List.</li>
+          <li>Return the result of calling Invoke with arguments <b><span style="font-family: monospace">"toString"</span>,</b> <i>O</i>, and an empty arguments <a href="#sec-8.7">List</a>.</li>
         </ol>
         <div class="note">
           <p><span class="nh">NOTE 1</span> This function is provided to give all Objects a generic <code>toLocaleString</code>
@@ -13868,7 +13868,7 @@
           <li>If Type(<i>argArray</i>) is not Object, then throw a <b>TypeError</b> exception.</li>
           <li>Let <i>len</i> be the result of calling the [[Get]] internal method of <i>argArray</i> with argument <code>"length"</code>.</li>
           <li>Let <i>n</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>len</i>).</li>
-          <li>Let <i>argList</i>  be an empty List.</li>
+          <li>Let <i>argList</i>  be an empty <a href="#sec-8.7">List</a>.</li>
           <li>Let <i>index</i> be 0.</li>
           <li>Repeat while <i>index</i> &lt; <i>n</i>
             <ol class="block">
@@ -13900,7 +13900,7 @@
 
         <ol class="proc">
           <li>If <a href="#sec-9.2.2">IsCallable</a>(<i>func</i>) is <b>false</b>, then throw a <b>TypeError</b> exception.</li>
-          <li>Let <i>argList</i> be an empty List.</li>
+          <li>Let <i>argList</i> be an empty <a href="#sec-8.7">List</a>.</li>
           <li>If this method was called with more than one argument then in left to right order starting with <i>arg1</i> append each argument as the last element of <i>argList</i></li>
           <li>Return the result of calling the [[Call]] internal method of <i>func</i>, providing <i>thisArg</i> as the <b>this</b> value and <i>argList</i> as the list of arguments.</li>
         </ol>
@@ -14305,7 +14305,7 @@
           </li>
           <li>Else
             <ol class="block">
-              <li>Let <i>R</i> be the result of calling Invoke with arguments <b><span style="font-family: monospace">"toLocaleString"</span>,</b> <i>firstElement</i>, and an empty arguments List.</li>
+              <li>Let <i>R</i> be the result of calling Invoke with arguments <b><span style="font-family: monospace">"toLocaleString"</span>,</b> <i>firstElement</i>, and an empty arguments <a href="#sec-8.7">List</a>.</li>
               <li>If <i>R</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>R</i>.</li>
             </ol>
           </li>
@@ -14321,7 +14321,7 @@
               </li>
               <li>Else
                 <ol class="block">
-                  <li>Let <i>R</i> be the result of calling Invoke with arguments <b><span style="font-family: monospace">"toLocaleString"</span>,</b> <i>nextElement</i>, and an empty arguments List.</li>
+                  <li>Let <i>R</i> be the result of calling Invoke with arguments <b><span style="font-family: monospace">"toLocaleString"</span>,</b> <i>nextElement</i>, and an empty arguments <a href="#sec-8.7">List</a>.</li>
                   <li>If <i>R</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>R</i>.</li>
                 </ol>
               </li>
@@ -14354,7 +14354,7 @@
           <li>Let <i>O</i> be the result of calling <a href="#sec-9.1.9">ToObject</a> passing the <b>this</b> value as the argument.</li>
           <li>Let <i>A</i> be a new array created as if by the expression <code>new Array()</code> where <code>Array</code> is the standard built-in constructor with that name.</li>
           <li>Let <i>n</i> be 0.</li>
-          <li>Let <i>items</i> be an internal List whose first element is <i>O</i> and whose subsequent elements are, in left to right order, the arguments that were passed to this function invocation.</li>
+          <li>Let <i>items</i> be an internal <a href="#sec-8.7">List</a> whose first element is <i>O</i> and whose subsequent elements are, in left to right order, the arguments that were passed to this function invocation.</li>
           <li>Repeat, while <i>items</i> is not empty
             <ol class="block">
               <li>Remove the first element from <i>items</i> and let <i>E</i> be the value of the element.</li>
@@ -14497,7 +14497,7 @@
           <li>Let <i>lenVal</i> be the result of calling the [[Get]] internal method of <i>O</i> with argument <span style="font-family: monospace">"<b>length</b>"</span>.</li>
           <li>Let <i>n</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenVal</i>).</li>
           <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>len</i>).</li>
-          <li>Let <i>items</i> be an internal List whose elements are, in left to right order, the arguments that were passed to this function invocation.</li>
+          <li>Let <i>items</i> be an internal <a href="#sec-8.7">List</a> whose elements are, in left to right order, the arguments that were passed to this function invocation.</li>
           <li>Repeat, while <i>items</i> is not empty
             <ol class="block">
               <li>Remove the first element from <i>items</i> and let <i>E</i> be the value of the element.</li>
@@ -14873,7 +14873,7 @@
               <li>Increment <i>k</i> by 1.</li>
             </ol>
           </li>
-          <li>Let <i>items</i> be an internal List whose elements are, in left to right order, the portion of the actual argument list starting with <i>item1</i>. The list will be empty if no such items are present.</li>
+          <li>Let <i>items</i> be an internal <a href="#sec-8.7">List</a> whose elements are, in left to right order, the portion of the actual argument list starting with <i>item1</i>. The list will be empty if no such items are present.</li>
           <li>Let <i>itemCount</i> be the number of elements in <i>items</i>.</li>
           <li>If <i>itemCount</i> &lt; <i>actualDeleteCount</i>, then
             <ol class="block">
@@ -14988,7 +14988,7 @@
             </ol>
           </li>
           <li>Let <i>j</i> be 0.</li>
-          <li>Let <i>items</i> be an internal List whose elements are, in left to right order, the arguments that were passed to this function invocation.</li>
+          <li>Let <i>items</i> be an internal <a href="#sec-8.7">List</a> whose elements are, in left to right order, the arguments that were passed to this function invocation.</li>
           <li>Repeat, while <i>items</i> is not empty
             <ol class="block">
               <li>Remove the first element from <i>items</i> and let <i>E</i> be the value of that element.</li>
@@ -15375,7 +15375,7 @@
                 <ol class="block">
                   <li>Let <i>kValue</i> be the result of calling the [[Get]] internal method of <i>O</i> with argument <i>Pk</i>.</li>
                   <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>kValue</i>).</li>
-                  <li>Let <i>mappedValue</i> be the result of calling the [[Call]] internal method of <i>callbackfn</i> with <i>T</i> as the <b>this</b> value and argument List containing <i>kValue</i>, <i>k</i>, and <i>O</i>.</li>
+                  <li>Let <i>mappedValue</i> be the result of calling the [[Call]] internal method of <i>callbackfn</i> with <i>T</i> as the <b>this</b> value and argument <a href="#sec-8.7">List</a> containing <i>kValue</i>, <i>k</i>, and <i>O</i>.</li>
                   <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>mappedValue</i>).</li>
                   <li>Let <i>defineResult</i> be the result of calling the [[DefineOwnProperty]] internal method of <i>A</i> with arguments <i>Pk</i>, <a href="#sec-8.10">Property Descriptor</a> {[[Value]]: <i>mappedValue</i>, [[Writable]]: <b>true</b>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}, and <b>false</b>.</li>
                   <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>defineResult</i>).</li>
@@ -20965,7 +20965,7 @@ THH:mm:ss.sss</pre>
             </li>
             <li>Else
               <ol class="block">
-                <li>Let <i>keys</i> be an internal List of String values consisting of the names of all the own properties of <i>val</i> whose [[Enumerable]] attribute is <b>true</b>. The ordering of the Strings should be the same as that used by the <b>Object.keys</b> standard built-in function.</li>
+                <li>Let <i>keys</i> be an internal <a href="#sec-8.7">List</a> of String values consisting of the names of all the own properties of <i>val</i> whose [[Enumerable]] attribute is <b>true</b>. The ordering of the Strings should be the same as that used by the <b>Object.keys</b> standard built-in function.</li>
                 <li>For each String <i>P</i> in <i>keys</i> do,
                   <ol class="block">
                     <li>Let <i>newElement</i> be the result of calling the abstract operation Walk, passing <i>val</i> and <i>P</i>.</li>
@@ -21013,7 +21013,7 @@ THH:mm:ss.sss</pre>
       <p>These are the steps in stringifying an object:</p>
 
       <ol class="proc">
-        <li>Let <i>stack</i> be an empty List.</li>
+        <li>Let <i>stack</i> be an empty <a href="#sec-8.7">List</a>.</li>
         <li>Let <i>indent</i> be the empty String.</li>
         <li>Let <i>PropertyList</i> and <i>ReplacerFunction</i> be <b>undefined</b>.</li>
         <li>If Type(<i>replacer</i>) is Object, then
@@ -21025,7 +21025,7 @@ THH:mm:ss.sss</pre>
             </li>
             <li>Else if <i>replacer</i> has a [[NativeBrand]] internal property with value NativeArray , then
               <ol class="block">
-                <li>Let <i>PropertyList</i>  be an empty internal List</li>
+                <li>Let <i>PropertyList</i>  be an empty internal <a href="#sec-8.7">List</a></li>
                 <li>For each value <i>v</i> of a property of <i>replacer</i> that has an array index property name. The properties are enumerated in the ascending array index order of their names.
                   <ol class="block">
                     <li>Let <i>item</i> be <b>undefined</b>.</li>
@@ -21219,10 +21219,10 @@ THH:mm:ss.sss</pre>
         </li>
         <li>Else
           <ol class="block">
-            <li>Let <i>K</i> be an internal List of Strings consisting of the names of all the own properties of <i>value</i> whose [[Enumerable]] attribute is <b>true</b>. The ordering of the Strings should be the same as that used by the <b>Object.keys</b> standard built-in function.</li>
+            <li>Let <i>K</i> be an internal <a href="#sec-8.7">List</a> of Strings consisting of the names of all the own properties of <i>value</i> whose [[Enumerable]] attribute is <b>true</b>. The ordering of the Strings should be the same as that used by the <b>Object.keys</b> standard built-in function.</li>
           </ol>
         </li>
-        <li>Let <i>partial</i> be an empty List.</li>
+        <li>Let <i>partial</i> be an empty <a href="#sec-8.7">List</a>.</li>
         <li>For each element <i>P</i> of <i>K</i>.
           <ol class="block">
             <li>Let <i>strP</i> be the result of calling the abstract operation <i>Str</i> with arguments <i>P</i> and <i>value</i>.</li>
@@ -21281,7 +21281,7 @@ THH:mm:ss.sss</pre>
         <li>Append <i>value</i> to <i>stack</i>.</li>
         <li>Let <i>stepback</i> be <i>indent</i>.</li>
         <li>Let <i>indent</i> be the concatenation of <i>indent</i> and <i>gap</i>.</li>
-        <li>Let <i>partial</i> be an empty List.</li>
+        <li>Let <i>partial</i> be an empty <a href="#sec-8.7">List</a>.</li>
         <li>Let <i>len</i> be the result of calling the [[Get]] internal method of value with argument <code>"length"</code>.</li>
         <li>Let <i>index</i> be 0.</li>
         <li>Repeat while <i>index</i> &lt; <i>len</i>

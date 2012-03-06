@@ -920,16 +920,17 @@ def fixup_links(doc):
 
     specific_link_source_data = [
         # clause 7
-        ('automatic semicolon insertion (7.9)', 'Automatic Semicolon Insertion'),
-        ('automatic semicolon insertion (see 7.9)', 'Automatic Semicolon Insertion'),
-        ('semicolon insertion (see 7.9)', 'Automatic Semicolon Insertion'),
+        ("automatic semicolon insertion (7.9)", "Automatic Semicolon Insertion"),
+        ("automatic semicolon insertion (see 7.9)", "Automatic Semicolon Insertion"),
+        ("semicolon insertion (see 7.9)", "Automatic Semicolon Insertion"),
 
         # clause 8
-        ("Completion Record", 'The Completion Record Specification Type'),
-        ("Completion", 'The Completion Record Specification Type'),
-        ("NormalCompletion", 'The Completion Record Specification Type'),
-        ('abrupt completion', 'The Completion Record Specification Type'),
-        ("ReturnIfAbrupt", 'The Completion Record Specification Type'),
+        ("List", "The List and Record Specification Type"),
+        ("Completion Record", "The Completion Record Specification Type"),
+        ("Completion", "The Completion Record Specification Type"),
+        ("NormalCompletion", "The Completion Record Specification Type"),
+        ("abrupt completion", "The Completion Record Specification Type"),
+        ("ReturnIfAbrupt", "The Completion Record Specification Type"),
         ("Reference", "The Reference Specification Type"),
         ("GetBase", "The Reference Specification Type"),
         ("GetReferencedName", "The Reference Specification Type"),
@@ -951,23 +952,23 @@ def fixup_links(doc):
         ("ToPropertyDescriptor", "ToPropertyDescriptor ( Obj )"),
 
         # clause 9
-        ('ToPrimitive', 'ToPrimitive'),
-        ('ToBoolean', 'ToBoolean'),
-        ('ToNumber', 'ToNumber'),
-        ('ToInteger', 'ToInteger'),
-        ('ToInt32', 'ToInt32: (Signed 32 Bit Integer)'),
-        ('ToUint32', 'ToUint32: (Unsigned 32 Bit Integer)'),
-        #('ToUint16 (9.7)', 'ToUint16: (Unsigned 16 Bit Integer)'),   # flunks the assertion
-        ('ToUint16', 'ToUint16: (Unsigned 16 Bit Integer)'),
-        ('ToString', 'ToString'),
-        ('ToObject', 'ToObject'),
-        ('CheckObjectCoercible', 'CheckObjectCoercible'),
-        ('IsCallable', 'IsCallable'),
-        ('SameValue', 'The SameValue Algorithm'),
+        ("ToPrimitive", "ToPrimitive"),
+        ("ToBoolean", "ToBoolean"),
+        ("ToNumber", "ToNumber"),
+        ("ToInteger", "ToInteger"),
+        ("ToInt32", "ToInt32: (Signed 32 Bit Integer)"),
+        ("ToUint32", "ToUint32: (Unsigned 32 Bit Integer)"),
+        #("ToUint16 (9.7)", "ToUint16: (Unsigned 16 Bit Integer)"),   # flunks the assertion
+        ("ToUint16", "ToUint16: (Unsigned 16 Bit Integer)"),
+        ("ToString", "ToString"),
+        ("ToObject", "ToObject"),
+        ("CheckObjectCoercible", "CheckObjectCoercible"),
+        ("IsCallable", "IsCallable"),
+        ("SameValue", "The SameValue Algorithm"),
         ("the SameValue algorithm (9.12)", "The SameValue Algorithm"),
 
         # 10.1
-        ('strict mode code (see 10.1.1)', 'Strict Mode Code'),
+        ("strict mode code (see 10.1.1)", "Strict Mode Code"),
         ("base code", "Strict Mode Code"),
 
         # 10.2
@@ -975,7 +976,7 @@ def fixup_links(doc):
         ("lexical environment", "Lexical Environments"),
         ("outer environment reference", "Lexical Environments"),
         ("outer lexical environment reference", "Lexical Environments"),
-        ('environment record (10.2.1)', 'Environment Records'),
+        ("environment record (10.2.1)", "Environment Records"),
         ("Environment Record", "Environment Records"),
         ("declarative environment record", "Environment Records"),
         ("Declarative Environment Record", "Environment Records"),
@@ -1000,11 +1001,11 @@ def fixup_links(doc):
         ("Function Declaration Binding Instantiation", "Function Declaration Instantiation"),
 
         # clause 14
-        ('Directive Prologue', 'Directive Prologues and the Use Strict Directive'),
-        ('Use Strict Directive', 'Directive Prologues and the Use Strict Directive'),
+        ("Directive Prologue", "Directive Prologues and the Use Strict Directive"),
+        ("Use Strict Directive", "Directive Prologues and the Use Strict Directive"),
 
         # clause 15
-        ('direct call (see 15.1.2.1.1) to the eval function', 'Direct Call to Eval'),
+        ("direct call (see 15.1.2.1.1) to the eval function", "Direct Call to Eval"),
 
         # 15.9
         ("this time value", "Properties of the Date Prototype Object"),
