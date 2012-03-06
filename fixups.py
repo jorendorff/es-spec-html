@@ -1044,6 +1044,8 @@ def fixup_links(doc):
         # The space is to avoid matching "(3.5)" in "Math.round(3.5)".
         r' \(((?:see )?SECTION)\)',
 
+        r'(?:see|See|of|and) (SECTION)(?:$|\.$|[,:) ]|\.[^0-9])',
+
         # Match "(Clause 16)", "(see clause 6)".
         r'(?i)(?:)\((?:but )?((?:see\s+(?:also\s+)?)?clause\s+([1-9][0-9]*))\)',
 
