@@ -930,6 +930,7 @@ def fixup_links(doc):
         ("NormalCompletion", 'The Completion Record Specification Type'),
         ('abrupt completion', 'The Completion Record Specification Type'),
         ("ReturnIfAbrupt", 'The Completion Record Specification Type'),
+        ("Reference", "The Reference Specification Type"),
         ("GetBase", "The Reference Specification Type"),
         ("GetReferencedName", "The Reference Specification Type"),
         ("IsStrictReference", "The Reference Specification Type"),
@@ -965,12 +966,15 @@ def fixup_links(doc):
         ('SameValue', 'The SameValue Algorithm'),
         ("the SameValue algorithm (9.12)", "The SameValue Algorithm"),
 
+        # 10.1
+        ('strict mode code (see 10.1.1)', 'Strict Mode Code'),
+        ("base code", "Strict Mode Code"),
+
         # 10.2
         ("Lexical Environment", "Lexical Environments"),
         ("lexical environment", "Lexical Environments"),
         ("outer environment reference", "Lexical Environments"),
         ("outer lexical environment reference", "Lexical Environments"),
-        ('strict mode code (see 10.1.1)', 'Strict Mode Code'),
         ('environment record (10.2.1)', 'Environment Records'),
         ("Environment Record", "Environment Records"),
         ("declarative environment record", "Environment Records"),
@@ -1057,7 +1061,7 @@ def fixup_links(doc):
         # The space is to avoid matching "(3.5)" in "Math.round(3.5)".
         r' \(((?:see )?SECTION)\)',
 
-        r'(?:see|See|of|and) (SECTION)(?:$|\.$|[,:) ]|\.[^0-9])',
+        r'(?:see|See|in|of|and) (SECTION)(?:$|\.$|[,:) ]|\.[^0-9])',
 
         # Match "(Clause 16)", "(see clause 6)".
         r'(?i)(?:)\((?:but )?((?:see\s+(?:also\s+)?)?clause\s+([1-9][0-9]*))\)',
@@ -1077,9 +1081,6 @@ def fixup_links(doc):
 
         # Match "Clause 8" in "as defined in Clause 8 of this specification".
         r'(?i)in (Clause ([1-9][0-9]*))',
-
-        # Match 
-        r'in ((\b[1-9A-Z][0-9]*(?:\.[1-9][0-9]*)+))'
     ]))
 
     def find_link(s):

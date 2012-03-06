@@ -2762,7 +2762,7 @@
   ECMAScript language. The ECMAScript language types are Undefined, Null, Boolean, String, Number, and Object.</p>
 
   <p>A specification type corresponds to meta-values that are used within algorithms to describe the semantics of ECMAScript
-  language constructs and ECMAScript language types. The specification types are Reference, List, <a
+  language constructs and ECMAScript language types. The specification types are <a href="#sec-8.9">Reference</a>, List, <a
   href="#sec-8.8">Completion</a>, <a href="#sec-8.10">Property Descriptor</a>, <a href="#sec-8.10">Property Identifier</a>, <a
   href="#sec-10.2">Lexical Environment</a>, and <a href="#sec-10.2.1">Environment Record</a>. Specification type values are
   specification artefacts that do not necessarily correspond to any specific entity within an ECMAScript implementation.
@@ -3225,8 +3225,8 @@
           </tr>
           <tr>
             <td>[[Call]]</td>
-            <td>SpecOp(<i>any</i>, a List of <i>any</i>) <span style="font-family: Times New Roman; font-style: italic; font-weight: bold">&rarr;</span> <i>any</i> or Reference</td>
-            <td>Executes code associated with the object. Invoked via a function call expression. The arguments to the SpecOp are this object and a list containing the arguments passed to the function call expression. Objects that implement this internal method are <i>callable</i>. Only callable objects that are host objects may return Reference values.</td>
+            <td>SpecOp(<i>any</i>, a List of <i>any</i>) <span style="font-family: Times New Roman; font-style: italic; font-weight: bold">&rarr;</span> <i>any</i> or <a href="#sec-8.9">Reference</a></td>
+            <td>Executes code associated with the object. Invoked via a function call expression. The arguments to the SpecOp are this object and a list containing the arguments passed to the function call expression. Objects that implement this internal method are <i>callable</i>. Only callable objects that are host objects may return <a href="#sec-8.9">Reference</a> values.</td>
           </tr>
           <tr>
             <td>[[HasInstance]]</td>
@@ -3514,7 +3514,7 @@
       <ol class="proc">
         <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>V</i>).</li>
         <li>Let <i>V</i> be NormalValue(<i>V</i>).</li>
-        <li>If Type(<i>V</i>) is not Reference, return <i>V</i>.</li>
+        <li>If Type(<i>V</i>) is not <a href="#sec-8.9">Reference</a>, return <i>V</i>.</li>
         <li>Let <i>base</i> be the result of calling <a href="#sec-8.9">GetBase</a>(<i>V</i>).</li>
         <li>If <a href="#sec-8.9">IsUnresolvableReference</a>(<i>V</i>), throw a <b>ReferenceError</b> exception.</li>
         <li>If <a href="#sec-8.9">IsPropertyReference</a>(<i>V</i>), then
@@ -3558,7 +3558,7 @@
         <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>W</i>).</li>
         <li>Let <i>V</i> be NormalValue(<i>V</i>).</li>
         <li>Let <i>W</i> be NormalValue(<i>W</i>).</li>
-        <li>If Type(<i>V</i>) is not Reference, throw a <b>ReferenceError</b> exception.</li>
+        <li>If Type(<i>V</i>) is not <a href="#sec-8.9">Reference</a>, throw a <b>ReferenceError</b> exception.</li>
         <li>Let <i>base</i> be the result of calling <a href="#sec-8.9">GetBase</a>(<i>V</i>).</li>
         <li>If <a href="#sec-8.9">IsUnresolvableReference</a>(<i>V</i>), then
           <ol class="block">
@@ -5356,14 +5356,14 @@
         <ol class="proc">
           <li>If <i>lex</i> is the value <b>null</b>, then
             <ol class="block">
-              <li>Return a value of type Reference whose base value is <b>undefined</b>, whose referenced name is <i>name</i>, and whose strict mode flag is <i>strict</i>.</li>
+              <li>Return a value of type <a href="#sec-8.9">Reference</a> whose base value is <b>undefined</b>, whose referenced name is <i>name</i>, and whose strict mode flag is <i>strict</i>.</li>
             </ol>
           </li>
           <li>Let <i>envRec</i> be <i>lex</i>&rsquo;s environment record.</li>
           <li>Let <i>exists</i> be the result of calling the HasBinding(<i>N</i>) concrete method of <i>envRec</i> passing <i>name</i> as the argument <i>N</i>.</li>
           <li>If <i>exists</i> is <code>true</code>, then
             <ol class="block">
-              <li>Return a value of type Reference whose base value is <i>envRec</i>, whose referenced name is <i>name</i>, and whose strict mode flag is <i>strict.</i></li>
+              <li>Return a value of type <a href="#sec-8.9">Reference</a> whose base value is <i>envRec</i>, whose referenced name is <i>name</i>, and whose strict mode flag is <i>strict.</i></li>
             </ol>
           </li>
           <li>Else
@@ -5481,8 +5481,8 @@
         <li>Return the result of calling <a href="#sec-10.2.2.1">GetIdentifierReference</a> abstract operation passing <i>env</i>, the String value containing the same sequence of characters as <i>IdentifierName</i>, and <i>strict</i> as arguments.</li>
       </ol>
 
-      <p>The result of evaluating an identifier is always a value of type Reference with its referenced name component equal to
-      the <span style="font-family: Times New Roman; font-style: italic">Identifier</span> String.</p>
+      <p>The result of evaluating an identifier is always a value of type <a href="#sec-8.9">Reference</a> with its referenced
+      name component equal to the <span style="font-family: Times New Roman; font-style: italic">Identifier</span> String.</p>
     </section>
   </section>
 
@@ -5588,7 +5588,7 @@
       current <span style="font-family: Times New Roman"><a href="#sec-10.3">VariableEnvironment</a></span>.  Each top-level level
       variable, constant, or function declarated in the code is instantiated.</p>
 
-      <p>Top-level Declaration Instantiation for base code is performed as follows:</p>
+      <p>Top-level Declaration Instantiation for <a href="#sec-10.1.1">base code</a> is performed as follows:</p>
 
       <ol class="proc">
         <li>Let <i>env</i> be the environment record component of the running execution context&rsquo;s <a href="#sec-10.3">VariableEnvironment</a>.</li>
@@ -6084,7 +6084,7 @@
       </ol>
 
       <p>NOTE:&#x9;The result of evaluating an <span style="font-family: Times New Roman; font-style: italic">Identifier</span> is
-      always a value of type Reference.</p>
+      always a value of type <a href="#sec-8.9">Reference</a>.</p>
     </section>
 
     <section id="sec-11.1.3">
@@ -6711,7 +6711,7 @@
       style="font-family: Times New Roman; font-style: italic">Expression</span> <code>)</code></p>
 
       <ol class="proc">
-        <li>Return the result of evaluating <i>Expression</i>. This may be of type Reference.</li>
+        <li>Return the result of evaluating <i>Expression</i>. This may be of type <a href="#sec-8.9">Reference</a>.</li>
       </ol>
       <div class="note">
         <p><span class="nh">NOTE</span> This algorithm does not apply <a href="#sec-8.9.1">GetValue</a> to the result of
@@ -6800,7 +6800,7 @@
         <li>If the result of <a href="#sec-9.2.1">CheckObjectCoercible</a>(<i>baseValue</i>) is an <a href="#sec-8.8">abrupt completion</a>, return that result.</li>
         <li>Let <i>propertyNameString</i> be <a href="#sec-9.1.8">ToString</a>(<i>propertyNameValue</i>).</li>
         <li>If the code matched by the syntactic production that is being evaluated is strict mode code, let <i>strict</i> be <b>true</b>, else let <i>strict</i> be <b>false</b>.</li>
-        <li>Return a value of type Reference whose base value is <i>baseValue</i> and whose referenced name is <i>propertyNameString</i>, and whose strict mode flag is <i>strict</i>.</li>
+        <li>Return a value of type <a href="#sec-8.9">Reference</a> whose base value is <i>baseValue</i> and whose referenced name is <i>propertyNameString</i>, and whose strict mode flag is <i>strict</i>.</li>
       </ol>
 
       <p><span style="font-family: Times New Roman; font-style: italic">CallExpression</span> <b>:</b> <span style="font-family:
@@ -6864,7 +6864,7 @@
         <li>If <i>argList</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>argList</i>.</li>
         <li>If Type(<i>func</i>) is not Object, throw a <b>TypeError</b> exception.</li>
         <li>If <a href="#sec-9.2.2">IsCallable</a>(<i>func</i>) is <b>false</b>, throw a <b>TypeError</b> exception.</li>
-        <li>If Type(<i>ref</i>) is Reference, then
+        <li>If Type(<i>ref</i>) is <a href="#sec-8.9">Reference</a>, then
           <ol class="block">
             <li>If <a href="#sec-8.9">IsPropertyReference</a>(<i>ref</i>) is <b>true</b>, then
               <ol class="block">
@@ -6878,7 +6878,7 @@
             </li>
           </ol>
         </li>
-        <li>Else, Type(<i>ref</i>) is not Reference.
+        <li>Else, Type(<i>ref</i>) is not <a href="#sec-8.9">Reference</a>.
           <ol class="block">
             <li>Let <i>thisValue</i> be <b>undefined</b>.</li>
           </ol>
@@ -6897,10 +6897,10 @@
       1.</p>
 
       <div class="note">
-        <p><span class="nh">NOTE</span> The returned result will never be of type Reference if <span style="font-family: Times New
-        Roman; font-style: italic">func</span> is a native ECMAScript object. Whether calling a host object can return a value of
-        type Reference is implementation-dependent. If a value of type Reference is returned, it must be a non-strict Property
-        Reference.</p>
+        <p><span class="nh">NOTE</span> The returned result will never be of type <a href="#sec-8.9">Reference</a> if <span
+        style="font-family: Times New Roman; font-style: italic">func</span> is a native ECMAScript object. Whether calling a host
+        object can return a value of type <a href="#sec-8.9">Reference</a> is implementation-dependent. If a value of type <a
+        href="#sec-8.9">Reference</a> is returned, it must be a non-strict Property <a href="#sec-8.9">Reference</a>.</p>
       </div>
     </section>
 
@@ -6941,7 +6941,7 @@
         <li>Call <a href="#sec-9.2.1">CheckObjectCoercible</a>(<i>baseValue</i>).</li>
         <li>Let <i>propertyNameString</i> be <a href="#sec-9.1.8">ToString</a>(<i>propertyNameValue</i>).</li>
         <li>If the code matched by the syntactic production that is being evaluated is strict mode code, let <i>strict</i> be <b>true</b>, else let <i>strict</i> be <b>false</b>.</li>
-        <li>Return a value of type Reference whose base value is <i>baseValue</i> and whose referenced name is <i>propertyNameString</i>, and whose strict mode flag is <i>strict</i>.</li>
+        <li>Return a value of type <a href="#sec-8.9">Reference</a> whose base value is <i>baseValue</i> and whose referenced name is <i>propertyNameString</i>, and whose strict mode flag is <i>strict</i>.</li>
       </ol>
     </section>
 
@@ -7139,7 +7139,7 @@
       <ol class="proc">
         <li>Let <i>ref</i> be the result of evaluating <i>UnaryExpression</i>.</li>
         <li>If <i>ref</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>ref</i>.</li>
-        <li>If Type(<i>ref</i>) is not Reference, return <b>true</b>.</li>
+        <li>If Type(<i>ref</i>) is not <a href="#sec-8.9">Reference</a>, return <b>true</b>.</li>
         <li>If <a href="#sec-8.9">IsUnresolvableReference</a>(<i>ref</i>) is <b>true</b>, then,
           <ol class="block">
             <li>If <a href="#sec-8.9">IsStrictReference</a>(<i>ref</i>) is <b>true</b>, throw a <b>SyntaxError</b> exception.</li>
@@ -7151,7 +7151,7 @@
             <li>Return the result of calling the [[Delete]] internal method on <a href="#sec-9.1.9">ToObject</a>(<a href="#sec-8.9">GetBase</a>(<i>ref)</i>) providing <a href="#sec-8.9">GetReferencedName</a>(<i>ref</i>) and <a href="#sec-8.9">IsStrictReference</a>(<i>ref</i>) as the arguments.</li>
           </ol>
         </li>
-        <li>Else, <i>ref</i> is a Reference to an <a href="#sec-10.2.1">Environment Record</a> binding, so
+        <li>Else, <i>ref</i> is a <a href="#sec-8.9">Reference</a> to an <a href="#sec-10.2.1">Environment Record</a> binding, so
           <ol class="block">
             <li>Let <i>bindings</i> be <a href="#sec-8.9">GetBase</a>(<i>ref</i>).</li>
             <li>Return the result of calling the DeleteBinding concrete method of <i>bindings</i>, providing <a href="#sec-8.9">GetReferencedName</a>(<i>ref</i>) as the argument.</li>
@@ -7197,7 +7197,7 @@
 
       <ol class="proc">
         <li>Let <i>val</i> be the result of evaluating <i>UnaryExpression</i>.</li>
-        <li>If Type(<i>val</i>) is Reference, then
+        <li>If Type(<i>val</i>) is <a href="#sec-8.9">Reference</a>, then
           <ol class="block">
             <li>If <a href="#sec-8.9">IsUnresolvableReference</a>(<i>val</i>) is <b>true</b>, return <code>"undefined"</code>.</li>
             <li>Let <i>val</i> be <a href="#sec-8.9.1">GetValue</a>(<i>val</i>).</li>
@@ -12542,13 +12542,14 @@
           <p>A direct call to the eval function is one that is expressed as a <span style="font-family: Times New Roman;
           font-style: italic">CallExpression</span> that meets the following two conditions:</p>
 
-          <p>The Reference that is the result of evaluating the <span style="font-family: Times New Roman; font-style:
-          italic">MemberExpression</span> in the <span style="font-family: Times New Roman; font-style:
+          <p>The <a href="#sec-8.9">Reference</a> that is the result of evaluating the <span style="font-family: Times New Roman;
+          font-style: italic">MemberExpression</span> in the <span style="font-family: Times New Roman; font-style:
           italic">CallExpression</span> has an environment record as its base value and its reference name is <span
           style="font-family: monospace">"<b>eval</b>"</span>.</p>
 
-          <p>The result of calling the abstract operation <a href="#sec-8.9.1">GetValue</a> with that Reference as the argument is
-          the standard built-in function defined in <a href="#sec-15.1.2.1">15.1.2.1</a>.</p>
+          <p>The result of calling the abstract operation <a href="#sec-8.9.1">GetValue</a> with that <a
+          href="#sec-8.9">Reference</a> as the argument is the standard built-in function defined in <a
+          href="#sec-15.1.2.1">15.1.2.1</a>.</p>
         </section>
       </section>
 
@@ -21392,7 +21393,7 @@ THH:mm:ss.sss</pre>
     <li>The occurrence of a <span style="font-family: Times New Roman; font-style: italic">WithStatement</span> in strict mode code.</li>
     <li>The occurrence of an <span style="font-family: Times New Roman; font-style: italic">Identifier</span> value appearing more than once within a <span style="font-family: Times New Roman; font-style: italic">FormalParameterList</span> of an individual strict mode <span style="font-family: Times New Roman; font-style: italic">FunctionDeclaration</span> or <span style="font-family: Times New Roman; font-style: italic">FunctionExpression</span>.</li>
     <li>Improper uses of <code>return</code>, <code>break</code>, and <code>continue</code>.</li>
-    <li>Attempts to call <a href="#sec-8.9.2">PutValue</a> on any value for which an early determination can be made that the value is not a Reference (for example, executing the assignment statement <span style="font-family: monospace">3=4</span>).</li>
+    <li>Attempts to call <a href="#sec-8.9.2">PutValue</a> on any value for which an early determination can be made that the value is not a <a href="#sec-8.9">Reference</a> (for example, executing the assignment statement <span style="font-family: monospace">3=4</span>).</li>
   </ul>
 
   <p>An implementation shall not treat other kinds of errors as early errors even if the compiler can prove that a construct
