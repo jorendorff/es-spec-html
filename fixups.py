@@ -743,14 +743,26 @@ def fixup_notes(e):
 
     fixup_notes_in(e)
 
-def find_section(doc, sec_id):
+def ht_text(ht):
+    if isinstance(ht, str):
+        return ht
+    elif isinstance(ht, list):
+        return ''.join(map(ht_text, ht))
+    else:
+        return ht_text(ht.content)
+
+def find_section(doc, title):
     # super slow algorithm
-    want_id = "sec-" + sec_id
     for sect in findall(doc, 'section'):
-        id = sect.attrs.get('id')
-        if id == want_id:
-            return sect
-    return None
+        if sect.content and ht_name_is(sect.content[0], 'h1'):
+            h = sect.content[0]
+            i = 0
+            if h.content and ht_name_is(h.content[0], 'span') and h.content[0].attrs.get('class') == 'secnum':
+                i += 1
+            s = ht_text(h.content[i:])
+            if s.strip() == title:
+                return sect
+    raise ValueError("No section has the title " + repr(title))
 
 def fixup_7_9_1(doc, docx):
     """ Fix the ilvl attributes on the bullets in section 7.9.1.
@@ -760,7 +772,7 @@ def fixup_7_9_1(doc, docx):
     bullet_numid = '384' # gross hard-coded hack
     assert docx.get_list_style_at(bullet_numid, '3').numFmt == 'bullet'
 
-    sect = find_section(doc, '7.9.1')
+    sect = find_section(doc, 'Rules of Automatic Semicolon Insertion')
     lst = sect.content[2:7]
     assert [int(elt.style['-ooxml-ilvl']) for elt in lst] == [2, 0, 0, 2, 2]
     for i in (1, 2):
@@ -906,13 +918,53 @@ def fixup_links(doc):
     def compile(re_source):
         return re.compile(re_source.replace("SECTION", SECTION))
 
-    specific_links = [
-        ('automatic semicolon insertion (7.9)', '#sec-7.9'),
-        ('automatic semicolon insertion (see 7.9)', '#sec-7.9'),
-        ('semicolon insertion (see 7.9)', '#sec-7.9'),
-        ('strict mode code (see 10.1.1)', '#sec-10.1.1'),
-        ('direct call (see 15.1.2.1.1) to the eval function', '#sec-15.1.2.1.1')
+    sections_by_title = {}
+    for sect in findall(doc, 'section'):
+        if 'id' in sect.attrs and sect.content and sect.content[0].name == 'h1':
+            title = ht_text(sect.content[0].content[1:]).strip()
+            sections_by_title[title] = '#' + sect.attrs['id']
+
+    specific_link_source_data = [
+        ('automatic semicolon insertion (7.9)', 'Automatic Semicolon Insertion'),
+        ('automatic semicolon insertion (see 7.9)', 'Automatic Semicolon Insertion'),
+        ('semicolon insertion (see 7.9)', 'Automatic Semicolon Insertion'),
+        ('strict mode code (see 10.1.1)', 'Strict Mode Code'),
+        ('direct call (see 15.1.2.1.1) to the eval function', 'Direct Call to Eval'),
+
+        ('abrupt completion', 'The Completion Record Specification Type'),
+
+        ('ToPrimitive', 'ToPrimitive'),
+        ('ToInteger', 'ToInteger'),
+        ('ToInt32', 'ToInt32: (Signed 32 Bit Integer)'),
+        ('ToUint32', 'ToUint32: (Unsigned 32 Bit Integer)'),
+        #('ToUint16 (9.7)', 'ToUint16: (Unsigned 16 Bit Integer)'),   # flunks the assertion
+        ('ToUint16', 'ToUint16: (Unsigned 16 Bit Integer)'),
+        ('ToString', 'ToString'),
+        ('ToObject', 'ToObject'),
+        ('CheckObjectCoercible', 'CheckObjectCoercible'),
+        ('IsCallable', 'IsCallable'),
+        ('SameValue', 'The SameValue Algorithm'),
+
+        ('[[Iterate]]', '[[Iterate]] ( )'),
+        ('environment record (10.2.1)', 'Environment Records'),
+
+        ('Directive Prologue', 'Directive Prologues and the Use Strict Directive'),
+        ('Use Strict Directive', 'Directive Prologues and the Use Strict Directive'),
     ]
+
+    specific_links = [(text, sections_by_title[title]) for text, title in specific_link_source_data]
+
+    # Assert that the specific_links above make sense; that is, that each link
+    # with a "(7.9)" or "(see 7.9)" in it actually points to the named section.
+    #
+    # If any of these assertions fails, it means sections were renumbered. Any
+    # number of things can be wrong in the wake of such a change. :)
+    #
+    for text, target in specific_links:
+        m = re.search(r'\((?:see )?([1-9][0-9]*(?:\.[1-9][0-9]*)*)\)', text)
+        if m is not None:
+            if target != '#sec-' + m.group(1):
+                print("OH NO, expected " + repr(m.group(1)) + ", got " + repr(target))
 
     section_link_regexes = list(map(compile, [
         # Match " (11.1.5)" and " (see 7.9)"
@@ -942,9 +994,12 @@ def fixup_links(doc):
         best = None
         for text, target in specific_links:
             i = s.find(text)
-            if i != -1:
-                if best is None or i < best[0]:
-                    best = i, i + len(text), target
+            if (i != -1
+                and target not in current_elements  # don't link sections to themselves
+                and (i == 0 or not s[i-1].isalnum())  # check for word break before
+                and (i + len(text) == len(s) or not s[i + len(text)].isalnum())  # and after
+                and (best is None or i < best[0])):
+                best = i, i + len(text), target
 
         for link_re in section_link_regexes:
             m = link_re.search(s)
@@ -978,12 +1033,24 @@ def fixup_links(doc):
                 break
             s = s[stop:]
 
+    current_elements = set()
     def visit(e):
+        id = e.attrs.get('id')
+        if id is not None:
+            id = '#' + id
+            current_elements.add(id)
+
         for i, kid in enumerate(e.content):
             if isinstance(kid, str):
                 linkify(e, i, kid)
+            elif kid.name == 'h1' or (kid.name == 'ol' and kid.attrs.get('class') == 'toc'):
+                # Don't linkify headings or the table of contents.
+                pass
             else:
                 visit(kid)
+
+        if id is not None:
+            current_elements.remove(id)
 
     visit(doc_body(doc))
 
@@ -1011,6 +1078,48 @@ def fixup_title_page(doc):
             # A few of the lines here are redundant.
             del parent.content[3:]
 
+def fixup_overview_biblio(doc):
+    sect = find_section(doc, "Overview")
+    for i, p in enumerate(sect.content):
+        if p.name == 'p':
+            if p.content and p.content[0].startswith('Gosling'):
+                break
+
+    # First, strip the <sup> element around the &trade; symbol.
+    assert p.content[1].name == 'sup'
+    assert p.content[1].content == ['\N{TRADE MARK SIGN}']
+    s = p.content[0] + p.content[1].content[0] + p.content[2]
+
+    # Make this paragraph a reference.
+    p.attrs['class'] = 'formal-reference'
+
+    # Italicize the title.
+    people, dot_space, rest = s.partition('. ')
+    assert dot_space
+    title, dot_space, rest = rest.partition('. ')
+    assert dot_space
+    p.content[0:3] = [people + dot_space, html.span(title.strip(), class_="book-title"), dot_space + rest]
+
+    # Fix up the second reference.
+    i += 1
+    p = sect.content[i]
+    assert p.name == 'p'
+    p.attrs['class'] = 'formal-reference'
+    people, dot_space, rest = p.content[0].partition('. ')
+    assert dot_space
+    title, dot_space, rest = rest.partition('. ')
+    assert dot_space
+    p.content[0:1] = [people + dot_space, html.span(title.strip(), class_="book-title"), dot_space + rest]
+
+    # Fix up the third reference.
+    i += 1
+    p = sect.content[i]
+    assert p.name == 'p'
+    assert p.content[0].startswith('IEEE')
+    p.attrs['class'] = 'formal-reference'
+    title, dot_space, rest = p.content[0].partition('.')
+    assert dot_space
+    p.content[0:1] = [html.span(title.strip(), class_="book-title"), dot_space + rest]
 
 def fixup(docx, doc):
     styles = docx.styles
@@ -1036,4 +1145,5 @@ def fixup(docx, doc):
     fixup_links(doc)
     fixup_remove_hr(doc)
     fixup_title_page(doc)
+    fixup_overview_biblio(doc)
     return doc

@@ -24,6 +24,7 @@ body > .inner-title {
     margin-top: 6em;
 }
 body section h1 { font-size: 110%; margin-bottom: 1em; }
+body > hgroup > h1 { font-size: 150%; margin-top: 0; margin-bottom: 0; }
 h1 span.secnum {
     width: 6em;
     margin-left: -6.8em;
