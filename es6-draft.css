@@ -51,9 +51,12 @@ code, .string, .math { white-space: nowrap; }
 #sec4\.3 section h1 { font-size: 100%; margin-bottom: 0; }
 
 sup, sub { font-size: smaller; }
+sub {
+    vertical-align: baseline;
+    position: relative;
+    bottom: -0.3em;
+}
 .gp sub, .prod sub, sub.gopt {  /* Specifically for "opt". */
-    position: relative;  /* Forgive me -- but this works. */
-    bottom: 0.3em;
     font-size: 65%;
 }
 
@@ -222,6 +225,7 @@ div.rhs > span.nt,
 div.rhs > span.grhsannot,
 div.rhs > span.grhsmod,
 div.rhs > span.chgloss,
+div.rhs > span.gprose,
 div.rhs > var,
 span.prod > span.geq,
 span.prod > code.t,
@@ -229,6 +233,7 @@ span.prod > span.nt,
 span.prod > span.grhsannot,
 span.prod > span.grhsmod,
 span.prod > span.chgloss,
+span.prod > span.gprose,
 div.rhs > var {
     margin-left: 5pt;
 }
@@ -238,13 +243,15 @@ div.rhs > span.nt:first-child,
 div.rhs > span.grhsannot:first-child,
 div.rhs > span.grhsmod:first-child,
 div.rhs > span.chgloss:first-child,
+div.rhs > span.gprose:first-child,
 div.rhs > var:first-child,
 span.prod > span.geq:first-child,
 span.prod > code.t:first-child,
 span.prod > span.nt:first-child,
 span.prod > span.grhsannot:first-child,
 span.prod > span.grhsmod:first-child,
-span.prod > span.chgloss:first-child,
+span.prod > span.chprose:first-child,
+span.prod > span.gprose:first-child,
 span.prod > var:first-child {
     margin-left: 0;
 }

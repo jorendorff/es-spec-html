@@ -299,8 +299,8 @@ def fixup_paragraph_classes(doc):
         'Syntax': 'h2',
         'SyntaxDefinition': 'div.rhs',
         'SyntaxDefinition2': 'div.rhs',
-        'SyntaxRule': 'div.gp',
-        'SyntaxRule2': 'div.gp',
+        'SyntaxRule': 'div.lhs',
+        'SyntaxRule2': 'div.lhs',
         'Tabletitle': 'figcaption',
         'TermNum': 'h1',
         'Terms': 'p.Terms',
@@ -833,29 +833,6 @@ def fixup_lists(e, docx):
 
         kids[:] = new_content
 
-def fixup_grammar(e):
-    """ Fix div.gp and div.rhs elements in `e` by changing the div.gp to a div.lhs
-    and wrapping them both in a new div.gp. """
-
-    def wrap(parent_list, start):
-        j = start + 1
-        while j < len(parent_list):
-            sib = parent_list[j]
-            if isinstance(sib, str) or sib.name != "div" or sib.attrs.get("class") != "rhs":
-                break
-            j += 1
-
-        if j > start + 1:
-            stop = j
-            parent_list[start].attrs["class"] = "lhs"
-            parent_list[start:stop] = [html.div(*parent_list[start:stop], class_="gp")]
-
-    for i, kid in e.kids():
-        if kid.name == "div" and kid.attrs.get("class") == "gp":
-            wrap(e.content, i)
-        elif kid.name in ('body', 'section', 'div'):
-            fixup_grammar(kid)
-
 def fixup_picts(doc):
     """ Replace Figure 1 with canned HTML. Remove div.w-pict elements. """
     def walk(e):
@@ -1238,6 +1215,167 @@ def fixup_overview_biblio(doc):
     assert dot_space
     p.content[0:1] = [html.span(title.strip(), class_="book-title"), dot_space + rest]
 
+def fixup_grammar_pre(doc):
+    """ Convert runs of div.lhs and div.rhs elements in doc to pre elements.
+
+    Keep the text; throw everything else away.
+    """
+
+    def is_grammar(div):
+        return ht_name_is(div, 'div') and div.attrs.get('class') in ('lhs', 'rhs')
+
+    def lines(div):
+        line = ''
+        all_lines = []
+        def visit(content):
+            nonlocal line
+            for ht in content:
+                if isinstance(ht, str):
+                    line += ht
+                elif ht.name == 'br':
+                    all_lines.append(line)
+                    line = ''
+                elif ht.name == 'sub' and ht.content == ['opt']:
+                    line += '_opt'
+                else:
+                    visit(ht.content)
+
+        visit(div.content)
+        if line:
+            all_lines.append(line)
+        return all_lines
+
+    def is_lhs(text):
+        text = re.sub(r'( one of-?)?( See ((\d+|[A-Z])(.\d+)*|clause \d+))?$', '', text)
+        if text.endswith(' one of'):
+            text = text[:-7]
+        return text.endswith(':')
+
+    for parent, i, div in all_parent_index_child_triples(doc):
+        if is_grammar(div):
+            j = i + 1
+            while j < len(parent.content) and is_grammar(parent.content[j]):
+                j += 1
+            syntax = ''
+            for e in parent.content[i:j]:
+                for line in lines(e):
+                    line = line.strip()
+                    line = ' '.join(line.split())
+
+                    if line.startswith("any "):
+                        line = '[desc ' + line + ']'
+                    elif 'U+0000 through' in line:
+                        k = line.index('U+0000 through')
+                        line = line[:k] + '[desc ' + line[k:] + ']'
+
+                    if is_lhs(line):
+                        syntax += '\n'  # blank line before
+                    else:
+                        syntax += '    '  # indent each rhs
+                    syntax += line + '\n'
+
+            # Hack - not all the paragraphs marked as syntax are actually
+            # things we want to replace. So as a heuristic, only make the
+            # change if the first line satisfied is_lhs.
+            if syntax.startswith('    '):
+                continue
+
+            parent.content[i:j] = [html.pre(syntax, class_="syntax")]
+
+def fixup_grammar_post(doc):
+    """ Generate nice markup from the stripped-down pre.syntax elements
+    created by fixup_grammar_pre. """
+
+    syntax_token_re = re.compile(r'''(?x)
+        ( See \  (?:clause\ )? [0-9A-Z\.]+  # cross-reference
+        | ((?:[A-Z]+[a-z]|uri)[A-Za-z]* (?:_opt)?)  # nonterminal
+        | one\ of
+        | but\ not\ one\ of
+        | but\ not
+        | or
+        | \[no\ LineTerminator\ here\]
+        | \[desc \  [^]]* \]
+        | \[empty\]
+        | \[lookahead \  . [^]]* \]     # the . stands for &notin;
+        | <[A-Z]+>                      # special character
+        | \(                            # unstick a parenthesis from the following token
+        | [^ ]*                         # any other token
+        )\s*
+        ''')
+
+    def markup_div(text, cls, xrefs=None):
+        xref = None
+        markup = []
+
+        i = 0
+        while i < len(text):
+            m = syntax_token_re.match(text, i)
+            if markup:
+                markup.append(' ')
+
+            token = m.group(1)
+            opt = token.endswith('_opt')
+            if opt:
+                token = token[:-4]
+
+            if token.startswith('See '):
+                assert xref is None
+                xref = html.div(token, class_='gsumxref')
+            elif m.group(2) is not None:
+                # nonterminal
+                markup.append(html.span(token, class_='nt'))
+            elif token in ('one of', 'but not', 'but not one of', 'or'):
+                markup.append(html.span(token, class_='grhsmod'))
+            elif token == '[empty]':
+                markup.append(html.span(token, class_='grhsannot'))
+            elif token == '[no LineTerminator here]':
+                markup.append(html.span('[no ',
+                                        html.span('LineTerminator', class_='nt'),
+                                        ' here]',
+                                        class_='grhsannot'))
+            elif token.startswith('[desc '):
+                markup.append(html.span(token[6:-1].strip(), class_='gprose'))
+            elif token.startswith('[lookahead '):
+                markup.append(html.span(token, class_='grhsannot'))
+            elif token and token.rstrip(':') == '':
+                markup.append(html.span(token, class_='geq'))
+            elif token.startswith('<') and token.endswith('>'):
+                if markup:
+                    markup[-1] += token
+                else:
+                    markup.append(token)
+            else:
+                # A terminal.
+                assert token
+                markup.append(html.code(token, class_='t'))
+
+            if opt:
+                markup.append(html.sub('opt'))
+
+            i = m.end()
+
+        results = []
+        if xref:
+            results.append(xref)
+        results.append(html.div(*markup, class_=cls))
+        return results
+
+    for parent, i, pre in all_parent_index_child_triples(doc):
+        if pre.name == 'pre' and pre.attrs.get('class') == 'syntax':
+            divs = []
+            [syntax] = pre.content
+            syntax = syntax.lstrip('\n')
+            for production in syntax.split('\n\n'):
+                lines = production.splitlines()
+
+                assert not lines[0][:1].isspace()
+                lines_out = markup_div(lines[0], 'lhs')
+                for line in lines[1:]:
+                    assert line.startswith('    ')
+                    lines_out += markup_div(line.strip(), 'rhs')
+                divs.append(html.div(*lines_out, class_='gp'))
+            parent.content[i:i+1] = divs
+
 def fixup(docx, doc):
     styles = docx.styles
     numbering = docx.numbering
@@ -1256,11 +1394,12 @@ def fixup(docx, doc):
     fixup_notes(doc)
     fixup_7_9_1(doc, docx)
     fixup_lists(doc, docx)
-    fixup_grammar(doc)
     fixup_picts(doc)
     fixup_figures(doc)
     fixup_links(doc)
     fixup_remove_hr(doc)
     fixup_title_page(doc)
     fixup_overview_biblio(doc)
+    fixup_grammar_pre(doc)
+    fixup_grammar_post(doc)
     return doc

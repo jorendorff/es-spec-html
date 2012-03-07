@@ -104,7 +104,7 @@ def transform(e):
                     'F0B4': '\u00d7', # multiplication sign
                     'F0B8': '\u00f7', # division sign
                     'F0B9': '\u2260', # not equal to
-                    'F0CF': '\u2208', # element of
+                    'F0CF': '\u2209', # not an element of
                     'F0D4': '\u2122', # trade mark sign
                     'F0E4': '\u2122'  # trade mark sign (again)
                 }
