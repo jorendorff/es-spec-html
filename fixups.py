@@ -1336,7 +1336,22 @@ def fixup_grammar_post(doc):
             elif token.startswith('[desc '):
                 markup.append(html.span(token[6:-1].strip(), class_='gprose'))
             elif token.startswith('[lookahead '):
-                markup.append(html.span(token, class_='grhsannot'))
+                start = '[lookahead \N{NOT AN ELEMENT OF} '
+                assert token.startswith(start)
+                assert token.endswith(']')
+                lookset = token[len(start):-1].strip()
+                if lookset.isalpha() and lookset[0].isupper():
+                    parts = [start, html.span(lookset, class_='nt'), ']']
+                elif lookset[0] == '{' and lookset[-1] == '}':
+                    parts = [start + '{']
+                    for minitoken in lookset[1:-1].split(','):
+                        if len(parts) > 1:
+                            parts.append(', ')
+                        parts.append(html.code(minitoken.strip(), class_='t'))
+                    parts.append('}]')
+                else:
+                    parts = [token]
+                markup.append(html.span(*parts, class_='grhsannot'))
             elif token and token.rstrip(':') == '':
                 markup.append(html.span(token, class_='geq'))
             elif token.startswith('<') and token.endswith('>'):

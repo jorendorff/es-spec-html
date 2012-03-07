@@ -1366,8 +1366,8 @@
 
       <div class="gp">
         <div class="lhs"><span class="nt">LookaheadExample</span> <span class="geq">::</span></div>
-        <div class="rhs"><code class="t">n</code> <span class="grhsannot">[lookahead &notin; {1, 3, 5, 7, 9}]</span> <span class="nt">DecimalDigits</span></div>
-        <div class="rhs"><span class="nt">DecimalDigit</span> <span class="grhsannot">[lookahead &notin; DecimalDigit ]</span></div>
+        <div class="rhs"><code class="t">n</code> <span class="grhsannot">[lookahead &notin; {<code class="t">1</code>, <code class="t">3</code>, <code class="t">5</code>, <code class="t">7</code>, <code class="t">9</code>}]</span> <span class="nt">DecimalDigits</span></div>
+        <div class="rhs"><span class="nt">DecimalDigit</span> <span class="grhsannot">[lookahead &notin; <span class="nt">DecimalDigit</span>]</span></div>
       </div>
 
       <p>matches either the letter <code>n</code> followed by one or more decimal digits the first of which is even, or a decimal
@@ -2521,7 +2521,7 @@
       <div class="gp">
         <div class="lhs"><span class="nt">EscapeSequence</span> <span class="geq">::</span></div>
         <div class="rhs"><span class="nt">CharacterEscapeSequence</span></div>
-        <div class="rhs"><code class="t">0</code> <span class="grhsannot">[lookahead &notin; DecimalDigit]</span></div>
+        <div class="rhs"><code class="t">0</code> <span class="grhsannot">[lookahead &notin; <span class="nt">DecimalDigit</span>]</span></div>
         <div class="rhs"><span class="nt">HexEscapeSequence</span></div>
         <div class="rhs"><span class="nt">UnicodeEscapeSequence</span></div>
       </div>
@@ -10711,7 +10711,7 @@
 
     <div class="gp">
       <div class="lhs"><span class="nt">ExpressionStatement</span> <span class="geq">:</span></div>
-      <div class="rhs"><span class="grhsannot">[lookahead &notin; {{, function}]</span> <span class="nt">Expression</span> <code class="t">;</code></div>
+      <div class="rhs"><span class="grhsannot">[lookahead &notin; {<code class="t">{</code>, <code class="t">function</code>}]</span> <span class="nt">Expression</span> <code class="t">;</code></div>
     </div>
 
     <div class="note">
@@ -19745,7 +19745,7 @@ THH:mm:ss.sss</pre>
 
       <div class="gp">
         <div class="lhs"><span class="nt">DecimalEscape</span> <span class="geq">::</span></div>
-        <div class="rhs"><span class="nt">DecimalIntegerLiteral</span> <span class="grhsannot">[lookahead &notin; DecimalDigit]</span></div>
+        <div class="rhs"><span class="nt">DecimalIntegerLiteral</span> <span class="grhsannot">[lookahead &notin; <span class="nt">DecimalDigit</span>]</span></div>
       </div>
 
       <div class="gp">
@@ -19755,7 +19755,7 @@ THH:mm:ss.sss</pre>
 
       <div class="gp">
         <div class="lhs"><span class="nt">CharacterClass</span> <span class="geq">::</span></div>
-        <div class="rhs"><code class="t">[</code> <span class="grhsannot">[lookahead &notin; {^}]</span> <span class="nt">ClassRanges</span> <code class="t">]</code></div>
+        <div class="rhs"><code class="t">[</code> <span class="grhsannot">[lookahead &notin; {<code class="t">^</code>}]</span> <span class="nt">ClassRanges</span> <code class="t">]</code></div>
         <div class="rhs"><code class="t">[</code> <code class="t">^</code> <span class="nt">ClassRanges</span> <code class="t">]</code></div>
       </div>
 
@@ -22851,7 +22851,7 @@ THH:mm:ss.sss</pre>
       <div class="gsumxref">See 7.8.4</div>
       <div class="lhs"><span class="nt">EscapeSequence</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">CharacterEscapeSequence</span></div>
-      <div class="rhs"><code class="t">0</code> <span class="grhsannot">[lookahead &notin; DecimalDigit]</span></div>
+      <div class="rhs"><code class="t">0</code> <span class="grhsannot">[lookahead &notin; <span class="nt">DecimalDigit</span>]</span></div>
       <div class="rhs"><span class="nt">HexEscapeSequence</span></div>
       <div class="rhs"><span class="nt">UnicodeEscapeSequence</span></div>
     </div>
@@ -23505,7 +23505,7 @@ THH:mm:ss.sss</pre>
     <div class="gp">
       <div class="gsumxref">See 12.4</div>
       <div class="lhs"><span class="nt">ExpressionStatement</span> <span class="geq">:</span> </div>
-      <div class="rhs"><span class="grhsannot">[lookahead &notin; {{, function}]</span> <span class="nt">Expression</span> <code class="t">;</code></div>
+      <div class="rhs"><span class="grhsannot">[lookahead &notin; {<code class="t">{</code>, <code class="t">function</code>}]</span> <span class="nt">Expression</span> <code class="t">;</code></div>
     </div>
 
     <div class="gp">
@@ -23850,7 +23850,7 @@ THH:mm:ss.sss</pre>
     <div class="gp">
       <div class="gsumxref">See 15.10.1</div>
       <div class="lhs"><span class="nt">DecimalEscape</span> <span class="geq">::</span> </div>
-      <div class="rhs"><span class="nt">DecimalIntegerLiteral</span> <span class="grhsannot">[lookahead &notin; DecimalDigit]</span></div>
+      <div class="rhs"><span class="nt">DecimalIntegerLiteral</span> <span class="grhsannot">[lookahead &notin; <span class="nt">DecimalDigit</span>]</span></div>
     </div>
 
     <div class="gp">
@@ -23862,7 +23862,7 @@ THH:mm:ss.sss</pre>
     <div class="gp">
       <div class="gsumxref">See 15.10.1</div>
       <div class="lhs"><span class="nt">CharacterClass</span> <span class="geq">::</span> </div>
-      <div class="rhs"><code class="t">[</code> <span class="grhsannot">[lookahead &notin; {^}]</span> <span class="nt">ClassRanges</span> <code class="t">]</code></div>
+      <div class="rhs"><code class="t">[</code> <span class="grhsannot">[lookahead &notin; {<code class="t">^</code>}]</span> <span class="nt">ClassRanges</span> <code class="t">]</code></div>
       <div class="rhs"><code class="t">[</code> <code class="t">^</code> <span class="nt">ClassRanges</span> <code class="t">]</code></div>
     </div>
 
@@ -24112,8 +24112,8 @@ THH:mm:ss.sss</pre>
 
       <div class="gp">
         <div class="lhs"><span class="nt">OctalEscapeSequence</span> <span class="geq">::</span></div>
-        <div class="rhs"><span class="nt">OctalDigit</span> <span class="grhsannot">[lookahead &notin; DecimalDigit]</span></div>
-        <div class="rhs"><span class="nt">ZeroToThree</span> <span class="nt">OctalDigit</span> <span class="grhsannot">[lookahead &notin; DecimalDigit]</span></div>
+        <div class="rhs"><span class="nt">OctalDigit</span> <span class="grhsannot">[lookahead &notin; <span class="nt">DecimalDigit</span>]</span></div>
+        <div class="rhs"><span class="nt">ZeroToThree</span> <span class="nt">OctalDigit</span> <span class="grhsannot">[lookahead &notin; <span class="nt">DecimalDigit</span>]</span></div>
         <div class="rhs"><span class="nt">FourToSeven</span> <span class="nt">OctalDigit</span></div>
         <div class="rhs"><span class="nt">ZeroToThree</span> <span class="nt">OctalDigit</span> <span class="nt">OctalDigit</span></div>
       </div>
