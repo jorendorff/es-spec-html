@@ -648,29 +648,27 @@ def fixup_tables(doc):
                 if not span.attrs and not span.style:
                     td.content = span.content
 
-def fixup_code(e):
+def fixup_code(doc):
     """ Merge adjacent code elements. Convert p elements containing only code elements to pre.
 
     Precedes fixup_notes, which considers pre elements to be part of notes.
     """
 
-    for i, k in e.kids():
-        fixup_code(k)
-
-    if e.name == 'p' and len(e.content) == 1 and not isinstance(e.content[0], str) and e.content[0].name == 'code':
-        code = e.content[0]
-        s = ''
-        for k in code.content:
-            if isinstance(k, str):
-                s += k
-            elif k.name == 'br':
-                s += '\n'
-            else:
-                s = None
-                break
-        if s is not None:
-            e.name = 'pre'
-            e.content[:] = [s]
+    for e in findall(doc, 'p'):
+        if len(e.content) == 1 and ht_name_is(e.content[0], 'code'):
+            code = e.content[0]
+            s = ''
+            for k in code.content:
+                if isinstance(k, str):
+                    s += k
+                elif k.name == 'br':
+                    s += '\n'
+                else:
+                    s = None
+                    break
+            if s is not None:
+                e.name = 'pre'
+                e.content[:] = [s]
 
 def fixup_notes(doc):
     """ Wrap each NOTE in div.note and wrap the labels "NOTE", "NOTE 2", etc. in span.nh. """
