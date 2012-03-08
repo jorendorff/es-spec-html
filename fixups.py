@@ -17,6 +17,17 @@ def all_parent_index_child_triples(e):
             for t in all_parent_index_child_triples(k):
                 yield t
 
+def all_parent_index_child_triples_reversed(e):
+    i = len(e.content) - 1
+    while i >= 0:
+        k = e.content[i]
+        if not isinstance(k, str):
+            for t in all_parent_index_child_triples_reversed(k):
+                yield t
+            assert e.content[i] is k
+            yield e, i, k
+        i -= 1
+
 def has_bullet(docx, p):
     if not p.style:
         return False
@@ -47,6 +58,9 @@ def fixup_list_styles(doc, docx):
     for p in findall(doc, 'p'):
         if p.attrs.get("class") in wrong_types and has_bullet(docx, p):
             p.attrs['class'] = "Normal"
+
+def looks_like_nonterminal(text):
+    return re.match(r'^(?:uri(?:[A-Z][A-Za-z]*)?|[A-Z]+[a-z][A-Za-z]*)$', text) is not None
 
 def fixup_formatting(doc, styles):
     """
@@ -85,22 +99,10 @@ def fixup_formatting(doc, styles):
             else:
                 i += 1
 
-        if style == {'font-style': 'italic'}:
-            return html.i(*content)
-        elif style == {'font-weight': 'bold'}:
-            return html.b(*content)
-        elif style == {'vertical-align': 'super'}:
-            return html.sup(*content)
-        elif style == {'vertical-align': 'sub'}:
-            return html.sub(*content)
-        elif content == ["opt"] and style == {'font-family': 'sans-serif', 'vertical-align': 'sub'}:
-            return html.sub("opt")
-        elif style == {'font-family': 'monospace', 'font-weight': 'bold'}:
-            return html.code(*content)
-        else:
-            result = html.span(*content)
+        result = html.span(*content)
+        if style:
             result.style = style
-            return result
+        return result
 
     def rewrite_spans(parent):
         spans = parent.content[:]  # copies the array
@@ -536,7 +538,10 @@ def fixup_hr(doc):
             a.content[i] = b.content[0]
 
 def fixup_toc(doc):
-    """ Generate a table of contents and replace the one in the document. """
+    """ Generate a table of contents and replace the one in the document.
+
+    This must follow fixup_hr and fixup_sections.
+    """
 
     def make_toc_list(e, depth=0):
         sublist = []
@@ -560,7 +565,7 @@ def fixup_toc(doc):
 
         # Copy the content of the header.
         # TODO - make this clone enough to rip out the h1>span>a title= attribute
-        # TODO - make links when there isn't one
+        # TODO - make a link when there isn't one
         i = 0
         output += h1.content[i:]  # shallow copy, nodes may appear in tree multiple times
 
@@ -571,7 +576,7 @@ def fixup_toc(doc):
         return output
 
     body = doc_body(doc)
-    toc = html.section(html.h1("Contents"), *make_toc_list(body))
+    toc = html.section(html.h1("Contents"), *make_toc_list(body), id='contents')
 
     hr_iterator = body.kids("hr")
     i0, first_hr = hr_iterator.__next__()
@@ -737,10 +742,17 @@ def fixup_7_9_1(doc, docx):
         assert has_bullet(docx, lst[i])
 
 def fixup_lists(e, docx):
+    """ Wrap each li element in a list of the appropriate type.
+
+    This comes fairly early in the sequence, since it assumes the document is
+    still pretty flat.
+    """
+
     if e.name in ('ol', 'ul'):
-        # This is already a list. I don't think there are any lists we don't
-        # identify during transform phase that are nested in lists we do
-        # identify. So skip this.
+        # This is already a list. It is the table of contents, actually.
+        # Skip it.
+        if e.attrs.get("class") != 'toc':
+            warn("list already exists in fixup_lists: " + repr(e)[:300])
         return
 
     have_list_items = False
@@ -1172,8 +1184,9 @@ def fixup_overview_biblio(doc):
             if p.content and p.content[0].startswith('Gosling'):
                 break
 
-    # First, strip the <sup> element around the &trade; symbol.
-    assert p.content[1].name == 'sup'
+    # First, strip the span element around the &trade; symbol.
+    assert p.content[1].name == 'span'
+    assert p.content[1].style == {'vertical-align': 'super'}
     assert p.content[1].content == ['\N{TRADE MARK SIGN}']
     s = p.content[0] + p.content[1].content[0] + p.content[2]
 
@@ -1207,6 +1220,60 @@ def fixup_overview_biblio(doc):
     title, dot_space, rest = p.content[0].partition('.')
     assert dot_space
     p.content[0:1] = [html.span(title.strip(), class_="book-title"), dot_space + rest]
+
+def fixup_simplify_formatting(doc):
+    """ Convert formatting spans into HTML markup that does the same thing.
+
+    (Sometimes this converts to semantic markup, like using a var or span.nt
+    element instead of an <i>; but it's just a shot in the dark.)
+    
+    This precedes fixup_syntax_pre which looks for sub elements.
+    """
+    def simplify_style_span(span):
+        if span.attrs:
+            return [span]
+        if not span.style:
+            return span.content
+
+        style = span.style.copy()
+        content = span.content
+
+        if content == ["opt"] and style == {'font-family': 'sans-serif', 'vertical-align': 'sub'}:
+            return [html.sub("opt")]
+        elif style == {'font-family': 'monospace', 'font-weight': 'bold'}:
+            return [html.code(*content)]
+        elif (style == {'font-family': 'Times New Roman', 'font-style': 'italic'}
+              and len(content) == 1
+              and isinstance(content[0], str)):
+            if looks_like_nonterminal(content[0].strip()):
+                return [html.span(*content, class_="nt")]
+            else:
+                return [html.var(*content)]
+        elif style == {'font-family': 'Times New Roman', 'font-weight': 'bold'}:
+            return [html.span(*content, class_='value')]
+
+        if style.get('font-style') == 'italic':
+            content = [html.i(*content)]
+            del style['font-style']
+        if style.get('font-weight') == 'bold':
+            content = [html.b(*content)]
+            del style['font-weight']
+        if style.get('vertical-align') == 'super':
+            content = [html.sup(*content)]
+            del style['vertical-align']
+        if style.get('vertical-align') == 'sub':
+            content = [html.sub(*content)]
+            del style['vertical-align']
+
+        if style:
+            content = [html.span(*content)]
+            content[0].style = style
+
+        return content
+
+    for parent, i, span in all_parent_index_child_triples_reversed(doc):
+        if span.name == 'span':
+            parent.content[i:i + 1] = simplify_style_span(span)
 
 def fixup_grammar_pre(doc):
     """ Convert runs of div.lhs and div.rhs elements in doc to pre elements.
@@ -1435,6 +1502,7 @@ def fixup(docx, doc):
     fixup_remove_hr(doc)
     fixup_title_page(doc)
     fixup_overview_biblio(doc)
+    fixup_simplify_formatting(doc)
     fixup_grammar_pre(doc)
     fixup_grammar_post(doc)
     fixup_add_disclaimer(doc)
