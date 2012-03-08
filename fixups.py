@@ -399,33 +399,6 @@ def doc_body(doc):
     assert body.name == 'body'
     return body
 
-def insert_disclaimer(doc):
-    div = html.div
-    p = html.p
-    strong = html.strong
-    em = html.em
-    a = html.a
-
-    disclaimer = div(
-        p(strong("This is ", em("not"), " the official ECMAScript Language Specification.")),
-        p("The most recent final ECMAScript standard is Edition 5.1, the PDF document located at ",
-          a("http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-262.pdf",
-            href="http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-262.pdf"),
-          "."),
-        p("This is a draft of the next edition of the standard."),
-        p("This page is based on the current working draft published at ",
-          a("http://wiki.ecmascript.org/doku.php?id=harmony:specification_drafts",
-            href="http://wiki.ecmascript.org/doku.php?id=harmony:specification_drafts"),
-          ". The program used to convert that Word doc to HTML is a custom-piled heap of hacks. "
-          "It has doubtlessly stripped out or garbled some of the formatting that makes "
-          "the specification comprehensible. You can help improve the program ",
-          a("here", href="https://github.com/jorendorff/es-spec-html"),
-          "."),
-        # (U+2019 is RIGHT SINGLE QUOTATION MARK, the character you're supposed to use for an apostrophe.)
-        p("For copyright information, see ECMA\u2019s legal disclaimer in the document itself."),
-        id="unofficial")
-    doc_body(doc).content.insert(0, disclaimer)
-
 def ht_name_is(ht, name):
     return not isinstance(ht, str) and ht.name == name
 
@@ -1411,6 +1384,33 @@ def fixup_grammar_post(doc):
                 divs.append(html.div(*lines_out, class_='gp'))
             parent.content[i:i+1] = divs
 
+def fixup_add_disclaimer(doc):
+    div = html.div
+    p = html.p
+    strong = html.strong
+    em = html.em
+    a = html.a
+
+    disclaimer = div(
+        p(strong("This is ", em("not"), " the official ECMAScript Language Specification.")),
+        p("The most recent final ECMAScript standard is Edition 5.1, the PDF document located at ",
+          a("http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-262.pdf",
+            href="http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-262.pdf"),
+          "."),
+        p("This is a draft of the next edition of the standard."),
+        p("This page is based on the current working draft published at ",
+          a("http://wiki.ecmascript.org/doku.php?id=harmony:specification_drafts",
+            href="http://wiki.ecmascript.org/doku.php?id=harmony:specification_drafts"),
+          ". The program used to convert that Word doc to HTML is a custom-piled heap of hacks. "
+          "It has doubtlessly stripped out or garbled some of the formatting that makes "
+          "the specification comprehensible. You can help improve the program ",
+          a("here", href="https://github.com/jorendorff/es-spec-html"),
+          "."),
+        # (U+2019 is RIGHT SINGLE QUOTATION MARK, the character you're supposed to use for an apostrophe.)
+        p("For copyright information, see ECMA\u2019s legal disclaimer in the document itself."),
+        id="unofficial")
+    doc_body(doc).content.insert(0, disclaimer)
+
 def fixup(docx, doc):
     styles = docx.styles
     numbering = docx.numbering
@@ -1419,7 +1419,6 @@ def fixup(docx, doc):
     fixup_formatting(doc, styles)
     fixup_paragraph_classes(doc)
     fixup_element_spacing(doc)
-    insert_disclaimer(doc)
     fixup_sec_4_3(doc)
     fixup_sections(doc)
     fixup_hr(doc)
@@ -1438,4 +1437,5 @@ def fixup(docx, doc):
     fixup_overview_biblio(doc)
     fixup_grammar_pre(doc)
     fixup_grammar_post(doc)
+    fixup_add_disclaimer(doc)
     return doc
