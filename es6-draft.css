@@ -50,12 +50,13 @@ code, .string, .math { white-space: nowrap; }
 
 #sec4\.3 section h1 { font-size: 100%; margin-bottom: 0; }
 
-sup, sub { font-size: smaller; }
-sub {
-    vertical-align: baseline;
+sup, sub {
+    font-size: smaller;
+    vertical-align: baseline;  /* Make sup and sub not affect line height. */
     position: relative;
-    bottom: -0.3em;
 }
+sup { bottom:  0.3em; }
+sub { bottom: -0.3em; }
 .gp sub, .prod sub, sub.gopt {  /* Specifically for "opt". */
     font-size: 65%;
 }
