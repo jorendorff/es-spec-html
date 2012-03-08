@@ -537,18 +537,34 @@ def fixup_hr(doc):
         if b.name == "p" and len(b.content) == 1 and isinstance(b.content[0], html.Element) and b.content[0].name == "hr":
             a.content[i] = b.content[0]
 
-def fixup_toc(doc):
-    """ Generate a table of contents and replace the one in the document.
+def fixup_strip_toc(doc):
+    """ Delete the table of contents in the document.
 
-    This must follow fixup_hr and fixup_sections.
+    Leave an empty section tag which can be populated with auto-generated
+    contents later.
+
+    This must follow fixup_hr.
+
+    Precedes fixup_generate_toc.
     """
+    body = doc_body(doc)
+    toc = html.section(id='contents')
+
+    hr_iterator = body.kids("hr")
+    i0, first_hr = hr_iterator.__next__()
+    i1, next_hr = hr_iterator.__next__()
+    body.content[i0: i1 + 1] = [toc]
+
+def fixup_generate_toc(doc):
+    """ Generate a table of contents from the section headings. """
 
     def make_toc_list(e, depth=0):
         sublist = []
         for _, sect in e.kids("section"):
-            sect_item = make_toc_for(sect, depth + 1)
-            if sect_item:
-                sublist.append(html.li(*sect_item))
+            if sect.attrs.get('id') != 'contents':
+                sect_item = make_toc_for(sect, depth + 1)
+                if sect_item:
+                    sublist.append(html.li(*sect_item))
         if sublist:
             return [html.ol(*sublist, class_="toc")]
         else:
@@ -566,8 +582,7 @@ def fixup_toc(doc):
         # Copy the content of the header.
         # TODO - make this clone enough to rip out the h1>span>a title= attribute
         # TODO - make a link when there isn't one
-        i = 0
-        output += h1.content[i:]  # shallow copy, nodes may appear in tree multiple times
+        output += h1.content[:]  # shallow copy, nodes may appear in tree multiple times
 
         # Find any subsections.
         if depth < 3:
@@ -576,12 +591,14 @@ def fixup_toc(doc):
         return output
 
     body = doc_body(doc)
-    toc = html.section(html.h1("Contents"), *make_toc_list(body), id='contents')
+    for i, section in body.kids('section'):
+        if section.attrs.get('id') == 'contents':
+            break
+    else:
+        raise ValueError("Cannot find body>section#contents.")
 
-    hr_iterator = body.kids("hr")
-    i0, first_hr = hr_iterator.__next__()
-    i1, next_hr = hr_iterator.__next__()
-    body.content[i0: i1 + 1] = [toc]
+    assert not section.content
+    section.content = [html.h1("Contents")] + make_toc_list(doc_body(doc))
 
 def fixup_tables(doc):
     """ Turn highlighted td elements into th elements.
@@ -1489,7 +1506,7 @@ def fixup(docx, doc):
     fixup_sec_4_3(doc)
     fixup_sections(doc)
     fixup_hr(doc)
-    fixup_toc(doc)
+    fixup_strip_toc(doc)
     fixup_tables(doc)
     fixup_code(doc)
     fixup_notes(doc)
@@ -1505,5 +1522,6 @@ def fixup(docx, doc):
     fixup_simplify_formatting(doc)
     fixup_grammar_pre(doc)
     fixup_grammar_post(doc)
+    fixup_generate_toc(doc)
     fixup_add_disclaimer(doc)
     return doc
