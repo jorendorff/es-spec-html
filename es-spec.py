@@ -5,8 +5,6 @@ import htmodel
 from transform import transform
 import fixups
 
-es6_draft = docx.load("es6-draft.docx")
-
 def sketch_schema(document):
     def has_own_text(e):
         return e.text or any(k.tail for k in e)
@@ -29,7 +27,7 @@ def sketch_schema(document):
     for path in sorted(hits):
         print(path)
 
-def save_html(docxfile):
+def save_html(docxfile, filename):
     result = transform(docxfile.document)
     fixups.fixup(docxfile, result)
 
@@ -38,9 +36,13 @@ def save_html(docxfile):
         print(k, v)
     print()
 
-    htmodel.save_html('es6-draft.html', result)
+    htmodel.save_html(filename, result)
 
+es6_draft = docx.load("es6-draft.docx")
 #sketch_schema(es6_draft.document)
 #es6_draft._extract()
 #es6_draft._dump_styles()
-save_html(es6_draft)
+save_html(es6_draft, 'es6-draft.html')
+
+#es51 = docx.load("es5.1-final.dotx")
+#save_html(es51, "es5.1-final.html")
