@@ -41,7 +41,7 @@ k_left = bloat('left')
 k_hanging = bloat('hanging')
 
 def parse_pr(e):
-    font_keys = {k_ascii, k_hAnsi, k_cs, k_eastAsia}
+    font_keys = {k_ascii, k_hAnsi, k_cs, k_eastAsia, bloat('hint')}
 
     assert e.text is None
 
@@ -360,7 +360,7 @@ class Document:
         return levels[ilvl]
 
 def load(filename):
-    with zipfile.ZipFile("es6-draft.docx") as f:
+    with zipfile.ZipFile(filename) as f:
         document_xml = f.read('word/document.xml')
         styles_xml = f.read('word/styles.xml')
         numbering_xml = f.read('word/numbering.xml')
