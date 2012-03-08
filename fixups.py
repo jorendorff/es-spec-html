@@ -557,6 +557,7 @@ def fixup_hr(doc):
     than between paragraphs, and this leads to goofy markup which has to be
     fixed up.
     """
+
     for a, i, b in all_parent_index_child_triples(doc):
         if b.name == "p" and len(b.content) == 1 and isinstance(b.content[0], html.Element) and b.content[0].name == "hr":
             a.content[i] = b.content[0]
@@ -832,6 +833,33 @@ def fixup_lists(e, docx):
                 lists[-1][1].content.append(k)
 
         kids[:] = new_content
+
+def fixup_list_paragraphs(doc):
+    """ Put some more space between list items in certain lists. """
+
+    def is_block(ht):
+        return not isinstance(ht, str) and ht.is_block()
+
+    for ul in findall(doc, 'ul'):
+        n = 0
+        chars = 0
+        for _, li in ul.kids('li'):
+            # Check to see if this list item already contains a paragraph
+            first = li.content[0]
+            if not isinstance(first, str) and first.is_block():
+                chars = -1
+                break
+            n += 1
+            chars += len(ht_text(li))
+        print(round(chars / n, 1))
+
+        # If the average list item is any length, make paragraphs.
+        if chars / n > 80:
+            for _, li in ul.kids('li'):
+                i = len(li.content)
+                while i > 0 and is_block(li.content[i - 1]):
+                    i -= 1
+                li.content[:i] = [html.p(*li.content[:i])]
 
 def fixup_picts(doc):
     """ Replace Figure 1 with canned HTML. Remove div.w-pict elements. """
@@ -1160,7 +1188,8 @@ def fixup_title_page(doc):
         if parent.name == 'p' and child.name == 'h1':
             # A p element shouldn't contain an h1, so make this an hgroup.
             parent.name = 'hgroup'
-            assert len(parent.content) == 6
+            if len(parent.content) != 6:
+                continue
             h = parent.content[1]
 
             # One of the lines has an ugly typo that I don't want right up
@@ -1409,6 +1438,7 @@ def fixup(docx, doc):
     fixup_notes(doc)
     fixup_7_9_1(doc, docx)
     fixup_lists(doc, docx)
+    fixup_list_paragraphs(doc)
     fixup_picts(doc)
     fixup_figures(doc)
     fixup_links(doc)
