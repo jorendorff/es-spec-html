@@ -655,13 +655,7 @@ def fixup_code(e):
     """
 
     for i, k in e.kids():
-        if k.name == 'code':
-            while i + 1 < len(e.content) and not isinstance(e.content[i + 1], str) and e.content[i + 1].name == 'code':
-                # merge two adjacent code nodes (should merge adjacent text nodes after this :-P)
-                k.content += e.content[i + 1].content
-                del e.content[i + 1]
-        else:
-            fixup_code(k)
+        fixup_code(k)
 
     if e.name == 'p' and len(e.content) == 1 and not isinstance(e.content[0], str) and e.content[0].name == 'code':
         code = e.content[0]
