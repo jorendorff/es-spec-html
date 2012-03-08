@@ -851,7 +851,6 @@ def fixup_list_paragraphs(doc):
                 break
             n += 1
             chars += len(ht_text(li))
-        print(round(chars / n, 1))
 
         # If the average list item is any length, make paragraphs.
         if chars / n > 80:
