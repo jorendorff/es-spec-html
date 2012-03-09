@@ -2806,8 +2806,8 @@
 
         <li>
           <p>The CV of <span class="prod"><span class="nt">EscapeSequence</span> <span class="geq">::</span> <code
-          class="t">0</code> <code class="t">[lookahead</code> <code class="t">&notin;</code> <span
-          class="nt">DecimalDigit</span></span>] is a &lt;NUL&gt; character (Unicode value 0000).</p>
+          class="t">0</code> <span class="grhsannot">[lookahead &notin; <span class="nt">DecimalDigit</span>]</span></span> is a
+          &lt;NUL&gt; character (Unicode value 0000).</p>
         </li>
 
         <li>
@@ -6681,7 +6681,7 @@
     <ol class="proc">
       <li>Let <i>bodyText</i> be the result of concatenating the Strings "<code>return</code> ", <i>name</i>, and "<code>;</code>".</li>
       <li>Let <i>body</i> be the result of parsing <i>bodyText</i> using <i>FunctionBody</i> as the goal symbol.</li>
-      <li>Let <i>parameters</i> be a <span class="prod"><span class="nt">FormalParameterList</span> <span class="geq">:</span></span> [empty] production.</li>
+      <li>Let <i>parameters</i> be a <span class="prod"><span class="nt">FormalParameterList</span> <span class="geq">:</span> <span class="grhsannot">[empty]</span></span> production.</li>
       <li>Return the result of creating a function object as described in <a href="#sec-13.2">13.2</a> using <i>parameters</i> as <i>FormalParameterList</i>, <i>body</i> for <i>FunctionBody</i>, <i>env</i> as <i>Scope</i>, and <b>true</b> for <i>Strict</i>.</li>
     </ol>
 
@@ -7530,7 +7530,7 @@
 
         <ol class="proc">
           <li>Let <i>propName</i> be PropName of <i>PropertyName</i>.</li>
-          <li>Let <i>closure</i> be the result of creating a new Function object as specified in <a href="#sec-13.1.1">13.1.1</a> using a <span class="prod"><span class="nt">FormalParameterList</span> <span class="geq">:</span></span> [empty] production as the parameter list and body specified by <i>FunctionBody</i>. Pass in the <a href="#sec-10.3">LexicalEnvironment</a> of the running execution context as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag. Pass object as the optional <i>homeObject</i> argument and propName as the optional <i>methodName</i> argument.</li>
+          <li>Let <i>closure</i> be the result of creating a new Function object as specified in <a href="#sec-13.1.1">13.1.1</a> using a <span class="prod"><span class="nt">FormalParameterList</span> <span class="geq">:</span> <span class="grhsannot">[empty]</span></span> production as the parameter list and body specified by <i>FunctionBody</i>. Pass in the <a href="#sec-10.3">LexicalEnvironment</a> of the running execution context as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag. Pass object as the optional <i>homeObject</i> argument and propName as the optional <i>methodName</i> argument.</li>
           <li>Let <i>desc</i> be the <a href="#sec-8.10">Property Descriptor</a>{[[Get]]: <i>closure</i>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}</li>
           <li>Return the result of calling the [[DefineOwnProperty]] internal method of <i>object</i> with arguments <i>propName</i>, <i>desc</i>, and <b>false</b>.</li>
         </ol>
@@ -7541,7 +7541,7 @@
 
         <ol class="proc">
           <li>Let <i>propName</i> be PropName of <i>PropertyName</i>.</li>
-          <li>Let <i>closure</i> be the result of creating a new Generator object as specified in <a href="#sec-13.2">13.2</a>.xxx  using a <span class="prod"><span class="nt">FormalParameterList</span> <span class="geq">:</span></span> [empty] production as the parameter list and body specified by <i>FunctionBody</i>. Pass in the <a href="#sec-10.3">LexicalEnvironment</a> of the running execution context as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag. Pass object as the optional <i>homeObject</i> argument and propName as the optional <i>methodName</i> argument.</li>
+          <li>Let <i>closure</i> be the result of creating a new Generator object as specified in <a href="#sec-13.2">13.2</a>.xxx  using a <span class="prod"><span class="nt">FormalParameterList</span> <span class="geq">:</span> <span class="grhsannot">[empty]</span></span> production as the parameter list and body specified by <i>FunctionBody</i>. Pass in the <a href="#sec-10.3">LexicalEnvironment</a> of the running execution context as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag. Pass object as the optional <i>homeObject</i> argument and propName as the optional <i>methodName</i> argument.</li>
           <li>Let <i>desc</i> be the <a href="#sec-8.10">Property Descriptor</a>{[[Get]]: <i>closure</i>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}</li>
           <li>Return the result of calling the [[DefineOwnProperty]] internal method of <i>object</i> with arguments <i>propName</i>, <i>desc</i>, and <b>false</b>.</li>
         </ol>
@@ -7552,7 +7552,7 @@
 
         <ol class="proc">
           <li>Let <i>propName</i> be PropName(<i>PropertyName</i>).</li>
-          <li>Let <i>closure</i> be the result of creating a new Function object as specified in <a href="#sec-13.2">13.2</a> using a <span class="prod"><span class="nt">FormalParameterList</span> <span class="geq">:</span></span> [empty] production as the formal parameter list and body specified by <i>FunctionBody</i>. Pass in the <a href="#sec-10.3">LexicalEnvironment</a> of the running execution context as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag if the <i>PropertyAssignment</i> is contained in <a href="#sec-10.1.1">strict code</a> or if its <i>FunctionBody</i> is <a href="#sec-10.1.1">strict code</a>. Pass object as the optional <i>homeObject</i> argument and propName as the optional <i>methodName</i> argument.</li>
+          <li>Let <i>closure</i> be the result of creating a new Function object as specified in <a href="#sec-13.2">13.2</a> using a <span class="prod"><span class="nt">FormalParameterList</span> <span class="geq">:</span> <span class="grhsannot">[empty]</span></span> production as the formal parameter list and body specified by <i>FunctionBody</i>. Pass in the <a href="#sec-10.3">LexicalEnvironment</a> of the running execution context as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag if the <i>PropertyAssignment</i> is contained in <a href="#sec-10.1.1">strict code</a> or if its <i>FunctionBody</i> is <a href="#sec-10.1.1">strict code</a>. Pass object as the optional <i>homeObject</i> argument and propName as the optional <i>methodName</i> argument.</li>
           <li>Let <i>desc</i> be the <a href="#sec-8.10">Property Descriptor</a>{[[Get]]: <i>closure</i>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}</li>
           <li>Return the result of calling the [[DefineOwnProperty]] internal method of <i>object</i> with arguments <i>propName</i>, <i>desc</i>, and <b>false</b>.</li>
         </ol>
@@ -11418,9 +11418,9 @@
 
       <p><b>Runtime Semantics: Evaluation</b></p>
 
-      <p><span class="prod"><span class="nt">ExpressionStatement</span> <span class="geq">:</span></span> [lookahead &notin;
-      {<b><span style="font-family: monospace">{</span>, <span style="font-family: monospace">function</span></b>}] <span
-      class="nt">Expression</span><code>;</code></p>
+      <p><span class="prod"><span class="nt">ExpressionStatement</span> <span class="geq">:</span> <span
+      class="grhsannot">[lookahead &notin; {<code class="t">{</code>, <code class="t">function</code>}]</span> <span
+      class="nt">Expression</span> <code class="t">;</code></span></p>
 
       <ol class="proc">
         <li>Let <i>exprRef</i> be the result of evaluating <i>Expression</i>.</li>
@@ -12688,9 +12688,9 @@
         </li>
       </ol>
 
-      <p><span class="prod"><span class="nt">CaseBlock</span> <span class="geq">:</span></span><span style="font-family:
-      monospace">{</span> <span class="nt">CaseClauses</span><sub>opt</sub> <span class="nt">DefaultClause</span> <span
-      class="nt">CaseClauses</span><sub>opt</sub> <span style="font-family: monospace">}</span></p>
+      <p><span class="prod"><span class="nt">CaseBlock</span> <span class="geq">:</span> <code class="t">{</code> <span
+      class="nt">CaseClausesopt</span> <span class="nt">DefaultClause</span> <span class="nt">CaseClausesopt</span> <code
+      class="t">}</code></span></p>
 
       <ol class="proc">
         <li><span style="font-family: Times New Roman">Let <i>V</i> = <b>undefined</b>..</span></li>
@@ -20532,9 +20532,9 @@
       <section id="sec-15.10.2.4">
         <h1><span class="secnum"><a href="#sec-15.10.2.4" title="link to this section">15.10.2.4</a></span> Alternative</h1>
 
-        <p>The production <span class="prod"><span class="nt">Alternative</span> <span class="geq">::</span></span> [empty]
-        evaluates by returning a Matcher that takes two arguments, a State <var>x</var> and a Continuation <var>c</var>, and
-        returns the result of calling <var>c</var>(<var>x</var>).</p>
+        <p>The production <span class="prod"><span class="nt">Alternative</span> <span class="geq">::</span> <span
+        class="grhsannot">[empty]</span></span> evaluates by returning a Matcher that takes two arguments, a State <var>x</var>
+        and a Continuation <var>c</var>, and returns the result of calling <var>c</var>(<var>x</var>).</p>
 
         <p>The production <span class="prod"><span class="nt">Alternative</span> <span class="geq">::</span> <span
         class="nt">Alternative</span> <span class="nt">Term</span></span> evaluates as follows:</p>
@@ -21260,8 +21260,8 @@
         <h1><span class="secnum"><a href="#sec-15.10.2.11" title="link to this section">15.10.2.11</a></span> DecimalEscape</h1>
 
         <p>The production <span class="prod"><span class="nt">DecimalEscape</span> <span class="geq">::</span> <span
-        class="nt">DecimalIntegerLiteral</span> <code class="t">[lookahead</code> <code class="t">&notin;</code> <span
-        class="nt">DecimalDigit</span></span>] evaluates as follows:</p>
+        class="nt">DecimalIntegerLiteral</span> <span class="grhsannot">[lookahead &notin; <span
+        class="nt">DecimalDigit</span>]</span></span> evaluates as follows:</p>
 
         <ol class="proc">
           <li>Let <i>i</i> be the MV of <i>DecimalIntegerLiteral</i>.</li>
@@ -21401,9 +21401,9 @@
         <h1><span class="secnum"><a href="#sec-15.10.2.13" title="link to this section">15.10.2.13</a></span> CharacterClass</h1>
 
         <p>The production <span class="prod"><span class="nt">CharacterClass</span> <span class="geq">::</span> <code
-        class="t">[</code></span> [lookahead &notin; {<b>^</b>}] <span class="nt">ClassRanges</span> <code>]</code> evaluates by
-        evaluating <span class="nt">ClassRanges</span> to obtain a CharSet and returning that CharSet and the Boolean
-        <b>false</b>.</p>
+        class="t">[</code> <span class="grhsannot">[lookahead &notin; {<code class="t">^</code>}]</span> <span
+        class="nt">ClassRanges</span> <code class="t">]</code></span> evaluates by evaluating <span class="nt">ClassRanges</span>
+        to obtain a CharSet and returning that CharSet and the Boolean <b>false</b>.</p>
 
         <p>The production <span class="prod"><span class="nt">CharacterClass</span> <span class="geq">::</span> <code
         class="t">[</code> <code class="t">^</code> <span class="nt">ClassRanges</span> <code class="t">]</code></span> evaluates
@@ -21414,8 +21414,8 @@
       <section id="sec-15.10.2.14">
         <h1><span class="secnum"><a href="#sec-15.10.2.14" title="link to this section">15.10.2.14</a></span> ClassRanges</h1>
 
-        <p>The production <span class="prod"><span class="nt">ClassRanges</span> <span class="geq">::</span></span> [empty]
-        evaluates by returning the empty CharSet.</p>
+        <p>The production <span class="prod"><span class="nt">ClassRanges</span> <span class="geq">::</span> <span
+        class="grhsannot">[empty]</span></span> evaluates by returning the empty CharSet.</p>
 
         <p>The production <span class="prod"><span class="nt">ClassRanges</span> <span class="geq">::</span> <span
         class="nt">NonemptyClassRanges</span></span> evaluates by evaluating <span class="nt">NonemptyClassRanges</span> to obtain

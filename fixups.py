@@ -1373,11 +1373,21 @@ def fixup_grammar_pre(doc):
         else:
             return False
 
-    def is_grammar_inline(ht):
+    inline_grammar_re = re.compile('^\s*(?:$|\[empty\]|\[no\s*$|here\]|\[lookahead \N{NOT AN ELEMENT OF}|{|}|\])')
+
+    def is_grammar_inline_at(parent, i):
+        ht = parent.content[i]
         if isinstance(ht, str):
-            return ht.strip() in {'', '[empty]', '[no', 'here]', '[lookahead \N{NOT AN ELEMENT OF}', ']'}
+            m = inline_grammar_re.match(ht)
+            if m is None:
+                return False
+            end = m.end()
+            if end != len(ht):
+                # Need to split, ew, mutation
+                parent.content[i: i + 1] = [ht[:end], ht[end:]]
+            return True
         elif ht.name == 'span':
-            return ht.attrs.get('class') == 'nt' or (len(ht.content) == 1 and is_grammar_inline(ht.content[0]))
+            return ht.attrs.get('class') == 'nt' or (len(ht.content) == 1 and is_grammar_inline_at(ht, 0))
         elif ht.name == 'sub':
             return ht.content == ['opt']
         else:
@@ -1425,7 +1435,7 @@ def fixup_grammar_pre(doc):
 
         # Find the end of the production.
         j += 1
-        while j < len(content) and is_grammar_inline(content[j]):
+        while j < len(content) and is_grammar_inline_at(parent, j):
             j += 1
 
         # Strip out all formatting and replace parent.content[i:j] with a new span.prod.
