@@ -1477,6 +1477,17 @@ def fixup_grammar_pre(doc):
         text = ' '.join(text.strip().split())
         content[i:j] = [html.span(text, class_='prod')]
 
+        # Insert a space after, unless there already is one or we're at the end
+        # of a paragraph.
+        if i + 1 < len(content):
+            next_ht = content[i + 1]
+            if isinstance(next_ht, str):
+                if not next_ht[:1].isspace():
+                    content[i + 1] = ' ' + next_ht
+            else:
+                if next_ht.name != 'br' and not ht_text(next_ht)[:1].isspace():
+                    content.insert(i + 1, ' ')
+
     for parent, i, child in all_parent_index_child_triples(doc):
         if is_grammar_block(child):
             strip_grammar_block(parent, i)

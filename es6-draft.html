@@ -2153,7 +2153,7 @@
     <p><b>Static Semantics:  <span class="nt">String</span> <span class="nt">Value</span></b></p>
 
     <p><span class="prod"><span class="nt">Identifier</span> <span class="geq">::</span> <span
-    class="nt">IdentifierName</span></span><span style="font-family: sans-serif"><b>but not</b></span> <i>ReservedWord</i></p>
+    class="nt">IdentifierName</span></span> <span style="font-family: sans-serif"><b>but not</b></span> <i>ReservedWord</i></p>
 
     <ol class="proc">
       <li>Return the String Value of <i>IdentifierName</i>.</li>
@@ -2532,12 +2532,12 @@
       <ul>
         <li>
           <p>The MV of <span class="prod"><span class="nt">NumericLiteral</span> <span class="geq">::</span> <span
-          class="nt">DecimalLiteral</span></span>is the MV of <i>DecimalLiteral</i>.</p>
+          class="nt">DecimalLiteral</span></span> is the MV of <i>DecimalLiteral</i>.</p>
         </li>
 
         <li>
           <p>The MV of <span class="prod"><span class="nt">NumericLiteral</span> <span class="geq">::</span> <span
-          class="nt">HexIntegerLiteral</span></span>is the MV of <i>HexIntegerLiteral</i>.</p>
+          class="nt">HexIntegerLiteral</span></span> is the MV of <i>HexIntegerLiteral</i>.</p>
         </li>
 
         <li>
@@ -2597,24 +2597,24 @@
 
         <li>
           <p>The MV of <span class="prod"><span class="nt">DecimalIntegerLiteral</span> <span class="geq">::</span> <span
-          class="nt">NonZeroDigit</span></span>is the MV of <i>NonZeroDigit.</i></p>
+          class="nt">NonZeroDigit</span></span> is the MV of <i>NonZeroDigit.</i></p>
         </li>
 
         <li>
           <p>The MV of <span class="prod"><span class="nt">DecimalIntegerLiteral</span> <span class="geq">::</span> <span
-          class="nt">NonZeroDigit</span> <span class="nt">DecimalDigits</span></span>is (the MV of <i>NonZeroDigit</i> times
+          class="nt">NonZeroDigit</span> <span class="nt">DecimalDigits</span></span> is (the MV of <i>NonZeroDigit</i> times
           10<sup><i>n</i></sup>) plus the MV of <i>DecimalDigits</i>, where <i>n</i> is the number of characters in
           <i>DecimalDigits</i>.</p>
         </li>
 
         <li>
           <p>The MV of <span class="prod"><span class="nt">DecimalDigits</span> <span class="geq">::</span> <span
-          class="nt">DecimalDigit</span></span>is the MV of <i>DecimalDigit</i>.</p>
+          class="nt">DecimalDigit</span></span> is the MV of <i>DecimalDigit</i>.</p>
         </li>
 
         <li>
           <p>The MV of <span class="prod"><span class="nt">DecimalDigits</span> <span class="geq">::</span> <span
-          class="nt">DecimalDigits</span> <span class="nt">DecimalDigit</span></span>is (the MV of <i>DecimalDigits</i> times 10)
+          class="nt">DecimalDigits</span> <span class="nt">DecimalDigit</span></span> is (the MV of <i>DecimalDigits</i> times 10)
           plus the MV of <i>DecimalDigit</i>.</p>
         </li>
 
@@ -2640,107 +2640,107 @@
 
         <li>
           <p>The MV of <span class="prod"><span class="nt">DecimalDigit</span> <span class="geq">::</span> <code
-          class="t">0</code></span>or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">::</span> <code
-          class="t">0</code></span>is 0.</p>
+          class="t">0</code></span> or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">::</span> <code
+          class="t">0</code></span> is 0.</p>
         </li>
 
         <li>
           <p>The MV of <span class="prod"><span class="nt">DecimalDigit</span> <span class="geq">::</span> <code
-          class="t">1</code></span>or of <span class="prod"><span class="nt">NonZeroDigit</span> <span class="geq">::</span> <code
-          class="t">1</code></span>or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">::</span> <code
-          class="t">1</code></span>is 1.</p>
+          class="t">1</code></span> or of <span class="prod"><span class="nt">NonZeroDigit</span> <span class="geq">::</span>
+          <code class="t">1</code></span> or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">::</span>
+          <code class="t">1</code></span> is 1.</p>
         </li>
 
         <li>
           <p>The MV of <span class="prod"><span class="nt">DecimalDigit</span> <span class="geq">::</span> <code
-          class="t">2</code></span>or of <span class="prod"><span class="nt">NonZeroDigit</span> <span class="geq">::</span> <code
-          class="t">2</code></span>or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">::</span> <code
-          class="t">2</code></span>is 2.</p>
+          class="t">2</code></span> or of <span class="prod"><span class="nt">NonZeroDigit</span> <span class="geq">::</span>
+          <code class="t">2</code></span> or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">::</span>
+          <code class="t">2</code></span> is 2.</p>
         </li>
 
         <li>
           <p>The MV of <span class="prod"><span class="nt">DecimalDigit</span> <span class="geq">::</span> <code
-          class="t">3</code></span>or of <span class="prod"><span class="nt">NonZeroDigit</span> <span class="geq">::</span> <code
-          class="t">3</code></span>or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">::</span> <code
-          class="t">3</code></span>is 3.</p>
+          class="t">3</code></span> or of <span class="prod"><span class="nt">NonZeroDigit</span> <span class="geq">::</span>
+          <code class="t">3</code></span> or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">::</span>
+          <code class="t">3</code></span> is 3.</p>
         </li>
 
         <li>
           <p>The MV of <span class="prod"><span class="nt">DecimalDigit</span> <span class="geq">::</span> <code
-          class="t">4</code></span>or of <span class="prod"><span class="nt">NonZeroDigit</span> <span class="geq">::</span> <code
-          class="t">4</code></span>or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">::</span> <code
-          class="t">4</code></span>is 4.</p>
+          class="t">4</code></span> or of <span class="prod"><span class="nt">NonZeroDigit</span> <span class="geq">::</span>
+          <code class="t">4</code></span> or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">::</span>
+          <code class="t">4</code></span> is 4.</p>
         </li>
 
         <li>
           <p>The MV of <span class="prod"><span class="nt">DecimalDigit</span> <span class="geq">::</span> <code
-          class="t">5</code></span>or of <span class="prod"><span class="nt">NonZeroDigit</span> <span class="geq">::</span> <code
-          class="t">5</code></span>or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">::</span> <code
-          class="t">5</code></span>is 5.</p>
+          class="t">5</code></span> or of <span class="prod"><span class="nt">NonZeroDigit</span> <span class="geq">::</span>
+          <code class="t">5</code></span> or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">::</span>
+          <code class="t">5</code></span> is 5.</p>
         </li>
 
         <li>
           <p>The MV of <span class="prod"><span class="nt">DecimalDigit</span> <span class="geq">::</span> <code
-          class="t">6</code></span>or of <span class="prod"><span class="nt">NonZeroDigit</span> <span class="geq">::</span> <code
-          class="t">6</code></span>or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">::</span> <code
-          class="t">6</code></span>is 6.</p>
+          class="t">6</code></span> or of <span class="prod"><span class="nt">NonZeroDigit</span> <span class="geq">::</span>
+          <code class="t">6</code></span> or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">::</span>
+          <code class="t">6</code></span> is 6.</p>
         </li>
 
         <li>
           <p>The MV of <span class="prod"><span class="nt">DecimalDigit</span> <span class="geq">::</span> <code
-          class="t">7</code></span>or of <span class="prod"><span class="nt">NonZeroDigit</span> <span class="geq">::</span> <code
-          class="t">7</code></span>or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">::</span> <code
-          class="t">7</code></span>is 7.</p>
+          class="t">7</code></span> or of <span class="prod"><span class="nt">NonZeroDigit</span> <span class="geq">::</span>
+          <code class="t">7</code></span> or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">::</span>
+          <code class="t">7</code></span> is 7.</p>
         </li>
 
         <li>
           <p>The MV of <span class="prod"><span class="nt">DecimalDigit</span> <span class="geq">::</span> <code
-          class="t">8</code></span>or of <span class="prod"><span class="nt">NonZeroDigit</span> <span class="geq">::</span> <code
-          class="t">8</code></span>or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">::</span> <code
-          class="t">8</code></span>is 8.</p>
+          class="t">8</code></span> or of <span class="prod"><span class="nt">NonZeroDigit</span> <span class="geq">::</span>
+          <code class="t">8</code></span> or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">::</span>
+          <code class="t">8</code></span> is 8.</p>
         </li>
 
         <li>
           <p>The MV of <span class="prod"><span class="nt">DecimalDigit</span> <span class="geq">::</span> <code
-          class="t">9</code></span>or of <span class="prod"><span class="nt">NonZeroDigit</span> <span class="geq">::</span> <code
-          class="t">9</code></span>or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">::</span> <code
-          class="t">9</code></span>is 9.</p>
+          class="t">9</code></span> or of <span class="prod"><span class="nt">NonZeroDigit</span> <span class="geq">::</span>
+          <code class="t">9</code></span> or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">::</span>
+          <code class="t">9</code></span> is 9.</p>
         </li>
 
         <li>
           <p>The MV of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">::</span> <code
-          class="t">a</code></span>or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">::</span> <code
-          class="t">A</code></span>is 10.</p>
+          class="t">a</code></span> or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">::</span> <code
+          class="t">A</code></span> is 10.</p>
         </li>
 
         <li>
           <p>The MV of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">::</span> <code
-          class="t">b</code></span>or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">::</span> <code
-          class="t">B</code></span>is 11.</p>
+          class="t">b</code></span> or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">::</span> <code
+          class="t">B</code></span> is 11.</p>
         </li>
 
         <li>
           <p>The MV of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">::</span> <code
-          class="t">c</code></span>or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">::</span> <code
-          class="t">C</code></span>is 12.</p>
+          class="t">c</code></span> or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">::</span> <code
+          class="t">C</code></span> is 12.</p>
         </li>
 
         <li>
           <p>The MV of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">::</span> <code
-          class="t">d</code></span>or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">::</span> <code
-          class="t">D</code></span>is 13.</p>
+          class="t">d</code></span> or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">::</span> <code
+          class="t">D</code></span> is 13.</p>
         </li>
 
         <li>
           <p>The MV of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">::</span> <code
-          class="t">e</code></span>or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">::</span> <code
-          class="t">E</code></span>is 14.</p>
+          class="t">e</code></span> or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">::</span> <code
+          class="t">E</code></span> is 14.</p>
         </li>
 
         <li>
           <p>The MV of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">::</span> <code
-          class="t">f</code></span>or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">::</span> <code
-          class="t">F</code></span>is 15.</p>
+          class="t">f</code></span> or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">::</span> <code
+          class="t">F</code></span> is 15.</p>
         </li>
 
         <li>
@@ -2879,23 +2879,23 @@
       <ul>
         <li>
           <p>The SV of <span class="prod"><span class="nt">StringLiteral</span> <span class="geq">::</span> <code
-          class="t">""</code></span>is the empty character sequence.</p>
+          class="t">""</code></span> is the empty character sequence.</p>
         </li>
 
         <li>
           <p>The SV of <span class="prod"><span class="nt">StringLiteral</span> <span class="geq">::</span> <code
-          class="t">''</code></span>is the empty character sequence.</p>
+          class="t">''</code></span> is the empty character sequence.</p>
         </li>
 
         <li>
           <p>The SV of <span class="prod"><span class="nt">StringLiteral</span> <span class="geq">::</span> <code
-          class="t">"</code> <span class="nt">DoubleStringCharacters</span> <code class="t">"</code></span>is the SV of
+          class="t">"</code> <span class="nt">DoubleStringCharacters</span> <code class="t">"</code></span> is the SV of
           <i>DoubleStringCharacters</i>.</p>
         </li>
 
         <li>
           <p>The SV of <span class="prod"><span class="nt">StringLiteral</span> <span class="geq">::</span> <code
-          class="t">'</code> <span class="nt">SingleStringCharacters</span> <code class="t">'</code></span>is the SV of
+          class="t">'</code> <span class="nt">SingleStringCharacters</span> <code class="t">'</code></span> is the SV of
           <i>SingleStringCharacters</i>.</p>
         </li>
 
@@ -2925,7 +2925,7 @@
 
         <li>
           <p>The SV of <span class="prod"><span class="nt">LineContinuation</span> <span class="geq">::</span> <code
-          class="t">\</code> <span class="nt">LineTerminatorSequence</span></span>is the empty character sequence.</p>
+          class="t">\</code> <span class="nt">LineTerminatorSequence</span></span> is the empty character sequence.</p>
         </li>
 
         <li>
@@ -2942,7 +2942,7 @@
 
         <li>
           <p>The CV of <span class="prod"><span class="nt">DoubleStringCharacter</span> <span class="geq">::</span> <span
-          class="nt">LineContinuation</span></span>is the empty character sequence.</p>
+          class="nt">LineContinuation</span></span> is the empty character sequence.</p>
         </li>
 
         <li>
@@ -3065,7 +3065,7 @@
         <li>
           <p>The CV of <span class="prod"><span class="nt">NonEscapeCharacter</span> <span class="geq">::</span> <span
           class="nt">SourceCharacter</span> <span class="grhsmod">but not one of</span> <span class="nt">EscapeCharacter</span>
-          <span class="grhsmod">or</span> <span class="nt">LineTerminator</span></span>is the <i>SourceCharacter</i> character
+          <span class="grhsmod">or</span> <span class="nt">LineTerminator</span></span> is the <i>SourceCharacter</i> character
           itself.</p>
         </li>
 
@@ -5382,7 +5382,7 @@
 
           <li>
             <p>The MV of <span class="prod"><span class="nt">DecimalDigits</span> <span class="geq">:::</span> <span
-            class="nt">DecimalDigit</span></span>is the MV of <i>DecimalDigit</i>.</p>
+            class="nt">DecimalDigit</span></span> is the MV of <i>DecimalDigit</i>.</p>
           </li>
 
           <li>
@@ -5414,97 +5414,97 @@
 
           <li>
             <p>The MV of <span class="prod"><span class="nt">DecimalDigit</span> <span class="geq">:::</span> <code
-            class="t">0</code></span>or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">:::</span> <code
+            class="t">0</code></span> or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">:::</span> <code
             class="t">0</code></span> is 0.</p>
           </li>
 
           <li>
             <p>The MV of <span class="prod"><span class="nt">DecimalDigit</span> <span class="geq">:::</span> <code
-            class="t">1</code></span>or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">:::</span> <code
+            class="t">1</code></span> or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">:::</span> <code
             class="t">1</code></span> is 1.</p>
           </li>
 
           <li>
             <p>The MV of <span class="prod"><span class="nt">DecimalDigit</span> <span class="geq">:::</span> <code
-            class="t">2</code></span>or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">:::</span> <code
+            class="t">2</code></span> or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">:::</span> <code
             class="t">2</code></span> is 2.</p>
           </li>
 
           <li>
             <p>The MV of <span class="prod"><span class="nt">DecimalDigit</span> <span class="geq">:::</span> <code
-            class="t">3</code></span>or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">:::</span> <code
+            class="t">3</code></span> or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">:::</span> <code
             class="t">3</code></span> is 3.</p>
           </li>
 
           <li>
             <p>The MV of <span class="prod"><span class="nt">DecimalDigit</span> <span class="geq">:::</span> <code
-            class="t">4</code></span>or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">:::</span> <code
+            class="t">4</code></span> or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">:::</span> <code
             class="t">4</code></span> is 4.</p>
           </li>
 
           <li>
             <p>The MV of <span class="prod"><span class="nt">DecimalDigit</span> <span class="geq">:::</span> <code
-            class="t">5</code></span>or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">:::</span> <code
+            class="t">5</code></span> or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">:::</span> <code
             class="t">5</code></span> is 5.</p>
           </li>
 
           <li>
             <p>The MV of <span class="prod"><span class="nt">DecimalDigit</span> <span class="geq">:::</span> <code
-            class="t">6</code></span>or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">:::</span> <code
+            class="t">6</code></span> or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">:::</span> <code
             class="t">6</code></span> is 6.</p>
           </li>
 
           <li>
             <p>The MV of <span class="prod"><span class="nt">DecimalDigit</span> <span class="geq">:::</span> <code
-            class="t">7</code></span>or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">:::</span> <code
+            class="t">7</code></span> or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">:::</span> <code
             class="t">7</code></span> is 7.</p>
           </li>
 
           <li>
             <p>The MV of <span class="prod"><span class="nt">DecimalDigit</span> <span class="geq">:::</span> <code
-            class="t">8</code></span>or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">:::</span> <code
+            class="t">8</code></span> or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">:::</span> <code
             class="t">8</code></span> is 8.</p>
           </li>
 
           <li>
             <p>The MV of <span class="prod"><span class="nt">DecimalDigit</span> <span class="geq">:::</span> <code
-            class="t">9</code></span>or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">:::</span> <code
+            class="t">9</code></span> or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">:::</span> <code
             class="t">9</code></span> is 9.</p>
           </li>
 
           <li>
             <p>The MV of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">:::</span> <code
-            class="t">a</code></span>or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">:::</span> <code
+            class="t">a</code></span> or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">:::</span> <code
             class="t">A</code></span> is 10.</p>
           </li>
 
           <li>
             <p>The MV of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">:::</span> <code
-            class="t">b</code></span>or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">:::</span> <code
+            class="t">b</code></span> or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">:::</span> <code
             class="t">B</code></span> is 11.</p>
           </li>
 
           <li>
             <p>The MV of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">:::</span> <code
-            class="t">c</code></span>or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">:::</span> <code
+            class="t">c</code></span> or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">:::</span> <code
             class="t">C</code></span> is 12.</p>
           </li>
 
           <li>
             <p>The MV of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">:::</span> <code
-            class="t">d</code></span>or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">:::</span> <code
+            class="t">d</code></span> or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">:::</span> <code
             class="t">D</code></span> is 13.</p>
           </li>
 
           <li>
             <p>The MV of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">:::</span> <code
-            class="t">e</code></span>or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">:::</span> <code
+            class="t">e</code></span> or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">:::</span> <code
             class="t">E</code></span> is 14.</p>
           </li>
 
           <li>
             <p>The MV of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">:::</span> <code
-            class="t">f</code></span>or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">:::</span> <code
+            class="t">f</code></span> or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">:::</span> <code
             class="t">F</code></span> is 15.</p>
           </li>
 
@@ -7696,11 +7696,10 @@
           <li>
             <p>It is a Syntax Error if this production is contained in <a href="#sec-10.1.1">strict code</a>,  <span
             class="nt">PropertyAssignment</span> is the production <span class="prod"><span class="nt">PropertyAssignment</span>
-            <span class="geq">:</span> <span class="nt">PropertyName</span> <span
-            class="geq">:</span></span><var>AssignmentExpression,</var> and <span style="font-family: Times New
-            Roman">PropertyDefinitionList</span>(<span style="font-family: Times New Roman">PropName</span> of <span
-            class="nt">PropertyAssignment</span>) of <span class="nt">PropertyNameAndValueList</span> is not the empty <a
-            href="#sec-8.7">List</a>.</p>
+            <span class="geq">:</span> <span class="nt">PropertyName</span> <span class="geq">:</span></span>
+            <var>AssignmentExpression,</var> and <span style="font-family: Times New Roman">PropertyDefinitionList</span>(<span
+            style="font-family: Times New Roman">PropName</span> of <span class="nt">PropertyAssignment</span>) of <span
+            class="nt">PropertyNameAndValueList</span> is not the empty <a href="#sec-8.7">List</a>.</p>
           </li>
 
           <li>
@@ -7735,23 +7734,23 @@
             <p>It is a Syntax Error if <span class="nt">PropertyAssignment</span> is the production<br>   <span class="prod"><span
             class="nt">PropertyAssignment</span> <span class="geq">:</span> <code class="t">get</code> <span
             class="nt">PropertyName</span> <code class="t">(</code> <code class="t">)</code> <code class="t">{</code> <span
-            class="nt">FunctionBody</span> <code class="t">}</code></span>and <span style="font-family: Times New
+            class="nt">FunctionBody</span> <code class="t">}</code></span> and <span style="font-family: Times New
             Roman">PropertyDefinitionList</span> (<span style="font-family: Times New Roman">PropName</span> of <span
             class="nt">PropertyAssignment</span>) of <span class="nt">PropertyNameAndValueList</span> includes a production of the
             form <span class="prod"><span class="nt">PropertyAssignment</span> <span class="geq">:</span> <span
-            class="nt">PropertyName</span> <span class="geq">:</span> <span class="nt">AssignmentExpression</span></span>.</p>
+            class="nt">PropertyName</span> <span class="geq">:</span> <span class="nt">AssignmentExpression</span></span> .</p>
           </li>
 
           <li>
             <p>It is a Syntax Error if <span class="nt">PropertyAssignment</span> is the production<br>   <span class="prod"><span
             class="nt">PropertyAssignment</span> <span class="geq">:</span> <code class="t">set</code> <span
             class="nt">PropertyName</span> <code class="t">(</code> <span class="nt">PropertySetParameterList</span> <code
-            class="t">)</code> <code class="t">{</code> <span class="nt">FunctionBody</span> <code class="t">}</code></span>and
+            class="t">)</code> <code class="t">{</code> <span class="nt">FunctionBody</span> <code class="t">}</code></span> and
             <span style="font-family: Times New Roman">PropertyDefinitionList</span> (<span style="font-family: Times New
             Roman">PropName</span> of <span class="nt">PropertyAssignment</span>) of <span
             class="nt">PropertyNameAndValueList</span> includes a production of the form <span class="prod"><span
             class="nt">PropertyAssignment</span> <span class="geq">:</span> <span class="nt">PropertyName</span> <span
-            class="geq">:</span> <span class="nt">AssignmentExpression</span></span>.</p>
+            class="geq">:</span> <span class="nt">AssignmentExpression</span></span> .</p>
           </li>
 
           <li>
@@ -7763,20 +7762,20 @@
             class="nt">PropertyAssignment</span>) of <span class="nt">PropertyNameAndValueList</span> includes a production of the
             form <span class="prod"><span class="nt">PropertyAssignment</span> <span class="geq">:</span> <code
             class="t">get</code> <span class="nt">PropertyName</span> <code class="t">(</code> <code class="t">)</code> <code
-            class="t">{</code> <span class="nt">FunctionBody</span> <code class="t">}</code></span>.</p>
+            class="t">{</code> <span class="nt">FunctionBody</span> <code class="t">}</code></span> .</p>
           </li>
 
           <li>
             <p>It is a Syntax Error if <span class="nt">PropertyAssignment</span> is the production<br>   <span class="prod"><span
             class="nt">PropertyAssignment</span> <span class="geq">:</span> <code class="t">set</code> <span
             class="nt">PropertyName</span> <code class="t">(</code> <span class="nt">PropertySetParameterList</span> <code
-            class="t">)</code> <code class="t">{</code> <span class="nt">FunctionBody</span> <code class="t">}</code></span>and
+            class="t">)</code> <code class="t">{</code> <span class="nt">FunctionBody</span> <code class="t">}</code></span> and
             <span style="font-family: Times New Roman">PropertyDefinitionList</span> (<span style="font-family: Times New
             Roman">PropName</span> of <span class="nt">PropertyAssignment</span>) of <span
             class="nt">PropertyNameAndValueList</span> includes a production of the form<br>   <span class="prod"><span
             class="nt">PropertyAssignment</span> <span class="geq">:</span> <code class="t">set</code> <span
             class="nt">PropertyName</span> <code class="t">(</code> <span class="nt">PropertySetParameterList</span> <code
-            class="t">)</code> <code class="t">{</code> <span class="nt">FunctionBody</span> <code class="t">}</code></span>.</p>
+            class="t">)</code> <code class="t">{</code> <span class="nt">FunctionBody</span> <code class="t">}</code></span> .</p>
           </li>
         </ul>
 
@@ -8598,7 +8597,7 @@
       <p><b>Runtime Semantics: Evaluation</b></p>
 
       <p><span class="prod"><span class="nt">PostfixExpression</span> <span class="geq">:</span> <span
-      class="nt">LeftHandSideExpression</span></span><span style="font-family: Times New Roman">[no <i>LineTerminator</i>
+      class="nt">LeftHandSideExpression</span></span> <span style="font-family: Times New Roman">[no <i>LineTerminator</i>
       here]</span> <code>++</code></p>
 
       <ol class="proc">
@@ -8957,7 +8956,7 @@
     <p><b>Runtime Semantics: Evaluation</b></p>
 
     <p>The production <span class="prod"><span class="nt">MultiplicativeExpression</span> <span class="geq">:</span> <span
-    class="nt">MultiplicativeExpression</span> <code class="t">@</code> <span class="nt">UnaryExpression</span></span>, where @
+    class="nt">MultiplicativeExpression</span> <code class="t">@</code> <span class="nt">UnaryExpression</span></span> , where @
     stands for one of the operators in the above definitions, is evaluated as follows:</p>
 
     <ol class="proc">
@@ -10448,7 +10447,7 @@
         <p>with parameters <var>obj</var> and <var>index</var></p>
 
         <p><span class="prod"><span class="nt">AssignmentElementList</span> <span class="geq">:</span> <span
-        class="nt">Elision</span></span><span style="font-family: sans-serif"><sub>opt</sub></span> <i>AssignmentElement</i></p>
+        class="nt">Elision</span></span> <span style="font-family: sans-serif"><sub>opt</sub></span> <i>AssignmentElement</i></p>
 
         <ol class="proc">
           <li>If <i>Elision</i> is present, then let <i>skip</i> be the result of evaluating <i>Elision</i>, otherwise let
@@ -10460,7 +10459,7 @@
         </ol>
 
         <p><span class="prod"><span class="nt">AssignmentElementList</span> <span class="geq">:</span> <span
-        class="nt">AssignmentElementList</span> <code class="t">,</code> <span class="nt">Elision</span></span><span
+        class="nt">AssignmentElementList</span> <code class="t">,</code> <span class="nt">Elision</span></span> <span
         style="font-family: sans-serif"><sub>opt</sub></span> <i>AssignmentElement</i></p>
 
         <ol class="proc">
@@ -11937,7 +11936,7 @@
         </ol>
 
         <p><span class="prod"><span class="nt">BindingElementList</span> <span class="geq">:</span> <span
-        class="nt">Elision</span></span><span style="font-family: sans-serif"><sub>opt</sub></span> <i>BindingElement</i></p>
+        class="nt">Elision</span></span> <span style="font-family: sans-serif"><sub>opt</sub></span> <i>BindingElement</i></p>
 
         <ol class="proc">
           <li>If <i>Elision</i> is present, then let <i>skip</i> be the result of evaluating <i>Elision</i>, otherwise let
@@ -11949,7 +11948,7 @@
         </ol>
 
         <p><span class="prod"><span class="nt">BindingElementList</span> <span class="geq">:</span> <span
-        class="nt">BindingElementList</span> <code class="t">,</code> <span class="nt">Elision</span></span><span
+        class="nt">BindingElementList</span> <code class="t">,</code> <span class="nt">Elision</span></span> <span
         style="font-family: sans-serif"><sub>opt</sub></span> <i>BindingElement</i></p>
 
         <ol class="proc">
@@ -22968,7 +22967,8 @@
 
         <p>The production <span class="prod"><span class="nt">CharacterClassEscape</span> <span class="geq">::</span> <code
         class="t">D</code></span> evaluates by returning the set of all characters not included in the set returned by <span
-        class="prod"><span class="nt">CharacterClassEscape</span> <span class="geq">::</span> <code class="t">d</code></span>.</p>
+        class="prod"><span class="nt">CharacterClassEscape</span> <span class="geq">::</span> <code class="t">d</code></span>
+        .</p>
 
         <p>The production <span class="prod"><span class="nt">CharacterClassEscape</span> <span class="geq">::</span> <code
         class="t">s</code></span> evaluates by returning the set of characters containing the characters that are on the
@@ -22977,7 +22977,8 @@
 
         <p>The production <span class="prod"><span class="nt">CharacterClassEscape</span> <span class="geq">::</span> <code
         class="t">S</code></span> evaluates by returning the set of all characters not included in the set returned by <span
-        class="prod"><span class="nt">CharacterClassEscape</span> <span class="geq">::</span> <code class="t">s</code></span>.</p>
+        class="prod"><span class="nt">CharacterClassEscape</span> <span class="geq">::</span> <code class="t">s</code></span>
+        .</p>
 
         <p>The production <span class="prod"><span class="nt">CharacterClassEscape</span> <span class="geq">::</span> <code
         class="t">w</code></span> evaluates by returning the set of characters containing the sixty-three characters:</p>
@@ -23073,7 +23074,8 @@
 
         <p>The production <span class="prod"><span class="nt">CharacterClassEscape</span> <span class="geq">::</span> <code
         class="t">W</code></span> evaluates by returning the set of all characters not included in the set returned by <span
-        class="prod"><span class="nt">CharacterClassEscape</span> <span class="geq">::</span> <code class="t">w</code></span>.</p>
+        class="prod"><span class="nt">CharacterClassEscape</span> <span class="geq">::</span> <code class="t">w</code></span>
+        .</p>
       </section>
 
       <section id="sec-15.10.2.13">
@@ -26508,13 +26510,13 @@
 
         <li>
           <p>The CV of <span class="prod"><span class="nt">OctalEscapeSequence</span> <span class="geq">::</span> <span
-          class="nt">OctalDigit</span></span>[lookahead &notin; <i>DecimalDigit</i>] is the character whose code unit value is the
-          MV of the <i>OctalDigit</i>.</p>
+          class="nt">OctalDigit</span></span> [lookahead &notin; <i>DecimalDigit</i>] is the character whose code unit value is
+          the MV of the <i>OctalDigit</i>.</p>
         </li>
 
         <li>
           <p>The CV of <span class="prod"><span class="nt">OctalEscapeSequence</span> <span class="geq">::</span> <span
-          class="nt">ZeroToThree</span> <span class="nt">OctalDigit</span></span>[lookahead &notin; <i>DecimalDigit</i>] is the
+          class="nt">ZeroToThree</span> <span class="nt">OctalDigit</span></span> [lookahead &notin; <i>DecimalDigit</i>] is the
           character whose code unit value is (8 times the MV of the <i>ZeroToThree</i>) plus the MV of the <i>OctalDigit</i>.</p>
         </li>
 
@@ -27254,7 +27256,7 @@
 
   <p><a href="#sec-7.8.4">7.8.4</a>: CV definitions added for <span class="prod"><span class="nt">DoubleStringCharacter</span>
   <span class="geq">::</span> <span class="nt">LineContinuation</span></span> and <span class="prod"><span
-  class="nt">SingleStringCharacter</span> <span class="geq">::</span> <span class="nt">LineContinuation</span></span>.</p>
+  class="nt">SingleStringCharacter</span> <span class="geq">::</span> <span class="nt">LineContinuation</span></span> .</p>
 
   <p><a href="#sec-10.2.1.1.3">10.2.1.1.3</a>: The argument S is not ignored. It controls whether an exception is thrown when
   attempting to set an immutable binding.</p>
