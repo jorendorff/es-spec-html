@@ -900,6 +900,20 @@ def fixup_links(doc):
             title = ht_text(sect.content[0].content[1:]).strip()
             sections_by_title[title] = '#' + sect.attrs['id']
 
+    # Normally, any section can link to any other section, even its own
+    # subsection or parent section.  This dictionary overrides that.  Each
+    # item (source, destination): False means that text in source does not
+    # get linked to destination.
+    linkability_overrides = {
+        ('7.9.1', '7.9'): False,
+        ('7.9.2', '7.9'): False
+    }
+
+    def can_link(source, target):
+        s = source[5:] if source.startswith('#sec-') else source
+        t = target[5:] if target.startswith('#sec-') else target
+        return linkability_overrides.get((s, t), source != target)
+
     specific_link_source_data = [
         # 5.2
         ("abs(", "Algorithm Conventions"),
@@ -910,6 +924,7 @@ def fixup_links(doc):
         # clause 7
         ("automatic semicolon insertion (7.9)", "Automatic Semicolon Insertion"),
         ("automatic semicolon insertion (see 7.9)", "Automatic Semicolon Insertion"),
+        ("automatic semicolon insertion", "Automatic Semicolon Insertion"),
         ("semicolon insertion (see 7.9)", "Automatic Semicolon Insertion"),
 
         # clause 8
@@ -1057,7 +1072,7 @@ def fixup_links(doc):
         # The space is to avoid matching "(3.5)" in "Math.round(3.5)".
         r' \(((?:see )?SECTION)\)',
 
-        r'(?:see|See|in|of|to|and) (SECTION)(?:$|\.$|[,:) ]|\.[^0-9])',
+        r'(?:see|See|in|of|to|from|and) (SECTION)(?:$|\.$|[,:) ]|\.[^0-9])',
 
         # Match "(Clause 16)", "(see clause 6)".
         r'(?i)(?:)\((?:but )?((?:see\s+(?:also\s+)?)?clause\s+([1-9][0-9]*))\)',
@@ -1087,7 +1102,7 @@ def fixup_links(doc):
         for text, target in specific_links:
             i = s.find(text)
             if (i != -1
-                and target != current_section  # don't link sections to themselves
+                and can_link(current_section, target)  # don't link sections to themselves
                 and (i == 0 or not s[i-1].isalnum())  # check for word break before
                 and (text.endswith('(')
                      or i + len(text) == len(s)
