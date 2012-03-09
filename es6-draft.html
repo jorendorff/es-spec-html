@@ -24696,13 +24696,13 @@
     <h1><span class="secnum"><a href="#sec-A.1" title="link to this section">A.1</a></span> Lexical Grammar</h1>
 
     <div class="gp">
-      <div class="gsumxref">See clause 6</div>
+      <div class="gsumxref"><a href="#sec-6">See clause 6</a></div>
       <div class="lhs"><span class="nt">SourceCharacter</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="gprose">any Unicode code unit</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See clause 7</div>
+      <div class="gsumxref"><a href="#sec-7">See clause 7</a></div>
       <div class="lhs"><span class="nt">InputElementDiv</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">WhiteSpace</span></div>
       <div class="rhs"><span class="nt">LineTerminator</span></div>
@@ -24712,7 +24712,7 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See clause 7</div>
+      <div class="gsumxref"><a href="#sec-7">See clause 7</a></div>
       <div class="lhs"><span class="nt">InputElementRegExp</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">WhiteSpace</span></div>
       <div class="rhs"><span class="nt">LineTerminator</span></div>
@@ -24722,7 +24722,7 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.2">7.2</a></div>
+      <div class="gsumxref"><a href="#sec-7.2">See 7.2</a></div>
       <div class="lhs"><span class="nt">WhiteSpace</span> <span class="geq">::</span> </div>
       <div class="rhs">&lt;TAB&gt;</div>
       <div class="rhs">&lt;VT&gt;</div>
@@ -24734,7 +24734,7 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.3">7.3</a></div>
+      <div class="gsumxref"><a href="#sec-7.3">See 7.3</a></div>
       <div class="lhs"><span class="nt">LineTerminator</span> <span class="geq">::</span> </div>
       <div class="rhs">&lt;LF&gt;</div>
       <div class="rhs">&lt;CR&gt;</div>
@@ -24743,7 +24743,7 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.3">7.3</a></div>
+      <div class="gsumxref"><a href="#sec-7.3">See 7.3</a></div>
       <div class="lhs"><span class="nt">LineTerminatorSequence</span> <span class="geq">::</span> </div>
       <div class="rhs">&lt;LF&gt;</div>
       <div class="rhs">&lt;CR&gt; <span class="grhsannot">[lookahead &notin; &lt;LF&gt; ]</span></div>
@@ -24753,64 +24753,64 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.4">7.4</a></div>
+      <div class="gsumxref"><a href="#sec-7.4">See 7.4</a></div>
       <div class="lhs"><span class="nt">Comment</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">MultiLineComment</span></div>
       <div class="rhs"><span class="nt">SingleLineComment</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.4">7.4</a></div>
+      <div class="gsumxref"><a href="#sec-7.4">See 7.4</a></div>
       <div class="lhs"><span class="nt">MultiLineComment</span> <span class="geq">::</span> </div>
       <div class="rhs"><code class="t">/*</code> <span class="nt">MultiLineCommentChars</span><sub>opt</sub> <code class="t">*/</code></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.4">7.4</a></div>
+      <div class="gsumxref"><a href="#sec-7.4">See 7.4</a></div>
       <div class="lhs"><span class="nt">MultiLineCommentChars</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">MultiLineNotAsteriskChar</span> <span class="nt">MultiLineCommentChars</span><sub>opt</sub></div>
       <div class="rhs"><code class="t">*</code> <span class="nt">PostAsteriskCommentChars</span><sub>opt</sub></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.4">7.4</a></div>
+      <div class="gsumxref"><a href="#sec-7.4">See 7.4</a></div>
       <div class="lhs"><span class="nt">PostAsteriskCommentChars</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">MultiLineNotForwardSlashOrAsteriskChar</span> <span class="nt">MultiLineCommentChars</span><sub>opt</sub></div>
       <div class="rhs"><code class="t">*</code> <span class="nt">PostAsteriskCommentChars</span><sub>opt</sub></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.4">7.4</a></div>
+      <div class="gsumxref"><a href="#sec-7.4">See 7.4</a></div>
       <div class="lhs"><span class="nt">MultiLineNotAsteriskChar</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">SourceCharacter</span> <span class="grhsmod">but not</span> <code class="t">*</code></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.4">7.4</a></div>
+      <div class="gsumxref"><a href="#sec-7.4">See 7.4</a></div>
       <div class="lhs"><span class="nt">MultiLineNotForwardSlashOrAsteriskChar</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">SourceCharacter</span> <span class="grhsmod">but not one of</span> <code class="t">/</code> <span class="grhsmod">or</span> <code class="t">*</code></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.4">7.4</a></div>
+      <div class="gsumxref"><a href="#sec-7.4">See 7.4</a></div>
       <div class="lhs"><span class="nt">SingleLineComment</span> <span class="geq">::</span> </div>
       <div class="rhs"><code class="t">//</code> <span class="nt">SingleLineCommentChars</span><sub>opt</sub></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.4">7.4</a></div>
+      <div class="gsumxref"><a href="#sec-7.4">See 7.4</a></div>
       <div class="lhs"><span class="nt">SingleLineCommentChars</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">SingleLineCommentChar</span> <span class="nt">SingleLineCommentChars</span><sub>opt</sub></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.4">7.4</a></div>
+      <div class="gsumxref"><a href="#sec-7.4">See 7.4</a></div>
       <div class="lhs"><span class="nt">SingleLineCommentChar</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">SourceCharacter</span> <span class="grhsmod">but not</span> <span class="nt">LineTerminator</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.5">7.5</a></div>
+      <div class="gsumxref"><a href="#sec-7.5">See 7.5</a></div>
       <div class="lhs"><span class="nt">Token</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">IdentifierName</span></div>
       <div class="rhs"><span class="nt">Punctuator</span></div>
@@ -24819,20 +24819,20 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.6">7.6</a></div>
+      <div class="gsumxref"><a href="#sec-7.6">See 7.6</a></div>
       <div class="lhs"><span class="nt">Identifier</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">IdentifierName</span> <span class="grhsmod">but not</span> <span class="nt">ReservedWord</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.6">7.6</a></div>
+      <div class="gsumxref"><a href="#sec-7.6">See 7.6</a></div>
       <div class="lhs"><span class="nt">IdentifierName</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">IdentifierStart</span></div>
       <div class="rhs"><span class="nt">IdentifierName</span> <span class="nt">IdentifierPart</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.6">7.6</a></div>
+      <div class="gsumxref"><a href="#sec-7.6">See 7.6</a></div>
       <div class="lhs"><span class="nt">IdentifierStart</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">UnicodeLetter</span></div>
       <div class="rhs"><code class="t">$</code></div>
@@ -24841,7 +24841,7 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.6">7.6</a></div>
+      <div class="gsumxref"><a href="#sec-7.6">See 7.6</a></div>
       <div class="lhs"><span class="nt">IdentifierPart</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">IdentifierStart</span></div>
       <div class="rhs"><span class="nt">UnicodeCombiningMark</span></div>
@@ -24852,31 +24852,31 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.6">7.6</a></div>
+      <div class="gsumxref"><a href="#sec-7.6">See 7.6</a></div>
       <div class="lhs"><span class="nt">UnicodeLetter</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="gprose">any character in the Unicode categories &ldquo;Uppercase letter (Lu)&rdquo;, &ldquo;Lowercase letter (Ll)&rdquo;, &ldquo;Titlecase letter (Lt)&rdquo;, &ldquo;Modifier letter (Lm)&rdquo;, &ldquo;Other letter (Lo)&rdquo;, or &ldquo;Letter number (Nl)&rdquo;.</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.6">7.6</a></div>
+      <div class="gsumxref"><a href="#sec-7.6">See 7.6</a></div>
       <div class="lhs"><span class="nt">UnicodeCombiningMark</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="gprose">any character in the Unicode categories &ldquo;Non-spacing mark (Mn)&rdquo; or &ldquo;Combining spacing mark (Mc)&rdquo;</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.6">7.6</a></div>
+      <div class="gsumxref"><a href="#sec-7.6">See 7.6</a></div>
       <div class="lhs"><span class="nt">UnicodeDigit</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="gprose">any character in the Unicode category &ldquo;Decimal number (Nd)&rdquo;</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.6">7.6</a></div>
+      <div class="gsumxref"><a href="#sec-7.6">See 7.6</a></div>
       <div class="lhs"><span class="nt">UnicodeConnectorPunctuation</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="gprose">any character in the Unicode category &ldquo;Connector punctuation (Pc)&rdquo;</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.6.1">7.6.1</a></div>
+      <div class="gsumxref"><a href="#sec-7.6.1">See 7.6.1</a></div>
       <div class="lhs"><span class="nt">ReservedWord</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">Keyword</span></div>
       <div class="rhs"><span class="nt">FutureReservedWord</span></div>
@@ -24885,7 +24885,7 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.6.1.1">7.6.1.1</a></div>
+      <div class="gsumxref"><a href="#sec-7.6.1.1">See 7.6.1.1</a></div>
       <div class="lhs"><span class="nt">Keyword</span> <span class="geq">::</span> <span class="grhsmod">one of</span> </div>
     </div>
 
@@ -24937,7 +24937,7 @@
     </figure>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.6.1.2">7.6.1.2</a></div>
+      <div class="gsumxref"><a href="#sec-7.6.1.2">See 7.6.1.2</a></div>
       <div class="lhs"><span class="nt">FutureReservedWord</span> <span class="geq">::</span> <span class="grhsmod">one of</span> </div>
     </div>
 
@@ -24985,7 +24985,7 @@
     </figure>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.7">7.7</a></div>
+      <div class="gsumxref"><a href="#sec-7.7">See 7.7</a></div>
       <div class="lhs"><span class="nt">Punctuator</span> <span class="geq">::</span> <span class="grhsmod">one of</span> </div>
     </div>
 
@@ -25059,7 +25059,7 @@
     </figure>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.7">7.7</a></div>
+      <div class="gsumxref"><a href="#sec-7.7">See 7.7</a></div>
       <div class="lhs"><span class="nt">DivPunctuator</span> <span class="geq">::</span> <span class="grhsmod">one of</span> </div>
     </div>
 
@@ -25077,7 +25077,7 @@
     </figure>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.8">7.8</a></div>
+      <div class="gsumxref"><a href="#sec-7.8">See 7.8</a></div>
       <div class="lhs"><span class="nt">Literal</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">NullLiteral</span></div>
       <div class="rhs"><span class="nt">BooleanLiteral</span></div>
@@ -25087,27 +25087,27 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.8.1">7.8.1</a></div>
+      <div class="gsumxref"><a href="#sec-7.8.1">See 7.8.1</a></div>
       <div class="lhs"><span class="nt">NullLiteral</span> <span class="geq">::</span> </div>
       <div class="rhs"><code class="t">null</code></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.8.2">7.8.2</a></div>
+      <div class="gsumxref"><a href="#sec-7.8.2">See 7.8.2</a></div>
       <div class="lhs"><span class="nt">BooleanLiteral</span> <span class="geq">::</span> </div>
       <div class="rhs"><code class="t">true</code></div>
       <div class="rhs"><code class="t">false</code></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.8.3">7.8.3</a></div>
+      <div class="gsumxref"><a href="#sec-7.8.3">See 7.8.3</a></div>
       <div class="lhs"><span class="nt">NumericLiteral</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">DecimalLiteral</span></div>
       <div class="rhs"><span class="nt">HexIntegerLiteral</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.8.3">7.8.3</a></div>
+      <div class="gsumxref"><a href="#sec-7.8.3">See 7.8.3</a></div>
       <div class="lhs"><span class="nt">DecimalLiteral</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">DecimalIntegerLiteral</span> <code class="t">.</code> <span class="nt">DecimalDigits</span><sub>opt</sub> <span class="nt">ExponentPart</span><sub>opt</sub></div>
       <div class="rhs"><code class="t">.</code> <span class="nt">DecimalDigits</span> <span class="nt">ExponentPart</span><sub>opt</sub></div>
@@ -25115,45 +25115,45 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.8.3">7.8.3</a></div>
+      <div class="gsumxref"><a href="#sec-7.8.3">See 7.8.3</a></div>
       <div class="lhs"><span class="nt">DecimalIntegerLiteral</span> <span class="geq">::</span> </div>
       <div class="rhs"><code class="t">0</code></div>
       <div class="rhs"><span class="nt">NonZeroDigit</span> <span class="nt">DecimalDigits</span><sub>opt</sub></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.8.3">7.8.3</a></div>
+      <div class="gsumxref"><a href="#sec-7.8.3">See 7.8.3</a></div>
       <div class="lhs"><span class="nt">DecimalDigits</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">DecimalDigit</span></div>
       <div class="rhs"><span class="nt">DecimalDigits</span> <span class="nt">DecimalDigit</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.8.3">7.8.3</a></div>
+      <div class="gsumxref"><a href="#sec-7.8.3">See 7.8.3</a></div>
       <div class="lhs"><span class="nt">DecimalDigit</span> <span class="geq">::</span> <span class="grhsmod">one of</span> </div>
       <div class="rhs"><code class="t">0</code> <code class="t">1</code> <code class="t">2</code> <code class="t">3</code> <code class="t">4</code> <code class="t">5</code> <code class="t">6</code> <code class="t">7</code> <code class="t">8</code> <code class="t">9</code></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.8.3">7.8.3</a></div>
+      <div class="gsumxref"><a href="#sec-7.8.3">See 7.8.3</a></div>
       <div class="lhs"><span class="nt">NonZeroDigit</span> <span class="geq">::</span> <span class="grhsmod">one of</span> </div>
       <div class="rhs"><code class="t">1</code> <code class="t">2</code> <code class="t">3</code> <code class="t">4</code> <code class="t">5</code> <code class="t">6</code> <code class="t">7</code> <code class="t">8</code> <code class="t">9</code></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.8.3">7.8.3</a></div>
+      <div class="gsumxref"><a href="#sec-7.8.3">See 7.8.3</a></div>
       <div class="lhs"><span class="nt">ExponentPart</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">ExponentIndicator</span> <span class="nt">SignedInteger</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.8.3">7.8.3</a></div>
+      <div class="gsumxref"><a href="#sec-7.8.3">See 7.8.3</a></div>
       <div class="lhs"><span class="nt">ExponentIndicator</span> <span class="geq">::</span> <span class="grhsmod">one of</span> </div>
       <div class="rhs"><code class="t">e</code> <code class="t">E</code></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.8.3">7.8.3</a></div>
+      <div class="gsumxref"><a href="#sec-7.8.3">See 7.8.3</a></div>
       <div class="lhs"><span class="nt">SignedInteger</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">DecimalDigits</span></div>
       <div class="rhs"><code class="t">+</code> <span class="nt">DecimalDigits</span></div>
@@ -25161,7 +25161,7 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.8.3">7.8.3</a></div>
+      <div class="gsumxref"><a href="#sec-7.8.3">See 7.8.3</a></div>
       <div class="lhs"><span class="nt">HexIntegerLiteral</span> <span class="geq">::</span> </div>
       <div class="rhs"><code class="t">0x</code> <span class="nt">HexDigit</span></div>
       <div class="rhs"><code class="t">0X</code> <span class="nt">HexDigit</span></div>
@@ -25169,32 +25169,32 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.8.3">7.8.3</a></div>
+      <div class="gsumxref"><a href="#sec-7.8.3">See 7.8.3</a></div>
       <div class="lhs"><span class="nt">HexDigit</span> <span class="geq">::</span> <span class="grhsmod">one of</span> </div>
       <div class="rhs"><code class="t">0</code> <code class="t">1</code> <code class="t">2</code> <code class="t">3</code> <code class="t">4</code> <code class="t">5</code> <code class="t">6</code> <code class="t">7</code> <code class="t">8</code> <code class="t">9</code> <code class="t">a</code> <code class="t">b</code> <code class="t">c</code> <code class="t">d</code> <code class="t">e</code> <code class="t">f</code> <code class="t">A</code> <code class="t">B</code> <code class="t">C</code> <code class="t">D</code> <code class="t">E</code> <code class="t">F</code></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.8.4">7.8.4</a></div>
+      <div class="gsumxref"><a href="#sec-7.8.4">See 7.8.4</a></div>
       <div class="lhs"><span class="nt">StringLiteral</span> <span class="geq">::</span> </div>
       <div class="rhs"><code class="t">"</code> <span class="nt">DoubleStringCharacters</span><sub>opt</sub> <code class="t">"</code></div>
       <div class="rhs"><code class="t">'</code> <span class="nt">SingleStringCharacters</span><sub>opt</sub> <code class="t">'</code></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.8.4">7.8.4</a></div>
+      <div class="gsumxref"><a href="#sec-7.8.4">See 7.8.4</a></div>
       <div class="lhs"><span class="nt">DoubleStringCharacters</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">DoubleStringCharacter</span> <span class="nt">DoubleStringCharacters</span><sub>opt</sub></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.8.4">7.8.4</a></div>
+      <div class="gsumxref"><a href="#sec-7.8.4">See 7.8.4</a></div>
       <div class="lhs"><span class="nt">SingleStringCharacters</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">SingleStringCharacter</span> <span class="nt">SingleStringCharacters</span><sub>opt</sub></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.8.4">7.8.4</a></div>
+      <div class="gsumxref"><a href="#sec-7.8.4">See 7.8.4</a></div>
       <div class="lhs"><span class="nt">DoubleStringCharacter</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">SourceCharacter</span> <span class="grhsmod">but not one of</span> <code class="t">"</code> <span class="grhsmod">or</span> <code class="t">\</code> <span class="grhsmod">or</span> <span class="nt">LineTerminator</span></div>
       <div class="rhs"><code class="t">\</code> <span class="nt">EscapeSequence</span></div>
@@ -25202,7 +25202,7 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.8.4">7.8.4</a></div>
+      <div class="gsumxref"><a href="#sec-7.8.4">See 7.8.4</a></div>
       <div class="lhs"><span class="nt">SingleStringCharacter</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">SourceCharacter</span> <span class="grhsmod">but not one of</span> <code class="t">'</code> <span class="grhsmod">or</span> <code class="t">\</code> <span class="grhsmod">or</span> <span class="nt">LineTerminator</span></div>
       <div class="rhs"><code class="t">\</code> <span class="nt">EscapeSequence</span></div>
@@ -25210,13 +25210,13 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.8.4">7.8.4</a></div>
+      <div class="gsumxref"><a href="#sec-7.8.4">See 7.8.4</a></div>
       <div class="lhs"><span class="nt">LineContinuation</span> <span class="geq">::</span> </div>
       <div class="rhs"><code class="t">\</code> <span class="nt">LineTerminatorSequence</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.8.4">7.8.4</a></div>
+      <div class="gsumxref"><a href="#sec-7.8.4">See 7.8.4</a></div>
       <div class="lhs"><span class="nt">EscapeSequence</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">CharacterEscapeSequence</span></div>
       <div class="rhs"><code class="t">0</code> <span class="grhsannot">[lookahead &notin; <span class="nt">DecimalDigit</span>]</span></div>
@@ -25225,26 +25225,26 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.8.4">7.8.4</a></div>
+      <div class="gsumxref"><a href="#sec-7.8.4">See 7.8.4</a></div>
       <div class="lhs"><span class="nt">CharacterEscapeSequence</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">SingleEscapeCharacter</span></div>
       <div class="rhs"><span class="nt">NonEscapeCharacter</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.8.4">7.8.4</a></div>
+      <div class="gsumxref"><a href="#sec-7.8.4">See 7.8.4</a></div>
       <div class="lhs"><span class="nt">SingleEscapeCharacter</span> <span class="geq">::</span> <span class="grhsmod">one of</span> </div>
       <div class="rhs"><code class="t">'</code> <code class="t">"</code> <code class="t">\</code> <code class="t">b</code> <code class="t">f</code> <code class="t">n</code> <code class="t">r</code> <code class="t">t</code> <code class="t">v</code></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.8.4">7.8.4</a></div>
+      <div class="gsumxref"><a href="#sec-7.8.4">See 7.8.4</a></div>
       <div class="lhs"><span class="nt">NonEscapeCharacter</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">SourceCharacter</span> <span class="grhsmod">but not one of</span> <span class="nt">EscapeCharacter</span> <span class="grhsmod">or</span> <span class="nt">LineTerminator</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.8.4">7.8.4</a></div>
+      <div class="gsumxref"><a href="#sec-7.8.4">See 7.8.4</a></div>
       <div class="lhs"><span class="nt">EscapeCharacter</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">SingleEscapeCharacter</span></div>
       <div class="rhs"><span class="nt">DecimalDigit</span></div>
@@ -25253,38 +25253,38 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.8.4">7.8.4</a></div>
+      <div class="gsumxref"><a href="#sec-7.8.4">See 7.8.4</a></div>
       <div class="lhs"><span class="nt">HexEscapeSequence</span> <span class="geq">::</span> </div>
       <div class="rhs"><code class="t">x</code> <span class="nt">HexDigit</span> <span class="nt">HexDigit</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.8.4">7.8.4</a></div>
+      <div class="gsumxref"><a href="#sec-7.8.4">See 7.8.4</a></div>
       <div class="lhs"><span class="nt">UnicodeEscapeSequence</span> <span class="geq">::</span> </div>
       <div class="rhs"><code class="t">u</code> <span class="nt">HexDigit</span> <span class="nt">HexDigit</span> <span class="nt">HexDigit</span> <span class="nt">HexDigit</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.8.5">7.8.5</a></div>
+      <div class="gsumxref"><a href="#sec-7.8.5">See 7.8.5</a></div>
       <div class="lhs"><span class="nt">RegularExpressionLiteral</span> <span class="geq">::</span> </div>
       <div class="rhs"><code class="t">/</code> <span class="nt">RegularExpressionBody</span> <code class="t">/</code> <span class="nt">RegularExpressionFlags</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.8.5">7.8.5</a></div>
+      <div class="gsumxref"><a href="#sec-7.8.5">See 7.8.5</a></div>
       <div class="lhs"><span class="nt">RegularExpressionBody</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">RegularExpressionFirstChar</span> <span class="nt">RegularExpressionChars</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.8.5">7.8.5</a></div>
+      <div class="gsumxref"><a href="#sec-7.8.5">See 7.8.5</a></div>
       <div class="lhs"><span class="nt">RegularExpressionChars</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="grhsannot">[empty]</span></div>
       <div class="rhs"><span class="nt">RegularExpressionChars</span> <span class="nt">RegularExpressionChar</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.8.5">7.8.5</a></div>
+      <div class="gsumxref"><a href="#sec-7.8.5">See 7.8.5</a></div>
       <div class="lhs"><span class="nt">RegularExpressionFirstChar</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">RegularExpressionNonTerminator</span> <span class="grhsmod">but not one of</span> <code class="t">*</code> <span class="grhsmod">or</span> <code class="t">\</code> <span class="grhsmod">or</span> <code class="t">/</code> <span class="grhsmod">or</span> <code class="t">[</code></div>
       <div class="rhs"><span class="nt">RegularExpressionBackslashSequence</span></div>
@@ -25292,7 +25292,7 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.8.5">7.8.5</a></div>
+      <div class="gsumxref"><a href="#sec-7.8.5">See 7.8.5</a></div>
       <div class="lhs"><span class="nt">RegularExpressionChar</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">RegularExpressionNonTerminator</span> <span class="grhsmod">but not</span> <code class="t">\</code> <span class="grhsmod">or</span> <code class="t">/</code> <span class="grhsmod">or</span> <code class="t">[</code></div>
       <div class="rhs"><span class="nt">RegularExpressionBackslashSequence</span></div>
@@ -25300,39 +25300,39 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.8.5">7.8.5</a></div>
+      <div class="gsumxref"><a href="#sec-7.8.5">See 7.8.5</a></div>
       <div class="lhs"><span class="nt">RegularExpressionBackslashSequence</span> <span class="geq">::</span> </div>
       <div class="rhs"><code class="t">\</code> <span class="nt">RegularExpressionNonTerminator</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.8.5">7.8.5</a></div>
+      <div class="gsumxref"><a href="#sec-7.8.5">See 7.8.5</a></div>
       <div class="lhs"><span class="nt">RegularExpressionNonTerminator</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">SourceCharacter</span> <span class="grhsmod">but not</span> <span class="nt">LineTerminator</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.8.5">7.8.5</a></div>
+      <div class="gsumxref"><a href="#sec-7.8.5">See 7.8.5</a></div>
       <div class="lhs"><span class="nt">RegularExpressionClass</span> <span class="geq">::</span> </div>
       <div class="rhs"><code class="t">[</code> <span class="nt">RegularExpressionClassChars</span> <code class="t">]</code></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.8.5">7.8.5</a></div>
+      <div class="gsumxref"><a href="#sec-7.8.5">See 7.8.5</a></div>
       <div class="lhs"><span class="nt">RegularExpressionClassChars</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="grhsannot">[empty]</span></div>
       <div class="rhs"><span class="nt">RegularExpressionClassChars</span> <span class="nt">RegularExpressionClassChar</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.8.5">7.8.5</a></div>
+      <div class="gsumxref"><a href="#sec-7.8.5">See 7.8.5</a></div>
       <div class="lhs"><span class="nt">RegularExpressionClassChar</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">RegularExpressionNonTerminator</span> <span class="grhsmod">but not</span> <code class="t">]</code> <span class="grhsmod">or</span> <code class="t">\</code></div>
       <div class="rhs"><span class="nt">RegularExpressionBackslashSequence</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-7.8.5">7.8.5</a></div>
+      <div class="gsumxref"><a href="#sec-7.8.5">See 7.8.5</a></div>
       <div class="lhs"><span class="nt">RegularExpressionFlags</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="grhsannot">[empty]</span></div>
       <div class="rhs"><span class="nt">RegularExpressionFlags</span> <span class="nt">IdentifierPart</span></div>
@@ -25343,34 +25343,34 @@
     <h1><span class="secnum"><a href="#sec-A.2" title="link to this section">A.2</a></span> Number Conversions</h1>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-9.3.1">9.3.1</a></div>
+      <div class="gsumxref"><a href="#sec-9.3.1">See 9.3.1</a></div>
       <div class="lhs"><span class="nt">StringNumericLiteral</span> <span class="geq">:::</span> </div>
       <div class="rhs"><span class="nt">StrWhiteSpace</span><sub>opt</sub></div>
       <div class="rhs"><span class="nt">StrWhiteSpace</span><sub>opt</sub> <span class="nt">StrNumericLiteral</span> <span class="nt">StrWhiteSpace</span><sub>opt</sub></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-9.3.1">9.3.1</a></div>
+      <div class="gsumxref"><a href="#sec-9.3.1">See 9.3.1</a></div>
       <div class="lhs"><span class="nt">StrWhiteSpace</span> <span class="geq">:::</span> </div>
       <div class="rhs"><span class="nt">StrWhiteSpaceChar</span> <span class="nt">StrWhiteSpace</span><sub>opt</sub></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-9.3.1">9.3.1</a></div>
+      <div class="gsumxref"><a href="#sec-9.3.1">See 9.3.1</a></div>
       <div class="lhs"><span class="nt">StrWhiteSpaceChar</span> <span class="geq">:::</span> </div>
       <div class="rhs"><span class="nt">WhiteSpace</span></div>
       <div class="rhs"><span class="nt">LineTerminator</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-9.3.1">9.3.1</a></div>
+      <div class="gsumxref"><a href="#sec-9.3.1">See 9.3.1</a></div>
       <div class="lhs"><span class="nt">StrNumericLiteral</span> <span class="geq">:::</span> </div>
       <div class="rhs"><span class="nt">StrDecimalLiteral</span></div>
       <div class="rhs"><span class="nt">HexIntegerLiteral</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-9.3.1">9.3.1</a></div>
+      <div class="gsumxref"><a href="#sec-9.3.1">See 9.3.1</a></div>
       <div class="lhs"><span class="nt">StrDecimalLiteral</span> <span class="geq">:::</span> </div>
       <div class="rhs"><span class="nt">StrUnsignedDecimalLiteral</span></div>
       <div class="rhs"><code class="t">+</code> <span class="nt">StrUnsignedDecimalLiteral</span></div>
@@ -25378,7 +25378,7 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-9.3.1">9.3.1</a></div>
+      <div class="gsumxref"><a href="#sec-9.3.1">See 9.3.1</a></div>
       <div class="lhs"><span class="nt">StrUnsignedDecimalLiteral</span> <span class="geq">:::</span> </div>
       <div class="rhs"><span class="nt">Infinity</span></div>
       <div class="rhs"><span class="nt">DecimalDigits</span> <code class="t">.</code> <span class="nt">DecimalDigits</span><sub>opt</sub> <span class="nt">ExponentPart</span><sub>opt</sub></div>
@@ -25387,32 +25387,32 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-9.3.1">9.3.1</a></div>
+      <div class="gsumxref"><a href="#sec-9.3.1">See 9.3.1</a></div>
       <div class="lhs"><span class="nt">DecimalDigits</span> <span class="geq">:::</span> </div>
       <div class="rhs"><span class="nt">DecimalDigit</span></div>
       <div class="rhs"><span class="nt">DecimalDigits</span> <span class="nt">DecimalDigit</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-9.3.1">9.3.1</a></div>
+      <div class="gsumxref"><a href="#sec-9.3.1">See 9.3.1</a></div>
       <div class="lhs"><span class="nt">DecimalDigit</span> <span class="geq">:::</span> <span class="grhsmod">one of</span> </div>
       <div class="rhs"><code class="t">0</code> <code class="t">1</code> <code class="t">2</code> <code class="t">3</code> <code class="t">4</code> <code class="t">5</code> <code class="t">6</code> <code class="t">7</code> <code class="t">8</code> <code class="t">9</code></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-9.3.1">9.3.1</a></div>
+      <div class="gsumxref"><a href="#sec-9.3.1">See 9.3.1</a></div>
       <div class="lhs"><span class="nt">ExponentPart</span> <span class="geq">:::</span> </div>
       <div class="rhs"><span class="nt">ExponentIndicator</span> <span class="nt">SignedInteger</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-9.3.1">9.3.1</a></div>
+      <div class="gsumxref"><a href="#sec-9.3.1">See 9.3.1</a></div>
       <div class="lhs"><span class="nt">ExponentIndicator</span> <span class="geq">:::</span> <span class="grhsmod">one of</span> </div>
       <div class="rhs"><code class="t">e</code> <code class="t">E</code></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-9.3.1">9.3.1</a></div>
+      <div class="gsumxref"><a href="#sec-9.3.1">See 9.3.1</a></div>
       <div class="lhs"><span class="nt">SignedInteger</span> <span class="geq">:::</span> </div>
       <div class="rhs"><span class="nt">DecimalDigits</span></div>
       <div class="rhs"><code class="t">+</code> <span class="nt">DecimalDigits</span></div>
@@ -25420,7 +25420,7 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-9.3.1">9.3.1</a></div>
+      <div class="gsumxref"><a href="#sec-9.3.1">See 9.3.1</a></div>
       <div class="lhs"><span class="nt">HexIntegerLiteral</span> <span class="geq">:::</span> </div>
       <div class="rhs"><code class="t">0x</code> <span class="nt">HexDigit</span></div>
       <div class="rhs"><code class="t">0X</code> <span class="nt">HexDigit</span></div>
@@ -25428,7 +25428,7 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-9.3.1">9.3.1</a></div>
+      <div class="gsumxref"><a href="#sec-9.3.1">See 9.3.1</a></div>
       <div class="lhs"><span class="nt">HexDigit</span> <span class="geq">:::</span> <span class="grhsmod">one of</span> </div>
       <div class="rhs"><code class="t">0</code> <code class="t">1</code> <code class="t">2</code> <code class="t">3</code> <code class="t">4</code> <code class="t">5</code> <code class="t">6</code> <code class="t">7</code> <code class="t">8</code> <code class="t">9</code> <code class="t">a</code> <code class="t">b</code> <code class="t">c</code> <code class="t">d</code> <code class="t">e</code> <code class="t">f</code> <code class="t">A</code> <code class="t">B</code> <code class="t">C</code> <code class="t">D</code> <code class="t">E</code> <code class="t">F</code></div>
     </div>
@@ -25438,7 +25438,7 @@
     <h1><span class="secnum"><a href="#sec-A.3" title="link to this section">A.3</a></span> Expressions</h1>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.1">11.1</a></div>
+      <div class="gsumxref"><a href="#sec-11.1">See 11.1</a></div>
       <div class="lhs"><span class="nt">PrimaryExpression</span> <span class="geq">:</span> </div>
       <div class="rhs"><code class="t">this</code></div>
       <div class="rhs"><span class="nt">Identifier</span></div>
@@ -25449,7 +25449,7 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.1.4">11.1.4</a></div>
+      <div class="gsumxref"><a href="#sec-11.1.4">See 11.1.4</a></div>
       <div class="lhs"><span class="nt">ArrayLiteral</span> <span class="geq">:</span> </div>
       <div class="rhs"><code class="t">[</code> <span class="nt">Elision</span><sub>opt</sub> <code class="t">]</code></div>
       <div class="rhs"><code class="t">[</code> <span class="nt">ElementList</span> <code class="t">]</code></div>
@@ -25457,21 +25457,21 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.1.4">11.1.4</a></div>
+      <div class="gsumxref"><a href="#sec-11.1.4">See 11.1.4</a></div>
       <div class="lhs"><span class="nt">ElementList</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">Elision</span><sub>opt</sub> <span class="nt">AssignmentExpression</span></div>
       <div class="rhs"><span class="nt">ElementList</span> <code class="t">,</code> <span class="nt">Elision</span><sub>opt</sub> <span class="nt">AssignmentExpression</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.1.4">11.1.4</a></div>
+      <div class="gsumxref"><a href="#sec-11.1.4">See 11.1.4</a></div>
       <div class="lhs"><span class="nt">Elision</span> <span class="geq">:</span> </div>
       <div class="rhs"><code class="t">,</code></div>
       <div class="rhs"><span class="nt">Elision</span> <code class="t">,</code></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.1.5">11.1.5</a></div>
+      <div class="gsumxref"><a href="#sec-11.1.5">See 11.1.5</a></div>
       <div class="lhs"><span class="nt">ObjectLiteral</span> <span class="geq">:</span> </div>
       <div class="rhs"><code class="t">{</code> <code class="t">}</code></div>
       <div class="rhs"><code class="t">{</code> <span class="nt">PropertyNameAndValueList</span> <code class="t">}</code></div>
@@ -25479,14 +25479,14 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.1.5">11.1.5</a></div>
+      <div class="gsumxref"><a href="#sec-11.1.5">See 11.1.5</a></div>
       <div class="lhs"><span class="nt">PropertyNameAndValueList</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">PropertyAssignment</span></div>
       <div class="rhs"><span class="nt">PropertyNameAndValueList</span> <code class="t">,</code> <span class="nt">PropertyAssignment</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.1.5">11.1.5</a></div>
+      <div class="gsumxref"><a href="#sec-11.1.5">See 11.1.5</a></div>
       <div class="lhs"><span class="nt">PropertyAssignment</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">PropertyName</span> <span class="geq">:</span> <span class="nt">AssignmentExpression</span></div>
       <div class="rhs"><code class="t">get</code> <span class="nt">PropertyName</span> <code class="t">(</code> <code class="t">)</code> <code class="t">{</code> <span class="nt">FunctionBody</span> <code class="t">}</code></div>
@@ -25494,7 +25494,7 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.1.5">11.1.5</a></div>
+      <div class="gsumxref"><a href="#sec-11.1.5">See 11.1.5</a></div>
       <div class="lhs"><span class="nt">PropertyName</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">IdentifierName</span></div>
       <div class="rhs"><span class="nt">StringLiteral</span></div>
@@ -25502,13 +25502,13 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.1.5">11.1.5</a></div>
+      <div class="gsumxref"><a href="#sec-11.1.5">See 11.1.5</a></div>
       <div class="lhs"><span class="nt">PropertySetParameterList</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">Identifier</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.2">11.2</a></div>
+      <div class="gsumxref"><a href="#sec-11.2">See 11.2</a></div>
       <div class="lhs"><span class="nt">MemberExpression</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">PrimaryExpression</span></div>
       <div class="rhs"><span class="nt">FunctionExpression</span></div>
@@ -25518,14 +25518,14 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.2">11.2</a></div>
+      <div class="gsumxref"><a href="#sec-11.2">See 11.2</a></div>
       <div class="lhs"><span class="nt">NewExpression</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">MemberExpression</span></div>
       <div class="rhs"><code class="t">new</code> <span class="nt">NewExpression</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.2">11.2</a></div>
+      <div class="gsumxref"><a href="#sec-11.2">See 11.2</a></div>
       <div class="lhs"><span class="nt">CallExpression</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">MemberExpression</span> <span class="nt">Arguments</span></div>
       <div class="rhs"><span class="nt">CallExpression</span> <span class="nt">Arguments</span></div>
@@ -25534,28 +25534,28 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.2">11.2</a></div>
+      <div class="gsumxref"><a href="#sec-11.2">See 11.2</a></div>
       <div class="lhs"><span class="nt">Arguments</span> <span class="geq">:</span> </div>
       <div class="rhs"><code class="t">(</code> <code class="t">)</code></div>
       <div class="rhs"><code class="t">(</code> <span class="nt">ArgumentList</span> <code class="t">)</code></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.2">11.2</a></div>
+      <div class="gsumxref"><a href="#sec-11.2">See 11.2</a></div>
       <div class="lhs"><span class="nt">ArgumentList</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">AssignmentExpression</span></div>
       <div class="rhs"><span class="nt">ArgumentList</span> <code class="t">,</code> <span class="nt">AssignmentExpression</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.2">11.2</a></div>
+      <div class="gsumxref"><a href="#sec-11.2">See 11.2</a></div>
       <div class="lhs"><span class="nt">LeftHandSideExpression</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">NewExpression</span></div>
       <div class="rhs"><span class="nt">CallExpression</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.3">11.3</a></div>
+      <div class="gsumxref"><a href="#sec-11.3">See 11.3</a></div>
       <div class="lhs"><span class="nt">PostfixExpression</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">LeftHandSideExpression</span></div>
       <div class="rhs"><span class="nt">LeftHandSideExpression</span> <span class="grhsannot">[no <span class="nt">LineTerminator</span> here]</span> <code class="t">++</code></div>
@@ -25563,7 +25563,7 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.4">11.4</a></div>
+      <div class="gsumxref"><a href="#sec-11.4">See 11.4</a></div>
       <div class="lhs"><span class="nt">UnaryExpression</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">PostfixExpression</span></div>
       <div class="rhs"><code class="t">delete</code> <span class="nt">UnaryExpression</span></div>
@@ -25578,7 +25578,7 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.5">11.5</a></div>
+      <div class="gsumxref"><a href="#sec-11.5">See 11.5</a></div>
       <div class="lhs"><span class="nt">MultiplicativeExpression</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">UnaryExpression</span></div>
       <div class="rhs"><span class="nt">MultiplicativeExpression</span> <code class="t">*</code> <span class="nt">UnaryExpression</span></div>
@@ -25587,7 +25587,7 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.6">11.6</a></div>
+      <div class="gsumxref"><a href="#sec-11.6">See 11.6</a></div>
       <div class="lhs"><span class="nt">AdditiveExpression</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">MultiplicativeExpression</span></div>
       <div class="rhs"><span class="nt">AdditiveExpression</span> <code class="t">+</code> <span class="nt">MultiplicativeExpression</span></div>
@@ -25595,7 +25595,7 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.7">11.7</a></div>
+      <div class="gsumxref"><a href="#sec-11.7">See 11.7</a></div>
       <div class="lhs"><span class="nt">ShiftExpression</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">AdditiveExpression</span></div>
       <div class="rhs"><span class="nt">ShiftExpression</span> <code class="t">&lt;&lt;</code> <span class="nt">AdditiveExpression</span></div>
@@ -25604,7 +25604,7 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.8">11.8</a></div>
+      <div class="gsumxref"><a href="#sec-11.8">See 11.8</a></div>
       <div class="lhs"><span class="nt">RelationalExpression</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">ShiftExpression</span></div>
       <div class="rhs"><span class="nt">RelationalExpression</span> <code class="t">&lt;</code> <span class="nt">ShiftExpression</span></div>
@@ -25616,7 +25616,7 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.8">11.8</a></div>
+      <div class="gsumxref"><a href="#sec-11.8">See 11.8</a></div>
       <div class="lhs"><span class="nt">RelationalExpressionNoIn</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">ShiftExpression</span></div>
       <div class="rhs"><span class="nt">RelationalExpressionNoIn</span> <code class="t">&lt;</code> <span class="nt">ShiftExpression</span></div>
@@ -25627,7 +25627,7 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.9">11.9</a></div>
+      <div class="gsumxref"><a href="#sec-11.9">See 11.9</a></div>
       <div class="lhs"><span class="nt">EqualityExpression</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">RelationalExpression</span></div>
       <div class="rhs"><span class="nt">EqualityExpression</span> <code class="t">==</code> <span class="nt">RelationalExpression</span></div>
@@ -25637,7 +25637,7 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.9">11.9</a></div>
+      <div class="gsumxref"><a href="#sec-11.9">See 11.9</a></div>
       <div class="lhs"><span class="nt">EqualityExpressionNoIn</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">RelationalExpressionNoIn</span></div>
       <div class="rhs"><span class="nt">EqualityExpressionNoIn</span> <code class="t">==</code> <span class="nt">RelationalExpressionNoIn</span></div>
@@ -25647,91 +25647,91 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.10">11.10</a></div>
+      <div class="gsumxref"><a href="#sec-11.10">See 11.10</a></div>
       <div class="lhs"><span class="nt">BitwiseANDExpression</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">EqualityExpression</span></div>
       <div class="rhs"><span class="nt">BitwiseANDExpression</span> <code class="t">&amp;</code> <span class="nt">EqualityExpression</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.10">11.10</a></div>
+      <div class="gsumxref"><a href="#sec-11.10">See 11.10</a></div>
       <div class="lhs"><span class="nt">BitwiseANDExpressionNoIn</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">EqualityExpressionNoIn</span></div>
       <div class="rhs"><span class="nt">BitwiseANDExpressionNoIn</span> <code class="t">&amp;</code> <span class="nt">EqualityExpressionNoIn</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.10">11.10</a></div>
+      <div class="gsumxref"><a href="#sec-11.10">See 11.10</a></div>
       <div class="lhs"><span class="nt">BitwiseXORExpression</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">BitwiseANDExpression</span></div>
       <div class="rhs"><span class="nt">BitwiseXORExpression</span> <code class="t">^</code> <span class="nt">BitwiseANDExpression</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.10">11.10</a></div>
+      <div class="gsumxref"><a href="#sec-11.10">See 11.10</a></div>
       <div class="lhs"><span class="nt">BitwiseXORExpressionNoIn</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">BitwiseANDExpressionNoIn</span></div>
       <div class="rhs"><span class="nt">BitwiseXORExpressionNoIn</span> <code class="t">^</code> <span class="nt">BitwiseANDExpressionNoIn</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.10">11.10</a></div>
+      <div class="gsumxref"><a href="#sec-11.10">See 11.10</a></div>
       <div class="lhs"><span class="nt">BitwiseORExpression</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">BitwiseXORExpression</span></div>
       <div class="rhs"><span class="nt">BitwiseORExpression</span> <code class="t">|</code> <span class="nt">BitwiseXORExpression</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.10">11.10</a></div>
+      <div class="gsumxref"><a href="#sec-11.10">See 11.10</a></div>
       <div class="lhs"><span class="nt">BitwiseORExpressionNoIn</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">BitwiseXORExpressionNoIn</span></div>
       <div class="rhs"><span class="nt">BitwiseORExpressionNoIn</span> <code class="t">|</code> <span class="nt">BitwiseXORExpressionNoIn</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.11">11.11</a></div>
+      <div class="gsumxref"><a href="#sec-11.11">See 11.11</a></div>
       <div class="lhs"><span class="nt">LogicalANDExpression</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">BitwiseORExpression</span></div>
       <div class="rhs"><span class="nt">LogicalANDExpression</span> <code class="t">&amp;&amp;</code> <span class="nt">BitwiseORExpression</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.11">11.11</a></div>
+      <div class="gsumxref"><a href="#sec-11.11">See 11.11</a></div>
       <div class="lhs"><span class="nt">LogicalANDExpressionNoIn</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">BitwiseORExpressionNoIn</span></div>
       <div class="rhs"><span class="nt">LogicalANDExpressionNoIn</span> <code class="t">&amp;&amp;</code> <span class="nt">BitwiseORExpressionNoIn</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.11">11.11</a></div>
+      <div class="gsumxref"><a href="#sec-11.11">See 11.11</a></div>
       <div class="lhs"><span class="nt">LogicalORExpression</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">LogicalANDExpression</span></div>
       <div class="rhs"><span class="nt">LogicalORExpression</span> <code class="t">||</code> <span class="nt">LogicalANDExpression</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.11">11.11</a></div>
+      <div class="gsumxref"><a href="#sec-11.11">See 11.11</a></div>
       <div class="lhs"><span class="nt">LogicalORExpressionNoIn</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">LogicalANDExpressionNoIn</span></div>
       <div class="rhs"><span class="nt">LogicalORExpressionNoIn</span> <code class="t">||</code> <span class="nt">LogicalANDExpressionNoIn</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.12">11.12</a></div>
+      <div class="gsumxref"><a href="#sec-11.12">See 11.12</a></div>
       <div class="lhs"><span class="nt">ConditionalExpression</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">LogicalORExpression</span></div>
       <div class="rhs"><span class="nt">LogicalORExpression</span> <code class="t">?</code> <span class="nt">AssignmentExpression</span> <span class="geq">:</span> <span class="nt">AssignmentExpression</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.12">11.12</a></div>
+      <div class="gsumxref"><a href="#sec-11.12">See 11.12</a></div>
       <div class="lhs"><span class="nt">ConditionalExpressionNoIn</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">LogicalORExpressionNoIn</span></div>
       <div class="rhs"><span class="nt">LogicalORExpressionNoIn</span> <code class="t">?</code> <span class="nt">AssignmentExpression</span> <span class="geq">:</span> <span class="nt">AssignmentExpressionNoIn</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.13">11.13</a></div>
+      <div class="gsumxref"><a href="#sec-11.13">See 11.13</a></div>
       <div class="lhs"><span class="nt">AssignmentExpression</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">ConditionalExpression</span></div>
       <div class="rhs"><span class="nt">LeftHandSideExpression</span> <code class="t">=</code> <span class="nt">AssignmentExpression</span></div>
@@ -25739,7 +25739,7 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.13">11.13</a></div>
+      <div class="gsumxref"><a href="#sec-11.13">See 11.13</a></div>
       <div class="lhs"><span class="nt">AssignmentExpressionNoIn</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">ConditionalExpressionNoIn</span></div>
       <div class="rhs"><span class="nt">LeftHandSideExpression</span> <code class="t">=</code> <span class="nt">AssignmentExpressionNoIn</span></div>
@@ -25747,7 +25747,7 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.13">11.13</a></div>
+      <div class="gsumxref"><a href="#sec-11.13">See 11.13</a></div>
       <div class="lhs"><span class="nt">AssignmentOperator</span> <span class="geq">:</span> <span class="grhsmod">one of</span> </div>
     </div>
 
@@ -25770,14 +25770,14 @@
     </figure>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.14">11.14</a></div>
+      <div class="gsumxref"><a href="#sec-11.14">See 11.14</a></div>
       <div class="lhs"><span class="nt">Expression</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">AssignmentExpression</span></div>
       <div class="rhs"><span class="nt">Expression</span> <code class="t">,</code> <span class="nt">AssignmentExpression</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-11.14">11.14</a></div>
+      <div class="gsumxref"><a href="#sec-11.14">See 11.14</a></div>
       <div class="lhs"><span class="nt">ExpressionNoIn</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">AssignmentExpressionNoIn</span></div>
       <div class="rhs"><span class="nt">ExpressionNoIn</span> <code class="t">,</code> <span class="nt">AssignmentExpressionNoIn</span></div>
@@ -25788,7 +25788,7 @@
     <h1><span class="secnum"><a href="#sec-A.4" title="link to this section">A.4</a></span> Statements</h1>
 
     <div class="gp">
-      <div class="gsumxref">See clause 12</div>
+      <div class="gsumxref"><a href="#sec-12">See clause 12</a></div>
       <div class="lhs"><span class="nt">Statement</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">Block</span></div>
       <div class="rhs"><span class="nt">VariableStatement</span></div>
@@ -25808,83 +25808,83 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-12.1">12.1</a></div>
+      <div class="gsumxref"><a href="#sec-12.1">See 12.1</a></div>
       <div class="lhs"><span class="nt">Block</span> <span class="geq">:</span> </div>
       <div class="rhs"><code class="t">{</code> <span class="nt">StatementList</span><sub>opt</sub> <code class="t">}</code></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-12.1">12.1</a></div>
+      <div class="gsumxref"><a href="#sec-12.1">See 12.1</a></div>
       <div class="lhs"><span class="nt">StatementList</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">Statement</span></div>
       <div class="rhs"><span class="nt">StatementList</span> <span class="nt">Statement</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-12.2">12.2</a></div>
+      <div class="gsumxref"><a href="#sec-12.2">See 12.2</a></div>
       <div class="lhs"><span class="nt">VariableStatement</span> <span class="geq">:</span> </div>
       <div class="rhs"><code class="t">var</code> <span class="nt">VariableDeclarationList</span> <code class="t">;</code></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-12.2">12.2</a></div>
+      <div class="gsumxref"><a href="#sec-12.2">See 12.2</a></div>
       <div class="lhs"><span class="nt">VariableDeclarationList</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">VariableDeclaration</span></div>
       <div class="rhs"><span class="nt">VariableDeclarationList</span> <code class="t">,</code> <span class="nt">VariableDeclaration</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-12.2">12.2</a></div>
+      <div class="gsumxref"><a href="#sec-12.2">See 12.2</a></div>
       <div class="lhs"><span class="nt">VariableDeclarationListNoIn</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">VariableDeclarationNoIn</span></div>
       <div class="rhs"><span class="nt">VariableDeclarationListNoIn</span> <code class="t">,</code> <span class="nt">VariableDeclarationNoIn</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-12.2">12.2</a></div>
+      <div class="gsumxref"><a href="#sec-12.2">See 12.2</a></div>
       <div class="lhs"><span class="nt">VariableDeclaration</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">Identifier</span> <span class="nt">Initialiser</span><sub>opt</sub></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-12.2">12.2</a></div>
+      <div class="gsumxref"><a href="#sec-12.2">See 12.2</a></div>
       <div class="lhs"><span class="nt">VariableDeclarationNoIn</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">Identifier</span> <span class="nt">InitialiserNoIn</span><sub>opt</sub></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-12.2">12.2</a></div>
+      <div class="gsumxref"><a href="#sec-12.2">See 12.2</a></div>
       <div class="lhs"><span class="nt">Initialiser</span> <span class="geq">:</span> </div>
       <div class="rhs"><code class="t">=</code> <span class="nt">AssignmentExpression</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-12.2">12.2</a></div>
+      <div class="gsumxref"><a href="#sec-12.2">See 12.2</a></div>
       <div class="lhs"><span class="nt">InitialiserNoIn</span> <span class="geq">:</span> </div>
       <div class="rhs"><code class="t">=</code> <span class="nt">AssignmentExpressionNoIn</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-12.3">12.3</a></div>
+      <div class="gsumxref"><a href="#sec-12.3">See 12.3</a></div>
       <div class="lhs"><span class="nt">EmptyStatement</span> <span class="geq">:</span> </div>
       <div class="rhs"><code class="t">;</code></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-12.4">12.4</a></div>
+      <div class="gsumxref"><a href="#sec-12.4">See 12.4</a></div>
       <div class="lhs"><span class="nt">ExpressionStatement</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="grhsannot">[lookahead &notin; {<code class="t">{</code>, <code class="t">function</code>}]</span> <span class="nt">Expression</span> <code class="t">;</code></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-12.5">12.5</a></div>
+      <div class="gsumxref"><a href="#sec-12.5">See 12.5</a></div>
       <div class="lhs"><span class="nt">IfStatement</span> <span class="geq">:</span> </div>
       <div class="rhs"><code class="t">if</code> <code class="t">(</code> <span class="nt">Expression</span> <code class="t">)</code> <span class="nt">Statement</span> <code class="t">else</code> <span class="nt">Statement</span></div>
       <div class="rhs"><code class="t">if</code> <code class="t">(</code> <span class="nt">Expression</span> <code class="t">)</code> <span class="nt">Statement</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-12.6">12.6</a></div>
+      <div class="gsumxref"><a href="#sec-12.6">See 12.6</a></div>
       <div class="lhs"><span class="nt">IterationStatement</span> <span class="geq">:</span> </div>
       <div class="rhs"><code class="t">do</code> <span class="nt">Statement</span> <code class="t">while</code> <code class="t">(</code> <span class="nt">Expression</span> <code class="t">);</code></div>
       <div class="rhs"><code class="t">while</code> <code class="t">(</code> <span class="nt">Expression</span> <code class="t">)</code> <span class="nt">Statement</span></div>
@@ -25895,78 +25895,78 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-12.7">12.7</a></div>
+      <div class="gsumxref"><a href="#sec-12.7">See 12.7</a></div>
       <div class="lhs"><span class="nt">ContinueStatement</span> <span class="geq">:</span> </div>
       <div class="rhs"><code class="t">continue</code> <code class="t">;</code></div>
       <div class="rhs"><code class="t">continue</code> <span class="grhsannot">[no <span class="nt">LineTerminator</span> here]</span> <span class="nt">Identifier</span> <code class="t">;</code></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-12.8">12.8</a></div>
+      <div class="gsumxref"><a href="#sec-12.8">See 12.8</a></div>
       <div class="lhs"><span class="nt">BreakStatement</span> <span class="geq">:</span> </div>
       <div class="rhs"><code class="t">break</code> <code class="t">;</code></div>
       <div class="rhs"><code class="t">break</code> <span class="grhsannot">[no <span class="nt">LineTerminator</span> here]</span> <span class="nt">Identifier</span> <code class="t">;</code></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-12.9">12.9</a></div>
+      <div class="gsumxref"><a href="#sec-12.9">See 12.9</a></div>
       <div class="lhs"><span class="nt">ReturnStatement</span> <span class="geq">:</span> </div>
       <div class="rhs"><code class="t">return</code> <code class="t">;</code></div>
       <div class="rhs"><code class="t">return</code> <span class="grhsannot">[no <span class="nt">LineTerminator</span> here]</span> <span class="nt">Expression</span> <code class="t">;</code></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-12.10">12.10</a></div>
+      <div class="gsumxref"><a href="#sec-12.10">See 12.10</a></div>
       <div class="lhs"><span class="nt">WithStatement</span> <span class="geq">:</span> </div>
       <div class="rhs"><code class="t">with</code> <code class="t">(</code> <span class="nt">Expression</span> <code class="t">)</code> <span class="nt">Statement</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-12.11">12.11</a></div>
+      <div class="gsumxref"><a href="#sec-12.11">See 12.11</a></div>
       <div class="lhs"><span class="nt">SwitchStatement</span> <span class="geq">:</span> </div>
       <div class="rhs"><code class="t">switch</code> <code class="t">(</code> <span class="nt">Expression</span> <code class="t">)</code> <span class="nt">CaseBlock</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-12.11">12.11</a></div>
+      <div class="gsumxref"><a href="#sec-12.11">See 12.11</a></div>
       <div class="lhs"><span class="nt">CaseBlock</span> <span class="geq">:</span> </div>
       <div class="rhs"><code class="t">{</code> <span class="nt">CaseClauses</span><sub>opt</sub> <code class="t">}</code></div>
       <div class="rhs"><code class="t">{</code> <span class="nt">CaseClauses</span><sub>opt</sub> <span class="nt">DefaultClause</span> <span class="nt">CaseClauses</span><sub>opt</sub> <code class="t">}</code></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-12.11">12.11</a></div>
+      <div class="gsumxref"><a href="#sec-12.11">See 12.11</a></div>
       <div class="lhs"><span class="nt">CaseClauses</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">CaseClause</span></div>
       <div class="rhs"><span class="nt">CaseClauses</span> <span class="nt">CaseClause</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-12.11">12.11</a></div>
+      <div class="gsumxref"><a href="#sec-12.11">See 12.11</a></div>
       <div class="lhs"><span class="nt">CaseClause</span> <span class="geq">:</span> </div>
       <div class="rhs"><code class="t">case</code> <span class="nt">Expression</span> <span class="geq">:</span> <span class="nt">StatementList</span><sub>opt</sub></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-12.11">12.11</a></div>
+      <div class="gsumxref"><a href="#sec-12.11">See 12.11</a></div>
       <div class="lhs"><span class="nt">DefaultClause</span> <span class="geq">:</span> </div>
       <div class="rhs"><code class="t">default</code> <span class="geq">:</span> <span class="nt">StatementList</span><sub>opt</sub></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-12.12">12.12</a></div>
+      <div class="gsumxref"><a href="#sec-12.12">See 12.12</a></div>
       <div class="lhs"><span class="nt">LabelledStatement</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">Identifier</span> <span class="geq">:</span> <span class="nt">Statement</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-12.13">12.13</a></div>
+      <div class="gsumxref"><a href="#sec-12.13">See 12.13</a></div>
       <div class="lhs"><span class="nt">ThrowStatement</span> <span class="geq">:</span> </div>
       <div class="rhs"><code class="t">throw</code> <span class="grhsannot">[no <span class="nt">LineTerminator</span> here]</span> <span class="nt">Expression</span> <code class="t">;</code></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-12.14">12.14</a></div>
+      <div class="gsumxref"><a href="#sec-12.14">See 12.14</a></div>
       <div class="lhs"><span class="nt">TryStatement</span> <span class="geq">:</span> </div>
       <div class="rhs"><code class="t">try</code> <span class="nt">Block</span> <span class="nt">Catch</span></div>
       <div class="rhs"><code class="t">try</code> <span class="nt">Block</span> <span class="nt">Finally</span></div>
@@ -25974,19 +25974,19 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-12.14">12.14</a></div>
+      <div class="gsumxref"><a href="#sec-12.14">See 12.14</a></div>
       <div class="lhs"><span class="nt">Catch</span> <span class="geq">:</span> </div>
       <div class="rhs"><code class="t">catch</code> <code class="t">(</code> <span class="nt">Identifier</span> <code class="t">)</code> <span class="nt">Block</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-12.14">12.14</a></div>
+      <div class="gsumxref"><a href="#sec-12.14">See 12.14</a></div>
       <div class="lhs"><span class="nt">Finally</span> <span class="geq">:</span> </div>
       <div class="rhs"><code class="t">finally</code> <span class="nt">Block</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-12.15">12.15</a></div>
+      <div class="gsumxref"><a href="#sec-12.15">See 12.15</a></div>
       <div class="lhs"><span class="nt">DebuggerStatement</span> <span class="geq">:</span> </div>
       <div class="rhs"><code class="t">debugger</code> <code class="t">;</code></div>
     </div>
@@ -25996,45 +25996,45 @@
     <h1><span class="secnum"><a href="#sec-A.5" title="link to this section">A.5</a></span> Functions and Programs</h1>
 
     <div class="gp">
-      <div class="gsumxref">See clause 13</div>
+      <div class="gsumxref"><a href="#sec-13">See clause 13</a></div>
       <div class="lhs"><span class="nt">FunctionDeclaration</span> <span class="geq">:</span> </div>
       <div class="rhs"><code class="t">function</code> <span class="nt">Identifier</span> <code class="t">(</code> <span class="nt">FormalParameterList</span><sub>opt</sub> <code class="t">)</code> <code class="t">{</code> <span class="nt">FunctionBody</span> <code class="t">}</code></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See clause 13</div>
+      <div class="gsumxref"><a href="#sec-13">See clause 13</a></div>
       <div class="lhs"><span class="nt">FunctionExpression</span> <span class="geq">:</span> </div>
       <div class="rhs"><code class="t">function</code> <span class="nt">Identifier</span><sub>opt</sub> <code class="t">(</code> <span class="nt">FormalParameterList</span><sub>opt</sub> <code class="t">)</code> <code class="t">{</code> <span class="nt">FunctionBody</span> <code class="t">}</code></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See clause 13</div>
+      <div class="gsumxref"><a href="#sec-13">See clause 13</a></div>
       <div class="lhs"><span class="nt">FormalParameterList</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">Identifier</span></div>
       <div class="rhs"><span class="nt">FormalParameterList</span> <code class="t">,</code> <span class="nt">Identifier</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See clause 13</div>
+      <div class="gsumxref"><a href="#sec-13">See clause 13</a></div>
       <div class="lhs"><span class="nt">FunctionBody</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">SourceElements</span><sub>opt</sub></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See clause 14</div>
+      <div class="gsumxref"><a href="#sec-14">See clause 14</a></div>
       <div class="lhs"><span class="nt">Program</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">SourceElements</span><sub>opt</sub></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See clause 14</div>
+      <div class="gsumxref"><a href="#sec-14">See clause 14</a></div>
       <div class="lhs"><span class="nt">SourceElements</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">SourceElement</span></div>
       <div class="rhs"><span class="nt">SourceElements</span> <span class="nt">SourceElement</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See clause 14</div>
+      <div class="gsumxref"><a href="#sec-14">See clause 14</a></div>
       <div class="lhs"><span class="nt">SourceElement</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">Statement</span></div>
       <div class="rhs"><span class="nt">FunctionDeclaration</span></div>
@@ -26046,19 +26046,19 @@
         Character Classes</h1>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-15.1.3">15.1.3</a></div>
+      <div class="gsumxref"><a href="#sec-15.1.3">See 15.1.3</a></div>
       <div class="lhs"><span class="nt">uri</span> <span class="geq">:::</span> </div>
       <div class="rhs"><span class="nt">uriCharacters</span><sub>opt</sub></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-15.1.3">15.1.3</a></div>
+      <div class="gsumxref"><a href="#sec-15.1.3">See 15.1.3</a></div>
       <div class="lhs"><span class="nt">uriCharacters</span> <span class="geq">:::</span> </div>
       <div class="rhs"><span class="nt">uriCharacter</span> <span class="nt">uriCharacters</span><sub>opt</sub></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-15.1.3">15.1.3</a></div>
+      <div class="gsumxref"><a href="#sec-15.1.3">See 15.1.3</a></div>
       <div class="lhs"><span class="nt">uriCharacter</span> <span class="geq">:::</span> </div>
       <div class="rhs"><span class="nt">uriReserved</span></div>
       <div class="rhs"><span class="nt">uriUnescaped</span></div>
@@ -26066,13 +26066,13 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-15.1.3">15.1.3</a></div>
+      <div class="gsumxref"><a href="#sec-15.1.3">See 15.1.3</a></div>
       <div class="lhs"><span class="nt">uriReserved</span> <span class="geq">:::</span> <span class="grhsmod">one of</span> </div>
       <div class="rhs"><code class="t">;</code> <code class="t">/</code> <code class="t">?</code> <span class="geq">:</span> <code class="t">@</code> <code class="t">&amp;</code> <code class="t">=</code> <code class="t">+</code> <code class="t">$</code> <code class="t">,</code></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-15.1.3">15.1.3</a></div>
+      <div class="gsumxref"><a href="#sec-15.1.3">See 15.1.3</a></div>
       <div class="lhs"><span class="nt">uriUnescaped</span> <span class="geq">:::</span> </div>
       <div class="rhs"><span class="nt">uriAlpha</span></div>
       <div class="rhs"><span class="nt">DecimalDigit</span></div>
@@ -26080,20 +26080,20 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-15.1.3">15.1.3</a></div>
+      <div class="gsumxref"><a href="#sec-15.1.3">See 15.1.3</a></div>
       <div class="lhs"><span class="nt">uriEscaped</span> <span class="geq">:::</span> </div>
       <div class="rhs"><code class="t">%</code> <span class="nt">HexDigit</span> <span class="nt">HexDigit</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-15.1.3">15.1.3</a></div>
+      <div class="gsumxref"><a href="#sec-15.1.3">See 15.1.3</a></div>
       <div class="lhs"><span class="nt">uriAlpha</span> <span class="geq">:::</span> <span class="grhsmod">one of</span> </div>
       <div class="rhs"><code class="t">a</code> <code class="t">b</code> <code class="t">c</code> <code class="t">d</code> <code class="t">e</code> <code class="t">f</code> <code class="t">g</code> <code class="t">h</code> <code class="t">i</code> <code class="t">j</code> <code class="t">k</code> <code class="t">l</code> <code class="t">m</code> <code class="t">n</code> <code class="t">o</code> <code class="t">p</code> <code class="t">q</code> <code class="t">r</code> <code class="t">s</code> <code class="t">t</code> <code class="t">u</code> <code class="t">v</code> <code class="t">w</code> <code class="t">x</code> <code class="t">y</code> <code class="t">z</code></div>
       <div class="rhs"><code class="t">A</code> <code class="t">B</code> <code class="t">C</code> <code class="t">D</code> <code class="t">E</code> <code class="t">F</code> <code class="t">G</code> <code class="t">H</code> <code class="t">I</code> <code class="t">J</code> <code class="t">K</code> <code class="t">L</code> <code class="t">M</code> <code class="t">N</code> <code class="t">O</code> <code class="t">P</code> <code class="t">Q</code> <code class="t">R</code> <code class="t">S</code> <code class="t">T</code> <code class="t">U</code> <code class="t">V</code> <code class="t">W</code> <code class="t">X</code> <code class="t">Y</code> <code class="t">Z</code></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-15.1.3">15.1.3</a></div>
+      <div class="gsumxref"><a href="#sec-15.1.3">See 15.1.3</a></div>
       <div class="lhs"><span class="nt">uriMark</span> <span class="geq">:::</span> <span class="grhsmod">one of</span> </div>
       <div class="rhs"><code class="t">-</code> <code class="t">_</code> <code class="t">.</code> <code class="t">!</code> <code class="t">~</code> <code class="t">*</code> <code class="t">'</code> <code class="t">(</code> <code class="t">)</code></div>
     </div>
@@ -26103,27 +26103,27 @@
     <h1><span class="secnum"><a href="#sec-A.7" title="link to this section">A.7</a></span> Regular Expressions</h1>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-15.10.1">15.10.1</a></div>
+      <div class="gsumxref"><a href="#sec-15.10.1">See 15.10.1</a></div>
       <div class="lhs"><span class="nt">Pattern</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">Disjunction</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-15.10.1">15.10.1</a></div>
+      <div class="gsumxref"><a href="#sec-15.10.1">See 15.10.1</a></div>
       <div class="lhs"><span class="nt">Disjunction</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">Alternative</span></div>
       <div class="rhs"><span class="nt">Alternative</span> <code class="t">|</code> <span class="nt">Disjunction</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-15.10.1">15.10.1</a></div>
+      <div class="gsumxref"><a href="#sec-15.10.1">See 15.10.1</a></div>
       <div class="lhs"><span class="nt">Alternative</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="grhsannot">[empty]</span></div>
       <div class="rhs"><span class="nt">Alternative</span> <span class="nt">Term</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-15.10.1">15.10.1</a></div>
+      <div class="gsumxref"><a href="#sec-15.10.1">See 15.10.1</a></div>
       <div class="lhs"><span class="nt">Term</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">Assertion</span></div>
       <div class="rhs"><span class="nt">Atom</span></div>
@@ -26131,7 +26131,7 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-15.10.1">15.10.1</a></div>
+      <div class="gsumxref"><a href="#sec-15.10.1">See 15.10.1</a></div>
       <div class="lhs"><span class="nt">Assertion</span> <span class="geq">::</span> </div>
       <div class="rhs"><code class="t">^</code></div>
       <div class="rhs"><code class="t">$</code></div>
@@ -26142,14 +26142,14 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-15.10.1">15.10.1</a></div>
+      <div class="gsumxref"><a href="#sec-15.10.1">See 15.10.1</a></div>
       <div class="lhs"><span class="nt">Quantifier</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">QuantifierPrefix</span></div>
       <div class="rhs"><span class="nt">QuantifierPrefix</span> <code class="t">?</code></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-15.10.1">15.10.1</a></div>
+      <div class="gsumxref"><a href="#sec-15.10.1">See 15.10.1</a></div>
       <div class="lhs"><span class="nt">QuantifierPrefix</span> <span class="geq">::</span> </div>
       <div class="rhs"><code class="t">*</code></div>
       <div class="rhs"><code class="t">+</code></div>
@@ -26160,7 +26160,7 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-15.10.1">15.10.1</a></div>
+      <div class="gsumxref"><a href="#sec-15.10.1">See 15.10.1</a></div>
       <div class="lhs"><span class="nt">Atom</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">PatternCharacter</span></div>
       <div class="rhs"><code class="t">.</code></div>
@@ -26171,14 +26171,14 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-15.10.1">15.10.1</a></div>
+      <div class="gsumxref"><a href="#sec-15.10.1">See 15.10.1</a></div>
       <div class="lhs"><span class="nt">PatternCharacter</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">SourceCharacter</span> <span class="grhsmod">but not one of</span> <code class="t">-</code></div>
       <div class="rhs"><code class="t">^</code> <code class="t">$</code> <code class="t">\</code> <code class="t">.</code> <code class="t">*</code> <code class="t">+</code> <code class="t">?</code> <code class="t">(</code> <code class="t">)</code> <code class="t">[</code> <code class="t">]</code> <code class="t">{</code> <code class="t">}</code> <code class="t">|</code></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-15.10.1">15.10.1</a></div>
+      <div class="gsumxref"><a href="#sec-15.10.1">See 15.10.1</a></div>
       <div class="lhs"><span class="nt">AtomEscape</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">DecimalEscape</span></div>
       <div class="rhs"><span class="nt">CharacterEscape</span></div>
@@ -26186,7 +26186,7 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-15.10.1">15.10.1</a></div>
+      <div class="gsumxref"><a href="#sec-15.10.1">See 15.10.1</a></div>
       <div class="lhs"><span class="nt">CharacterEscape</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">ControlEscape</span></div>
       <div class="rhs"><code class="t">c</code> <span class="nt">ControlLetter</span></div>
@@ -26196,20 +26196,20 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-15.10.1">15.10.1</a></div>
+      <div class="gsumxref"><a href="#sec-15.10.1">See 15.10.1</a></div>
       <div class="lhs"><span class="nt">ControlEscape</span> <span class="geq">::</span> <span class="grhsmod">one of</span> </div>
       <div class="rhs"><code class="t">f</code> <code class="t">n</code> <code class="t">r</code> <code class="t">t</code> <code class="t">v</code></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-15.10.1">15.10.1</a></div>
+      <div class="gsumxref"><a href="#sec-15.10.1">See 15.10.1</a></div>
       <div class="lhs"><span class="nt">ControlLetter</span> <span class="geq">::</span> <span class="grhsmod">one of</span> </div>
       <div class="rhs"><code class="t">a</code> <code class="t">b</code> <code class="t">c</code> <code class="t">d</code> <code class="t">e</code> <code class="t">f</code> <code class="t">g</code> <code class="t">h</code> <code class="t">i</code> <code class="t">j</code> <code class="t">k</code> <code class="t">l</code> <code class="t">m</code> <code class="t">n</code> <code class="t">o</code> <code class="t">p</code> <code class="t">q</code> <code class="t">r</code> <code class="t">s</code> <code class="t">t</code> <code class="t">u</code> <code class="t">v</code> <code class="t">w</code> <code class="t">x</code> <code class="t">y</code> <code class="t">z</code></div>
       <div class="rhs"><code class="t">A</code> <code class="t">B</code> <code class="t">C</code> <code class="t">D</code> <code class="t">E</code> <code class="t">F</code> <code class="t">G</code> <code class="t">H</code> <code class="t">I</code> <code class="t">J</code> <code class="t">K</code> <code class="t">L</code> <code class="t">M</code> <code class="t">N</code> <code class="t">O</code> <code class="t">P</code> <code class="t">Q</code> <code class="t">R</code> <code class="t">S</code> <code class="t">T</code> <code class="t">U</code> <code class="t">V</code> <code class="t">W</code> <code class="t">X</code> <code class="t">Y</code> <code class="t">Z</code></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-15.10.1">15.10.1</a></div>
+      <div class="gsumxref"><a href="#sec-15.10.1">See 15.10.1</a></div>
       <div class="lhs"><span class="nt">IdentityEscape</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">SourceCharacter</span> <span class="grhsmod">but not</span> <span class="nt">IdentifierPart</span></div>
       <div class="rhs">&lt;ZWJ&gt;</div>
@@ -26217,33 +26217,33 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-15.10.1">15.10.1</a></div>
+      <div class="gsumxref"><a href="#sec-15.10.1">See 15.10.1</a></div>
       <div class="lhs"><span class="nt">DecimalEscape</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">DecimalIntegerLiteral</span> <span class="grhsannot">[lookahead &notin; <span class="nt">DecimalDigit</span>]</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-15.10.1">15.10.1</a></div>
+      <div class="gsumxref"><a href="#sec-15.10.1">See 15.10.1</a></div>
       <div class="lhs"><span class="nt">CharacterClassEscape</span> <span class="geq">::</span> <span class="grhsmod">one of</span> </div>
       <div class="rhs"><code class="t">d</code> <code class="t">D</code> <code class="t">s</code> <code class="t">S</code> <code class="t">w</code> <code class="t">W</code></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-15.10.1">15.10.1</a></div>
+      <div class="gsumxref"><a href="#sec-15.10.1">See 15.10.1</a></div>
       <div class="lhs"><span class="nt">CharacterClass</span> <span class="geq">::</span> </div>
       <div class="rhs"><code class="t">[</code> <span class="grhsannot">[lookahead &notin; {<code class="t">^</code>}]</span> <span class="nt">ClassRanges</span> <code class="t">]</code></div>
       <div class="rhs"><code class="t">[</code> <code class="t">^</code> <span class="nt">ClassRanges</span> <code class="t">]</code></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-15.10.1">15.10.1</a></div>
+      <div class="gsumxref"><a href="#sec-15.10.1">See 15.10.1</a></div>
       <div class="lhs"><span class="nt">ClassRanges</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="grhsannot">[empty]</span></div>
       <div class="rhs"><span class="nt">NonemptyClassRanges</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-15.10.1">15.10.1</a></div>
+      <div class="gsumxref"><a href="#sec-15.10.1">See 15.10.1</a></div>
       <div class="lhs"><span class="nt">NonemptyClassRanges</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">ClassAtom</span></div>
       <div class="rhs"><span class="nt">ClassAtom</span> <span class="nt">NonemptyClassRangesNoDash</span></div>
@@ -26251,7 +26251,7 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-15.10.1">15.10.1</a></div>
+      <div class="gsumxref"><a href="#sec-15.10.1">See 15.10.1</a></div>
       <div class="lhs"><span class="nt">NonemptyClassRangesNoDash</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">ClassAtom</span></div>
       <div class="rhs"><span class="nt">ClassAtomNoDash</span> <span class="nt">NonemptyClassRangesNoDash</span></div>
@@ -26259,21 +26259,21 @@
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-15.10.1">15.10.1</a></div>
+      <div class="gsumxref"><a href="#sec-15.10.1">See 15.10.1</a></div>
       <div class="lhs"><span class="nt">ClassAtom</span> <span class="geq">::</span> </div>
       <div class="rhs"><code class="t">-</code></div>
       <div class="rhs"><span class="nt">ClassAtomNoDash</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-15.10.1">15.10.1</a></div>
+      <div class="gsumxref"><a href="#sec-15.10.1">See 15.10.1</a></div>
       <div class="lhs"><span class="nt">ClassAtomNoDash</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">SourceCharacter</span> <span class="grhsmod">but not one of</span> <code class="t">\</code> <span class="grhsmod">or</span> <code class="t">]</code> <span class="grhsmod">or</span> <code class="t">-</code></div>
       <div class="rhs"><code class="t">\</code> <span class="nt">ClassEscape</span></div>
     </div>
 
     <div class="gp">
-      <div class="gsumxref">See <a href="#sec-15.10.1">15.10.1</a></div>
+      <div class="gsumxref"><a href="#sec-15.10.1">See 15.10.1</a></div>
       <div class="lhs"><span class="nt">ClassEscape</span> <span class="geq">::</span> </div>
       <div class="rhs"><span class="nt">DecimalEscape</span></div>
       <div class="rhs"><code class="t">b</code></div>
@@ -26289,7 +26289,7 @@
       <h1><span class="secnum"><a href="#sec-A.8.1" title="link to this section">A.8.1</a></span> JSON Lexical Grammar</h1>
 
       <div class="gp">
-        <div class="gsumxref">See <a href="#sec-15.12.1.1">15.12.1.1</a></div>
+        <div class="gsumxref"><a href="#sec-15.12.1.1">See 15.12.1.1</a></div>
         <div class="lhs"><span class="nt">JSONWhiteSpace</span> <span class="geq">::</span> </div>
         <div class="rhs">&lt;TAB&gt;</div>
         <div class="rhs">&lt;CR&gt;</div>
@@ -26298,57 +26298,57 @@
       </div>
 
       <div class="gp">
-        <div class="gsumxref">See <a href="#sec-15.12.1.1">15.12.1.1</a></div>
+        <div class="gsumxref"><a href="#sec-15.12.1.1">See 15.12.1.1</a></div>
         <div class="lhs"><span class="nt">JSONString</span> <span class="geq">::</span> </div>
         <div class="rhs"><code class="t">"</code> <span class="nt">JSONStringCharacters</span><sub>opt</sub> <code class="t">"</code></div>
       </div>
 
       <div class="gp">
-        <div class="gsumxref">See <a href="#sec-15.12.1.1">15.12.1.1</a></div>
+        <div class="gsumxref"><a href="#sec-15.12.1.1">See 15.12.1.1</a></div>
         <div class="lhs"><span class="nt">JSONStringCharacters</span> <span class="geq">::</span> </div>
         <div class="rhs"><span class="nt">JSONStringCharacter</span> <span class="nt">JSONStringCharacters</span><sub>opt</sub></div>
       </div>
 
       <div class="gp">
-        <div class="gsumxref">See <a href="#sec-15.12.1.1">15.12.1.1</a></div>
+        <div class="gsumxref"><a href="#sec-15.12.1.1">See 15.12.1.1</a></div>
         <div class="lhs"><span class="nt">JSONStringCharacter</span> <span class="geq">::</span> </div>
         <div class="rhs"><span class="nt">SourceCharacter</span> <span class="grhsmod">but not one of</span> <code class="t">"</code> <span class="grhsmod">or</span> <code class="t">\</code> <span class="grhsmod">or</span> <span class="gprose">U+0000 through U+001F</span></div>
         <div class="rhs"><code class="t">\</code> <span class="nt">JSONEscapeSequence</span></div>
       </div>
 
       <div class="gp">
-        <div class="gsumxref">See <a href="#sec-15.12.1.1">15.12.1.1</a></div>
+        <div class="gsumxref"><a href="#sec-15.12.1.1">See 15.12.1.1</a></div>
         <div class="lhs"><span class="nt">JSONEscapeSequence</span> <span class="geq">::</span> </div>
         <div class="rhs"><span class="nt">JSONEscapeCharacter</span></div>
         <div class="rhs"><span class="nt">UnicodeEscapeSequence</span></div>
       </div>
 
       <div class="gp">
-        <div class="gsumxref">See <a href="#sec-15.12.1.1">15.12.1.1</a></div>
+        <div class="gsumxref"><a href="#sec-15.12.1.1">See 15.12.1.1</a></div>
         <div class="lhs"><span class="nt">JSONEscapeCharacter</span> <span class="geq">::</span> <span class="grhsmod">one of</span> </div>
         <div class="rhs"><code class="t">"</code> <code class="t">/</code> <code class="t">\</code> <code class="t">b</code> <code class="t">f</code> <code class="t">n</code> <code class="t">r</code> <code class="t">t</code></div>
       </div>
 
       <div class="gp">
-        <div class="gsumxref">See <a href="#sec-15.12.1.1">15.12.1.1</a></div>
+        <div class="gsumxref"><a href="#sec-15.12.1.1">See 15.12.1.1</a></div>
         <div class="lhs"><span class="nt">JSONNumber</span> <span class="geq">::</span> </div>
         <div class="rhs"><code class="t">-</code><sub>opt</sub> <span class="nt">DecimalIntegerLiteral</span> <span class="nt">JSONFraction</span><sub>opt</sub> <span class="nt">ExponentPart</span><sub>opt</sub></div>
       </div>
 
       <div class="gp">
-        <div class="gsumxref">See <a href="#sec-15.12.1.1">15.12.1.1</a></div>
+        <div class="gsumxref"><a href="#sec-15.12.1.1">See 15.12.1.1</a></div>
         <div class="lhs"><span class="nt">JSONFraction</span> <span class="geq">::</span> </div>
         <div class="rhs"><code class="t">.</code> <span class="nt">DecimalDigits</span></div>
       </div>
 
       <div class="gp">
-        <div class="gsumxref">See <a href="#sec-15.12.1.1">15.12.1.1</a></div>
+        <div class="gsumxref"><a href="#sec-15.12.1.1">See 15.12.1.1</a></div>
         <div class="lhs"><span class="nt">JSONNullLiteral</span> <span class="geq">::</span> </div>
         <div class="rhs"><span class="nt">NullLiteral</span></div>
       </div>
 
       <div class="gp">
-        <div class="gsumxref">See <a href="#sec-15.12.1.1">15.12.1.1</a></div>
+        <div class="gsumxref"><a href="#sec-15.12.1.1">See 15.12.1.1</a></div>
         <div class="lhs"><span class="nt">JSONBooleanLiteral</span> <span class="geq">::</span> </div>
         <div class="rhs"><span class="nt">BooleanLiteral</span></div>
       </div>
@@ -26358,13 +26358,13 @@
       <h1><span class="secnum"><a href="#sec-A.8.2" title="link to this section">A.8.2</a></span> JSON Syntactic Grammar</h1>
 
       <div class="gp">
-        <div class="gsumxref">See <a href="#sec-15.12.1.2">15.12.1.2</a></div>
+        <div class="gsumxref"><a href="#sec-15.12.1.2">See 15.12.1.2</a></div>
         <div class="lhs"><span class="nt">JSONText</span> <span class="geq">:</span> </div>
         <div class="rhs"><span class="nt">JSONValue</span></div>
       </div>
 
       <div class="gp">
-        <div class="gsumxref">See <a href="#sec-15.12.1.2">15.12.1.2</a></div>
+        <div class="gsumxref"><a href="#sec-15.12.1.2">See 15.12.1.2</a></div>
         <div class="lhs"><span class="nt">JSONValue</span> <span class="geq">:</span> </div>
         <div class="rhs"><span class="nt">JSONNullLiteral</span></div>
         <div class="rhs"><span class="nt">JSONBooleanLiteral</span></div>
@@ -26375,34 +26375,34 @@
       </div>
 
       <div class="gp">
-        <div class="gsumxref">See <a href="#sec-15.12.1.2">15.12.1.2</a></div>
+        <div class="gsumxref"><a href="#sec-15.12.1.2">See 15.12.1.2</a></div>
         <div class="lhs"><span class="nt">JSONObject</span> <span class="geq">:</span> </div>
         <div class="rhs"><code class="t">{</code> <code class="t">}</code></div>
         <div class="rhs"><code class="t">{</code> <span class="nt">JSONMemberList</span> <code class="t">}</code></div>
       </div>
 
       <div class="gp">
-        <div class="gsumxref">See <a href="#sec-15.12.1.2">15.12.1.2</a></div>
+        <div class="gsumxref"><a href="#sec-15.12.1.2">See 15.12.1.2</a></div>
         <div class="lhs"><span class="nt">JSONMember</span> <span class="geq">:</span> </div>
         <div class="rhs"><span class="nt">JSONString</span> <span class="geq">:</span> <span class="nt">JSONValue</span></div>
       </div>
 
       <div class="gp">
-        <div class="gsumxref">See <a href="#sec-15.12.1.2">15.12.1.2</a></div>
+        <div class="gsumxref"><a href="#sec-15.12.1.2">See 15.12.1.2</a></div>
         <div class="lhs"><span class="nt">JSONMemberList</span> <span class="geq">:</span> </div>
         <div class="rhs"><span class="nt">JSONMember</span></div>
         <div class="rhs"><span class="nt">JSONMemberList</span> <code class="t">,</code> <span class="nt">JSONMember</span></div>
       </div>
 
       <div class="gp">
-        <div class="gsumxref">See <a href="#sec-15.12.1.2">15.12.1.2</a></div>
+        <div class="gsumxref"><a href="#sec-15.12.1.2">See 15.12.1.2</a></div>
         <div class="lhs"><span class="nt">JSONArray</span> <span class="geq">:</span> </div>
         <div class="rhs"><code class="t">[</code> <code class="t">]</code></div>
         <div class="rhs"><code class="t">[</code> <span class="nt">JSONElementList</span> <code class="t">]</code></div>
       </div>
 
       <div class="gp">
-        <div class="gsumxref">See <a href="#sec-15.12.1.2">15.12.1.2</a></div>
+        <div class="gsumxref"><a href="#sec-15.12.1.2">See 15.12.1.2</a></div>
         <div class="lhs"><span class="nt">JSONElementList</span> <span class="geq">:</span> </div>
         <div class="rhs"><span class="nt">JSONValue</span></div>
         <div class="rhs"><span class="nt">JSONElementList</span> <code class="t">,</code> <span class="nt">JSONValue</span></div>
@@ -27370,7 +27370,8 @@
 
   <p><a href="#sec-B.2.1">B.2.1</a>: Added to NOTE that the encoding is based upon RFC 1738 rather than the newer RFC 3986.</p>
 
-  <p>Annex C: An item was added corresponding to 7.6.12 regarding <span class="nt">FutureReservedWords</span> in strict mode.</p>
+  <p><a href="#sec-C">Annex C</a>: An item was added corresponding to 7.6.12 regarding <span class="nt">FutureReservedWords</span>
+  in strict mode.</p>
 </section>
 
 <section>

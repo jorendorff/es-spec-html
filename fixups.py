@@ -1493,7 +1493,7 @@ def fixup_links(doc):
 
     all_ids = set([kid.attrs['id'] for _, _, kid in all_parent_index_child_triples(doc) if 'id' in kid.attrs])
 
-    SECTION = r'([1-9A-Z][0-9]*(?:\.[1-9][0-9]*)+)'
+    SECTION = r'([1-9A-Z][0-9]*(?:\.[1-9][0-9]*)+|[Cc]lause\s+[1-9][0-9]*|[Aa]nnex\s+[A-Z])'
     def compile(re_source):
         return re.compile(re_source.replace("SECTION", SECTION))
 
@@ -1502,10 +1502,16 @@ def fixup_links(doc):
         # The space is to avoid matching "(3.5)" in "Math.round(3.5)".
         r' \(((?:see )?SECTION)\)',
 
+        # Match "See 11.5" and "See clause 13" in span.gsumxref.
+        r'^(See SECTION)$',
+
+        # Match "Clause 8" in "as defined in Clause 8 of this specification"
+        # and many other similar cases.
         r'(?:see|See|in|of|to|from|and) (SECTION)(?:$|\.$|[,:) ]|\.[^0-9])',
 
         # Match "(Clause 16)", "(see clause 6)".
         r'(?i)(?:)\((?:but )?((?:see\s+(?:also\s+)?)?clause\s+([1-9][0-9]*))\)',
+        #r'(?i)(?:)\((?:but )?((?:see\s+(?:also\s+)?)?SECTION)\)',
 
         # Match the first section number in a parenthesized list "(13.3.5, 13.4, 13.6)"
         r'\((SECTION),\ ',
@@ -1519,9 +1525,6 @@ def fixup_links(doc):
         # Match the penultimate section number in lists that don't use the
         # Oxford comma, like "13.3, 13.4 and 13.5"
         r' (SECTION) and\b',
-
-        # Match "Clause 8" in "as defined in Clause 8 of this specification".
-        r'(?i)in (Clause ([1-9][0-9]*))',
     ]))
 
     # Disallow . ( ) at the end since it's usually not meant as part of the URL.
@@ -1547,12 +1550,19 @@ def fixup_links(doc):
         for link_re in section_link_regexes:
             m = link_re.search(s)
             while m is not None:
-                id = "sec-" + m.group(2)
+                # Get the target section id.
+                sec_num = m.group(2)
+                if sec_num.lower().startswith('clause'):
+                    sec_num = sec_num[6:].lstrip()
+                elif sec_num.lower().startswith('annex'):
+                    sec_num = sec_num[5:].lstrip()
+                id = "sec-" + sec_num
+
                 if id not in all_ids:
                     warn("no such section: " + m.group(2))
                     m = link_re.search(s, m.end(1))
                 else:
-                    hit = m.start(1), m.end(1), "#sec-" + m.group(2)
+                    hit = m.start(1), m.end(1), "#" + id
                     if best is None or hit < best:
                         best = hit
                     break
