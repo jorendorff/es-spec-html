@@ -115,19 +115,44 @@ def write_html(f, ht, indent='', strict=True):
     content = ht.content
     assert info[1] != '0' or len(content) == 0  # empty tag is empty
 
-    if ht.name == 'p':
+    if (ht.name in ('p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6')
+          or (ht.name == 'li' and ht.content and is_ht_inline(ht.content[0]))):
+        # Word-wrap the inline content in this block element.
+        # First, find out if this is an li element with a trailing list.
+        if ht.name == 'li' and isinstance(ht.content[-1], Element) and ht.content[-1].name in ('ol', 'ul'):
+            content_to_wrap = content[:-1]
+            last_list = content[-1]
+        else:
+            content_to_wrap = content
+            last_list = None
+
+        # Dump content_to_wrap to a temporary buffer.
         tmpf = StringIO()
         tmpf.write(start_tag(ht))
-        write_inline_content(tmpf, content, indent + '  ', False, strict)
-        tmpf.write('</{}>'.format(ht.name))
+        write_inline_content(tmpf, content_to_wrap, indent + '  ', allow_last_list=False, strict=strict)
+        if last_list is None:
+            tmpf.write('</{}>'.format(ht.name))
         text = tmpf.getvalue()
+
+        # Write the output to f.
         if '\n' in text:
+            # This is unexpected; don't word-wrap. Write it verbatim, with newlines.
             f.write(indent + text + "\n")
         else:
+            # The usual case. Word-wrap and write.
+            subsequent_indent = indent
+            if ht.name != 'p':
+                subsequent_indent += '    '
             f.write(textwrap.fill(text, WIDTH, expand_tabs=False, replace_whitespace=False,
-                                  initial_indent=indent, subsequent_indent=indent,
+                                  initial_indent=indent, subsequent_indent=subsequent_indent,
                                   break_long_words=False, break_on_hyphens=False))
             f.write("\n")
+
+        # If we had a trailing list, dump it now (and the end tag we skipped before).
+        if last_list:
+            write_html(f, last_list, indent + '  ', strict=strict)
+            f.write(indent + "</{}>\n".format(ht.name))
+
     elif info[0] == 'B':
         # Block.
         f.write(indent + start_tag(ht))
