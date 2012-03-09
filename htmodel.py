@@ -86,8 +86,8 @@ def write_html(f, ht, indent='', strict=True):
     def is_ht_inline(ht):
         return isinstance(ht, str) or _tag_data[ht.name][0] == 'I'
 
-    def write_inline_content(f, content, indent, allow_last_list, strict):
-        if allow_last_list and isinstance(content[-1], Element) and content[-1].name in ('ol', 'ul'):
+    def write_inline_content(f, content, indent, allow_last_block, strict):
+        if allow_last_block and isinstance(content[-1], Element) and content[-1].name in ('ol', 'ul', 'table'):
             last = content[-1]
             content = content[:-1]
         else:
@@ -119,18 +119,18 @@ def write_html(f, ht, indent='', strict=True):
           or (ht.name == 'li' and ht.content and is_ht_inline(ht.content[0]))):
         # Word-wrap the inline content in this block element.
         # First, find out if this is an li element with a trailing list.
-        if ht.name == 'li' and isinstance(ht.content[-1], Element) and ht.content[-1].name in ('ol', 'ul'):
+        if ht.name == 'li' and isinstance(ht.content[-1], Element) and ht.content[-1].name in ('ol', 'ul', 'table'):
             content_to_wrap = content[:-1]
-            last_list = content[-1]
+            last_block = content[-1]
         else:
             content_to_wrap = content
-            last_list = None
+            last_block = None
 
         # Dump content_to_wrap to a temporary buffer.
         tmpf = StringIO()
         tmpf.write(start_tag(ht))
-        write_inline_content(tmpf, content_to_wrap, indent + '  ', allow_last_list=False, strict=strict)
-        if last_list is None:
+        write_inline_content(tmpf, content_to_wrap, indent + '  ', allow_last_block=False, strict=strict)
+        if last_block is None:
             tmpf.write('</{}>'.format(ht.name))
         text = tmpf.getvalue()
 
@@ -148,9 +148,9 @@ def write_html(f, ht, indent='', strict=True):
                                   break_long_words=False, break_on_hyphens=False))
             f.write("\n")
 
-        # If we had a trailing list, dump it now (and the end tag we skipped before).
-        if last_list:
-            write_html(f, last_list, indent + '  ', strict=strict)
+        # If we had a trailing block, dump it now (and the end tag we skipped before).
+        if last_block:
+            write_html(f, last_block, indent + '  ', strict=strict)
             f.write(indent + "</{}>\n".format(ht.name))
 
     elif info[0] == 'B':

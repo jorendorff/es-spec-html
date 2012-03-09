@@ -24364,43 +24364,49 @@
             <li>Else if <i>C</i> is backspace, formfeed, newline, carriage return, or tab
               <ol class="block">
                 <li>Let <i>product</i> be the concatenation of <i>product</i> and the backslash character.</li>
-                <li>Let <i>abbrev</i> be the character corresponding to the value of <i>C</i> as follows:</li>
+                <li>Let <i>abbrev</i> be the character corresponding to the value of <i>C</i> as follows:
+                  <table class="lightweight">
+                    <tr>
+                      <td>backspace</td>
+                      <td><span class="string value">"b"</span></td>
+                    </tr>
+                    <tr>
+                      <td>formfeed</td>
+                      <td><span class="string value">"f"</span></td>
+                    </tr>
+                    <tr>
+                      <td>newline</td>
+                      <td><span class="string value">"n"</span></td>
+                    </tr>
+                    <tr>
+                      <td>carriage return</td>
+                      <td><span class="string value">"r"</span></td>
+                    </tr>
+                    <tr>
+                      <td>tab</td>
+                      <td><span class="string value">"t"</span></td>
+                    </tr>
+                  </table>
+                </li>
+                <li>Let <i>product</i> be the concatenation of <i>product</i> and <i>abbrev</i>.</li>
+              </ol>
+            </li>
+            <li>Else if <i>C</i> is a control character having a code unit value less than the space character
+              <ol class="block">
+                <li>Let <i>product</i> be the concatenation of <i>product</i> and the backslash character.</li>
+                <li>Let <i>product</i> be the concatenation of <i>product</i> and <code>"u"</code>.</li>
+                <li>Let <i>hex</i> be the result of converting the numeric code unit value of <i>C</i> to a String of four
+                    hexadecimal digits.  Alphabetic hexadecimal digits are presented as lowercase characters.</li>
+                <li>Let <i>product</i> be the concatenation of <i>product</i> and <i>hex</i>.</li>
+              </ol>
+            </li>
+            <li>Else
+              <ol class="block">
+                <li>Let <i>product</i> be the concatenation of <i>product</i> and <i>C</i>.</li>
               </ol>
             </li>
           </ol>
         </li>
-      </ol>
-
-      <p><span style="font-family: Times New Roman">backspace</span>&#x9;<code>"b"</code></p>
-
-      <p><span style="font-family: Times New Roman">formfeed</span>&#x9;<code>"f"</code></p>
-
-      <p><span style="font-family: Times New Roman">newline</span>&#x9;<code>"n"</code></p>
-
-      <p><span style="font-family: Times New Roman">carriage return</span>&#x9;<code>"r"</code></p>
-
-      <p><span style="font-family: Times New Roman">tab</span>&#x9;<code>"t"</code></p>
-
-      <ol class="proc">
-        <li>Let <i>product</i> be the concatenation of <i>product</i> and <i>abbrev</i>.</li>
-      </ol>
-      <ol class="proc">
-        <li>Else if <i>C</i> is a control character having a code unit value less than the space character
-          <ol class="block">
-            <li>Let <i>product</i> be the concatenation of <i>product</i> and the backslash character.</li>
-            <li>Let <i>product</i> be the concatenation of <i>product</i> and <code>"u"</code>.</li>
-            <li>Let <i>hex</i> be the result of converting the numeric code unit value of <i>C</i> to a String of four hexadecimal
-                digits.  Alphabetic hexadecimal digits are presented as lowercase characters.</li>
-            <li>Let <i>product</i> be the concatenation of <i>product</i> and <i>hex</i>.</li>
-          </ol>
-        </li>
-        <li>Else
-          <ol class="block">
-            <li>Let <i>product</i> be the concatenation of <i>product</i> and <i>C</i>.</li>
-          </ol>
-        </li>
-      </ol>
-      <ol class="proc">
         <li>Let <i>product</i> be the concatenation of <i>product</i> and the double quote character.</li>
         <li>Return <i>product</i>.</li>
       </ol>

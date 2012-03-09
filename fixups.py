@@ -784,6 +784,28 @@ def fixup_15_10_2_2(doc):
         assert li.style['-ooxml-ilvl'] == '0'
         li.style['-ooxml-ilvl'] = '3'
 
+def fixup_15_12_3(doc):
+    """ Convert some paragraphs in seciton 15.12.3 into tables.
+
+    Precedes fixup_lists which needs the table to exist in order to translate
+    the lists properly.
+    """
+    def row(p):
+        word, char = ht_text(p).strip().split('\t')
+        return html.tr(html.td(word), html.td(html.span(char, class_="string value")))
+
+    sect = find_section(doc, 'stringify ( value [ , replacer [ , space ] ] )')
+    for i, p in sect.kids():
+        if p.name == 'p' and ht_text(p).startswith('backspace\t'):
+            j = i + 1
+            while j < len(sect.content) and ht_name_is(sect.content[j], 'p'):
+                j += 1
+            tbl = html.table(*map(row, sect.content[i:j]), class_='lightweight')
+            sect.content[i:j] = [tbl]
+            return
+
+    warn("fixup_15_12_3: could not find text to patch")
+            
 def fixup_lists(e, docx):
     """ Wrap each li element in a list of the appropriate type.
 
@@ -812,9 +834,16 @@ def fixup_lists(e, docx):
         lists = []
         for k in kids:
             if isinstance(k, str) or k.name != 'li':
-                # Not a list item. Close all open lists. Add k to new_content.
-                del lists[:]
-                new_content.append(k)
+                if lists and k.name == 'table' and k.attrs.get('class') == 'lightweight':
+                    # Totally special case: put the table into the preceding cell.
+                    # See fixup_15_12_3.
+                    last_list = lists[-1][1]
+                    last_list_item = last_list.content[-1]
+                    last_list_item.content.append(k)
+                else:
+                    # Not a list item. Close all open lists. Add k to new_content.
+                    del lists[:]
+                    new_content.append(k)
             else:
                 # Oh no. It is a list item. Well, what is its depth? Does it
                 # have a bullet or numbering?
@@ -1667,6 +1696,7 @@ def fixup(docx, doc):
     fixup_notes(doc)
     fixup_7_9_1(doc, docx)
     fixup_15_10_2_2(doc)
+    fixup_15_12_3(doc)
     fixup_lists(doc, docx)
     fixup_list_paragraphs(doc)
     fixup_picts(doc)
