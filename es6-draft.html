@@ -2404,15 +2404,16 @@
         </li>
 
         <li>
-          <p>The MV of <i>DecimalLiteral</i> <b>::<span style="font-family: monospace">.</span></b> <i>DecimalDigits</i> is the MV
-          of <i>DecimalDigits</i> times 10<sup>&ndash;<i>n</i></sup>, where <i>n</i> is the number of characters in
-          <i>DecimalDigit</i>s.</p>
+          <p>The MV of <span class="prod"><span class="nt">DecimalLiteral</span> <span class="geq">::</span> <code
+          class="t">.</code> <span class="nt">DecimalDigits</span></span> is the MV of <i>DecimalDigits</i> times
+          10<sup>&ndash;<i>n</i></sup>, where <i>n</i> is the number of characters in <i>DecimalDigit</i>s.</p>
         </li>
 
         <li>
-          <p>The MV of <i>DecimalLiteral</i> <b>::<span style="font-family: monospace">.</span></b> <i>DecimalDigits
-          ExponentPart</i> is the MV of <i>DecimalDigits</i> times 10<sup><i>e</i>&ndash;<i>n</i></sup>, where <i>n</i> is the
-          number of characters in <i>DecimalDigit</i>s and <i>e</i> is the MV of <i>ExponentPart</i>.</p>
+          <p>The MV of <span class="prod"><span class="nt">DecimalLiteral</span> <span class="geq">::</span> <code
+          class="t">.</code> <span class="nt">DecimalDigits</span> <span class="nt">ExponentPart</span></span> is the MV of
+          <i>DecimalDigits</i> times 10<sup><i>e</i>&ndash;<i>n</i></sup>, where <i>n</i> is the number of characters in
+          <i>DecimalDigit</i>s and <i>e</i> is the MV of <i>ExponentPart</i>.</p>
         </li>
 
         <li>
@@ -5063,15 +5064,16 @@
           </li>
 
           <li>
-            <p>The MV of <i>StrUnsignedDecimalLiteral</i><b>:::<span style="font-family: monospace">.</span></b>
-            <i>DecimalDigits</i> is the MV of <i>DecimalDigits</i> times 10<sup>&minus;<i>n</i></sup>, where <i>n</i> is the
-            number of characters in <i>DecimalDigit</i>s.</p>
+            <p>The MV of <span class="prod"><span class="nt">StrUnsignedDecimalLiteral</span> <span class="geq">:::</span> <code
+            class="t">.</code> <span class="nt">DecimalDigits</span></span> is the MV of <i>DecimalDigits</i> times
+            10<sup>&minus;<i>n</i></sup>, where <i>n</i> is the number of characters in <i>DecimalDigit</i>s.</p>
           </li>
 
           <li>
-            <p>The MV of <i>StrUnsignedDecimalLiteral</i><b>:::<span style="font-family: monospace">.</span></b> <i>DecimalDigits
-            ExponentPart</i> is the MV of <i>DecimalDigits</i> times 10<sup><i>e</i>&minus;<i>n</i></sup>, where <i>n</i> is the
-            number of characters in <i>DecimalDigit</i>s and <i>e</i> is the MV of <i>ExponentPart</i>.</p>
+            <p>The MV of <span class="prod"><span class="nt">StrUnsignedDecimalLiteral</span> <span class="geq">:::</span> <code
+            class="t">.</code> <span class="nt">DecimalDigits</span> <span class="nt">ExponentPart</span></span> is the MV of
+            <i>DecimalDigits</i> times 10<sup><i>e</i>&minus;<i>n</i></sup>, where <i>n</i> is the number of characters in
+            <i>DecimalDigit</i>s and <i>e</i> is the MV of <i>ExponentPart</i>.</p>
           </li>
 
           <li>
@@ -20988,7 +20990,7 @@
 
         <ol class="proc">
           <li>Evaluate <i>Disjunction</i> to obtain a Matcher <i>m</i>.</li>
-          <li>Let <i>parenIndex</i> be the number of left capturing parentheses in the entire regular expression that occur to the left of this production expansion's initial left parenthesis. This is the total number of times the <span class="prod"><span class="nt">Atom</span> <code class="t">::&nbsp;(&nbsp;Disjunction</code> <code class="t">)</code></span> production is expanded prior to this production's <i>Atom</i> plus the total number of <span class="prod"><span class="nt">Atom</span> <code class="t">::&nbsp;(&nbsp;Disjunction&nbsp;)</code></span> productions enclosing this <i>Atom</i>.</li>
+          <li>Let <i>parenIndex</i> be the number of left capturing parentheses in the entire regular expression that occur to the left of this production expansion's initial left parenthesis. This is the total number of times the <span class="prod"><span class="nt">Atom</span> <span class="geq">::</span> <code class="t">(</code> <span class="nt">Disjunction</span> <code class="t">)</code></span> production is expanded prior to this production's <i>Atom</i> plus the total number of <span class="prod"><span class="nt">Atom</span> <span class="geq">::</span> <code class="t">(</code> <span class="nt">Disjunction</span> <code class="t">)</code></span> productions enclosing this <i>Atom</i>.</li>
           <li>Return an internal Matcher closure that takes two arguments, a State <i>x</i> and a Continuation <i>c</i>, and performs the following steps:
             <ol class="block">
               <li>Create an internal Continuation closure <i>d</i> that takes one State argument <i>y</i> and performs the following steps:

@@ -1373,6 +1373,17 @@ def fixup_grammar_pre(doc):
             return ht.name in ('code', 'i', 'b')
 
     def strip_grammar_inline(parent, i):
+        """ Find a grammar production in parent, starting at parent.content[i].
+
+        Replace it with a span.prod element.
+        """
+
+        # This algorithm is ugly. The only thing it has going for it is the
+        # lack of evidence that something smarter would do a better job.
+
+        # Skip any whitespace immediately following parent.content[i]. If that
+        # puts us at the end of parent, there is no grammar production here;
+        # return without doing anything.
         content = parent.content
         j = i + 1
         if j >= len(content):
@@ -1382,15 +1393,34 @@ def fixup_grammar_pre(doc):
                 j += 1
                 if j >= len(content):
                     return
-        jtext = ht_text(content[j]).lstrip()
-        if not jtext.startswith(':') or jtext.split(None, 1)[0].rstrip(':') != '':
-            return
-        j += 1
 
+        # Hack: some productions are written (roughly) <b>::</b><code>.</code>
+        # with no space between. Insert a space to make it work.
+        free_pass = False
+        eq = content[j]
+        if (not isinstance(eq, str)
+              and len(eq.content) > 1
+              and isinstance(eq.content[0], str)
+              and eq.content[0].startswith(':')
+              and eq.content[0].rstrip(':') == ''):
+            eq.content[0] += ' '
+            free_pass = True
+
+        # If we got a free pass, don't bother sanity-checking content[j].
+        if not free_pass:
+            jtext = ht_text(content[j]).lstrip()
+            if not jtext.startswith(':') or jtext.split(None, 1)[0].rstrip(':') != '':
+                return
+
+        # Find the end of the production.
+        j += 1
         while j < len(content) and is_grammar_inline(content[j]):
             j += 1
 
-        content[i:j] = [html.span(ht_text(content[i:j]), class_='prod')]
+        # Strip out all formatting and replace parent.content[i:j] with a new span.prod.
+        text = ht_text(content[i:j])
+        text = ' '.join(text.strip().split())
+        content[i:j] = [html.span(text, class_='prod')]
 
     for parent, i, child in all_parent_index_child_triples(doc):
         if is_grammar_block(child):
