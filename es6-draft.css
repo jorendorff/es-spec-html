@@ -219,7 +219,7 @@ div.gsumxref {     /* grammar summary cross-reference, used in Annex A */
     float: right;
 }
 
-span.prod { margin-left: 5pt; margin-right: 5pt; background-color: rgba(255, 0, 0, 0.2); }
+span.prod { margin-left: 5pt; margin-right: 5pt; }
 
 div.rhs > code.t,
 div.rhs > span.nt,
