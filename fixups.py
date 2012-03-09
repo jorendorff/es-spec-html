@@ -913,291 +913,6 @@ def fixup_figures(doc):
             del parent.content[i]
             figure.content.insert(0, child)
 
-def fixup_links(doc):
-    sections_by_title = {}
-    for sect in findall(doc, 'section'):
-        if 'id' in sect.attrs and sect.content and sect.content[0].name == 'h1':
-            title = ht_text(sect.content[0].content[1:]).strip()
-            sections_by_title[title] = '#' + sect.attrs['id']
-
-    # Normally, any section can link to any other section, even its own
-    # subsection or parent section.  This dictionary overrides that.  Each
-    # item (source, destination): False means that text in source does not
-    # get linked to destination.
-    linkability_overrides = {
-        ('7.9.1', '7.9'): False,
-        ('7.9.2', '7.9'): False
-    }
-
-    def can_link(source, target):
-        s = source[5:] if source.startswith('#sec-') else source
-        t = target[5:] if target.startswith('#sec-') else target
-        return linkability_overrides.get((s, t), source != target)
-
-    specific_link_source_data = [
-        # 5.2
-        ("abs(", "Algorithm Conventions"),
-        ("sign(", "Algorithm Conventions"),
-        ("modulo", "Algorithm Conventions"),
-        ("floor(", "Algorithm Conventions"),
-
-        # clause 7
-        ("automatic semicolon insertion (7.9)", "Automatic Semicolon Insertion"),
-        ("automatic semicolon insertion (see 7.9)", "Automatic Semicolon Insertion"),
-        ("automatic semicolon insertion", "Automatic Semicolon Insertion"),
-        ("semicolon insertion (see 7.9)", "Automatic Semicolon Insertion"),
-
-        # clause 8
-        ("Type(", "Types"),
-        ("List", "The List and Record Specification Type"),
-        ("Completion Record", "The Completion Record Specification Type"),
-        ("Completion", "The Completion Record Specification Type"),
-        ("NormalValue", "The Completion Record Specification Type"),
-        ("NormalCompletion", "The Completion Record Specification Type"),
-        ("abrupt completion", "The Completion Record Specification Type"),
-        ("ReturnIfAbrupt", "The Completion Record Specification Type"),
-        ("Reference", "The Reference Specification Type"),
-        ("GetBase", "The Reference Specification Type"),
-        ("GetReferencedName", "The Reference Specification Type"),
-        ("IsStrictReference", "The Reference Specification Type"),
-        ("HasPrimitiveBase", "The Reference Specification Type"),
-        ("IsPropertyReference", "The Reference Specification Type"),
-        ("IsUnresolvableReference", "The Reference Specification Type"),
-        ("unresolvable Reference", "The Reference Specification Type"),
-        ("Unresolvable Reference", "The Reference Specification Type"),
-        ("IsSuperReference", "The Reference Specification Type"),
-        ("GetValue", "GetValue (V)"),
-        ("PutValue", "PutValue (V, W)"),
-        ("Property Descriptor", "The Property Descriptor and Property Identifier Specification Types"),
-        ("Property Identifier", "The Property Descriptor and Property Identifier Specification Types"),
-        ("IsAccessorDescriptor", "IsAccessorDescriptor ( Desc )"),
-        ("IsDataDescriptor", "IsDataDescriptor ( Desc )"),
-        ("IsGenericDescriptor", "IsGenericDescriptor ( Desc )"),
-        ("FromPropertyDescriptor", "FromPropertyDescriptor ( Desc )"),
-        ("ToPropertyDescriptor", "ToPropertyDescriptor ( Obj )"),
-
-        # clause 9
-        ("ToPrimitive", "ToPrimitive"),
-        ("ToBoolean", "ToBoolean"),
-        ("ToNumber", "ToNumber"),
-        ("ToInteger", "ToInteger"),
-        ("ToInt32", "ToInt32: (Signed 32 Bit Integer)"),
-        ("ToUint32", "ToUint32: (Unsigned 32 Bit Integer)"),
-        #("ToUint16 (9.7)", "ToUint16: (Unsigned 16 Bit Integer)"),   # flunks the assertion
-        ("ToUint16", "ToUint16: (Unsigned 16 Bit Integer)"),
-        ("ToString", "ToString"),
-        ("ToObject", "ToObject"),
-        ("CheckObjectCoercible", "CheckObjectCoercible"),
-        ("IsCallable", "IsCallable"),
-        ("SameValue (according to 9.12)", "The SameValue Algorithm"),
-        ("SameValue", "The SameValue Algorithm"),
-        ("the SameValue algorithm (9.12)", "The SameValue Algorithm"),
-        ("the SameValue Algorithm (9.12)", "The SameValue Algorithm"),
-
-        # 10.1
-        ("strict mode code (see 10.1.1)", "Strict Mode Code"),
-        ("strict mode code", "Strict Mode Code"),
-        ("strict code", "Strict Mode Code"),
-        ("base code", "Strict Mode Code"),
-
-        # 10.2
-        ("Lexical Environment", "Lexical Environments"),
-        ("lexical environment", "Lexical Environments"),
-        ("outer environment reference", "Lexical Environments"),
-        ("outer lexical environment reference", "Lexical Environments"),
-        ("environment record (10.2.1)", "Environment Records"),
-        ("Environment Record", "Environment Records"),
-        ("declarative environment record", "Environment Records"),
-        ("Declarative Environment Record", "Environment Records"),
-        ("Object Environment Record", "Environment Records"),
-        ("object environment record", "Environment Records"),
-        ("GetIdentifierReference", "GetIdentifierReference (lex, name, strict)"),
-        ("NewDeclarativeEnvironment", "NewDeclarativeEnvironment (E)"),
-        ("NewObjectEnvironment", "NewObjectEnvironment (O, E)"),
-        ("the global environment", "The Global Environment"),
-        ("the Global Environment", "The Global Environment"),
-
-        # 10.3
-        ("LexicalEnvironment", "Execution Contexts"),
-        ("VariableEnvironment", "Execution Contexts"),
-        ("ThisBinding", "Execution Contexts"),
-        ("Identifier Resolution as specified in 10.3.1", "Identifier Resolution"),
-        ("Identifier Resolution(10.3.1)", "Identifier Resolution"),
-
-        # 10.5
-        ("Declaration Binding Instantiation", "Declaration Binding Instantiation"),
-        ("declaration binding instantiation (10.5)", "Declaration Binding Instantiation"),
-        ("Function Declaration Binding Instantiation", "Function Declaration Instantiation"),
-
-        # clause 14
-        ("Directive Prologue", "Directive Prologues and the Use Strict Directive"),
-        ("Use Strict Directive", "Directive Prologues and the Use Strict Directive"),
-
-        # clause 15
-        ("direct call (see 15.1.2.1.1) to the eval function", "Direct Call to Eval"),
-
-        # 15.9
-        ("this time value", "Properties of the Date Prototype Object"),
-        ("time value", "Time Values and Time Range"),
-        ("Day(", "Day Number and Time within Day"),
-        ("msPerDay", "Day Number and Time within Day"),
-        ("TimeWithinDay", "Day Number and Time within Day"),
-        ("DaysInYear", "Year Number"),
-        ("TimeFromYear", "Year Number"),
-        ("YearFromTime", "Year Number"),
-        ("InLeapYear", "Year Number"),
-        ("MonthFromTime", "Month Number"),
-        ("DayWithinYear", "Month Number"),
-        ("DateFromTime", "Date Number"),
-        ("WeekDay", "Week Day"),
-        ("LocalTZA", "Local Time Zone Adjustment"),
-        ("DaylightSavingTA", "Daylight Saving Time Adjustment"),
-        ("LocalTime", "Local Time"),
-        ("UTC(", "Local Time"),
-        ("HourFromTime", "Hours, Minutes, Second, and Milliseconds"),
-        ("MinFromTime", "Hours, Minutes, Second, and Milliseconds"),
-        ("SecFromTime", "Hours, Minutes, Second, and Milliseconds"),
-        ("msFromTime", "Hours, Minutes, Second, and Milliseconds"),
-        ("msPerSecond", "Hours, Minutes, Second, and Milliseconds"),
-        ("msPerMinute", "Hours, Minutes, Second, and Milliseconds"),
-        ("msPerHour", "Hours, Minutes, Second, and Milliseconds"),
-        ("MakeTime", "MakeTime (hour, min, sec, ms)"),
-        ("MakeDay", "MakeDay (year, month, date)"),
-        ("MakeDate", "MakeDate (day, time)"),
-        ("TimeClip", "TimeClip (time)")
-    ]
-
-    specific_links = [(text, sections_by_title[title]) for text, title in specific_link_source_data]
-
-    # Assert that the specific_links above make sense; that is, that each link
-    # with a "(7.9)" or "(see 7.9)" in it actually points to the named section.
-    #
-    # A warning here means sections were renumbered. Any number of things can
-    # be wrong in the wake of such a change. :)
-    #
-    for text, target in specific_links:
-        m = re.search(r'\((?:see )?([1-9][0-9]*(?:\.[1-9][0-9]*)*)\)', text)
-        if m is not None:
-            if target != '#sec-' + m.group(1):
-                warn("text refers to section number " + repr(m.group(1)) + ", but actual section is " + repr(target))
-
-    all_ids = set([kid.attrs['id'] for _, _, kid in all_parent_index_child_triples(doc) if 'id' in kid.attrs])
-
-    SECTION = r'([1-9A-Z][0-9]*(?:\.[1-9][0-9]*)+)'
-    def compile(re_source):
-        return re.compile(re_source.replace("SECTION", SECTION))
-
-    section_link_regexes = list(map(compile, [
-        # Match " (11.1.5)" and " (see 7.9)"
-        # The space is to avoid matching "(3.5)" in "Math.round(3.5)".
-        r' \(((?:see )?SECTION)\)',
-
-        r'(?:see|See|in|of|to|from|and) (SECTION)(?:$|\.$|[,:) ]|\.[^0-9])',
-
-        # Match "(Clause 16)", "(see clause 6)".
-        r'(?i)(?:)\((?:but )?((?:see\s+(?:also\s+)?)?clause\s+([1-9][0-9]*))\)',
-
-        # Match the first section number in a parenthesized list "(13.3.5, 13.4, 13.6)"
-        r'\((SECTION),\ ',
-
-        # Match the first section number in a list at the beginning of a paragraph, "12.14:" or "12.7, 12.7:"
-        r'^(SECTION)[,:]',
-
-        # Match the second or subsequent section number in a parenthesized list.
-        r', (SECTION)[,):]',
-
-        # Match the penultimate section number in lists that don't use the
-        # Oxford comma, like "13.3, 13.4 and 13.5"
-        r' (SECTION) and\b',
-
-        # Match "Clause 8" in "as defined in Clause 8 of this specification".
-        r'(?i)in (Clause ([1-9][0-9]*))',
-    ]))
-
-    # Disallow . ( ) at the end since it's usually not meant as part of the URL.
-    url_re = re.compile(r'https?://[0-9A-Za-z;/?:@&=+$,_.!~*()\'-]+[0-9A-Za-z;/?:@&=+$,_!~*\'-]')
-
-    def find_link(s):
-        best = None
-        for text, target in specific_links:
-            i = s.find(text)
-            if (i != -1
-                and can_link(current_section, target)  # don't link sections to themselves
-                and (i == 0 or not s[i-1].isalnum())  # check for word break before
-                and (text.endswith('(')
-                     or i + len(text) == len(s)
-                     or not s[i + len(text)].isalnum())  # and after
-                and (best is None or i < best[0])):
-                # New best hit.
-                n = len(text)
-                if text.endswith('('):
-                    n -= 1
-                best = i, i + n, target
-
-        for link_re in section_link_regexes:
-            m = link_re.search(s)
-            while m is not None:
-                id = "sec-" + m.group(2)
-                if id not in all_ids:
-                    warn("no such section: " + m.group(2))
-                    m = link_re.search(s, m.end(1))
-                else:
-                    hit = m.start(1), m.end(1), "#sec-" + m.group(2)
-                    if best is None or hit < best:
-                        best = hit
-                    break
-
-        m = url_re.search(s)
-        if m is not None:
-            hit = m.start(), m.end(), m.group(0)
-            if best is None or hit < best:
-                best = hit
-
-        return best
-
-    def linkify(parent, i, s):
-        while True:
-            m = find_link(s)
-            if m is None:
-                return
-            start, stop, href = m
-            if start > 0:
-                parent.content.insert(i, s[:start])
-                i += 1
-            assert not href.startswith('#') or href[1:] in all_ids
-            parent.content[i] = html.a(href=href, *s[start:stop])
-            i += 1
-            if stop < len(s):
-                parent.content.insert(i, s[stop:])
-            else:
-                break
-            s = s[stop:]
-
-    current_section = None
-    def visit(e):
-        nonlocal current_section
-
-        id = e.attrs.get('id')
-        if id is not None:
-            current_section = '#' + id
-
-        for i, kid in enumerate(e.content):
-            if isinstance(kid, str):
-                linkify(e, i, kid)
-            elif kid.name == 'a' and 'href' in kid.attrs:
-                # Yo dawg. No links in links.
-                pass
-            elif kid.name == 'h1' or (kid.name == 'ol' and kid.attrs.get('class') == 'toc'):
-                # Don't linkify headings or the table of contents.
-                pass
-            else:
-                visit(kid)
-
-        if id is not None:
-            current_section = None
-
-    visit(doc_body(doc))
-
 def fixup_remove_hr(doc):
     """ Remove all remaining hr elements. """
     for parent, i, child in all_parent_index_child_triples(doc):
@@ -1608,6 +1323,291 @@ def fixup_grammar_post(doc):
             [result] = markup_syntax(syntax.strip(), 'prod')
             child.content = result.content
 
+def fixup_links(doc):
+    sections_by_title = {}
+    for sect in findall(doc, 'section'):
+        if 'id' in sect.attrs and sect.content and sect.content[0].name == 'h1':
+            title = ht_text(sect.content[0].content[1:]).strip()
+            sections_by_title[title] = '#' + sect.attrs['id']
+
+    # Normally, any section can link to any other section, even its own
+    # subsection or parent section.  This dictionary overrides that.  Each
+    # item (source, destination): False means that text in source does not
+    # get linked to destination.
+    linkability_overrides = {
+        ('7.9.1', '7.9'): False,
+        ('7.9.2', '7.9'): False
+    }
+
+    def can_link(source, target):
+        s = source[5:] if source.startswith('#sec-') else source
+        t = target[5:] if target.startswith('#sec-') else target
+        return linkability_overrides.get((s, t), source != target)
+
+    specific_link_source_data = [
+        # 5.2
+        ("abs(", "Algorithm Conventions"),
+        ("sign(", "Algorithm Conventions"),
+        ("modulo", "Algorithm Conventions"),
+        ("floor(", "Algorithm Conventions"),
+
+        # clause 7
+        ("automatic semicolon insertion (7.9)", "Automatic Semicolon Insertion"),
+        ("automatic semicolon insertion (see 7.9)", "Automatic Semicolon Insertion"),
+        ("automatic semicolon insertion", "Automatic Semicolon Insertion"),
+        ("semicolon insertion (see 7.9)", "Automatic Semicolon Insertion"),
+
+        # clause 8
+        ("Type(", "Types"),
+        ("List", "The List and Record Specification Type"),
+        ("Completion Record", "The Completion Record Specification Type"),
+        ("Completion", "The Completion Record Specification Type"),
+        ("NormalValue", "The Completion Record Specification Type"),
+        ("NormalCompletion", "The Completion Record Specification Type"),
+        ("abrupt completion", "The Completion Record Specification Type"),
+        ("ReturnIfAbrupt", "The Completion Record Specification Type"),
+        ("Reference", "The Reference Specification Type"),
+        ("GetBase", "The Reference Specification Type"),
+        ("GetReferencedName", "The Reference Specification Type"),
+        ("IsStrictReference", "The Reference Specification Type"),
+        ("HasPrimitiveBase", "The Reference Specification Type"),
+        ("IsPropertyReference", "The Reference Specification Type"),
+        ("IsUnresolvableReference", "The Reference Specification Type"),
+        ("unresolvable Reference", "The Reference Specification Type"),
+        ("Unresolvable Reference", "The Reference Specification Type"),
+        ("IsSuperReference", "The Reference Specification Type"),
+        ("GetValue", "GetValue (V)"),
+        ("PutValue", "PutValue (V, W)"),
+        ("Property Descriptor", "The Property Descriptor and Property Identifier Specification Types"),
+        ("Property Identifier", "The Property Descriptor and Property Identifier Specification Types"),
+        ("IsAccessorDescriptor", "IsAccessorDescriptor ( Desc )"),
+        ("IsDataDescriptor", "IsDataDescriptor ( Desc )"),
+        ("IsGenericDescriptor", "IsGenericDescriptor ( Desc )"),
+        ("FromPropertyDescriptor", "FromPropertyDescriptor ( Desc )"),
+        ("ToPropertyDescriptor", "ToPropertyDescriptor ( Obj )"),
+
+        # clause 9
+        ("ToPrimitive", "ToPrimitive"),
+        ("ToBoolean", "ToBoolean"),
+        ("ToNumber", "ToNumber"),
+        ("ToInteger", "ToInteger"),
+        ("ToInt32", "ToInt32: (Signed 32 Bit Integer)"),
+        ("ToUint32", "ToUint32: (Unsigned 32 Bit Integer)"),
+        #("ToUint16 (9.7)", "ToUint16: (Unsigned 16 Bit Integer)"),   # flunks the assertion
+        ("ToUint16", "ToUint16: (Unsigned 16 Bit Integer)"),
+        ("ToString", "ToString"),
+        ("ToObject", "ToObject"),
+        ("CheckObjectCoercible", "CheckObjectCoercible"),
+        ("IsCallable", "IsCallable"),
+        ("SameValue (according to 9.12)", "The SameValue Algorithm"),
+        ("SameValue", "The SameValue Algorithm"),
+        ("the SameValue algorithm (9.12)", "The SameValue Algorithm"),
+        ("the SameValue Algorithm (9.12)", "The SameValue Algorithm"),
+
+        # 10.1
+        ("strict mode code (see 10.1.1)", "Strict Mode Code"),
+        ("strict mode code", "Strict Mode Code"),
+        ("strict code", "Strict Mode Code"),
+        ("base code", "Strict Mode Code"),
+
+        # 10.2
+        ("Lexical Environment", "Lexical Environments"),
+        ("lexical environment", "Lexical Environments"),
+        ("outer environment reference", "Lexical Environments"),
+        ("outer lexical environment reference", "Lexical Environments"),
+        ("environment record (10.2.1)", "Environment Records"),
+        ("Environment Record", "Environment Records"),
+        ("declarative environment record", "Environment Records"),
+        ("Declarative Environment Record", "Environment Records"),
+        ("Object Environment Record", "Environment Records"),
+        ("object environment record", "Environment Records"),
+        ("GetIdentifierReference", "GetIdentifierReference (lex, name, strict)"),
+        ("NewDeclarativeEnvironment", "NewDeclarativeEnvironment (E)"),
+        ("NewObjectEnvironment", "NewObjectEnvironment (O, E)"),
+        ("the global environment", "The Global Environment"),
+        ("the Global Environment", "The Global Environment"),
+
+        # 10.3
+        ("LexicalEnvironment", "Execution Contexts"),
+        ("VariableEnvironment", "Execution Contexts"),
+        ("ThisBinding", "Execution Contexts"),
+        ("Identifier Resolution as specified in 10.3.1", "Identifier Resolution"),
+        ("Identifier Resolution(10.3.1)", "Identifier Resolution"),
+
+        # 10.5
+        ("Declaration Binding Instantiation", "Declaration Binding Instantiation"),
+        ("declaration binding instantiation (10.5)", "Declaration Binding Instantiation"),
+        ("Function Declaration Binding Instantiation", "Function Declaration Instantiation"),
+
+        # clause 14
+        ("Directive Prologue", "Directive Prologues and the Use Strict Directive"),
+        ("Use Strict Directive", "Directive Prologues and the Use Strict Directive"),
+
+        # clause 15
+        ("direct call (see 15.1.2.1.1) to the eval function", "Direct Call to Eval"),
+
+        # 15.9
+        ("this time value", "Properties of the Date Prototype Object"),
+        ("time value", "Time Values and Time Range"),
+        ("Day(", "Day Number and Time within Day"),
+        ("msPerDay", "Day Number and Time within Day"),
+        ("TimeWithinDay", "Day Number and Time within Day"),
+        ("DaysInYear", "Year Number"),
+        ("TimeFromYear", "Year Number"),
+        ("YearFromTime", "Year Number"),
+        ("InLeapYear", "Year Number"),
+        ("MonthFromTime", "Month Number"),
+        ("DayWithinYear", "Month Number"),
+        ("DateFromTime", "Date Number"),
+        ("WeekDay", "Week Day"),
+        ("LocalTZA", "Local Time Zone Adjustment"),
+        ("DaylightSavingTA", "Daylight Saving Time Adjustment"),
+        ("LocalTime", "Local Time"),
+        ("UTC(", "Local Time"),
+        ("HourFromTime", "Hours, Minutes, Second, and Milliseconds"),
+        ("MinFromTime", "Hours, Minutes, Second, and Milliseconds"),
+        ("SecFromTime", "Hours, Minutes, Second, and Milliseconds"),
+        ("msFromTime", "Hours, Minutes, Second, and Milliseconds"),
+        ("msPerSecond", "Hours, Minutes, Second, and Milliseconds"),
+        ("msPerMinute", "Hours, Minutes, Second, and Milliseconds"),
+        ("msPerHour", "Hours, Minutes, Second, and Milliseconds"),
+        ("MakeTime", "MakeTime (hour, min, sec, ms)"),
+        ("MakeDay", "MakeDay (year, month, date)"),
+        ("MakeDate", "MakeDate (day, time)"),
+        ("TimeClip", "TimeClip (time)")
+    ]
+
+    specific_links = [(text, sections_by_title[title]) for text, title in specific_link_source_data]
+
+    # Assert that the specific_links above make sense; that is, that each link
+    # with a "(7.9)" or "(see 7.9)" in it actually points to the named section.
+    #
+    # A warning here means sections were renumbered. Any number of things can
+    # be wrong in the wake of such a change. :)
+    #
+    for text, target in specific_links:
+        m = re.search(r'\((?:see )?([1-9][0-9]*(?:\.[1-9][0-9]*)*)\)', text)
+        if m is not None:
+            if target != '#sec-' + m.group(1):
+                warn("text refers to section number " + repr(m.group(1)) + ", but actual section is " + repr(target))
+
+    all_ids = set([kid.attrs['id'] for _, _, kid in all_parent_index_child_triples(doc) if 'id' in kid.attrs])
+
+    SECTION = r'([1-9A-Z][0-9]*(?:\.[1-9][0-9]*)+)'
+    def compile(re_source):
+        return re.compile(re_source.replace("SECTION", SECTION))
+
+    section_link_regexes = list(map(compile, [
+        # Match " (11.1.5)" and " (see 7.9)"
+        # The space is to avoid matching "(3.5)" in "Math.round(3.5)".
+        r' \(((?:see )?SECTION)\)',
+
+        r'(?:see|See|in|of|to|from|and) (SECTION)(?:$|\.$|[,:) ]|\.[^0-9])',
+
+        # Match "(Clause 16)", "(see clause 6)".
+        r'(?i)(?:)\((?:but )?((?:see\s+(?:also\s+)?)?clause\s+([1-9][0-9]*))\)',
+
+        # Match the first section number in a parenthesized list "(13.3.5, 13.4, 13.6)"
+        r'\((SECTION),\ ',
+
+        # Match the first section number in a list at the beginning of a paragraph, "12.14:" or "12.7, 12.7:"
+        r'^(SECTION)[,:]',
+
+        # Match the second or subsequent section number in a parenthesized list.
+        r', (SECTION)[,):]',
+
+        # Match the penultimate section number in lists that don't use the
+        # Oxford comma, like "13.3, 13.4 and 13.5"
+        r' (SECTION) and\b',
+
+        # Match "Clause 8" in "as defined in Clause 8 of this specification".
+        r'(?i)in (Clause ([1-9][0-9]*))',
+    ]))
+
+    # Disallow . ( ) at the end since it's usually not meant as part of the URL.
+    url_re = re.compile(r'https?://[0-9A-Za-z;/?:@&=+$,_.!~*()\'-]+[0-9A-Za-z;/?:@&=+$,_!~*\'-]')
+
+    def find_link(s):
+        best = None
+        for text, target in specific_links:
+            i = s.find(text)
+            if (i != -1
+                and can_link(current_section, target)  # don't link sections to themselves
+                and (i == 0 or not s[i-1].isalnum())  # check for word break before
+                and (text.endswith('(')
+                     or i + len(text) == len(s)
+                     or not s[i + len(text)].isalnum())  # and after
+                and (best is None or i < best[0])):
+                # New best hit.
+                n = len(text)
+                if text.endswith('('):
+                    n -= 1
+                best = i, i + n, target
+
+        for link_re in section_link_regexes:
+            m = link_re.search(s)
+            while m is not None:
+                id = "sec-" + m.group(2)
+                if id not in all_ids:
+                    warn("no such section: " + m.group(2))
+                    m = link_re.search(s, m.end(1))
+                else:
+                    hit = m.start(1), m.end(1), "#sec-" + m.group(2)
+                    if best is None or hit < best:
+                        best = hit
+                    break
+
+        m = url_re.search(s)
+        if m is not None:
+            hit = m.start(), m.end(), m.group(0)
+            if best is None or hit < best:
+                best = hit
+
+        return best
+
+    def linkify(parent, i, s):
+        while True:
+            m = find_link(s)
+            if m is None:
+                return
+            start, stop, href = m
+            if start > 0:
+                parent.content.insert(i, s[:start])
+                i += 1
+            assert not href.startswith('#') or href[1:] in all_ids
+            parent.content[i] = html.a(href=href, *s[start:stop])
+            i += 1
+            if stop < len(s):
+                parent.content.insert(i, s[stop:])
+            else:
+                break
+            s = s[stop:]
+
+    current_section = None
+    def visit(e):
+        nonlocal current_section
+
+        id = e.attrs.get('id')
+        if id is not None:
+            current_section = '#' + id
+
+        for i, kid in enumerate(e.content):
+            if isinstance(kid, str):
+                linkify(e, i, kid)
+            elif kid.name == 'a' and 'href' in kid.attrs:
+                # Yo dawg. No links in links.
+                pass
+            elif kid.name == 'h1':
+                # Don't linkify headings.
+                pass
+            else:
+                visit(kid)
+
+        if id is not None:
+            current_section = None
+
+    visit(doc_body(doc))
+
 def fixup_generate_toc(doc):
     """ Generate a table of contents from the section headings. """
 
@@ -1699,7 +1699,6 @@ def fixup(docx, doc):
     fixup_list_paragraphs(doc)
     fixup_picts(doc)
     fixup_figures(doc)
-    fixup_links(doc)
     fixup_remove_hr(doc)
     fixup_title_page(doc)
     fixup_overview_biblio(doc)
@@ -1707,6 +1706,7 @@ def fixup(docx, doc):
     fixup_grammar_pre(doc)
 
     fixup_grammar_post(doc)
+    fixup_links(doc)
     fixup_generate_toc(doc)
     fixup_add_disclaimer(doc)
     return doc
