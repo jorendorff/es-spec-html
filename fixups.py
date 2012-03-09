@@ -1240,6 +1240,9 @@ def fixup_simplify_formatting(doc):
     
     This precedes fixup_grammar_pre which looks for sub and span.nt elements.
     """
+
+    nt_re = re.compile(r'\s+|\S+')
+
     def simplify_style_span(span):
         if span.attrs:
             return [span]
@@ -1256,8 +1259,16 @@ def fixup_simplify_formatting(doc):
         elif (style == {'font-family': 'Times New Roman', 'font-style': 'italic'}
               and len(content) == 1
               and isinstance(content[0], str)):
-            if looks_like_nonterminal(content[0].strip()):
-                return [html.span(*content, class_="nt")]
+            words = content[0].strip().split()
+            if all(looks_like_nonterminal(w) for w in words):
+                # Don't use words, because it's stripped.
+                arr = []
+                for s in nt_re.findall(content[0]):
+                    if s.isspace():
+                        arr.append(s)
+                    else:
+                        arr.append(html.span(s, class_="nt"))
+                return arr
             else:
                 return [html.var(*content)]
         elif style == {'font-family': 'Times New Roman', 'font-weight': 'bold'}:

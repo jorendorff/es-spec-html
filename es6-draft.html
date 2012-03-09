@@ -1987,7 +1987,7 @@
     <p>The definitions of the nonterminal <span class="nt">UnicodeEscapeSequence</span> is given in <a
     href="#sec-7.8.4">7.8.4</a></p>
 
-    <p><b>Static Semantics:  <var>String Value</var></b></p>
+    <p><b>Static Semantics:  <span class="nt">String</span> <span class="nt">Value</span></b></p>
 
     <p><span class="prod"><span class="nt">Identifier</span> <span class="geq">::</span> <span class="nt">IdentifierName</span>
     <span class="grhsmod">but not</span> <span class="nt">ReservedWord</span></span></p>
@@ -10099,8 +10099,8 @@
         <li>Return the LexicalDeclarations of <i>StatementListItem</i>.</li>
       </ol>
 
-      <p><span class="prod"><span class="nt">StatementList</span> <span class="geq">:</span></span><var>StatementList
-      StatementListItem</var></p>
+      <p><span class="prod"><span class="nt">StatementList</span> <span class="geq">:</span> <span class="nt">StatementList</span>
+      <span class="nt">StatementListItem</span></span></p>
 
       <ol class="proc">
         <li>Let <i>declarations</i> be LexicalDeclarations of <i>StatementList</i>.</li>
@@ -10145,8 +10145,8 @@
         <li>Return the LexicallyDeclaredNames of <i>StatementListItem</i>.</li>
       </ol>
 
-      <p><span class="prod"><span class="nt">StatementList</span> <span class="geq">:</span></span><var>StatementList
-      StatementListItem</var></p>
+      <p><span class="prod"><span class="nt">StatementList</span> <span class="geq">:</span> <span class="nt">StatementList</span>
+      <span class="nt">StatementListItem</span></span></p>
 
       <ol class="proc">
         <li>Let <i>names</i> be LexicallyDeclaredNames of <i>StatementList</i>.</li>
@@ -10198,8 +10198,8 @@
         <li>Return the VarDeclaredNames of <i>StatementListItem</i>.</li>
       </ol>
 
-      <p><span class="prod"><span class="nt">StatementList</span> <span class="geq">:</span></span><var>StatementList
-      StatementListItem</var></p>
+      <p><span class="prod"><span class="nt">StatementList</span> <span class="geq">:</span> <span class="nt">StatementList</span>
+      <span class="nt">StatementListItem</span></span></p>
 
       <ol class="proc">
         <li>Let <i>names</i> be VarDeclaredNames of <i>StatementList</i>.</li>
@@ -10267,8 +10267,8 @@
         <li>Return <i>s</i>.</li>
       </ol>
 
-      <p><span class="prod"><span class="nt">StatementList</span> <span class="geq">:</span></span><var>StatementList
-      StatementListItem</var></p>
+      <p><span class="prod"><span class="nt">StatementList</span> <span class="geq">:</span> <span class="nt">StatementList</span>
+      <span class="nt">StatementListItem</span></span></p>
 
       <ol class="proc">
         <li>Let <i>sl</i> be the result of evaluating <i>StatementList</i>.</li>
@@ -10417,8 +10417,8 @@
 
         <p><b>Static Semantics:  Bound</b> <b>Names</b></p>
 
-        <p><span class="prod"><span class="nt">LexicalDeclaration</span> <span class="geq">:</span></span><var>LetOrConst
-        BindingList</var> <code>;</code></p>
+        <p><span class="prod"><span class="nt">LexicalDeclaration</span> <span class="geq">:</span> <span
+        class="nt">LetOrConst</span> <span class="nt">BindingList</span> <code class="t">;</code></span></p>
 
         <ol class="proc">
           <li>Return the Bound Names of <i>BindingList</i>.</li>
@@ -10447,8 +10447,8 @@
           <li>Return the Bound Names of <i>BindingIdentifier</i>.</li>
         </ol>
 
-        <p><span class="prod"><span class="nt">LexicalBinding</span> <span class="geq">:</span></span><var>BindingPattern
-        Initialiser</var></p>
+        <p><span class="prod"><span class="nt">LexicalBinding</span> <span class="geq">:</span> <span
+        class="nt">BindingPattern</span> <span class="nt">Initialiser</span></span></p>
 
         <ol class="proc">
           <li>Return the Bound Names of <i>BindingPattern</i>.</li>
@@ -10463,20 +10463,22 @@
 
         <p><b>Static Semantics:  IsConstantDeclaration</b></p>
 
-        <p><span class="prod"><span class="nt">LexicalDeclaration</span> <span class="geq">:</span></span><var>LetOrConst
-        BindingList</var> <code>;</code></p>
+        <p><span class="prod"><span class="nt">LexicalDeclaration</span> <span class="geq">:</span> <span
+        class="nt">LetOrConst</span> <span class="nt">BindingList</span> <code class="t">;</code></span></p>
 
         <ol class="proc">
           <li>Return IsConstantDeclaration of <i>LetOrConst</i>.</li>
         </ol>
 
-        <p><var>LetOrConst BindingList</var>  <b>:</b>  <code>let</code></p>
+        <p><span class="nt">LetOrConst</span> <span class="prod"><span class="nt">BindingList</span> <span class="geq">:</span>
+        <code class="t">let</code></span></p>
 
         <ol class="proc">
           <li>Return <b>false</b>.</li>
         </ol>
 
-        <p><var>LetOrConst BindingList</var>  <b>:</b>  <code>const</code></p>
+        <p><span class="nt">LetOrConst</span> <span class="prod"><span class="nt">BindingList</span> <span class="geq">:</span>
+        <code class="t">const</code></span></p>
 
         <ol class="proc">
           <li>Return <b>false</b>.</li>
@@ -10531,8 +10533,8 @@
 
         <p><b>Runtime Semantics: Evaluation</b></p>
 
-        <p><span class="prod"><span class="nt">LexicalDeclaration</span> <span class="geq">:</span></span><var>LetOrConst
-        BindingList</var> <code>;</code></p>
+        <p><span class="prod"><span class="nt">LexicalDeclaration</span> <span class="geq">:</span> <span
+        class="nt">LetOrConst</span> <span class="nt">BindingList</span> <code class="t">;</code></span></p>
 
         <ol class="proc">
           <li>Let <i>next</i> be the result of evaluating <i>BindingList</i>.</li>
@@ -10569,8 +10571,8 @@
           never occurs in a <code>const</code> declaration.</p>
         </div>
 
-        <p><span class="prod"><span class="nt">LexicalBinding</span> <span class="geq">:</span></span><var>BindingIdentifier
-        Initialiser</var></p>
+        <p><span class="prod"><span class="nt">LexicalBinding</span> <span class="geq">:</span> <span
+        class="nt">BindingIdentifier</span> <span class="nt">Initialiser</span></span></p>
 
         <ol class="proc">
           <li>Let <i>rhs</i> be the result of evaluating <i>Initialiser</i>.</li>
@@ -10580,8 +10582,8 @@
           <li>Return the result of performing Binding Initialisation for <i>BindingIdentifier</i> passing <i>value</i> and <i>env</i> as the arguments.</li>
         </ol>
 
-        <p><span class="prod"><span class="nt">LexicalBinding</span> <span class="geq">:</span></span><var>BindingPattern
-        Initialiser</var></p>
+        <p><span class="prod"><span class="nt">LexicalBinding</span> <span class="geq">:</span> <span
+        class="nt">BindingPattern</span> <span class="nt">Initialiser</span></span></p>
 
         <ol class="proc">
           <li>Let <i>rhs</i> be the result of evaluating <i>Initialiser</i>.</li>
@@ -10688,8 +10690,8 @@
           <li>Return the BoundNames of <i>BindingIdentifier</i>.</li>
         </ol>
 
-        <p><span class="prod"><span class="nt">VariableDeclaration</span> <span class="geq">:</span></span><var>BindingPattern
-        Initialiser</var></p>
+        <p><span class="prod"><span class="nt">VariableDeclaration</span> <span class="geq">:</span> <span
+        class="nt">BindingPattern</span> <span class="nt">Initialiser</span></span></p>
 
         <ol class="proc">
           <li>Return the BoundNames of <i>BindingPattern</i>.</li>
@@ -10717,15 +10719,15 @@
           <li>Return the result of performing Binding Initialisation for <i>BindingIdentifier</i> passing <i>value</i> and <b>undefined</b> as the arguments.</li>
         </ol>
 
-        <p><span class="prod"><span class="nt">VariableDeclaration</span> <span class="geq">:</span></span><var>BindingIdentifier
-        Initialiser</var></p>
+        <p><span class="prod"><span class="nt">VariableDeclaration</span> <span class="geq">:</span> <span
+        class="nt">BindingIdentifier</span> <span class="nt">Initialiser</span></span></p>
 
         <ol class="proc">
           <li>Return the result of performing Binding Initialisation for <i>BindingIdentifier</i> passing <i>value</i> and <b>undefined</b> as the arguments.</li>
         </ol>
 
-        <p><span class="prod"><span class="nt">VariableDeclaration</span> <span class="geq">:</span></span><var>BindingPattern
-        Initialiser</var></p>
+        <p><span class="prod"><span class="nt">VariableDeclaration</span> <span class="geq">:</span> <span
+        class="nt">BindingPattern</span> <span class="nt">Initialiser</span></span></p>
 
         <ol class="proc">
           <li>Return the result of performing Binding Initialisation for <i>BindingPattern</i> passing <i>value</i> and <b>undefined</b> as the arguments.</li>
@@ -10765,8 +10767,8 @@
           <li>Return <a href="#sec-8.8">NormalCompletion</a>(<span style="font-family: sans-serif">empty</span>).</li>
         </ol>
 
-        <p><span class="prod"><span class="nt">VariableDeclaration</span> <span class="geq">:</span></span><var>BindingIdentifier
-        Initialiser</var></p>
+        <p><span class="prod"><span class="nt">VariableDeclaration</span> <span class="geq">:</span> <span
+        class="nt">BindingIdentifier</span> <span class="nt">Initialiser</span></span></p>
 
         <ol class="proc">
           <li>Let <i>rhs</i> be the result of evaluating <i>Initialiser</i>.</li>
@@ -10783,8 +10785,8 @@
           class="nt">Identifier</span>.</p>
         </div>
 
-        <p><span class="prod"><span class="nt">VariableDeclaration</span> <span class="geq">:</span></span><var>BindingPattern
-        Initialiser</var></p>
+        <p><span class="prod"><span class="nt">VariableDeclaration</span> <span class="geq">:</span> <span
+        class="nt">BindingPattern</span> <span class="nt">Initialiser</span></span></p>
 
         <ol class="proc">
           <li>Let <i>rhs</i> be the result of evaluating <i>Initialiser</i>.</li>
@@ -11041,8 +11043,8 @@
           <li>Return <b>false</b>.</li>
         </ol>
 
-        <p><span class="prod"><span class="nt">BindingElement</span> <span class="geq">:</span></span><var>BindingPattern
-        Initialiser</var></p>
+        <p><span class="prod"><span class="nt">BindingElement</span> <span class="geq">:</span> <span
+        class="nt">BindingPattern</span> <span class="nt">Initialiser</span></span></p>
 
         <ol class="proc">
           <li>Return <b>true</b>.</li>
@@ -11055,8 +11057,8 @@
           <li>Return <b>false</b>.</li>
         </ol>
 
-        <p><span class="prod"><span class="nt">SingleNameBinding</span> <span class="geq">:</span></span><var>BindingIdentifier
-        Initialiser</var></p>
+        <p><span class="prod"><span class="nt">SingleNameBinding</span> <span class="geq">:</span> <span
+        class="nt">BindingIdentifier</span> <span class="nt">Initialiser</span></span></p>
 
         <ol class="proc">
           <li>Return <b>true</b>.</li>
@@ -12468,7 +12470,8 @@
       </ol>
 
       <p><span class="prod"><span class="nt">CaseBlock</span> <span class="geq">:</span> <code class="t">{</code> <span
-      class="nt">CaseClausesopt</span></span><var>DefaultClause CaseClauses</var><sub>opt</sub> <code>}</code></p>
+      class="nt">CaseClausesopt</span> <span class="nt">DefaultClause</span> <span class="nt">CaseClausesopt</span> <code
+      class="t">}</code></span></p>
 
       <ol class="proc">
         <li>If the first <i>CaseClauses</i> is present, let <i>declarations</i> be the LexicalDeclarations of the first <i>CaseClauses</i>.</li>
@@ -12485,8 +12488,8 @@
         <li>Return the LexicalDeclarations of <i>CaseClause</i>.</li>
       </ol>
 
-      <p><span class="prod"><span class="nt">CaseClauses</span> <span class="geq">:</span></span><var>CaseClauses
-      CaseClause</var></p>
+      <p><span class="prod"><span class="nt">CaseClauses</span> <span class="geq">:</span> <span class="nt">CaseClauses</span>
+      <span class="nt">CaseClause</span></span></p>
 
       <ol class="proc">
         <li>Let <i>declarations</i> be LexicalDeclarations of <i>CaseClauses</i>.</li>
@@ -12527,7 +12530,8 @@
       </ol>
 
       <p><span class="prod"><span class="nt">CaseBlock</span> <span class="geq">:</span> <code class="t">{</code> <span
-      class="nt">CaseClausesopt</span></span><var>DefaultClause CaseClauses</var><sub>opt</sub> <code>}</code></p>
+      class="nt">CaseClausesopt</span> <span class="nt">DefaultClause</span> <span class="nt">CaseClausesopt</span> <code
+      class="t">}</code></span></p>
 
       <ol class="proc">
         <li>If the first <i>CaseClauses</i> is present, let <i>names</i> be the LexicallyDeclaredNames of the first <i>CaseClauses</i>.</li>
@@ -12544,8 +12548,8 @@
         <li>Return the LexicallyDeclaredNames of <i>CaseClause</i>.</li>
       </ol>
 
-      <p><span class="prod"><span class="nt">CaseClauses</span> <span class="geq">:</span></span><var>CaseClauses
-      CaseClause</var></p>
+      <p><span class="prod"><span class="nt">CaseClauses</span> <span class="geq">:</span> <span class="nt">CaseClauses</span>
+      <span class="nt">CaseClause</span></span></p>
 
       <ol class="proc">
         <li>Let <i>names</i> be LexicallyDeclaredNames of <i>CaseClauses</i>.</li>
@@ -12593,7 +12597,8 @@
       </ol>
 
       <p><span class="prod"><span class="nt">CaseBlock</span> <span class="geq">:</span> <code class="t">{</code> <span
-      class="nt">CaseClausesopt</span></span><var>DefaultClause CaseClauses</var><sub>opt</sub> <code>}</code></p>
+      class="nt">CaseClausesopt</span> <span class="nt">DefaultClause</span> <span class="nt">CaseClausesopt</span> <code
+      class="t">}</code></span></p>
 
       <ol class="proc">
         <li>If the first <i>CaseClauses</i> is present, let <i>names</i> be the VarDeclaredNames of the first <i>CaseClauses</i>.</li>
@@ -12610,8 +12615,8 @@
         <li>Return the VarDeclaredNames of <i>CaseClause</i>.</li>
       </ol>
 
-      <p><span class="prod"><span class="nt">CaseClauses</span> <span class="geq">:</span></span><var>CaseClauses
-      CaseClause</var></p>
+      <p><span class="prod"><span class="nt">CaseClauses</span> <span class="geq">:</span> <span class="nt">CaseClauses</span>
+      <span class="nt">CaseClause</span></span></p>
 
       <ol class="proc">
         <li>Let <i>names</i> be VarDeclaredNames of <i>CaseClauses</i>.</li>
@@ -12684,8 +12689,8 @@
       </ol>
 
       <p><span class="prod"><span class="nt">CaseBlock</span> <span class="geq">:</span></span><span style="font-family:
-      monospace">{</span> <span class="nt">CaseClauses</span><sub>opt</sub> <var>DefaultClause CaseClauses</var><sub>opt</sub>
-      <span style="font-family: monospace">}</span></p>
+      monospace">{</span> <span class="nt">CaseClauses</span><sub>opt</sub> <span class="nt">DefaultClause</span> <span
+      class="nt">CaseClauses</span><sub>opt</sub> <span style="font-family: monospace">}</span></p>
 
       <ol class="proc">
         <li><span style="font-family: Times New Roman">Let <i>V</i> = <b>undefined</b>..</span></li>
@@ -13299,8 +13304,9 @@
 
       <ul>
         <li>
-          <p>It is a Syntax Error if the derivation of <span class="nt">BindingElement</span> is <var>BindingIdentifier
-          Initialiser</var> and the source code matching this production is not extended code.</p>
+          <p>It is a Syntax Error if the derivation of <span class="nt">BindingElement</span> is <span
+          class="nt">BindingIdentifier</span>  <span class="nt">Initialiser</span> and the source code matching this production is
+          not extended code.</p>
         </li>
 
         <li>
@@ -25251,10 +25257,10 @@
   Environment Record</a> to bind the name of the function.</p>
 
   <p>14: In Edition 3, the algorithm for the production <span class="prod"><span class="nt">SourceElements</span> <span
-  class="geq">:</span></span><var>SourceElements SourceElement</var> did not correctly propagate statement result values in the
-  same manner as <span class="nt">Block</span>. This could result in the <code>eval</code> function producing an incorrect result
-  when evaluating a <span class="nt">Program</span> text. In practice most implementations of Edition 3 have implemented the
-  correct propagation rather than what was specified in Edition 5.</p>
+  class="geq">:</span> <span class="nt">SourceElements</span> <span class="nt">SourceElement</span></span> did not correctly
+  propagate statement result values in the same manner as <span class="nt">Block</span>. This could result in the
+  <code>eval</code> function producing an incorrect result when evaluating a <span class="nt">Program</span> text. In practice
+  most implementations of Edition 3 have implemented the correct propagation rather than what was specified in Edition 5.</p>
 
   <p><a href="#sec-15.10.6">15.10.6</a>: RegExp.prototype is now a RegExp object rather than an instance of Object. The value of
   its [[Class]] internal property which is observable using Object.prototype.toString is now &ldquo;RegExp&rdquo; rather than
