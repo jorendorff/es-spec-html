@@ -1238,7 +1238,7 @@ def fixup_simplify_formatting(doc):
     (Sometimes this converts to semantic markup, like using a var or span.nt
     element instead of an <i>; but it's just a shot in the dark.)
     
-    This precedes fixup_syntax_pre which looks for sub elements.
+    This precedes fixup_grammar_pre which looks for sub and span.nt elements.
     """
     def simplify_style_span(span):
         if span.attrs:
@@ -1292,7 +1292,7 @@ def fixup_grammar_pre(doc):
     Keep the text; throw everything else away.
     """
 
-    def is_grammar(div):
+    def is_grammar_block(div):
         return ht_name_is(div, 'div') and div.attrs.get('class') in ('lhs', 'rhs')
 
     def lines(div):
@@ -1322,36 +1322,81 @@ def fixup_grammar_pre(doc):
             text = text[:-7]
         return text.endswith(':')
 
-    for parent, i, div in all_parent_index_child_triples(doc):
-        if is_grammar(div):
-            j = i + 1
-            while j < len(parent.content) and is_grammar(parent.content[j]):
+    def strip_grammar_block(parent, i):
+        j = i + 1
+        while j < len(parent.content) and is_grammar_block(parent.content[j]):
+            j += 1
+        syntax = ''
+        for e in parent.content[i:j]:
+            for line in lines(e):
+                line = line.strip()
+                line = ' '.join(line.split())
+
+                if line.startswith("any "):
+                    line = '[desc ' + line + ']'
+                elif 'U+0000 through' in line:
+                    k = line.index('U+0000 through')
+                    line = line[:k] + '[desc ' + line[k:] + ']'
+
+                if is_lhs(line):
+                    syntax += '\n'  # blank line before
+                else:
+                    syntax += '    '  # indent each rhs
+                syntax += line + '\n'
+
+        # Hack - not all the paragraphs marked as syntax are actually
+        # things we want to replace. So as a heuristic, only make the
+        # change if the first line satisfied is_lhs.
+        if syntax.startswith('    '):
+            return
+
+        parent.content[i:j] = [html.pre(syntax, class_="syntax")]
+
+    def is_nonterminal(ht):
+        if isinstance(ht, str):
+            return False
+        elif ht.name == 'i' or (ht.style and ht.style.get('font-style') == 'italic'):
+            return looks_like_nonterminal(ht_text(ht).strip())
+        elif ht.name == 'span':
+            return ht.attrs.get('class') == 'nt' or (len(ht.content) == 1 and is_nonterminal(ht.content[0]))
+        else:
+            return False
+
+    def is_grammar_inline(ht):
+        if isinstance(ht, str):
+            return ht.strip() in {'', '[empty]', '[no', 'here]', '[lookahead \N{NOT AN ELEMENT OF}', ']'}
+        elif ht.name == 'span':
+            return ht.attrs.get('class') == 'nt' or (len(ht.content) == 1 and is_grammar_inline(ht.content[0]))
+        elif ht.name == 'sub':
+            return ht.content == ['opt']
+        else:
+            return ht.name in ('code', 'i', 'b')
+
+    def strip_grammar_inline(parent, i):
+        content = parent.content
+        j = i + 1
+        if j >= len(content):
+            return
+        if isinstance(content[j], str):
+            if content[j].strip() == '':
                 j += 1
-            syntax = ''
-            for e in parent.content[i:j]:
-                for line in lines(e):
-                    line = line.strip()
-                    line = ' '.join(line.split())
+                if j >= len(content):
+                    return
+        jtext = ht_text(content[j]).lstrip()
+        if not jtext.startswith(':') or jtext.split(None, 1)[0].rstrip(':') != '':
+            return
+        j += 1
 
-                    if line.startswith("any "):
-                        line = '[desc ' + line + ']'
-                    elif 'U+0000 through' in line:
-                        k = line.index('U+0000 through')
-                        line = line[:k] + '[desc ' + line[k:] + ']'
+        while j < len(content) and is_grammar_inline(content[j]):
+            j += 1
 
-                    if is_lhs(line):
-                        syntax += '\n'  # blank line before
-                    else:
-                        syntax += '    '  # indent each rhs
-                    syntax += line + '\n'
+        content[i:j] = [html.span(ht_text(content[i:j]), class_='prod')]
 
-            # Hack - not all the paragraphs marked as syntax are actually
-            # things we want to replace. So as a heuristic, only make the
-            # change if the first line satisfied is_lhs.
-            if syntax.startswith('    '):
-                continue
-
-            parent.content[i:j] = [html.pre(syntax, class_="syntax")]
+    for parent, i, child in all_parent_index_child_triples(doc):
+        if is_grammar_block(child):
+            strip_grammar_block(parent, i)
+        elif is_nonterminal(child):
+            strip_grammar_inline(parent, i)
 
 def fixup_grammar_post(doc):
     """ Generate nice markup from the stripped-down pre.syntax elements
@@ -1374,7 +1419,7 @@ def fixup_grammar_post(doc):
         )\s*
         ''')
 
-    def markup_div(text, cls, xrefs=None):
+    def markup_syntax(text, cls, xrefs=None):
         xref = None
         markup = []
 
@@ -1446,21 +1491,25 @@ def fixup_grammar_post(doc):
         results.append(html.div(*markup, class_=cls))
         return results
 
-    for parent, i, pre in all_parent_index_child_triples(doc):
-        if pre.name == 'pre' and pre.attrs.get('class') == 'syntax':
+    for parent, i, child in all_parent_index_child_triples(doc):
+        if child.name == 'pre' and child.attrs.get('class') == 'syntax':
             divs = []
-            [syntax] = pre.content
+            [syntax] = child.content
             syntax = syntax.lstrip('\n')
             for production in syntax.split('\n\n'):
                 lines = production.splitlines()
 
                 assert not lines[0][:1].isspace()
-                lines_out = markup_div(lines[0], 'lhs')
+                lines_out = markup_syntax(lines[0], 'lhs')
                 for line in lines[1:]:
                     assert line.startswith('    ')
-                    lines_out += markup_div(line.strip(), 'rhs')
+                    lines_out += markup_syntax(line.strip(), 'rhs')
                 divs.append(html.div(*lines_out, class_='gp'))
-            parent.content[i:i+1] = divs
+            parent.content[i:i + 1] = divs
+        elif child.name == 'span' and child.attrs.get('class') == 'prod':
+            [syntax] = child.content
+            [result] = markup_syntax(syntax.strip(), 'prod')
+            child.content = result.content
 
 def fixup_add_disclaimer(doc):
     div = html.div
