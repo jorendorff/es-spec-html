@@ -7665,7 +7665,7 @@
       <div class="gp">
         <div class="lhs"><span class="nt">PropertyAssignment</span> <span class="geq">:</span></div>
         <div class="rhs"><span class="nt">IdentifierName</span></div>
-        <div class="rhs"><span class="nt">PropertyName</span> <span class="geq">:</span> <span class="nt">AssignmentExpression</span></div>
+        <div class="rhs"><span class="nt">PropertyName</span> <code class="t">:</code> <span class="nt">AssignmentExpression</span></div>
         <div class="rhs"><span class="nt">PropertyName</span> <code class="t">(</code> <span class="nt">FormalParameterList</span> <code class="t">)</code> <code class="t">{</code> <span class="nt">FunctionBody</span> <code class="t">}</code></div>
         <div class="rhs"><code class="t">*</code> <span class="nt">PropertyName</span> <code class="t">(</code> <span class="nt">FormalParameterList</span> <code class="t">)</code> <code class="t">{</code> <span class="nt">FunctionBody</span> <code class="t">}</code></div>
         <div class="rhs"><code class="t">get</code> <span class="nt">PropertyName</span> <code class="t">(</code> <code class="t">)</code> <code class="t">{</code> <span class="nt">FunctionBody</span> <code class="t">}</code></div>
@@ -7697,7 +7697,7 @@
           <li>
             <p>It is a Syntax Error if this production is contained in <a href="#sec-10.1.1">strict code</a>,  <span
             class="nt">PropertyAssignment</span> is the production <span class="prod"><span class="nt">PropertyAssignment</span>
-            <span class="geq">:</span> <span class="nt">PropertyName</span> <span class="geq">:</span></span>
+            <span class="geq">:</span> <span class="nt">PropertyName</span> <code class="t">:</code></span>
             <var>AssignmentExpression,</var> and <span style="font-family: Times New Roman">PropertyDefinitionList</span>(<span
             style="font-family: Times New Roman">PropName</span> of <span class="nt">PropertyAssignment</span>) of <span
             class="nt">PropertyNameAndValueList</span> is not the empty <a href="#sec-8.7">List</a>.</p>
@@ -7739,7 +7739,7 @@
             Roman">PropertyDefinitionList</span> (<span style="font-family: Times New Roman">PropName</span> of <span
             class="nt">PropertyAssignment</span>) of <span class="nt">PropertyNameAndValueList</span> includes a production of the
             form <span class="prod"><span class="nt">PropertyAssignment</span> <span class="geq">:</span> <span
-            class="nt">PropertyName</span> <span class="geq">:</span> <span class="nt">AssignmentExpression</span></span> .</p>
+            class="nt">PropertyName</span> <code class="t">:</code> <span class="nt">AssignmentExpression</span></span> .</p>
           </li>
 
           <li>
@@ -7750,8 +7750,8 @@
             <span style="font-family: Times New Roman">PropertyDefinitionList</span> (<span style="font-family: Times New
             Roman">PropName</span> of <span class="nt">PropertyAssignment</span>) of <span
             class="nt">PropertyNameAndValueList</span> includes a production of the form <span class="prod"><span
-            class="nt">PropertyAssignment</span> <span class="geq">:</span> <span class="nt">PropertyName</span> <span
-            class="geq">:</span> <span class="nt">AssignmentExpression</span></span> .</p>
+            class="nt">PropertyAssignment</span> <span class="geq">:</span> <span class="nt">PropertyName</span> <code
+            class="t">:</code> <span class="nt">AssignmentExpression</span></span> .</p>
           </li>
 
           <li>
@@ -7914,7 +7914,7 @@
         </ol>
 
         <p><span class="prod"><span class="nt">PropertyAssignment</span> <span class="geq">:</span> <span
-        class="nt">PropertyName</span> <span class="geq">:</span> <span class="nt">AssignmentExpression</span></span></p>
+        class="nt">PropertyName</span> <code class="t">:</code> <span class="nt">AssignmentExpression</span></span></p>
 
         <ol class="proc">
           <li>Return PropName of <i>PropertyName</i>.</li>
@@ -8043,7 +8043,7 @@
         </ol>
 
         <p><span class="prod"><span class="nt">PropertyAssignment</span> <span class="geq">:</span> <span
-        class="nt">PropertyName</span> <span class="geq">:</span> <span class="nt">AssignmentExpression</span></span></p>
+        class="nt">PropertyName</span> <code class="t">:</code> <span class="nt">AssignmentExpression</span></span></p>
 
         <ol class="proc">
           <li>Let <i>propName</i> be PropName(<i>PropertyName</i>).</li>
@@ -9976,13 +9976,13 @@
     <div class="gp">
       <div class="lhs"><span class="nt">ConditionalExpression</span> <span class="geq">:</span></div>
       <div class="rhs"><span class="nt">LogicalORExpression</span></div>
-      <div class="rhs"><span class="nt">LogicalORExpression</span> <code class="t">?</code> <span class="nt">AssignmentExpression</span> <span class="geq">:</span> <span class="nt">AssignmentExpression</span></div>
+      <div class="rhs"><span class="nt">LogicalORExpression</span> <code class="t">?</code> <span class="nt">AssignmentExpression</span> <code class="t">:</code> <span class="nt">AssignmentExpression</span></div>
     </div>
 
     <div class="gp">
       <div class="lhs"><span class="nt">ConditionalExpressionNoIn</span> <span class="geq">:</span></div>
       <div class="rhs"><span class="nt">LogicalORExpressionNoIn</span></div>
-      <div class="rhs"><span class="nt">LogicalORExpressionNoIn</span> <code class="t">?</code> <span class="nt">AssignmentExpression</span> <span class="geq">:</span> <span class="nt">AssignmentExpressionNoIn</span></div>
+      <div class="rhs"><span class="nt">LogicalORExpressionNoIn</span> <code class="t">?</code> <span class="nt">AssignmentExpression</span> <code class="t">:</code> <span class="nt">AssignmentExpressionNoIn</span></div>
     </div>
 
     <p>The semantics of the <span class="nt">ConditionalExpressionNoIn</span> production is the same as the <span
@@ -10002,8 +10002,8 @@
     <p><b>Runtime Semantics: Evaluation</b></p>
 
     <p><span class="prod"><span class="nt">ConditionalExpression</span> <span class="geq">:</span> <span
-    class="nt">LogicalORExpression</span> <code class="t">?</code> <span class="nt">AssignmentExpression</span> <span
-    class="geq">:</span> <span class="nt">AssignmentExpression</span></span></p>
+    class="nt">LogicalORExpression</span> <code class="t">?</code> <span class="nt">AssignmentExpression</span> <code
+    class="t">:</code> <span class="nt">AssignmentExpression</span></span></p>
 
     <ol class="proc">
       <li>Let <i>lref</i> be the result of evaluating <i>LogicalORExpression</i>.</li>
@@ -10216,7 +10216,7 @@
       <div class="gp">
         <div class="lhs"><span class="nt">AssignmentProperty</span> <span class="geq">:</span></div>
         <div class="rhs"><span class="nt">Identifier</span></div>
-        <div class="rhs"><span class="nt">PropertyName</span> <span class="geq">:</span> <span class="nt">LeftHandSideExpression</span></div>
+        <div class="rhs"><span class="nt">PropertyName</span> <code class="t">:</code> <span class="nt">LeftHandSideExpression</span></div>
       </div>
 
       <div class="gp">
@@ -10235,7 +10235,7 @@
         <p><b>Static Semantics:  Early Errors</b></p>
 
         <p><span class="prod"><span class="nt">AssignmentProperty</span> <span class="geq">:</span> <span
-        class="nt">PropertyName</span> <span class="geq">:</span> <span class="nt">LeftHandSideExpression</span></span></p>
+        class="nt">PropertyName</span> <code class="t">:</code> <span class="nt">LeftHandSideExpression</span></span></p>
 
         <p><span class="prod"><span class="nt">AssignmentElement</span> <span class="geq">:</span> <span
         class="nt">LeftHandSideExpression</span></span></p>
@@ -10390,7 +10390,7 @@
         </ol>
 
         <p><span class="prod"><span class="nt">AssignmentProperty</span> <span class="geq">:</span> <span
-        class="nt">PropertyName</span> <span class="geq">:</span> <span class="nt">LeftHandSideExpression</span></span></p>
+        class="nt">PropertyName</span> <code class="t">:</code> <span class="nt">LeftHandSideExpression</span></span></p>
 
         <ol class="proc">
           <li>Let <i>name</i> be the result of evaluating <i>PropertyName</i>.</li>
@@ -11548,7 +11548,7 @@
       <div class="gp">
         <div class="lhs"><span class="nt">BindingProperty</span> <span class="geq">:</span></div>
         <div class="rhs"><span class="nt">SingleNameBinding</span></div>
-        <div class="rhs"><span class="nt">PropertyName</span> <span class="geq">:</span> <span class="nt">BindingElement</span></div>
+        <div class="rhs"><span class="nt">PropertyName</span> <code class="t">:</code> <span class="nt">BindingElement</span></div>
       </div>
 
       <div class="gp">
@@ -11706,7 +11706,7 @@
         </ol>
 
         <p><span class="prod"><span class="nt">BindingProperty</span> <span class="geq">:</span> <span
-        class="nt">PropertyName</span> <span class="geq">:</span> <span class="nt">BindingElement</span></span></p>
+        class="nt">PropertyName</span> <code class="t">:</code> <span class="nt">BindingElement</span></span></p>
 
         <ol class="proc">
           <li>Return the BoundNames of <i>BindingElement</i>.</li>
@@ -11871,7 +11871,7 @@
         </ol>
 
         <p><span class="prod"><span class="nt">BindingProperty</span> <span class="geq">:</span> <span
-        class="nt">PropertyName</span> <span class="geq">:</span> <span class="nt">BindingElement</span></span></p>
+        class="nt">PropertyName</span> <code class="t">:</code> <span class="nt">BindingElement</span></span></p>
 
         <ol class="proc">
           <li>Let <i>P</i> be the PropName of <i>PropertyName</i></li>
@@ -13242,12 +13242,12 @@
 
     <div class="gp">
       <div class="lhs"><span class="nt">CaseClause</span> <span class="geq">:</span></div>
-      <div class="rhs"><code class="t">case</code> <span class="nt">Expression</span> <span class="geq">:</span> <span class="nt">StatementList</span><sub>opt</sub></div>
+      <div class="rhs"><code class="t">case</code> <span class="nt">Expression</span> <code class="t">:</code> <span class="nt">StatementList</span><sub>opt</sub></div>
     </div>
 
     <div class="gp">
       <div class="lhs"><span class="nt">DefaultClause</span> <span class="geq">:</span></div>
-      <div class="rhs"><code class="t">default</code> <span class="geq">:</span> <span class="nt">StatementList</span><sub>opt</sub></div>
+      <div class="rhs"><code class="t">default</code> <code class="t">:</code> <span class="nt">StatementList</span><sub>opt</sub></div>
     </div>
 
     <section>
@@ -13317,15 +13317,15 @@
       </ol>
 
       <p><span class="prod"><span class="nt">CaseClause</span> <span class="geq">:</span> <code class="t">case</code> <span
-      class="nt">Expression</span> <span class="geq">:</span> <span class="nt">StatementList</span><sub>opt</sub></span></p>
+      class="nt">Expression</span> <code class="t">:</code> <span class="nt">StatementList</span><sub>opt</sub></span></p>
 
       <ol class="proc">
         <li>If the <i>StatementList</i> is present, return the LexicalDeclarations of <i>StatementList</i>.</li>
         <li>Else return a new empty <a href="#sec-8.7">List</a>.</li>
       </ol>
 
-      <p><span class="prod"><span class="nt">DefaultClause</span> <span class="geq">:</span> <code class="t">default</code> <span
-      class="geq">:</span> <span class="nt">StatementList</span><sub>opt</sub></span></p>
+      <p><span class="prod"><span class="nt">DefaultClause</span> <span class="geq">:</span> <code class="t">default</code> <code
+      class="t">:</code> <span class="nt">StatementList</span><sub>opt</sub></span></p>
 
       <ol class="proc">
         <li>If the <i>StatementList</i> is present, return the LexicalDeclarations of <i>StatementList</i>.</li>
@@ -13379,15 +13379,15 @@
       </ol>
 
       <p><span class="prod"><span class="nt">CaseClause</span> <span class="geq">:</span> <code class="t">case</code> <span
-      class="nt">Expression</span> <span class="geq">:</span> <span class="nt">StatementList</span><sub>opt</sub></span></p>
+      class="nt">Expression</span> <code class="t">:</code> <span class="nt">StatementList</span><sub>opt</sub></span></p>
 
       <ol class="proc">
         <li>If the <i>StatementList</i> is present, return the LexicallyDeclaredNames of <i>StatementList</i>.</li>
         <li>Else return a new empty <a href="#sec-8.7">List</a>.</li>
       </ol>
 
-      <p><span class="prod"><span class="nt">DefaultClause</span> <span class="geq">:</span> <code class="t">default</code> <span
-      class="geq">:</span> <span class="nt">StatementList</span><sub>opt</sub></span></p>
+      <p><span class="prod"><span class="nt">DefaultClause</span> <span class="geq">:</span> <code class="t">default</code> <code
+      class="t">:</code> <span class="nt">StatementList</span><sub>opt</sub></span></p>
 
       <ol class="proc">
         <li>If the <i>StatementList</i> is present, return the LexicallyDeclaredNames of <i>StatementList</i>.</li>
@@ -13448,15 +13448,15 @@
       </ol>
 
       <p><span class="prod"><span class="nt">CaseClause</span> <span class="geq">:</span> <code class="t">case</code> <span
-      class="nt">Expression</span> <span class="geq">:</span> <span class="nt">StatementList</span><sub>opt</sub></span></p>
+      class="nt">Expression</span> <code class="t">:</code> <span class="nt">StatementList</span><sub>opt</sub></span></p>
 
       <ol class="proc">
         <li>If the <i>StatementList</i> is present, return the VarDeclaredNames of <i>StatementList</i>.</li>
         <li>Else return a new empty <a href="#sec-8.7">List</a>.</li>
       </ol>
 
-      <p><span class="prod"><span class="nt">DefaultClause</span> <span class="geq">:</span> <code class="t">default</code> <span
-      class="geq">:</span> <span class="nt">StatementList</span><sub>opt</sub></span></p>
+      <p><span class="prod"><span class="nt">DefaultClause</span> <span class="geq">:</span> <code class="t">default</code> <code
+      class="t">:</code> <span class="nt">StatementList</span><sub>opt</sub></span></p>
 
       <ol class="proc">
         <li>If the <i>StatementList</i> is present, return the VarDeclaredNames of <i>StatementList</i>.</li>
@@ -13642,7 +13642,7 @@
       </div>
 
       <p><span class="prod"><span class="nt">CaseClause</span> <span class="geq">:</span> <code class="t">case</code> <span
-      class="nt">Expression</span> <span class="geq">:</span> <span class="nt">StatementList</span><sub>opt</sub></span></p>
+      class="nt">Expression</span> <code class="t">:</code> <span class="nt">StatementList</span><sub>opt</sub></span></p>
 
       <ol class="proc">
         <li>Let <i>exprRef</i> be the result of evaluating <i>Expression</i>.</li>
@@ -13664,7 +13664,7 @@
 
     <div class="gp">
       <div class="lhs"><span class="nt">LabelledStatement</span> <span class="geq">:</span></div>
-      <div class="rhs"><span class="nt">Identifier</span> <span class="geq">:</span> <span class="nt">Statement</span></div>
+      <div class="rhs"><span class="nt">Identifier</span> <code class="t">:</code> <span class="nt">Statement</span></div>
     </div>
 
     <div class="note">
@@ -13695,7 +13695,7 @@
       <p><b>Static Semantics:  VarDeclaredNames</b></p>
 
       <p><span class="prod"><span class="nt">LabelledStatement</span> <span class="geq">:</span> <span
-      class="nt">Identifier</span> <span class="geq">:</span> <span class="nt">Statement</span></span></p>
+      class="nt">Identifier</span> <code class="t">:</code> <span class="nt">Statement</span></span></p>
 
       <ol class="proc">
         <li>Return the VarDeclaredNames of <i>Statement</i>.</li>
@@ -13710,7 +13710,7 @@
       <p>With argument <var>labelSet</var>.</p>
 
       <p><span class="prod"><span class="nt">LabelledStatement</span> <span class="geq">:</span> <span
-      class="nt">Identifier</span> <span class="geq">:</span> <span class="nt">Statement</span></span></p>
+      class="nt">Identifier</span> <code class="t">:</code> <span class="nt">Statement</span></span></p>
 
       <ol class="proc">
         <li>Let <i>label</i> be the StringValue of <i>Identifier</i>.</li>
@@ -13740,7 +13740,7 @@
       <p><b>Runtime Semantics: Evaluation</b></p>
 
       <p><span class="prod"><span class="nt">LabelledStatement</span> <span class="geq">:</span> <span
-      class="nt">Identifier</span> <span class="geq">:</span> <span class="nt">Statement</span></span></p>
+      class="nt">Identifier</span> <code class="t">:</code> <span class="nt">Statement</span></span></p>
 
       <ol class="proc">
         <li>Let <i>newLabelSet</i>  be a new empty <a href="#sec-8.7">List</a>.</li>
@@ -15062,7 +15062,7 @@
 
       <div class="gp">
         <div class="lhs"><span class="nt">uriReserved</span> <span class="geq">:::</span> <span class="grhsmod">one of</span></div>
-        <div class="rhs"><code class="t">;</code> <code class="t">/</code> <code class="t">?</code> <span class="geq">:</span> <code class="t">@</code> <code class="t">&amp;</code> <code class="t">=</code> <code class="t">+</code> <code class="t">$</code> <code class="t">,</code></div>
+        <div class="rhs"><code class="t">;</code> <code class="t">/</code> <code class="t">?</code> <code class="t">:</code> <code class="t">@</code> <code class="t">&amp;</code> <code class="t">=</code> <code class="t">+</code> <code class="t">$</code> <code class="t">,</code></div>
       </div>
 
       <div class="gp">
@@ -21879,7 +21879,7 @@
         <div class="rhs"><code class="t">\</code> <span class="nt">AtomEscape</span></div>
         <div class="rhs"><span class="nt">CharacterClass</span></div>
         <div class="rhs"><code class="t">(</code> <span class="nt">Disjunction</span> <code class="t">)</code></div>
-        <div class="rhs"><code class="t">(</code> <code class="t">?</code> <span class="geq">:</span> <span class="nt">Disjunction</span> <code class="t">)</code></div>
+        <div class="rhs"><code class="t">(</code> <code class="t">?</code> <code class="t">:</code> <span class="nt">Disjunction</span> <code class="t">)</code></div>
       </div>
 
       <div class="gp">
@@ -22692,7 +22692,7 @@
         </ol>
 
         <p>The production <span class="prod"><span class="nt">Atom</span> <span class="geq">::</span> <code class="t">(</code>
-        <code class="t">?</code> <span class="geq">:</span> <span class="nt">Disjunction</span> <code class="t">)</code></span>
+        <code class="t">?</code> <code class="t">:</code> <span class="nt">Disjunction</span> <code class="t">)</code></span>
         evaluates by evaluating <span class="nt">Disjunction</span> to obtain a Matcher and returning that Matcher.</p>
 
         <p>The abstract operation <span class="nt">CharacterSetMatcher</span> takes two arguments, a CharSet <var>A</var> and a
@@ -24050,7 +24050,7 @@
 
         <div class="gp">
           <div class="lhs"><span class="nt">JSONMember</span> <span class="geq">:</span></div>
-          <div class="rhs"><span class="nt">JSONString</span> <span class="geq">:</span> <span class="nt">JSONValue</span></div>
+          <div class="rhs"><span class="nt">JSONString</span> <code class="t">:</code> <span class="nt">JSONValue</span></div>
         </div>
 
         <div class="gp">
@@ -25492,7 +25492,7 @@
     <div class="gp">
       <div class="gsumxref"><a href="#sec-11.1.5">See 11.1.5</a></div>
       <div class="lhs"><span class="nt">PropertyAssignment</span> <span class="geq">:</span> </div>
-      <div class="rhs"><span class="nt">PropertyName</span> <span class="geq">:</span> <span class="nt">AssignmentExpression</span></div>
+      <div class="rhs"><span class="nt">PropertyName</span> <code class="t">:</code> <span class="nt">AssignmentExpression</span></div>
       <div class="rhs"><code class="t">get</code> <span class="nt">PropertyName</span> <code class="t">(</code> <code class="t">)</code> <code class="t">{</code> <span class="nt">FunctionBody</span> <code class="t">}</code></div>
       <div class="rhs"><code class="t">set</code> <span class="nt">PropertyName</span> <code class="t">(</code> <span class="nt">PropertySetParameterList</span> <code class="t">)</code> <code class="t">{</code> <span class="nt">FunctionBody</span> <code class="t">}</code></div>
     </div>
@@ -25724,14 +25724,14 @@
       <div class="gsumxref"><a href="#sec-11.12">See 11.12</a></div>
       <div class="lhs"><span class="nt">ConditionalExpression</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">LogicalORExpression</span></div>
-      <div class="rhs"><span class="nt">LogicalORExpression</span> <code class="t">?</code> <span class="nt">AssignmentExpression</span> <span class="geq">:</span> <span class="nt">AssignmentExpression</span></div>
+      <div class="rhs"><span class="nt">LogicalORExpression</span> <code class="t">?</code> <span class="nt">AssignmentExpression</span> <code class="t">:</code> <span class="nt">AssignmentExpression</span></div>
     </div>
 
     <div class="gp">
       <div class="gsumxref"><a href="#sec-11.12">See 11.12</a></div>
       <div class="lhs"><span class="nt">ConditionalExpressionNoIn</span> <span class="geq">:</span> </div>
       <div class="rhs"><span class="nt">LogicalORExpressionNoIn</span></div>
-      <div class="rhs"><span class="nt">LogicalORExpressionNoIn</span> <code class="t">?</code> <span class="nt">AssignmentExpression</span> <span class="geq">:</span> <span class="nt">AssignmentExpressionNoIn</span></div>
+      <div class="rhs"><span class="nt">LogicalORExpressionNoIn</span> <code class="t">?</code> <span class="nt">AssignmentExpression</span> <code class="t">:</code> <span class="nt">AssignmentExpressionNoIn</span></div>
     </div>
 
     <div class="gp">
@@ -25948,19 +25948,19 @@
     <div class="gp">
       <div class="gsumxref"><a href="#sec-12.11">See 12.11</a></div>
       <div class="lhs"><span class="nt">CaseClause</span> <span class="geq">:</span> </div>
-      <div class="rhs"><code class="t">case</code> <span class="nt">Expression</span> <span class="geq">:</span> <span class="nt">StatementList</span><sub>opt</sub></div>
+      <div class="rhs"><code class="t">case</code> <span class="nt">Expression</span> <code class="t">:</code> <span class="nt">StatementList</span><sub>opt</sub></div>
     </div>
 
     <div class="gp">
       <div class="gsumxref"><a href="#sec-12.11">See 12.11</a></div>
       <div class="lhs"><span class="nt">DefaultClause</span> <span class="geq">:</span> </div>
-      <div class="rhs"><code class="t">default</code> <span class="geq">:</span> <span class="nt">StatementList</span><sub>opt</sub></div>
+      <div class="rhs"><code class="t">default</code> <code class="t">:</code> <span class="nt">StatementList</span><sub>opt</sub></div>
     </div>
 
     <div class="gp">
       <div class="gsumxref"><a href="#sec-12.12">See 12.12</a></div>
       <div class="lhs"><span class="nt">LabelledStatement</span> <span class="geq">:</span> </div>
-      <div class="rhs"><span class="nt">Identifier</span> <span class="geq">:</span> <span class="nt">Statement</span></div>
+      <div class="rhs"><span class="nt">Identifier</span> <code class="t">:</code> <span class="nt">Statement</span></div>
     </div>
 
     <div class="gp">
@@ -26072,7 +26072,7 @@
     <div class="gp">
       <div class="gsumxref"><a href="#sec-15.1.3">See 15.1.3</a></div>
       <div class="lhs"><span class="nt">uriReserved</span> <span class="geq">:::</span> <span class="grhsmod">one of</span> </div>
-      <div class="rhs"><code class="t">;</code> <code class="t">/</code> <code class="t">?</code> <span class="geq">:</span> <code class="t">@</code> <code class="t">&amp;</code> <code class="t">=</code> <code class="t">+</code> <code class="t">$</code> <code class="t">,</code></div>
+      <div class="rhs"><code class="t">;</code> <code class="t">/</code> <code class="t">?</code> <code class="t">:</code> <code class="t">@</code> <code class="t">&amp;</code> <code class="t">=</code> <code class="t">+</code> <code class="t">$</code> <code class="t">,</code></div>
     </div>
 
     <div class="gp">
@@ -26171,7 +26171,7 @@
       <div class="rhs"><code class="t">\</code> <span class="nt">AtomEscape</span></div>
       <div class="rhs"><span class="nt">CharacterClass</span></div>
       <div class="rhs"><code class="t">(</code> <span class="nt">Disjunction</span> <code class="t">)</code></div>
-      <div class="rhs"><code class="t">(</code> <code class="t">?</code> <span class="geq">:</span> <span class="nt">Disjunction</span> <code class="t">)</code></div>
+      <div class="rhs"><code class="t">(</code> <code class="t">?</code> <code class="t">:</code> <span class="nt">Disjunction</span> <code class="t">)</code></div>
     </div>
 
     <div class="gp">
@@ -26388,7 +26388,7 @@
       <div class="gp">
         <div class="gsumxref"><a href="#sec-15.12.1.2">See 15.12.1.2</a></div>
         <div class="lhs"><span class="nt">JSONMember</span> <span class="geq">:</span> </div>
-        <div class="rhs"><span class="nt">JSONString</span> <span class="geq">:</span> <span class="nt">JSONValue</span></div>
+        <div class="rhs"><span class="nt">JSONString</span> <code class="t">:</code> <span class="nt">JSONValue</span></div>
       </div>
 
       <div class="gp">

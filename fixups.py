@@ -1246,6 +1246,8 @@ def fixup_grammar_post(doc):
         xref = None
         markup = []
 
+        make_geq = cls in ('lhs', 'prod')
+
         i = 0
         while i < len(text):
             m = syntax_token_re.match(text, i)
@@ -1291,8 +1293,9 @@ def fixup_grammar_post(doc):
                 else:
                     parts = [token]
                 markup.append(html.span(*parts, class_='grhsannot'))
-            elif token and token.rstrip(':') == '':
+            elif make_geq and token and token.rstrip(':') == '':
                 markup.append(html.span(token, class_='geq'))
+                make_geq = False
             elif token.startswith('<') and token.endswith('>'):
                 if markup:
                     markup[-1] += token
