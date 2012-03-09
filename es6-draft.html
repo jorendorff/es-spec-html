@@ -1571,17 +1571,16 @@
     <p><span class="nh">NOTE</span> There are no syntactic grammar contexts where both a leading division or division-assignment,
     and a leading <span class="nt">RegularExpressionLiteral</span> are permitted. This is not affected by <a
     href="#sec-7.9">semicolon insertion (see 7.9)</a>; in examples such as the following:</p>
-  </div>
 
-  <p><code>a = b<br>/hi/g.exec(c).map(d);</code></p>
+    <pre>a = b
+/hi/g.exec(c).map(d);</pre>
 
-  <div class="note">
     <p>where the first non-whitespace, non-comment character after a <span class="nt">LineTerminator</span> is slash
     (<code>/</code>) and the syntactic context allows division or division-assignment, no semicolon is inserted at the <span
     class="nt">LineTerminator</span>. That is, the above example is interpreted in the same way as:</p>
-  </div>
 
-  <p><code>a = b / hi / g.exec(c).map(d);</code></p>
+    <pre>a = b / hi / g.exec(c).map(d);</pre>
+  </div>
 
   <h2>Syntax</h2>
 
@@ -1704,7 +1703,7 @@
         </tr>
         <tr>
           <td>
-            <p><code>\uFEFF</code></p>
+            <pre>\uFEFF</pre>
 
             <p>Other category &ldquo;Zs&rdquo;</p>
           </td>
@@ -10078,13 +10077,11 @@
         class="nt">StatementList</span> is the value of the last value producing <i>Statement</i> in the <span
         class="nt">StatementList</span>.  For example, the following calls to the <code>eval</code> function all return the value
         1:</p>
+
+        <pre>eval("1;;;;;")</pre>
+        <pre>eval("1;{}")</pre>
+        <pre>eval("1;var a;")</pre>
       </div>
-
-      <p><code>eval("1;;;;;")</code></p>
-
-      <p><code>eval("1;{}")</code></p>
-
-      <p><code>eval("1;var a;")</code></p>
 
       <p><span class="nt">StatementListItem</span> <b>:</b> <span class="nt">Statement</span></p>
 
@@ -17366,11 +17363,12 @@
         <var>separator</var> is matched the results (including any <b>undefined</b> results) of the capturing parentheses are
         spliced into the output array. For&nbsp;example,</p>
 
-        <p><code>"A&lt;B&gt;bold&lt;/B&gt;and&lt;CODE&gt;coded&lt;/CODE&gt;".split(/&lt;(\/)?([^&lt;&gt;]+)&gt;/)</code></p>
+        <pre>"A&lt;B&gt;bold&lt;/B&gt;and&lt;CODE&gt;coded&lt;/CODE&gt;".split(/&lt;(\/)?([^&lt;&gt;]+)&gt;/)</pre>
 
         <p>evaluates to the array</p>
 
-        <p><code>["A", undefined, "B", "bold", "/", "B", "and", undefined,<br> "CODE", "coded", "/", "CODE", ""]</code></p>
+        <pre>["A", undefined, "B", "bold", "/", "B", "and", undefined,
+ "CODE", "coded", "/", "CODE", ""]</pre>
 
         <p>If <var>separator</var> is <b>undefined</b>, then the result array contains just one String, which is the <b>this</b>
         value (converted to a String). If <var>limit</var> is not <b>undefined</b>, then the output array is truncated so that it
@@ -19014,13 +19012,17 @@
         <div class="note">
           <p>This format includes date-only forms:</p>
 
-          <p><code>YYYY<br>YYYY-MM<br>YYYY-MM-DD</code></p>
+          <pre>YYYY
+YYYY-MM
+YYYY-MM-DD</pre>
         </div>
 
         <p>It also includes &ldquo;date-time&rdquo; forms that consist of one of the above date-only forms immediately followed by
         one of the following time forms with an optional time zone offset appended:</p>
 
-        <p><code>THH:mm<br>THH:mm:ss<br>THH:mm:ss.sss</code></p>
+        <pre>THH:mm
+THH:mm:ss
+THH:mm:ss.sss</pre>
 
         <p>All numbers must be base <span style="font-family: Times New Roman">10</span>. If the <code>MM</code> or
         <code>DD</code> fields are absent &ldquo;<code>01</code>&rdquo; is used as the value. If the <code>HH</code>,

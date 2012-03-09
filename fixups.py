@@ -606,7 +606,7 @@ def fixup_tables(doc):
     Also, OOXML puts all table cell content in paragraphs; strip out the extra
     <p></p> tags.
 
-    Precedes fixup_code, which converts p elements containing only code into
+    Precedes fixup_pre, which converts p elements containing only code into
     pre elements; we don't want code elements in tables to handled that way.
     """
     for td in findall(doc, 'td'):
@@ -643,27 +643,30 @@ def fixup_tables(doc):
                 if not span.attrs and not span.style:
                     td.content = span.content
 
-def fixup_code(doc):
-    """ Merge adjacent code elements. Convert p elements containing only code elements to pre.
+def fixup_pre(doc):
+    """ Convert p elements containing only monospace font to pre.
 
     Precedes fixup_notes, which considers pre elements to be part of notes.
     """
 
     for e in findall(doc, 'p'):
-        if len(e.content) == 1 and ht_name_is(e.content[0], 'code'):
-            code = e.content[0]
-            s = ''
-            for k in code.content:
-                if isinstance(k, str):
-                    s += k
-                elif k.name == 'br':
-                    s += '\n'
-                else:
-                    s = None
-                    break
-            if s is not None:
-                e.name = 'pre'
-                e.content[:] = [s]
+        if len(e.content) == 1:
+            [span] = e.content
+            if ht_name_is(span, 'span') and span.style and span.style.get('font-family') == 'monospace':
+                print(e)
+                code = e.content[0]
+                s = ''
+                for k in code.content:
+                    if isinstance(k, str):
+                        s += k
+                    elif k.name == 'br':
+                        s += '\n'
+                    else:
+                        s = None
+                        break
+                if s is not None:
+                    e.name = 'pre'
+                    e.content[:] = [s]
 
 def fixup_notes(doc):
     """ Wrap each NOTE in div.note and wrap the labels "NOTE", "NOTE 2", etc. in span.nh. """
@@ -853,7 +856,7 @@ def fixup_list_paragraphs(doc):
                 while i > 0 and is_block(li.content[i - 1]):
                     i -= 1
                 li.content[:i] = [html.p(*li.content[:i])]
-
+<
 def fixup_picts(doc):
     """ Replace Figure 1 with canned HTML. Remove div.w-pict elements. """
     def walk(e):
@@ -1508,7 +1511,7 @@ def fixup(docx, doc):
     fixup_hr(doc)
     fixup_strip_toc(doc)
     fixup_tables(doc)
-    fixup_code(doc)
+    fixup_pre(doc)
     fixup_notes(doc)
     fixup_7_9_1(doc, docx)
     fixup_lists(doc, docx)
