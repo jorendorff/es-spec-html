@@ -574,51 +574,6 @@ def fixup_strip_toc(doc):
     i1, next_hr = hr_iterator.__next__()
     body.content[i0: i1 + 1] = [toc]
 
-def fixup_generate_toc(doc):
-    """ Generate a table of contents from the section headings. """
-
-    def make_toc_list(e, depth=0):
-        sublist = []
-        for _, sect in e.kids("section"):
-            if sect.attrs.get('id') != 'contents':
-                sect_item = make_toc_for(sect, depth + 1)
-                if sect_item:
-                    sublist.append(html.li(*sect_item))
-        if sublist:
-            return [html.ol(*sublist, class_="toc")]
-        else:
-            return []
-
-    def make_toc_for(sect, depth):
-        if not sect.content:
-            return []
-        h1 = sect.content[0]
-        if isinstance(h1, str) or h1.name != 'h1' or h1.content in (['Static Semantics'], ['Runtime Semantics']):
-            return []
-
-        output = []
-
-        # Copy the content of the header.
-        # TODO - make this clone enough to rip out the h1>span>a title= attribute
-        # TODO - make a link when there isn't one
-        output += h1.content[:]  # shallow copy, nodes may appear in tree multiple times
-
-        # Find any subsections.
-        if depth < 3:
-            output += make_toc_list(sect, depth)
-
-        return output
-
-    body = doc_body(doc)
-    for i, section in body.kids('section'):
-        if section.attrs.get('id') == 'contents':
-            break
-    else:
-        raise ValueError("Cannot find body>section#contents.")
-
-    assert not section.content
-    section.content = [html.h1("Contents")] + make_toc_list(doc_body(doc))
-
 def fixup_tables(doc):
     """ Turn highlighted td elements into th elements.
 
@@ -814,10 +769,8 @@ def fixup_lists(e, docx):
     """
 
     if e.name in ('ol', 'ul'):
-        # This is already a list. It is the table of contents, actually.
-        # Skip it.
-        if e.attrs.get("class") != 'toc':
-            warn("list already exists in fixup_lists: " + repr(e)[:300])
+        # Unexpected. Don't rewire an existing list.
+        warn("list already exists in fixup_lists: " + repr(e)[:300])
         return
 
     have_list_items = False
@@ -1654,6 +1607,51 @@ def fixup_grammar_post(doc):
             [syntax] = child.content
             [result] = markup_syntax(syntax.strip(), 'prod')
             child.content = result.content
+
+def fixup_generate_toc(doc):
+    """ Generate a table of contents from the section headings. """
+
+    def make_toc_list(e, depth=0):
+        sublist = []
+        for _, sect in e.kids("section"):
+            if sect.attrs.get('id') != 'contents':
+                sect_item = make_toc_for(sect, depth + 1)
+                if sect_item:
+                    sublist.append(html.li(*sect_item))
+        if sublist:
+            return [html.ol(*sublist, class_="toc")]
+        else:
+            return []
+
+    def make_toc_for(sect, depth):
+        if not sect.content:
+            return []
+        h1 = sect.content[0]
+        if isinstance(h1, str) or h1.name != 'h1' or h1.content in (['Static Semantics'], ['Runtime Semantics']):
+            return []
+
+        output = []
+
+        # Copy the content of the header.
+        # TODO - make this clone enough to rip out the h1>span>a title= attribute
+        # TODO - make a link when there isn't one
+        output += h1.content[:]  # shallow copy, nodes may appear in tree multiple times
+
+        # Find any subsections.
+        if depth < 3:
+            output += make_toc_list(sect, depth)
+
+        return output
+
+    body = doc_body(doc)
+    for i, section in body.kids('section'):
+        if section.attrs.get('id') == 'contents':
+            break
+    else:
+        raise ValueError("Cannot find body>section#contents.")
+
+    assert not section.content
+    section.content = [html.h1("Contents")] + make_toc_list(doc_body(doc))
 
 def fixup_add_disclaimer(doc):
     div = html.div
