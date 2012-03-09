@@ -1423,17 +1423,17 @@
     For example:</p>
 
     <ol class="proc">
-      <li><span style="font-family: Times New Roman">Top-level step</span>
+      <li>Top-level step
         <ol class="block">
-          <li><span style="font-family: Times New Roman">Substep.</span></li>
-          <li><span style="font-family: Times New Roman">Substep</span>
+          <li>Substep.</li>
+          <li>Substep
             <ol class="block">
-              <li><span style="font-family: Times New Roman">Subsubstep.</span></li>
-              <li><span style="font-family: Times New Roman">Subsubstep.</span>
+              <li>Subsubstep.</li>
+              <li>Subsubstep.
                 <ol class="block">
-                  <li><span style="font-family: Times New Roman">Subsubsubstep</span>
+                  <li>Subsubsubstep
                     <ol class="block">
-                      <li><span style="font-family: Times New Roman">Subsubsubsubstep</span></li>
+                      <li>Subsubsubsubstep</li>
                     </ol>
                   </li>
                 </ol>
@@ -1638,19 +1638,19 @@
           <td><code>\u200C</code></td>
           <td>Zero width non-joiner</td>
           <td>&lt;ZWNJ&gt;</td>
-          <td><span class="nt">IdentifierPart</span></td>
+          <td><i>IdentifierPart</i></td>
         </tr>
         <tr>
           <td><code>\u200D</code></td>
           <td>Zero width joiner</td>
           <td>&lt;ZWJ&gt;</td>
-          <td><span class="nt">IdentifierPart</span></td>
+          <td><i>IdentifierPart</i></td>
         </tr>
         <tr>
           <td><code>\uFEFF</code></td>
           <td>Byte Order Mark</td>
           <td>&lt;BOM&gt;</td>
-          <td><span class="nt">Whitespace</span></td>
+          <td><i>Whitespace</i></td>
         </tr>
       </table>
     </figure>
@@ -1989,8 +1989,8 @@
 
     <p><b>Static Semantics:  <span class="nt">String</span> <span class="nt">Value</span></b></p>
 
-    <p><span class="prod"><span class="nt">Identifier</span> <span class="geq">::</span> <span class="nt">IdentifierName</span>
-    <span class="grhsmod">but not</span> <span class="nt">ReservedWord</span></span></p>
+    <p><span class="prod"><span class="nt">Identifier</span> <span class="geq">::</span> <span
+    class="nt">IdentifierName</span></span><span style="font-family: sans-serif"><b>but not</b></span> <i>ReservedWord</i></p>
 
     <ol class="proc">
       <li>Return the String Value of <i>IdentifierName</i>.</li>
@@ -3051,14 +3051,14 @@
       <p>There are three basic rules of semicolon insertion:</p>
 
       <ol class="proc">
-        <li><span style="font-family: sans-serif">When, as the program is parsed from left to right, a token (called the <i>offending token</i>) is encountered that is not allowed by any production of the grammar, then a semicolon is automatically inserted before the offending token if one or more of the following conditions is true:</span>
+        <li>When, as the program is parsed from left to right, a token (called the <i>offending token</i>) is encountered that is not allowed by any production of the grammar, then a semicolon is automatically inserted before the offending token if one or more of the following conditions is true:
           <ul>
             <li>The offending token is separated from the previous token by at least one <span class="nt">LineTerminator</span>.</li>
             <li>The offending token is <code>}</code>.</li>
           </ul>
         </li>
-        <li><span style="font-family: sans-serif">When, as the program is parsed from left to right, the end of the input stream of tokens is encountered and the parser is unable to parse the input token stream as a single complete ECMAScript</span> <i>Program</i><span style="font-family: sans-serif">, then a semicolon is automatically inserted at the end of the input stream.</span></li>
-        <li><span style="font-family: sans-serif">When, as the program is parsed from left to right, a token is encountered that is allowed by some production of the grammar, but the production is a <i>restricted production</i> and the token would be the first token for a terminal or nonterminal immediately following the annotation</span> &ldquo;<span style="font-family: sans-serif">[no</span> <i>LineTerminator</i> <span style="font-family: sans-serif">here]</span>&rdquo; <span style="font-family: sans-serif">within the restricted production (and therefore such a token is called a restricted token), and the restricted token is separated from the previous token by at least one</span> <i>LineTerminator</i><span style="font-family: sans-serif">, then a semicolon is automatically inserted before the restricted token.</span></li>
+        <li>When, as the program is parsed from left to right, the end of the input stream of tokens is encountered and the parser is unable to parse the input token stream as a single complete ECMAScript <span class="nt">Program</span>, then a semicolon is automatically inserted at the end of the input stream.</li>
+        <li>When, as the program is parsed from left to right, a token is encountered that is allowed by some production of the grammar, but the production is a <i>restricted production</i> and the token would be the first token for a terminal or nonterminal immediately following the annotation <span style="font-family: Times New Roman">&ldquo;</span>[no <i>LineTerminator</i> here]<span style="font-family: Times New Roman">&rdquo;</span> within the restricted production (and therefore such a token is called a restricted token), and the restricted token is separated from the previous token by at least one <span class="nt">LineTerminator</span>, then a semicolon is automatically inserted before the restricted token.</li>
       </ol>
 
       <p>However, there is an additional overriding condition on the preceding rules: a semicolon is never inserted automatically
@@ -3868,17 +3868,17 @@
           <th>Meaning</th>
         </tr>
         <tr>
-          <td><span style="font-family: Times New Roman">[[type]]</span></td>
+          <td>[[type]]</td>
           <td>One of <b>normal</b>, <b>break</b>, <b>continue</b>, <b>return</b>, or <b>throw</b></td>
           <td>The type of completion that occurred.</td>
         </tr>
         <tr>
-          <td><span style="font-family: Times New Roman">[[value]]</span></td>
+          <td>[[value]]</td>
           <td>any ECMAScript language value or <b>empty</b></td>
           <td>The value that was produced.</td>
         </tr>
         <tr>
-          <td><span style="font-family: Times New Roman">[[target]]</span></td>
+          <td>[[target]]</td>
           <td>any ECMAScript identifier or <b>empty</b></td>
           <td>The target label for directed control transfers.</td>
         </tr>
@@ -3909,9 +3909,9 @@
     <p>The abstraction operation NormalValue with a single <i>argument</i> is a short hand that is defined as follows:</p>
 
     <ol class="proc">
-      <li><span style="font-family: Times New Roman">If <i>argument</i> is not a Completion Record, return <i>argument</i>.</span></li>
-      <li><span style="font-family: Times New Roman">If <i>argument</i> is an abrupt completion, return <i>argument</i>.</span></li>
-      <li><span style="font-family: Times New Roman">Return</span> <span style="font-family: Times New Roman"><i>argument</i>.[[value]].</span></li>
+      <li>If <i>argument</i> is not a Completion Record, return <i>argument</i>.</li>
+      <li>If <i>argument</i> is an abrupt completion, return <i>argument</i>.</li>
+      <li>Return <i>argument</i>.[[value]].</li>
     </ol>
 
     <p>The abstraction operation NormalCompletion with a single <i>argument</i> is a short hand that is defined as follows:</p>
@@ -4157,9 +4157,9 @@
       following steps are taken:</p>
 
       <ol class="proc">
-        <li><span style="font-family: Times New Roman">If <i>Desc</i> is <b>undefined</b>, then return <b>false</b>.</span></li>
-        <li><span style="font-family: Times New Roman">If both <i>Desc</i>.[[Get]] and <i>Desc</i>.[[Set]] are absent, then return <b>false</b>.</span></li>
-        <li><span style="font-family: Times New Roman">Return <b>true</b>.</span></li>
+        <li>If <i>Desc</i> is <b>undefined</b>, then return <b>false</b>.</li>
+        <li>If both <i>Desc</i>.[[Get]] and <i>Desc</i>.[[Set]] are absent, then return <b>false</b>.</li>
+        <li>Return <b>true</b>.</li>
       </ol>
     </section>
 
@@ -4170,9 +4170,9 @@
       following steps are taken:</p>
 
       <ol class="proc">
-        <li><span style="font-family: Times New Roman">If <i>Desc</i> is <b>undefined</b>, then return <b>false</b>.</span></li>
-        <li><span style="font-family: Times New Roman">If both <i>Desc</i>.[[Value]] and <i>Desc</i>.[[Writable]] are absent, then return <b>false</b>.</span></li>
-        <li><span style="font-family: Times New Roman">Return <b>true</b>.</span></li>
+        <li>If <i>Desc</i> is <b>undefined</b>, then return <b>false</b>.</li>
+        <li>If both <i>Desc</i>.[[Value]] and <i>Desc</i>.[[Writable]] are absent, then return <b>false</b>.</li>
+        <li>Return <b>true</b>.</li>
       </ol>
     </section>
 
@@ -4183,9 +4183,9 @@
       following steps are taken:</p>
 
       <ol class="proc">
-        <li><span style="font-family: Times New Roman">If <i>Desc</i> is <b>undefined</b>, then return <b>false</b>.</span></li>
-        <li><span style="font-family: Times New Roman">If <a href="#sec-8.10.1">IsAccessorDescriptor</a>(<i>Desc</i>) and <a href="#sec-8.10.2">IsDataDescriptor</a>(<i>Desc</i>) are both <b>false</b>, then return <b>true</b>.</span></li>
-        <li><span style="font-family: Times New Roman">Return <b>false</b>.</span></li>
+        <li>If <i>Desc</i> is <b>undefined</b>, then return <b>false</b>.</li>
+        <li>If <a href="#sec-8.10.1">IsAccessorDescriptor</a>(<i>Desc</i>) and <a href="#sec-8.10.2">IsDataDescriptor</a>(<i>Desc</i>) are both <b>false</b>, then return <b>true</b>.</li>
+        <li>Return <b>false</b>.</li>
       </ol>
     </section>
 
@@ -4199,23 +4199,23 @@
       Descriptor</a>, such as that returned from [[GetOwnProperty]] (<a href="#sec-8.12.1">see 8.12.1</a>).</p>
 
       <ol class="proc">
-        <li><span style="font-family: Times New Roman">If <i>Desc</i> is <b>undefined</b>, then return <b>undefined</b>.</span></li>
-        <li><span style="font-family: Times New Roman">Let <i>obj</i> be the result of creating a new object as if by the expression <b>new Object()</b> where <b>Object</b> is the standard built-in constructor with that name.</span></li>
-        <li><span style="font-family: Times New Roman">If <a href="#sec-8.10.2">IsDataDescriptor</a>(<i>Desc</i>) is <b>true</b>, then</span>
+        <li>If <i>Desc</i> is <b>undefined</b>, then return <b>undefined</b>.</li>
+        <li>Let <i>obj</i> be the result of creating a new object as if by the expression <b>new Object()</b> where <b>Object</b> is the standard built-in constructor with that name.</li>
+        <li>If <a href="#sec-8.10.2">IsDataDescriptor</a>(<i>Desc</i>) is <b>true</b>, then
           <ol class="block">
-            <li><span style="font-family: Times New Roman">Call the [[DefineOwnProperty]] internal method of <i>obj</i> with arguments "</span><code>value</code><span style="font-family: Times New Roman">", <a href="#sec-8.10">Property Descriptor</a> {[[Value]]: <i>Desc</i>.[[Value]], [[Writable]]: <b>true</b>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}, and <b>false</b>.</span></li>
-            <li><span style="font-family: Times New Roman">Call the [[DefineOwnProperty]] internal method of <i>obj</i> with arguments "</span><code>writable</code><span style="font-family: Times New Roman">", <a href="#sec-8.10">Property Descriptor</a> {[[Value]]: <i>Desc</i>.[[Writable]], [[Writable]]: <b>true</b>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}, and <b>false</b>.</span></li>
+            <li>Call the [[DefineOwnProperty]] internal method of <i>obj</i> with arguments "<code>value</code>", <a href="#sec-8.10">Property Descriptor</a> {[[Value]]: <i>Desc</i>.[[Value]], [[Writable]]: <b>true</b>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}, and <b>false</b>.</li>
+            <li>Call the [[DefineOwnProperty]] internal method of <i>obj</i> with arguments "<code>writable</code>", <a href="#sec-8.10">Property Descriptor</a> {[[Value]]: <i>Desc</i>.[[Writable]], [[Writable]]: <b>true</b>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}, and <b>false</b>.</li>
           </ol>
         </li>
-        <li><span style="font-family: Times New Roman">Else, <a href="#sec-8.10.1">IsAccessorDescriptor</a>(<i>Desc</i>) must be <b>true</b>, so</span>
+        <li>Else, <a href="#sec-8.10.1">IsAccessorDescriptor</a>(<i>Desc</i>) must be <b>true</b>, so
           <ol class="block">
-            <li><span style="font-family: Times New Roman">Call the [[DefineOwnProperty]] internal method of <i>obj</i> with arguments "</span><code>get"</code><span style="font-family: Times New Roman">, <a href="#sec-8.10">Property Descriptor</a> {[[Value]]: <i>Desc</i>.[[Get]], [[Writable]]: <b>true</b>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}, and <b>false</b>.</span></li>
-            <li><span style="font-family: Times New Roman">Call the [[DefineOwnProperty]] internal method of <i>obj</i> with arguments "</span><code>set</code><span style="font-family: Times New Roman">", <a href="#sec-8.10">Property Descriptor</a> {[[Value]]: <i>Desc</i>.[[Set]], [[Writable]]: <b>true</b>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}, and <b>false</b>.</span></li>
+            <li>Call the [[DefineOwnProperty]] internal method of <i>obj</i> with arguments "<code>get"</code>, <a href="#sec-8.10">Property Descriptor</a> {[[Value]]: <i>Desc</i>.[[Get]], [[Writable]]: <b>true</b>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}, and <b>false</b>.</li>
+            <li>Call the [[DefineOwnProperty]] internal method of <i>obj</i> with arguments "<code>set</code>", <a href="#sec-8.10">Property Descriptor</a> {[[Value]]: <i>Desc</i>.[[Set]], [[Writable]]: <b>true</b>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}, and <b>false</b>.</li>
           </ol>
         </li>
-        <li><span style="font-family: Times New Roman">Call the [[DefineOwnProperty]] internal method of <i>obj</i> with arguments "</span><code>enumerable</code><span style="font-family: Times New Roman">", <a href="#sec-8.10">Property Descriptor</a> {[[Value]]: <i>Desc</i>.[[Enumerable]], [[Writable]]: <b>true</b>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}, and <b>false</b>.</span></li>
-        <li><span style="font-family: Times New Roman">Call the [[DefineOwnProperty]] internal method of <i>obj</i> with arguments "</span><code>configurable</code><span style="font-family: Times New Roman">", <a href="#sec-8.10">Property Descriptor</a> {[[Value]]: <i>Desc</i>.[[Configurable]], [[Writable]]: <b>true</b>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}, and <b>false</b>.</span></li>
-        <li><span style="font-family: Times New Roman">Return <i>obj</i>.</span></li>
+        <li>Call the [[DefineOwnProperty]] internal method of <i>obj</i> with arguments "<code>enumerable</code>", <a href="#sec-8.10">Property Descriptor</a> {[[Value]]: <i>Desc</i>.[[Enumerable]], [[Writable]]: <b>true</b>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}, and <b>false</b>.</li>
+        <li>Call the [[DefineOwnProperty]] internal method of <i>obj</i> with arguments "<code>configurable</code>", <a href="#sec-8.10">Property Descriptor</a> {[[Value]]: <i>Desc</i>.[[Configurable]], [[Writable]]: <b>true</b>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}, and <b>false</b>.</li>
+        <li>Return <i>obj</i>.</li>
       </ol>
     </section>
 
@@ -4757,8 +4757,8 @@
               <p>Perform the following steps:</p>
 
               <ol class="proc">
-                <li><span style="font-family: Times New Roman">Let <i>default</i> be the result of calling the [[DefaultValue]] internal method of <i>argument</i>, passing the optional hint</span> <span style="font-family: Times New Roman"><i>PreferredType</i>.</span></li>
-                <li><span style="font-family: Times New Roman">Return ToPrimitive(<i>default</i>).</span></li>
+                <li>Let <i>default</i> be the result of calling the [[DefaultValue]] internal method of <i>argument</i>, passing the optional hint <i>PreferredType</i>.</li>
+                <li>Return ToPrimitive(<i>default</i>).</li>
               </ol>
 
               <p>The behaviour of the [[DefaultValue]] internal method is defined by this specification for all native ECMAScript
@@ -4856,8 +4856,8 @@
               <p>Apply the following steps:</p>
 
               <ol class="proc">
-                <li><span style="font-family: Times New Roman">Let <i>primValue</i> be <a href="#sec-9.1.1">ToPrimitive</a>(<i>argument</i>, hint Number).</span></li>
-                <li><span style="font-family: Times New Roman">Return ToNumber(<i>primValue</i>).</span></li>
+                <li>Let <i>primValue</i> be <a href="#sec-9.1.1">ToPrimitive</a>(<i>argument</i>, hint Number).</li>
+                <li>Return ToNumber(<i>primValue</i>).</li>
               </ol>
             </td>
           </tr>
@@ -5420,10 +5420,9 @@
             <td>
               <p>Apply the following steps:</p>
 
-              <p><span style="font-family: Times New Roman">1. Let <i>primValue</i> be <a
-              href="#sec-9.1.1">ToPrimitive</a>(<i>argument</i>, hint String).</span></p>
+              <p>1. Let <i>primValue</i> be <a href="#sec-9.1.1">ToPrimitive</a>(<i>argument</i>, hint String).</p>
 
-              <p><span style="font-family: Times New Roman">2. Return ToString(<i>primValue</i>).</span></p>
+              <p>2. Return ToString(<i>primValue</i>).</p>
             </td>
           </tr>
         </table>
@@ -5468,15 +5467,12 @@
           <p><span class="nh">NOTE 2</span> For implementations that provide more accurate conversions than required by the rules
           above, it is recommended that the following alternative version of step 5 be used as a guideline:</p>
 
-          <p><span style="font-family: Times New Roman">Otherwise, let <i>n</i>, <i>k</i>, and <i>s</i> be integers such that
-          <i>k</i></span> <span style="font-family: Times New Roman">&ge; 1, 10<sup><i>k</i>&minus;1</sup></span> <span
-          style="font-family: Times New Roman">&le;</span> <span style="font-family: Times New Roman"><i>s</i> &lt;
-          10<sup><i>k</i></sup>, the Number value for <i>s</i></span> <span style="font-family: Times New Roman">&times;
-          10<sup><i>n</i>&minus;<i>k</i></sup> is <i>m</i>, and <i>k</i> is as small as possible. If there are multiple
-          possibilities for <i>s</i>, choose the value of <i>s</i> for which <i>s</i></span> <span style="font-family: Times New
-          Roman">&times; 10<sup><i>n</i>&minus;<i>k</i></sup> is closest in value to <i>m</i>. If there are two such possible
-          values of <i>s</i>, choose the one that is even. Note that <i>k</i> is the number of digits in the decimal
-          representation of <i>s</i> and that <i>s</i> is not divisible by 10.</span></p>
+          <p>Otherwise, let <i>n</i>, <i>k</i>, and <i>s</i> be integers such that <i>k</i> &ge; 1, 10<sup><i>k</i>&minus;1</sup>
+          &le; <i>s</i> &lt; 10<sup><i>k</i></sup>, the Number value for <i>s</i> &times; 10<sup><i>n</i>&minus;<i>k</i></sup> is
+          <i>m</i>, and <i>k</i> is as small as possible. If there are multiple possibilities for <i>s</i>, choose the value of
+          <i>s</i> for which <i>s</i> &times; 10<sup><i>n</i>&minus;<i>k</i></sup> is closest in value to <i>m</i>. If there are
+          two such possible values of <i>s</i>, choose the one that is even. Note that <i>k</i> is the number of digits in the
+          decimal representation of <i>s</i> and that <i>s</i> is not divisible by 10.</p>
         </div>
 
         <div class="note">
@@ -6449,7 +6445,7 @@
         <li>For each String <i>argName</i> in <i>parameterNames</i>, in list order do
           <ol class="block">
             <li>Let <i>alreadyDeclared</i> be the result of calling <i>env&rsquo;s</i> HasBinding concrete method passing <i>argName</i> as the argument.</li>
-            <li><span style="font-family: sans-serif">NOTE</span>   <span style="font-family: sans-serif">Duplicate parameter names can only occur in non-<a href="#sec-10.1.1">strict code</a>.</span></li>
+            <li>NOTE   Duplicate parameter names can only occur in non-<a href="#sec-10.1.1">strict code</a>.</li>
             <li>If <i>alreadyDeclared</i> is <b>false</b>, then
               <ol class="block">
                 <li>Call <i>env&rsquo;s</i> CreateMutableBinding concrete method passing <i>argName</i> as the argument.</li>
@@ -6472,12 +6468,12 @@
         <li>Else,
           <ol class="block">
             <li>Let <i>names</i> be BoundNames of <i>formals</i>.</li>
-            <li><span style="font-family: sans-serif">NOTE</span>&#x9;&#x9;<span style="font-family: sans-serif">Because</span> <i>F</i> <span style="font-family: sans-serif">is a none strict function it is not extended code.  Hence</span> <i>formals</i> <span style="font-family: sans-serif">does not contain the names of any destructuring</span> <i>BindingProperties</i><span style="font-family: sans-serif">, rest parameters, or parameters with default value initialisers.</span></li>
+            <li>NOTE&#x9;&#x9;Because <i>F</i> is a none strict function it is not extended code.  Hence <i>formals</i> does not contain the names of any destructuring <i>BindingProperties</i>, rest parameters, or parameters with default value initialisers.</li>
             <li>Let <i>ao</i> be the result of performing the abstract operation CreateMappedArgumentsObject with arguments <i>names</i>, <i>env</i>, and <i>argumentsList</i>.</li>
             <li>Let <i>formalStatus</i> be the result of performing Binding Initialisation for <i>formals</i> with <i>ao</i> and <b>undefined</b> as arguments.</li>
           </ol>
         </li>
-        <li><span style="font-family: sans-serif">NOTE</span>&#x9;<span style="font-family: sans-serif">Binding Initialisation for</span> <i>formals</i> <span style="font-family: sans-serif">is perform prior to to instantiating any non-parameter declarations in order to ensure that any such local declarations are not visible to any parameter Initialisation code that may be evaluated.</span></li>
+        <li>NOTE&#x9;Binding Initialisation for <i>formals</i> is perform prior to to instantiating any non-parameter declarations in order to ensure that any such local declarations are not visible to any parameter Initialisation code that may be evaluated.</li>
         <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>formalStatus</i>).</li>
         <li>For each element <i>d</i> in <i>declarations</i> do
           <ol class="block">
@@ -6503,7 +6499,7 @@
           </ol>
         </li>
         <li>Let <i>argumentsAlreadyDeclared</i> be the result of calling <i>env&rsquo;s</i> HasBinding concrete method passing <code>"arguments"</code> as the argument.</li>
-        <li><span style="font-family: sans-serif">NOTE</span>&#x9;<span style="font-family: sans-serif">If</span> <i>argumentsAlreadyDeclared</i> <span style="font-family: sans-serif">is</span> <b>true</b> <span style="font-family: sans-serif">then the value of</span> <i>ao</i> <span style="font-family: sans-serif">is not directly observable to ECMAScript code and need not actually exist. In that case,  its use in the above steps is strictly as a device for specifying formal parameter initialisation semantics.</span></li>
+        <li>NOTE&#x9;If <i>argumentsAlreadyDeclared</i> is <b>true</b> then the value of <i>ao</i> is not directly observable to ECMAScript code and need not actually exist. In that case,  its use in the above steps is strictly as a device for specifying formal parameter initialisation semantics.</li>
         <li>If <i>argumentsAlreadyDeclared</i> is <b>false</b>, then
           <ol class="block">
             <li>If <i>strict</i> is <b>true</b>, then
@@ -6523,7 +6519,7 @@
         <li>For each String <i>varName</i> in <i>varNames</i>, in list order do
           <ol class="block">
             <li>Let <i>alreadyDeclared</i> be the result of calling <i>env&rsquo;s</i> HasBinding concrete method passing <i>varName</i> as the argument.</li>
-            <li><span style="font-family: sans-serif">NOTE</span>&#x9;&#x9;<span style="font-family: sans-serif">A VarDeclaredNames</span> <span style="font-family: sans-serif">is only instantiated and initialied here if it is not also the name of a formal parameter or a</span> <i>FunctionDeclarations</i><span style="font-family: sans-serif">. Such duplicate declarations may only occur in non-extended code.</span></li>
+            <li>NOTE&#x9;&#x9;A VarDeclaredNames is only instantiated and initialied here if it is not also the name of a formal parameter or a <i>FunctionDeclarations</i>. Such duplicate declarations may only occur in non-extended code.</li>
             <li>If <i>alreadyDeclared</i> is <b>false</b>, then
               <ol class="block">
                 <li>Call <i>env&rsquo;s</i> CreateMutableBinding concrete method passing <i>varName</i> as the argument.</li>
@@ -6535,7 +6531,7 @@
         <li>Let <i>initializedFunctions</i> be an emptyList.</li>
         <li>For each <i>FunctionDeclaration</i> <i>f</i> in <i>declarations</i>, in reverse list order do
           <ol class="block">
-            <li><span style="font-family: sans-serif">NOTE</span>&#x9; <span style="font-family: sans-serif">If there are multiple</span> <i>FunctionDeclarations</i> <span style="font-family: sans-serif">for the same name, the last declaration is used. Multiple</span> <i>FunctionDeclarations</i> <span style="font-family: sans-serif">for the same name is only valid in non-extended code.</span></li>
+            <li>NOTE&#x9;&#x9;If there are multiple <i>FunctionDeclarations</i> for the same name, the last declaration is used. Multiple <i>FunctionDeclarations</i> for the same name is only valid in non-extended code.</li>
             <li>Let <i>fn</i> be the sole element of the BoundNames of <i>f.</i></li>
             <li>If <i>fn</i> is not an element of <i>initializedFunctions,</i> then
               <ol class="block">
@@ -6843,7 +6839,7 @@
 
       <div class="lhs">PrimaryExpression <span style="font-family: sans-serif"><b>:</b></span>  <code>this</code></div>
       <ol class="proc">
-        <li><span style="font-family: Times New Roman">Return the value of the <a href="#sec-10.3">ThisBinding</a> of the current execution context.</span></li>
+        <li>Return the value of the <a href="#sec-10.3">ThisBinding</a> of the current execution context.</li>
       </ol>
     </section>
 
@@ -7308,7 +7304,7 @@
         <ul>
           <li>
             <p>It is a Syntax Error if <span style="font-family: Times New Roman">BoundNames</span> of <span
-            class="nt">BindingPattern</span> contains any duplicate elements.</p>
+            class="nt">BindingPattern</span>  contains any duplicate elements.</p>
           </li>
         </ul>
 
@@ -8830,7 +8826,7 @@
             <li>Let <i>py</i> be the result of calling <a href="#sec-9.1.1">ToPrimitive</a>(<i>y</i>, hint Number).</li>
             <li>If <i>py</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>py</i>.</li>
             <li>Let <i>px</i> be the result of calling <a href="#sec-9.1.1">ToPrimitive</a>(<i>x</i>, hint Number).</li>
-            <li><span style="font-family: Times New Roman">If p<i>x</i> is an <a href="#sec-8.8">abrupt completion</a>, return p<i>x</i>.</span></li>
+            <li>If p<i>x</i> is an <a href="#sec-8.8">abrupt completion</a>, return p<i>x</i>.</li>
           </ol>
         </li>
         <li>If it is not the case that both <a href="#sec-8">Type</a>(<i>px</i>) is String and <a href="#sec-8">Type</a>(<i>py</i>) is String, then
@@ -9469,7 +9465,7 @@
       class="nt">LeftHandSideExpression</span> <code class="t">=</code> <span class="nt">AssignmentExpression</span></span></p>
 
       <ol class="proc">
-        <li><b>If <i>LeftHandSideExpression</i> is neither an <i>ObjectLiteral</i> nor an <i>ArrayLiteral</i> then</b>
+        <li><b>If <i>LeftHandSideExpression</i> is neither an <i>ObjectLiteral</i> nor an <i>ArrayLiteral</i>  then</b>
           <ol class="block">
             <li>Let <i>lref</i> be the result of evaluating <i>LeftHandSideExpression</i>.</li>
             <li>If <i>lref</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>lref</i>.</li>
@@ -9776,7 +9772,7 @@
         <p>with parameters <var>obj</var> and <var>index</var></p>
 
         <p><span class="prod"><span class="nt">AssignmentElementList</span> <span class="geq">:</span> <span
-        class="nt">Elisionopt</span> <span class="nt">AssignmentElement</span></span></p>
+        class="nt">Elision</span></span><span style="font-family: sans-serif"><sub>opt</sub></span> <i>AssignmentElement</i></p>
 
         <ol class="proc">
           <li>If <i>Elision</i> is present, then let <i>skip</i> be the result of evaluating <i>Elision</i>, otherwise let <i>skip</i> be 0.</li>
@@ -9786,8 +9782,8 @@
         </ol>
 
         <p><span class="prod"><span class="nt">AssignmentElementList</span> <span class="geq">:</span> <span
-        class="nt">AssignmentElementList</span> <code class="t">,</code> <span class="nt">Elisionopt</span> <span
-        class="nt">AssignmentElement</span></span></p>
+        class="nt">AssignmentElementList</span> <code class="t">,</code> <span class="nt">Elision</span></span><span
+        style="font-family: sans-serif"><sub>opt</sub></span> <i>AssignmentElement</i></p>
 
         <ol class="proc">
           <li>Let <i>listNext</i> be the result of performing Indexed Destructuring Assignment Evaluation of <i>AssignmentElementList</i> using <i>obj</i> as the <i>obj</i> parameter and <i>index</i> as the <i>index</i> parameter</li>
@@ -10021,7 +10017,7 @@
       <li>Return the result of evaluating the  single non-terminal symbol that is the right hand side of the production.</li>
     </ol>
 
-    <p>The <span class="nt">Declaration</span> productions are all evaluated as follows</p>
+    <p>The <span class="nt">Declaration</span>  productions are all evaluated as follows</p>
 
     <ol class="proc">
       <li>Return the result of evaluating the  single non-terminal symbol that is the right hand side of the production.</li>
@@ -10440,8 +10436,8 @@
           <li>Return <i>names</i>.</li>
         </ol>
 
-        <p><span class="prod"><span class="nt">LexicalBinding</span> <span class="geq">:</span></span><span style="font-family:
-        Times New Roman"><i>BindingIdentifier Initialiser</i><sub>opt</sub></span></p>
+        <p><span class="prod"><span class="nt">LexicalBinding</span> <span class="geq">:</span> <span
+        class="nt">BindingIdentifier</span> <span class="nt">Initialiseropt</span></span></p>
 
         <ol class="proc">
           <li>Return the Bound Names of <i>BindingIdentifier</i>.</li>
@@ -10515,7 +10511,7 @@
           <li>Return the result of performing Binding Initialisation for <i>Identifier</i> passing <i>value</i> and <i>env</i> as the arguments.</li>
         </ol>
 
-        <p><span class="nt">Token</span> <span class="nt">Identifier</span></p>
+        <p><i>Token</i> <i>Identifier</i></p>
 
         <ol class="proc">
           <li>If <i>environment</i> is not <b>undefined</b>, then
@@ -10683,8 +10679,8 @@
           <li>Return <i>names</i>.</li>
         </ol>
 
-        <p><span class="prod"><span class="nt">VariableDeclaration</span> <span class="geq">:</span></span><span
-        style="font-family: Times New Roman"><i>BindingIdentifier Initialiser</i><sub>opt</sub></span></p>
+        <p><span class="prod"><span class="nt">VariableDeclaration</span> <span class="geq">:</span> <span
+        class="nt">BindingIdentifier</span> <span class="nt">Initialiseropt</span></span></p>
 
         <ol class="proc">
           <li>Return the BoundNames of <i>BindingIdentifier</i>.</li>
@@ -10999,8 +10995,8 @@
           <li>Return the BoundNames of <i>BindingElement</i>.</li>
         </ol>
 
-        <p><span class="prod"><span class="nt">SingleNameBinding</span> <span class="geq">:</span></span><span style="font-family:
-        Times New Roman"><i>BindingIdentifier Initialiser</i><sub>opt</sub></span></p>
+        <p><span class="prod"><span class="nt">SingleNameBinding</span> <span class="geq">:</span> <span
+        class="nt">BindingIdentifier</span> <span class="nt">Initialiseropt</span></span></p>
 
         <ol class="proc">
           <li>Return the BoundNames of <i>BindingIdentifier</i>.</li>
@@ -11013,8 +11009,8 @@
           <li>Return the BoundNames of <i>SingleNameBinding</i> .</li>
         </ol>
 
-        <p><span class="prod"><span class="nt">BindingElement</span> <span class="geq">:</span></span><span style="font-family:
-        Times New Roman"><i>BindingPattern Initialiser</i><sub>opt</sub></span></p>
+        <p><span class="prod"><span class="nt">BindingElement</span> <span class="geq">:</span> <span
+        class="nt">BindingPattern</span> <span class="nt">Initialiseropt</span></span></p>
 
         <ol class="proc">
           <li>Return the BoundNames of <i>BindingPattern</i>.</li>
@@ -11211,7 +11207,7 @@
         </ol>
 
         <p><span class="prod"><span class="nt">BindingElementList</span> <span class="geq">:</span> <span
-        class="nt">Elisionopt</span> <span class="nt">BindingElement</span></span></p>
+        class="nt">Elision</span></span><span style="font-family: sans-serif"><sub>opt</sub></span> <i>BindingElement</i></p>
 
         <ol class="proc">
           <li>If <i>Elision</i> is present, then let <i>skip</i> be the result of evaluating <i>Elision</i>, otherwise let <i>skip</i> be 0.</li>
@@ -11221,8 +11217,8 @@
         </ol>
 
         <p><span class="prod"><span class="nt">BindingElementList</span> <span class="geq">:</span> <span
-        class="nt">BindingElementList</span> <code class="t">,</code> <span class="nt">Elisionopt</span> <span
-        class="nt">BindingElement</span></span></p>
+        class="nt">BindingElementList</span> <code class="t">,</code> <span class="nt">Elision</span></span><span
+        style="font-family: sans-serif"><sub>opt</sub></span> <i>BindingElement</i></p>
 
         <ol class="proc">
           <li>Let <i>listNext</i> be the result of performing Indexed Binding Initialisation for <i>BindingElementList</i> using  <i>array, nextIndex</i>, and <i>environment</i> as arguments.</li>
@@ -11240,8 +11236,8 @@
           <li>Return the result of performing Keyed Binding Initialisation for <i>SingleNameBinding</i> using  <i>array</i>, <i>environment</i>, and <a href="#sec-9.1.8">ToString</a>(<i>nextIndex</i>) as the arguments.</li>
         </ol>
 
-        <p><span class="prod"><span class="nt">BindingElement</span> <span class="geq">:</span></span><span style="font-family:
-        Times New Roman"><i>BindingPattern Initialiser</i><sub>opt</sub></span></p>
+        <p><span class="prod"><span class="nt">BindingElement</span> <span class="geq">:</span> <span
+        class="nt">BindingPattern</span> <span class="nt">Initialiseropt</span></span></p>
 
         <ol class="proc">
           <li>Let <i>P</i> be <a href="#sec-9.1.8">ToString</a>(<i>nextIndex</i>).</li>
@@ -11316,8 +11312,7 @@
         </ol>
 
         <p><span class="prod"><span class="nt">BindingElement</span> <span class="geq">:</span> <span
-        class="nt">BindingPattern</span></span><span style="font-family: Times New
-        Roman"><i>Initialiser</i><sub>opt</sub></span></p>
+        class="nt">BindingPattern</span> <span class="nt">Initialiseropt</span></span></p>
 
         <ol class="proc">
           <li>Let <i>exists</i> be the result of calling the [[HasProperty]] internal method of <i>obj</i> with argument <i>propertyName</i>.</li>
@@ -11344,8 +11339,8 @@
           <li>Return the result of performing Binding Initialisation for <i>BindingPattern</i> passing <i>v</i> and <i>environment</i> as arguments.</li>
         </ol>
 
-        <p><span class="prod"><span class="nt">SingleNameBinding</span> <span class="geq">:</span></span><span style="font-family:
-        Times New Roman"><i>BindingIdentifier Initialiser</i><sub>opt</sub></span></p>
+        <p><span class="prod"><span class="nt">SingleNameBinding</span> <span class="geq">:</span> <span
+        class="nt">BindingIdentifier</span> <span class="nt">Initialiseropt</span></span></p>
 
         <ol class="proc">
           <li>Let <i>exists</i> be the result of calling the [[HasProperty]] internal method of <i>obj</i> with argument <i>propertyName</i>.</li>
@@ -11720,7 +11715,7 @@
                 <ol class="block">
                   <li>Let <i>incExprRef</i> be the result of evaluating <i>incrementExpr</i>.</li>
                   <li>Let <i>incExprValue</i> be <a href="#sec-8.9.1">GetValue</a>(<i>incExprRef</i>).</li>
-                  <li><span style="font-family: Times New Roman">If loopContinues(<i>incExprValue</i>,<i>labelSet</i>) is <b>false</b>, return <i>incExprValue.</i></span></li>
+                  <li>If loopContinues(<i>incExprValue</i>,<i>labelSet</i>) is <b>false</b>, return <i>incExprValue.</i></li>
                 </ol>
               </li>
             </ol>
@@ -11786,10 +11781,10 @@
 
         <p><span class="prod"><span class="nt">IterationStatement</span> <span class="geq">:</span></span></p>
 
-        <p><code>for</code> <code>(</code><span class="nt">LeftHandSideExpression</span> <code>in</code> <span
+        <p><code>for</code> <code>(</code><span class="nt">LeftHandSideExpression</span>  <code>in</code> <span
         class="nt">Expression</span> <code>)</code> <span class="nt">Statement</span></p>
 
-        <p><code>for</code> <code>(</code><span class="nt">LeftHandSideExpression</span> <code>of</code> <span
+        <p><code>for</code> <code>(</code><span class="nt">LeftHandSideExpression</span>  <code>of</code> <span
         class="nt">Expression</span> <code>)</code> <span class="nt">Statement</span></p>
 
         <ul>
@@ -12110,7 +12105,7 @@
                   <li>Let <i>nextValue</i> be <i>next</i>.[[value]].</li>
                   <li>If <i>lhsKind</i> is <span style="font-family: sans-serif">assignment</span>, then
                     <ol class="block">
-                      <li>If <i>lhs</i> is neither an <i>ObjectLiteral</i> nor an <i>ArrayLiteral</i> then
+                      <li>If <i>lhs</i> is neither an <i>ObjectLiteral</i> nor an <i>ArrayLiteral</i>  then
                         <ol class="block">
                           <li>Let <i>lhsRef</i> be the result of evaluating the <i>LeftHandSideExpression</i> ( it may be evaluated repeatedly).</li>
                           <li>Let <i>status</i> be the result of performing <a href="#sec-8.9.2">PutValue</a>(<i>lhsRef</i>,  <i>nextValue</i>).</li>
@@ -12181,9 +12176,8 @@
 
       <ul>
         <li>
-          <p><span style="font-family: sans-serif">It is a Syntax Error if</span> <span style="font-family: sans-serif">this
-          production is not nested, directly or indirectly (but not crossing function boundaries), within an</span>
-          <i>IterationStatement</i><span style="font-family: sans-serif">.</span></p>
+          <p>It is a Syntax Error if this production is not nested, directly or indirectly (but not crossing function boundaries),
+          within an <i>IterationStatement</i>.</p>
         </li>
       </ul>
 
@@ -12193,10 +12187,8 @@
 
       <ul>
         <li>
-          <p><span style="font-family: sans-serif">It is a Syntax Error if</span> <i>Identifier</i> <span style="font-family:
-          sans-serif">does not appear in the</span> <i>CurrentLabelSet</i> <span style="font-family: sans-serif">of an enclosing
-          (but not crossing function boundaries)</span> <i>IterationStatement</i><span style="font-family:
-          sans-serif">.</span></p>
+          <p>It is a Syntax Error if <i>Identifier</i> does not appear in the <i>CurrentLabelSet</i> of an enclosing (but not
+          crossing function boundaries) <i>IterationStatement</i>.</p>
         </li>
       </ul>
     </section>
@@ -12243,10 +12235,8 @@
 
       <ul>
         <li>
-          <p><span style="font-family: sans-serif">It is a Syntax Error if</span> <span style="font-family: sans-serif">this
-          production not nested, directly or indirectly (but not crossing function boundaries), within an</span>
-          <i>IterationStatement</i> <span style="font-family: sans-serif">or a</span> <i>SwitchStatement</i><span
-          style="font-family: sans-serif">.</span></p>
+          <p>It is a Syntax Error if this production not nested, directly or indirectly (but not crossing function boundaries),
+          within an <i>IterationStatement</i> or a <i>SwitchStatement</i>.</p>
         </li>
       </ul>
 
@@ -12256,9 +12246,8 @@
 
       <ul>
         <li>
-          <p><span style="font-family: sans-serif">It is a Syntax Error if</span> <i>Identifier</i> <span style="font-family:
-          sans-serif">does not appear in the</span> <i>CurrentLabelSet</i> <span style="font-family: sans-serif">of an enclosing
-          (but not crossing function boundaries)</span> <i>Statement</i><span style="font-family: sans-serif">.</span></p>
+          <p>It is a Syntax Error if <i>Identifier</i> does not appear in the <i>CurrentLabelSet</i> of an enclosing (but not
+          crossing function boundaries) <i>Statement</i>.</p>
         </li>
       </ul>
     </section>
@@ -12652,36 +12641,36 @@
       class="nt">CaseClausesopt</span> <code class="t">}</code></span></p>
 
       <ol class="proc">
-        <li><span style="font-family: Times New Roman">Let <i>V</i> = <b>undefined</b>.</span></li>
-        <li><span style="font-family: Times New Roman">Let <i>A</i> be the list of <i>CaseClause</i> items in source text order.</span></li>
-        <li><span style="font-family: Times New Roman">Let <i>searching</i> be <b>true</b>.</span></li>
-        <li><span style="font-family: Times New Roman">Repeat, while <i>searching</i> is <b>true</b></span>
+        <li>Let <i>V</i> = <b>undefined</b>.</li>
+        <li>Let <i>A</i> be the list of <i>CaseClause</i> items in source text order.</li>
+        <li>Let <i>searching</i> be <b>true</b>.</li>
+        <li>Repeat, while <i>searching</i> is <b>true</b>
           <ol class="block">
-            <li><span style="font-family: Times New Roman">Let <i>C</i> be the next <i>CaseClause</i> in <i>A</i>. If there is no such <i>CaseClause</i>, return</span> <a href="#sec-8.8">NormalCompletion</a>(<span style="font-family: Times New Roman"><i>V</i>).</span></li>
-            <li><span style="font-family: Times New Roman">Let <i>clauseSelector</i> be the result of evaluating <i>C</i>.</span></li>
+            <li>Let <i>C</i> be the next <i>CaseClause</i> in <i>A</i>. If there is no such <i>CaseClause</i>, return <span style="font-family: sans-serif"><a href="#sec-8.8">NormalCompletion</a>(</span><i>V</i>).</li>
+            <li>Let <i>clauseSelector</i> be the result of evaluating <i>C</i>.</li>
             <li>If <i>clauseSelector</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>clauseSelector</i>.</li>
-            <li><span style="font-family: Times New Roman">If <i>input</i> is equal to <i>clauseSelector</i> as defined by the Strict Equality Comparision Algorithm (<a href="#sec-11.9.1">11.9.1</a>), then</span>
+            <li>If <i>input</i> is equal to <i>clauseSelector</i> as defined by the Strict Equality Comparision Algorithm (11.9.1), then
               <ol class="block">
-                <li><span style="font-family: Times New Roman">Set <i>searching</i> to <b>false</b>.</span></li>
-                <li><span style="font-family: Times New Roman">If <i>C</i> has a <i>StatementList</i>, then</span>
+                <li>Set <i>searching</i> to <b>false</b>.</li>
+                <li>If <i>C</i> has a <i>StatementList</i>, then
                   <ol class="block">
-                    <li><span style="font-family: Times New Roman">Evaluate <i>C</i>&rsquo;s <i>StatementList</i> and let <i>R</i> be the result.</span></li>
-                    <li><span style="font-family: Times New Roman">If <i>R</i> is an <a href="#sec-8.8">abrupt completion</a>, then return <i>R</i>.</span></li>
-                    <li><span style="font-family: Times New Roman">Let <i>V</i> = <i>R</i>.[[value]].</span></li>
+                    <li>Evaluate <i>C</i>&rsquo;s <i>StatementList</i> and let <i>R</i> be the result.</li>
+                    <li>If <i>R</i> is an <a href="#sec-8.8">abrupt completion</a>, then return <i>R</i>.</li>
+                    <li>Let <i>V</i> = <i>R</i>.[[value]].</li>
                   </ol>
                 </li>
               </ol>
             </li>
           </ol>
         </li>
-        <li><span style="font-family: Times New Roman">Repeat</span>
+        <li>Repeat
           <ol class="block">
-            <li><span style="font-family: Times New Roman">Let <i>C</i> be the next <i>CaseClause</i> in <i>A</i>. If there is no such <i>CaseClause</i>, return</span> <a href="#sec-8.8">NormalCompletion</a>(<span style="font-family: Times New Roman"><i>V</i>).</span></li>
-            <li><span style="font-family: Times New Roman">If <i>C</i> has a <i>StatementList</i>, then</span>
+            <li>Let <i>C</i> be the next <i>CaseClause</i> in <i>A</i>. If there is no such <i>CaseClause</i>, return <span style="font-family: sans-serif"><a href="#sec-8.8">NormalCompletion</a>(</span><i>V</i>).</li>
+            <li>If <i>C</i> has a <i>StatementList</i>, then
               <ol class="block">
-                <li><span style="font-family: Times New Roman">Evaluate <i>C</i>&rsquo;s <i>StatementList</i> and let <i>R</i> be the result.</span></li>
-                <li><span style="font-family: Times New Roman">If <i>R</i>.[[value]] is not</span> empty<span style="font-family: Times New Roman">, then let <i>V</i> = <i>R</i>.[[value]].</span></li>
-                <li><span style="font-family: Times New Roman">If <i>R</i> is an <a href="#sec-8.8">abrupt completion</a>, then return <a href="#sec-8.8">Completion</a></span> <span style="font-family: Times New Roman">{[[type]]:</span> <span style="font-family: Times New Roman"><i>R</i>.[[type]],</span> <span style="font-family: Times New Roman">[[value]]:</span>  <span style="font-family: Times New Roman"><i>V</i>,</span> <span style="font-family: Times New Roman">[[target]]:</span>  <span style="font-family: Times New Roman"><i>R</i>.[[target]]}.</span></li>
+                <li>Evaluate <i>C</i>&rsquo;s <i>StatementList</i> and let <i>R</i> be the result.</li>
+                <li>If <i>R</i>.[[value]] is not <span style="font-family: sans-serif">empty</span>, then let <i>V</i> = <i>R</i>.[[value]].</li>
+                <li>If <i>R</i> is an <a href="#sec-8.8">abrupt completion</a>, then return <a href="#sec-8.8">Completion</a> {[[type]]: <i>R</i>.[[type]], [[value]]:  <i>V</i>, [[target]]:  <i>R</i>.[[target]]}.</li>
               </ol>
             </li>
           </ol>
@@ -12693,58 +12682,58 @@
       class="t">}</code></span></p>
 
       <ol class="proc">
-        <li><span style="font-family: Times New Roman">Let <i>V</i> = <b>undefined</b>..</span></li>
-        <li><span style="font-family: Times New Roman">Let <i>A</i> be the list of <i>CaseClause</i> items in the first <i>CaseClauses</i>, in source text order.</span></li>
-        <li><span style="font-family: Times New Roman">Let <i>B</i> be the list of <i>CaseClause</i> items in the second <i>CaseClauses</i>, in source text order.</span></li>
-        <li><span style="font-family: Times New Roman">Let <i>found</i> be <b>false</b>.</span></li>
-        <li><span style="font-family: Times New Roman">Repeat letting <i>C</i> be in order each <i>CaseClause</i> in <i>A</i></span>
+        <li>Let <i>V</i> = <b>undefined</b>..</li>
+        <li>Let <i>A</i> be the list of <i>CaseClause</i> items in the first <i>CaseClauses</i>, in source text order.</li>
+        <li>Let <i>B</i> be the list of <i>CaseClause</i> items in the second <i>CaseClauses</i>, in source text order.</li>
+        <li>Let <i>found</i> be <b>false</b>.</li>
+        <li>Repeat letting <i>C</i> be in order each <i>CaseClause</i> in <i>A</i>
           <ol class="block">
-            <li><span style="font-family: Times New Roman">If <i>found</i> is <b>false</b>, then</span>
+            <li>If <i>found</i> is <b>false</b>, then
               <ol class="block">
-                <li><span style="font-family: Times New Roman">Let <i>clauseSelector</i> be the result of evaluating <i>C</i>.</span></li>
+                <li>Let <i>clauseSelector</i> be the result of evaluating <i>C</i>.</li>
                 <li>If <i>clauseSelector</i> is an <a href="#sec-8.8">abrupt completion</a>, then
                   <ol class="block">
                     <li>If <i>clauseSelector</i>.[[value]] is <span style="font-family: sans-serif">empty</span>, then return <a href="#sec-8.8">Completion</a> {[[type]]: <i>clauseSelector</i>.[[type]], [[value]]:  <b>undefined</b>, [[target]]:  <i>clauseSelector</i>.[[target]]}.</li>
                     <li>Else, return <i>clauseSelector</i>.</li>
                   </ol>
                 </li>
-                <li><span style="font-family: Times New Roman">If <i>input</i> is equal to <i>clauseSelector</i> as defined by the Strict Equality Comparision Algorithm (<a href="#sec-11.9.1">11.9.1</a>), then set <i>found</i> to <b>true</b>.</span></li>
+                <li>If <i>input</i> is equal to <i>clauseSelector</i> as defined by the Strict Equality Comparision Algorithm (11.9.1), then set <i>found</i> to <b>true</b>.</li>
               </ol>
             </li>
-            <li><span style="font-family: Times New Roman">If <i>found</i> is <b>true</b>, then</span>
+            <li>If <i>found</i> is <b>true</b>, then
               <ol class="block">
-                <li><span style="font-family: Times New Roman">If <i>C</i> has a <i>StatementList</i>, then</span>
+                <li>If <i>C</i> has a <i>StatementList</i>, then
                   <ol class="block">
-                    <li><span style="font-family: Times New Roman">Evaluate <i>C</i>&rsquo;s <i>StatementList</i> and let <i>R</i> be the result.</span></li>
-                    <li><span style="font-family: Times New Roman">If <i>R</i>.[[value]] is not</span> empty<span style="font-family: Times New Roman">, then let <i>V</i> = <i>R</i>.[[value]].</span></li>
-                    <li><span style="font-family: Times New Roman">If <i>R</i> is an <a href="#sec-8.8">abrupt completion</a>, then return <a href="#sec-8.8">Completion</a></span> <span style="font-family: Times New Roman">{[[type]]:</span> <span style="font-family: Times New Roman"><i>R</i>.[[type]],</span> <span style="font-family: Times New Roman">[[value]]:</span>  <span style="font-family: Times New Roman"><i>V</i>,</span> <span style="font-family: Times New Roman">[[target]]:</span>  <span style="font-family: Times New Roman"><i>R</i>.[[target]]}.</span></li>
+                    <li>Evaluate <i>C</i>&rsquo;s <i>StatementList</i> and let <i>R</i> be the result.</li>
+                    <li>If <i>R</i>.[[value]] is not <span style="font-family: sans-serif">empty</span>, then let <i>V</i> = <i>R</i>.[[value]].</li>
+                    <li>If <i>R</i> is an <a href="#sec-8.8">abrupt completion</a>, then return <a href="#sec-8.8">Completion</a> {[[type]]: <i>R</i>.[[type]], [[value]]:  <i>V</i>, [[target]]:  <i>R</i>.[[target]]}.</li>
                   </ol>
                 </li>
               </ol>
             </li>
           </ol>
         </li>
-        <li><span style="font-family: Times New Roman">Let <i>foundInB</i> be <b>false</b>.</span></li>
-        <li><span style="font-family: Times New Roman">If <i>found</i> is <b>false</b>, then</span>
+        <li>Let <i>foundInB</i> be <b>false</b>.</li>
+        <li>If <i>found</i> is <b>false</b>, then
           <ol class="block">
-            <li><span style="font-family: Times New Roman">Repeat, while <i>foundInB</i> is <b>false</b> and all elements of <i>B</i> have not been processed</span>
+            <li>Repeat, while <i>foundInB</i> is <b>false</b> and all elements of <i>B</i> have not been processed
               <ol class="block">
-                <li><span style="font-family: Times New Roman">Let <i>C</i> be the next <i>CaseClause</i> in <i>B</i>.</span></li>
-                <li><span style="font-family: Times New Roman">Let <i>clauseSelector</i> be the result of evaluating <i>C</i>.</span></li>
+                <li>Let <i>C</i> be the next <i>CaseClause</i> in <i>B</i>.</li>
+                <li>Let <i>clauseSelector</i> be the result of evaluating <i>C</i>.</li>
                 <li>If <i>clauseSelector</i> is an <a href="#sec-8.8">abrupt completion</a>, then.
                   <ol class="block">
                     <li>If <i>clauseSelector</i>.[[value]] is <span style="font-family: sans-serif">empty</span>, then return <a href="#sec-8.8">Completion</a> {[[type]]: <i>clauseSelector</i>.[[type]], [[value]]:  <b>undefined</b>, [[target]]:  <i>clauseSelector</i>.[[target]]}.</li>
                     <li>Else, return <i>clauseSelector</i>.</li>
                   </ol>
                 </li>
-                <li><span style="font-family: Times New Roman">If <i>input</i> is equal to <i>clauseSelector</i> as defined by the Strict Equality Comparision Algorithm (<a href="#sec-11.9.1">11.9.1</a>), then</span>
+                <li>If <i>input</i> is equal to <i>clauseSelector</i> as defined by the Strict Equality Comparision Algorithm (11.9.1), then
                   <ol class="block">
-                    <li><span style="font-family: Times New Roman">Set <i>foundInB</i> to <b>true</b>.</span></li>
-                    <li><span style="font-family: Times New Roman">If <i>C</i> has a <i>StatementList</i>, then</span>
+                    <li>Set <i>foundInB</i> to <b>true</b>.</li>
+                    <li>If <i>C</i> has a <i>StatementList</i>, then
                       <ol class="block">
-                        <li><span style="font-family: Times New Roman">Evaluate <i>C</i>&rsquo;s <i>StatementList</i> and let <i>R</i> be the result.</span></li>
-                        <li><span style="font-family: Times New Roman">If <i>R</i>.[[value]] is not</span> empty<span style="font-family: Times New Roman">, then let <i>V</i> = <i>R</i>.[[value]].</span></li>
-                        <li><span style="font-family: Times New Roman">If <i>R</i> is an <a href="#sec-8.8">abrupt completion</a>, then return <a href="#sec-8.8">Completion</a></span> <span style="font-family: Times New Roman">{[[type]]:</span> <span style="font-family: Times New Roman"><i>R</i>.[[type]],</span> <span style="font-family: Times New Roman">[[value]]:</span>  <span style="font-family: Times New Roman"><i>V</i>,</span> <span style="font-family: Times New Roman">[[target]]:</span>  <span style="font-family: Times New Roman"><i>R</i>.[[target]]}.</span></li>
+                        <li>Evaluate <i>C</i>&rsquo;s <i>StatementList</i> and let <i>R</i> be the result.</li>
+                        <li>If <i>R</i>.[[value]] is not <span style="font-family: sans-serif">empty</span>, then let <i>V</i> = <i>R</i>.[[value]].</li>
+                        <li>If <i>R</i> is an <a href="#sec-8.8">abrupt completion</a>, then return <a href="#sec-8.8">Completion</a> {[[type]]: <i>R</i>.[[type]], [[value]]:  <i>V</i>, [[target]]:  <i>R</i>.[[target]]}.</li>
                       </ol>
                     </li>
                   </ol>
@@ -12753,21 +12742,21 @@
             </li>
           </ol>
         </li>
-        <li><span style="font-family: Times New Roman">If <i>foundInB</i> is <b>false</b> and the <i>DefaultClause</i> has a <i>StatementList</i>, then</span>
+        <li>If <i>foundInB</i> is <b>false</b> and the <i>DefaultClause</i> has a <i>StatementList</i>, then
           <ol class="block">
-            <li><span style="font-family: Times New Roman">Evaluate the <i>DefaultClause&rsquo;s</i></span> <span style="font-family: Times New Roman"><i>StatementList</i> and let <i>R</i> be the result.</span></li>
-            <li><span style="font-family: Times New Roman">If <i>R</i>.[[value]] is not</span> empty<span style="font-family: Times New Roman">, then let <i>V</i> = <i>R</i>.[[value]].</span></li>
-            <li><span style="font-family: Times New Roman">If <i>R</i> is an <a href="#sec-8.8">abrupt completion</a>, then return <a href="#sec-8.8">Completion</a></span> <span style="font-family: Times New Roman">{[[type]]:</span> <span style="font-family: Times New Roman"><i>R</i>.[[type]],</span> <span style="font-family: Times New Roman">[[value]]:</span>  <span style="font-family: Times New Roman"><i>V</i>,</span> <span style="font-family: Times New Roman">[[target]]:</span>  <span style="font-family: Times New Roman"><i>R</i>.[[target]]}.</span></li>
+            <li>Evaluate the <i>DefaultClause&rsquo;s</i> <i>StatementList</i> and let <i>R</i> be the result.</li>
+            <li>If <i>R</i>.[[value]] is not <span style="font-family: sans-serif">empty</span>, then let <i>V</i> = <i>R</i>.[[value]].</li>
+            <li>If <i>R</i> is an <a href="#sec-8.8">abrupt completion</a>, then return <a href="#sec-8.8">Completion</a> {[[type]]: <i>R</i>.[[type]], [[value]]:  <i>V</i>, [[target]]:  <i>R</i>.[[target]]}.</li>
           </ol>
         </li>
-        <li><span style="font-family: Times New Roman">Repeat (Note that if step 7.a.i has been performed this loop does not start at the beginning of <i>B</i>)</span>
+        <li>Repeat (Note that if step 7.a.i has been performed this loop does not start at the beginning of <i>B</i>)
           <ol class="block">
-            <li><span style="font-family: Times New Roman">Let <i>C</i> be the next <i>CaseClause</i> in <i>B</i>. If there is no such <i>CaseClause</i>, return</span> <a href="#sec-8.8">NormalCompletion</a>(<span style="font-family: Times New Roman"><i>V</i>).</span></li>
-            <li><span style="font-family: Times New Roman">If <i>C</i> has a <i>StatementList</i>, then</span>
+            <li>Let <i>C</i> be the next <i>CaseClause</i> in <i>B</i>. If there is no such <i>CaseClause</i>, return <span style="font-family: sans-serif"><a href="#sec-8.8">NormalCompletion</a>(</span><i>V</i>).</li>
+            <li>If <i>C</i> has a <i>StatementList</i>, then
               <ol class="block">
-                <li><span style="font-family: Times New Roman">Evaluate <i>C</i>&rsquo;s <i>StatementList</i> and let <i>R</i> be the result.</span></li>
-                <li><span style="font-family: Times New Roman">If <i>R</i>.[[value]] is not</span> empty<span style="font-family: Times New Roman">, then let <i>V</i> = <i>R</i>.[[value]].</span></li>
-                <li><span style="font-family: Times New Roman">If <i>R</i> is an <a href="#sec-8.8">abrupt completion</a>, then <a href="#sec-8.8">Completion</a></span> <span style="font-family: Times New Roman">{[[type]]:</span> <span style="font-family: Times New Roman"><i>R</i>.[[type]],</span> <span style="font-family: Times New Roman">[[value]]:</span>  <span style="font-family: Times New Roman"><i>V</i>,</span> <span style="font-family: Times New Roman">[[target]]:</span>  <span style="font-family: Times New Roman"><i>R</i>.[[target]]}.</span></li>
+                <li>Evaluate <i>C</i>&rsquo;s <i>StatementList</i> and let <i>R</i> be the result.</li>
+                <li>If <i>R</i>.[[value]] is not <span style="font-family: sans-serif">empty</span>, then let <i>V</i> = <i>R</i>.[[value]].</li>
+                <li>If <i>R</i> is an <a href="#sec-8.8">abrupt completion</a>, then <a href="#sec-8.8">Completion</a> {[[type]]: <i>R</i>.[[type]], [[value]]:  <i>V</i>, [[target]]:  <i>R</i>.[[target]]}.</li>
               </ol>
             </li>
           </ol>
@@ -13450,11 +13439,11 @@
 
       <p><b>Static Semantics:  LexicallyDeclaredNames</b></p>
 
-      <div class="lhs">FunctionBody <span style="font-family: sans-serif"><b>:</b> [empty]</span></div>
+      <div class="lhs">FunctionBody <span style="font-family: sans-serif"><b>:</b>  [empty]</span></div>
       <ol class="proc">
         <li>Return an empty <a href="#sec-8.7">List</a>.</li>
       </ol>
-      <div class="lhs">FunctionBody <span style="font-family: sans-serif"><b>:</b></span> StatementList</div>
+      <div class="lhs">FunctionBody <span style="font-family: sans-serif"><b>:</b></span>  StatementList</div>
       <ol class="proc">
         <li>Return the LexicllyDeclaredNames of <i>StatementList</i>.</li>
       </ol>
@@ -13468,11 +13457,11 @@
       <ol class="proc">
         <li>Return an empty <a href="#sec-8.7">List</a>.</li>
       </ol>
-      <div class="lhs">FunctionBody <span style="font-family: sans-serif"><b>:</b> [empty]</span></div>
+      <div class="lhs">FunctionBody <span style="font-family: sans-serif"><b>:</b>  [empty]</span></div>
       <ol class="proc">
         <li>Return an empty <a href="#sec-8.7">List</a>.</li>
       </ol>
-      <div class="lhs">FunctionBody <span style="font-family: sans-serif"><b>:</b></span> StatementList</div>
+      <div class="lhs">FunctionBody <span style="font-family: sans-serif"><b>:</b></span>  StatementList</div>
       <ol class="proc">
         <li>Return the VarDeclaredNames of <i>StatementList</i>.</li>
       </ol>
@@ -13566,7 +13555,7 @@
       class="nt">FunctionBody</span> <code class="t">}</code></span></p>
 
       <ol class="proc">
-        <li><span style="font-family: Times New Roman">Return the result of creating a new Function object as specified in <a href="#sec-13.2">13.2</a> with parameters specified by <i>FormalParameterList</i> and body specified by <i>FunctionBody</i>. Pass in the <a href="#sec-10.3">LexicalEnvironment</a> of the running execution context as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag if the <i>FunctionExpression</i> is contained in <a href="#sec-10.1.1">strict code</a> or if its <i>FunctionBody</i> is <a href="#sec-10.1.1">strict code</a>.</span></li>
+        <li>Return the result of creating a new Function object as specified in <a href="#sec-13.2">13.2</a> with parameters specified by <i>FormalParameterList</i> and body specified by <i>FunctionBody</i>. Pass in the <a href="#sec-10.3">LexicalEnvironment</a> of the running execution context as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag if the <i>FunctionExpression</i> is contained in <a href="#sec-10.1.1">strict code</a> or if its <i>FunctionBody</i> is <a href="#sec-10.1.1">strict code</a>.</li>
       </ol>
 
       <p><span class="prod"><span class="nt">FunctionExpression</span> <span class="geq">:</span> <code class="t">function</code>
@@ -13574,12 +13563,12 @@
       class="t">)</code> <code class="t">{</code> <span class="nt">FunctionBody</span> <code class="t">}</code></span></p>
 
       <ol class="proc">
-        <li><span style="font-family: Times New Roman">Let <i>funcEnv</i> be the result of calling <a href="#sec-10.2.2.2">NewDeclarativeEnvironment</a> passing the running execution context&rsquo;s <a href="#sec-10.2">Lexical Environment</a> as the argument</span></li>
-        <li><span style="font-family: Times New Roman">Let <i>envRec</i> be <i>funcEnv&rsquo;s</i> environment record.</span></li>
-        <li><span style="font-family: Times New Roman">Call the CreateImmutableBinding concrete method of <i>envRec</i> passing the String value of <i>BindingIdentifier</i> as the argument.</span></li>
-        <li><span style="font-family: Times New Roman">Let <i>closure</i> be the result of creating a new Function object as specified in <a href="#sec-13.2">13.2</a> with parameters specified by <i>FormalParameterList</i> and body specified by <i>FunctionBody</i>. Pass in <i>funcEnv</i> as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag if the <i>FunctionExpression</i> is contained in <a href="#sec-10.1.1">strict code</a> or if its <i>FunctionBody</i> is <a href="#sec-10.1.1">strict code</a>.</span></li>
-        <li><span style="font-family: Times New Roman">Call the InitializeBinding concrete method of <i>envRec</i> passing the String value of <i>Identifier</i> and <i>closure</i> as the arguments.</span></li>
-        <li><span style="font-family: Times New Roman">Return <i>closure</i>.</span></li>
+        <li>Let <i>funcEnv</i> be the result of calling <a href="#sec-10.2.2.2">NewDeclarativeEnvironment</a> passing the running execution context&rsquo;s <a href="#sec-10.2">Lexical Environment</a> as the argument</li>
+        <li>Let <i>envRec</i> be <i>funcEnv&rsquo;s</i> environment record.</li>
+        <li>Call the CreateImmutableBinding concrete method of <i>envRec</i> passing the String value of <i>BindingIdentifier</i> as the argument.</li>
+        <li>Let <i>closure</i> be the result of creating a new Function object as specified in <a href="#sec-13.2">13.2</a> with parameters specified by <i>FormalParameterList</i> and body specified by <i>FunctionBody</i>. Pass in <i>funcEnv</i> as the <i>Scope</i>. Pass in <b>true</b> as the <i>Strict</i> flag if the <i>FunctionExpression</i> is contained in <a href="#sec-10.1.1">strict code</a> or if its <i>FunctionBody</i> is <a href="#sec-10.1.1">strict code</a>.</li>
+        <li>Call the InitializeBinding concrete method of <i>envRec</i> passing the String value of <i>Identifier</i> and <i>closure</i> as the arguments.</li>
+        <li>Return <i>closure</i>.</li>
       </ol>
 
       <div class="note">
@@ -13595,9 +13584,9 @@
       class="nt">StatementListopt</span></span></p>
 
       <ol class="proc">
-        <li><span style="font-family: Times New Roman">The code of this <i>FunctionBody</i> is <a href="#sec-10.1.1">strict mode code</a> if it is part of a <i>FunctionDeclaration</i> or <i>FunctionExpression</i> that is contained in <a href="#sec-10.1.1">strict mode code</a> or if the <a href="#sec-14.1">Directive Prologue</a> (<a href="#sec-14.1">14.1</a>) of its <i>StatementList</i> contains a <a href="#sec-14.1">Use Strict Directive</a> or if any of the conditions in <a href="#sec-10.1.1">10.1.1</a> apply.  If the code of this <i>FunctionBody</i> is <a href="#sec-10.1.1">strict mode code</a>, <i>StatementList</i> is evaluated in the following steps as <a href="#sec-10.1.1">strict mode code</a>. Otherwise, <i>StatementList</i> is evaluated in the following steps as non-<a href="#sec-10.1.1">strict mode code</a>.</span></li>
-        <li><span style="font-family: Times New Roman">If <i>StatementList</i> is present return the result of evaluating <i>StatementList</i>.</span></li>
-        <li><span style="font-family: Times New Roman">Else return <a href="#sec-8.8">NormalCompletion</a>(<b>undefined</b>).</span></li>
+        <li>The code of this <i>FunctionBody</i> is <a href="#sec-10.1.1">strict mode code</a> if it is part of a <i>FunctionDeclaration</i> or <i>FunctionExpression</i> that is contained in <a href="#sec-10.1.1">strict mode code</a> or if the <a href="#sec-14.1">Directive Prologue</a> (<a href="#sec-14.1">14.1</a>) of its <i>StatementList</i> contains a <a href="#sec-14.1">Use Strict Directive</a> or if any of the conditions in <a href="#sec-10.1.1">10.1.1</a> apply.  If the code of this <i>FunctionBody</i> is <a href="#sec-10.1.1">strict mode code</a>, <i>StatementList</i> is evaluated in the following steps as <a href="#sec-10.1.1">strict mode code</a>. Otherwise, <i>StatementList</i> is evaluated in the following steps as non-<a href="#sec-10.1.1">strict mode code</a>.</li>
+        <li>If <i>StatementList</i> is present return the result of evaluating <i>StatementList</i>.</li>
+        <li>Else return <a href="#sec-8.8">NormalCompletion</a>(<b>undefined</b>).</li>
       </ol>
     </section>
 
@@ -13610,34 +13599,34 @@
       class="nt">Strict</span>, and optionally, an object <var>homeObject</var> and a string <var>methodName</var>:</p>
 
       <ol class="proc">
-        <li><span style="font-family: Times New Roman">Create a new native ECMAScript object and let <i>F</i> be that object.</span></li>
-        <li><span style="font-family: Times New Roman">Set all the internal methods, except for [[Get]], of <i>F</i> as described in <a href="#sec-8.12">8.12</a>.</span></li>
-        <li><span style="font-family: Times New Roman">Add the [[NativeBrand]] internal property with value NativeFunction</span> <span style="font-family: Times New Roman">to <i>F</i>.</span></li>
-        <li><span style="font-family: Times New Roman">Set the [[Prototype]] internal property of <i>F</i> to the standard built-in Function prototype object as specified in <a href="#sec-15.3.3.1">15.3.3.1</a>.</span></li>
-        <li><span style="font-family: Times New Roman">Set the [[Get]] internal property of <i>F</i> as described in <a href="#sec-15.3.5.4">15.3.5.4</a>.</span></li>
-        <li><span style="font-family: Times New Roman">Set the [[Call]] internal property of <i>F</i> as described in 13.2.1.</span></li>
-        <li><span style="font-family: Times New Roman">Set the [[Construct]] internal property of <i>F</i> as described in 13.2.2.</span></li>
-        <li><span style="font-family: Times New Roman">Set the [[HasInstance]] internal property of <i>F</i> as described in <a href="#sec-15.3.5.3">15.3.5.3</a>.</span></li>
-        <li><span style="font-family: Times New Roman">Set the [[Scope]] internal property of <i>F</i> to the value of <i>Scope</i>.</span></li>
-        <li><span style="font-family: Times New Roman">Set the [[FormalParameters]] internal property of <i>F</i> to <i>FormalParameterList</i>. .</span></li>
-        <li><span style="font-family: Times New Roman">Set the [[Code]] internal property of <i>F</i> to <i>FunctionBody</i>.</span></li>
-        <li><span style="font-family: Times New Roman">Set the [[Extensible]] internal property of <i>F</i> to <b>true</b>.</span></li>
-        <li><span style="font-family: Times New Roman">If the <i>homeObject</i> argument was provided, set the [[Home]] internal property of <i>F</i> to <i>homeObject</i>.</span></li>
-        <li><span style="font-family: Times New Roman">If the <i>methodName</i>argument was provided, set the [[MethodName]] internal property of <i>F</i> to <i>methodName</i>.</span></li>
-        <li><span style="font-family: Times New Roman">Let <i>len</i> be the ExpectedArgumentCount of</span> <span style="font-family: Times New Roman"><i>FormalParameterList</i>.</span></li>
-        <li><span style="font-family: Times New Roman">Call the [[DefineOwnProperty]] internal method of <i>F</i> with arguments</span> <code>"length"</code><span style="font-family: Times New Roman">, <a href="#sec-8.10">Property Descriptor</a> {[[Value]]: <i>len</i>, [[Writable]]: <b>false</b>, [[Enumerable]]: <b>false</b>, [[Configurable]]: <b>false</b>}, and <b>false</b>.</span></li>
-        <li><span style="font-family: Times New Roman">Let <i>proto</i> be the result of creating a new object as would be constructed by the expression</span> <code>new Object()</code><span style="font-family: Times New Roman">where</span> <code>Object</code> <span style="font-family: Times New Roman">is the standard built-in constructor with that name.</span></li>
-        <li><span style="font-family: Times New Roman">Call the [[DefineOwnProperty]] internal method of <i>proto</i> with arguments</span> <code>"constructor"</code><span style="font-family: Times New Roman">, <a href="#sec-8.10">Property Descriptor</a> {[[Value]]: <i>F</i>, [[Writable]]: <b>true</b>, [[Enumerable]]: <b>false</b>, [[Configurable]]: <b>true</b>}, and <b>false</b>.</span></li>
-        <li><span style="font-family: Times New Roman">Call the [[DefineOwnProperty]] internal method of <i>F</i> with arguments</span> <code>"prototype"</code><span style="font-family: Times New Roman">, <a href="#sec-8.10">Property Descriptor</a> {[[Value]]: <i>proto</i>, [[Writable]]: <b>true</b>, [[Enumerable]]: <b>false</b>, [[Configurable]]: <b>false</b>}, and <b>false</b>.</span></li>
-        <li><span style="font-family: Times New Roman">If <i>Strict</i> is <b>true</b>, then</span>
+        <li>Create a new native ECMAScript object and let <i>F</i> be that object.</li>
+        <li>Set all the internal methods, except for [[Get]], of <i>F</i> as described in <a href="#sec-8.12">8.12</a>.</li>
+        <li>Add the [[NativeBrand]] internal property with value NativeFunction to <i>F</i>.</li>
+        <li>Set the [[Prototype]] internal property of <i>F</i> to the standard built-in Function prototype object as specified in <a href="#sec-15.3.3.1">15.3.3.1</a>.</li>
+        <li>Set the [[Get]] internal property of <i>F</i> as described in <a href="#sec-15.3.5.4">15.3.5.4</a>.</li>
+        <li>Set the [[Call]] internal property of <i>F</i> as described in 13.2.1.</li>
+        <li>Set the [[Construct]] internal property of <i>F</i> as described in 13.2.2.</li>
+        <li>Set the [[HasInstance]] internal property of <i>F</i> as described in <a href="#sec-15.3.5.3">15.3.5.3</a>.</li>
+        <li>Set the [[Scope]] internal property of <i>F</i> to the value of <i>Scope</i>.</li>
+        <li>Set the [[FormalParameters]] internal property of <i>F</i> to <i>FormalParameterList</i>. .</li>
+        <li>Set the [[Code]] internal property of <i>F</i> to <i>FunctionBody</i>.</li>
+        <li>Set the [[Extensible]] internal property of <i>F</i> to <b>true</b>.</li>
+        <li>If the <i>homeObject</i> argument was provided, set the [[Home]] internal property of <i>F</i> to <i>homeObject</i>.</li>
+        <li>If the <i>methodName</i>argument was provided, set the [[MethodName]] internal property of <i>F</i> to <i>methodName</i>.</li>
+        <li>Let <i>len</i> be the ExpectedArgumentCount of <i>FormalParameterList</i>.</li>
+        <li>Call the [[DefineOwnProperty]] internal method of <i>F</i> with arguments <code>"length"</code>, <a href="#sec-8.10">Property Descriptor</a> {[[Value]]: <i>len</i>, [[Writable]]: <b>false</b>, [[Enumerable]]: <b>false</b>, [[Configurable]]: <b>false</b>}, and <b>false</b>.</li>
+        <li>Let <i>proto</i> be the result of creating a new object as would be constructed by the expression <code>new Object()</code>where <code>Object</code> is the standard built-in constructor with that name.</li>
+        <li>Call the [[DefineOwnProperty]] internal method of <i>proto</i> with arguments <code>"constructor"</code>, <a href="#sec-8.10">Property Descriptor</a> {[[Value]]: <i>F</i>, [[Writable]]: <b>true</b>, [[Enumerable]]: <b>false</b>, [[Configurable]]: <b>true</b>}, and <b>false</b>.</li>
+        <li>Call the [[DefineOwnProperty]] internal method of <i>F</i> with arguments <code>"prototype"</code>, <a href="#sec-8.10">Property Descriptor</a> {[[Value]]: <i>proto</i>, [[Writable]]: <b>true</b>, [[Enumerable]]: <b>false</b>, [[Configurable]]: <b>false</b>}, and <b>false</b>.</li>
+        <li>If <i>Strict</i> is <b>true</b>, then
           <ol class="block">
-            <li><span style="font-family: Times New Roman">Let <i>thrower</i> be the [[ThrowTypeError]] function Object (13.2.3).</span></li>
-            <li><span style="font-family: Times New Roman">Call the [[DefineOwnProperty]] internal method of <i>F</i> with arguments</span> <code>"caller"</code><span style="font-family: Times New Roman">, PropertyDescriptor {[[Get]]: <i>thrower</i>, [[Set]]: <i>thrower</i>, [[Enumerable]]: <b>false</b>, [[Configurable]]: <b>false</b>}, and <b>false</b>.</span></li>
-            <li><span style="font-family: Times New Roman">Call the [[DefineOwnProperty]] internal method of <i>F</i> with arguments</span> <code>"arguments"</code><span style="font-family: Times New Roman">, PropertyDescriptor {[[Get]]: <i>thrower</i>, [[Set]]: <i>thrower</i>, [[Enumerable]]: <b>false</b>, [[Configurable]]: <b>false</b>}, and <b>false</b>.</span></li>
+            <li>Let <i>thrower</i> be the [[ThrowTypeError]] function Object (13.2.3).</li>
+            <li>Call the [[DefineOwnProperty]] internal method of <i>F</i> with arguments <code>"caller"</code>, PropertyDescriptor {[[Get]]: <i>thrower</i>, [[Set]]: <i>thrower</i>, [[Enumerable]]: <b>false</b>, [[Configurable]]: <b>false</b>}, and <b>false</b>.</li>
+            <li>Call the [[DefineOwnProperty]] internal method of <i>F</i> with arguments <code>"arguments"</code>, PropertyDescriptor {[[Get]]: <i>thrower</i>, [[Set]]: <i>thrower</i>, [[Enumerable]]: <b>false</b>, [[Configurable]]: <b>false</b>}, and <b>false</b>.</li>
           </ol>
         </li>
-        <li><span style="font-family: Times New Roman">Set the [[Strict]] internal property of <i>F</i> to <i>Strict</i>.</span></li>
-        <li><span style="font-family: Times New Roman">Return <i>F</i>.</span></li>
+        <li>Set the [[Strict]] internal property of <i>F</i> to <i>Strict</i>.</li>
+        <li>Return <i>F</i>.</li>
       </ol>
 
       <div class="note">
@@ -13682,17 +13671,17 @@
         arguments, the following steps are taken:</p>
 
         <ol class="proc">
-          <li><span style="font-family: Times New Roman">Let <i>obj</i> be a newly created native ECMAScript object.</span></li>
-          <li><span style="font-family: Times New Roman">Set all the internal methods of <i>obj</i> as specified in <a href="#sec-8.12">8.12</a>.</span></li>
-          <li><span style="font-family: Times New Roman">Set the [[Extensible]] internal property of <i>obj</i> to <b>true</b>.</span></li>
-          <li><span style="font-family: Times New Roman">Let <i>proto</i> be the value of calling the [[Get]] internal property of <i>F</i> with argument</span> <code>"prototype"</code><span style="font-family: Times New Roman">.</span></li>
-          <li><span style="font-family: Times New Roman"><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>proto</i>).</span></li>
-          <li><span style="font-family: Times New Roman">If <a href="#sec-8">Type</a>(<i>proto</i>)</span> <span style="font-family: Times New Roman">is Object, set the [[Prototype]] internal property of <i>obj</i> to <i>proto</i>.</span></li>
-          <li><span style="font-family: Times New Roman">If <a href="#sec-8">Type</a>(<i>proto</i>)</span> <span style="font-family: Times New Roman">is not Object, set the [[Prototype]] internal property of <i>obj</i> to the standard built-in Object prototype object as described in <a href="#sec-15.2.4">15.2.4</a>.</span></li>
-          <li><span style="font-family: Times New Roman">Let <i>result</i> be the result of calling the [[Call]] internal property of <i>F</i>, providing <i>obj</i> as the <b>this</b> value and providing the argument list passed into [[Construct]] as <i>args</i>.</span></li>
-          <li><span style="font-family: Times New Roman"><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>proto</i>).</span></li>
-          <li><span style="font-family: Times New Roman">If <a href="#sec-8">Type</a>(<i>result</i>.[[value]]) is Object then return <i>result</i>.</span></li>
-          <li><span style="font-family: Times New Roman">Return <a href="#sec-8.8">NormalCompletion</a>(<i>obj</i>).</span></li>
+          <li>Let <i>obj</i> be a newly created native ECMAScript object.</li>
+          <li>Set all the internal methods of <i>obj</i> as specified in <a href="#sec-8.12">8.12</a>.</li>
+          <li>Set the [[Extensible]] internal property of <i>obj</i> to <b>true</b>.</li>
+          <li>Let <i>proto</i> be the value of calling the [[Get]] internal property of <i>F</i> with argument <code>"prototype"</code>.</li>
+          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>proto</i>).</li>
+          <li>If <a href="#sec-8">Type</a>(<i>proto</i>) is Object, set the [[Prototype]] internal property of <i>obj</i> to <i>proto</i>.</li>
+          <li>If <a href="#sec-8">Type</a>(<i>proto</i>) is not Object, set the [[Prototype]] internal property of <i>obj</i> to the standard built-in Object prototype object as described in <a href="#sec-15.2.4">15.2.4</a>.</li>
+          <li>Let <i>result</i> be the result of calling the [[Call]] internal property of <i>F</i>, providing <i>obj</i> as the <b>this</b> value and providing the argument list passed into [[Construct]] as <i>args</i>.</li>
+          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>proto</i>).</li>
+          <li>If <a href="#sec-8">Type</a>(<i>result</i>.[[value]]) is Object then return <i>result</i>.</li>
+          <li>Return <a href="#sec-8.8">NormalCompletion</a>(<i>obj</i>).</li>
         </ol>
       </section>
 
@@ -13702,17 +13691,17 @@
         <p>The [[ThrowTypeError]] object is a unique function object that is defined once as follows:</p>
 
         <ol class="proc">
-          <li><span style="font-family: Times New Roman">Create a new native ECMAScript object and let <i>F</i> be that object.</span></li>
-          <li><span style="font-family: Times New Roman">Set all the internal methods of <i>F</i> as described in <a href="#sec-8.12">8.12</a>.</span></li>
-          <li><span style="font-family: Times New Roman">Add the [[NativeBrand]] internal property with value NativeFunction</span> <span style="font-family: Times New Roman">to <i>F</i>.</span></li>
-          <li><span style="font-family: Times New Roman">Set the [[Prototype]] internal property of <i>F</i> to the standard built-in Function prototype object as specified in <a href="#sec-15.3.3.1">15.3.3.1</a>.</span></li>
-          <li><span style="font-family: Times New Roman">Set the [[Call]] internal property of <i>F</i> as described in 13.2.1.</span></li>
-          <li><span style="font-family: Times New Roman">Set the [[Scope]] internal property of <i>F</i> to <a href="#sec-10.2.3">the Global Environment</a>.</span></li>
-          <li><span style="font-family: Times New Roman">Set the [[FormalParameters]] internal property of <i>F</i> to the</span> <span class="prod"><span class="nt">FormalParameterList</span> <span class="geq">:</span> <span class="grhsannot">[empty]</span></span><span style="font-family: Times New Roman">production.</span></li>
-          <li><span style="font-family: Times New Roman">Set the [[Code]] internal property of <i>F</i> to be a <i>FunctionBody</i> that unconditionally throws a <b>TypeError</b> exception and performs no other action.</span></li>
-          <li><span style="font-family: Times New Roman">Call the [[DefineOwnProperty]] internal method of <i>F</i> with arguments</span> <code>"length"</code><span style="font-family: Times New Roman">, <a href="#sec-8.10">Property Descriptor</a> {[[Value]]: <i>0</i>, [[Writable]]: <b>false</b>, [[Enumerable]]: <b>false</b>, [[Configurable]]: <b>false</b>}, and <b>false</b>.</span></li>
-          <li><span style="font-family: Times New Roman">Set the [[Extensible]] internal property of <i>F</i> to <b>false</b>.</span></li>
-          <li><span style="font-family: Times New Roman">Let [[ThrowTypeError]] be <i>F</i>.</span></li>
+          <li>Create a new native ECMAScript object and let <i>F</i> be that object.</li>
+          <li>Set all the internal methods of <i>F</i> as described in <a href="#sec-8.12">8.12</a>.</li>
+          <li>Add the [[NativeBrand]] internal property with value NativeFunction to <i>F</i>.</li>
+          <li>Set the [[Prototype]] internal property of <i>F</i> to the standard built-in Function prototype object as specified in <a href="#sec-15.3.3.1">15.3.3.1</a>.</li>
+          <li>Set the [[Call]] internal property of <i>F</i> as described in 13.2.1.</li>
+          <li>Set the [[Scope]] internal property of <i>F</i> to <a href="#sec-10.2.3">the Global Environment</a>.</li>
+          <li>Set the [[FormalParameters]] internal property of <i>F</i> to the <span class="prod"><span class="nt">FormalParameterList</span> <span class="geq">:</span> <span class="grhsannot">[empty]</span></span> production.</li>
+          <li>Set the [[Code]] internal property of <i>F</i> to be a <i>FunctionBody</i> that unconditionally throws a <b>TypeError</b> exception and performs no other action.</li>
+          <li>Call the [[DefineOwnProperty]] internal method of <i>F</i> with arguments <code>"length"</code>, <a href="#sec-8.10">Property Descriptor</a> {[[Value]]: <i>0</i>, [[Writable]]: <b>false</b>, [[Enumerable]]: <b>false</b>, [[Configurable]]: <b>false</b>}, and <b>false</b>.</li>
+          <li>Set the [[Extensible]] internal property of <i>F</i> to <b>false</b>.</li>
+          <li>Let [[ThrowTypeError]] be <i>F</i>.</li>
         </ol>
       </section>
     </section>
@@ -13926,14 +13915,14 @@
         <p>When the <code>eval</code> function is called with one argument <var>x</var>, the following steps are taken:</p>
 
         <ol class="proc">
-          <li><span style="font-family: Times New Roman">If <a href="#sec-8">Type</a>(<i>x</i>) is not String, return <i>x</i>.</span></li>
-          <li><span style="font-family: Times New Roman">Let <i>prog</i> be the ECMAScript code that is the result of parsing <i>x</i> as a <i>Program</i>. If the parse fails, throw a <b>SyntaxError</b> exception (but <a href="#sec-16">see also clause 16</a>).</span></li>
-          <li><span style="font-family: Times New Roman">Let <i>evalCtx</i> be the result of establishing a new execution context (<a href="#sec-10.4.2">10.4.2</a>) for the eval code <i>prog</i>.</span></li>
-          <li><span style="font-family: Times New Roman">Let <i>result</i> be the result of evaluating the program <i>prog</i>.</span></li>
-          <li><span style="font-family: Times New Roman">Exit the running execution context <i>evalCtx</i>, restoring the previous execution context.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>result</i>.type is</span> normal <span style="font-family: Times New Roman">and its completion value is a value <i>V</i>, then return the value <i>V</i>.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>result</i>.type is</span> normal <span style="font-family: Times New Roman">and its completion value is</span> empty<span style="font-family: Times New Roman">, then return the value <b>undefined</b>.</span></li>
-          <li><span style="font-family: Times New Roman">Otherwise, <i>result</i>.type must be</span> throw<span style="font-family: Times New Roman">. Throw <i>result</i>.value as an exception.</span></li>
+          <li>If <a href="#sec-8">Type</a>(<i>x</i>) is not String, return <i>x</i>.</li>
+          <li>Let <i>prog</i> be the ECMAScript code that is the result of parsing <i>x</i> as a <i>Program</i>. If the parse fails, throw a <b>SyntaxError</b> exception (but <a href="#sec-16">see also clause 16</a>).</li>
+          <li>Let <i>evalCtx</i> be the result of establishing a new execution context (<a href="#sec-10.4.2">10.4.2</a>) for the eval code <i>prog</i>.</li>
+          <li>Let <i>result</i> be the result of evaluating the program <i>prog</i>.</li>
+          <li>Exit the running execution context <i>evalCtx</i>, restoring the previous execution context.</li>
+          <li>If <i>result</i>.type is <span style="font-family: sans-serif">normal</span> and its completion value is a value <i>V</i>, then return the value <i>V</i>.</li>
+          <li>If <i>result</i>.type is <span style="font-family: sans-serif">normal</span> and its completion value is <span style="font-family: sans-serif">empty</span>, then return the value <b>undefined</b>.</li>
+          <li>Otherwise, <i>result</i>.type must be <span style="font-family: sans-serif">throw</span>. Throw <i>result</i>.value as an exception.</li>
         </ol>
 
         <section id="sec-15.1.2.1.1">
@@ -14058,11 +14047,11 @@
     <section id="sec-15.1.3">
       <h1><span class="secnum"><a href="#sec-15.1.3" title="link to this section">15.1.3</a></span> URI Handling Function Properties</h1>
 
-      <p><span style="font-family: Times New Roman">Uniform Resource Identifiers, or URIs, are Strings that identify resources
-      (e.g. web pages or files) and transport protocols by which to access them (e.g. HTTP or FTP) on the Internet. The ECMAScript
-      language itself does not provide any support for using URIs except for functions that encode and decode URIs as described in
-      <a href="#sec-15.1.3.1">15.1.3.1</a>, <a href="#sec-15.1.3.2">15.1.3.2</a>, <a href="#sec-15.1.3.3">15.1.3.3</a> and <a
-      href="#sec-15.1.3.4">15.1.3.4</a>.</span></p>
+      <p>Uniform Resource Identifiers, or URIs, are Strings that identify resources (e.g. web pages or files) and transport
+      protocols by which to access them (e.g. HTTP or FTP) on the Internet. The ECMAScript language itself does not provide any
+      support for using URIs except for functions that encode and decode URIs as described in <a
+      href="#sec-15.1.3.1">15.1.3.1</a>, <a href="#sec-15.1.3.2">15.1.3.2</a>, <a href="#sec-15.1.3.3">15.1.3.3</a> and <a
+      href="#sec-15.1.3.4">15.1.3.4</a>.</p>
 
       <div class="note">
         <p><span class="nh">NOTE</span> Many implementations of ECMAScript provide additional functions and methods that
@@ -14338,7 +14327,7 @@
             <td>
               <p><b>0xD800 - 0xDBFF</b></p>
 
-              <p><span style="font-family: sans-serif"><i>followed by</i></span></p>
+              <p><i>followed by</i></p>
 
               <p><b>0xDC00 &ndash; 0xDFFF</b></p>
             </td>
@@ -14346,7 +14335,7 @@
             <td>
               <p><b>110110</b><i>vv vvwwwwxx</i></p>
 
-              <p><span style="font-family: sans-serif"><i>followed by</i></span></p>
+              <p><i>followed by</i></p>
 
               <p><b>110111</b><i>yy yyzzzzzz</i></p>
             </td>
@@ -14360,7 +14349,7 @@
             <td>
               <p><b>0xD800 - 0xDBFF</b></p>
 
-              <p><span style="font-family: sans-serif"><i>not followed by</i></span></p>
+              <p><i>not followed by</i></p>
 
               <p><b>0xDC00 &ndash; 0xDFFF</b></p>
             </td>
@@ -14392,9 +14381,7 @@
 
       <p>Where</p>
 
-      <p><var>uuuuu</var> <span style="font-family: Times New Roman">=</span> <span style="font-family:
-      monospace"><i>vvvv</i></span>  <span style="font-family: Times New Roman">+</span> <span style="font-family: Times New
-      Roman">1</span></p>
+      <p><i>uuuuu</i> = <span style="font-family: monospace"><i>vvvv</i></span>  + 1</p>
 
       <p>to account for the addition of 0x10000 as in Surrogates, section 3.7, of the Unicode Standard.</p>
 
@@ -15519,14 +15506,14 @@
     <p>An object, <var>O</var>,  is said to be <i>sparse</i> if the following algorithm returns <b>true</b>:</p>
 
     <ol class="proc">
-      <li><span style="font-family: Times New Roman">Let <i>len</i> be the result of calling the [[Get]] internal method of <i>O</i> with argument <b>"length"</b>.</span></li>
-      <li><span style="font-family: Times New Roman">For each integer <i>i</i> in the range 0&le;<i>i</i>&lt;<a href="#sec-9.1.6">ToUint32</a>(<i>len</i>)</span>
+      <li>Let <i>len</i> be the result of calling the [[Get]] internal method of <i>O</i> with argument <b>"length"</b>.</li>
+      <li>For each integer <i>i</i> in the range 0&le;<i>i</i>&lt;<a href="#sec-9.1.6">ToUint32</a>(<i>len</i>)
         <ol class="block">
-          <li><span style="font-family: Times New Roman">Let <i>elem</i> be the result of calling the [[GetOwnProperty]] internal method of <i>O</i> with argument <a href="#sec-9.1.8">ToString</a>(<i>i</i>).</span></li>
-          <li><span style="font-family: Times New Roman">If <i>elem</i> is <b>undefined</b>, return <b>true</b>.</span></li>
+          <li>Let <i>elem</i> be the result of calling the [[GetOwnProperty]] internal method of <i>O</i> with argument <a href="#sec-9.1.8">ToString</a>(<i>i</i>).</li>
+          <li>If <i>elem</i> is <b>undefined</b>, return <b>true</b>.</li>
         </ol>
       </li>
-      <li><span style="font-family: Times New Roman">Return <b>false</b>.</span></li>
+      <li>Return <b>false</b>.</li>
     </ol>
 
     <section id="sec-15.4.1">
@@ -16181,50 +16168,38 @@
 
         <ul>
           <li>
-            <p><span style="font-family: Times New Roman">Calling <i>comparefn</i>(<i>a</i>,<i>b</i>) always returns the same
-            value <i>v</i> when given a specific pair of values <i>a</i> and <i>b</i> as its two arguments. Furthermore, <a
-            href="#sec-8">Type</a>(<i>v</i>) is Number, and <i>v</i> is not NaN. Note that this implies that exactly one of
-            <i>a</i>&nbsp;&lt;<sub>CF</sub></span>&nbsp;<span style="font-family: Times New Roman"><i>b</i>,
-            <i>a</i>&nbsp;=<sub>CF</sub></span>&nbsp;<span style="font-family: Times New Roman"><i>b</i>, and
-            <i>a</i>&nbsp;&gt;<sub>CF</sub></span>&nbsp;<span style="font-family: Times New Roman"><i>b</i> will be true for a
-            given pair of <i>a</i> and <i>b</i>.</span></p>
+            <p>Calling <i>comparefn</i>(<i>a</i>,<i>b</i>) always returns the same value <i>v</i> when given a specific pair of
+            values <i>a</i> and <i>b</i> as its two arguments. Furthermore, <a href="#sec-8">Type</a>(<i>v</i>) is Number, and
+            <i>v</i> is not NaN. Note that this implies that exactly one of <i>a</i>&nbsp;&lt;<sub>CF</sub>&nbsp;<i>b</i>,
+            <i>a</i>&nbsp;=<sub>CF</sub>&nbsp;<i>b</i>, and <i>a</i>&nbsp;&gt;<sub>CF</sub>&nbsp;<i>b</i> will be true for a given
+            pair of <i>a</i> and <i>b</i>.</p>
           </li>
 
           <li>
-            <p><span style="font-family: Times New Roman">Calling <i>comparefn</i>(<i>a</i>,<i>b</i>) does not modify the
-            <b>this</b> object.</span></p>
+            <p>Calling <i>comparefn</i>(<i>a</i>,<i>b</i>) does not modify the <b>this</b> object.</p>
           </li>
 
           <li>
-            <p><span style="font-family: Times New Roman"><i>a</i>&nbsp;=<sub>CF</sub></span>&nbsp;<span style="font-family: Times
-            New Roman"><i>a</i>   (reflexivity)</span></p>
+            <p><i>a</i>&nbsp;=<sub>CF</sub>&nbsp;<i>a</i>   (reflexivity)</p>
           </li>
 
           <li>
-            <p><span style="font-family: Times New Roman">If <i>a</i>&nbsp;=<sub>CF</sub></span>&nbsp;<span style="font-family:
-            Times New Roman"><i>b</i>, then <i>b</i>&nbsp;=<sub>CF</sub></span>&nbsp;<span style="font-family: Times New
-            Roman"><i>a</i>   (symmetry)</span></p>
+            <p>If <i>a</i>&nbsp;=<sub>CF</sub>&nbsp;<i>b</i>, then <i>b</i>&nbsp;=<sub>CF</sub>&nbsp;<i>a</i>   (symmetry)</p>
           </li>
 
           <li>
-            <p><span style="font-family: Times New Roman">If <i>a</i>&nbsp;=<sub>CF</sub></span>&nbsp;<span style="font-family:
-            Times New Roman"><i>b</i> and <i>b</i>&nbsp;=<sub>CF</sub></span>&nbsp;<span style="font-family: Times New
-            Roman"><i>c</i>, then <i>a</i>&nbsp;=<sub>CF</sub></span>&nbsp;<span style="font-family: Times New Roman"><i>c</i>
-            (transitivity of =<sub>CF</sub>)</span></p>
+            <p>If <i>a</i>&nbsp;=<sub>CF</sub>&nbsp;<i>b</i> and <i>b</i>&nbsp;=<sub>CF</sub>&nbsp;<i>c</i>, then
+            <i>a</i>&nbsp;=<sub>CF</sub>&nbsp;<i>c</i>   (transitivity of =<sub>CF</sub>)</p>
           </li>
 
           <li>
-            <p><span style="font-family: Times New Roman">If <i>a</i>&nbsp;&lt;<sub>CF</sub></span>&nbsp;<span style="font-family:
-            Times New Roman"><i>b</i> and <i>b</i>&nbsp;&lt;<sub>CF</sub></span>&nbsp;<span style="font-family: Times New
-            Roman"><i>c</i>, then <i>a</i>&nbsp;&lt;<sub>CF</sub></span>&nbsp;<span style="font-family: Times New Roman"><i>c</i>
-            (transitivity of &lt;<sub>CF</sub>)</span></p>
+            <p>If <i>a</i>&nbsp;&lt;<sub>CF</sub>&nbsp;<i>b</i> and <i>b</i>&nbsp;&lt;<sub>CF</sub>&nbsp;<i>c</i>, then
+            <i>a</i>&nbsp;&lt;<sub>CF</sub>&nbsp;<i>c</i>   (transitivity of &lt;<sub>CF</sub>)</p>
           </li>
 
           <li>
-            <p><span style="font-family: Times New Roman">If <i>a</i>&nbsp;&gt;<sub>CF</sub></span>&nbsp;<span style="font-family:
-            Times New Roman"><i>b</i> and <i>b</i>&nbsp;&gt;<sub>CF</sub></span>&nbsp;<span style="font-family: Times New
-            Roman"><i>c</i>, then <i>a</i>&nbsp;&gt;<sub>CF</sub></span>&nbsp;<span style="font-family: Times New Roman"><i>c</i>
-            (transitivity of &gt;<sub>CF</sub>)</span></p>
+            <p>If <i>a</i>&nbsp;&gt;<sub>CF</sub>&nbsp;<i>b</i> and <i>b</i>&nbsp;&gt;<sub>CF</sub>&nbsp;<i>c</i>, then
+            <i>a</i>&nbsp;&gt;<sub>CF</sub>&nbsp;<i>c</i>   (transitivity of &gt;<sub>CF</sub>)</p>
           </li>
         </ul>
 
@@ -16483,7 +16458,7 @@
                   <li>Let <i>elementK</i> be the result of calling the [[Get]] internal method of <i>O</i> with the argument <a href="#sec-9.1.8">ToString</a>(<i>k</i>).</li>
                   <li>If <i>elementK</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>elementK</i>.</li>
                   <li>Let <i>same</i> be the result of applying the Strict Equality Comparison Algorithm to <i>searchElement</i> and <i>elementK</i>.</li>
-                  <li>If <i>same</i> is <b>true,</b> return <i>k</i>.</li>
+                  <li>If <i>same</i> is <b>true,</b>  return <i>k</i>.</li>
                 </ol>
               </li>
               <li>Increase <i>k</i> by 1.</li>
@@ -16537,7 +16512,7 @@
                   <li>Let <i>elementK</i> be the result of calling the [[Get]] internal method of <i>O</i> with the argument <a href="#sec-9.1.8">ToString</a>(<i>k</i>).</li>
                   <li>If <i>elementK</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>elementK</i>.</li>
                   <li>Let <i>same</i> be the result of applying the Strict Equality Comparison Algorithm to <i>searchElement</i> and <i>elementK</i>.</li>
-                  <li>If <i>same</i> is <b>true,</b> return <i>k</i>.</li>
+                  <li>If <i>same</i> is <b>true,</b>  return <i>k</i>.</li>
                 </ol>
               </li>
               <li>Decrease <i>k</i> by 1.</li>
@@ -18422,7 +18397,7 @@
         </div>
 
         <ol class="proc">
-          <li><span style="font-family: Times New Roman">Let <i>e</i>, <i>n</i>, and <i>f</i> be integers such that <i>f</i></span> <span style="font-family: Times New Roman">&ge; 0, 10<sup><i>f</i></sup></span> <span style="font-family: Times New Roman">&le; n &lt; 10<sup><i>f</i>+1</sup>, the number value for n &times; 10<sup><i>e</i>&ndash;<i>f</i></sup> is x, and <i>f</i> is as small as possible. If there are multiple possibilities for <i>n</i>, choose the value of <i>n</i> for which <i>n</i></span> <span style="font-family: Times New Roman">&times; 10<sup><i>e</i>&ndash;<i>f</i></sup> is closest in value to <i>x</i>. If there are two such possible values of <i>n</i>, choose the one that is even.</span></li>
+          <li>Let <i>e</i>, <i>n</i>, and <i>f</i> be integers such that <i>f</i> &ge; 0, 10<sup><i>f</i></sup> &le; n &lt; 10<sup><i>f</i>+1</sup>, the number value for n &times; 10<sup><i>e</i>&ndash;<i>f</i></sup> is x, and <i>f</i> is as small as possible. If there are multiple possibilities for <i>n</i>, choose the value of <i>n</i> for which <i>n</i> &times; 10<sup><i>e</i>&ndash;<i>f</i></sup> is closest in value to <i>x</i>. If there are two such possible values of <i>n</i>, choose the one that is even.</li>
         </ol>
       </section>
 
@@ -18677,9 +18652,9 @@
         sign.</p>
 
         <ul>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is NaN, the result is NaN.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is &minus;0, the result is +0.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is &minus;&infin;, the result is +&infin;.</span></li>
+          <li>If <i>x</i> is NaN, the result is NaN.</li>
+          <li>If <i>x</i> is &minus;0, the result is +0.</li>
+          <li>If <i>x</i> is &minus;&infin;, the result is +&infin;.</li>
         </ul>
       </section>
 
@@ -18691,10 +18666,10 @@
         Roman">+&pi;</span>.</p>
 
         <ul>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is NaN, the result is NaN.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is greater than 1, the result is NaN.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is less than <b>&minus;</b>1, the result is NaN.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is exactly 1, the result is +0.</span></li>
+          <li>If <i>x</i> is NaN, the result is NaN.</li>
+          <li>If <i>x</i> is greater than 1, the result is NaN.</li>
+          <li>If <i>x</i> is less than <b>&minus;</b>1, the result is NaN.</li>
+          <li>If <i>x</i> is exactly 1, the result is +0.</li>
         </ul>
       </section>
 
@@ -18706,11 +18681,11 @@
         Roman">+&pi;/2</span>.</p>
 
         <ul>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is NaN, the result is NaN.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is greater than 1, the result is NaN.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is less than &ndash;1, the result is NaN.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is +0, the result is +0.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is &minus;0, the result is &minus;0.</span></li>
+          <li>If <i>x</i> is NaN, the result is NaN.</li>
+          <li>If <i>x</i> is greater than 1, the result is NaN.</li>
+          <li>If <i>x</i> is less than &ndash;1, the result is NaN.</li>
+          <li>If <i>x</i> is +0, the result is +0.</li>
+          <li>If <i>x</i> is &minus;0, the result is &minus;0.</li>
         </ul>
       </section>
 
@@ -18722,11 +18697,11 @@
         New Roman">+&pi;/2</span>.</p>
 
         <ul>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is NaN, the result is NaN.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is +0, the result is +0.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is &minus;0, the result is &minus;0.</span></li>
-          <li><span style="font-family: Times New Roman">If</span> <span style="font-family: Times New Roman"><i>x</i> is +&infin;, the result is an implementation-dependent approximation to +&pi;/2.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is &minus;&infin;, the result is an implementation-dependent approximation to &minus;&pi;/2.</span></li>
+          <li>If <i>x</i> is NaN, the result is NaN.</li>
+          <li>If <i>x</i> is +0, the result is +0.</li>
+          <li>If <i>x</i> is &minus;0, the result is &minus;0.</li>
+          <li>If <i>x</i> is +&infin;, the result is an implementation-dependent approximation to +&pi;/2.</li>
+          <li>If <i>x</i> is &minus;&infin;, the result is an implementation-dependent approximation to &minus;&pi;/2.</li>
         </ul>
       </section>
 
@@ -18741,29 +18716,29 @@
         to <span style="font-family: Times New Roman">+&pi;</span>.</p>
 
         <ul>
-          <li><span style="font-family: Times New Roman">If either <i>x</i> or <i>y</i> is NaN, the result is NaN.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>y</i>&gt;0 and <i>x</i> is +0, the result is an implementation-dependent approximation to  +&pi;/2.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>y</i>&gt;0 and <i>x</i> is &minus;0, the result is an implementation-dependent approximation to  +&pi;/2.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>y</i> is +0 and <i>x</i>&gt;0, the result is +0.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>y</i> is +0 and <i>x</i> is +0, the result is +0.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>y</i> is +0 and <i>x</i> is &minus;0, the result is an implementation-dependent approximation to  +&pi;.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>y</i> is +0 and <i>x</i>&lt;0, the result is an implementation-dependent approximation to  +&pi;.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>y</i> is &minus;0 and <i>x</i>&gt;0, the result is &minus;0.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>y</i> is &minus;0 and <i>x</i> is +0, the result is &minus;0.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>y</i> is &minus;0 and <i>x</i> is &minus;0, the result is an implementation-dependent approximation to  &minus;&pi;.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>y</i> is &minus;0 and <i>x</i>&lt;0, the result is an implementation-dependent approximation to  &minus;&pi;.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>y</i>&lt;0 and <i>x</i> is +0, the result is an implementation-dependent approximation to  &minus;&pi;/2.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>y</i>&lt;0 and <i>x</i> is &minus;0, the result is an implementation-dependent approximation to  &minus;&pi;/2.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>y</i>&gt;0 and <i>y</i> is finite and <i>x</i> is +&infin;, the result is +0.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>y</i>&gt;0 and <i>y</i> is finite and <i>x</i> is &minus;&infin;, the result if an implementation-dependent approximation to  +&pi;.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>y</i>&lt;0 and <i>y</i> is finite and <i>x</i> is +&infin;, the result is &minus;0.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>y</i>&lt;0 and <i>y</i> is finite and <i>x</i> is &minus;&infin;, the result is an implementation-dependent approximation to &minus;&pi;.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>y</i> is +&infin; and <i>x</i> is finite, the result is an implementation-dependent approximation to  +&pi;/2.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>y</i> is &minus;&infin; and <i>x</i> is finite, the result is an implementation-dependent approximation to  &minus;&pi;/2.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>y</i> is +&infin; and <i>x</i> is +&infin;, the result is an implementation-dependent approximation to  +&pi;/4.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>y</i> is +&infin; and <i>x</i> is &minus;&infin;, the result is an implementation-dependent approximation to  +3&pi;/4.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>y</i> is &minus;&infin; and <i>x</i> is +&infin;, the result is an implementation-dependent approximation to  &minus;&pi;/4.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>y</i> is &minus;&infin; and <i>x</i> is &minus;&infin;, the result is an implementation-dependent approximation to  &minus;3&pi;/4.</span></li>
+          <li>If either <i>x</i> or <i>y</i> is NaN, the result is NaN.</li>
+          <li>If <i>y</i>&gt;0 and <i>x</i> is +0, the result is an implementation-dependent approximation to  +&pi;/2.</li>
+          <li>If <i>y</i>&gt;0 and <i>x</i> is &minus;0, the result is an implementation-dependent approximation to  +&pi;/2.</li>
+          <li>If <i>y</i> is +0 and <i>x</i>&gt;0, the result is +0.</li>
+          <li>If <i>y</i> is +0 and <i>x</i> is +0, the result is +0.</li>
+          <li>If <i>y</i> is +0 and <i>x</i> is &minus;0, the result is an implementation-dependent approximation to  +&pi;.</li>
+          <li>If <i>y</i> is +0 and <i>x</i>&lt;0, the result is an implementation-dependent approximation to  +&pi;.</li>
+          <li>If <i>y</i> is &minus;0 and <i>x</i>&gt;0, the result is &minus;0.</li>
+          <li>If <i>y</i> is &minus;0 and <i>x</i> is +0, the result is &minus;0.</li>
+          <li>If <i>y</i> is &minus;0 and <i>x</i> is &minus;0, the result is an implementation-dependent approximation to  &minus;&pi;.</li>
+          <li>If <i>y</i> is &minus;0 and <i>x</i>&lt;0, the result is an implementation-dependent approximation to  &minus;&pi;.</li>
+          <li>If <i>y</i>&lt;0 and <i>x</i> is +0, the result is an implementation-dependent approximation to  &minus;&pi;/2.</li>
+          <li>If <i>y</i>&lt;0 and <i>x</i> is &minus;0, the result is an implementation-dependent approximation to  &minus;&pi;/2.</li>
+          <li>If <i>y</i>&gt;0 and <i>y</i> is finite and <i>x</i> is +&infin;, the result is +0.</li>
+          <li>If <i>y</i>&gt;0 and <i>y</i> is finite and <i>x</i> is &minus;&infin;, the result if an implementation-dependent approximation to  +&pi;.</li>
+          <li>If <i>y</i>&lt;0 and <i>y</i> is finite and <i>x</i> is +&infin;, the result is &minus;0.</li>
+          <li>If <i>y</i>&lt;0 and <i>y</i> is finite and <i>x</i> is &minus;&infin;, the result is an implementation-dependent approximation to &minus;&pi;.</li>
+          <li>If <i>y</i> is +&infin; and <i>x</i> is finite, the result is an implementation-dependent approximation to  +&pi;/2.</li>
+          <li>If <i>y</i> is &minus;&infin; and <i>x</i> is finite, the result is an implementation-dependent approximation to  &minus;&pi;/2.</li>
+          <li>If <i>y</i> is +&infin; and <i>x</i> is +&infin;, the result is an implementation-dependent approximation to  +&pi;/4.</li>
+          <li>If <i>y</i> is +&infin; and <i>x</i> is &minus;&infin;, the result is an implementation-dependent approximation to  +3&pi;/4.</li>
+          <li>If <i>y</i> is &minus;&infin; and <i>x</i> is +&infin;, the result is an implementation-dependent approximation to  &minus;&pi;/4.</li>
+          <li>If <i>y</i> is &minus;&infin; and <i>x</i> is &minus;&infin;, the result is an implementation-dependent approximation to  &minus;3&pi;/4.</li>
         </ul>
       </section>
 
@@ -18774,12 +18749,12 @@
         a mathematical integer. If <var>x</var> is already an integer, the result is <var>x</var>.</p>
 
         <ul>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is NaN, the result is NaN.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is +0, the result is +0.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is &minus;0, the result is &minus;0.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is +&infin;, the result is +&infin;.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is &minus;&infin;, the result is &minus;&infin;.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is less than 0 but greater than -1, the result is &minus;0.</span></li>
+          <li>If <i>x</i> is NaN, the result is NaN.</li>
+          <li>If <i>x</i> is +0, the result is +0.</li>
+          <li>If <i>x</i> is &minus;0, the result is &minus;0.</li>
+          <li>If <i>x</i> is +&infin;, the result is +&infin;.</li>
+          <li>If <i>x</i> is &minus;&infin;, the result is &minus;&infin;.</li>
+          <li>If <i>x</i> is less than 0 but greater than -1, the result is &minus;0.</li>
         </ul>
 
         <p>The value of <code>Math.ceil(x)</code> is the same as the value of <code>-Math.<a
@@ -18793,11 +18768,11 @@
         radians.</p>
 
         <ul>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is NaN, the result is NaN.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is +0, the result is 1.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is &minus;0, the result is 1.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is +&infin;, the result is NaN.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is &minus;&infin;, the result is NaN.</span></li>
+          <li>If <i>x</i> is NaN, the result is NaN.</li>
+          <li>If <i>x</i> is +0, the result is 1.</li>
+          <li>If <i>x</i> is &minus;0, the result is 1.</li>
+          <li>If <i>x</i> is +&infin;, the result is NaN.</li>
+          <li>If <i>x</i> is &minus;&infin;, the result is NaN.</li>
         </ul>
       </section>
 
@@ -18808,11 +18783,11 @@
         the power of <var>x</var>, where <var>e</var> is the base of the natural logarithms).</p>
 
         <ul>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is NaN, the result is NaN.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is +0, the result is 1.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is &minus;0, the result is 1.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is +&infin;, the result is +&infin;.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is &minus;&infin;, the result is +0.</span></li>
+          <li>If <i>x</i> is NaN, the result is NaN.</li>
+          <li>If <i>x</i> is +0, the result is 1.</li>
+          <li>If <i>x</i> is &minus;0, the result is 1.</li>
+          <li>If <i>x</i> is +&infin;, the result is +&infin;.</li>
+          <li>If <i>x</i> is &minus;&infin;, the result is +0.</li>
         </ul>
       </section>
 
@@ -18823,12 +18798,12 @@
         mathematical integer. If <var>x</var> is already an integer, the result is <var>x</var>.</p>
 
         <ul>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is NaN, the result is NaN.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is +0, the result is +0.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is &minus;0, the result is &minus;0.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is +&infin;, the result is +&infin;.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is &minus;&infin;, the result is &minus;&infin;.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is greater than 0 but less than 1, the result is +0.</span></li>
+          <li>If <i>x</i> is NaN, the result is NaN.</li>
+          <li>If <i>x</i> is +0, the result is +0.</li>
+          <li>If <i>x</i> is &minus;0, the result is &minus;0.</li>
+          <li>If <i>x</i> is +&infin;, the result is +&infin;.</li>
+          <li>If <i>x</i> is &minus;&infin;, the result is &minus;&infin;.</li>
+          <li>If <i>x</i> is greater than 0 but less than 1, the result is +0.</li>
         </ul>
 
         <div class="note">
@@ -18840,12 +18815,12 @@
       <section id="sec-15.8.2.10">
         <h1><span class="secnum"><a href="#sec-15.8.2.10" title="link to this section">15.8.2.10</a></span> log (x)</h1>
         <ul>
-          <li><span style="font-family: Times New Roman">Returns an implementation-dependent approximation to the natural logarithm of <i>x</i>.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is NaN, the result is NaN.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is less than 0, the result is NaN.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is +0 or &minus;0, the result is &minus;&infin;.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is 1, the result is +0.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is +&infin;, the result is +&infin;.</span></li>
+          <li>Returns an implementation-dependent approximation to the natural logarithm of <i>x</i>.</li>
+          <li>If <i>x</i> is NaN, the result is NaN.</li>
+          <li>If <i>x</i> is less than 0, the result is NaN.</li>
+          <li>If <i>x</i> is +0 or &minus;0, the result is &minus;&infin;.</li>
+          <li>If <i>x</i> is 1, the result is +0.</li>
+          <li>If <i>x</i> is +&infin;, the result is +&infin;.</li>
         </ul>
       </section>
 
@@ -18857,17 +18832,16 @@
 
         <ul>
           <li>
-            <p><span style="font-family: Times New Roman">If no arguments are given, the result is &minus;&infin;.</span></p>
+            <p>If no arguments are given, the result is &minus;&infin;.</p>
           </li>
 
           <li>
-            <p><span style="font-family: Times New Roman">If any value is NaN, the result is NaN.</span></p>
+            <p>If any value is NaN, the result is NaN.</p>
           </li>
 
           <li>
-            <p><span style="font-family: Times New Roman">The comparison of values to determine the largest value is done using
-            the Abstract Relational Comparision Alogrithm ( 11.8.1) except that +0 is considered to be larger than
-            &minus;0.</span></p>
+            <p>The comparison of values to determine the largest value is done using the Abstract Relational Comparision Alogrithm
+            ( 11.8.1) except that +0 is considered to be larger than &minus;0.</p>
           </li>
         </ul>
 
@@ -18882,17 +18856,16 @@
 
         <ul>
           <li>
-            <p><span style="font-family: Times New Roman">If no arguments are given, the result is +&infin;.</span></p>
+            <p>If no arguments are given, the result is +&infin;.</p>
           </li>
 
           <li>
-            <p><span style="font-family: Times New Roman">If any value is NaN, the result is NaN.</span></p>
+            <p>If any value is NaN, the result is NaN.</p>
           </li>
 
           <li>
-            <p><span style="font-family: Times New Roman">The comparison of values to determine the smallest value is done using
-            the Abstract Relational Comparision Alogrithm (<a href="#sec-11.8.1">11.8.1</a>) except that +0 is considered to be
-            larger than &minus;0.</span></p>
+            <p>The comparison of values to determine the smallest value is done using the Abstract Relational Comparision
+            Alogrithm (11.8.1) except that +0 is considered to be larger than &minus;0.</p>
           </li>
         </ul>
 
@@ -18905,29 +18878,29 @@
         <p>Returns an implementation-dependent approximation to the result of raising <var>x</var> to the power <var>y</var>.</p>
 
         <ul>
-          <li><span style="font-family: Times New Roman">If <i>y</i> is NaN, the result is NaN.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>y</i> is +0, the result is 1, even if <i>x</i> is NaN.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>y</i> is &minus;0, the result is 1, even if <i>x</i> is NaN.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is NaN and <i>y</i> is nonzero, the result is NaN.</span></li>
-          <li><span style="font-family: Times New Roman">If <a href="#sec-5.2">abs</a>(<i>x</i>)&gt;1 and <i>y</i> is +&infin;, the result is +&infin;.</span></li>
-          <li><span style="font-family: Times New Roman">If <a href="#sec-5.2">abs</a>(<i>x</i>)&gt;1 and <i>y</i> is &minus;&infin;, the result is +0.</span></li>
-          <li><span style="font-family: Times New Roman">If <a href="#sec-5.2">abs</a>(<i>x</i>)==1 and <i>y</i> is +&infin;, the result is NaN.</span></li>
-          <li><span style="font-family: Times New Roman">If <a href="#sec-5.2">abs</a>(<i>x</i>)==1 and <i>y</i> is &minus;&infin;, the result is NaN.</span></li>
-          <li><span style="font-family: Times New Roman">If <a href="#sec-5.2">abs</a>(<i>x</i>)&lt;1 and <i>y</i> is +&infin;, the result is +0.</span></li>
-          <li><span style="font-family: Times New Roman">If <a href="#sec-5.2">abs</a>(<i>x</i>)&lt;1 and <i>y</i> is &minus;&infin;, the result is +&infin;.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is +&infin; and <i>y</i>&gt;0, the result is +&infin;.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is +&infin; and <i>y</i>&lt;0, the result is +0.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is &minus;&infin; and <i>y</i>&gt;0 and <i>y</i> is an odd integer, the result is &minus;&infin;.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is &minus;&infin; and <i>y</i>&gt;0 and <i>y</i> is not an odd integer, the result is +&infin;.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is &minus;&infin; and <i>y</i>&lt;0 and <i>y</i> is an odd integer, the result is &minus;0.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is &minus;&infin; and <i>y</i>&lt;0 and <i>y</i> is not an odd integer, the result is +0.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is +0 and <i>y</i>&gt;0, the result is +0.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is +0 and <i>y</i>&lt;0, the result is +&infin;.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is &minus;0 and <i>y</i>&gt;0 and <i>y</i> is an odd integer, the result is &minus;0.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is &minus;0 and <i>y</i>&gt;0 and <i>y</i> is not an odd integer, the result is +0.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is &minus;0 and <i>y</i>&lt;0 and <i>y</i> is an odd integer, the result is &minus;&infin;.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is &minus;0 and <i>y</i>&lt;0 and <i>y</i> is not an odd integer, the result is +&infin;.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i>&lt;0 and <i>x</i> is finite and <i>y</i> is finite and <i>y</i> is not an integer, the result is NaN.</span></li>
+          <li>If <i>y</i> is NaN, the result is NaN.</li>
+          <li>If <i>y</i> is +0, the result is 1, even if <i>x</i> is NaN.</li>
+          <li>If <i>y</i> is &minus;0, the result is 1, even if <i>x</i> is NaN.</li>
+          <li>If <i>x</i> is NaN and <i>y</i> is nonzero, the result is NaN.</li>
+          <li>If <a href="#sec-5.2">abs</a>(<i>x</i>)&gt;1 and <i>y</i> is +&infin;, the result is +&infin;.</li>
+          <li>If <a href="#sec-5.2">abs</a>(<i>x</i>)&gt;1 and <i>y</i> is &minus;&infin;, the result is +0.</li>
+          <li>If <a href="#sec-5.2">abs</a>(<i>x</i>)==1 and <i>y</i> is +&infin;, the result is NaN.</li>
+          <li>If <a href="#sec-5.2">abs</a>(<i>x</i>)==1 and <i>y</i> is &minus;&infin;, the result is NaN.</li>
+          <li>If <a href="#sec-5.2">abs</a>(<i>x</i>)&lt;1 and <i>y</i> is +&infin;, the result is +0.</li>
+          <li>If <a href="#sec-5.2">abs</a>(<i>x</i>)&lt;1 and <i>y</i> is &minus;&infin;, the result is +&infin;.</li>
+          <li>If <i>x</i> is +&infin; and <i>y</i>&gt;0, the result is +&infin;.</li>
+          <li>If <i>x</i> is +&infin; and <i>y</i>&lt;0, the result is +0.</li>
+          <li>If <i>x</i> is &minus;&infin; and <i>y</i>&gt;0 and <i>y</i> is an odd integer, the result is &minus;&infin;.</li>
+          <li>If <i>x</i> is &minus;&infin; and <i>y</i>&gt;0 and <i>y</i> is not an odd integer, the result is +&infin;.</li>
+          <li>If <i>x</i> is &minus;&infin; and <i>y</i>&lt;0 and <i>y</i> is an odd integer, the result is &minus;0.</li>
+          <li>If <i>x</i> is &minus;&infin; and <i>y</i>&lt;0 and <i>y</i> is not an odd integer, the result is +0.</li>
+          <li>If <i>x</i> is +0 and <i>y</i>&gt;0, the result is +0.</li>
+          <li>If <i>x</i> is +0 and <i>y</i>&lt;0, the result is +&infin;.</li>
+          <li>If <i>x</i> is &minus;0 and <i>y</i>&gt;0 and <i>y</i> is an odd integer, the result is &minus;0.</li>
+          <li>If <i>x</i> is &minus;0 and <i>y</i>&gt;0 and <i>y</i> is not an odd integer, the result is +0.</li>
+          <li>If <i>x</i> is &minus;0 and <i>y</i>&lt;0 and <i>y</i> is an odd integer, the result is &minus;&infin;.</li>
+          <li>If <i>x</i> is &minus;0 and <i>y</i>&lt;0 and <i>y</i> is not an odd integer, the result is +&infin;.</li>
+          <li>If <i>x</i>&lt;0 and <i>x</i> is finite and <i>y</i> is finite and <i>y</i> is not an integer, the result is NaN.</li>
         </ul>
       </section>
 
@@ -18947,13 +18920,13 @@
         Times New Roman">+&infin;</span>. If <var>x</var> is already an integer, the result is <var>x</var>.</p>
 
         <ul>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is NaN, the result is NaN.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is +0, the result is +0.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is &minus;0, the result is &minus;0.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is +&infin;, the result is +&infin;.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is &minus;&infin;, the result is &minus;&infin;.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is greater than 0 but less than 0.5, the result is +0.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is less than 0 but greater than or equal to -0.5, the result is &minus;0.</span></li>
+          <li>If <i>x</i> is NaN, the result is NaN.</li>
+          <li>If <i>x</i> is +0, the result is +0.</li>
+          <li>If <i>x</i> is &minus;0, the result is &minus;0.</li>
+          <li>If <i>x</i> is +&infin;, the result is +&infin;.</li>
+          <li>If <i>x</i> is &minus;&infin;, the result is &minus;&infin;.</li>
+          <li>If <i>x</i> is greater than 0 but less than 0.5, the result is +0.</li>
+          <li>If <i>x</i> is less than 0 but greater than or equal to -0.5, the result is &minus;0.</li>
         </ul>
 
         <div class="note">
@@ -18979,10 +18952,10 @@
         radians.</p>
 
         <ul>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is NaN, the result is NaN.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is +0, the result is +0.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is &minus;0, the result is &minus;0.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is +&infin; or &minus;&infin;, the result is NaN.</span></li>
+          <li>If <i>x</i> is NaN, the result is NaN.</li>
+          <li>If <i>x</i> is +0, the result is +0.</li>
+          <li>If <i>x</i> is &minus;0, the result is &minus;0.</li>
+          <li>If <i>x</i> is +&infin; or &minus;&infin;, the result is NaN.</li>
         </ul>
       </section>
 
@@ -18992,11 +18965,11 @@
         <p>Returns an implementation-dependent approximation to the square root of <var>x</var>.</p>
 
         <ul>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is NaN, the result is NaN.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is less than 0, the result is NaN.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is +0, the result is +0.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is &minus;0, the result is &minus;0.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is +&infin;, the result is +&infin;.</span></li>
+          <li>If <i>x</i> is NaN, the result is NaN.</li>
+          <li>If <i>x</i> is less than 0, the result is NaN.</li>
+          <li>If <i>x</i> is +0, the result is +0.</li>
+          <li>If <i>x</i> is &minus;0, the result is &minus;0.</li>
+          <li>If <i>x</i> is +&infin;, the result is +&infin;.</li>
         </ul>
       </section>
 
@@ -19007,10 +18980,10 @@
         radians.</p>
 
         <ul>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is NaN, the result is NaN.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is +0, the result is +0.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is &minus;0, the result is &minus;0.</span></li>
-          <li><span style="font-family: Times New Roman">If <i>x</i> is +&infin; or &minus;&infin;, the result is NaN.</span></li>
+          <li>If <i>x</i> is NaN, the result is NaN.</li>
+          <li>If <i>x</i> is +0, the result is +0.</li>
+          <li>If <i>x</i> is &minus;0, the result is &minus;0.</li>
+          <li>If <i>x</i> is +&infin; or &minus;&infin;, the result is NaN.</li>
         </ul>
       </section>
     </section>
@@ -19289,18 +19262,18 @@
 
         <p>Where the fields are as follows:</p>
 
-        <p><code>YYYY</code> <span style="font-family: sans-serif">is the decimal digits of the year 0000 to 9999 in the Gregorian
-        calendar.</span></p>
+        <p><code>YYYY</code>&#x9;<span style="font-family: sans-serif">is the decimal digits of the year 0000 to 9999 in the
+        Gregorian calendar.</span></p>
 
         <p><code>-</code>&#x9;&#x9;<span style="font-family: sans-serif">&ldquo;</span><code>-</code><span style="font-family:
         sans-serif">&rdquo; (hyphen) appears literally twice in the string.</span></p>
 
-        <p><code>MM</code>&#x9; <span style="font-family: sans-serif">is the month of the year from 01 (January) to 12
+        <p><code>MM</code>&#x9;&#x9;<span style="font-family: sans-serif">is the month of the year from 01 (January) to 12
         (December).</span></p>
 
-        <p><code>DD</code>&#x9; <span style="font-family: sans-serif">is the day of the month from 01 to 31.</span></p>
+        <p><code>DD</code>&#x9;&#x9;<span style="font-family: sans-serif">is the day of the month from 01 to 31.</span></p>
 
-        <p><code>T</code>&#x9; <span style="font-family: sans-serif">&ldquo;</span><code>T</code><span style="font-family:
+        <p><code>T</code>&#x9;&#x9;<span style="font-family: sans-serif">&ldquo;</span><code>T</code><span style="font-family:
         sans-serif">&rdquo; appears literally in the string, to indicate the beginning of the time element.</span></p>
 
         <p><code>HH</code>&#x9;<span style="font-family: sans-serif">is the number of complete hours that have passed since
@@ -19312,16 +19285,16 @@
         <p><code>mm</code>&#x9;<span style="font-family: sans-serif">is the number of complete minutes since the start of the hour
         as two decimal digits from 00 to 59.</span></p>
 
-        <p><code>ss</code> <span style="font-family: sans-serif">is the number of complete seconds since the start of the minute
-        as two decimal digits from 00 to 59.</span></p>
+        <p><code>ss</code>&#x9;<span style="font-family: sans-serif">is the number of complete seconds since the start of the
+        minute as two decimal digits from 00 to 59.</span></p>
 
         <p><code>.</code>&#x9;&#x9;<span style="font-family: sans-serif">&ldquo;</span><code>.</code><span style="font-family:
         sans-serif">&rdquo; (dot) appears literally in the string.</span></p>
 
-        <p><code>sss</code> <span style="font-family: sans-serif">is the number of complete milliseconds since the start of the
-        second as three decimal digits.</span></p>
+        <p><code>sss</code>&#x9;<span style="font-family: sans-serif">is the number of complete milliseconds since the start of
+        the second as three decimal digits.</span></p>
 
-        <p><code>Z</code> <span style="font-family: sans-serif">is the time zone offset specified as
+        <p><code>Z</code>&#x9;<span style="font-family: sans-serif">is the time zone offset specified as
         &ldquo;</span><code>Z</code><span style="font-family: sans-serif">&rdquo; (for UTC) or either
         &ldquo;</span><code>+</code><span style="font-family: sans-serif">&rdquo; or &ldquo;</span><code>-</code><span
         style="font-family: sans-serif">&rdquo; followed by a time expression</span> <code>HH:mm</code></p>
@@ -21195,7 +21168,7 @@
           <figcaption>Table&nbsp;25 &mdash; ControlEscape Character Values</figcaption>
           <table class="real-table">
             <tr>
-              <th><span style="font-family: Times New Roman"><b><i>ControlEscape</i></b></span> </th>
+              <th><b><i>ControlEscape</i></b> </th>
               <th>Code Unit</th>
               <th>Name</th>
               <th>Symbol</th>

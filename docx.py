@@ -229,6 +229,7 @@ k_numId = bloat('numId')
 k_numbering = bloat('numbering')
 k_pStyle = bloat('pStyle')
 k_numFmt = bloat('numFmt')
+k_numStyleLink = bloat('numStyleLink')
 
 class Num:
     def __init__(self, abstract_num_id, overrides):
@@ -278,13 +279,19 @@ def parse_numbering(docx, e):
         abstract_id = style.get(k_abstractNumId)
         assert abstract_id is not None
 
-        levels = []
-        for level in style.findall(k_lvl):
-            ilvl = int(level.get(k_ilvl))
-            while len(levels) <= ilvl:
-                levels.append(None)
-            levels[ilvl] = parse_lvl(docx, level)
-        abstract_num[abstract_id] = levels
+        nsl = list(style.findall(k_numStyleLink))
+        if len(nsl) == 0:
+            levels = []
+            for level in style.findall(k_lvl):
+                ilvl = int(level.get(k_ilvl))
+                while len(levels) <= ilvl:
+                    levels.append(None)
+                levels[ilvl] = parse_lvl(docx, level)
+            abstract_num[abstract_id] = levels
+        else:
+            assert len(nsl) == 1
+            assert len(list(style.findall(k_lvl))) == 0
+            abstract_num[abstract_id] = nsl[0].get(k_val)
 
     # Build the num dictionary (extra level of misdirection in OOXML, awesome)
     num = {}
@@ -351,13 +358,13 @@ class Document:
         ov = num.overrides
         if ilvl < len(ov) and ov[ilvl] is not None:
             return ov[ilvl]
-        levels = self.numbering.abstract_num[num.abstract_num_id]
-        if ilvl >= len(levels):
-            # This can happen due to w:numStyleLink, which could be hooked up--
-            # it just involves looking in self.styles and chasing some pointers.
-            # Too lazy for now.
-            return None
-        return levels[ilvl]
+        abstract_num = self.numbering.abstract_num[num.abstract_num_id]
+        if isinstance(abstract_num, str):
+            style = self.styles[abstract_num]
+            return self.get_list_style_at(style.full_style['-ooxml-numId'], ilvl)
+        else:
+            assert isinstance(abstract_num, list)
+            return abstract_num[ilvl]
 
 def load(filename):
     with zipfile.ZipFile(filename) as f:

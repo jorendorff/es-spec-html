@@ -62,7 +62,7 @@ def fixup_list_styles(doc, docx):
 def looks_like_nonterminal(text):
     return re.match(r'^(?:uri(?:[A-Z][A-Za-z]*)?|[A-Z]+[a-z][A-Za-z]*)$', text) is not None
 
-def fixup_formatting(doc, styles):
+def fixup_formatting(doc, docx):
     """
     Convert runs of span elements to more HTML-like code.
 
@@ -107,10 +107,8 @@ def fixup_formatting(doc, styles):
     def rewrite_spans(parent):
         spans = parent.content[:]  # copies the array
 
-        # The role of inherited style is a little weird here.
-        # We use it only to throw away pointless run markup.
         cls = parent.attrs.get('class', 'Normal')
-        inherited_style = styles[cls].full_style
+        inherited_style = docx.styles[cls].full_style
 
         if parent.style:
             # Delete w:rPr properties from the paragraph's style. As far as I
@@ -119,6 +117,33 @@ def fixup_formatting(doc, styles):
                 if prop in run_style_properties:
                     del parent.style[prop]
 
+        # Determine the style of each bit of content in the paragraph.
+        items = []
+        for kid in spans:
+            if not isinstance(kid, str) and kid.name == 'span':
+                run_style = kid.style
+                if 'class' in kid.attrs:
+                    run_style = run_style.copy()
+                    run_style.update(docx.styles[kid.attrs['class']].full_style)
+                items.append((kid.content, run_style))
+            else:
+                items.append(([kid], inherited_style))
+
+        # Drop trailing whitespace at end of paragraph.
+        while items and all(isinstance(ht, str) and ht.isspace() for ht in items[-1][0]):
+            del items[-1]
+
+        # If the paragraph begins and ends in the same font, treat that font
+        # as the paragraph's font, which we will drop.
+        paragraph_style = inherited_style.copy()
+        if items:
+            start_font = items[0][1].get('font-family')
+            if start_font is not None and start_font != 'monospace':
+                end_font = items[-1][1].get('font-family')
+                if start_font == end_font:
+                    paragraph_style['font-family'] = start_font
+
+        # Build the ranges.
         all_content = []
         ranges = collections.defaultdict(dict)
         current_style = {}
@@ -138,18 +163,9 @@ def fixup_formatting(doc, styles):
                     assert current_style[prop][1] == val
             assert {k: v for k, (_, v) in current_style.items()} == style
 
-        # Build ranges.
-        for kid in spans:
-            if not isinstance(kid, str) and kid.name == 'span':
-                run_style = kid.style
-                if 'class' in kid.attrs:
-                    run_style = run_style.copy()
-                    run_style.update(styles[kid.attrs['class']].full_style)
-                set_current_style_to({p: v for p, v in run_style.items() if inherited_style.get(p) != v})
-                all_content += kid.content
-            else:
-                set_current_style_to({})
-                all_content.append(kid)
+        for content, run_style in items:
+            set_current_style_to({p: v for p, v in run_style.items() if paragraph_style.get(p) != v})
+            all_content += content
         set_current_style_to({})
 
         # Convert ranges to a list.
@@ -363,16 +379,19 @@ def fixup_element_spacing(doc):
                 if k.content:
                     a = k.content[0]
                     if isinstance(a, str) and a[:1].isspace():
-                        k.content[0] = a.lstrip()
+                        k.content[0] = a_text = a.lstrip()
                         if not discard_space:
-                            addstr(' ')
-                result.append(k)
+                            addstr(a[:len(a) - len(a_text)])
+                        if a_text == '':
+                            del k.content[0]
+                if k.content or k.attrs or k.name not in {'span', 'i', 'b', 'sub', 'sup'}:
+                    result.append(k)
                 if k.content:
                     b = k.content[-1]
                     if isinstance(b, str) and b[-1:].isspace():
-                        k.content[-1] = b.rstrip()
+                        k.content[-1] = b_text = b.rstrip()
                         if not discard_space:
-                            addstr(' ')
+                            addstr(b[len(b_text):])
 
         parent.content[:] = result
 
@@ -1605,11 +1624,8 @@ def fixup_add_disclaimer(doc):
     doc_body(doc).content.insert(0, disclaimer)
 
 def fixup(docx, doc):
-    styles = docx.styles
-    numbering = docx.numbering
-
     fixup_list_styles(doc, docx)
-    fixup_formatting(doc, styles)
+    fixup_formatting(doc, docx)
     fixup_paragraph_classes(doc)
     fixup_element_spacing(doc)
     fixup_sec_4_3(doc)
@@ -1630,6 +1646,7 @@ def fixup(docx, doc):
     fixup_overview_biblio(doc)
     fixup_simplify_formatting(doc)
     fixup_grammar_pre(doc)
+
     fixup_grammar_post(doc)
     fixup_generate_toc(doc)
     fixup_add_disclaimer(doc)
