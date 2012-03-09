@@ -278,3 +278,62 @@ ol.bibliography > li {
     margin-left: 3em; list-style-type: none; margin-bottom: 1.1em; }
 ol.bibliography > li > span.num {
     float: left; margin-left: -3em; width: 2.5em; text-align: right; }
+
+@media print {
+    html {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    body {
+        max-width: none;
+        background-color: transparent;
+        color: black;
+        font-size: 10pt;
+        line-height: inherit;
+    }
+
+    h1 span.secnum {
+        width: auto;
+        margin-left: 0;
+        text-align: inherit;
+        float: none;
+    }
+
+    a:link, a:visited {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    code, pre, span.errorname, span.grhsmod,
+    a:link b, a:link span.value, a:link span.this,
+    a:link span.libname, a:link span.errorname, a:link code,
+    a:visited b, a:visited span.value, a:visited span.this,
+    a:visited span.libname, a:visited span.errorname, a:visited code,
+    .toc span.secnum a:link, .toc span.secnum a:visited,
+    figure figcaption {
+        color: inherit;
+    }
+
+    table.real-table td, table.real-table th {
+        border: 0.2pt solid black;
+    }
+
+    div.note {
+        font-size: 9pt;
+    }
+
+    @page :left {
+        margin-top: 1.25in;
+        margin-bottom: 0.375in;
+        margin-left: 0.5in;
+        margin-right: 1.0in;
+    }
+
+    @page :right {
+        margin-top: 1.25in;
+        margin-bottom: 0.375in;
+        margin-left: 1.0in;
+        margin-right: 0.5in;
+    }
+}

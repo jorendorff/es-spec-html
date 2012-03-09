@@ -1143,6 +1143,17 @@ def fixup_grammar_pre(doc):
         else:
             return ht.name in ('code', 'i', 'b')
 
+    def inline_grammar_text(content):
+        s = ''
+        for ht in content:
+            if isinstance(ht, str):
+                s += ht
+            elif ht.name == 'sub' and ht.content == ['opt']:
+                s += '_opt'
+            else:
+                s += inline_grammar_text(ht.content)
+        return s
+
     def strip_grammar_inline(parent, i):
         """ Find a grammar production in parent, starting at parent.content[i].
 
@@ -1189,7 +1200,7 @@ def fixup_grammar_pre(doc):
             j += 1
 
         # Strip out all formatting and replace parent.content[i:j] with a new span.prod.
-        text = ht_text(content[i:j])
+        text = inline_grammar_text(content[i:j])
         text = ' '.join(text.strip().split())
         content[i:j] = [html.span(text, class_='prod')]
 
@@ -1507,7 +1518,7 @@ def fixup_links(doc):
 
         # Match "Clause 8" in "as defined in Clause 8 of this specification"
         # and many other similar cases.
-        r'(?:see|See|in|of|to|from|and) (SECTION)(?:$|\.$|[,:) ]|\.[^0-9])',
+        r'(?:see|See|in|of|to|from|below|and) (SECTION)(?:$|\.$|[,:) ]|\.[^0-9])',
 
         # Match "(Clause 16)", "(see clause 6)".
         r'(?i)(?:)\((?:but )?((?:see\s+(?:also\s+)?)?clause\s+([1-9][0-9]*))\)',

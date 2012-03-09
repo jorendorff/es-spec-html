@@ -5288,9 +5288,9 @@
 
           <li>
             <p>The MV of <span class="prod"><span class="nt">StringNumericLiteral</span> <span class="geq">:::</span> <span
-            class="nt">StrWhiteSpaceopt</span> <span class="nt">StrNumericLiteral</span> <span
-            class="nt">StrWhiteSpaceopt</span></span> is the MV of <span class="nt">StrNumericLiteral</span>, no matter whether
-            white space is present or not.</p>
+            class="nt">StrWhiteSpace</span><sub>opt</sub> <span class="nt">StrNumericLiteral</span> <span
+            class="nt">StrWhiteSpace</span><sub>opt</sub></span> is the MV of <span class="nt">StrNumericLiteral</span>, no matter
+            whether white space is present or not.</p>
           </li>
 
           <li>
@@ -7469,8 +7469,8 @@
 
         <p>With parameters <var>array</var> and <var>nextIndex</var>.</p>
 
-        <p><span class="prod"><span class="nt">ElementList</span> <span class="geq">:</span> <span class="nt">Elisionopt</span>
-        <span class="nt">AssignmentExpression</span></span></p>
+        <p><span class="prod"><span class="nt">ElementList</span> <span class="geq">:</span> <span
+        class="nt">Elision</span><sub>opt</sub> <span class="nt">AssignmentExpression</span></span></p>
 
         <ol class="proc">
           <li>Let <i>padding</i> be the Elision Width of <i>Elision<sub>opt</sub></i>.</li>
@@ -7484,8 +7484,8 @@
           <li>Return <i>nextIndex+padding+</i>1.</li>
         </ol>
 
-        <p><span class="prod"><span class="nt">ElementList</span> <span class="geq">:</span> <span class="nt">Elisionopt</span>
-        <span class="nt">SpreadElement</span></span></p>
+        <p><span class="prod"><span class="nt">ElementList</span> <span class="geq">:</span> <span
+        class="nt">Elision</span><sub>opt</sub> <span class="nt">SpreadElement</span></span></p>
 
         <ol class="proc">
           <li>Let <i>padding</i> be the Elision Width of <i>Elision<sub>opt</sub></i>.</li>
@@ -7494,7 +7494,8 @@
         </ol>
 
         <p><span class="prod"><span class="nt">ElementList</span> <span class="geq">:</span> <span class="nt">ElementList</span>
-        <code class="t">,</code> <span class="nt">Elisionopt</span> <span class="nt">AssignmentExpression</span></span></p>
+        <code class="t">,</code> <span class="nt">Elision</span><sub>opt</sub> <span
+        class="nt">AssignmentExpression</span></span></p>
 
         <ol class="proc">
           <li>Let <i>postIndex</i>  be the result of performing Array Accumulation for <i>ElementList</i> with arguments
@@ -7512,7 +7513,7 @@
         </ol>
 
         <p><span class="prod"><span class="nt">ElementList</span> <span class="geq">:</span> <span class="nt">ElementList</span>
-        <code class="t">,</code> <span class="nt">Elisionopt</span> <span class="nt">SpreadElement</span></span></p>
+        <code class="t">,</code> <span class="nt">Elision</span><sub>opt</sub> <span class="nt">SpreadElement</span></span></p>
 
         <ol class="proc">
           <li>Let <i>postIndex</i>  be the result of performing Array Accumulation for <i>ElementList</i> with arguments
@@ -7566,7 +7567,7 @@
         <p><b>Runtime Semantics: Evaluation</b></p>
 
         <p><span class="prod"><span class="nt">ArrayLiteral</span> <span class="geq">:</span> <code class="t">[</code> <span
-        class="nt">Elisionopt</span> <code class="t">]</code></span></p>
+        class="nt">Elision</span><sub>opt</sub> <code class="t">]</code></span></p>
 
         <ol class="proc">
           <li>Let <i>array</i> be the result of creating a new object as if by the expression <code>new Array()</code> where
@@ -7592,7 +7593,7 @@
         </ol>
 
         <p><span class="prod"><span class="nt">ArrayLiteral</span> <span class="geq">:</span> <code class="t">[</code> <span
-        class="nt">ElementList</span> <code class="t">,</code> <span class="nt">Elisionopt</span> <code
+        class="nt">ElementList</span> <code class="t">,</code> <span class="nt">Elision</span><sub>opt</sub> <code
         class="t">]</code></span></p>
 
         <ol class="proc">
@@ -8970,7 +8971,7 @@
       <li>Let <i>rightNum</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>rightValue</i>).</li>
       <li>If <i>rightNum</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>rightNum</i>.</li>
       <li>Return the result of applying the specified operation (*, /, or %) to <i>leftNum</i> and <i>rightNum</i>. See the Notes
-          below 11.5.1, <a href="#sec-11.5.2">11.5.2</a>, 11.5.3.</li>
+          below <a href="#sec-11.5.1">11.5.1</a>, <a href="#sec-11.5.2">11.5.2</a>, 11.5.3.</li>
     </ol>
 
     <section id="sec-11.5.1">
@@ -9170,7 +9171,7 @@
           </ol>
         </li>
         <li>Return the result of applying the addition operation to <a href="#sec-9.1.3">ToNumber</a>(<i>lprim</i>) and <a
-            href="#sec-9.1.3">ToNumber</a>(<i>rprim</i>). See the Note below 11.6.3.</li>
+            href="#sec-9.1.3">ToNumber</a>(<i>rprim</i>). See the Note below <a href="#sec-11.6.3">11.6.3</a>.</li>
       </ol>
 
       <div class="note">
@@ -9206,8 +9207,8 @@
         <li>If <i>lnum</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>lnum</i>.</li>
         <li>Let <i>rnum</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>rval</i>).</li>
         <li>If <i>rnum</i> is an <a href="#sec-8.8">abrupt completion</a>, return <i>rnum</i>.</li>
-        <li>Return the result of applying the subtraction operation to <i>lnum</i> and <i>rnum</i>. See the note below
-            11.6.3.</li>
+        <li>Return the result of applying the subtraction operation to <i>lnum</i> and <i>rnum</i>. See the note below <a
+            href="#sec-11.6.3">11.6.3</a>.</li>
       </ol>
     </section>
 
@@ -10410,7 +10411,8 @@
         </ol>
 
         <p><span class="prod"><span class="nt">ArrayAssignmentPattern</span> <span class="geq">:</span> <code class="t">[</code>
-        <span class="nt">Elisionopt</span> <span class="nt">AssignmentRestElement</span> <code class="t">]</code></span></p>
+        <span class="nt">Elision</span><sub>opt</sub> <span class="nt">AssignmentRestElement</span> <code
+        class="t">]</code></span></p>
 
         <ol class="proc">
           <li>If <i>Elision</i> is present, then let <i>skip</i> be the result of evaluating <i>Elision</i>, otherwise let
@@ -10428,8 +10430,8 @@
         </ol>
 
         <p><span class="prod"><span class="nt">ArrayAssignmentPattern</span> <span class="geq">:</span> <code class="t">[</code>
-        <span class="nt">AssignmentElementList</span> <code class="t">,</code> <span class="nt">Elisionopt</span> <span
-        class="nt">AssignmentRestElementopt</span> <code class="t">]</code></span></p>
+        <span class="nt">AssignmentElementList</span> <code class="t">,</code> <span class="nt">Elision</span><sub>opt</sub> <span
+        class="nt">AssignmentRestElement</span><sub>opt</sub> <code class="t">]</code></span></p>
 
         <ol class="proc">
           <li>Let <i>lastIndex</i> be the result of performing Indexed Destructuring Assignment Evaluation of
@@ -11139,7 +11141,7 @@
         </ol>
 
         <p><span class="prod"><span class="nt">LexicalBinding</span> <span class="geq">:</span> <span
-        class="nt">BindingIdentifier</span> <span class="nt">Initialiseropt</span></span></p>
+        class="nt">BindingIdentifier</span> <span class="nt">Initialiser</span><sub>opt</sub></span></p>
 
         <ol class="proc">
           <li>Return the Bound Names of <i>BindingIdentifier</i>.</li>
@@ -11388,7 +11390,7 @@
         </ol>
 
         <p><span class="prod"><span class="nt">VariableDeclaration</span> <span class="geq">:</span> <span
-        class="nt">BindingIdentifier</span> <span class="nt">Initialiseropt</span></span></p>
+        class="nt">BindingIdentifier</span> <span class="nt">Initialiser</span><sub>opt</sub></span></p>
 
         <ol class="proc">
           <li>Return the BoundNames of <i>BindingIdentifier</i>.</li>
@@ -11624,14 +11626,15 @@
         </ol>
 
         <p><span class="prod"><span class="nt">ArrayBindingPattern</span> <span class="geq">:</span> <code class="t">[</code>
-        <span class="nt">Elisionopt</span> <code class="t">]</code></span></p>
+        <span class="nt">Elision</span><sub>opt</sub> <code class="t">]</code></span></p>
 
         <ol class="proc">
           <li>Return an empty <a href="#sec-8.7">List</a>.</li>
         </ol>
 
         <p><span class="prod"><span class="nt">ArrayBindingPattern</span> <span class="geq">:</span> <code class="t">[</code>
-        <span class="nt">Elisionopt</span> <span class="nt">BindingRestElement</span> <code class="t">]</code></span></p>
+        <span class="nt">Elision</span><sub>opt</sub> <span class="nt">BindingRestElement</span> <code
+        class="t">]</code></span></p>
 
         <ol class="proc">
           <li>Return the BoundNames of <i>BindingElementList</i>.</li>
@@ -11645,7 +11648,7 @@
         </ol>
 
         <p><span class="prod"><span class="nt">ArrayBindingPattern</span> <span class="geq">:</span> <code class="t">[</code>
-        <span class="nt">BindingElementList</span> <code class="t">,</code> <span class="nt">Elisionopt</span> <code
+        <span class="nt">BindingElementList</span> <code class="t">,</code> <span class="nt">Elision</span><sub>opt</sub> <code
         class="t">]</code></span></p>
 
         <ol class="proc">
@@ -11653,7 +11656,7 @@
         </ol>
 
         <p><span class="prod"><span class="nt">ArrayBindingPattern</span> <span class="geq">:</span> <code class="t">[</code>
-        <span class="nt">BindingElementList</span> <code class="t">,</code> <span class="nt">Elisionopt</span> <span
+        <span class="nt">BindingElementList</span> <code class="t">,</code> <span class="nt">Elision</span><sub>opt</sub> <span
         class="nt">BindingRestElement</span> <code class="t">]</code></span></p>
 
         <ol class="proc">
@@ -11679,14 +11682,14 @@
         </ol>
 
         <p><span class="prod"><span class="nt">BindingElementList</span> <span class="geq">:</span> <span
-        class="nt">Elisionopt</span> <span class="nt">BindingElement</span></span></p>
+        class="nt">Elision</span><sub>opt</sub> <span class="nt">BindingElement</span></span></p>
 
         <ol class="proc">
           <li>Return BoundNames of <i>BindingElement</i>.</li>
         </ol>
 
         <p><span class="prod"><span class="nt">BindingElementList</span> <span class="geq">:</span> <span
-        class="nt">BindingElementList</span> <code class="t">,</code> <span class="nt">Elisionopt</span> <span
+        class="nt">BindingElementList</span> <code class="t">,</code> <span class="nt">Elision</span><sub>opt</sub> <span
         class="nt">BindingElement</span></span></p>
 
         <ol class="proc">
@@ -11710,7 +11713,7 @@
         </ol>
 
         <p><span class="prod"><span class="nt">SingleNameBinding</span> <span class="geq">:</span> <span
-        class="nt">BindingIdentifier</span> <span class="nt">Initialiseropt</span></span></p>
+        class="nt">BindingIdentifier</span> <span class="nt">Initialiser</span><sub>opt</sub></span></p>
 
         <ol class="proc">
           <li>Return the BoundNames of <i>BindingIdentifier</i>.</li>
@@ -11724,7 +11727,7 @@
         </ol>
 
         <p><span class="prod"><span class="nt">BindingElement</span> <span class="geq">:</span> <span
-        class="nt">BindingPattern</span> <span class="nt">Initialiseropt</span></span></p>
+        class="nt">BindingPattern</span> <span class="nt">Initialiser</span><sub>opt</sub></span></p>
 
         <ol class="proc">
           <li>Return the BoundNames of <i>BindingPattern</i>.</li>
@@ -11888,14 +11891,15 @@
         </div>
 
         <p><span class="prod"><span class="nt">ArrayBindingPattern</span> <span class="geq">:</span> <code class="t">[</code>
-        <span class="nt">Elisionopt</span> <code class="t">]</code></span></p>
+        <span class="nt">Elision</span><sub>opt</sub> <code class="t">]</code></span></p>
 
         <ol class="proc">
           <li>Return.</li>
         </ol>
 
         <p><span class="prod"><span class="nt">ArrayBindingPattern</span> <span class="geq">:</span> <code class="t">[</code>
-        <span class="nt">Elisionopt</span> <span class="nt">BindingRestElement</span> <code class="t">]</code></span></p>
+        <span class="nt">Elision</span><sub>opt</sub> <span class="nt">BindingRestElement</span> <code
+        class="t">]</code></span></p>
 
         <ol class="proc">
           <li>If <i>Elision</i> is present, then let <i>nextIndex</i> be the result of evaluating <i>Elision</i>, otherwise let
@@ -11913,7 +11917,7 @@
         </ol>
 
         <p><span class="prod"><span class="nt">ArrayBindingPattern</span> <span class="geq">:</span> <code class="t">[</code>
-        <span class="nt">BindingElementList</span> <code class="t">,</code> <span class="nt">Elisionopt</span> <code
+        <span class="nt">BindingElementList</span> <code class="t">,</code> <span class="nt">Elision</span><sub>opt</sub> <code
         class="t">]</code></span></p>
 
         <ol class="proc">
@@ -11922,7 +11926,7 @@
         </ol>
 
         <p><span class="prod"><span class="nt">ArrayBindingPattern</span> <span class="geq">:</span> <code class="t">[</code>
-        <span class="nt">BindingElementList</span> <code class="t">,</code> <span class="nt">Elisionopt</span> <span
+        <span class="nt">BindingElementList</span> <code class="t">,</code> <span class="nt">Elision</span><sub>opt</sub> <span
         class="nt">BindingRestElement</span> <code class="t">]</code></span></p>
 
         <ol class="proc">
@@ -11972,7 +11976,7 @@
         </ol>
 
         <p><span class="prod"><span class="nt">BindingElement</span> <span class="geq">:</span> <span
-        class="nt">BindingPattern</span> <span class="nt">Initialiseropt</span></span></p>
+        class="nt">BindingPattern</span> <span class="nt">Initialiser</span><sub>opt</sub></span></p>
 
         <ol class="proc">
           <li>Let <i>P</i> be <a href="#sec-9.1.8">ToString</a>(<i>nextIndex</i>).</li>
@@ -12058,7 +12062,7 @@
         </ol>
 
         <p><span class="prod"><span class="nt">BindingElement</span> <span class="geq">:</span> <span
-        class="nt">BindingPattern</span> <span class="nt">Initialiseropt</span></span></p>
+        class="nt">BindingPattern</span> <span class="nt">Initialiser</span><sub>opt</sub></span></p>
 
         <ol class="proc">
           <li>Let <i>exists</i> be the result of calling the [[HasProperty]] internal method of <i>obj</i> with argument
@@ -12089,7 +12093,7 @@
         </ol>
 
         <p><span class="prod"><span class="nt">SingleNameBinding</span> <span class="geq">:</span> <span
-        class="nt">BindingIdentifier</span> <span class="nt">Initialiseropt</span></span></p>
+        class="nt">BindingIdentifier</span> <span class="nt">Initialiser</span><sub>opt</sub></span></p>
 
         <ol class="proc">
           <li>Let <i>exists</i> be the result of calling the [[HasProperty]] internal method of <i>obj</i> with argument
@@ -12416,8 +12420,8 @@
 
       <p><span class="prod"><span class="nt">IterationStatement</span> <span class="geq">:</span> <code class="t">for</code> <code
       class="t">(</code> <code class="t">var</code> <span class="nt">VariableDeclarationListNoIn</span> <code class="t">;</code>
-      <span class="nt">Expressionopt</span> <code class="t">;</code> <span class="nt">Expressionopt</span> <code
-      class="t">)</code> <span class="nt">Statement</span></span></p>
+      <span class="nt">Expression</span><sub>opt</sub> <code class="t">;</code> <span class="nt">Expression</span><sub>opt</sub>
+      <code class="t">)</code> <span class="nt">Statement</span></span></p>
 
       <ol class="proc">
         <li>Let <i>names</i> be BoundNames of <i>VariableDeclarationListNoIn</i>.</li>
@@ -12441,9 +12445,9 @@
         <p>With argument <var>labelSet</var>.</p>
 
         <p><span class="prod"><span class="nt">IterationStatement</span> <span class="geq">:</span> <code class="t">for</code>
-        <code class="t">(</code> <span class="nt">ExpressionNoInopt</span> <code class="t">;</code> <span
-        class="nt">Expressionopt</span> <code class="t">;</code> <span class="nt">Expressionopt</span> <code class="t">)</code>
-        <span class="nt">Statement</span></span></p>
+        <code class="t">(</code> <span class="nt">ExpressionNoIn</span><sub>opt</sub> <code class="t">;</code> <span
+        class="nt">Expression</span><sub>opt</sub> <code class="t">;</code> <span class="nt">Expression</span><sub>opt</sub> <code
+        class="t">)</code> <span class="nt">Statement</span></span></p>
 
         <ol class="proc">
           <li>If <i>ExpressionNoIn</i> is present, then.
@@ -12491,8 +12495,8 @@
 
         <p><span class="prod"><span class="nt">IterationStatement</span> <span class="geq">:</span> <code class="t">for</code>
         <code class="t">(</code> <code class="t">var</code> <span class="nt">VariableDeclarationListNoIn</span> <code
-        class="t">;</code> <span class="nt">Expressionopt</span> <code class="t">;</code> <span class="nt">Expressionopt</span>
-        <code class="t">)</code> <span class="nt">Statement</span></span></p>
+        class="t">;</code> <span class="nt">Expression</span><sub>opt</sub> <code class="t">;</code> <span
+        class="nt">Expression</span><sub>opt</sub> <code class="t">)</code> <span class="nt">Statement</span></span></p>
 
         <ol class="proc">
           <li>Let <i>varDcl</i> be the result of evaluating <i>VariableDeclarationListNoIn</i>.</li>
@@ -12503,8 +12507,8 @@
 
         <p><span class="prod"><span class="nt">IterationStatement</span> <span class="geq">:</span> <code class="t">for</code>
         <code class="t">(</code> <span class="nt">LexicalDeclarationNoIn</span> <code class="t">;</code> <span
-        class="nt">Expressionopt</span> <code class="t">;</code> <span class="nt">Expressionopt</span> <code class="t">)</code>
-        <span class="nt">Statement</span></span></p>
+        class="nt">Expression</span><sub>opt</sub> <code class="t">;</code> <span class="nt">Expression</span><sub>opt</sub> <code
+        class="t">)</code> <span class="nt">Statement</span></span></p>
 
         <ol class="proc">
           <li>Let <i>oldEnv</i> be the running execution context&rsquo;s <a href="#sec-10.3">LexicalEnvironment</a>.</li>
@@ -13283,8 +13287,8 @@
       </ol>
 
       <p><span class="prod"><span class="nt">CaseBlock</span> <span class="geq">:</span> <code class="t">{</code> <span
-      class="nt">CaseClausesopt</span> <span class="nt">DefaultClause</span> <span class="nt">CaseClausesopt</span> <code
-      class="t">}</code></span></p>
+      class="nt">CaseClauses</span><sub>opt</sub> <span class="nt">DefaultClause</span> <span
+      class="nt">CaseClauses</span><sub>opt</sub> <code class="t">}</code></span></p>
 
       <ol class="proc">
         <li>If the first <i>CaseClauses</i> is present, let <i>declarations</i> be the LexicalDeclarations of the first
@@ -13313,7 +13317,7 @@
       </ol>
 
       <p><span class="prod"><span class="nt">CaseClause</span> <span class="geq">:</span> <code class="t">case</code> <span
-      class="nt">Expression</span> <span class="geq">:</span> <span class="nt">StatementListopt</span></span></p>
+      class="nt">Expression</span> <span class="geq">:</span> <span class="nt">StatementList</span><sub>opt</sub></span></p>
 
       <ol class="proc">
         <li>If the <i>StatementList</i> is present, return the LexicalDeclarations of <i>StatementList</i>.</li>
@@ -13321,7 +13325,7 @@
       </ol>
 
       <p><span class="prod"><span class="nt">DefaultClause</span> <span class="geq">:</span> <code class="t">default</code> <span
-      class="geq">:</span> <span class="nt">StatementListopt</span></span></p>
+      class="geq">:</span> <span class="nt">StatementList</span><sub>opt</sub></span></p>
 
       <ol class="proc">
         <li>If the <i>StatementList</i> is present, return the LexicalDeclarations of <i>StatementList</i>.</li>
@@ -13345,8 +13349,8 @@
       </ol>
 
       <p><span class="prod"><span class="nt">CaseBlock</span> <span class="geq">:</span> <code class="t">{</code> <span
-      class="nt">CaseClausesopt</span> <span class="nt">DefaultClause</span> <span class="nt">CaseClausesopt</span> <code
-      class="t">}</code></span></p>
+      class="nt">CaseClauses</span><sub>opt</sub> <span class="nt">DefaultClause</span> <span
+      class="nt">CaseClauses</span><sub>opt</sub> <code class="t">}</code></span></p>
 
       <ol class="proc">
         <li>If the first <i>CaseClauses</i> is present, let <i>names</i> be the LexicallyDeclaredNames of the first
@@ -13375,7 +13379,7 @@
       </ol>
 
       <p><span class="prod"><span class="nt">CaseClause</span> <span class="geq">:</span> <code class="t">case</code> <span
-      class="nt">Expression</span> <span class="geq">:</span> <span class="nt">StatementListopt</span></span></p>
+      class="nt">Expression</span> <span class="geq">:</span> <span class="nt">StatementList</span><sub>opt</sub></span></p>
 
       <ol class="proc">
         <li>If the <i>StatementList</i> is present, return the LexicallyDeclaredNames of <i>StatementList</i>.</li>
@@ -13383,7 +13387,7 @@
       </ol>
 
       <p><span class="prod"><span class="nt">DefaultClause</span> <span class="geq">:</span> <code class="t">default</code> <span
-      class="geq">:</span> <span class="nt">StatementListopt</span></span></p>
+      class="geq">:</span> <span class="nt">StatementList</span><sub>opt</sub></span></p>
 
       <ol class="proc">
         <li>If the <i>StatementList</i> is present, return the LexicallyDeclaredNames of <i>StatementList</i>.</li>
@@ -13414,8 +13418,8 @@
       </ol>
 
       <p><span class="prod"><span class="nt">CaseBlock</span> <span class="geq">:</span> <code class="t">{</code> <span
-      class="nt">CaseClausesopt</span> <span class="nt">DefaultClause</span> <span class="nt">CaseClausesopt</span> <code
-      class="t">}</code></span></p>
+      class="nt">CaseClauses</span><sub>opt</sub> <span class="nt">DefaultClause</span> <span
+      class="nt">CaseClauses</span><sub>opt</sub> <code class="t">}</code></span></p>
 
       <ol class="proc">
         <li>If the first <i>CaseClauses</i> is present, let <i>names</i> be the VarDeclaredNames of the first
@@ -13444,7 +13448,7 @@
       </ol>
 
       <p><span class="prod"><span class="nt">CaseClause</span> <span class="geq">:</span> <code class="t">case</code> <span
-      class="nt">Expression</span> <span class="geq">:</span> <span class="nt">StatementListopt</span></span></p>
+      class="nt">Expression</span> <span class="geq">:</span> <span class="nt">StatementList</span><sub>opt</sub></span></p>
 
       <ol class="proc">
         <li>If the <i>StatementList</i> is present, return the VarDeclaredNames of <i>StatementList</i>.</li>
@@ -13452,7 +13456,7 @@
       </ol>
 
       <p><span class="prod"><span class="nt">DefaultClause</span> <span class="geq">:</span> <code class="t">default</code> <span
-      class="geq">:</span> <span class="nt">StatementListopt</span></span></p>
+      class="geq">:</span> <span class="nt">StatementList</span><sub>opt</sub></span></p>
 
       <ol class="proc">
         <li>If the <i>StatementList</i> is present, return the VarDeclaredNames of <i>StatementList</i>.</li>
@@ -13468,7 +13472,7 @@
       <p>With argument <var>input</var>.</p>
 
       <p><span class="prod"><span class="nt">CaseBlock</span> <span class="geq">:</span> <code class="t">{</code> <span
-      class="nt">CaseClausesopt</span> <code class="t">}</code></span></p>
+      class="nt">CaseClauses</span><sub>opt</sub> <code class="t">}</code></span></p>
 
       <ol class="proc">
         <li>Let <i>V</i> = <b>undefined</b>.</li>
@@ -13513,8 +13517,8 @@
       </ol>
 
       <p><span class="prod"><span class="nt">CaseBlock</span> <span class="geq">:</span> <code class="t">{</code> <span
-      class="nt">CaseClausesopt</span> <span class="nt">DefaultClause</span> <span class="nt">CaseClausesopt</span> <code
-      class="t">}</code></span></p>
+      class="nt">CaseClauses</span><sub>opt</sub> <span class="nt">DefaultClause</span> <span
+      class="nt">CaseClauses</span><sub>opt</sub> <code class="t">}</code></span></p>
 
       <ol class="proc">
         <li>Let <i>V</i> = <b>undefined</b>..</li>
@@ -13638,7 +13642,7 @@
       </div>
 
       <p><span class="prod"><span class="nt">CaseClause</span> <span class="geq">:</span> <code class="t">case</code> <span
-      class="nt">Expression</span> <span class="geq">:</span> <span class="nt">StatementListopt</span></span></p>
+      class="nt">Expression</span> <span class="geq">:</span> <span class="nt">StatementList</span><sub>opt</sub></span></p>
 
       <ol class="proc">
         <li>Let <i>exprRef</i> be the result of evaluating <i>Expression</i>.</li>
@@ -14093,7 +14097,7 @@
       <span class="nt">BindingIdentifier</span> <code class="t">(</code> <span class="nt">FormalParameterList</span> <code
       class="t">)</code> <code class="t">{</code> <span class="nt">FunctionBody</span> <code
       class="t">}</code></span><br>and<br><span class="prod"><span class="nt">FunctionExpression</span> <span class="geq">:</span>
-      <code class="t">function</code> <span class="nt">BindingIdentifieropt</span> <code class="t">(</code> <span
+      <code class="t">function</code> <span class="nt">BindingIdentifier</span><sub>opt</sub> <code class="t">(</code> <span
       class="nt">FormalParameterList</span> <code class="t">)</code> <code class="t">{</code> <span class="nt">FunctionBody</span>
       <code class="t">}</code></span></p>
 
@@ -14473,7 +14477,7 @@
       </div>
 
       <p><span class="prod"><span class="nt">FunctionBody</span> <span class="geq">:</span> <span
-      class="nt">StatementListopt</span></span></p>
+      class="nt">StatementList</span><sub>opt</sub></span></p>
 
       <ol class="proc">
         <li>The code of this <i>FunctionBody</i> is <a href="#sec-10.1.1">strict mode code</a> if it is part of a
@@ -14668,7 +14672,7 @@
   <h2>Semantics</h2>
 
   <p>The production <span class="prod"><span class="nt">Program</span> <span class="geq">:</span> <span
-  class="nt">ProgramBodyopt</span></span> is evaluated as follows:</p>
+  class="nt">ProgramBody</span><sub>opt</sub></span> is evaluated as follows:</p>
 
   <ol class="proc">
     <li>The code of this <i>Program</i> is <a href="#sec-10.1.1">strict mode code</a> if the <a href="#sec-14.1">Directive
