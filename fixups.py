@@ -653,20 +653,8 @@ def fixup_pre(doc):
         if len(e.content) == 1:
             [span] = e.content
             if ht_name_is(span, 'span') and span.style and span.style.get('font-family') == 'monospace':
-                print(e)
-                code = e.content[0]
-                s = ''
-                for k in code.content:
-                    if isinstance(k, str):
-                        s += k
-                    elif k.name == 'br':
-                        s += '\n'
-                    else:
-                        s = None
-                        break
-                if s is not None:
-                    e.name = 'pre'
-                    e.content[:] = [s]
+                e.name = 'pre'
+                e.content = span.content
 
 def fixup_notes(doc):
     """ Wrap each NOTE in div.note and wrap the labels "NOTE", "NOTE 2", etc. in span.nh. """
@@ -698,9 +686,12 @@ def fixup_notes(doc):
 
     for parent, i, p in all_parent_index_child_triples(doc):
         if p.name == 'p':
+            # The Note class is unreliable: there are both false positives and
+            # false negatives.  We only use it to emit warnings for the false
+            # positives.
             has_note_class = p.attrs.get('class') == 'Note'
             nh_info = find_nh(p, strict=has_note_class)
-            if nh_info or has_note_class:
+            if nh_info:
                 # This is a note! See if the word "NOTE" or "NOTE 1" can be divided out into
                 # a span.nh element. This should ordinarily be the case.
                 if nh_info:
@@ -856,7 +847,7 @@ def fixup_list_paragraphs(doc):
                 while i > 0 and is_block(li.content[i - 1]):
                     i -= 1
                 li.content[:i] = [html.p(*li.content[:i])]
-<
+
 def fixup_picts(doc):
     """ Replace Figure 1 with canned HTML. Remove div.w-pict elements. """
     def walk(e):

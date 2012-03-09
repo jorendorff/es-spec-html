@@ -1572,8 +1572,7 @@
     and a leading <span class="nt">RegularExpressionLiteral</span> are permitted. This is not affected by <a
     href="#sec-7.9">semicolon insertion (see 7.9)</a>; in examples such as the following:</p>
 
-    <pre>a = b
-/hi/g.exec(c).map(d);</pre>
+    <pre>a = b<br>/hi/g.exec(c).map(d);</pre>
 
     <p>where the first non-whitespace, non-comment character after a <span class="nt">LineTerminator</span> is slash
     (<code>/</code>) and the syntactic context allows division or division-assignment, no semicolon is inserted at the <span
@@ -4331,10 +4330,8 @@
         </li>
       </ol>
 
-      <div class="note">
-        <p>Host objects may define additional constraints upon [[Put]] operations. If possible, host objects should not allow
-        [[Put]] operations in situations where this definition of [[CanPut]] returns false.</p>
-      </div>
+      <p class="Note">Host objects may define additional constraints upon [[Put]] operations. If possible, host objects should not
+      allow [[Put]] operations in situations where this definition of [[CanPut]] returns false.</p>
     </section>
 
     <section id="sec-8.12.5">
@@ -17367,8 +17364,7 @@
 
         <p>evaluates to the array</p>
 
-        <pre>["A", undefined, "B", "bold", "/", "B", "and", undefined,
- "CODE", "coded", "/", "CODE", ""]</pre>
+        <pre>["A", undefined, "B", "bold", "/", "B", "and", undefined,<br> "CODE", "coded", "/", "CODE", ""]</pre>
 
         <p>If <var>separator</var> is <b>undefined</b>, then the result array contains just one String, which is the <b>this</b>
         value (converted to a String). If <var>limit</var> is not <b>undefined</b>, then the output array is truncated so that it
@@ -17522,11 +17518,9 @@
         Basic Multilingual Plane. Surrogate code points are directly transferred from <var>S</var> to <var>L</var> without any
         mapping.</p>
 
-        <div class="note">
-          <p>The result must be derived according to the case mappings in the Unicode character database (this explicitly includes
-          not only the UnicodeData.txt file, but also the SpecialCasings.txt file that accompanies it in Unicode 2.1.8 and
-          later).</p>
-        </div>
+        <p class="Note">The result must be derived according to the case mappings in the Unicode character database (this
+        explicitly includes not only the UnicodeData.txt file, but also the SpecialCasings.txt file that accompanies it in Unicode
+        2.1.8 and later).</p>
 
         <div class="note">
           <p><span class="nh">NOTE 1</span> The case mapping of some characters may produce multiple characters.  In this case the
@@ -19009,20 +19003,14 @@
         &ldquo;</span><code>+</code><span style="font-family: sans-serif">&rdquo; or &ldquo;</span><code>-</code><span
         style="font-family: sans-serif">&rdquo; followed by a time expression</span> <code>HH:mm</code></p>
 
-        <div class="note">
-          <p>This format includes date-only forms:</p>
+        <p class="Note">This format includes date-only forms:</p>
 
-          <pre>YYYY
-YYYY-MM
-YYYY-MM-DD</pre>
-        </div>
+        <pre class="Note">YYYY<br>YYYY-MM<br>YYYY-MM-DD</pre>
 
         <p>It also includes &ldquo;date-time&rdquo; forms that consist of one of the above date-only forms immediately followed by
         one of the following time forms with an optional time zone offset appended:</p>
 
-        <pre>THH:mm
-THH:mm:ss
-THH:mm:ss.sss</pre>
+        <pre>THH:mm<br>THH:mm:ss<br>THH:mm:ss.sss</pre>
 
         <p>All numbers must be base <span style="font-family: Times New Roman">10</span>. If the <code>MM</code> or
         <code>DD</code> fields are absent &ldquo;<code>01</code>&rdquo; is used as the value. If the <code>HH</code>,
@@ -19202,13 +19190,10 @@ THH:mm:ss.sss</pre>
         then all of the following expressions should produce the same numeric value in that implementation, if all the properties
         referenced have their initial values:</p>
 
-        <p><code><i>x</i>.valueOf()</code></p>
-
-        <p><code>Date.parse(<i>x</i>.toString())</code></p>
-
-        <p><code>Date.parse(<i>x</i>.toUTCString())</code></p>
-
-        <p><code>Date.parse(<i>x</i>.toISOString())</code></p>
+        <pre><i>x</i>.valueOf()</pre>
+        <pre>Date.parse(<i>x</i>.toString())</pre>
+        <pre>Date.parse(<i>x</i>.toUTCString())</pre>
+        <pre>Date.parse(<i>x</i>.toISOString())</pre>
 
         <p>However, the expression</p>
 
