@@ -22095,16 +22095,19 @@
         <ol class="proc">
           <li>Evaluate <i>Disjunction</i> to obtain a Matcher <i>m</i>.</li>
           <li>Return an internal closure that takes two arguments, a String <i>str</i> and an integer <i>index</i>, and performs
-              the following:</li>
-          <li>Let <i>Input</i> be the given String <i>str</i>. This variable will be used throughout the algorithms in <a
-              href="#sec-15.10.2">15.10.2</a>.</li>
-          <li>Let <i>InputLength</i> be the length of <i>Input</i>. This variable will be used throughout the algorithms in <a
-              href="#sec-15.10.2">15.10.2</a>.</li>
-          <li>Let <i>c</i> be a Continuation that always returns its State argument as a successful MatchResult.</li>
-          <li>Let <i>cap</i> be an internal array of <i>NcapturingParens</i> <b>undefined</b> values, indexed 1 through
-              <i>NcapturingParens</i>.</li>
-          <li>Let <i>x</i> be the State (<i>index</i>, <i>cap</i>).</li>
-          <li>Call <i>m</i>(<i>x</i>, <i>c</i>) and return its result.</li>
+              the following:
+            <ol class="nested proc">
+              <li>Let <i>Input</i> be the given String <i>str</i>. This variable will be used throughout the algorithms in <a
+                  href="#sec-15.10.2">15.10.2</a>.</li>
+              <li>Let <i>InputLength</i> be the length of <i>Input</i>. This variable will be used throughout the algorithms in <a
+                  href="#sec-15.10.2">15.10.2</a>.</li>
+              <li>Let <i>c</i> be a Continuation that always returns its State argument as a successful MatchResult.</li>
+              <li>Let <i>cap</i> be an internal array of <i>NcapturingParens</i> <b>undefined</b> values, indexed 1 through
+                  <i>NcapturingParens</i>.</li>
+              <li>Let <i>x</i> be the State (<i>index</i>, <i>cap</i>).</li>
+              <li>Call <i>m</i>(<i>x</i>, <i>c</i>) and return its result.</li>
+            </ol>
+          </li>
         </ol>
 
         <div class="note">
@@ -22134,7 +22137,7 @@
           <li>Evaluate <i>Disjunction</i> to obtain a Matcher <i>m2</i>.</li>
           <li>Return an internal Matcher closure that takes two arguments, a State <i>x</i> and a Continuation <i>c</i>, and
               performs the following:
-            <ol class="block">
+            <ol class="nested proc">
               <li>Call <i>m1</i>(<i>x</i>, <i>c</i>) and let <i>r</i> be its result.</li>
               <li>If <i>r</i> isn't <b>failure</b>, return <i>r</i>.</li>
               <li>Call <i>m2</i>(<i>x</i>, <i>c</i>) and return its result.</li>
@@ -22184,7 +22187,7 @@
           <li>Evaluate <i>Term</i> to obtain a Matcher <i>m2</i>.</li>
           <li>Return an internal Matcher closure that takes two arguments, a State <i>x</i> and a Continuation <i>c</i>, and
               performs the following:
-            <ol class="block">
+            <ol class="nested proc">
               <li>Create a Continuation <i>d</i> that takes a State argument <i>y</i> and returns the result of calling
                   <i>m2</i>(<i>y</i>, <i>c</i>).</li>
               <li>Call <i>m1</i>(<i>x</i>, <i>d</i>) and return its result.</li>
@@ -22239,7 +22242,7 @@
               production's <i>Atom</i>.</li>
           <li>Return an internal Matcher closure that takes two arguments, a State <i>x</i> and a Continuation <i>c</i>, and
               performs the following:
-            <ol class="block">
+            <ol class="nested proc">
               <li>Call RepeatMatcher(<i>m</i>, <i>min</i>, <i>max</i>, <i>greedy</i>, <i>x</i>, <i>c</i>, <i>parenIndex</i>,
                   <i>parenCount</i>) and return its result.</li>
             </ol>
@@ -22253,7 +22256,7 @@
         <ol class="proc">
           <li>If <i>max</i> is zero, then call <i>c</i>(<i>x</i>) and return its result.</li>
           <li>Create an internal Continuation closure <i>d</i> that takes one State argument <i>y</i> and performs the following:
-            <ol class="block">
+            <ol class="nested proc">
               <li>If <i>min</i> is zero and <i>y</i>'s <i>endIndex</i> is equal to <i>x</i>'s <i>endIndex</i>, then return
                   <b>failure</b>.</li>
               <li>If <i>min</i> is zero then let <i>min2</i> be zero; otherwise let <i>min2</i> be <i>min</i>&ndash;1.</li>
@@ -22428,7 +22431,7 @@
           <li>Evaluate <i>Disjunction</i> to obtain a Matcher <i>m</i>.</li>
           <li>Return an internal Matcher closure that takes two arguments, a State <i>x</i> and a Continuation <i>c</i>, and
               performs the following steps:
-            <ol class="block">
+            <ol class="nested proc">
               <li>Let <i>d</i> be a Continuation that always returns its State argument as a successful MatchResult.</li>
               <li>Call <i>m</i>(<i>x</i>, <i>d</i>) and let <i>r</i> be its result.</li>
               <li>If <i>r</i> is <b>failure</b>, return <b>failure</b>.</li>
@@ -22449,7 +22452,7 @@
           <li>Evaluate <i>Disjunction</i> to obtain a Matcher <i>m</i>.</li>
           <li>Return an internal Matcher closure that takes two arguments, a State <i>x</i> and a Continuation <i>c</i>, and
               performs the following steps:
-            <ol class="block">
+            <ol class="nested proc">
               <li>Let <i>d</i> be a Continuation that always returns its State argument as a successful MatchResult.</li>
               <li>Call <i>m</i>(<i>x</i>, <i>d</i>) and let <i>r</i> be its result.</li>
               <li>If <i>r</i> isn't <b>failure</b>, return <b>failure</b>.</li>
@@ -22665,10 +22668,10 @@
               this <i>Atom</i>.</li>
           <li>Return an internal Matcher closure that takes two arguments, a State <i>x</i> and a Continuation <i>c</i>, and
               performs the following steps:
-            <ol class="block">
+            <ol class="nested proc">
               <li>Create an internal Continuation closure <i>d</i> that takes one State argument <i>y</i> and performs the
                   following steps:
-                <ol class="block">
+                <ol class="nested proc">
                   <li>Let <i>cap</i> be a fresh copy of <i>y</i>'s <i>captures</i> internal array.</li>
                   <li>Let <i>xe</i> be <i>x</i>'s <i>endIndex</i>.</li>
                   <li>Let <i>ye</i> be <i>y</i>'s <i>endIndex</i>.</li>
@@ -22694,7 +22697,7 @@
         <ol class="proc">
           <li>Return an internal Matcher closure that takes two arguments, a State <i>x</i> and a Continuation <i>c</i>, and
               performs the following steps:
-            <ol class="block">
+            <ol class="nested proc">
               <li>Let <i>e</i> be <i>x</i>'s <i>endIndex</i>.</li>
               <li>If <i>e</i> == <i>InputLength</i>, return <b>failure</b>.</li>
               <li>Let <i>ch</i> be the character <i>Input</i>[<i>e</i>].</li>
@@ -22819,7 +22822,7 @@
           <li>If <i>n</i>=0 or <i>n</i>&gt;<i>NCapturingParens</i> then throw a <b>SyntaxError</b> exception.</li>
           <li>Return an internal Matcher closure that takes two arguments, a State <i>x</i> and a Continuation <i>c</i>, and
               performs the following:
-            <ol class="block">
+            <ol class="nested proc">
               <li>Let <i>cap</i> be <i>x</i>'s <i>captures</i> internal array.</li>
               <li>Let <i>s</i> be <i>cap</i>[<i>n</i>].</li>
               <li>If <i>s</i> is <b>undefined</b>, then call <i>c</i>(<i>x</i>) and return its result.</li>

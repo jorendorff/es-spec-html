@@ -771,6 +771,19 @@ def fixup_7_9_1(doc, docx):
         lst[i].style['-ooxml-numId'] = bullet_numid
         assert has_bullet(docx, lst[i])
 
+def fixup_15_10_2_2(doc):
+    """ Fix the ilvl attributes on the nested procedure in section 15.10.2.2.
+
+    Precedes fixup_lists which consumes this data.
+    """
+    sect = find_section(doc, 'Pattern')
+    assert len(sect.content) == 11
+    assert [e.name for e in sect.content] == ['h1', 'p', 'li', 'li', 'li', 'li', 'li', 'li', 'li', 'li', 'div']
+    for li in sect.content[4:10]:
+        assert li.name == 'li'
+        assert li.style['-ooxml-ilvl'] == '0'
+        li.style['-ooxml-ilvl'] = '3'
+
 def fixup_lists(e, docx):
     """ Wrap each li element in a list of the appropriate type.
 
@@ -829,7 +842,13 @@ def fixup_lists(e, docx):
                     if bullet:
                         new_list = html.ul()
                     else:
-                        new_list = html.ol(class_='block' if lists else 'proc')
+                        if not lists:
+                            cls = 'proc'
+                        elif depth > lists[-1][0] + 1:
+                            cls = 'nested proc'
+                        else:
+                            cls = 'block'
+                        new_list = html.ol(class_=cls)
 
                     # If there is an enclosing list, add new_list to the last <li>
                     # of the enclosing list, not the enclosing list itself.
@@ -1647,6 +1666,7 @@ def fixup(docx, doc):
     fixup_pre(doc)
     fixup_notes(doc)
     fixup_7_9_1(doc, docx)
+    fixup_15_10_2_2(doc)
     fixup_lists(doc, docx)
     fixup_list_paragraphs(doc)
     fixup_picts(doc)
