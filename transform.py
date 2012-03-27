@@ -18,8 +18,7 @@ def transform(e):
         return '{' + e.text + '}'
 
     elif name in {'pPr', 'rPr', 'sectPr', 'tblPr', 'tblPrEx', 'trPr', 'tcPr', 'numPr'}:
-        # Presentation data which we currently do not parse.
-        # tcPr has shading which we'd like to have.
+        # Presentation data.
         return parse_pr(e)
 
     elif name == 'pPrChange':
@@ -52,9 +51,7 @@ def transform(e):
         if name == 'document':
             [body_e] = c
             return html(
-                head(
-                    title("ECMAScript Language Specification ECMA-262 6th Edition - DRAFT"),
-                    link(rel="stylesheet", type="text/css", href="es6-draft.css")),
+                head(link(rel="stylesheet", type="text/css", href="es6-draft.css")),
                 body_e)
 
         elif name == 'body':
@@ -149,7 +146,18 @@ def transform(e):
 
         elif name == 'tbl':
             assert not e.keys()
-            return figure(table(*c, class_="real-table"))
+            tbl = table(*c, class_="real-table")
+            if css:
+                if '-ooxml-border-insideH' in css:
+                    # borders between rows
+                    row_border = css['-ooxml-border-insideH']
+                    del css['-ooxml-border-insideH']
+                if '-ooxml-border-insideV' in css:
+                    # borders between columns
+                    col_border = css['-ooxml-border-insideV']
+                    del css['-ooxml-border-insideV']
+                ##tbl.style = css
+            return figure(tbl)
 
         elif name == 'tr':
             return tr(*c)

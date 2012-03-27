@@ -40,6 +40,13 @@ k_color = bloat('color')
 k_left = bloat('left')
 k_hanging = bloat('hanging')
 
+
+def parse_color(s):
+    if s is not None and re.match(r'^[0-9a-fA-F]{6}$', s):
+        return '#' + s
+    else:
+        return None
+
 def parse_pr(e):
     font_keys = {k_ascii, k_hAnsi, k_cs, k_eastAsia, bloat('hint')}
 
@@ -101,14 +108,33 @@ def parse_pr(e):
         elif name == 'shd':
             val = k.get(k_val)
             if val == 'solid':
-                color = k.get(k_color)
+                color = parse_color(k.get(k_color))
             elif val == 'clear':
-                color = k.get(k_fill)
+                color = parse_color(k.get(k_fill))
             else:
                 color = None
+                    
 
-            if color is not None and re.match(r'^[0-9a-fA-F]{6}$', color):
-                put('background-color', '#' + color)
+            if color is not None:
+                put('background-color', color)
+
+        elif name in ('tcBorders', 'tblBorders'):
+            # tblBorders can have insideH/insideV elements that are applied to
+            # all horizontal/vertical borders between cells in the table. For
+            # now, we store that style information in CSS properties named
+            # -ooxml-border-insideH/insideV; later we will turn that into
+            # border-top/left properties on all the individual table cells.
+            for side in ('top', 'bottom', 'left', 'right', 'insideH', 'insideV'):
+                for side_style in k.findall(bloat(side)):
+                    if side_style.get(k_val) == 'single':
+                        color = parse_color(side_style.get(k_color)) or 'black'
+                        sz = side_style.get(k_sz)
+                        if sz is not None:
+                            sz = int(sz) // 6
+                        prop = 'border-' + side
+                        if side.startswith('inside'):
+                            prop = '@' + prop
+                        put('border-' + side, '{}px solid {}'.format(sz, color))
 
         elif name == 'sz':
             if list(k.keys()) == [k_val]:
@@ -116,7 +142,7 @@ def parse_pr(e):
                 v = float(k.get(k_val)) / 2
                 #put('font-size', str(v) + 'pt')
 
-        # todo: jc, ind, spacing, contextualSpacing
+        # todo: jc, spacing, contextualSpacing
         # todo: pBdr
 
         elif name == 'ind':
@@ -230,6 +256,7 @@ k_numbering = bloat('numbering')
 k_pStyle = bloat('pStyle')
 k_numFmt = bloat('numFmt')
 k_numStyleLink = bloat('numStyleLink')
+k_sz = bloat('sz')
 
 class Num:
     def __init__(self, abstract_num_id, overrides):

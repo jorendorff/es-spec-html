@@ -440,6 +440,24 @@ def fixup_sec_4_3(doc):
                     h1_content.append(item)
             del parent.content[i]
 
+def fixup_hr(doc):
+    """ Replace <p><hr></p> with <hr>.
+
+    Word treats an explicit page break as occurring within a paragraph rather
+    than between paragraphs, and this leads to goofy markup which has to be
+    fixed up.
+
+    Precedes fixup_sections and fixup_strip_toc, which depend on the <hr> tags.
+    """
+
+    for a, i, b in all_parent_index_child_triples(doc):
+        if a.name == 'p' and b.name == 'hr' and all(isinstance(ht, str) and ht.isspace()
+                                                    for ht in a.content[:i] + a.content[i + 1:]):
+            a.name = b.name
+            a.attrs = b.attrs
+            a.style = b.style
+            a.content = b.content
+
 def fixup_sections(doc):
     """ Group h1 elements and subsequent elements of all kinds together into sections. """
 
@@ -502,19 +520,22 @@ def fixup_sections(doc):
 
     def wrap(sec_num, sec_title, start):
         """ Wrap the section starting at body[start] in a section element. """
-
         sec_id = sec_num_to_id(sec_num) if sec_num else None
 
         j = start + 1
         while j < len(body):
             kid = body[j]
             if not isinstance(kid, str):
-                if kid.name == "div":
-                    if (kid.attrs.get("id") == "ecma-disclaimer"
-                        or kid.attrs.get("class") == "inner-title"):
+                if kid.name == 'div':
+                    if (kid.attrs.get('id') == 'ecma-disclaimer'
+                        or kid.attrs.get('class') == 'inner-title'):
                         # Don't let the introduction section eat up these elements.
                         break
-                if kid.name == "h1":
+                elif kid.name == 'hr':
+                    # Don't let the copyright notice eat the table of contents.
+                    if sec_title == "Copyright notice":
+                        break
+                elif kid.name == 'h1':
                     kid_num, kid_title = heading_info(kid)
 
                     # Hack: most numberless sections are subsections, but the
@@ -544,18 +565,6 @@ def fixup_sections(doc):
         num, title = heading_info(kid)
         wrap(num, title, i)
 
-def fixup_hr(doc):
-    """ Replace <p><hr></p> with <hr>.
-
-    Word treats an explicit page break as occurring within a paragraph rather
-    than between paragraphs, and this leads to goofy markup which has to be
-    fixed up.
-    """
-
-    for a, i, b in all_parent_index_child_triples(doc):
-        if b.name == "p" and len(b.content) == 1 and isinstance(b.content[0], html.Element) and b.content[0].name == "hr":
-            a.content[i] = b.content[0]
-
 def fixup_strip_toc(doc):
     """ Delete the table of contents in the document.
 
@@ -570,8 +579,12 @@ def fixup_strip_toc(doc):
     toc = html.section(id='contents')
 
     hr_iterator = body.kids("hr")
-    i0, first_hr = hr_iterator.__next__()
-    i1, next_hr = hr_iterator.__next__()
+    i0, first_hr = next(hr_iterator)
+    if ht_text(body.content[i0 + 1]).startswith('Copyright notice'):
+        # Skip the copyright notice that appears at the front of ES5.1.
+        # The table of contents is right after that.
+        i0, first_hr = next(hr_iterator)
+    i1, next_hr = next(hr_iterator)
     body.content[i0: i1 + 1] = [toc]
 
 def fixup_tables(doc):
@@ -715,8 +728,13 @@ def fixup_7_9_1(doc, docx):
 
     Precedes fixup_lists which consumes this data.
     """
-    bullet_numid = '384' # gross hard-coded hack
-    assert docx.get_list_style_at(bullet_numid, '3').numFmt == 'bullet'
+
+    # Ridiculous: select some style in which level 3 list items get a bullet.
+    for bullet_numid in docx.numbering.num:
+        if docx.get_list_style_at(bullet_numid, '3').numFmt == 'bullet':
+            break
+    else:
+        raise ValueError("bulleted list style not found")
 
     sect = find_section(doc, 'Rules of Automatic Semicolon Insertion')
     lst = sect.content[2:7]
@@ -937,6 +955,17 @@ def fixup_title_page(doc):
 
             # A few of the lines here are redundant.
             del parent.content[3:]
+
+def fixup_html_title(doc):
+    head, body = doc.content
+    assert ht_name_is(head, 'head')
+    assert ht_name_is(body, 'body')
+    hgroup = next(findall(body, 'hgroup'))
+    if '5.1' in ht_text(hgroup):
+        title = "ECMAScript Language Specification - ECMA-262 Edition 5.1"
+    else:
+        title = "ECMAScript Language Specification ECMA-262 6th Edition - DRAFT"
+    head.content.insert(0, html.title(title))
 
 def fixup_overview_biblio(doc):
     sect = find_section(doc, "Overview")
@@ -1344,6 +1373,12 @@ def fixup_links(doc):
             title = ht_text(sect.content[0].content[1:]).strip()
             sections_by_title[title] = '#' + sect.attrs['id']
 
+    fallback_section_titles = {
+        "The List and Record Specification Type": "The List Specification Type",
+        "The Completion Record Specification Type": "The Completion Specification Type",
+        "Function Declaration Instantiation": None
+    }
+
     # Normally, any section can link to any other section, even its own
     # subsection or parent section.  This dictionary overrides that.  Each
     # item (source, destination): False means that text in source does not
@@ -1360,6 +1395,9 @@ def fixup_links(doc):
 
     specific_link_source_data = [
         # 5.2
+        # Note that there's a hack below to avoid including the parenthesis in the <a> element.
+        # We only want to match when the parenthesis is present, but it shouldn't be part of
+        # the link.
         ("abs(", "Algorithm Conventions"),
         ("sign(", "Algorithm Conventions"),
         ("modulo", "Algorithm Conventions"),
@@ -1491,7 +1529,18 @@ def fixup_links(doc):
         ("TimeClip", "TimeClip (time)")
     ]
 
-    specific_links = [(text, sections_by_title[title]) for text, title in specific_link_source_data]
+    # Build specific_links from specific_link_source_data, sections_by_title,
+    # and fallback_section_titles.
+    specific_links = []
+    for text, title in specific_link_source_data:
+        if title in sections_by_title:
+            sec = sections_by_title[title]
+        else:
+            target_title = fallback_section_titles[title]
+            if target_title is None:
+                continue
+            sec = sections_by_title[target_title]
+        specific_links.append((text, sec))
 
     # Assert that the specific_links above make sense; that is, that each link
     # with a "(7.9)" or "(see 7.9)" in it actually points to the named section.
@@ -1617,7 +1666,8 @@ def fixup_links(doc):
 
         for i, kid in enumerate(e.content):
             if isinstance(kid, str):
-                linkify(e, i, kid)
+                if current_section is not None:  # don't linkify front matter, etc.
+                    linkify(e, i, kid)
             elif kid.name == 'a' and 'href' in kid.attrs:
                 # Yo dawg. No links in links.
                 pass
@@ -1710,8 +1760,8 @@ def fixup(docx, doc):
     fixup_paragraph_classes(doc)
     fixup_element_spacing(doc)
     fixup_sec_4_3(doc)
-    fixup_sections(doc)
     fixup_hr(doc)
+    fixup_sections(doc)
     fixup_strip_toc(doc)
     fixup_tables(doc)
     fixup_pre(doc)
@@ -1725,6 +1775,7 @@ def fixup(docx, doc):
     fixup_figures(doc)
     fixup_remove_hr(doc)
     fixup_title_page(doc)
+    fixup_html_title(doc)
     fixup_overview_biblio(doc)
     fixup_simplify_formatting(doc)
     fixup_grammar_pre(doc)
