@@ -51,7 +51,7 @@ def transform(e):
         if name == 'document':
             [body_e] = c
             return html(
-                head(link(rel="stylesheet", type="text/css", href="es6-draft.css")),
+                head(link(rel="stylesheet", href="es6-draft.css")),
                 body_e)
 
         elif name == 'body':
