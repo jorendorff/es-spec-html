@@ -2,48 +2,43 @@
 <html>
 <head>
   <title>ECMAScript Language Specification - ECMA-262 Edition 5.1</title>
-  <link href="es6-draft.css" rel="stylesheet">
+  <link href="es5.1-final.css" rel="stylesheet">
+  <link rel="icon"  type="image/gif" href="favicon.ico">
 </head>
 <body>
-<div id="unofficial">
-  <p><strong>This is <em>not</em> the official ECMAScript Language Specification.</strong></p>
-
-  <p>The most recent final ECMAScript standard is Edition 5.1, the PDF document located at <a
-  href="http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-262.pdf">http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-262.pdf</a>.</p>
-
-  <p>This is a draft of the next edition of the standard.</p>
-
-  <p>This page is based on the current working draft published at <a
-  href="http://wiki.ecmascript.org/doku.php?id=harmony:specification_drafts">http://wiki.ecmascript.org/doku.php?id=harmony:specification_drafts</a>.
-  The program used to convert that Word doc to HTML is a custom-piled heap of hacks. It has doubtlessly stripped out or garbled
-  some of the formatting that makes the specification comprehensible. You can help improve the program <a
-  href="https://github.com/jorendorff/es-spec-html">here</a>.</p>
-
-  <p>For copyright information, see ECMA&rsquo;s legal disclaimer in the document itself.</p>
-</div>
+<img src="Ecma_RVB-003.jpg" alt="Ecma International Logo." height="146" width="373">
 
 <hgroup>
-  <h1>ECMAScript Language Specification</h1>
-  <h1>ECMA-262</h1>
+  <h1>Standard ECMA-262</h1>
   <h1>5.1 Edition / June 2011</h1>
-</hgroup>
+  <h1 style="font-size:250%;margin-top:20px;">ECMAScript Language Specification</h1></hgroup>
+
+<div id="unofficial">
+  <p>This is the HTML rendering of <em> Ecma-262 Edition 5.1, The ECMAScript Language Specification.</em>
+  <p>The PDF rendering of this document is located at <a
+  href="http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-262.pdf">http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-262.pdf</a>.</p>
+
+  <p>The PDF version is the definative specification.  Any discrepencies between this HTML version and the PDF version are unintentional.</p>
+</div>
 
 <section>
   <h1>Copyright notice</h1>
 
   <p>Copyright &copy; 2011 Ecma International</p>
 
-  <p>Ecma International</p>
+  <ul>
+  <li style="list-style-type: none;">Ecma International</li>
 
-  <p>Rue du Rhone 114</p>
+  <li style="list-style-type: none;">Rue du Rhone 114</li>
 
-  <p>CH-1204 Geneva</p>
+  <li style="list-style-type: none;">CH-1204 Geneva</li>
 
-  <p>Tel: +41 22 849 6000</p>
+  <li style="list-style-type: none;">Tel: +41 22 849 6000</li>
 
-  <p>Fax: +41 22 849 6001</p>
+  <li style="list-style-type: none;">Fax: +41 22 849 6001</li>
 
-  <p>Web: http://www.ecma-international.org</p>
+  <li style="list-style-type: none;">Web: <a href="http://www.ecma-international.org">http://www.ecma-international.org</a></li>
+  </ul>
 
   <p>This document and possible translations of it may be copied and furnished to others, and derivative works that comment on or
   otherwise explain it or assist in its implementation may be prepared, copied, published, and distributed, in whole or in part,
@@ -2201,7 +2196,7 @@
         </div>
 
         <figure>
-          <table class="real-table">
+          <table class="lightweight-table">
             <tr>
               <td>break</td>
               <td>do</td>
@@ -2261,7 +2256,7 @@
         </div>
 
         <figure>
-          <table class="real-table">
+          <table class="lightweight-table">
             <tr>
               <td>class</td>
               <td>enum</td>
@@ -2283,7 +2278,7 @@
         class="nt">FutureReservedWord</span> would produce an error must also produce an equivalent error:</p>
 
         <figure>
-          <table class="real-table">
+          <table class="lightweight-table">
             <tr>
               <td>implements</td>
               <td>let</td>
@@ -2313,7 +2308,7 @@
     </div>
 
     <figure>
-      <table class="real-table">
+      <table class="lightweight-table">
         <tr>
           <td>{</td>
           <td>}</td>
@@ -2386,7 +2381,7 @@
     </div>
 
     <figure>
-      <table class="real-table">
+      <table class="lightweight-table">
         <tr>
           <td>/</td>
           <td>/=</td>
@@ -7343,16 +7338,16 @@
 
       <ol class="proc">
         <li>Let <i>lhs</i> be the result of evaluating <i>LeftHandSideExpression</i>.</li>
-        <li>Throw a <b>SyntaxError</b> exception if the following conditions are all true:</li>
-      </ol>
+        <li>Throw a <b>SyntaxError</b> exception if the following conditions are all true:
       <ul>
         <li><a href="#sec-8">Type</a>(<i>lhs</i>) is <a href="#sec-8.7">Reference</a> is <b>true</b></li>
         <li><a href="#sec-8.7">IsStrictReference</a>(<i>lhs</i>) is <b>true</b></li>
         <li><a href="#sec-8">Type</a>(<a href="#sec-8.7">GetBase</a>(<i>lhs</i>)) is <a href="#sec-10.2.1">Environment
             Record</a></li>
         <li><a href="#sec-8.7">GetReferencedName</a>(<i>lhs</i>) is either <code>"eval"</code> or <code>"arguments"</code></li>
-      </ul>
-      <ol class="proc">
+      </ul></li>
+      </ol>
+      <ol class="proc" start="3">
         <li>Let <i>oldValue</i> be <a href="#sec-9.3">ToNumber</a>(<a href="#sec-8.7.1">GetValue</a>(<i>lhs</i>)).</li>
         <li>Let <i>newValue</i> be the result of adding the value <code>1</code> to <i>oldValue</i>, using the same rules as for
             the <code>+</code> operator (<a href="#sec-11.6.3">see 11.6.3</a>).</li>
@@ -7371,16 +7366,16 @@
 
       <ol class="proc">
         <li>Let <i>lhs</i> be the result of evaluating <i>LeftHandSideExpression</i>.</li>
-        <li>Throw a <b>SyntaxError</b> exception if the following conditions are all true:</li>
-      </ol>
+        <li>Throw a <b>SyntaxError</b> exception if the following conditions are all true:
       <ul>
         <li><a href="#sec-8">Type</a>(<i>lhs</i>) is <a href="#sec-8.7">Reference</a> is <b>true</b></li>
         <li><a href="#sec-8.7">IsStrictReference</a>(<i>lhs</i>) is <b>true</b></li>
         <li><a href="#sec-8">Type</a>(<a href="#sec-8.7">GetBase</a>(<i>lhs</i>)) is <a href="#sec-10.2.1">Environment
             Record</a></li>
         <li><a href="#sec-8.7">GetReferencedName</a>(<i>lhs</i>) is either <code>"eval"</code> or <code>"arguments"</code></li>
-      </ul>
-      <ol class="proc">
+      </ul></li>
+      </ol>
+      <ol class="proc" start="3">
         <li>Let <i>oldValue</i> be <a href="#sec-9.3">ToNumber</a>(<a href="#sec-8.7.1">GetValue</a>(<i>lhs</i>)).</li>
         <li>Let <i>newValue</i> be the result of subtracting the value <code>1</code> from <i>oldValue</i>, using the same rules
             as for the <code>-</code> operator (<a href="#sec-11.6.3">11.6.3</a>).</li>
@@ -7539,16 +7534,16 @@
 
       <ol class="proc">
         <li>Let <i>expr</i> be the result of evaluating UnaryExpression.</li>
-        <li>Throw a <b>SyntaxError</b> exception if the following conditions are all true:</li>
-      </ol>
+        <li>Throw a <b>SyntaxError</b> exception if the following conditions are all true:
       <ul>
         <li><a href="#sec-8">Type</a>(<i>expr</i>) is <a href="#sec-8.7">Reference</a> is <b>true</b></li>
         <li><a href="#sec-8.7">IsStrictReference</a>(<i>expr</i>) is <b>true</b></li>
         <li><a href="#sec-8">Type</a>(<a href="#sec-8.7">GetBase</a>(<i>expr</i>)) is <a href="#sec-10.2.1">Environment
             Record</a></li>
         <li><a href="#sec-8.7">GetReferencedName</a>(<i>expr</i>) is either <code>"eval"</code> or <code>"arguments"</code></li>
-      </ul>
-      <ol class="proc">
+      </ul></li>
+      </ol>
+      <ol class="proc"  start="3">
         <li>Let <i>oldValue</i> be <a href="#sec-9.3">ToNumber</a>(<a href="#sec-8.7.1">GetValue</a>(<i>expr</i>)).</li>
         <li>Let <i>newValue</i> be the result of adding the value <code>1</code> to <i>oldValue</i>, using the same rules as for
             the <code>+</code> operator (<a href="#sec-11.6.3">see 11.6.3</a>).</li>
@@ -7565,16 +7560,16 @@
 
       <ol class="proc">
         <li>Let <i>expr</i> be the result of evaluating UnaryExpression.</li>
-        <li>Throw a <b>SyntaxError</b> exception if the following conditions are all true:</li>
-      </ol>
+        <li>Throw a <b>SyntaxError</b> exception if the following conditions are all true:
       <ul>
         <li><a href="#sec-8">Type</a>(<i>expr</i>) is <a href="#sec-8.7">Reference</a> is <b>true</b></li>
         <li><a href="#sec-8.7">IsStrictReference</a>(<i>expr</i>) is <b>true</b></li>
         <li><a href="#sec-8">Type</a>(<a href="#sec-8.7">GetBase</a>(<i>expr</i>)) is <a href="#sec-10.2.1">Environment
             Record</a></li>
         <li><a href="#sec-8.7">GetReferencedName</a>(<i>expr</i>) is either <code>"eval"</code> or <code>"arguments"</code></li>
-      </ul>
-      <ol class="proc">
+      </ul></li>
+      </ol>
+      <ol class="proc"  start="3">
         <li>Let <i>oldValue</i> be <a href="#sec-9.3">ToNumber</a>(<a href="#sec-8.7.1">GetValue</a>(<i>expr</i>)).</li>
         <li>Let <i>newValue</i> be the result of  subtracting the value <code>1</code> from <i>oldValue</i>, using the same rules
             as for the <code>-</code> operator (<a href="#sec-11.6.3">see 11.6.3</a>).</li>
@@ -8704,7 +8699,7 @@
     </div>
 
     <figure>
-      <table class="real-table">
+      <table class="lightweight-table">
         <tr>
           <td>*=</td>
           <td>/=</td>
@@ -8740,16 +8735,16 @@
         <li>Let <i>lref</i> be the result of evaluating <i>LeftHandSideExpression</i>.</li>
         <li>Let <i>rref</i> be the result of evaluating <i>AssignmentExpression</i>.</li>
         <li>Let <i>rval</i> be <a href="#sec-8.7.1">GetValue</a>(<i>rref</i>).</li>
-        <li>Throw a <b>SyntaxError</b> exception if the following conditions are all true:</li>
-      </ol>
+        <li>Throw a <b>SyntaxError</b> exception if the following conditions are all true:
       <ul>
         <li><a href="#sec-8">Type</a>(<i>lref</i>) is <a href="#sec-8.7">Reference</a> is <b>true</b></li>
         <li><a href="#sec-8.7">IsStrictReference</a>(<i>lref</i>) is <b>true</b></li>
         <li><a href="#sec-8">Type</a>(<a href="#sec-8.7">GetBase</a>(<i>lref</i>)) is <a href="#sec-10.2.1">Environment
             Record</a></li>
         <li><a href="#sec-8.7">GetReferencedName</a>(<i>lref</i>) is either <code>"eval"</code> or <code>"arguments"</code></li>
-      </ul>
-      <ol class="proc">
+      </ul></li>
+      </ol>
+      <ol class="proc"  start="5">
         <li>Call <a href="#sec-8.7.2">PutValue</a>(<i>lref</i>, <i>rval</i>).</li>
         <li>Return <i>rval</i>.</li>
       </ol>
@@ -8780,16 +8775,16 @@
         <li>Let <i>rref</i> be the result of evaluating <i>AssignmentExpression</i>.</li>
         <li>Let <i>rval</i> be <a href="#sec-8.7.1">GetValue</a>(<i>rref</i>).</li>
         <li>Let <i>r</i> be the result of applying operator @ to <i>lval</i> and <i>rval</i>.</li>
-        <li>Throw a <b>SyntaxError</b> exception if the following conditions are all true:</li>
-      </ol>
+        <li>Throw a <b>SyntaxError</b> exception if the following conditions are all true:
       <ul>
         <li><a href="#sec-8">Type</a>(<i>lref</i>) is <a href="#sec-8.7">Reference</a> is <b>true</b></li>
         <li><a href="#sec-8.7">IsStrictReference</a>(<i>lref</i>) is <b>true</b></li>
         <li><a href="#sec-8">Type</a>(<a href="#sec-8.7">GetBase</a>(<i>lref</i>)) is <a href="#sec-10.2.1">Environment
             Record</a></li>
         <li><a href="#sec-8.7">GetReferencedName</a>(lref) is either <code>"eval"</code> or <code>"arguments"</code></li>
-      </ul>
-      <ol class="proc">
+      </ul></li>
+      </ol>
+      <ol class="proc"  start="7">
         <li>Call <a href="#sec-8.7.2">PutValue</a>(<i>lref</i>, <i>r</i>).</li>
         <li>Return <i>r</i>.</li>
       </ol>
@@ -20376,7 +20371,7 @@
     </div>
 
     <figure>
-      <table class="real-table">
+      <table class="lightweight-table">
         <tr>
           <td>break</td>
           <td>do</td>
@@ -20428,7 +20423,7 @@
     </div>
 
     <figure>
-      <table class="real-table">
+      <table class="lightweight-table">
         <tr>
           <td>class</td>
           <td>enum</td>
@@ -20448,7 +20443,7 @@
     href="#sec-10.1.1">strict mode code (see 10.1.1)</a>.</p>
 
     <figure>
-      <table class="real-table">
+      <table class="lightweight-table">
         <tr>
           <td>implements</td>
           <td>let</td>
@@ -20476,7 +20471,7 @@
     </div>
 
     <figure>
-      <table class="real-table">
+      <table class="lightweight-table">
         <tr>
           <td>{</td>
           <td>}</td>
@@ -20550,7 +20545,7 @@
     </div>
 
     <figure>
-      <table class="real-table">
+      <table class="lightweight-table">
         <tr>
           <td>/</td>
           <td>/=</td>
@@ -21238,7 +21233,7 @@
     </div>
 
     <figure>
-      <table class="real-table">
+      <table class="lightweight-table">
         <tr>
           <td>*=</td>
           <td>/=</td>
