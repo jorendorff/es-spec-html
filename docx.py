@@ -400,6 +400,7 @@ def load(filename):
         numbering_xml = f.read('word/numbering.xml')
 
     doc = Document()
+    doc.filename = filename
     doc.document = ElementTree.fromstring(document_xml)
     doc.styles = parse_styles(ElementTree.fromstring(styles_xml))
     doc.numbering = parse_numbering(doc, ElementTree.fromstring(numbering_xml))

@@ -1,6 +1,7 @@
 import htmodel as html
 import collections, re
 from warnings import warn
+import os
 
 def findall(e, name):
     if e.name == name:
@@ -1727,32 +1728,46 @@ def fixup_generate_toc(doc):
     assert not section.content
     section.content = [html.h1("Contents")] + make_toc_list(doc_body(doc))
 
-def fixup_add_disclaimer(doc):
+def fixup_add_disclaimer(doc, official51):
     div = html.div
     p = html.p
     strong = html.strong
     em = html.em
+    i = html.i
     a = html.a
 
-    disclaimer = div(
-        p(strong("This is ", em("not"), " the official ECMAScript Language Specification.")),
-        p("The most recent final ECMAScript standard is Edition 5.1, the PDF document located at ",
-          a("http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-262.pdf",
-            href="http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-262.pdf"),
-          "."),
-        p("This is a draft of the next edition of the standard."),
-        p("This page is based on the current working draft published at ",
-          a("http://wiki.ecmascript.org/doku.php?id=harmony:specification_drafts",
-            href="http://wiki.ecmascript.org/doku.php?id=harmony:specification_drafts"),
-          ". The program used to convert that Word doc to HTML is a custom-piled heap of hacks. "
-          "It has doubtlessly stripped out or garbled some of the formatting that makes "
-          "the specification comprehensible. You can help improve the program ",
-          a("here", href="https://github.com/jorendorff/es-spec-html"),
-          "."),
-        # (U+2019 is RIGHT SINGLE QUOTATION MARK, the character you're supposed to use for an apostrophe.)
-        p("For copyright information, see ECMA\u2019s legal disclaimer in the document itself."),
-        id="unofficial")
-    doc_body(doc).content.insert(0, disclaimer)
+    if official51:
+        disclaimer = div(
+            p("This is the HTML rendering of ", i("ECMA-262 Edition 5.1, The ECMAScript Language Specification"), "."),
+            p("The PDF rendering of this document is located at ",
+              a("http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-262.pdf",
+                href="http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-262.pdf"),
+              "."),
+            p("The PDF version is the definitive specification. Any discrepancies between this HTML version "
+              "and the PDF version are unintentional."),
+            id="unofficial")
+        position = 1
+    else:
+        disclaimer = div(
+            p(strong("This is ", em("not"), " the official ECMAScript Language Specification.")),
+            p("The most recent final ECMAScript standard is Edition 5.1, the PDF document located at ",
+              a("http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-262.pdf",
+                href="http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-262.pdf"),
+              "."),
+            p("This is a draft of the next edition of the standard."),
+            p("This page is based on the current working draft published at ",
+              a("http://wiki.ecmascript.org/doku.php?id=harmony:specification_drafts",
+                href="http://wiki.ecmascript.org/doku.php?id=harmony:specification_drafts"),
+              ". The program used to convert that Word doc to HTML is a custom-piled heap of hacks. "
+              "It has doubtlessly stripped out or garbled some of the formatting that makes "
+              "the specification comprehensible. You can help improve the program ",
+              a("here", href="https://github.com/jorendorff/es-spec-html"),
+              "."),
+            # (U+2019 is RIGHT SINGLE QUOTATION MARK, the character you're supposed to use for an apostrophe.)
+            p("For copyright information, see ECMA\u2019s legal disclaimer in the document itself."),
+            id="unofficial")
+        position = 0
+    doc_body(doc).content.insert(position, disclaimer)
 
 def fixup(docx, doc):
     fixup_list_styles(doc, docx)
@@ -1783,5 +1798,6 @@ def fixup(docx, doc):
     fixup_grammar_post(doc)
     fixup_links(doc)
     fixup_generate_toc(doc)
-    fixup_add_disclaimer(doc)
+    fixup_add_disclaimer(doc, official51=(os.path.basename(docx.filename) == 'es5.1-final.dotx'))
+
     return doc
