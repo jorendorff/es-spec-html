@@ -470,15 +470,6 @@ def fixup_hr(doc):
                 body.content[i:i + 1] = result
                 break
 
-    #???
-    for a, i, b in all_parent_index_child_triples(doc):
-        if a.name == 'p' and b.name == 'hr' and all(isinstance(ht, str) and ht.isspace()
-                                                    for ht in a.content[:i] + a.content[i + 1:]):
-            a.name = b.name
-            a.attrs = b.attrs
-            a.style = b.style
-            a.content = b.content
-
 def fixup_sections(doc):
     """ Group h1 elements and subsequent elements of all kinds together into sections. """
 
