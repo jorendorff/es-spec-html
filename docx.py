@@ -251,11 +251,12 @@ k_ilvl = bloat('ilvl')
 k_lvl = bloat('lvl')
 k_lvlOverride = bloat('lvlOverride')
 k_num = bloat('num')
+k_numFmt = bloat('numFmt')
 k_numId = bloat('numId')
+k_numStyleLink = bloat('numStyleLink')
 k_numbering = bloat('numbering')
 k_pStyle = bloat('pStyle')
-k_numFmt = bloat('numFmt')
-k_numStyleLink = bloat('numStyleLink')
+k_startOverride = bloat('startOverride')
 k_sz = bloat('sz')
 
 class Num:
@@ -291,6 +292,15 @@ def parse_lvl(docx, e):
     lvl.full_style = style
 
     return lvl
+
+class StartOverride:
+    pass
+
+def parse_startOverride(e):
+    assert e.tag == k_startOverride
+    ov = StartOverride()
+    ov.val = int(e.get(k_val))
+    return ov
 
 class Numbering:
     def __init__(self, abstract_num, num):
@@ -332,8 +342,12 @@ def parse_numbering(docx, e):
             ilvl = int(override.get(k_ilvl))
             while len(overrides) <= ilvl:
                 overrides.append(None)
-            [lvl] = override
-            overrides[ilvl] = parse_lvl(docx, lvl)
+            [ov] = override
+            if ov.tag == k_lvl:
+                overrides[ilvl] = parse_lvl(docx, ov)
+            else:
+                so = parse_startOverride(ov)
+                assert so.val == 1
         num[numId] = Num(val, overrides)
 
     return Numbering(abstract_num, num)
