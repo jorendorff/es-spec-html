@@ -29,6 +29,12 @@ def all_parent_index_child_triples_reversed(e):
             yield e, i, k
         i -= 1
 
+def version_is_5(docx):
+    return os.path.basename(docx.filename).lower().startswith('es5')
+
+def version_is_51_final(docx):
+    return os.path.basename(docx.filename) == 'es5.1-final.dotx'
+
 def has_bullet(docx, p):
     if not p.style:
         return False
@@ -451,6 +457,20 @@ def fixup_hr(doc):
     Precedes fixup_sections and fixup_strip_toc, which depend on the <hr> tags.
     """
 
+    body = doc_body(doc)
+    for i, a in body.kids('p'):
+        for j, b in a.kids('hr'):
+            rest = a.content[j + 1:]
+            if all(isinstance(ht, str) and ht.isspace() for ht in rest):
+                result = []
+                if not all(isinstance(ht, str) and ht.isspace() for ht in a.content[:j]):
+                    del a.content[j:]
+                    result.append(a)
+                result.append(b)
+                body.content[i:i + 1] = result
+                break
+
+    #???
     for a, i, b in all_parent_index_child_triples(doc):
         if a.name == 'p' and b.name == 'hr' and all(isinstance(ht, str) and ht.isspace()
                                                     for ht in a.content[:i] + a.content[i + 1:]):
@@ -490,6 +510,11 @@ def fixup_sections(doc):
             s = '2\t' + s
         elif s == 'Normative references':
             s = '3\t' + s
+
+        # Very special hack: The heading for section 9.1.1 contains a tab
+        # character. I don't see a tab in the PDF, though. Snip it out.
+        if s.startswith('9.1\t.1\t'):
+            s = s.replace('9.1\t.1\t', '9.1.1\t')
 
         num, tab, title = s.partition('\t')
         if tab == "":
@@ -648,14 +673,18 @@ def fixup_notes(doc):
     """ Wrap each NOTE in div.note and wrap the labels "NOTE", "NOTE 2", etc. in span.nh. """
 
     def find_nh(p, strict=False):
+        if len(p.content) == 0:
+            if strict:
+                warn("warning in fixup_notes: p.Note paragraph has no content")
+            return None
         s = p.content[0]
         if not isinstance(s, str):
             if strict:
-                warn("warning in fixup_notes: p.Note paragraph does not start with a string ")
+                warn("warning in fixup_notes: p.Note paragraph does not start with a string")
             return None
         else:
             left, tab, right = s.partition('\t')
-            if tab is None:
+            if tab == '':
                 if strict:
                     warn('warning in fixup_notes: no tab in NOTE: ' + repr(s))
                 return None
@@ -682,11 +711,10 @@ def fixup_notes(doc):
             if nh_info:
                 # This is a note! See if the word "NOTE" or "NOTE 1" can be divided out into
                 # a span.nh element. This should ordinarily be the case.
-                if nh_info:
-                    nh, rest = nh_info
-                    assert p.content[0] == nh + '\t' + rest
-                    p.content[0] = ' ' + rest
-                    p.content.insert(0, html.span(nh, class_="nh"))
+                nh, rest = nh_info
+                assert p.content[0] == nh + '\t' + rest
+                p.content[0] = ' ' + rest
+                p.content.insert(0, html.span(nh, class_="nh"))
 
                 # We don't need .Note anymore; remove it.
                 if has_note_class:
@@ -939,20 +967,13 @@ def fixup_remove_hr(doc):
             del parent.content[i]
 
 def fixup_title_page(doc):
-    """ Apply a handful of fixups to the junk gleaned from the title page. """
+    """ Apply a fixup or two for the title page. """
     for parent, i, child in all_parent_index_child_triples(doc):
         if parent.name == 'p' and child.name == 'h1':
             # A p element shouldn't contain an h1, so make this an hgroup.
             parent.name = 'hgroup'
             if len(parent.content) != 6:
                 continue
-            h = parent.content[1]
-
-            # One of the lines has an ugly typo that I don't want right up
-            # front in large type.
-            s = h.content[-1]
-            assert s.endswith(' , 2012')
-            h.content[-1] = s.replace(' , 2012', ', 2012')
 
             # A few of the lines here are redundant.
             del parent.content[3:]
@@ -1367,7 +1388,7 @@ def fixup_grammar_post(doc):
             [result] = markup_syntax(syntax.strip(), 'prod')
             child.content = result.content
 
-def fixup_links(doc):
+def fixup_links(doc, docx):
     sections_by_title = {}
     for sect in findall(doc, 'section'):
         if 'id' in sect.attrs and sect.content and sect.content[0].name == 'h1':
@@ -1393,6 +1414,11 @@ def fixup_links(doc):
         s = source[5:] if source.startswith('#sec-') else source
         t = target[5:] if target.startswith('#sec-') else target
         return linkability_overrides.get((s, t), source != target)
+
+    if version_is_5(docx):
+        globalEnv = "The Global Environment"
+    else:
+        globalEnv = "Global Environment Records"
 
     specific_link_source_data = [
         # 5.2
@@ -1477,8 +1503,8 @@ def fixup_links(doc):
         ("GetIdentifierReference", "GetIdentifierReference (lex, name, strict)"),
         ("NewDeclarativeEnvironment", "NewDeclarativeEnvironment (E)"),
         ("NewObjectEnvironment", "NewObjectEnvironment (O, E)"),
-        ("the global environment", "The Global Environment"),
-        ("the Global Environment", "The Global Environment"),
+        ("the global environment", globalEnv),
+        ("the Global Environment", globalEnv),
 
         # 10.3
         ("LexicalEnvironment", "Execution Contexts"),
@@ -1728,7 +1754,7 @@ def fixup_generate_toc(doc):
     assert not section.content
     section.content = [html.h1("Contents")] + make_toc_list(doc_body(doc))
 
-def fixup_add_disclaimer(doc, official51):
+def fixup_add_disclaimer(doc, docx):
     div = html.div
     p = html.p
     strong = html.strong
@@ -1736,7 +1762,7 @@ def fixup_add_disclaimer(doc, official51):
     i = html.i
     a = html.a
 
-    if official51:
+    if version_is_51_final(docx):
         disclaimer = div(
             p("This is the HTML rendering of ", i("ECMA-262 Edition 5.1, The ECMAScript Language Specification"), "."),
             p("The PDF rendering of this document is located at ",
@@ -1796,8 +1822,8 @@ def fixup(docx, doc):
     fixup_grammar_pre(doc)
 
     fixup_grammar_post(doc)
-    fixup_links(doc)
+    fixup_links(doc, docx)
     fixup_generate_toc(doc)
-    fixup_add_disclaimer(doc, official51=(os.path.basename(docx.filename) == 'es5.1-final.dotx'))
+    fixup_add_disclaimer(doc, docx)
 
     return doc
