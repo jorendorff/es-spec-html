@@ -51,7 +51,7 @@ doc = docx.load(in_filename)
 save_html(doc, out_filename)
 
 # Some other things that can be done with a docx.Document:
-#sketch_schema(es6_draft.document)
-#es6_draft._extract()
-#es6_draft._dump_styles()
+#sketch_schema(doc.document)
+#doc._extract()
+#doc._dump_styles()
 
