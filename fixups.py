@@ -234,7 +234,7 @@ def fixup_paragraph_classes(doc):
         # Special case. Rather than implement OOXML numbering and Word
         # {SEQ} macros to the extent we'd need to generate the annex
         # headings, we fake it.
-        
+
         # Figure out what level heading we are.
         if cls == 'ANNEX':
             level = 0
@@ -814,7 +814,7 @@ def fixup_15_12_3(doc):
             return
 
     warn("fixup_15_12_3: could not find text to patch")
-            
+
 def fixup_lists(e, docx):
     """ Wrap each li element in a list of the appropriate type.
 
@@ -1045,7 +1045,7 @@ def fixup_simplify_formatting(doc):
 
     (Sometimes this converts to semantic markup, like using a var or span.nt
     element instead of an <i>; but it's just a shot in the dark.)
-    
+
     This precedes fixup_grammar_pre which looks for sub and span.nt elements.
     """
 
