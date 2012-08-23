@@ -41,6 +41,63 @@ class Element:
             if isinstance(kid, Element) and (name is None or kid.name == name):
                 yield i, kid
 
+    def with_content(self, replaced_content):
+        """ Return a copy of self with different content. """
+        return Element(self.name, self.attrs, self.style, replaced_content)
+
+    def replace(self, name, replacement):
+        """ A sort of map() on htmodel content.
+
+        self - An Element to transform.
+
+        name - A string.
+
+        replacement - A function taking a single Element and returning a content list
+            (that is, a list of Elements and/or strings).
+
+        Walk the entire tree under the Element self; for each Element e with the given
+        name, call replacement(e); return a tree with each such Element replaced by
+        the elements in replacement(e).
+
+        If self.name == name and list(replacement(self)) is not a list consisting of
+        exactly one Element, raise a ValueError.
+
+        self is left unmodified, but the result is not a deep copy: it may be
+        self or an Element whose tree shares some parts of self.
+        """
+
+        def map_element(e):
+            replaced_content = map_content(e.content)
+            if replaced_content is not e.content:
+                e = e.with_content(replaced_content)
+            if e.name == name:
+                return list(replacement(e))
+            return [e]
+
+        def map_content(source):
+            changed = False
+            result = []
+            for child in source:
+                if isinstance(child, str):
+                    result.append(child)
+                else:
+                    seq = map_element(child)
+                    changed = changed or seq != [child]
+                    result += seq
+            if changed:
+                return result
+            else:
+                return source
+
+        result_content = map_element(self)
+        if len(result_content) != 1:
+            raise ValueError("replaced root element with {} pieces of content".format(len(result_content)))
+        result_elt = result_content[0]
+        if not isinstance(result_elt, Element):
+            raise ValueError("replaced root element with non-element content")
+        return result_elt
+
+
 def escape(s, quote=False):
     def replace(m):
         c = ord(m.group(0))

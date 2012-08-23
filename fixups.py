@@ -360,6 +360,21 @@ def fixup_paragraph_classes(doc):
         else:
             e.name = default_tag
 
+def fixup_remove_empty_headings(doc):
+    def is_empty(item):
+        if isinstance(item, str):
+            return item.strip() == ''
+        else:
+            return all(is_empty(c) for c in item.content)
+
+    def remove_if_empty(heading):
+        if is_empty(heading):
+            return []
+        else:
+            return [heading]
+
+    return doc.replace('h1', remove_if_empty)
+
 def fixup_element_spacing(doc):
     """
     Change "A<i> B</i>" to "A <i>B</i>".
@@ -1791,6 +1806,7 @@ def fixup(docx, doc):
     fixup_list_styles(doc, docx)
     fixup_formatting(doc, docx)
     fixup_paragraph_classes(doc)
+    doc = fixup_remove_empty_headings(doc)
     fixup_element_spacing(doc)
     fixup_sec_4_3(doc)
     fixup_hr(doc)

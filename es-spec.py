@@ -30,7 +30,7 @@ def sketch_schema(document):
 
 def save_html(docxfile, filename):
     result = transform(docxfile.document)
-    fixups.fixup(docxfile, result)
+    result = fixups.fixup(docxfile, result)
 
     print("=== Unrecognized styles")
     for k, v in sorted(fixups.unrecognized_styles.items(), key=lambda pair: pair[1]):
