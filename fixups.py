@@ -36,6 +36,7 @@ def version_is_51_final(docx):
     return os.path.basename(docx.filename) == 'es5.1-final.dotx'
 
 def has_bullet(docx, p):
+    """ True if the given paragraph is of a style that has a bullet. """
     if not p.style:
         return False
     numId = p.style.get('-ooxml-numId')
