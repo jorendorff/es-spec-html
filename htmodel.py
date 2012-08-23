@@ -13,7 +13,9 @@ class Element:
         self.attrs = attrs or {}
         assert style is None or isinstance(style, dict)
         self.style = style
+        assert not isinstance(content, str)
         self.content = list(content)
+        assert all(isinstance(item, (str, Element)) for item in self.content)
 
     def is_block(self):
         """ True if this is a block element.
@@ -44,6 +46,13 @@ class Element:
     def with_content(self, replaced_content):
         """ Return a copy of self with different content. """
         return Element(self.name, self.attrs, self.style, replaced_content)
+
+    def with_(self, name=None, attrs=None, style=None, content=None):
+        if name is None: name = self.name
+        if attrs is None: attrs = self.attrs
+        if style is None: style = self.style
+        if content is None: content = self.content
+        return Element(name, attrs, style, content)
 
     def replace(self, name, replacement):
         """ A sort of map() on htmodel content.

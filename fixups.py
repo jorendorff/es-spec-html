@@ -230,10 +230,25 @@ unrecognized_styles = collections.defaultdict(int)
 
 def fixup_paragraph_classes(doc):
     annex_counters = [0, 0, 0, 0]
+
+    def ht_concat(c1, c2):
+        """ Concatenate two content lists. """
+        assert isinstance(c1, list)
+        assert isinstance(c2, list)
+        if not c1:
+            return c2
+        elif not c2:
+            return c1
+        elif isinstance(c1[-1], str) and isinstance(c2[0], str):
+            return c1[:-1] + [c1[-1] + c2[0]] + c2[1:]
+        else:
+            return c1 + c2
+
     def munge_annex_heading(e, cls):
         # Special case. Rather than implement OOXML numbering and Word
         # {SEQ} macros to the extent we'd need to generate the annex
         # headings, we fake it.
+        content = e.content
 
         # Figure out what level heading we are.
         if cls == 'ANNEX':
@@ -247,12 +262,10 @@ def fixup_paragraph_classes(doc):
         for i in range(level + 1, len(annex_counters)):
             annex_counters[i] = 0
 
-        e.name = 'h1'
         letter = chr(ord('A') + annex_counters[0] - 1)
         if level == 0:
             # Parse the current content of the heading.
             i = 0
-            content = e.content
 
             assert ht_name_is(content[i], 'br')
             i += 1
@@ -282,14 +295,15 @@ def fixup_paragraph_classes(doc):
                 i += 1
 
             # Build the new heading.
-            e.content = ["Annex " + letter + " ", html.span(status, class_="section-status"), " "] + title
+            replaced_content = ["Annex " + letter + " ", html.span(status, class_="section-status"), " "] + title
         else:
             # Autogenerate annex subsection number.
             s = letter + "." + ".".join(map(str, annex_counters[1:level + 1])) + '\t'
-            if e.content and isinstance(e.content[0], str):
-                e.content[0] = s + e.content[0]
-            else:
-                e.content.insert(0, s)
+            replaced_content = ht_concat([s], content)
+
+        attrs = e.attrs.copy()
+        del attrs['class']
+        return [e.with_(name='h1', attrs=attrs, content=replaced_content)]
 
     tag_names = {
         # ANNEX, a2, a3, a4 are treated specially.
@@ -332,31 +346,33 @@ def fixup_paragraph_classes(doc):
         'zzSTDTitle': 'div.inner-title'
     }
 
-    for e in findall(doc, 'p'):
+    def replace_tag_name(e):
         num = e.style and '-ooxml-numId' in e.style
         default_tag = 'li' if num else 'p'
 
-        if 'class' in e.attrs:
-            cls = e.attrs['class']
-            del e.attrs['class']
+        if 'class' not in e.attrs:
+            return [e.with_(name=default_tag)]
 
-            if cls not in tag_names:
-                unrecognized_styles[cls] += 1
-            #e.content.insert(0, html.span('<{0}>'.format(cls), style="color:red"))
+        cls = e.attrs['class']
 
-            if cls in ('ANNEX', 'a2', 'a3', 'a4'):
-                munge_annex_heading(e, cls)
-            else:
-                tag = tag_names.get(cls)
-                if tag is None:
-                    tag = default_tag
-                elif '.' in tag:
-                    tag, _, e.attrs['class'] = tag.partition('.')
-                    if tag == '':
-                        tag = default_tag
-                e.name = tag
-        else:
-            e.name = default_tag
+        if cls not in tag_names:
+            unrecognized_styles[cls] += 1
+
+        if cls in ('ANNEX', 'a2', 'a3', 'a4'):
+            return munge_annex_heading(e, cls)
+
+        attrs = e.attrs.copy()
+        del attrs['class']
+        tag = tag_names.get(cls)
+        if tag is None:
+            tag = default_tag
+        elif '.' in tag:
+            tag, _, attrs['class'] = tag.partition('.')
+            if tag == '':
+                tag = default_tag
+        return [e.with_(name=tag, attrs=attrs)]
+
+    return doc.replace('p', replace_tag_name)
 
 def fixup_remove_empty_headings(doc):
     def is_empty(item):
@@ -1803,7 +1819,7 @@ def fixup_add_disclaimer(doc, docx):
 def fixup(docx, doc):
     fixup_list_styles(doc, docx)
     fixup_formatting(doc, docx)
-    fixup_paragraph_classes(doc)
+    doc = fixup_paragraph_classes(doc)
     doc = fixup_remove_empty_headings(doc)
     fixup_element_spacing(doc)
     fixup_sec_4_3(doc)
