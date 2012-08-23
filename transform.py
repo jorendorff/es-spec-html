@@ -16,9 +16,9 @@ def transform(e):
         assert len(e) == 0
         return e.text
 
-    elif name == 'instrText':
+    elif name == 'instrText' or name == 'fldChar':
         assert len(e) == 0
-        return '{' + e.text + '}'
+        return None
 
     elif name in {'pPr', 'rPr', 'sectPr', 'tblPr', 'tblPrEx', 'trPr', 'tcPr', 'numPr'}:
         # Presentation data.
