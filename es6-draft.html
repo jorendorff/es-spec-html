@@ -405,12 +405,6 @@
             style="font-family: monospace">? : )</span></li>
         <li><span class="secnum"><a href="#sec-11.13" title="link to this section">11.13</a></span> Assignment Operators
           <ol class="toc">
-            <li><br></li>
-            <li><span style="font-family: monospace"><i><br><br></i></span></li>
-            <li><span style="font-family: monospace"><i><br></i></span></li>
-            <li><br></li>
-            <li><br></li>
-            <li><br></li>
             <li><span class="secnum"><a href="#sec-11.13.1" title="link to this section">11.13.1</a></span> Destructuring
                 Assignment</li>
           </ol>
@@ -2566,12 +2560,8 @@
       <div class="gp">
         <div class="lhs"><span class="nt">NullLiteral</span> <span class="geq">::</span></div>
         <div class="rhs"><code class="t">null</code></div>
+        <div class="rhs"></div>
       </div>
-
-      <section>
-        <h1></h1>
-        <div class="rhs"><code><br></code></div>
-      </section>
     </section>
 
     <section id="sec-7.8.3">
@@ -4988,14 +4978,6 @@
         </li>
         <li>Return <a href="#sec-8.9">GetBase</a>(<i>V</i>).</li>
       </ol>
-
-      <section>
-        <h1></h1>
-      </section>
-
-      <section>
-        <h1></h1>
-      </section>
     </section>
   </section>
 
@@ -6791,11 +6773,7 @@
         </li>
       </ul>
 
-      <section>
-        <h1></h1>
-
-        <p>The term &ldquo;base code&rdquo; is used to designate code that is not strict code.</p>
-      </section>
+      <p>The term &ldquo;base code&rdquo; is used to designate code that is not strict code.</p>
     </section>
 
     <section id="sec-10.1.2">
@@ -7550,10 +7528,6 @@
         </tr>
       </table>
     </figure>
-
-    <section>
-      <h1></h1>
-    </section>
   </section>
 
   <section id="sec-10.4">
@@ -7692,42 +7666,13 @@
 
       <ol class="proc">
         <li>Let <i>env</i> be the result of performing the GetThisEnvironment abstract operation.</li>
-        <li>Return the result of calling the GetThisBinding concrete method of <i>env</i>.</li>
+        <li>Return the result of calling the GetThisBinding concrete method of <i>env</i>.
+          <ol class="block">
+            <li></li>
+          </ol>
+        </li>
+        <li></li>
       </ol>
-
-      <section>
-        <h1></h1>
-      </section>
-
-      <section>
-        <h1></h1>
-      </section>
-
-      <section>
-        <h1></h1>
-      </section>
-
-      <section>
-        <h1></h1>
-      </section>
-
-      <section>
-        <h1></h1>
-      </section>
-
-      <section>
-        <h1></h1>
-      </section>
-
-      <section>
-        <h1></h1>
-        <ol class="proc">
-          <li></li>
-        </ol>
-        <ol class="proc">
-          <li></li>
-        </ol>
-      </section>
     </section>
   </section>
 
@@ -10812,115 +10757,94 @@
 
       <p><b>Runtime Semantics: Evaluation</b></p>
 
-      <section>
-        <h1></h1>
+      <p><span class="prod"><span class="nt">RelationalExpression</span> <span class="geq">:</span> <span
+      class="nt">RelationalExpression</span> <code class="t">&lt;</code> <span class="nt">ShiftExpression</span></span></p>
 
-        <p><span class="prod"><span class="nt">RelationalExpression</span> <span class="geq">:</span> <span
-        class="nt">RelationalExpression</span> <code class="t">&lt;</code> <span class="nt">ShiftExpression</span></span></p>
+      <ol class="proc">
+        <li>Let <i>lref</i> be the result of evaluating <i>RelationalExpression</i>.</li>
+        <li>Let <i>lval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>lref</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>lval</i>).</li>
+        <li>Let <i>rref</i> be the result of evaluating <i>ShiftExpression</i>.</li>
+        <li>Let <i>rval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>rref</i>).</li>
+        <li>Let <i>r</i> be the result of performing abstract relational comparison <i>lval</i> &lt; <i>rval</i>. (see
+            11.8.5)</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>r</i>).</li>
+        <li>If <i>r</i> is <b>undefined</b>, return <b>false</b>. Otherwise, return <i>r</i>.</li>
+      </ol>
 
-        <ol class="proc">
-          <li>Let <i>lref</i> be the result of evaluating <i>RelationalExpression</i>.</li>
-          <li>Let <i>lval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>lref</i>).</li>
-          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>lval</i>).</li>
-          <li>Let <i>rref</i> be the result of evaluating <i>ShiftExpression</i>.</li>
-          <li>Let <i>rval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>rref</i>).</li>
-          <li>Let <i>r</i> be the result of performing abstract relational comparison <i>lval</i> &lt; <i>rval</i>. (see
-              11.8.5)</li>
-          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>r</i>).</li>
-          <li>If <i>r</i> is <b>undefined</b>, return <b>false</b>. Otherwise, return <i>r</i>.</li>
-        </ol>
-      </section>
+      <p><span class="prod"><span class="nt">RelationalExpression</span> <span class="geq">:</span> <span
+      class="nt">RelationalExpression</span> <code class="t">&gt;</code> <span class="nt">ShiftExpression</span></span></p>
 
-      <section>
-        <h1></h1>
+      <ol class="proc">
+        <li>Let <i>lref</i> be the result of evaluating <i>RelationalExpression</i>.</li>
+        <li>Let <i>lval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>lref</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>lval</i>).</li>
+        <li>Let <i>rref</i> be the result of evaluating <i>ShiftExpression</i>.</li>
+        <li>Let <i>rval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>rref</i>).</li>
+        <li>Let <i>r</i> be the result of performing abstract relational comparison <i>rval</i> &lt; <i>lval</i> with
+            <i>LeftFirst</i> equal to <b>false</b>..</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>r</i>).</li>
+        <li>If <i>r</i> is <b>undefined</b>, return <b>false</b>. Otherwise, return <i>r</i>.</li>
+      </ol>
 
-        <p><span class="prod"><span class="nt">RelationalExpression</span> <span class="geq">:</span> <span
-        class="nt">RelationalExpression</span> <code class="t">&gt;</code> <span class="nt">ShiftExpression</span></span></p>
+      <p><span class="prod"><span class="nt">RelationalExpression</span> <span class="geq">:</span> <span
+      class="nt">RelationalExpression</span> <code class="t">&lt;=</code> <span class="nt">ShiftExpression</span></span></p>
 
-        <ol class="proc">
-          <li>Let <i>lref</i> be the result of evaluating <i>RelationalExpression</i>.</li>
-          <li>Let <i>lval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>lref</i>).</li>
-          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>lval</i>).</li>
-          <li>Let <i>rref</i> be the result of evaluating <i>ShiftExpression</i>.</li>
-          <li>Let <i>rval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>rref</i>).</li>
-          <li>Let <i>r</i> be the result of performing abstract relational comparison <i>rval</i> &lt; <i>lval</i> with
-              <i>LeftFirst</i> equal to <b>false</b>..</li>
-          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>r</i>).</li>
-          <li>If <i>r</i> is <b>undefined</b>, return <b>false</b>. Otherwise, return <i>r</i>.</li>
-        </ol>
-      </section>
+      <ol class="proc">
+        <li>Let <i>lref</i> be the result of evaluating <i>RelationalExpression</i>.</li>
+        <li>Let <i>lval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>lref</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>lval</i>).</li>
+        <li>Let <i>rref</i> be the result of evaluating <i>ShiftExpression</i>.</li>
+        <li>Let <i>rval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>rref</i>).</li>
+        <li>Let <i>r</i> be the result of performing abstract relational comparison <i>rval</i> &lt; <i>lval</i>  with
+            <i>LeftFirst</i> equal to <b>false</b>..</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>r</i>).</li>
+        <li>If <i>r</i> is <b>true</b> or <b>undefined</b>, return <b>false</b>. Otherwise, return <b>true</b>.</li>
+      </ol>
 
-      <section>
-        <h1></h1>
+      <p><span class="prod"><span class="nt">RelationalExpression</span> <span class="geq">:</span> <span
+      class="nt">RelationalExpression</span> <code class="t">&gt;=</code> <span class="nt">ShiftExpression</span></span></p>
 
-        <p><span class="prod"><span class="nt">RelationalExpression</span> <span class="geq">:</span> <span
-        class="nt">RelationalExpression</span> <code class="t">&lt;=</code> <span class="nt">ShiftExpression</span></span></p>
+      <ol class="proc">
+        <li>Let <i>lref</i> be the result of evaluating <i>RelationalExpression</i>.</li>
+        <li>Let <i>lval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>lref</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>lval</i>).</li>
+        <li>Let <i>rref</i> be the result of evaluating <i>ShiftExpression</i>.</li>
+        <li>Let <i>rval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>rref</i>).</li>
+        <li>Let <i>r</i> be the result of performing abstract relational comparison <i>lval</i> &lt; <i>rval</i>.</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>r</i>).</li>
+        <li>If <i>r</i> is <b>true</b> or <b>undefined</b>, return <b>false</b>. Otherwise, return <b>true</b>.</li>
+      </ol>
 
-        <ol class="proc">
-          <li>Let <i>lref</i> be the result of evaluating <i>RelationalExpression</i>.</li>
-          <li>Let <i>lval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>lref</i>).</li>
-          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>lval</i>).</li>
-          <li>Let <i>rref</i> be the result of evaluating <i>ShiftExpression</i>.</li>
-          <li>Let <i>rval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>rref</i>).</li>
-          <li>Let <i>r</i> be the result of performing abstract relational comparison <i>rval</i> &lt; <i>lval</i>  with
-              <i>LeftFirst</i> equal to <b>false</b>..</li>
-          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>r</i>).</li>
-          <li>If <i>r</i> is <b>true</b> or <b>undefined</b>, return <b>false</b>. Otherwise, return <b>true</b>.</li>
-        </ol>
-      </section>
+      <p><span class="prod"><span class="nt">RelationalExpression</span> <span class="geq">:</span> <span
+      class="nt">RelationalExpression</span> <code class="t">instanceof</code> <span class="nt">ShiftExpression</span></span></p>
 
-      <section>
-        <h1></h1>
+      <ol class="proc">
+        <li>Let <i>lref</i> be the result of evaluating <i>RelationalExpression</i>.</li>
+        <li>Let <i>lval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>lref</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>lval</i>).</li>
+        <li>Let <i>rref</i> be the result of evaluating <i>ShiftExpression</i>.</li>
+        <li>Let <i>rval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>rref</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>rval</i>).</li>
+        <li>If <a href="#sec-8">Type</a>(<i>rval</i>) is not Object, throw a <b>TypeError</b> exception.</li>
+        <li>If <i>rval</i> does not have a [[HasInstance]] internal method, throw a <b>TypeError</b> exception.</li>
+        <li>Return the result of calling the [[HasInstance]] internal method of <i>rval</i> with argument <i>lval</i>.</li>
+      </ol>
 
-        <p><span class="prod"><span class="nt">RelationalExpression</span> <span class="geq">:</span> <span
-        class="nt">RelationalExpression</span> <code class="t">&gt;=</code> <span class="nt">ShiftExpression</span></span></p>
+      <p><span class="prod"><span class="nt">RelationalExpression</span> <span class="geq">:</span> <span
+      class="nt">RelationalExpression</span> <code class="t">in</code> <span class="nt">ShiftExpression</span></span></p>
 
-        <ol class="proc">
-          <li>Let <i>lref</i> be the result of evaluating <i>RelationalExpression</i>.</li>
-          <li>Let <i>lval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>lref</i>).</li>
-          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>lval</i>).</li>
-          <li>Let <i>rref</i> be the result of evaluating <i>ShiftExpression</i>.</li>
-          <li>Let <i>rval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>rref</i>).</li>
-          <li>Let <i>r</i> be the result of performing abstract relational comparison <i>lval</i> &lt; <i>rval</i>.</li>
-          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>r</i>).</li>
-          <li>If <i>r</i> is <b>true</b> or <b>undefined</b>, return <b>false</b>. Otherwise, return <b>true</b>.</li>
-        </ol>
-
-        <p><span class="prod"><span class="nt">RelationalExpression</span> <span class="geq">:</span> <span
-        class="nt">RelationalExpression</span> <code class="t">instanceof</code> <span
-        class="nt">ShiftExpression</span></span></p>
-
-        <ol class="proc">
-          <li>Let <i>lref</i> be the result of evaluating <i>RelationalExpression</i>.</li>
-          <li>Let <i>lval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>lref</i>).</li>
-          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>lval</i>).</li>
-          <li>Let <i>rref</i> be the result of evaluating <i>ShiftExpression</i>.</li>
-          <li>Let <i>rval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>rref</i>).</li>
-          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>rval</i>).</li>
-          <li>If <a href="#sec-8">Type</a>(<i>rval</i>) is not Object, throw a <b>TypeError</b> exception.</li>
-          <li>If <i>rval</i> does not have a [[HasInstance]] internal method, throw a <b>TypeError</b> exception.</li>
-          <li>Return the result of calling the [[HasInstance]] internal method of <i>rval</i> with argument <i>lval</i>.</li>
-        </ol>
-      </section>
-
-      <section>
-        <h1></h1>
-
-        <p><span class="prod"><span class="nt">RelationalExpression</span> <span class="geq">:</span> <span
-        class="nt">RelationalExpression</span> <code class="t">in</code> <span class="nt">ShiftExpression</span></span></p>
-
-        <ol class="proc">
-          <li>Let <i>lref</i> be the result of evaluating <i>RelationalExpression</i>.</li>
-          <li>Let <i>lval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>lref</i>).</li>
-          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>lval</i>).</li>
-          <li>Let <i>rref</i> be the result of evaluating <i>ShiftExpression</i>.</li>
-          <li>Let <i>rval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>rref</i>).</li>
-          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>rval</i>).</li>
-          <li>If <a href="#sec-8">Type</a>(<i>rval</i>) is not Object, throw a <b>TypeError</b> exception.</li>
-          <li>Return the result of calling the [[HasProperty]] internal method of <i>rval</i> with argument <a
-              href="#sec-9.1.8">ToString</a>(<i>lval</i>).</li>
-        </ol>
-      </section>
+      <ol class="proc">
+        <li>Let <i>lref</i> be the result of evaluating <i>RelationalExpression</i>.</li>
+        <li>Let <i>lval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>lref</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>lval</i>).</li>
+        <li>Let <i>rref</i> be the result of evaluating <i>ShiftExpression</i>.</li>
+        <li>Let <i>rval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>rref</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>rval</i>).</li>
+        <li>If <a href="#sec-8">Type</a>(<i>rval</i>) is not Object, throw a <b>TypeError</b> exception.</li>
+        <li>Return the result of calling the [[HasProperty]] internal method of <i>rval</i> with argument <a
+            href="#sec-9.1.8">ToString</a>(<i>lval</i>).</li>
+      </ol>
     </section>
   </section>
 
@@ -11088,101 +11012,85 @@
 
       <p><b>Runtime Semantics: Evaluation</b></p>
 
-      <section>
-        <h1></h1>
+      <p><span class="prod"><span class="nt">EqualityExpression</span> <span class="geq">:</span> <span
+      class="nt">EqualityExpression</span> <code class="t">==</code> <span class="nt">RelationalExpression</span></span></p>
 
-        <p><span class="prod"><span class="nt">EqualityExpression</span> <span class="geq">:</span> <span
-        class="nt">EqualityExpression</span> <code class="t">==</code> <span class="nt">RelationalExpression</span></span></p>
+      <ol class="proc">
+        <li>Let <i>lref</i> be the result of evaluating <i>EqualityExpression</i>.</li>
+        <li>Let <i>lval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>lref</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>lval</i>).</li>
+        <li>Let <i>rref</i> be the result of evaluating <i>RelationalExpression</i>.</li>
+        <li>Let <i>rval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>rref</i>).</li>
+        <li>Return the result of performing abstract equality comparison algorithm <i>rval</i> == <i>lval</i>.</li>
+      </ol>
 
-        <ol class="proc">
-          <li>Let <i>lref</i> be the result of evaluating <i>EqualityExpression</i>.</li>
-          <li>Let <i>lval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>lref</i>).</li>
-          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>lval</i>).</li>
-          <li>Let <i>rref</i> be the result of evaluating <i>RelationalExpression</i>.</li>
-          <li>Let <i>rval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>rref</i>).</li>
-          <li>Return the result of performing abstract equality comparison algorithm <i>rval</i> == <i>lval</i>.</li>
-        </ol>
-      </section>
+      <p><span class="prod"><span class="nt">EqualityExpression</span> <span class="geq">:</span> <span
+      class="nt">EqualityExpression</span> <code class="t">!=</code> <span class="nt">RelationalExpression</span></span></p>
 
-      <section>
-        <h1></h1>
+      <ol class="proc">
+        <li>Let <i>lref</i> be the result of evaluating <i>EqualityExpression</i>.</li>
+        <li>Let <i>lval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>lref</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>lval</i>).</li>
+        <li>Let <i>rref</i> be the result of evaluating <i>RelationalExpression</i>.</li>
+        <li>Let <i>rval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>rref</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>rval</i>).</li>
+        <li>Let <i>r</i> be the result of performing abstract equality comparison algorithm <i>rval</i> == <i>lval</i>.</li>
+        <li>If <i>r</i> is <b>true</b>, return <b>false</b>. Otherwise, return <b>true</b>.</li>
+      </ol>
 
-        <p><span class="prod"><span class="nt">EqualityExpression</span> <span class="geq">:</span> <span
-        class="nt">EqualityExpression</span> <code class="t">!=</code> <span class="nt">RelationalExpression</span></span></p>
+      <p><span class="prod"><span class="nt">EqualityExpression</span> <span class="geq">:</span> <span
+      class="nt">EqualityExpression</span> <code class="t">===</code> <span class="nt">RelationalExpression</span></span></p>
 
-        <ol class="proc">
-          <li>Let <i>lref</i> be the result of evaluating <i>EqualityExpression</i>.</li>
-          <li>Let <i>lval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>lref</i>).</li>
-          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>lval</i>).</li>
-          <li>Let <i>rref</i> be the result of evaluating <i>RelationalExpression</i>.</li>
-          <li>Let <i>rval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>rref</i>).</li>
-          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>rval</i>).</li>
-          <li>Let <i>r</i> be the result of performing abstract equality comparison algorithm <i>rval</i> == <i>lval</i>.</li>
-          <li>If <i>r</i> is <b>true</b>, return <b>false</b>. Otherwise, return <b>true</b>.</li>
-        </ol>
-      </section>
+      <ol class="proc">
+        <li>Let <i>lref</i> be the result of evaluating <i>EqualityExpression</i>.</li>
+        <li>Let <i>lval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>lref</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>lval</i>)</li>
+        <li>Let <i>rref</i> be the result of evaluating <i>RelationalExpression</i>.</li>
+        <li>Let <i>rval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>rref</i>).</li>
+        <li>Return the result of performing the strict equality comparison algorithm <i>rval</i> === <i>lval</i>.</li>
+      </ol>
 
-      <section>
-        <h1></h1>
+      <p><span class="prod"><span class="nt">EqualityExpression</span> <span class="geq">:</span> <span
+      class="nt">EqualityExpression</span> <code class="t">!==</code> <span class="nt">RelationalExpression</span></span></p>
 
-        <p><span class="prod"><span class="nt">EqualityExpression</span> <span class="geq">:</span> <span
-        class="nt">EqualityExpression</span> <code class="t">===</code> <span class="nt">RelationalExpression</span></span></p>
+      <ol class="proc">
+        <li>Let <i>lref</i> be the result of evaluating <i>EqualityExpression</i>.</li>
+        <li>Let <i>lval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>lref</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>lval</i>).</li>
+        <li>Let <i>rref</i> be the result of evaluating <i>RelationalExpression</i>.</li>
+        <li>Let <i>rval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>rref</i>).</li>
+        <li>Let <i>r</i> be the result of performing strict equality comparison algorithm <i>rval</i> === <i>lval</i>.</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>r</i>).</li>
+        <li>If <i>r</i> is <b>true</b>, return <b>false</b>. Otherwise, return <b>true</b>.</li>
+      </ol>
 
-        <ol class="proc">
-          <li>Let <i>lref</i> be the result of evaluating <i>EqualityExpression</i>.</li>
-          <li>Let <i>lval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>lref</i>).</li>
-          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>lval</i>)</li>
-          <li>Let <i>rref</i> be the result of evaluating <i>RelationalExpression</i>.</li>
-          <li>Let <i>rval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>rref</i>).</li>
-          <li>Return the result of performing the strict equality comparison algorithm <i>rval</i> === <i>lval</i>.</li>
-        </ol>
-      </section>
+      <p><span class="prod"><span class="nt">EqualityExpression</span> <span class="geq">:</span> <span
+      class="nt">EqualityExpression</span> <span class="grhsannot">[no <span class="nt">LineTerminator</span> here]</span> <code
+      class="t">is</code> <span class="nt">RelationalExpression</span></span></p>
 
-      <section>
-        <h1></h1>
+      <ol class="proc">
+        <li>Let <i>lref</i> be the result of evaluating <i>EqualityExpression</i>.</li>
+        <li>Let <i>lval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>lref</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>lval</i>).</li>
+        <li>Let <i>rref</i> be the result of evaluating <i>RelationalExpression</i>.</li>
+        <li>Let <i>rval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>rref</i>).</li>
+        <li>Return the result of performing <a href="#sec-9.2.3">SameValue</a>(<i>rval</i>, <i>lval</i>).</li>
+      </ol>
 
-        <p><span class="prod"><span class="nt">EqualityExpression</span> <span class="geq">:</span> <span
-        class="nt">EqualityExpression</span> <code class="t">!==</code> <span class="nt">RelationalExpression</span></span></p>
+      <p><span class="prod"><span class="nt">EqualityExpression</span> <span class="geq">:</span> <span
+      class="nt">EqualityExpression</span> <span class="grhsannot">[no <span class="nt">LineTerminator</span> here]</span> <code
+      class="t">isnt</code> <span class="nt">RelationalExpression</span></span></p>
 
-        <ol class="proc">
-          <li>Let <i>lref</i> be the result of evaluating <i>EqualityExpression</i>.</li>
-          <li>Let <i>lval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>lref</i>).</li>
-          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>lval</i>).</li>
-          <li>Let <i>rref</i> be the result of evaluating <i>RelationalExpression</i>.</li>
-          <li>Let <i>rval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>rref</i>).</li>
-          <li>Let <i>r</i> be the result of performing strict equality comparison algorithm <i>rval</i> === <i>lval</i>.</li>
-          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>r</i>).</li>
-          <li>If <i>r</i> is <b>true</b>, return <b>false</b>. Otherwise, return <b>true</b>.</li>
-        </ol>
-
-        <p><span class="prod"><span class="nt">EqualityExpression</span> <span class="geq">:</span> <span
-        class="nt">EqualityExpression</span> <span class="grhsannot">[no <span class="nt">LineTerminator</span> here]</span> <code
-        class="t">is</code> <span class="nt">RelationalExpression</span></span></p>
-
-        <ol class="proc">
-          <li>Let <i>lref</i> be the result of evaluating <i>EqualityExpression</i>.</li>
-          <li>Let <i>lval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>lref</i>).</li>
-          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>lval</i>).</li>
-          <li>Let <i>rref</i> be the result of evaluating <i>RelationalExpression</i>.</li>
-          <li>Let <i>rval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>rref</i>).</li>
-          <li>Return the result of performing <a href="#sec-9.2.3">SameValue</a>(<i>rval</i>, <i>lval</i>).</li>
-        </ol>
-
-        <p><span class="prod"><span class="nt">EqualityExpression</span> <span class="geq">:</span> <span
-        class="nt">EqualityExpression</span> <span class="grhsannot">[no <span class="nt">LineTerminator</span> here]</span> <code
-        class="t">isnt</code> <span class="nt">RelationalExpression</span></span></p>
-
-        <ol class="proc">
-          <li>Let <i>lref</i> be the result of evaluating <i>EqualityExpression</i>.</li>
-          <li>Let <i>lval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>lref</i>).</li>
-          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>lval</i>).</li>
-          <li>Let <i>rref</i> be the result of evaluating <i>RelationalExpression</i>.</li>
-          <li>Let <i>rval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>rref</i>).</li>
-          <li>Let <i>r</i> be the result of performing <a href="#sec-9.2.3">SameValue</a>(<i>rval</i>, <i>lval</i>).</li>
-          <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>r</i>).</li>
-          <li>If <i>r</i> is <b>true</b>, return <b>false</b>. Otherwise, return <b>true</b>.</li>
-        </ol>
-      </section>
+      <ol class="proc">
+        <li>Let <i>lref</i> be the result of evaluating <i>EqualityExpression</i>.</li>
+        <li>Let <i>lval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>lref</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>lval</i>).</li>
+        <li>Let <i>rref</i> be the result of evaluating <i>RelationalExpression</i>.</li>
+        <li>Let <i>rval</i> be <a href="#sec-8.9.1">GetValue</a>(<i>rref</i>).</li>
+        <li>Let <i>r</i> be the result of performing <a href="#sec-9.2.3">SameValue</a>(<i>rval</i>, <i>lval</i>).</li>
+        <li><a href="#sec-8.8">ReturnIfAbrupt</a>(<i>r</i>).</li>
+        <li>If <i>r</i> is <b>true</b>, return <b>false</b>. Otherwise, return <b>true</b>.</li>
+      </ol>
     </section>
   </section>
 
@@ -11423,30 +11331,6 @@
     class="nt">ConditionalExpression</span> and <span class="nt">AssignmentExpression</span>, respectively.</p>
 
     <section>
-      <h1><br></h1>
-    </section>
-
-    <section>
-      <h1><span style="font-family: monospace"><i><br><br></i></span></h1>
-    </section>
-
-    <section>
-      <h1><span style="font-family: monospace"><i><br></i></span></h1>
-    </section>
-
-    <section>
-      <h1><br></h1>
-    </section>
-
-    <section>
-      <h1><br></h1>
-    </section>
-
-    <section>
-      <h1><br></h1>
-    </section>
-
-    <section>
       <h1>Static Semantics</h1>
 
       <p><b>Static Semantics:  Early Errors</b></p>
@@ -11456,10 +11340,7 @@
         <div class="rhs"><span class="nt">LeftHandSideExpression</span> <code class="t">=</code> <span class="nt">AssignmentExpression</span></div>
         <div class="rhs"><span class="nt">LeftHandSideExpression</span> <span class="nt">AssignmentOperator</span> <span class="nt">AssignmentExpression</span></div>
       </div>
-    </section>
 
-    <section>
-      <h1 style="-ooxml-ilvl: 0; -ooxml-numId: 737"></h1>
       <ul>
         <li>
           <p>It is a Syntax Error if the <span class="nt">AssignmentExpression</span> is contained in <a href="#sec-10.1.1">strict
@@ -12553,10 +12434,6 @@
           <li>Return the result of performing Binding Initialisation for <i>BindingPattern</i> using <i>rval</i> as the <i>obj</i>
               parameter and <i>env</i> as the <i>environment</i> parameter.</li>
         </ol>
-      </section>
-
-      <section>
-        <h1></h1>
 
         <p></p>
 
@@ -14323,10 +14200,6 @@
         normally or by some form of <a href="#sec-8.8">abrupt completion</a> or exception, the <a
         href="#sec-10.4">LexicalEnvironment</a> is always restored to its former state.</p>
       </div>
-    </section>
-
-    <section>
-      <h1></h1>
     </section>
   </section>
 
@@ -16671,10 +16544,6 @@
         <li>Return <a href="#sec-8.8">NormalCompletion</a>(<i>value</i>).</li>
       </ol>
     </section>
-
-    <section>
-      <h1></h1>
-    </section>
   </section>
 
   <section id="sec-13.6">
@@ -16879,10 +16748,6 @@
 
   <section id="sec-13.7">
     <h1><span class="secnum"><a href="#sec-13.7" title="link to this section">13.7</a></span> Tail Position Calls</h1>
-
-    <section>
-      <h1></h1>
-    </section>
   </section>
 </section>
 
@@ -18252,10 +18117,6 @@
 
         <p>If an implementation defines a specific order of enumeration for the for-in statement, that same enumeration order must
         be used in step 5 of this algorithm.</p>
-
-        <section>
-          <h1></h1>
-        </section>
       </section>
     </section>
 
