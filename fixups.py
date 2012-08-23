@@ -258,15 +258,13 @@ def fixup_paragraph_classes(doc):
             i += 1
 
             status = content[i]
-            status = re.sub(r'{SEQ .* }', '', status)
             assert status in ('(informative)', '(normative)')
             i += 1
 
             assert ht_name_is(content[i], 'br')
             i += 1
 
-            while ht_name_is(content[i], 'br') or (isinstance(content[i], str)
-                                                   and re.match(r'^{SEQ .* }$', content[i])):
+            while ht_name_is(content[i], 'br') or content[i] == '':
                 i += 1
 
             def ht_append(content, ht):
