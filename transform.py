@@ -5,7 +5,7 @@ from docx import shorten, parse_pr
 def dict_to_css(d):
     return "; ".join(p + ": " + v for p, v in d.items())
 
-# If True, allow <w:delText>, ignoring it.
+# If True, allow <w:delText> and <w:delInstrText>, ignoring them.
 ALLOW_CHANGES = True
 
 def transform(e):
@@ -28,7 +28,7 @@ def transform(e):
         # A diff to a previous version of the document.
         return None
 
-    elif name == 'delText':
+    elif name == 'delText' or name == 'delInstrText':
         assert ALLOW_CHANGES
         return None
 
