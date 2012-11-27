@@ -462,8 +462,13 @@ def ht_name_is(ht, name):
 
 def fixup_sec_4_3(doc):
     for parent, i, kid in all_parent_index_child_triples(doc):
-        # Hack: Sections 4.3.7 and 4.3.16 are messed up in the document. Wrong style. Fix it.
-        if kid.name == "h1" and i > 0 and ht_name_is(parent.content[i - 1], 'h1') and (kid.content == ["built-in object"] or kid.content == ["String value"]):
+        # Hack: Sections 4.3.{7,8,16} are messed up in the document. Wrong style. Fix it.
+        if (kid.name == "h1"
+            and i > 0
+            and ht_name_is(parent.content[i - 1], 'h1')
+            and (kid.content == ["built-in object"]
+                 or kid.content == ["String value"]
+                 or kid.content == ["standard object"])):
             kid.name = "p"
             kid.attrs['class'] = 'Terms'
 
