@@ -537,6 +537,12 @@ def fixup_sections(doc):
         if s.startswith('9.1\t.1\t'):
             s = s.replace('9.1\t.1\t', '9.1.1\t')
 
+        # Very special hack: Fix two typos in section numbers.
+        if s.startswith('8.4,4') or s.startswith('15,13'):
+            # Replace only this first comma with a dot.
+            before, comma, after = s.partition(',')
+            s = before + '.' + after
+
         num, tab, title = s.partition('\t')
         if tab == "":
             if len(c) > 1 and ht_name_is(c[1], "span") and c[1].attrs.get("class") == "section-status":
@@ -807,27 +813,59 @@ def fixup_15_10_2_2(doc):
         assert li.style['-ooxml-ilvl'] == '0'
         li.style['-ooxml-ilvl'] = '3'
 
+def apply_section_fixup(doc, title, fixup):
+    hits = 0
+
+    def match(e):
+        nonlocal hits
+        if e.name != 'section':
+            if e.name in ('body', 'html'):
+                return False  # no match, but visit children
+            return None  # no match and skip entire subtree
+        if len(e.content) == 0:
+            return False
+        h = e.content[0]
+        if not ht_name_is(h, 'h1'):
+            return False
+        i = 0
+        if h.content and ht_name_is(h.content[0], 'span') and h.content[0].attrs.get('class') == 'secnum':
+            i += 1
+        s = ht_text(h.content[i:])
+        if s.strip() == title:
+            hits += 1
+            return True
+        else:
+            return False
+
+    result = doc.find_replace(match, fixup)
+    if hits == 0:
+        raise ValueError("could not find section to patch: {!r}".format(title))
+    elif hits > 1:
+        raise ValueError("apply_section_fixup: found multiple sections with title {!r}".format(title))
+    return result
+
 def fixup_15_12_3(doc):
     """ Convert some paragraphs in seciton 15.12.3 into tables.
 
     Precedes fixup_lists which needs the table to exist in order to translate
     the lists properly.
     """
-    def row(p):
-        word, char = ht_text(p).strip().split('\t')
-        return html.tr(html.td(word), html.td(html.span(char, class_="string value")))
+    def fixup(sect):
+        def row(p):
+            word, char = ht_text(p).strip().split('\t')
+            return html.tr(html.td(word), html.td(html.span(char, class_="string value")))
 
-    sect = find_section(doc, 'stringify ( value [ , replacer [ , space ] ] )')
-    for i, p in sect.kids():
-        if p.name == 'p' and ht_text(p).startswith('backspace\t'):
-            j = i + 1
-            while j < len(sect.content) and ht_name_is(sect.content[j], 'p'):
-                j += 1
-            tbl = html.table(*map(row, sect.content[i:j]), class_='lightweight')
-            sect.content[i:j] = [tbl]
-            return
+        for i, p in sect.kids():
+            if p.name == 'p' and ht_text(p).startswith('backspace\t'):
+                j = i + 1
+                while j < len(sect.content) and ht_name_is(sect.content[j], 'p'):
+                    j += 1
+                tbl = html.table(*map(row, sect.content[i:j]), class_='lightweight')
+                return [sect.with_content_slice(i, j, [tbl])]
+        raise ValueError("fixup_15_12_3: could not find text to patch in section")
 
-    warn("fixup_15_12_3: could not find text to patch")
+    return apply_section_fixup(doc, 'JSON.stringify ( value [ , replacer [ , space ] ] )', fixup)
+
 
 def fixup_lists(e, docx):
     """ Wrap each li element in a list of the appropriate type.
@@ -1478,8 +1516,9 @@ def fixup_links(doc, docx):
         ("IsSuperReference", "The Reference Specification Type"),
         ("GetValue", "GetValue (V)"),
         ("PutValue", "PutValue (V, W)"),
-        ("Property Descriptor", "The Property Descriptor and Property Identifier Specification Types"),
-        ("Property Identifier", "The Property Descriptor and Property Identifier Specification Types"),
+        ("Property Descriptor", "The Property Descriptor Specification Types"),  # sic
+        ("property key value", "The Object Type"),
+        ("property key", "The Object Type"),
         ("IsAccessorDescriptor", "IsAccessorDescriptor ( Desc )"),
         ("IsDataDescriptor", "IsDataDescriptor ( Desc )"),
         ("IsGenericDescriptor", "IsGenericDescriptor ( Desc )"),
@@ -1493,10 +1532,10 @@ def fixup_links(doc, docx):
         ("ToInteger", "ToInteger"),
         ("ToInt32", "ToInt32: (Signed 32 Bit Integer)"),
         ("ToUint32", "ToUint32: (Unsigned 32 Bit Integer)"),
-        #("ToUint16 (9.7)", "ToUint16: (Unsigned 16 Bit Integer)"),   # flunks the assertion
         ("ToUint16", "ToUint16: (Unsigned 16 Bit Integer)"),
         ("ToString", "ToString"),
         ("ToObject", "ToObject"),
+        ("ToPropertyKey", "ToPropertyKey"),
         ("CheckObjectCoercible", "CheckObjectCoercible"),
         ("IsCallable", "IsCallable"),
         ("SameValue (according to 9.12)", "The SameValue Algorithm"),
@@ -1831,7 +1870,7 @@ def fixup(docx, doc):
     fixup_notes(doc)
     fixup_7_9_1(doc, docx)
     fixup_15_10_2_2(doc)
-    fixup_15_12_3(doc)
+    doc = fixup_15_12_3(doc)
     fixup_lists(doc, docx)
     fixup_list_paragraphs(doc)
     fixup_picts(doc)
@@ -1844,6 +1883,7 @@ def fixup(docx, doc):
     fixup_grammar_pre(doc)
 
     fixup_grammar_post(doc)
+    print(doc.to_html())
     fixup_links(doc, docx)
     fixup_generate_toc(doc)
     fixup_add_disclaimer(doc, docx)
