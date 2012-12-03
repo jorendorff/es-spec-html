@@ -71,8 +71,7 @@ def looks_like_nonterminal(text):
     return re.match(r'^(?:uri(?:[A-Z][A-Za-z]*)?|[A-Z]+[a-z][A-Za-z]*)$', text) is not None
 
 def fixup_formatting(doc, docx):
-    """
-    Convert runs of span elements to more HTML-like code.
+    """ Convert runs of span elements to more HTML-like code.
 
     The OOXML schema starts out like this:
      - w:body contains w:p elements (paragraphs)
@@ -361,15 +360,19 @@ def fixup_paragraph_classes(doc):
         if cls in ('ANNEX', 'a2', 'a3', 'a4'):
             return munge_annex_heading(e, cls)
 
-        attrs = e.attrs.copy()
-        del attrs['class']
+        # For greatest fidelity to the original, do not change the HTML class of any paragraph.
+        #attrs = e.attrs.copy()
+        #del attrs['class']
+        attrs = e.attrs
         tag = tag_names.get(cls)
         if tag is None:
             tag = default_tag
         elif '.' in tag:
-            tag, _, attrs['class'] = tag.partition('.')
+            #tag, _, attrs['class'] = tag.partition('.')
+            tag, _, __ = tag.partition('.')
             if tag == '':
-                tag = default_tag
+                #tag = default_tag
+                tag = e.name
         return [e.with_(name=tag, attrs=attrs)]
 
     return doc.replace('p', replace_tag_name)
@@ -1861,8 +1864,8 @@ def fixup_add_disclaimer(doc, docx):
     doc_body(doc).content.insert(position, disclaimer)
 
 def fixup(docx, doc):
-    fixup_list_styles(doc, docx)
-    fixup_formatting(doc, docx)
+    #fixup_list_styles(doc, docx)
+    #fixup_formatting(doc, docx)
     doc = fixup_paragraph_classes(doc)
     doc = fixup_remove_empty_headings(doc)
     fixup_element_spacing(doc)
@@ -1872,12 +1875,12 @@ def fixup(docx, doc):
     fixup_strip_toc(doc)
     fixup_tables(doc)
     fixup_pre(doc)
-    fixup_notes(doc)
+    #fixup_notes(doc)
     fixup_7_9_1(doc, docx)
-    fixup_15_10_2_2(doc)
+    #fixup_15_10_2_2(doc)
     doc = fixup_15_12_3(doc)
-    fixup_lists(doc, docx)
-    fixup_list_paragraphs(doc)
+    #fixup_lists(doc, docx)
+    #fixup_list_paragraphs(doc)
     fixup_picts(doc)
     fixup_figures(doc)
     fixup_remove_hr(doc)
@@ -1888,7 +1891,6 @@ def fixup(docx, doc):
     fixup_grammar_pre(doc)
 
     fixup_grammar_post(doc)
-    print(doc.to_html())
     fixup_links(doc, docx)
     fixup_generate_toc(doc)
     fixup_add_disclaimer(doc, docx)

@@ -30,6 +30,8 @@ def sketch_schema(document):
 
 def save_html(docxfile, filename):
     result = transform(docxfile.document)
+    style = htmodel.style(docxfile._style_css(), type="text/css")
+    result.content[0].content.append(style)
     result = fixups.fixup(docxfile, result)
 
     print("=== Unrecognized styles")

@@ -83,16 +83,16 @@ def parse_pr(e):
                 assert k.get(k_ascii, font) == font
                 assert k.get(k_hAnsi, font) == font
 
-                if font == 'Symbol':
-                    font = None  # vomit(); vomit(); forget()
-                elif font == 'Mistral':
-                    font = None  # fanciful, drop it
-                elif font in ('Courier', 'Courier New'):
-                    font = 'monospace'
-                elif font in ('Arial', 'Helvetica'):
-                    font = 'sans-serif'
-                elif font == 'CG Times':
-                    font = 'Times New Roman'
+                ## if font == 'Symbol':
+                ##     font = None  # vomit(); vomit(); forget()
+                ## elif font == 'Mistral':
+                ##     font = None  # fanciful, drop it
+                ## elif font in ('Courier', 'Courier New'):
+                ##     font = 'monospace'
+                ## elif font in ('Arial', 'Helvetica'):
+                ##     font = 'sans-serif'
+                ## elif font == 'CG Times':
+                ##     font = 'Times New Roman'
 
                 if font is not None:
                     put('font-family', font)
@@ -113,7 +113,6 @@ def parse_pr(e):
                 color = parse_color(k.get(k_fill))
             else:
                 color = None
-                    
 
             if color is not None:
                 put('background-color', color)
@@ -150,13 +149,13 @@ def parse_pr(e):
             if left is not None:
                 left = int(left)
                 assert left >= 0
-                #put('padding-left', str(left / 20) + 'pt')
+                put('padding-left', str(left / 20) + 'pt')
         
                 hanging = k.get(k_hanging)
                 if hanging is not None:
                     hanging = int(hanging)
                     assert hanging >= 0
-                    #put('text-indent', str((hanging - left) / 20) + 'pt')
+                    put('text-indent', str((hanging - left) / 20) + 'pt')
 
         elif name == 'numPr':
             ilvl = None
@@ -378,20 +377,26 @@ class Document:
                 writexml(tree, out)
 
         save(self.document, 'original.xml')
-        #save(self.styles, 'styles.xml')
-        #save(self.numbering, 'numbering.xml')
+        save(self.styles_xml, 'styles.xml')
+        save(self.numbering_xml, 'numbering.xml')
 
     def _dump_styles(self):
+        print(self._style_css())
+
+    def _style_css(self):
+        rules = []
         for cls, s in sorted(self.styles.items()):
-            print("p." + cls + " {")
+            rule = "p." + cls + " {\n"
             for prop, value in s.style.items():
-                print("    " + prop + ": " + value + ";")
+                rule += "    " + prop + ": " + value + ";\n"
             if s.basedOn is not None:
                 parent = self.styles[s.basedOn]
                 for prop, value in parent.full_style.items():
                     if prop not in s.style:
-                        print("    " + prop + ": " + value + ";  /* inherited */")
-            print("}\n")
+                        rule += "    " + prop + ": " + value + ";  /* inherited */\n"
+            rule += "}\n"
+            rules.append(rule)
+        return '\n'.join(rules)
 
     def get_list_style_at(self, numId, ilvl):
         num = self.numbering.num[numId]
@@ -416,6 +421,8 @@ def load(filename):
     doc = Document()
     doc.filename = filename
     doc.document = ElementTree.fromstring(document_xml)
-    doc.styles = parse_styles(ElementTree.fromstring(styles_xml))
-    doc.numbering = parse_numbering(doc, ElementTree.fromstring(numbering_xml))
+    doc.styles_xml = ElementTree.fromstring(styles_xml)
+    doc.styles = parse_styles(doc.styles_xml)
+    doc.numbering_xml = ElementTree.fromstring(numbering_xml)
+    doc.numbering = parse_numbering(doc, doc.numbering_xml)
     return doc

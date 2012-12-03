@@ -58,7 +58,7 @@ def transform(e):
         if name == 'document':
             [body_e] = c
             return html(
-                head(link(rel="stylesheet", href="es6-draft.css")),
+                head(), #head(link(rel="stylesheet", href="es6-draft.css")),
                 body_e)
 
         elif name == 'body':
@@ -155,15 +155,15 @@ def transform(e):
             assert not e.keys()
             tbl = table(*c, class_="real-table")
             if css:
-                if '-ooxml-border-insideH' in css:
-                    # borders between rows
-                    row_border = css['-ooxml-border-insideH']
-                    del css['-ooxml-border-insideH']
-                if '-ooxml-border-insideV' in css:
-                    # borders between columns
-                    col_border = css['-ooxml-border-insideV']
-                    del css['-ooxml-border-insideV']
-                ##tbl.style = css
+                ## if '-ooxml-border-insideH' in css:
+                ##     # borders between rows
+                ##     row_border = css['-ooxml-border-insideH']
+                ##     del css['-ooxml-border-insideH']
+                ## if '-ooxml-border-insideV' in css:
+                ##     # borders between columns
+                ##     col_border = css['-ooxml-border-insideV']
+                ##     del css['-ooxml-border-insideV']
+                tbl.style = css
             return figure(tbl)
 
         elif name == 'tr':
