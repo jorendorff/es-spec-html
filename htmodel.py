@@ -156,7 +156,6 @@ def escape(s, quote=False):
     # Now we only need to worry about non-ascii characters.
     return re.sub('[^\n -~]', replace, s)
 
-empty_tags = {'meta', 'br', 'hr', 'link'}
 non_indenting_tags = {'html', 'body'}
 
 def save_html(filename, ht):
@@ -188,126 +187,108 @@ def write_html(f, ht, indent='', strict=True):
     def is_ht_inline(ht):
         return isinstance(ht, str) or _tag_data[ht.name][0] == 'I'
 
-    def write_inline_content(f, content, indent, allow_last_block, strict):
-        if allow_last_block and isinstance(content[-1], Element) and content[-1].name in ('ol', 'ul', 'table'):
-            last = content[-1]
-            content = content[:-1]
-        else:
-            last = None
+    def wrap_text(text, indent, subsequent_indent):
+        """ Add indentation and newlines to text.
 
-        for kid in content:
-            if isinstance(kid, str):
-                f.write(escape(kid))
-            else:
-                if strict and not is_ht_inline(kid):
-                    raise ValueError("block element <{}> can't appear in inline content".format(kid.name))
-                write_html(f, kid, indent, strict)
+        The result is either empty or ends with a newline.
+        """
+        result = textwrap.fill(text, WIDTH, expand_tabs=False,
+                               replace_whitespace=False, initial_indent=indent,
+                               subsequent_indent=subsequent_indent, break_long_words=False,
+                               break_on_hyphens=False)
+        if result:
+            result += '\n'
+        return result
 
-        if last is not None:
-            f.write('\n')
-            write_html(f, last, indent, strict)
-            f.write(indent[:-2])
+    def content_to_str(content, indent):
+        """ Convert the given list of content to HTML.
+        
+        If all the content is inline, return a string containing no newlines
+        and no leading indentation (to be indented word-wrapped by the
+        caller). Otherwise return a string ending with a newline, with every
+        line indented.
+        """
+        kids = [ht_to_str(ht, indent) for ht in content]
+        if any(s.endswith('\n') for s in kids):
+            # Block content. This is nontrivial because we must convert
+            # any inline children to word-wrapped paragraphs.
+            result = ''
+            acc = ''
+            prev_needs_space = False
+            for kid, s in zip(content, kids):
+                needs_space = False
+                if s.endswith('\n'):
+                    # Ridiculous heuristic to determine if there should be a blank line
+                    # between this element and the previous one.
+                    needs_space = (isinstance(kid, Element)
+                                   and (kid.name in {'p', 'figure', 'section'}
+                                        or (kid.name in {'div', 'li', 'td'}
+                                            and kid.content and not is_ht_inline(kid.content[0]))))
 
-    if isinstance(ht, str):
-        assert not strict
-        f.write(escape(ht))
-        return
-
-    info = _tag_data[ht.name]
-    content = ht.content
-    assert info[1] != '0' or len(content) == 0  # empty tag is empty
-
-    if (ht.name in ('p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6')
-          or (ht.name == 'li' and ht.content and is_ht_inline(ht.content[0]))):
-        # Word-wrap the inline content in this block element.
-        # First, find out if this is an li element with a trailing list.
-        if ht.name == 'li' and isinstance(ht.content[-1], Element) and ht.content[-1].name in ('ol', 'ul', 'table'):
-            content_to_wrap = content[:-1]
-            last_block = content[-1]
-        else:
-            content_to_wrap = content
-            last_block = None
-
-        # Dump content_to_wrap to a temporary buffer.
-        tmpf = StringIO()
-        tmpf.write(start_tag(ht))
-        write_inline_content(tmpf, content_to_wrap, indent + '  ', allow_last_block=False, strict=strict)
-        if last_block is None:
-            tmpf.write('</{}>'.format(ht.name))
-        text = tmpf.getvalue()
-
-        # Write the output to f.
-        if '\n' in text:
-            # This is unexpected; don't word-wrap. Write it verbatim, with newlines.
-            f.write(indent + text + "\n")
-        else:
-            # The usual case. Word-wrap and write.
-            subsequent_indent = indent
-            if ht.name != 'p':
-                subsequent_indent += '    '
-            f.write(textwrap.fill(text, WIDTH, expand_tabs=False, replace_whitespace=False,
-                                  initial_indent=indent, subsequent_indent=subsequent_indent,
-                                  break_long_words=False, break_on_hyphens=False))
-            f.write("\n")
-
-        # If we had a trailing block, dump it now (and the end tag we skipped before).
-        if last_block:
-            write_html(f, last_block, indent + '  ', strict=strict)
-            f.write(indent + "</{}>\n".format(ht.name))
-
-    elif info[0] == 'B':
-        # Block.
-        f.write(indent + start_tag(ht))
-        if info != 'B0':
-            if content:
-                if is_ht_inline(content[0]):
-                    if strict and info[1] not in 'i?s':
-                        if isinstance(content[0], str):
-                            raise ValueError("<{}> element may only contain tags, not text".format(ht.name))
-                        else:
-                            raise ValueError("<{}> element may not contain inline element <{}>".format(ht.name, content[0].name))
-                    write_inline_content(f, content, indent + '  ', ht.name == 'li', strict)
+                    if acc:
+                        result += wrap_text(acc, indent, indent)
+                        acc = ''
+                    elif result and (needs_space or prev_needs_space):
+                            result += '\n'  # blank line between blocks
+                    result += s
                 else:
-                    if strict and info[1] not in 'b?':
-                        raise ValueError("<{}> element may not contain block element <{}>".format(ht.name, content[0].name))
-                    inner_indent = indent
-                    if ht.name not in non_indenting_tags:
-                        inner_indent += '  '
-                    f.write('\n')
-                    prev_needs_space = False
-                    first = True
-                    for kid in content:
-                        if strict and is_ht_inline(kid):
-                            if isinstance(kid, str):
-                                raise ValueError("<{}> element may contain either text or block content, not both".format(ht.name))
-                            else:
-                                raise ValueError("<{}> element may contain either blocks (like <{}>) "
-                                                 "or inline content (like <{}>), not both".format(
-                                        ht.name, content[0].name, kid.name))
-                        needs_space = ((strict or isinstance(kid, Element))
-                                       and (kid.name in {'p', 'figure', 'section'}
-                                            or (kid.name in {'div', 'li', 'td'}
-                                                and kid.content and not is_ht_inline(kid.content[0]))))
-                        if not first and (prev_needs_space or needs_space):
-                            f.write('\n')
-                        write_html(f, kid, inner_indent, strict)
-                        prev_needs_space = needs_space
-                        first = False
-                    f.write(indent)
-            f.write('</{}>'.format(ht.name))
-        f.write('\n')
-    else:
-        # Inline. Content must be inline too.
-        assert info in ('Ii', 'I0')
-        f.write(start_tag(ht))
-        if info != 'I0':
-            write_inline_content(f, content, indent + '  ', False, strict)
-            f.write('</{}>'.format(ht.name))
+                    acc += s
+                prev_needs_space = needs_space
+            if acc:
+                result += wrap_text(acc, indent, indent)
+            return result
+        else:
+            # All inline content.
+            return ''.join(kids)
+
+    def element_type_is_empty(tag_name):
+        return _tag_data[tag_name][1] == '0'
+
+    def element_renders_as_block(tag_name):
+        return _tag_data[tag_name][0] == 'B'
+
+    def ht_to_str(ht, indent):
+        if isinstance(ht, str):
+            result = escape(ht)
+            if '\n' in ht:
+                # This is unexpected; don't word-wrap. Write it nearly-verbatim, with newlines.
+                result = escape(result)
+                if not result.endswith('\n'):
+                    result += '\n'
+            return result
+        else:
+            assert isinstance(ht, Element)
+            empty_type = element_type_is_empty(ht.name)
+            assert len(ht.content) == 0 or not empty_type  # empty element is empty
+
+            start = start_tag(ht)
+            
+            if empty_type and len(ht.content) == 0:
+                end = ''
+            else:
+                end = '</{}>'.format(ht.name)
+
+            inner_indent = indent
+            if ht.name not in non_indenting_tags:
+                inner_indent += '  '
+            inner = content_to_str(ht.content, inner_indent)
+
+            if inner.endswith('\n'):
+                return (indent + start + '\n' + inner + indent + end + '\n')
+            elif element_renders_as_block(ht.name):
+                # All inline content. Add start and end tags, then word-wrap it.
+                subsequent_indent = indent
+                if ht.name != 'p':
+                    subsequent_indent += '    '
+                return wrap_text(start + inner + end, indent, subsequent_indent)
+            else:
+                return start + inner + end
+
+    f.write(ht_to_str(ht, indent))
 
 _tag_data = {}
 
 def _init(v):
-    
     # Every tag is one of:
     #
     # - like section, table, tr, ol, ul: block containing only blocks
@@ -322,17 +303,23 @@ def _init(v):
     # - like hr, img: block containing nothing
     #
     # - like br, wbr: inline containing nothing
-
+    #
+    # - like style, script: block with unparsed content
+    #
+    # - like svg, foreignObject: don't even try to figure out where these should appear
+    #
+    # Of course 
     _tag_raw_data = '''\
     html head body section hgroup table tbody thead tfoot tr ol\
         ul blockquote ol ul dl figure: Bb
     title p h1 h2 h3 h4 h5 h6 address figcaption pre: Bi
     a em strong small s cite q dfn abbr data time code var samp\
         kbd sub sup i b u mark bdi bdo span: Ii
-    br wbr: I0
     div li td th noscript object dt dd: B?
     meta link hr img: B0
-    style script: Bs'''
+    br wbr: I0
+    style script: Bs
+    svg foreignObject: Ib'''
 
     def element_constructor(name):
         def construct(*content, **attrs):
