@@ -39,6 +39,7 @@ k_fill = bloat('fill')
 k_color = bloat('color')
 k_left = bloat('left')
 k_hanging = bloat('hanging')
+k_firstLine = bloat('firstLine')
 k_before = bloat('before')
 k_after = bloat('after')
 k_line = bloat('line')
@@ -66,6 +67,11 @@ def parse_borders(k):
                     prop = '-ooxml-' + prop
                 yield (prop, '{}px solid {}'.format(sz, color))
 
+def twips(n):
+    if n % 20 == 0:
+        return '{}pt'.format(n // 20)
+    else:
+        return '{:.2f}pt'.format(n / 20)
 
 def parse_pr(e):
     font_keys = {k_ascii, k_hAnsi, k_cs, k_eastAsia, bloat('hint')}
@@ -169,12 +175,6 @@ def parse_pr(e):
                     put('text-align', 'justify')
 
         elif name == 'spacing':
-            def twips(n):
-                if n % 20 == 0:
-                    return '{}pt'.format(n // 20)
-                else:
-                    return '{:.2f}pt'.format(n / 20)
-
             # details of w:spacing differ from CSS: spacing between paragraphs is never
             # less than the computed line-height of either paragraph... or something.
             before = k.get(k_before)
@@ -183,9 +183,11 @@ def parse_pr(e):
             after = k.get(k_after)
             if after is not None:
                 put('margin-bottom', twips(int(after)))
+
+            # The "1.2 *" below is a heuristic hack.
             line = k.get(k_line)
             if line is not None:
-                put('line-height', '{:.1%}'.format(float(line) / 240))
+                put('line-height', '{:.1%}'.format(1.2 * float(line) / 240))
 
         # todo: contextualSpacing
 
@@ -194,13 +196,17 @@ def parse_pr(e):
             if left is not None:
                 left = int(left)
                 assert left >= 0
-                put('padding-left', str(left / 20) + 'pt')
+                put('padding-left', twips(left))
         
                 hanging = k.get(k_hanging)
                 if hanging is not None:
                     hanging = int(hanging)
                     assert hanging >= 0
-                    put('text-indent', str((hanging - left) / 20) + 'pt')
+                    put('text-indent', twips(hanging - left))
+                else:
+                    firstLine = k.get(k_firstLine)
+                    if firstLine is not None:
+                        put('text-indent', twips(int(firstLine)))
 
         elif name == 'numPr':
             ilvl = None
@@ -226,18 +232,26 @@ def parse_pr(e):
                 put('@cls', k.get(k_val))
 
         elif name == 'rPr':
-            for k, v in parse_pr(k).items():
-                # TODO - support these properly
-                if k == 'background-color' or k == '@cls':
-                    continue
-                put(k, v)
+            if shorten(e.tag) == 'pPr':
+                # This rPr actually applies to the pilcrow symbol that can
+                # (optionally) be displayed at the end of the paragraph.
+                # Disdain it.
+                pass
+            else:
+                for k, v in parse_pr(k).items():
+                    # TODO - support these properly
+                    if k == 'background-color' or k == '@cls':
+                        continue
+                    put(k, v)
 
-    if pr.get('vertical-align') in ('superscript', 'subscript'):
+    if pr.get('vertical-align') in ('super', 'sub'):
         sz = pr.get('font-size')
         if sz is None:
-            sz = '60%'
+            sz = '70%'
         else:
-            sz = format(float(sz) * 0.60, '.2f')
+            n, u = re.match(r'([0-9.]*)(.*)', sz).groups()
+            sz = format(float(n) * 0.70, '.2f') + u
+        pr['font-size'] = sz
 
     return pr
 
@@ -438,7 +452,7 @@ class Document:
         print(self._style_css())
 
     def _style_css(self):
-        rules = []
+        rules = ["p {\n    margin: 0;\n}\n"]
         for cls, s in sorted(self.styles.items()):
             tagname = 'p'
             if s.type == 'character':
