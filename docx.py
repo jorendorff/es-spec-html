@@ -47,6 +47,24 @@ def parse_color(s):
     else:
         return None
 
+def parse_borders(k):
+    for side in ('top', 'bottom', 'left', 'right', 'insideH', 'insideV'):
+        for side_style in k.findall(bloat(side)):
+            if side_style.get(k_val) == 'single':
+                color = parse_color(side_style.get(k_color)) or 'black'
+                sz = side_style.get(k_sz)
+                if sz is not None:
+                    sz = int(sz)
+                    if sz % 6 == 0:
+                        sz = str(sz // 6)
+                    else:
+                        sz = format(sz / 6, '.2f')
+                prop = 'border-' + side
+                if side.startswith('inside'):
+                    prop = '-ooxml-' + prop
+                yield (prop, '{}px solid {}'.format(sz, color))
+
+
 def parse_pr(e):
     font_keys = {k_ascii, k_hAnsi, k_cs, k_eastAsia, bloat('hint')}
 
@@ -117,32 +135,32 @@ def parse_pr(e):
             if color is not None:
                 put('background-color', color)
 
-        elif name in ('tcBorders', 'tblBorders'):
+        elif name in ('pBdr', 'tcBorders', 'tblBorders'):
+            # TODO w:pBdr>w:between
+
             # tblBorders can have insideH/insideV elements that are applied to
             # all horizontal/vertical borders between cells in the table. For
             # now, we store that style information in CSS properties named
             # -ooxml-border-insideH/insideV; later we will turn that into
             # border-top/left properties on all the individual table cells.
-            for side in ('top', 'bottom', 'left', 'right', 'insideH', 'insideV'):
-                for side_style in k.findall(bloat(side)):
-                    if side_style.get(k_val) == 'single':
-                        color = parse_color(side_style.get(k_color)) or 'black'
-                        sz = side_style.get(k_sz)
-                        if sz is not None:
-                            sz = int(sz) // 6
-                        prop = 'border-' + side
-                        if side.startswith('inside'):
-                            prop = '@' + prop
-                        put('border-' + side, '{}px solid {}'.format(sz, color))
+            for prop, val in parse_borders(k):
+                put(prop, val)
 
         elif name == 'sz':
             if list(k.keys()) == [k_val]:
-                # The unit of w:sz is half-points lol.
+                # The unit of w:sz is double-points lol.
                 v = float(k.get(k_val)) / 2
-                #put('font-size', str(v) + 'pt')
+                put('font-size', str(v) + 'pt')
 
-        # todo: jc, spacing, contextualSpacing
-        # todo: pBdr
+        elif name == 'jc':
+            if list(k.keys()) == [k_val]:
+                v = k.get(k_val)
+                if v in ('left', 'right', 'center'):
+                    put('text-align', v)
+                elif v == 'both':
+                    put('text-align', 'justify')
+
+        # todo: spacing, contextualSpacing
 
         elif name == 'ind':
             left = k.get(k_left)
@@ -186,6 +204,13 @@ def parse_pr(e):
                 if k == 'background-color' or k == '@cls':
                     continue
                 put(k, v)
+
+    if pr.get('vertical-align') in ('superscript', 'subscript'):
+        sz = pr.get('font-size')
+        if sz is None:
+            sz = '60%'
+        else:
+            sz = format(float(sz) * 0.60, '.2f')
 
     return pr
 
