@@ -39,7 +39,9 @@ k_fill = bloat('fill')
 k_color = bloat('color')
 k_left = bloat('left')
 k_hanging = bloat('hanging')
-
+k_before = bloat('before')
+k_after = bloat('after')
+k_line = bloat('line')
 
 def parse_color(s):
     if s is not None and re.match(r'^[0-9a-fA-F]{6}$', s):
@@ -83,12 +85,18 @@ def parse_pr(e):
         # TODO: caps, smallCaps, vanish, u, sz
 
         if name == 'i':
-            if not k.keys():
+            v = k.get(k_val, '1')
+            if v == '1':
                 put('font-style', 'italic')
+            elif v == '0':
+                put('font-style', 'normal')
 
         elif name == 'b':
-            if not k.keys():
+            v = k.get(k_val, '1')
+            if v == '1':
                 put('font-weight', 'bold')
+            elif v == '0':
+                put('font-weight', 'normal')
 
         elif name == 'rFonts':
             # There are some cases of <rFonts eastAsia="Calibri"/> which Word
@@ -160,7 +168,26 @@ def parse_pr(e):
                 elif v == 'both':
                     put('text-align', 'justify')
 
-        # todo: spacing, contextualSpacing
+        elif name == 'spacing':
+            def twips(n):
+                if n % 20 == 0:
+                    return '{}pt'.format(n // 20)
+                else:
+                    return '{:.2f}pt'.format(n / 20)
+
+            # details of w:spacing differ from CSS: spacing between paragraphs is never
+            # less than the computed line-height of either paragraph... or something.
+            before = k.get(k_before)
+            if before is not None:
+                put('margin-top', twips(int(before)))
+            after = k.get(k_after)
+            if after is not None:
+                put('margin-bottom', twips(int(after)))
+            line = k.get(k_line)
+            if line is not None:
+                put('line-height', '{:.1%}'.format(float(line) / 240))
+
+        # todo: contextualSpacing
 
         elif name == 'ind':
             left = k.get(k_left)
