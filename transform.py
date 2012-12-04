@@ -89,6 +89,8 @@ def transform(e):
             if css and '@cls' in css:
                 result.attrs['class'] = css['@cls']
                 del css['@cls']
+            else:
+                result.attrs['class'] = 'Normal'
             result.style = css
             return result
 
