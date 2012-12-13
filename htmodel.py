@@ -1,6 +1,5 @@
 import re
 import html as _html
-from html.entities import codepoint2name as _entities
 from io import StringIO
 import textwrap
 
@@ -99,17 +98,8 @@ class Element:
 
 
 def escape(s, quote=False):
-    def replace(m):
-        c = ord(m.group(0))
-        if c in _entities:
-            return '&' + _entities[c] + ';'
-        return '&#x{:x};'.format(c)
-
     # The stdlib takes care of & > < ' " for us.
-    s = _html.escape(s, quote)
-
-    # Now we only need to worry about non-ascii characters.
-    return re.sub('[^\n -~]', replace, s)
+    return _html.escape(s, quote)
 
 empty_tags = {'meta', 'br', 'hr', 'link'}
 non_indenting_tags = {'html', 'body'}
