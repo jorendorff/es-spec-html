@@ -240,10 +240,25 @@ unrecognized_styles = collections.defaultdict(int)
 
 def fixup_paragraph_classes(doc):
     annex_counters = [0, 0, 0, 0]
+
+    def ht_concat(c1, c2):
+        """ Concatenate two content lists. """
+        assert isinstance(c1, list)
+        assert isinstance(c2, list)
+        if not c1:
+            return c2
+        elif not c2:
+            return c1
+        elif isinstance(c1[-1], str) and isinstance(c2[0], str):
+            return c1[:-1] + [c1[-1] + c2[0]] + c2[1:]
+        else:
+            return c1 + c2
+
     def munge_annex_heading(e, cls):
         # Special case. Rather than implement OOXML numbering and Word
         # {SEQ} macros to the extent we'd need to generate the annex
         # headings, we fake it.
+        content = e.content
 
         # Figure out what level heading we are.
         if cls == 'ANNEX':
@@ -257,12 +272,10 @@ def fixup_paragraph_classes(doc):
         for i in range(level + 1, len(annex_counters)):
             annex_counters[i] = 0
 
-        e.name = 'h1'
         letter = chr(ord('A') + annex_counters[0] - 1)
         if level == 0:
             # Parse the current content of the heading.
             i = 0
-            content = e.content
 
             assert ht_name_is(content[i], 'br')
             i += 1
@@ -294,14 +307,15 @@ def fixup_paragraph_classes(doc):
                 i += 1
 
             # Build the new heading.
-            e.content = ["Annex " + letter + " ", html.span(status, class_="section-status"), " "] + title
+            replaced_content = ["Annex " + letter + " ", html.span(status, class_="section-status"), " "] + title
         else:
             # Autogenerate annex subsection number.
             s = letter + "." + ".".join(map(str, annex_counters[1:level + 1])) + '\t'
-            if e.content and isinstance(e.content[0], str):
-                e.content[0] = s + e.content[0]
-            else:
-                e.content.insert(0, s)
+            replaced_content = ht_concat([s], content)
+
+        attrs = e.attrs.copy()
+        del attrs['class']
+        return [e.with_(name='h1', attrs=attrs, content=replaced_content)]
 
     tag_names = {
         # ANNEX, a2, a3, a4 are treated specially.
@@ -349,31 +363,33 @@ def fixup_paragraph_classes(doc):
         'zzSTDTitle': 'div.inner-title'
     }
 
-    for e in findall(doc, 'p'):
+    def replace_tag_name(e):
         num = e.style and '-ooxml-numId' in e.style
         default_tag = 'li' if num else 'p'
 
-        if 'class' in e.attrs:
-            cls = e.attrs['class']
-            del e.attrs['class']
+        if 'class' not in e.attrs:
+            return [e.with_(name=default_tag)]
 
-            if cls not in tag_names:
-                unrecognized_styles[cls] += 1
-            #e.content.insert(0, html.span('<{0}>'.format(cls), style="color:red"))
+        cls = e.attrs['class']
 
-            if cls in ('ANNEX', 'a2', 'a3', 'a4'):
-                munge_annex_heading(e, cls)
-            else:
-                tag = tag_names.get(cls)
-                if tag is None:
-                    tag = default_tag
-                elif '.' in tag:
-                    tag, _, e.attrs['class'] = tag.partition('.')
-                    if tag == '':
-                        tag = default_tag
-                e.name = tag
-        else:
-            e.name = default_tag
+        if cls not in tag_names:
+            unrecognized_styles[cls] += 1
+
+        if cls in ('ANNEX', 'a2', 'a3', 'a4'):
+            return munge_annex_heading(e, cls)
+
+        attrs = e.attrs.copy()
+        del attrs['class']
+        tag = tag_names.get(cls)
+        if tag is None:
+            tag = default_tag
+        elif '.' in tag:
+            tag, _, attrs['class'] = tag.partition('.')
+            if tag == '':
+                tag = default_tag
+        return [e.with_(name=tag, attrs=attrs)]
+
+    return doc.replace('p', replace_tag_name)
 
 def fixup_remove_empty_headings(doc):
     def is_empty(item):
@@ -509,7 +525,7 @@ def fixup_intl_remove_junk(doc):
         if child.name == 'h1' and child.attrs.get('class') == 'StandardNumber' and child.content[0] == 'ECMA-XXX':
             del parent.content[i]
         if child.name == 'div' and child.attrs.get('class') == 'inner-title':
-            child.content[0], _, _ = child.content[0].partition('{')
+            child.content[0], _, _ = child.content[0].partition('INTERNATIONAL STANDARD© ISO/IEC')
 
 def fixup_sections(doc, docx):
     """ Group h1 elements and subsequent elements of all kinds together into sections. """
@@ -550,6 +566,12 @@ def fixup_sections(doc, docx):
         # character. I don't see a tab in the PDF, though. Snip it out.
         if s.startswith('9.1\t.1\t'):
             s = s.replace('9.1\t.1\t', '9.1.1\t')
+
+        # Very special hack: Fix two typos in section numbers.
+        if s.startswith('8.4,4') or s.startswith('15,13'):
+            # Replace only this first comma with a dot.
+            before, comma, after = s.partition(',')
+            s = before + '.' + after
 
         num, tab, title = s.partition('\t')
         if tab == "":
@@ -870,27 +892,58 @@ def fixup_lang_15_10_2_2(doc):
         assert li.style['-ooxml-ilvl'] == '0'
         li.style['-ooxml-ilvl'] = '3'
 
+def apply_section_fixup(doc, title, fixup):
+    hits = 0
+
+    def match(e):
+        nonlocal hits
+        if e.name != 'section':
+            if e.name in ('body', 'html'):
+                return False  # no match, but visit children
+            return None  # no match and skip entire subtree
+        if len(e.content) == 0:
+            return False
+        h = e.content[0]
+        if not ht_name_is(h, 'h1'):
+            return False
+        i = 0
+        if h.content and ht_name_is(h.content[0], 'span') and h.content[0].attrs.get('class') == 'secnum':
+            i += 1
+        s = ht_text(h.content[i:])
+        if s.strip() == title:
+            hits += 1
+            return True
+        else:
+            return False
+
+    result = doc.find_replace(match, fixup)
+    if hits == 0:
+        raise ValueError("could not find section to patch: {!r}".format(title))
+    elif hits > 1:
+        raise ValueError("apply_section_fixup: found multiple sections with title {!r}".format(title))
+    return result
+
 def fixup_lang_15_12_3(doc):
     """ Convert some paragraphs in section 15.12.3 of the Language specification into tables.
 
     Precedes fixup_lists which needs the table to exist in order to translate
     the lists properly.
     """
-    def row(p):
-        word, char = ht_text(p).strip().split('\t')
-        return html.tr(html.td(word), html.td(html.span(char, class_="string value")))
+    def fixup(sect):
+        def row(p):
+            word, char = ht_text(p).strip().split('\t')
+            return html.tr(html.td(word), html.td(html.span(char, class_="string value")))
 
-    sect = find_section(doc, 'stringify ( value [ , replacer [ , space ] ] )')
-    for i, p in sect.kids():
-        if p.name == 'p' and ht_text(p).startswith('backspace\t'):
-            j = i + 1
-            while j < len(sect.content) and ht_name_is(sect.content[j], 'p'):
-                j += 1
-            tbl = html.table(*map(row, sect.content[i:j]), class_='lightweight')
-            sect.content[i:j] = [tbl]
-            return
+        for i, p in sect.kids():
+            if p.name == 'p' and ht_text(p).startswith('backspace\t'):
+                j = i + 1
+                while j < len(sect.content) and ht_name_is(sect.content[j], 'p'):
+                    j += 1
+                tbl = html.table(*map(row, sect.content[i:j]), class_='lightweight')
+                return [sect.with_content_slice(i, j, [tbl])]
+        raise ValueError("fixup_lang_15_12_3: could not find text to patch in section")
 
-    warn("fixup_lang_15_12_3: could not find text to patch")
+    return apply_section_fixup(doc, 'JSON.stringify ( value [ , replacer [ , space ] ] )', fixup)
 
 def fixup_lists(e, docx):
     """ Wrap each li element in a list of the appropriate type.
@@ -1612,8 +1665,9 @@ def fixup_links(doc, docx):
         ("IsSuperReference", "The Reference Specification Type"),
         ("GetValue", "GetValue (V)"),
         ("PutValue", "PutValue (V, W)"),
-        ("Property Descriptor", "The Property Descriptor and Property Identifier Specification Types"),
-        ("Property Identifier", "The Property Descriptor and Property Identifier Specification Types"),
+        ("Property Descriptor", "The Property Descriptor Specification Types"),  # sic
+        ("property key value", "The Object Type"),
+        ("property key", "The Object Type"),
         ("IsAccessorDescriptor", "IsAccessorDescriptor ( Desc )"),
         ("IsDataDescriptor", "IsDataDescriptor ( Desc )"),
         ("IsGenericDescriptor", "IsGenericDescriptor ( Desc )"),
@@ -1627,10 +1681,10 @@ def fixup_links(doc, docx):
         ("ToInteger", "ToInteger"),
         ("ToInt32", "ToInt32: (Signed 32 Bit Integer)"),
         ("ToUint32", "ToUint32: (Unsigned 32 Bit Integer)"),
-        #("ToUint16 (9.7)", "ToUint16: (Unsigned 16 Bit Integer)"),   # flunks the assertion
         ("ToUint16", "ToUint16: (Unsigned 16 Bit Integer)"),
         ("ToString", "ToString"),
         ("ToObject", "ToObject"),
+        ("ToPropertyKey", "ToPropertyKey"),
         ("CheckObjectCoercible", "CheckObjectCoercible"),
         ("IsCallable", "IsCallable"),
         ("SameValue (according to 9.12)", "The SameValue Algorithm"),
@@ -1756,7 +1810,8 @@ def fixup_links(doc, docx):
         ("Table 3", "Table 3"),
     ]
 
-    non_section_ids_lang = {}
+    non_section_ids_lang = {
+    }
 
     non_section_ids_intl = {
         "Table 1": "table-1",
@@ -1774,13 +1829,26 @@ def fixup_links(doc, docx):
         "15.9.1.8": "http://ecma-international.org/ecma-262/5.1/#sec-15.9.1.8",
         "introduction of clause 15": "http://ecma-international.org/ecma-262/5.1/#sec-15",
     }
+    
+    max_table_lang = 35;
+
+    max_table_intl = 3;
 
     # Build specific_links from specific_link_source_data, sections_by_title,
     # and fallback_section_titles.
     if spec_is_lang(docx):
         specific_link_source_data = specific_link_source_data_lang
+        non_section_ids = non_section_ids_lang
+        max_table = max_table_lang
     else:
         specific_link_source_data = specific_link_source_data_intl
+        non_section_ids = non_section_ids_intl
+        max_table = max_table_lang
+    for id in range(1, max_table + 1):
+        non_section_ids["Table " + str(id)] = "table-" + str(id);
+    non_section_id_hrefs = []
+    for id in non_section_ids:
+        non_section_id_hrefs.append(non_section_ids[id])
     specific_links = []
     for text, title in specific_link_source_data:
         if title in sections_by_title:
@@ -1842,6 +1910,10 @@ def fixup_links(doc, docx):
         # Match the penultimate section number in lists that don't use the
         # Oxford comma, like "13.3, 13.4 and 13.5"
         r' (SECTION) and\b',
+
+        # in the Language spec, a few internal cross references to tables
+        # are marked as such, so we get ugly but easy-to-find text after transformation
+        r'\{ REF _Ref[0-9]+ \\h \}((Table [0-9]+))',
     ]))
 
     section_link_regexes_intl = list(map(compile, [
@@ -1879,10 +1951,8 @@ def fixup_links(doc, docx):
 
         if spec_is_lang(docx):
             section_link_regexes = section_link_regexes_lang
-            non_section_ids = non_section_ids_lang
         else:
             section_link_regexes = section_link_regexes_intl
-            non_section_ids = non_section_ids_intl
 
         for link_re in section_link_regexes:
             m = link_re.search(s)
@@ -1932,7 +2002,7 @@ def fixup_links(doc, docx):
                     prefix = m.group(1)
                 parent.content.insert(i, prefix)
                 i += 1
-            assert not href.startswith('#') or href[1:] in all_ids
+            assert not href.startswith('#') or href[1:] in all_ids or href[1:] in non_section_id_hrefs
             parent.content[i] = html.a(href=href, *s[start:stop])
             i += 1
             if stop < len(s):
@@ -2092,7 +2162,7 @@ def fixup_add_ecma_flavor(doc, docx):
 def fixup(docx, doc):
     fixup_list_styles(doc, docx)
     fixup_formatting(doc, docx)
-    fixup_paragraph_classes(doc)
+    doc = fixup_paragraph_classes(doc)
     doc = fixup_remove_empty_headings(doc)
     fixup_element_spacing(doc)
     fixup_sec_4_3(doc)
@@ -2107,7 +2177,7 @@ def fixup(docx, doc):
     if spec_is_lang(docx):
         fixup_lang_7_9_1(doc, docx)
         fixup_lang_15_10_2_2(doc)
-        fixup_lang_15_12_3(doc)
+        doc = fixup_lang_15_12_3(doc)
     fixup_lists(doc, docx)
     fixup_list_paragraphs(doc, docx)
     fixup_picts(doc, docx)

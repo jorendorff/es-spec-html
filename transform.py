@@ -5,7 +5,7 @@ from docx import shorten, parse_pr
 def dict_to_css(d):
     return "; ".join(p + ": " + v for p, v in d.items())
 
-# If True, allow <w:delText>, ignoring it.
+# If True, allow <w:delText> and <w:delInstrText>, ignoring them.
 ALLOW_CHANGES = True
 
 def transform(e):
@@ -18,7 +18,9 @@ def transform(e):
 
     elif name == 'instrText':
         assert len(e) == 0
-        return '{' + e.text + '}'
+        if e.text.startswith(' SEQ ') or e.text.startswith(' REF '):
+            return '{' + e.text + '}'
+        return None
 
     elif name in {'pPr', 'rPr', 'sectPr', 'tblPr', 'tblPrEx', 'trPr', 'tcPr', 'numPr'}:
         # Presentation data.
@@ -35,7 +37,7 @@ def transform(e):
         # Layout data
         return None
 
-    elif name == 'delText':
+    elif name == 'delText' or name == 'delInstrText':
         assert ALLOW_CHANGES
         return None
 
@@ -185,3 +187,4 @@ def transform(e):
             return c
 
 __all__ = ['transform', 'shorten']
+

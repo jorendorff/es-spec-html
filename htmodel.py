@@ -12,7 +12,9 @@ class Element:
         self.attrs = attrs or {}
         assert style is None or isinstance(style, dict)
         self.style = style
+        assert not isinstance(content, str)
         self.content = list(content)
+        assert all(isinstance(item, (str, Element)) for item in self.content)
 
     def is_block(self):
         """ True if this is a block element.
@@ -44,34 +46,54 @@ class Element:
         """ Return a copy of self with different content. """
         return Element(self.name, self.attrs, self.style, replaced_content)
 
-    def replace(self, name, replacement):
+    def with_content_slice(self, start, stop, replaced_content):
+        copy = self.content[:]
+        copy[start:stop] = replaced_content
+        return self.with_content(copy)
+
+    def with_(self, name=None, attrs=None, style=None, content=None):
+        if name is None: name = self.name
+        if attrs is None: attrs = self.attrs
+        if style is None: style = self.style
+        if content is None: content = self.content
+        return Element(name, attrs, style, content)
+
+    def find_replace(self, matcher, replacement):
         """ A sort of map() on htmodel content.
 
         self - An Element to transform.
 
-        name - A string.
+        matcher - A function mapping an Element to True, False, or None.
 
-        replacement - A function taking a single Element and returning a content list
-            (that is, a list of Elements and/or strings).
+        replacement - A function mapping an Element to a content list.
 
-        Walk the entire tree under the Element self; for each Element e with the given
-        name, call replacement(e); return a tree with each such Element replaced by
-        the elements in replacement(e).
+        Walk the entire tree under the Element self; for each element e such
+        that matcher(e) is True, call replacement(e); return a tree with each
+        such Element replaced by the content in replacement(e).
 
-        If self.name == name and list(replacement(self)) is not a list consisting of
-        exactly one Element, raise a ValueError.
+        If matcher(e) is False or None, replacement(e) is not called, and the
+        element is left in the result tree; the difference is that if
+        matcher(e) is False, e's descendants are visited; if it is None, the
+        descendants are skipped entirely and left unchanged in the result tree.
 
         self is left unmodified, but the result is not a deep copy: it may be
         self or an Element whose tree shares some parts of self.
         """
-
         def map_element(e):
+            match_result = matcher(e)
+            assert match_result is True or match_result is False or match_result is None
+            if match_result is None:
+                return [e]
             replaced_content = map_content(e.content)
-            if replaced_content is not e.content:
-                e = e.with_content(replaced_content)
-            if e.name == name:
-                return list(replacement(e))
-            return [e]
+            if replaced_content is e.content:
+                e2 = e
+            else:
+                e2 = e.with_content(replaced_content)
+
+            if match_result:
+                return list(replacement(e2))
+            else:
+                return [e2]
 
         def map_content(source):
             changed = False
@@ -96,6 +118,29 @@ class Element:
             raise ValueError("replaced root element with non-element content")
         return result_elt
 
+
+    def replace(self, name, replacement):
+        """ A sort of map() on htmodel content.
+
+        self - An Element to transform.
+
+        name - A string.
+
+        replacement - A function taking a single Element and returning a content list
+            (that is, a list of Elements and/or strings).
+
+        Walk the entire tree under the Element self; for each Element e with the given
+        name, call replacement(e); return a tree with each such Element replaced by
+        the content in replacement(e).
+
+        If self.name == name and list(replacement(self)) is not a list consisting of
+        exactly one Element, raise a ValueError.
+
+        self is left unmodified, but the result is not a deep copy: it may be
+        self or an Element whose tree shares some parts of self.
+        """
+
+        return self.find_replace(lambda e: e.name == name, replacement)
 
 def escape(s, quote=False):
     # The stdlib takes care of & > < ' " for us.
