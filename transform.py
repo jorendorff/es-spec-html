@@ -16,8 +16,10 @@ def transform(e):
         assert len(e) == 0
         return e.text
 
-    elif name == 'instrText' or name == 'fldChar':
+    elif name == 'instrText':
         assert len(e) == 0
+        if e.text.startswith(' SEQ ') or e.text.startswith(' REF '):
+            return '{' + e.text + '}'
         return None
 
     elif name in {'pPr', 'rPr', 'sectPr', 'tblPr', 'tblPrEx', 'trPr', 'tcPr', 'numPr'}:
@@ -26,6 +28,13 @@ def transform(e):
 
     elif name == 'pPrChange':
         # A diff to a previous version of the document.
+        return None
+
+    elif name in {'{http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing}posOffset',
+                  '{http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing}pctWidth',
+                  '{http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing}pctHeight'
+                 }:
+        # Layout data
         return None
 
     elif name == 'delText' or name == 'delInstrText':
@@ -58,7 +67,7 @@ def transform(e):
         if name == 'document':
             [body_e] = c
             return html(
-                head(link(rel="stylesheet", href="es6-draft.css")),
+                head(),
                 body_e)
 
         elif name == 'body':
@@ -178,3 +187,4 @@ def transform(e):
             return c
 
 __all__ = ['transform', 'shorten']
+
