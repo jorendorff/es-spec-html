@@ -2117,7 +2117,9 @@ def fixup_add_disclaimer(doc, docx):
               "the specification comprehensible. You can help improve the program ",
               a("here", href="https://github.com/jorendorff/es-spec-html"),
               "."),
-            p("For copyright information, see Ecma International’s legal disclaimer in the document itself."),
+
+            # (U+2019 is RIGHT SINGLE QUOTATION MARK, the character you're supposed to use for an apostrophe.)
+            p("For copyright information, see Ecma International\u2019s legal disclaimer in the document itself."),
             id="unofficial")
         position = 0
     elif spec_is_intl(docx) and version_is_intl_1_final(docx):

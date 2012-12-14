@@ -1,5 +1,6 @@
 import re
 import html as _html
+from html.entities import codepoint2name as _entities
 from io import StringIO
 import textwrap
 
@@ -143,8 +144,27 @@ class Element:
         return self.find_replace(lambda e: e.name == name, replacement)
 
 def escape(s, quote=False):
+    """ Escape the string s for HTML output.
+
+    This escapes characters that are special in HTML (& < >) and all non-ASCII characters.
+    If 'quote' is true, escape quotes (' ") as well.
+
+    Why use character entity refrences for non-ASCII characters? The program
+    encodes the output as UTF-8, so we should be fine without escaping. We
+    escape only for maximum robustness against broken tools.
+    """
+
+    def replace(m):
+        c = ord(m.group(0))
+        if c in _entities:
+            return '&' + _entities[c] + ';'
+        return '&#x{:x};'.format(c)
+
     # The stdlib takes care of & > < ' " for us.
-    return _html.escape(s, quote)
+    s = _html.escape(s, quote)
+
+    # Now we only need to worry about non-ascii characters.
+    return re.sub('[^\n -~]', replace, s)
 
 empty_tags = {'meta', 'br', 'hr', 'link'}
 non_indenting_tags = {'html', 'body'}
