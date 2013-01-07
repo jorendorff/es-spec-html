@@ -1,9 +1,22 @@
+""" Post-transformation hacks for the ECMAScript Language Specification document
+
+After the initial work of converting DOCX to HTML is done, a long series of
+hacks called "fixups" are applied, one by one, to produce the final document.
+
+See fixup() at the end of the file.
+
+"""
+
 import htmodel as html
 import collections, re
 from warnings import warn
 import os
 
+
+# === Common functions
+
 def findall(e, name):
+    """ Iterate over all elements in e with the given name, in document order. """
     if e.name == name:
         yield e
     for k in e.content:
@@ -12,6 +25,15 @@ def findall(e, name):
                 yield d
 
 def all_parent_index_child_triples(e):
+    """ Iterate over all elements in e, not counting e itself, in document order.
+    For each such element E, yield a triple (parent, index, E),
+    such that parent.children[index] is E.
+
+    The index is useful when you might need to replace the child entirely.
+    However note that deleting or inserting elements to the right of the iterator's position
+    is a bad idea because it changes indexes in mid-stream.
+    (It'd be nice to replace this with something zipper-like.)
+    """
     for i, k in enumerate(e.content):
         if not isinstance(k, str):
             yield e, i, k
@@ -19,6 +41,11 @@ def all_parent_index_child_triples(e):
                 yield t
 
 def all_parent_index_child_triples_reversed(e):
+    """ Same as all_parent_index_child_triples, but in reverse order.
+
+    (This is useful when code needs to insert or delete elements at the
+    iterator's position.)
+    """
     i = len(e.content) - 1
     while i >= 0:
         k = e.content[i]
@@ -28,12 +55,6 @@ def all_parent_index_child_triples_reversed(e):
             assert e.content[i] is k
             yield e, i, k
         i -= 1
-
-def version_is_5(docx):
-    return os.path.basename(docx.filename).lower().startswith('es5')
-
-def version_is_51_final(docx):
-    return os.path.basename(docx.filename) == 'es5.1-final.dotx'
 
 def has_bullet(docx, p):
     """ True if the given paragraph is of a style that has a bullet. """
@@ -45,6 +66,15 @@ def has_bullet(docx, p):
     ilvl = p.style.get('-ooxml-ilvl')
     s = docx.get_list_style_at(numId, ilvl)
     return s is not None and s.numFmt == 'bullet'
+
+def version_is_5(docx):
+    return os.path.basename(docx.filename).lower().startswith('es5')
+
+def version_is_51_final(docx):
+    return os.path.basename(docx.filename) == 'es5.1-final.dotx'
+
+
+# === Fixups
 
 def fixup_list_styles(doc, docx):
     """ Make sure bullet lists are never p.Alg4 or other particular styles.
@@ -1864,35 +1894,40 @@ def fixup_add_disclaimer(doc, docx):
     doc_body(doc).content.insert(position, disclaimer)
 
 def fixup(docx, doc):
-    #fixup_list_styles(doc, docx)
-    #fixup_formatting(doc, docx)
-    doc = fixup_paragraph_classes(doc)
-    doc = fixup_remove_empty_headings(doc)
-    fixup_element_spacing(doc)
-    fixup_sec_4_3(doc)
-    fixup_hr(doc)
-    fixup_sections(doc)
-    fixup_strip_toc(doc)
-    fixup_tables(doc)
-    fixup_pre(doc)
-    #fixup_notes(doc)
-    fixup_7_9_1(doc, docx)
-    #fixup_15_10_2_2(doc)
-    doc = fixup_15_12_3(doc)
-    #fixup_lists(doc, docx)
-    #fixup_list_paragraphs(doc)
-    fixup_picts(doc)
-    fixup_figures(doc)
-    fixup_remove_hr(doc)
-    fixup_title_page(doc)
-    fixup_html_title(doc)
-    fixup_overview_biblio(doc)
-    fixup_simplify_formatting(doc)
-    fixup_grammar_pre(doc)
+    # Implementation note:
+    # A few fixups treat the data as immutable: they produce a whole new document.
+    # These are called like so:   doc = fixup_paragraph_classes(doc)
+    # The rest are older and modify the tree in-place: fixup_hr(doc)
 
-    fixup_grammar_post(doc)
-    fixup_links(doc, docx)
-    fixup_generate_toc(doc)
-    fixup_add_disclaimer(doc, docx)
+    ## #fixup_list_styles(doc, docx)
+    ## #fixup_formatting(doc, docx)
+    ## doc = fixup_paragraph_classes(doc)
+    ## doc = fixup_remove_empty_headings(doc)
+    ## fixup_element_spacing(doc)
+    ## fixup_sec_4_3(doc)
+    ## fixup_hr(doc)
+    ## fixup_sections(doc)
+    ## fixup_strip_toc(doc)
+    ## fixup_tables(doc)
+    ## fixup_pre(doc)
+    ## #fixup_notes(doc)
+    ## fixup_7_9_1(doc, docx)
+    ## #fixup_15_10_2_2(doc)
+    ## doc = fixup_15_12_3(doc)
+    ## #fixup_lists(doc, docx)
+    ## #fixup_list_paragraphs(doc)
+    ## fixup_picts(doc)
+    ## fixup_figures(doc)
+    ## fixup_remove_hr(doc)
+    ## fixup_title_page(doc)
+    ## fixup_html_title(doc)
+    ## fixup_overview_biblio(doc)
+    ## fixup_simplify_formatting(doc)
+    ## fixup_grammar_pre(doc)
+    ## 
+    ## fixup_grammar_post(doc)
+    ## fixup_links(doc, docx)
+    ## fixup_generate_toc(doc)
+    ## fixup_add_disclaimer(doc, docx)
 
     return doc

@@ -196,7 +196,7 @@ def parse_pr(e):
             if left is not None:
                 left = int(left)
                 assert left >= 0
-                put('padding-left', twips(left))
+                put('margin-left', twips(left))
         
                 hanging = k.get(k_hanging)
                 if hanging is not None:
@@ -342,6 +342,16 @@ def get_val(e, key):
     else:
         return None
 
+list_styles = {
+    "none": "none",
+    "bullet": "disc",
+    "lowerLetter": "lower-alpha",
+    "lowerRoman": "lower-roman",
+    "upperLetter": "upper-alpha",
+    "upperRoman": "upper-roman",
+    "decimal": "decimal"
+}
+
 def parse_lvl(docx, e):
     lvl = Lvl()
     assert e.tag == k_lvl
@@ -352,9 +362,13 @@ def parse_lvl(docx, e):
         style = {}
     else:
         style = docx.styles[lvl.pStyle].full_style.copy()
-    for kid in e.findall('pPr'):
+    if lvl.numFmt in list_styles:
+        # This is wildly incorrect.
+        style['display'] = 'list-item'
+        style['list-style-type'] = list_styles[lvl.numFmt]
+    for kid in e.findall(bloat('pPr')):
         style.update(parse_pr(kid))
-    for kid in e.findall('rPr'):
+    for kid in e.findall(bloat('rPr')):
         style.update(parse_pr(kid))
     lvl.full_style = style
 
@@ -452,23 +466,54 @@ class Document:
         print(self._style_css())
 
     def _style_css(self):
-        rules = ["p {\n    margin: 0;\n}\n"]
+        rules = ["p {\n    margin: 0;\n}\n",
+                 ".real-table {\n    border-collapse: collapse;\n}\n"]
+
+        def add_rule(selector, props):
+            rule = selector + " {\n"
+            for prop, value in sorted(props.items()):
+                rule += "    " + prop + ": " + value + ";\n"
+            rule += "}\n"
+            rules.append(rule)
+
+        # Paragraph and character styles
         for cls, s in sorted(self.styles.items()):
             tagname = 'p'
             if s.type == 'character':
                 tagname = 'span'
-            rule = tagname + "." + cls + " {\n"
-            for prop, value in s.style.items():
-                rule += "    " + prop + ": " + value + ";\n"
-            if s.basedOn is not None:
-                parent = self.styles[s.basedOn]
-                for prop, value in parent.full_style.items():
-                    if prop not in s.style:
-                        rule += "    " + prop + ": " + value + ";  /* inherited */\n"
-            rule += "}\n"
-            rules.append(rule)
+            selector = tagname + "." + cls
+            add_rule(selector, s.full_style)
+
+        # Numbering styles
+        # Since these follow the paragraph styles, and they have the same CSS
+        # specificity, numbering styles take precedence.
+        for abstract_num_id, abstract_num in self.numbering.abstract_num.items():
+            if not isinstance(abstract_num, str):
+                assert isinstance(abstract_num, list)
+                for ilvl, lvl in enumerate(abstract_num):
+                    if lvl is not None:
+                        add_rule("p.abstractnumid-{}-ilvl-{}".format(abstract_num_id, ilvl), lvl.full_style)
+        for numid, num in self.numbering.num.items():
+            for ilvl, ov in enumerate(num.overrides):
+                if ov is not None:
+                    add_rule("p.numid-{}-override-ilvl-{}".format(numid, ilvl), ov.full_style)
+
         return '\n'.join(rules)
 
+    def get_list_class_at(self, numId, ilvl):
+        num = self.numbering.num[numId]
+        ilvl = int(ilvl)
+        ov = num.overrides
+        if ilvl < len(ov) and ov[ilvl] is not None:
+            return "numid-{}-override-ilvl-{}".format(numId, ilvl)
+        abstract_num = self.numbering.abstract_num[num.abstract_num_id]
+        if isinstance(abstract_num, str):
+            style = self.styles[abstract_num]
+            return self.get_list_class_at(style.full_style['-ooxml-numId'], ilvl)
+        else:
+            assert isinstance(abstract_num, list)
+            return "abstractnumid-{}-ilvl-{}".format(num.abstract_num_id, ilvl)
+        
     def get_list_style_at(self, numId, ilvl):
         num = self.numbering.num[numId]
         ilvl = int(ilvl)

@@ -29,7 +29,7 @@ def sketch_schema(document):
         print(path)
 
 def save_html(docxfile, filename):
-    result = transform(docxfile.document)
+    result = transform(docxfile)
     style = htmodel.style(docxfile._style_css(), type="text/css")
     result.content[0].content.append(style)
     result = fixups.fixup(docxfile, result)

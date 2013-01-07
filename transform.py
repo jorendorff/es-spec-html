@@ -8,7 +8,10 @@ def dict_to_css(d):
 # If True, allow <w:delText> and <w:delInstrText>, ignoring them.
 ALLOW_CHANGES = True
 
-def transform(e):
+def transform(doc):
+    return transform_element(doc, doc.document)
+
+def transform_element(doc, e):
     name = shorten(e.tag)
     assert e.tail is None
 
@@ -51,7 +54,7 @@ def transform(e):
                 c.append(ht)
 
         for k in e:
-            add(transform(k))
+            add(transform_element(doc, k))
         if not css:
             css = None
 
@@ -91,6 +94,13 @@ def transform(e):
                 del css['@cls']
             else:
                 result.attrs['class'] = 'Normal'
+
+            if css and '-ooxml-numId' in css and '-ooxml-ilvl' in css:
+                numid = css.pop('-ooxml-numId')
+                ilvl = css.pop('-ooxml-ilvl')
+                list_class = doc.get_list_class_at(numid, ilvl)
+                result.attrs['class'] += ' ' + list_class
+
             result.style = css
             return result
 
