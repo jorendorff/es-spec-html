@@ -202,7 +202,7 @@ def parse_pr(e):
                 if hanging is not None:
                     hanging = int(hanging)
                     assert hanging >= 0
-                    put('text-indent', twips(hanging - left))
+                    put('text-indent', twips(-hanging))
                 else:
                     firstLine = k.get(k_firstLine)
                     if firstLine is not None:
