@@ -101,23 +101,33 @@ def transform_element(doc, e, numbering_context=None):
                 numid = css.pop('-ooxml-numId')
                 ilvl = int(css.pop('-ooxml-ilvl'))
 
-                if len(numbering_context) <= ilvl:
-                    while len(numbering_context) <= ilvl:
-                        # Have not tested whether numbering actually starts at 1 for
-                        # indentation levels that don't occur in the document,
-                        # but I bet this is right.
-                        # TODO: use the <w:start> value for each level.
-                        numbering_context.append(1)
+                if numid == 0:
+                    # <w:numId w:val="0"/> is a special magic value meaning "no
+                    # list item", i.e. no marker. We speculate that this kind of
+                    # markerless list item has no effect on numbering.
+                    pass
                 else:
-                    del numbering_context[ilvl + 1:]
-                    numbering_context[ilvl] += 1
+                    # Apparently bulleted list items have no effect whatsoever
+                    # on numbering, even if they occur in the midst of numbered
+                    # list items with a greater w:ilvl.
+                    if doc.get_lvl(numid, ilvl).numFmt != 'bullet':
+                        if len(numbering_context) <= ilvl:
+                            while len(numbering_context) <= ilvl:
+                                # Have not tested whether numbering actually starts at 1 for
+                                # indentation levels that don't occur in the document,
+                                # but I bet this is right.
+                                # TODO: use the <w:start> value for each level.
+                                numbering_context.append(1)
+                        else:
+                            del numbering_context[ilvl + 1:]
+                            numbering_context[ilvl] += 1
 
-                list_class, marker = doc.get_list_class_and_marker_at(numid, numbering_context)
-                result.attrs['class'] += ' ' + list_class
-                if marker is not None:
-                    marker_span = span(marker)
-                    marker_span.attrs['class'] = 'marker'
-                    result.content.insert(0, marker_span)
+                    list_class, marker = doc.get_list_class_and_marker_at(numid, ilvl, numbering_context)
+                    result.attrs['class'] += ' ' + list_class
+                    if marker is not None:
+                        marker_span = span(marker)
+                        marker_span.attrs['class'] = 'marker'
+                        result.content.insert(0, marker_span)
             else:
                 # I can't find documentation for when top-level list numbering is supposed to reset.
                 # As a quick hack, reset all list numbering on each non-numbered paragraph.

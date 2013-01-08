@@ -551,25 +551,36 @@ class Document:
 
         return '\n'.join(rules)
 
-    def get_list_class_and_marker_at(self, numId, num_context):
-        """ Return the CSS class name corresponding to the given numId and ilvl. """
+    def _lookup_lvl(self, numId, ilvl):
         num = self.numbering.num[numId]
-        ilvl = len(num_context) - 1
         ovs = num.overrides
         if ilvl < len(ovs) and ovs[ilvl] is not None:
-            ov = ovs[ilvl]
-            cls = "numid-{}-override-ilvl-{}".format(numId, ilvl)
-            marker = ov.render_list_marker(num_context)
-            return cls, marker
+            return ovs[ilvl], numId, 'override'
         abstract_num = self.numbering.abstract_num[num.abstract_num_id]
         if isinstance(abstract_num, str):
             style = self.styles[abstract_num]
-            return self.get_list_class_and_marker_at(style.full_style['-ooxml-numId'], num_context)
+            return self._lookup_lvl(style.full_style['-ooxml-numId'], ilvl)
         else:
             assert isinstance(abstract_num, list)
-            cls = "abstractnumid-{}-ilvl-{}".format(num.abstract_num_id, ilvl)
-            marker = abstract_num[ilvl].render_list_marker(num_context)
-            return cls, marker
+            return abstract_num[ilvl], num.abstract_num_id, 'abstract'
+
+    def get_lvl(self, numId, ilvl):
+        return self._lookup_lvl(numId, ilvl)[0]
+
+    def get_list_class_and_marker_at(self, numId, ilvl, num_context):
+        """ Return the CSS class name corresponding to the given numId and ilvl. """
+
+        lvl, result_numId, how = self._lookup_lvl(numId, ilvl)
+        if lvl.numFmt != 'bullet':
+            assert ilvl == len(num_context) - 1
+
+        if how == 'override':
+            cls = "numid-{}-override-ilvl-{}".format(result_numId, ilvl)
+        else:
+            cls = "abstractnumid-{}-ilvl-{}".format(result_numId, ilvl)
+
+        marker = lvl.render_list_marker(num_context)
+        return cls, marker
 
     def get_list_style_at(self, numId, ilvl):
         num = self.numbering.num[numId]
