@@ -114,9 +114,10 @@ def transform_element(doc, e, numbering_context=None):
 
                 list_class, marker = doc.get_list_class_and_marker_at(numid, numbering_context)
                 result.attrs['class'] += ' ' + list_class
-                marker_span = span(marker)
-                marker_span.attrs['class'] = 'marker'
-                result.content.insert(0, marker_span)
+                if marker is not None:
+                    marker_span = span(marker)
+                    marker_span.attrs['class'] = 'marker'
+                    result.content.insert(0, marker_span)
             else:
                 # 
                 # I can't find documentation for when top-level list numbering is supposed to reset.

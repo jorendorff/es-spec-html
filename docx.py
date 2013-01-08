@@ -197,7 +197,7 @@ def parse_pr(e):
                 left = int(left)
                 assert left >= 0
                 put('margin-left', twips(left))
-        
+
                 hanging = k.get(k_hanging)
                 if hanging is not None:
                     hanging = int(hanging)
@@ -335,12 +335,16 @@ class Num:
 
 class Lvl:
     """ Data from a <w:lvl> element.
-    
+
     self.pStype is str, self.numFmt is str
     self.lvlText is str
     self.suff is str.
     """
     def render_list_marker(self, numbers):
+        # If there's a list-style-type, CSS generates the marker. No need to put one in the HTML.
+        if "list-style-type" in self.full_style:
+            return None
+
         def repl(m):
             ilvl = int(m.group(1)) - 1
             return str(numbers[ilvl])  # This really should take into account numFmt, unless isLgl.
@@ -387,17 +391,28 @@ def parse_lvl(docx, e):
     else:
         style = docx.styles[lvl.pStyle].full_style.copy()
 
-    if lvl.numFmt in list_styles:
-        # This is wildly incorrect.
-        style['display'] = 'list-item'
-        style['list-style-type'] = "none" #XXX list_styles[lvl.numFmt]
-
     for kid in e.findall(bloat('pPr')):
         style.update(parse_pr(kid))
     for kid in e.findall(bloat('rPr')):
         style.update(parse_pr(kid))
-    lvl.full_style = style
 
+    # If this kind of list numbering can be done using simple CSS, do that
+    if lvl.suff == '\t':
+        ilvl = int(e.get(k_ilvl))
+        if lvl.lvlText == '\uf0b7':
+            style['list-style-type'] = 'disc'
+        elif lvl.numFmt in list_styles and lvl.lvlText == '%{}.'.format(ilvl + 1):
+            style['list-style-type'] = list_styles[lvl.numFmt]
+
+        # If either of the two rules above matched...
+        if 'list-style-type' in style:
+            # then make this a list-item, and remove the text-indent since that
+            # is meant to position the marker.
+            style['display'] = 'list-item'
+            if 'text-indent' in style:
+                del style['text-indent']
+
+    lvl.full_style = style
     return lvl
 
 class StartOverride:
@@ -549,7 +564,7 @@ class Document:
             cls = "abstractnumid-{}-ilvl-{}".format(num.abstract_num_id, ilvl)
             marker = abstract_num[ilvl].render_list_marker(num_context)
             return cls, marker
-        
+
     def get_list_style_at(self, numId, ilvl):
         num = self.numbering.num[numId]
         ilvl = int(ilvl)
