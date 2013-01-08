@@ -11,7 +11,7 @@ ALLOW_CHANGES = True
 def transform(doc):
     return transform_element(doc, doc.document)
 
-def transform_element(doc, e):
+def transform_element(doc, e, numbering_context=None):
     name = shorten(e.tag)
     assert e.tail is None
 
@@ -53,8 +53,9 @@ def transform_element(doc, e):
             elif ht is not None:
                 c.append(ht)
 
+        child_numbering_context = []
         for k in e:
-            add(transform_element(doc, k))
+            add(transform_element(doc, k, child_numbering_context))
         if not css:
             css = None
 
@@ -96,10 +97,32 @@ def transform_element(doc, e):
                 result.attrs['class'] = 'Normal'
 
             if css and '-ooxml-numId' in css and '-ooxml-ilvl' in css:
+                # This paragraph has numbering.
                 numid = css.pop('-ooxml-numId')
-                ilvl = css.pop('-ooxml-ilvl')
-                list_class = doc.get_list_class_at(numid, ilvl)
+                ilvl = int(css.pop('-ooxml-ilvl'))
+
+                if len(numbering_context) <= ilvl:
+                    while len(numbering_context) <= ilvl:
+                        # Have not tested whether numbering actually starts at 1 for
+                        # indentation levels that don't occur in the document,
+                        # but I bet this is right.
+                        # TODO: use the <w:start> value for each level.
+                        numbering_context.append(1)
+                else:
+                    del numbering_context[ilvl + 1:]
+                    numbering_context[ilvl] += 1
+
+                list_class, marker = doc.get_list_class_and_marker_at(numid, numbering_context)
                 result.attrs['class'] += ' ' + list_class
+                marker_span = span(marker)
+                marker_span.attrs['class'] = 'marker'
+                result.content.insert(0, marker_span)
+            else:
+                # 
+                # I can't find documentation for when top-level list numbering is supposed to reset.
+                # except 
+                # As a quick hack, reset all list numbering on each non-numbered paragraph.
+                del numbering_context[:]
 
             result.style = css
             return result

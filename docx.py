@@ -317,6 +317,7 @@ k_abstractNumId = bloat('abstractNumId')
 k_ilvl = bloat('ilvl')
 k_lvl = bloat('lvl')
 k_lvlOverride = bloat('lvlOverride')
+k_lvlText = bloat('lvlText')
 k_num = bloat('num')
 k_numFmt = bloat('numFmt')
 k_numId = bloat('numId')
@@ -327,20 +328,34 @@ k_startOverride = bloat('startOverride')
 k_sz = bloat('sz')
 
 class Num:
+    """ Data from a <w:num> element. """
     def __init__(self, abstract_num_id, overrides):
         self.abstract_num_id = abstract_num_id
         self.overrides = overrides
 
 class Lvl:
-    pass
+    """ Data from a <w:lvl> element.
+    
+    self.pStype is str, self.numFmt is str
+    self.lvlText is str
+    self.suff is str.
+    """
+    def render_list_marker(self, numbers):
+        def repl(m):
+            ilvl = int(m.group(1)) - 1
+            return str(numbers[ilvl])  # This really should take into account numFmt, unless isLgl.
+        text = re.sub(r'%([1-9])', repl, self.lvlText)
+        return text + self.suff
 
-def get_val(e, key):
+def get_val(e, key, defaultVal=None):
     kids = list(e.findall(bloat(key)))
     if kids:
         [kid] = kids
-        return kid.get(k_val)
+        val = kid.get(k_val)
+        assert val is not None
+        return val
     else:
-        return None
+        return defaultVal
 
 list_styles = {
     "none": "none",
@@ -352,20 +367,31 @@ list_styles = {
     "decimal": "decimal"
 }
 
+suff_chars = {
+    'tab': "\t",
+    'space': " ",
+    'nothing': ""
+}
+
 def parse_lvl(docx, e):
     lvl = Lvl()
     assert e.tag == k_lvl
     lvl.pStyle = get_val(e, 'pStyle')
     lvl.numFmt = get_val(e, 'numFmt')
-
+    lvl.lvlText = get_val(e, 'lvlText')
+    lvl.suff = suff_chars[get_val(e, 'suff', 'tab')]
+    # <w:lvlRestart> also affects numbering in some strange cases.
+    # <w:isLgl> affects numbering when present.
     if lvl.pStyle is None:
         style = {}
     else:
         style = docx.styles[lvl.pStyle].full_style.copy()
+
     if lvl.numFmt in list_styles:
         # This is wildly incorrect.
         style['display'] = 'list-item'
-        style['list-style-type'] = list_styles[lvl.numFmt]
+        style['list-style-type'] = "none" #XXX list_styles[lvl.numFmt]
+
     for kid in e.findall(bloat('pPr')):
         style.update(parse_pr(kid))
     for kid in e.findall(bloat('rPr')):
@@ -384,6 +410,10 @@ def parse_startOverride(e):
     return ov
 
 class Numbering:
+    """ Numbering style data.
+    self.abstract_num is {str: [Lvl]}
+    self.num is {str: Num}
+    """
     def __init__(self, abstract_num, num):
         self.abstract_num = abstract_num
         self.num = num
@@ -500,19 +530,25 @@ class Document:
 
         return '\n'.join(rules)
 
-    def get_list_class_at(self, numId, ilvl):
+    def get_list_class_and_marker_at(self, numId, num_context):
+        """ Return the CSS class name corresponding to the given numId and ilvl. """
         num = self.numbering.num[numId]
-        ilvl = int(ilvl)
-        ov = num.overrides
-        if ilvl < len(ov) and ov[ilvl] is not None:
-            return "numid-{}-override-ilvl-{}".format(numId, ilvl)
+        ilvl = len(num_context) - 1
+        ovs = num.overrides
+        if ilvl < len(ovs) and ovs[ilvl] is not None:
+            ov = ovs[ilvl]
+            cls = "numid-{}-override-ilvl-{}".format(numId, ilvl)
+            marker = ov.render_list_marker(num_context)
+            return cls, marker
         abstract_num = self.numbering.abstract_num[num.abstract_num_id]
         if isinstance(abstract_num, str):
             style = self.styles[abstract_num]
-            return self.get_list_class_at(style.full_style['-ooxml-numId'], ilvl)
+            return self.get_list_class_and_marker_at(style.full_style['-ooxml-numId'], num_context)
         else:
             assert isinstance(abstract_num, list)
-            return "abstractnumid-{}-ilvl-{}".format(num.abstract_num_id, ilvl)
+            cls = "abstractnumid-{}-ilvl-{}".format(num.abstract_num_id, ilvl)
+            marker = abstract_num[ilvl].render_list_marker(num_context)
+            return cls, marker
         
     def get_list_style_at(self, numId, ilvl):
         num = self.numbering.num[numId]
