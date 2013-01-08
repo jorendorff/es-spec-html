@@ -119,9 +119,7 @@ def transform_element(doc, e, numbering_context=None):
                     marker_span.attrs['class'] = 'marker'
                     result.content.insert(0, marker_span)
             else:
-                # 
                 # I can't find documentation for when top-level list numbering is supposed to reset.
-                # except 
                 # As a quick hack, reset all list numbering on each non-numbered paragraph.
                 del numbering_context[:]
 
