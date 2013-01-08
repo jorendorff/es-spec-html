@@ -396,21 +396,27 @@ def parse_lvl(docx, e):
     for kid in e.findall(bloat('rPr')):
         style.update(parse_pr(kid))
 
-    # If this kind of list numbering can be done using simple CSS, do that
-    if lvl.suff == '\t':
-        ilvl = int(e.get(k_ilvl))
-        if lvl.lvlText == '\uf0b7':
-            style['list-style-type'] = 'disc'
-        elif lvl.numFmt in list_styles and lvl.lvlText == '%{}.'.format(ilvl + 1):
-            style['list-style-type'] = list_styles[lvl.numFmt]
-
-        # If either of the two rules above matched...
-        if 'list-style-type' in style:
-            # then make this a list-item, and remove the text-indent since that
-            # is meant to position the marker.
-            style['display'] = 'list-item'
-            if 'text-indent' in style:
-                del style['text-indent']
+    # Previously, I thought this was the right place to note that the list
+    # could be a simple HTML list with a CSS description.  Now I think it's
+    # better to rely on the appearance of the Word document (actual indentation
+    # and numbering) rather than its semantic markup.  If so, the conversion to
+    # HTML <ol>/<ul> should happen later.
+    #
+    ## # If this kind of list numbering can be done using simple CSS, do that
+    ## if lvl.suff == '\t':
+    ##     ilvl = int(e.get(k_ilvl))
+    ##     if lvl.lvlText == '\uf0b7':
+    ##         style['list-style-type'] = 'disc'
+    ##     elif lvl.numFmt in list_styles and lvl.lvlText == '%{}.'.format(ilvl + 1):
+    ##         style['list-style-type'] = list_styles[lvl.numFmt]
+    ## 
+    ##     # If either of the two rules above matched...
+    ##     if 'list-style-type' in style:
+    ##         # then make this a list-item, and remove the text-indent since that
+    ##         # is meant to position the marker.
+    ##         style['display'] = 'list-item'
+    ##         if 'text-indent' in style:
+    ##             del style['text-indent']
 
     lvl.full_style = style
     return lvl
