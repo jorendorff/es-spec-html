@@ -545,7 +545,8 @@ class Document:
         print(self._style_css())
 
     def _style_css(self):
-        rules = ["p {\n    margin: 0;\n}\n",
+        rules = ["body {\n    font-size: 10pt;\n}\n",
+                 "p {\n    margin: 0;\n}\n",
                  ".real-table {\n    border-collapse: collapse;\n}\n"]
 
         def add_rule(selector, props):
