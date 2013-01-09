@@ -35,6 +35,7 @@ k_ascii = bloat('ascii')
 k_hAnsi = bloat('hAnsi')
 k_cs = bloat('cs')
 k_eastAsia = bloat('eastAsia')
+k_hint = bloat('hint')
 k_fill = bloat('fill')
 k_color = bloat('color')
 k_left = bloat('left')
@@ -74,7 +75,7 @@ def twips(n):
         return '{:.2f}pt'.format(n / 20)
 
 def parse_pr(e):
-    font_keys = {k_ascii, k_hAnsi, k_cs, k_eastAsia, bloat('hint')}
+    font_keys = {k_ascii, k_hAnsi, k_cs, k_eastAsia, k_hint}
 
     assert e.text is None
 
@@ -126,8 +127,10 @@ def parse_pr(e):
                 ## elif font == 'CG Times':
                 ##     font = 'Times New Roman'
 
-                if font is not None:
-                    put('font-family', font)
+                put('font-family', font)
+            else:
+                if set(k.keys()) == {k_hint} and k.get(k_hint) == 'default':
+                    put('font-family', 'Arial')
 
         elif name == 'vertAlign':
             if list(k.keys()) == [k_val]:
@@ -367,6 +370,8 @@ class Lvl:
     self.pStype is str, self.numFmt is str
     self.lvlText is str
     self.suff is str.
+    self.full_style is {str: str}, a CSS dictionary.
+    self.marker_style is the same.
     """
     def render_list_marker(self, numbers):
         # If there's a list-style-type, CSS generates the marker. No need to put one in the HTML.
@@ -421,8 +426,10 @@ def parse_lvl(docx, e):
 
     for kid in e.findall(bloat('pPr')):
         style.update(parse_pr(kid))
+
+    marker_style = {}
     for kid in e.findall(bloat('rPr')):
-        style.update(parse_pr(kid))
+        marker_style.update(parse_pr(kid))
 
     # Previously, I thought this was the right place to note that the list
     # could be a simple HTML list with a CSS description.  Now I think it's
@@ -447,6 +454,7 @@ def parse_lvl(docx, e):
     ##             del style['text-indent']
 
     lvl.full_style = style
+    lvl.marker_style = marker_style
     return lvl
 
 class StartOverride:
@@ -572,7 +580,10 @@ class Document:
                 assert isinstance(abstract_num, list)
                 for ilvl, lvl in enumerate(abstract_num):
                     if lvl is not None:
-                        add_rule("p.abstractnumid-{}-ilvl-{}".format(abstract_num_id, ilvl), lvl.full_style)
+                        cls = "p.abstractnumid-{}-ilvl-{}".format(abstract_num_id, ilvl)
+                        add_rule(cls, lvl.full_style)
+                        if lvl.marker_style:
+                            add_rule(cls + ">span.marker", lvl.marker_style)
         for numid, num in self.numbering.num.items():
             for ilvl, ov in enumerate(num.overrides):
                 if ov is not None:

@@ -252,7 +252,6 @@ def write_html(f, ht, indent='', strict=True):
             result = escape(ht)
             if '\n' in ht:
                 # This is unexpected; don't word-wrap. Write it nearly-verbatim, with newlines.
-                result = escape(result)
                 if not result.endswith('\n'):
                     result += '\n'
             return result
@@ -268,10 +267,14 @@ def write_html(f, ht, indent='', strict=True):
             else:
                 end = '</{}>'.format(ht.name)
 
-            inner_indent = indent
-            if ht.name not in non_indenting_tags:
-                inner_indent += '  '
-            inner = content_to_str(ht.content, inner_indent)
+            if ht.name == 'style' and len(ht.content) == 1 and isinstance(ht.content[0], str):
+                # Don't escape CSS. Super gross but the browser will ignore selectors containing '&gt;'.
+                inner = ht.content[0]
+            else:
+                inner_indent = indent
+                if ht.name not in non_indenting_tags:
+                    inner_indent += '  '
+                inner = content_to_str(ht.content, inner_indent)
 
             if inner.endswith('\n'):
                 return (indent + start + '\n' + inner + indent + end + '\n')
