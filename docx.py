@@ -198,15 +198,15 @@ def parse_pr(e):
                 assert left >= 0
                 put('margin-left', twips(left))
 
-                hanging = k.get(k_hanging)
-                if hanging is not None:
-                    hanging = int(hanging)
-                    assert hanging >= 0
-                    put('text-indent', twips(-hanging))
-                else:
-                    firstLine = k.get(k_firstLine)
-                    if firstLine is not None:
-                        put('text-indent', twips(int(firstLine)))
+            hanging = k.get(k_hanging)
+            if hanging is not None:
+                hanging = int(hanging)
+                assert hanging >= 0
+                put('text-indent', twips(-hanging))
+            else:
+                firstLine = k.get(k_firstLine)
+                if firstLine is not None:
+                    put('text-indent', twips(int(firstLine)))
 
         elif name == 'numPr':
             ilvl = None
