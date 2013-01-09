@@ -333,6 +333,33 @@ class Num:
         self.abstract_num_id = abstract_num_id
         self.overrides = overrides
 
+def int_to_lower_roman(i):
+    """ Convert an integer to Roman numerals.
+    From Paul Winkler's recipe: https://code.activestate.com/recipes/81611-roman-numerals/
+    """
+    if i < 1 or i > 3999:
+        raise ValueError("Argument must be between 1 and 3999")
+    vals = (1000, 900,  500, 400, 100,  90, 50,  40, 10,  9,   5,  4,   1)
+    syms = ('m',  'cm', 'd', 'cd','c', 'xc','l','xl','x','ix','v','iv','i')
+    result = ""
+    for val, symbol in zip(vals, syms):
+        count = i // val
+        result += symbol * count
+        i -= val * count
+    return result
+
+def int_to_lower_letter(i):
+    if i > 26:
+        raise ValueError("Don't know any more lowercase letters after z.")
+    return "abcdefghijklmnopqrstuvwxyz"[i - 1]
+
+list_formatters = {
+    'lowerLetter': int_to_lower_letter,
+    'decimal': str,
+    'lowerRoman': int_to_lower_roman,
+    'upperRoman': lambda i: int_to_lower_roman(i).upper()
+}
+
 class Lvl:
     """ Data from a <w:lvl> element.
 
@@ -347,7 +374,7 @@ class Lvl:
 
         def repl(m):
             ilvl = int(m.group(1)) - 1
-            return str(numbers[ilvl])  # This really should take into account numFmt, unless isLgl.
+            return list_formatters[self.numFmt](numbers[ilvl])  # should ignore numFmt if isLgl
         text = re.sub(r'%([1-9])', repl, self.lvlText)
         return text + self.suff
 
