@@ -1,4 +1,5 @@
 from xml.etree import ElementTree
+import htmodel
 from htmodel import *
 from docx import shorten, parse_pr
 
@@ -58,6 +59,36 @@ def transform_element(doc, e, numbering_context=None):
             add(transform_element(doc, k, child_numbering_context))
         if not css:
             css = None
+
+        # <w:contextualSpacing> means roughly that a sibling <w:spacing>
+        # element should not affect margins between this paragraph and an
+        # adjacent paragraph that has the same paragraph style.
+        #
+        # But the example here suggests that that's not all <w:contextualSpacing>
+        # does and the true behavior is deeply weird:
+        # http://msdn.microsoft.com/en-us/library/office/documentformat.openxml.wordprocessing.contextualspacing.aspx
+        #
+        # We do not implement the full behavior. Rather, as a hack, when
+        # contextualSpacing appears directly on a paragraph, strip it and the
+        # margins affected by it.
+        #
+        def sameParagraphStyle(kid, adj):
+            if not isinstance(adj, htmodel.Element):
+                return False
+            kidStyle, _, _ = kid.attrs['class'].partition(' ')
+            adjStyle, _, _ = adj.attrs['class'].partition(' ')
+            return kidStyle == adjStyle
+        for i, kid in enumerate(c):
+            if isinstance(kid, htmodel.Element) and kid.style and '-ooxml-contextual-spacing' in kid.style:
+                del kid.style['-ooxml-contextual-spacing']
+                if i > 0:
+                    prev = c[i - 1]
+                    if sameParagraphStyle(kid, prev) and 'margin-top' in kid.style:
+                        del kid.style['margin-top']
+                if i + 1 < len(c):
+                    next = c[i + 1]
+                    if sameParagraphStyle(kid, next) and 'margin-bottom' in kid.style:
+                        del kid.style['margin-bottom']
 
         if name == 'document':
             [body_e] = c

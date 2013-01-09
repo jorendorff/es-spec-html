@@ -189,7 +189,8 @@ def parse_pr(e):
             if line is not None:
                 put('line-height', '{:.1%}'.format(1.2 * float(line) / 240))
 
-        # todo: contextualSpacing
+        elif name == 'contextualSpacing':
+            put('-ooxml-contextual-spacing', 'true')
 
         elif name == 'ind':
             left = k.get(k_left)
