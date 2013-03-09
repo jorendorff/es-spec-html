@@ -917,6 +917,21 @@ def fixup_lists(e, docx):
         warn("list already exists in fixup_lists: " + repr(e)[:300])
         return
 
+    if (e.content
+        and isinstance(e.content[0], html.Element)
+        and e.content[0].name == 'span'
+        and e.content[0].attrs.get('class') == 'marker'):
+
+        # This is a list item. (The caller will sort out its marker and wrap it
+        # in an <ol> or <ul> as needed.)
+        e.name = 'li'
+
+        # In Word, this was a paragraph. It therefore doesn't contain any
+        # nested lists or list items, so we're done.
+        return
+
+    # Checking every single element in the document isn't really necessary, but
+    # it's the easiest and most thorough thing.
     have_list_items = False
     for _, k in e.kids():
         fixup_lists(k, docx)
@@ -944,14 +959,52 @@ def fixup_lists(e, docx):
             else:
                 # Oh no. It is a list item. Well, what is its depth? Does it
                 # have a bullet or numbering?
-                bullet = False
-                if k.style and '-ooxml-ilvl' in k.style:
-                    depth = int(k.style['-ooxml-ilvl'])
-                    bullet = has_bullet(docx, k)
 
-                    # While we're here, delete the magic style attributes.
-                    del k.style['-ooxml-ilvl']
-                    del k.style['-ooxml-numId']
+                ## def compute_style(docx, e, name):
+                ##     """ Compute the value of CSS property 'name' on element 'e'.
+                ##     ('docx' is needed to examine the style rules.)
+                ## 
+                ##     Unfortunately this won't work for properties that are
+                ##     inherited from parents, since 'e' does not contain a
+                ##     reference to its parents.
+                ## 
+                ##     Note that the computed value of margin-left is not the
+                ##     absolute left coordinate of the box in CSS: among other
+                ##     considerations, since boxes nest, parent elements affect
+                ##     the horizontal position of the child. It's close enough for
+                ##     our purposes here though.
+                ##     """
+                ##     if e.style and name in e.style:
+                ##         return e.style[name]
+                ##     classes = e.attrs['class'].split()
+                ##     if len(classes) > 1:
+                ##         assert len(classes) == 2
+                ##         # TODO look up classes[1] in numbering style rules
+                ##     para_style = docx.styles[classes[0]]
+                ##     return para_style.get(name)
+                ## 
+                ## def pts(s):
+                ##     if s == '0':
+                ##         return 0
+                ##     assert s.endswith('pt')
+                ##     assert s[:-2].isdigit()
+                ##     return int(s[:-2])
+                ## 
+                ## indent = pts(compute_style(docx, k, 'margin-left'))
+
+                ## TODO - reverse-engineer list structure based on indentation
+                ## TODO - remove explicit markers from list items where the default HTML+CSS is close enough
+                ## TODO - detect bullets (Symbol font craziness) and render as ul>li
+                ## TODO - cope when the Word doc tweaks the marker "run
+                ##   properties", which isn't possible in HTML+CSS yet except by
+                ##   tweaking the whole paragraph
+
+                bullet = False
+                if '-ilvl-' in k.attrs.get('class', ''):
+                    [para_style, num_cls] = k.attrs['class'].split()
+                    _, ilvl_token, nstr = num_cls.partition('-ilvl-')
+                    assert ilvl_token
+                    depth = int(nstr)
                 else:
                     depth = 0
 
@@ -1914,7 +1967,7 @@ def fixup(docx, doc):
     ## fixup_7_9_1(doc, docx)
     ## #fixup_15_10_2_2(doc)
     ## doc = fixup_15_12_3(doc)
-    ## #fixup_lists(doc, docx)
+    ## fixup_lists(doc, docx)
     ## #fixup_list_paragraphs(doc)
     ## fixup_picts(doc)
     ## fixup_figures(doc)
