@@ -1670,7 +1670,7 @@ def fixup_links(doc, docx):
         ("IsSuperReference", "The Reference Specification Type"),
         ("GetValue", "GetValue (V)"),
         ("PutValue", "PutValue (V, W)"),
-        ("Property Descriptor", "The Property Descriptor Specification Types"),  # sic
+        #("Property Descriptor", "The Property Descriptor Specification Types"),  # sic
         ("property key value", "The Object Type"),
         ("property key", "The Object Type"),
         ("IsAccessorDescriptor", "IsAccessorDescriptor ( Desc )"),
@@ -1692,10 +1692,10 @@ def fixup_links(doc, docx):
         ("ToPropertyKey", "ToPropertyKey"),
         ("CheckObjectCoercible", "CheckObjectCoercible"),
         ("IsCallable", "IsCallable"),
-        ("SameValue (according to 9.12)", "The SameValue Algorithm"),
-        ("SameValue", "The SameValue Algorithm"),
-        ("the SameValue algorithm (9.12)", "The SameValue Algorithm"),
-        ("the SameValue Algorithm (9.12)", "The SameValue Algorithm"),
+        #("SameValue (according to 9.12)", "The SameValue Algorithm"),
+        #("SameValue", "The SameValue Algorithm"),
+        #("the SameValue algorithm (9.12)", "The SameValue Algorithm"),
+        #("the SameValue Algorithm (9.12)", "The SameValue Algorithm"),
 
         # 10.1
         ("strict mode code (see 10.1.1)", "Strict Mode Code"),
