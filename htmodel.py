@@ -188,7 +188,7 @@ def write_html(f, ht, indent='', strict=True):
 
     def start_tag(ht):
         attrs = ''.join(' {0}="{1}"'.format(htmlify(k), escape(v, True))
-                        for k, v in ht.attrs.items())
+                        for k, v in sorted(ht.attrs.items()))
         if ht.style:
             assert 'style' not in ht.attrs
             style = '; '.join(name + ": " + value for name, value in sorted(ht.style.items()))
