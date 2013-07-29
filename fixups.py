@@ -121,13 +121,13 @@ def fixup_formatting(doc, docx):
         cls = parent.attrs.get('class', 'Normal')
         inherited_style = docx.styles[cls].full_style
 
-        # Determine the style of each bit of content in the paragraph.
+        # Determine the style of each run of content in the paragraph.
         items = []
         for kid in spans:
             if not isinstance(kid, str) and kid.name == 'span':
-                run_style = kid.style
+                run_style = inherited_style.copy()
+                run_style.update(kid.style)
                 if 'class' in kid.attrs:
-                    run_style = run_style.copy()
                     run_style.update(docx.styles[kid.attrs['class']].full_style)
                 items.append((kid.content, run_style))
             else:

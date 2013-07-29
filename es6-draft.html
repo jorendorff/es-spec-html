@@ -4131,11 +4131,11 @@
             automatically inserted at the end of the input stream.</li>
         <li>When, as the script is parsed from left to right, a token is encountered that is allowed by some production of the
             grammar, but the production is a <i>restricted production</i> and the token would be the first token for a terminal or
-            nonterminal immediately following the annotation <span style="font-family: Times New Roman">&ldquo;</span>[no
-            <i>LineTerminator</i> here]<span style="font-family: Times New Roman">&rdquo;</span> within the restricted production
-            (and therefore such a token is called a restricted token), and the restricted token is separated from the previous
-            token by at least one <span class="nt">LineTerminator</span>, then a semicolon is automatically inserted before the
-            restricted token.</li>
+            nonterminal immediately following the annotation <span style="font-family: Times New Roman">&ldquo;</span>[no <span
+            style="font-family: Times New Roman"><i>LineTerminator</i></span> here]<span style="font-family: Times New
+            Roman">&rdquo;</span> within the restricted production (and therefore such a token is called a restricted token), and
+            the restricted token is separated from the previous token by at least one <span class="nt">LineTerminator</span>, then
+            a semicolon is automatically inserted before the restricted token.</li>
       </ol>
 
       <p>However, there is an additional overriding condition on the preceding rules: a semicolon is never inserted automatically
@@ -11683,8 +11683,8 @@
           <ol class="block">
             <li>If <i>d</i> is a <i>FunctionDeclaration</i> then
               <ol class="block">
-                <li>NOTE&#x9;&#x9;If there are multiple <i>FunctionDeclarations</i> for the same name, the last declaration is
-                    used.</li>
+                <li>NOTE&#x9;&#x9;If there are multiple <span style="font-family: Times New
+                    Roman"><i>FunctionDeclarations</i></span> for the same name, the last declaration is used.</li>
                 <li>Let <i>fn</i> be the sole element of the BoundNames of <i>d.</i></li>
                 <li>If <i>fn</i> is not an element of <i>declaredFunctionNames</i>, then
                   <ol class="block">
@@ -11820,8 +11820,8 @@
           <ol class="block">
             <li>If <i>d</i> is a <i>FunctionDeclaration</i> then
               <ol class="block">
-                <li>NOTE&#x9;&#x9;If there are multiple <i>FunctionDeclarations</i> for the same name, the last declaration is
-                    used.</li>
+                <li>NOTE&#x9;&#x9;If there are multiple <span style="font-family: Times New
+                    Roman"><i>FunctionDeclarations</i></span> for the same name, the last declaration is used.</li>
                 <li>Let <i>fn</i> be the sole element of the BoundNames of <i>d.</i></li>
                 <li>If <i>fn</i> is "<code>arguments</code>", then let <i>argumentsObjectNotNeeded</i>  be <b>true</b>.</li>
                 <li>Let <i>alreadyDeclared</i> be the result of calling <i>env&rsquo;s</i> HasBinding concrete method passing
@@ -11843,7 +11843,7 @@
             <li>Let <i>alreadyDeclared</i> be the result of calling <i>env&rsquo;s</i> HasBinding concrete method passing
                 <i>paramName</i> as the argument.</li>
             <li>NOTE   Duplicate parameter names can only occur in non-strict functions. Parameter names that are the same as
-                function declaration names do not get initialized to <b>undefined</b>.</li>
+                function declaration names do not get initialized to <span class="value">undefined</span>.</li>
             <li>If <i>alreadyDeclared</i> is <b>false</b>, then
               <ol class="block">
                 <li>If <i>paramName</i> is "<code>arguments</code>", then let <i>argumentsObjectNotNeeded</i>  be
@@ -11881,7 +11881,7 @@
             <li>Let <i>alreadyDeclared</i> be the result of calling <i>env&rsquo;s</i> HasBinding concrete method passing
                 <i>varName</i> as the argument.</li>
             <li>NOTE&#x9;&#x9;A VarDeclaredNames is only instantiated and initialied here if it is not also the name of a formal
-                parameter or a <i>FunctionDeclarations</i>.</li>
+                parameter or a <span class="nt">FunctionDeclarations</span>.</li>
             <li>If <i>alreadyDeclared</i> is <b>false</b>, then
               <ol class="block">
                 <li>Call <i>env&rsquo;s</i> CreateMutableBinding concrete method passing <i>varName</i> as the argument.</li>
@@ -11933,7 +11933,8 @@
           </ol>
         </li>
         <li></li>
-        <li>NOTE&#x9;If <i>argumentsObjectNotNeeded</i>  is <b>true</b> then the value of <i>ao</i> is not directly observable to
+        <li>NOTE&#x9;If <span style="font-family: Times New Roman"><i>argumentsObjectNotNeeded</i></span>  is <span
+            style="font-family: Times New Roman"><b>true</b></span> then the value of <var>ao</var> is not directly observable to
             ECMAScript code and need not actually exist. In that case,  its use in the above steps is strictly as a device for
             specifying formal parameter initialisation semantics.</li>
         <li>Let <i>formalStatus</i> be the result of performing Binding Initialisation for <i>formals</i> with <i>ao</i> and
@@ -12541,9 +12542,9 @@
               <i>nextIndex</i>+<i>padding</i>.</li>
         </ol>
 
-        <p><span class="prod"><span class="nt">ElementList</span> <span class="geq">:</span> <span class="nt">ElementList</span>
-        <code class="t">,</code> <span class="nt">Elision</span><sub>opt</sub> <span
-        class="nt">AssignmentExpression</span></span></p>
+        <p><span class="prod"><span class="nt">ElementList</span> <span class="geq">:</span> <span
+        class="nt">ElementList</span></span> <span style="font-family: sans-serif"><b>,</b></span> <i>Elision<sub>opt</sub></i>
+        <i>AssignmentExpression</i></p>
 
         <ol class="proc">
           <li>Let <i>postIndex</i>  be the result of performing Array Accumulation for <i>ElementList</i> with arguments
@@ -12562,8 +12563,9 @@
           <li>Return <i>postIndex</i>+<i>padding+</i>1.</li>
         </ol>
 
-        <p><span class="prod"><span class="nt">ElementList</span> <span class="geq">:</span> <span class="nt">ElementList</span>
-        <code class="t">,</code> <span class="nt">Elision</span><sub>opt</sub> <span class="nt">SpreadElement</span></span></p>
+        <p><span class="prod"><span class="nt">ElementList</span> <span class="geq">:</span> <span
+        class="nt">ElementList</span></span> <span style="font-family: sans-serif"><b>,</b></span> <i>Elision<sub>opt</sub></i>
+        <i>SpreadElement</i></p>
 
         <ol class="proc">
           <li>Let <i>postIndex</i>  be the result of performing Array Accumulation for <i>ElementList</i> with arguments
@@ -18149,9 +18151,9 @@
         <p><b>Static Semantics:  VarDeclaredNames</b></p>
 
         <p><span class="prod"><span class="nt">IterationStatement</span> <span class="geq">:</span> <code class="t">for</code>
-        <code class="t">(</code> <span class="nt">ExpressionNoIn</span><sub>opt</sub> <code class="t">;</code> <span
-        class="nt">Expression</span><sub>opt</sub> <code class="t">;</code> <span class="nt">Expression</span><sub>opt</sub> <code
-        class="t">)</code> <span class="nt">Statement</span></span></p>
+        <code class="t">(</code> <span class="nt">ExpressionNoIn</span></span> <span style="font-family:
+        sans-serif"><sub>opt</sub></span> <code>;</code> <i>Expression</i><span style="font-family:
+        sans-serif"><sub>opt</sub></span> <code>;</code> <i>Expression</i><sub>opt</sub><code>)</code> <i>Statement</i></p>
 
         <ol class="proc">
           <li>Return the VarDeclaredNames of <i>Statement</i>.</li>
@@ -18170,8 +18172,8 @@
 
         <p><span class="prod"><span class="nt">IterationStatement</span> <span class="geq">:</span> <code class="t">for</code>
         <code class="t">(</code> <span class="nt">LexicalDeclarationNoIn</span> <code class="t">;</code> <span
-        class="nt">Expression</span><sub>opt</sub> <code class="t">;</code> <span class="nt">Expression</span><sub>opt</sub> <code
-        class="t">)</code> <span class="nt">Statement</span></span></p>
+        class="nt">Expression</span></span> <span style="font-family: sans-serif"><sub>opt</sub></span> <code>;</code>
+        <i>Expression</i><sub>opt</sub><code>)</code> <i>Statement</i></p>
 
         <ol class="proc">
           <li>Return the VarDeclaredNames of <i>Statement</i>.</li>
@@ -18688,7 +18690,7 @@
       <ul>
         <li>
           <p>It is a Syntax Error if this production is not nested, directly or indirectly (but not crossing function boundaries),
-          within an <i>IterationStatement</i>.</p>
+          within an <span class="nt">IterationStatement</span>.</p>
         </li>
       </ul>
 
@@ -18698,8 +18700,9 @@
 
       <ul>
         <li>
-          <p>It is a Syntax Error if <i>Identifier</i> does not appear in the <i>CurrentLabelSet</i> of an enclosing (but not
-          crossing function boundaries) <i>IterationStatement</i>.</p>
+          <p>It is a Syntax Error if <span style="font-family: Times New Roman"><i>Identifier</i></span> does not appear in the
+          <span class="nt">CurrentLabelSet</span> of an enclosing (but not crossing function boundaries) <span
+          class="nt">IterationStatement</span>.</p>
         </li>
       </ul>
     </section>
@@ -18751,7 +18754,7 @@
       <ul>
         <li>
           <p>It is a Syntax Error if this production is not nested, directly or indirectly (but not crossing function boundaries),
-          within an <i>IterationStatement</i> or a <i>SwitchStatement</i>.</p>
+          within an <span class="nt">IterationStatement</span> or a <span class="nt">SwitchStatement</span>.</p>
         </li>
       </ul>
 
@@ -18761,8 +18764,9 @@
 
       <ul>
         <li>
-          <p>It is a Syntax Error if <i>Identifier</i> does not appear in the <i>CurrentLabelSet</i> of an enclosing (but not
-          crossing function boundaries) <i>Statement</i>.</p>
+          <p>It is a Syntax Error if <span style="font-family: Times New Roman"><i>Identifier</i></span> does not appear in the
+          <span class="nt">CurrentLabelSet</span> of an enclosing (but not crossing function boundaries) <span
+          class="nt">Statement</span>.</p>
         </li>
       </ul>
     </section>
@@ -41866,8 +41870,8 @@
       <ol class="block">
         <li>If <i>d</i> is a <i>FunctionDeclaration</i> then
           <ol class="block">
-            <li>NOTE&#x9;&#x9;If there are multiple <i>FunctionDeclarations</i> for the same name, the last declaration is
-                used.</li>
+            <li>NOTE&#x9;&#x9;If there are multiple <span style="font-family: Times New Roman"><i>FunctionDeclarations</i></span>
+                for the same name, the last declaration is used.</li>
             <li>Let <i>fn</i> be the sole element of the BoundNames of <i>d.</i></li>
             <li>If <i>fn</i> is "<code>arguments</code>", then let <i>argumentsObjectNotNeeded</i>  be <b>true</b>.</li>
             <li>Let <i>alreadyDeclared</i> be the result of calling <i>env&rsquo;s</i> HasBinding concrete method passing
@@ -41889,7 +41893,7 @@
         <li>Let <i>alreadyDeclared</i> be the result of calling <i>env&rsquo;s</i> HasBinding concrete method passing
             <i>paramName</i> as the argument.</li>
         <li>NOTE   Duplicate parameter names can only occur in non-strict functions. Parameter names that are the same as function
-            declaration names do not get initialized to <b>undefined</b>.</li>
+            declaration names do not get initialized to <span class="value">undefined</span>.</li>
         <li>If <i>alreadyDeclared</i> is <b>false</b>, then
           <ol class="block">
             <li>If <i>paramName</i> is "<code>arguments</code>", then let <i>argumentsObjectNotNeeded</i>  be <b>true</b>.</li>
@@ -41926,7 +41930,7 @@
         <li>Let <i>alreadyDeclared</i> be the result of calling <i>env&rsquo;s</i> HasBinding concrete method passing
             <i>varName</i> as the argument.</li>
         <li>NOTE&#x9;&#x9;A VarDeclaredNames is only instantiated and initialied here if it is not also the name of a formal
-            parameter or a <i>FunctionDeclarations</i>.</li>
+            parameter or a <span class="nt">FunctionDeclarations</span>.</li>
         <li>If <i>alreadyDeclared</i> is <b>false</b>, then
           <ol class="block">
             <li>Call <i>env&rsquo;s</i> CreateMutableBinding concrete method passing <i>varName</i> as the argument.</li>
@@ -41969,7 +41973,8 @@
         style="font-family: Times New Roman">"</span> is not initialized until after parameter initialization.</li>
     <li><span style="font-family: sans-serif">Let</span> <i>ao</i> be the result of InstantiateArgumentsObject with argument
         <i>argumentsList.</i></li>
-    <li>NOTE&#x9;If <i>argumentsObjectNotNeeded</i>  is <b>true</b> then the value of <i>ao</i> is not directly observable to
+    <li>NOTE&#x9;If <span style="font-family: Times New Roman"><i>argumentsObjectNotNeeded</i></span>  is <span
+        style="font-family: Times New Roman"><b>true</b></span> then the value of <var>ao</var> is not directly observable to
         ECMAScript code and need not actually exist. In that case,  its use in the above steps is strictly as a device for
         specifying formal parameter initialisation semantics.</li>
     <li>If <i>argumentsObjectNotNeeded</i>  is <b>false</b>, then
