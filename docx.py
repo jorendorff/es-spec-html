@@ -151,12 +151,12 @@ def parse_pr(e):
                 left = int(left)
                 assert left >= 0
                 #put('padding-left', str(left / 20) + 'pt')
-        
-                hanging = k.get(k_hanging)
-                if hanging is not None:
-                    hanging = int(hanging)
-                    assert hanging >= 0
-                    #put('text-indent', str((hanging - left) / 20) + 'pt')
+
+            hanging = k.get(k_hanging)
+            if hanging is not None:
+                hanging = int(hanging)
+                assert hanging >= 0
+                #put('text-indent', str((hanging - left) / 20) + 'pt')
 
         elif name == 'numPr':
             ilvl = None
