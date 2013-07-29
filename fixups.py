@@ -128,13 +128,6 @@ def fixup_formatting(doc, docx):
         cls = parent.attrs.get('class', 'Normal')
         inherited_style = docx.styles[cls].full_style
 
-        if parent.style:
-            # Delete w:rPr properties from the paragraph's style. As far as I
-            # can tell they are always spurious; Word seems to ignore them.
-            for prop, value in list(parent.style.items()):
-                if prop in run_style_properties:
-                    del parent.style[prop]
-
         # Determine the style of each bit of content in the paragraph.
         items = []
         for kid in spans:

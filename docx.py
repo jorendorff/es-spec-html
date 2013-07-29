@@ -182,11 +182,16 @@ def parse_pr(e):
                 put('@cls', k.get(k_val))
 
         elif name == 'rPr':
-            for k, v in parse_pr(k).items():
-                # TODO - support these properly
-                if k == 'background-color' or k == '@cls':
-                    continue
-                put(k, v)
+            if shorten(e.tag) == 'pPr':
+                # This rPr actually applies to the pilcrow symbol that Word can
+                # (optionally) display at the end of the paragraph. Disdain it.
+                pass
+            else:
+                for k, v in parse_pr(k).items():
+                    # TODO - support these properly
+                    if k == 'background-color' or k == '@cls':
+                        continue
+                    put(k, v)
 
     return pr
 
