@@ -194,13 +194,16 @@ k_style = bloat('style')
 k_styleId = bloat('styleId')
 
 class Style:
-    def __init__(self, id, basedOn):
+    def __init__(self, id, basedOn, type):
         self.id = id
         self.basedOn = basedOn
         self.style = {}
         self.full_style = None
+        assert type in ('paragraph', 'character', 'table', 'numbering')
+        self.type = type
 
 k_basedOn = bloat('basedOn')
+k_type = bloat('type')
 k_pPr = bloat('pPr')
 k_rPr = bloat('rPr')
 
@@ -211,7 +214,7 @@ def parse_style(e):
         basedOn = None
     else:
         basedOn = basedOn_elt.get(k_val)
-    s = Style(e.get(k_styleId), basedOn)
+    s = Style(e.get(k_styleId), basedOn, type=e.get(k_type))
 
     pPr = e.find(k_pPr)
     if pPr is not None:
@@ -383,7 +386,10 @@ class Document:
 
     def _dump_styles(self):
         for cls, s in sorted(self.styles.items()):
-            print("p." + cls + " {")
+            tagname = 'p'
+            if s.type == 'character':
+                tagname = 'span'
+            print(tagname + "." + cls + " {")
             for prop, value in s.style.items():
                 print("    " + prop + ": " + value + ";")
             if s.basedOn is not None:
