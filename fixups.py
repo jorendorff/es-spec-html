@@ -53,7 +53,7 @@ def has_bullet(docx, p):
     if numId is None:
         return False
     ilvl = p.style.get('-ooxml-ilvl')
-    s = docx.get_list_style_at(numId, ilvl)
+    s = docx.get_list_style_at_level(numId, ilvl)
     return s is not None and s.numFmt == 'bullet'
 
 def fixup_list_styles(doc, docx):
@@ -870,7 +870,8 @@ def fixup_lang_7_9_1(doc, docx):
 
     # Ridiculous: select some style in which level 3 list items get a bullet.
     for bullet_numid in docx.numbering.num:
-        if docx.get_list_style_at(bullet_numid, '3').numFmt == 'bullet':
+        style = docx.get_list_style_at_level(bullet_numid, '3')
+        if style and style.numFmt == 'bullet':
             break
     else:
         raise ValueError("bulleted list style not found")

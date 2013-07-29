@@ -393,7 +393,7 @@ class Document:
                         print("    " + prop + ": " + value + ";  /* inherited */")
             print("}\n")
 
-    def get_list_style_at(self, numId, ilvl):
+    def get_list_style_at_level(self, numId, ilvl):
         num = self.numbering.num[numId]
         ilvl = int(ilvl)
         ov = num.overrides
@@ -402,10 +402,13 @@ class Document:
         abstract_num = self.numbering.abstract_num[num.abstract_num_id]
         if isinstance(abstract_num, str):
             style = self.styles[abstract_num]
-            return self.get_list_style_at(style.full_style['-ooxml-numId'], ilvl)
+            return self.get_list_style_at_level(style.full_style['-ooxml-numId'], ilvl)
         else:
             assert isinstance(abstract_num, list)
-            return abstract_num[ilvl]
+            if ilvl >= len(abstract_num):
+                return None
+            else:
+                return abstract_num[ilvl]
 
 def load(filename):
     with zipfile.ZipFile(filename) as f:
