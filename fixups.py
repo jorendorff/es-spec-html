@@ -118,7 +118,7 @@ def fixup_formatting(doc, docx):
     def rewrite_spans(parent):
         spans = parent.content[:]  # copies the array
 
-        cls = parent.attrs.get('class', 'Normal')
+        cls = parent.attrs['class']
         inherited_style = docx.styles[cls].full_style
 
         # Determine the style of each run of content in the paragraph.
