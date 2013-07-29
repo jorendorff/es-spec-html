@@ -386,8 +386,8 @@ class Document:
                 writexml(tree, out)
 
         save(self.document, 'original.xml')
-        #save(self.styles, 'styles.xml')
-        #save(self.numbering, 'numbering.xml')
+        save(self.styles_raw, 'styles.xml')
+        save(self.numbering_raw, 'numbering.xml')
 
     def _dump_styles(self):
         for cls, s in sorted(self.styles.items()):
@@ -430,6 +430,8 @@ def load(filename):
     doc = Document()
     doc.filename = filename
     doc.document = ElementTree.fromstring(document_xml)
-    doc.styles = parse_styles(ElementTree.fromstring(styles_xml))
-    doc.numbering = parse_numbering(doc, ElementTree.fromstring(numbering_xml))
+    doc.styles_raw = ElementTree.fromstring(styles_xml)
+    doc.styles = parse_styles(doc.styles_raw)
+    doc.numbering_raw = ElementTree.fromstring(numbering_xml)
+    doc.numbering = parse_numbering(doc, doc.numbering_raw)
     return doc
