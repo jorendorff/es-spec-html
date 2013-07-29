@@ -98,13 +98,6 @@ def fixup_formatting(doc, docx):
     redundant formatting into nested HTML markup.
     """
 
-    run_style_properties = {
-        'font-style',
-        'font-weight',
-        'font-family',
-        'vertical-align'
-    }
-
     def new_span(content, style):
         # Merge adjacent strings, if any.
         i = 0
