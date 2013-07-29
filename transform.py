@@ -8,7 +8,10 @@ def dict_to_css(d):
 # If True, allow <w:delText> and <w:delInstrText>, ignoring them.
 ALLOW_CHANGES = True
 
-def transform(e):
+def transform(docx):
+    return transform_element(docx, docx.document)
+
+def transform_element(docx, e):
     name = shorten(e.tag)
     assert e.tail is None
 
@@ -60,7 +63,7 @@ def transform(e):
                 c.append(ht)
 
         for k in e:
-            add(transform(k))
+            add(transform_element(docx, k))
         if not css:
             css = None
 

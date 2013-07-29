@@ -29,7 +29,7 @@ def sketch_schema(document):
         print(path)
 
 def save_html(docxfile, filename):
-    result = transform(docxfile.document)
+    result = transform(docxfile)
     result = fixups.fixup(docxfile, result)
 
     print("=== Unrecognized styles")
