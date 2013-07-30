@@ -103,6 +103,27 @@ def transform_element(docx, e):
                 cls = 'Normal'
             result.attrs['class'] = cls
 
+            # Numbering.
+            paragraph_style = docx.styles[cls]
+            if css and '-ooxml-numId' in css:
+                numid = int(css['-ooxml-numId'])
+            elif '-ooxml-numId' in paragraph_style.full_style:
+                numid = int(paragraph_style.full_style['-ooxml-numId'])
+            else:
+                numid = 0
+
+            if numid != 0:
+                if '-ooxml-ilvl' in css:
+                    ilvl = int(css['-ooxml-ilvl'])
+                elif '-ooxml-ilvl' in paragraph_style.full_style:
+                    ilvl = int(paragraph_style.full_style['-ooxml-ilvl'])
+                else:
+                    ilvl = 0
+                marker = "({}, {})    ".format(numid, ilvl)
+                s = span(marker, class_="marker")
+                s.style = {}
+                result.content.insert(0, s)
+
             result.style = css
             return result
 

@@ -116,7 +116,15 @@ def fixup_formatting(doc, docx):
         return result
 
     def rewrite_spans(parent):
-        spans = parent.content[:]  # copies the array
+        # Figure out where to start rewriting. If Word numbering inserted a
+        # span.marker, skip it.
+        rewritable_content_start = 0
+        if parent.content and not isinstance(parent.content[rewritable_content_start], str):
+            first = parent.content[rewritable_content_start]
+            if first.name == 'span' and first.attrs.get('class') == 'marker':
+                rewritable_content_start += 1
+
+        spans = parent.content[rewritable_content_start:]  # copies the array
 
         cls = parent.attrs['class']
         inherited_style = docx.styles[cls].full_style
@@ -210,7 +218,7 @@ def fixup_formatting(doc, docx):
             result += all_content[content_index:i1]  # add any trailing plain content
             return result
 
-        parent.content[:] = build_result(ranges, 0, len(all_content))
+        parent.content[rewritable_content_start:] = build_result(ranges, 0, len(all_content))
 
     for p in findall(doc, 'p'):
         # We assert the spans don't have attrs because we are going to
@@ -1834,7 +1842,7 @@ def fixup_links(doc, docx):
         "15.9.1.8": "http://ecma-international.org/ecma-262/5.1/#sec-15.9.1.8",
         "introduction of clause 15": "http://ecma-international.org/ecma-262/5.1/#sec-15",
     }
-    
+
     max_table_lang = 35;
 
     max_table_intl = 3;
@@ -2166,9 +2174,23 @@ def fixup_add_ecma_flavor(doc, docx):
         doc_body(doc).content.insert(0, html.img(src="Ecma_RVB-003.jpg", alt="Ecma International Logo.",
             height="146", width="373"))
 
+def fixup_delete_markers(doc):
+    def has_marker(e):
+        return bool(e.content
+                    and ht_name_is(e.content[0], 'span')
+                    and e.content[0].attrs.get('class') == 'marker')
+
+    def del_marker(e):
+        return [e.with_content(e.content[1:])]
+
+    return doc.find_replace(has_marker, del_marker)
+
 def fixup(docx, doc):
     fixup_list_styles(doc, docx)
     fixup_formatting(doc, docx)
+
+    doc = fixup_delete_markers(doc)
+
     doc = fixup_paragraph_classes(doc)
     doc = fixup_remove_empty_headings(doc)
     fixup_element_spacing(doc)
