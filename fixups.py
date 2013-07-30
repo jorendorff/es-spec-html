@@ -267,9 +267,12 @@ def fixup_paragraph_classes(doc):
             annex_counters[i] = 0
 
         letter = chr(ord('A') + annex_counters[0] - 1)
+        start = 0
+        if ht_name_is(content[start], 'span') and content[start].attrs['class'] == 'marker':
+            start += 1
         if level == 0:
             # Parse the current content of the heading.
-            i = 0
+            i = start
 
             assert ht_name_is(content[i], 'br')
             i += 1
@@ -305,11 +308,11 @@ def fixup_paragraph_classes(doc):
         else:
             # Autogenerate annex subsection number.
             s = letter + "." + ".".join(map(str, annex_counters[1:level + 1])) + '\t'
-            replaced_content = ht_concat([s], content)
+            replaced_content = ht_concat([s], content[start:])
 
         attrs = e.attrs.copy()
         del attrs['class']
-        return [e.with_(name='h1', attrs=attrs, content=replaced_content)]
+        return [e.with_(name='h1', attrs=attrs, content=content[:start] + replaced_content)]
 
     tag_names = {
         # ANNEX, a2, a3, a4 are treated specially.
@@ -2188,10 +2191,10 @@ def fixup_delete_markers(doc):
 def fixup(docx, doc):
     fixup_list_styles(doc, docx)
     fixup_formatting(doc, docx)
+    doc = fixup_paragraph_classes(doc)
 
     doc = fixup_delete_markers(doc)
 
-    doc = fixup_paragraph_classes(doc)
     doc = fixup_remove_empty_headings(doc)
     fixup_element_spacing(doc)
     fixup_sec_4_3(doc)
