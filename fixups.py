@@ -392,6 +392,10 @@ def fixup_remove_empty_headings(doc):
     def is_empty(item):
         if isinstance(item, str):
             return item.strip() == ''
+        elif item.name == 'span' and item.attrs.get('class') == 'marker':
+            # TODO - strip this special case out; I think the generated marker
+            # will be empty in the one case where this matters.
+            return True
         else:
             return all(is_empty(c) for c in item.content)
 
@@ -2192,10 +2196,10 @@ def fixup(docx, doc):
     fixup_list_styles(doc, docx)
     fixup_formatting(doc, docx)
     doc = fixup_paragraph_classes(doc)
+    doc = fixup_remove_empty_headings(doc)
 
     doc = fixup_delete_markers(doc)
 
-    doc = fixup_remove_empty_headings(doc)
     fixup_element_spacing(doc)
     fixup_sec_4_3(doc)
     fixup_hr(doc)
