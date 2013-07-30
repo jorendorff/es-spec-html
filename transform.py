@@ -89,8 +89,7 @@ def transform_element(docx, e):
                 result = span(*c)
                 result.style = css
                 if css and '@cls' in css:
-                    result.attrs['class'] = css['@cls']
-                    del css['@cls']
+                    result.attrs['class'] = css.pop('@cls')
                 return result
 
         elif name == 'p':
@@ -99,10 +98,11 @@ def transform_element(docx, e):
 
             result = p(*c)
             if css and '@cls' in css:
-                result.attrs['class'] = css['@cls']
-                del css['@cls']
+                cls = css.pop('@cls')
             else:
-                result.attrs['class'] = 'Normal'
+                cls = 'Normal'
+            result.attrs['class'] = cls
+
             result.style = css
             return result
 
@@ -171,12 +171,10 @@ def transform_element(docx, e):
             if css:
                 if '-ooxml-border-insideH' in css:
                     # borders between rows
-                    row_border = css['-ooxml-border-insideH']
-                    del css['-ooxml-border-insideH']
+                    row_border = css.pop('-ooxml-border-insideH')
                 if '-ooxml-border-insideV' in css:
                     # borders between columns
-                    col_border = css['-ooxml-border-insideV']
-                    del css['-ooxml-border-insideV']
+                    col_border = css.pop('-ooxml-border-insideV')
                 ##tbl.style = css
             return figure(tbl)
 
