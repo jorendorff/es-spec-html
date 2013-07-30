@@ -50,7 +50,7 @@ def has_bullet(docx, p):
     if not p.style:
         return False
     numId = p.style.get('-ooxml-numId')
-    if numId is None:
+    if numId is None or numId == '0':
         return False
     ilvl = p.style.get('-ooxml-ilvl')
     s = docx.get_list_style_at_level(numId, ilvl)
@@ -350,7 +350,7 @@ def fixup_paragraph_classes(doc):
     }
 
     def replace_tag_name(e):
-        num = e.style and '-ooxml-numId' in e.style
+        num = e.style and e.style.get('-ooxml-numId', '0') != '0'
         default_tag = 'li' if num else 'p'
 
         if 'class' not in e.attrs:
@@ -954,6 +954,14 @@ def fixup_lists(e, docx):
         fixup_lists(k, docx)
         if k.name == 'li':
             have_list_items = True
+        elif k.name == 'p' and k.style:
+            # We already decided this isn't a list item, so any remaining
+            # numbering info on it is superfluous.
+            if '-ooxml-numId' in k.style:
+                del k.style['-ooxml-numId']
+            if '-ooxml-ilvl' in k.style:
+                del k.style['-ooxml-ilvl']
+
 
     if have_list_items:
         # Walk the elements from left to right. If we find any <li> elements,

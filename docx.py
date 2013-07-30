@@ -159,23 +159,14 @@ def parse_pr(e):
                 #put('text-indent', str((hanging - left) / 20) + 'pt')
 
         elif name == 'numPr':
-            ilvl = None
-            numId = None
             for item in k:
                 item_tag = shorten(item.tag)
                 if item_tag == 'ilvl':
                     assert list(item.keys()) == [k_val]
-                    assert ilvl is None
-                    ilvl = item.get(k_val)
+                    put('-ooxml-ilvl', item.get(k_val))
                 elif item_tag == 'numId':
                     assert list(item.keys()) == [k_val]
-                    assert numId is None
-                    numId = item.get(k_val)
-
-            if numId is not None and numId != "0":
-                put('-ooxml-numId', numId)
-                if ilvl is not None:
-                    put('-ooxml-ilvl', ilvl)
+                    put('-ooxml-numId', item.get(k_val))
 
         elif name in ('pStyle', 'rStyle'):
             if list(k.keys()) == [k_val]:
