@@ -49,10 +49,10 @@ def has_bullet(docx, p):
     """ True if the given paragraph is of a style that has a bullet. """
     if not p.style:
         return False
-    numId = p.style.get('-ooxml-numId')
-    if numId is None or numId == '0':
+    numId = p.style.get('-ooxml-numId', '0')
+    if numId == '0':
         return False
-    ilvl = p.style.get('-ooxml-ilvl')
+    ilvl = p.style.get('-ooxml-ilvl', '0')
     s = docx.get_list_style_at_level(numId, ilvl)
     return s is not None and s.numFmt == 'bullet'
 
