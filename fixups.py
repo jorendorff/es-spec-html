@@ -1600,7 +1600,12 @@ def fixup_links(doc, docx):
     sections_by_title = {}
     for sect in findall(doc, 'section'):
         if 'id' in sect.attrs and sect.content and sect.content[0].name == 'h1':
-            title = ht_text(sect.content[0].content[1:]).strip()
+            heading_content = sect.content[0].content[:]
+            while (heading_content
+                   and not isinstance(heading_content[0], str)
+                   and heading_content[0].attrs['class'] == 'secnum'):
+                del heading_content[0]
+            title = ht_text(heading_content).strip()
             sections_by_title[title] = '#' + sect.attrs['id']
 
     fallback_section_titles = {
