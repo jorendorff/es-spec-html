@@ -451,21 +451,9 @@ def fixup_element_spacing(doc):
         parent.content[:] = result
 
     def walk(e):
-        rebuild_e = False
         for i, kid in e.kids():
-            if (not rebuild_e
-                and kid.content
-                and ((isinstance(kid.content[0], str) and kid.content[0][:1].isspace())
-                     or (isinstance(kid.content[-1], str) and kid.content[-1][-1:].isspace()))):
-                # We do not rebuild immediately, but wait until after walking
-                # all contents, because if we eject trailing whitespace from
-                # the last kid, we want to eject it from the parent too in
-                # turn.
-                rebuild_e = True
             walk(kid)
-
-        if rebuild_e:
-            rebuild(e)
+        rebuild(e)
 
     walk(doc)
 

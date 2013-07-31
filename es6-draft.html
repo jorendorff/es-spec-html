@@ -1208,7 +1208,7 @@
       <p>Unlike class-based object languages, properties can be added to objects dynamically by assigning values to them. That is,
       constructors are not required to name or assign values to all or any of the constructed object&rsquo;s properties. In the
       above diagram, one could add a new shared property for <b>cf<sub>1</sub></b>, <b>cf<sub>2</sub></b>, <b>cf<sub>3</sub></b>,
-      <b>cf<sub>4</sub></b>, and <b>cf<sub>5</sub> </b>by assigning a new value to the property in <b>CF<sub>p</sub></b>.</p>
+      <b>cf<sub>4</sub></b>, and <b>cf<sub>5</sub></b> by assigning a new value to the property in <b>CF<sub>p</sub></b>.</p>
     </section>
 
     <section id="sec-4.2.2">
@@ -3074,7 +3074,7 @@
           class="t">2</code></span> or of <span class="prod"><span class="nt">NonZeroDigit</span> <span class="geq">::</span>
           <code class="t">2</code></span> or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">::</span>
           <code class="t">2</code></span> or of <span class="prod"><span class="nt">OctalDigit</span> <span class="geq">::</span>
-          <code class="t">2</code></span> is 2.</p>
+          <code class="t">2</code></span>  is 2.</p>
         </li>
 
         <li>
@@ -3098,7 +3098,7 @@
           class="t">5</code></span> or of <span class="prod"><span class="nt">NonZeroDigit</span> <span class="geq">::</span>
           <code class="t">5</code></span> or of <span class="prod"><span class="nt">HexDigit</span> <span class="geq">::</span>
           <code class="t">5</code></span> or of <span class="prod"><span class="nt">OctalDigit</span> <span class="geq">::</span>
-          <code class="t">5</code></span> is 5.</p>
+          <code class="t">5</code></span>  is 5.</p>
         </li>
 
         <li>
@@ -3544,7 +3544,7 @@
 
         <li>
           <p>The TV of <span class="prod"><span class="nt">TemplateCharacters</span> <span class="geq">::</span> <span
-          class="nt">TemplateCharacter</span></span> is the TV of <i>TemplateCharacter</i>.</p>
+          class="nt">TemplateCharacter</span></span>  is the TV of <i>TemplateCharacter</i>.</p>
         </li>
 
         <li>
@@ -3607,7 +3607,7 @@
 
         <li>
           <p>The TRV of <span class="prod"><span class="nt">TemplateCharacters</span> <span class="geq">::</span> <span
-          class="nt">TemplateCharacter</span></span> is the TRV of <i>TemplateCharacter</i>.</p>
+          class="nt">TemplateCharacter</span></span>  is the TRV of <i>TemplateCharacter</i>.</p>
         </li>
 
         <li>
@@ -3675,7 +3675,7 @@
           <p>The TRV of <span class="prod"><span class="nt">SingleEscapeCharacter</span> <span class="geq">::</span> <span
           class="grhsmod">one of</span> <code class="t">'</code> <code class="t">"</code> <code class="t">\</code> <code
           class="t">b</code> <code class="t">f</code> <code class="t">n</code> <code class="t">r</code> <code class="t">t</code>
-          <code class="t">v</code></span> is the CV of the <i>SourceCharacter</i> that is that single character.</p>
+          <code class="t">v</code></span>  is the CV of the <i>SourceCharacter</i> that is that single character.</p>
         </li>
 
         <li>
@@ -7008,7 +7008,7 @@
         <p>The %ThrowTypeError% object is a unique function object that is defined once for each Realm as follows:</p>
 
         <ol class="proc">
-          <li>Let the <i>scope</i> be the Global Environment.</li>
+          <li>Let the <i>scope</i> be <a href="#sec-10.2.1.4">the Global Environment</a>.</li>
           <li>Let <i>formalParameters</i> be the syntactic production:  <span class="prod"><span
               class="nt">FormalParameters</span> <span class="geq">:</span> <span class="grhsannot">[empty]</span></span> .</li>
           <li>Let <i>body</i> be the syntactic production: <span class="prod"><span class="nt">FunctionBody</span> <span
@@ -7046,7 +7046,7 @@
             </ol>
           </li>
           <li>Set <i>F</i>&rsquo;s essential internal method [[Construct]] to the definition specified in <a
-              href="#sec-8.3.1">8.3.1</a>5.2.</li>
+              href="#sec-8.3.15.2">8.3.15.2</a>.</li>
           <li>If <i>installNeeded</i>, then
             <ol class="block">
               <li>Call the [[DefineOwnProperty]] internal method of <i>prototype</i> with arguments <code>"constructor"</code> and
@@ -8155,8 +8155,8 @@
                     exception.</li>
               </ol>
             </li>
-            <li>If IsAccessorDescriptor(<i>targetDesc</i>) and <i>targetDesc</i>.[[Configurable]] is <b>false</b> and
-                <i>targetDesc</i>.[[Get]] is <b>undefined</b>, then
+            <li>If <a href="#sec-8.2.5.1">IsAccessorDescriptor</a>(<i>targetDesc</i>) and <i>targetDesc</i>.[[Configurable]] is
+                <b>false</b> and <i>targetDesc</i>.[[Get]] is <b>undefined</b>, then
               <ol class="block">
                 <li>If <i>trapResult</i> is not <b>undefined</b>, then throw a <b>TypeError</b> exception.</li>
               </ol>
@@ -8221,7 +8221,8 @@
                     exception.</li>
               </ol>
             </li>
-            <li>If IsAccessorDescriptor(<i>targetDesc</i>) and <i>targetDesc</i>.[[Configurable]] is <b>false</b>, then
+            <li>If <a href="#sec-8.2.5.1">IsAccessorDescriptor</a>(<i>targetDesc</i>) and <i>targetDesc</i>.[[Configurable]] is
+                <b>false</b>, then
               <ol class="block">
                 <li>If <i>targetDesc</i>.[[Set]] is <b>undefined</b>, then throw a <b>TypeError</b> exception.</li>
               </ol>
@@ -10106,10 +10107,10 @@
       </li>
 
       <li>
-        <p><i>Function code</i> is source text that is parsed to supply the value of the [[Code]] internal data property (see
-        8.3.15) of function and generator objects.  The <i>function code</i> of a particular function or generator does not
-        include any source text that is parsed as the function code of a nested <i>FunctionBody</i>, <i>GeneratorBody</i>,
-        <i>ConciseBody</i>, or <i>ClassBody</i>.</p>
+        <p><i>Function code</i> is source text that is parsed to supply the value of the [[Code]] internal data property (<a
+        href="#sec-8.3.15">see 8.3.15</a>) of function and generator objects.  The <i>function code</i> of a particular function
+        or generator does not include any source text that is parsed as the function code of a nested <i>FunctionBody</i>,
+        <i>GeneratorBody</i>, <i>ConciseBody</i>, or <i>ClassBody</i>.</p>
       </li>
 
       <li>
@@ -19147,8 +19148,8 @@
                 href="#sec-8.2.3">NormalCompletion</a>(<i>V</i>).</li>
             <li>Let <i>clauseSelector</i> be the result of evaluating <i>C</i>.</li>
             <li><a href="#sec-8.2.3">ReturnIfAbrupt</a>(<i>clauseSelector</i>).</li>
-            <li>If <i>input</i> is equal to <i>clauseSelector</i> as defined by the Strict Equality Comparison Algorithm (11.9.1),
-                then
+            <li>If <i>input</i> is equal to <i>clauseSelector</i> as defined by the Strict Equality Comparison Algorithm (<a
+                href="#sec-11.9.1">11.9.1</a>), then
               <ol class="block">
                 <li>Set <i>searching</i> to <b>false</b>.</li>
                 <li>If <i>C</i> has a <i>StatementList</i>, then
@@ -19200,8 +19201,8 @@
                     <li>Else, return <i>clauseSelector</i>.</li>
                   </ol>
                 </li>
-                <li>If <i>input</i> is equal to <i>clauseSelector</i> as defined by the Strict Equality Comparison Algorithm
-                    (11.9.1), then set <i>found</i> to <b>true</b>.</li>
+                <li>If <i>input</i> is equal to <i>clauseSelector</i> as defined by the Strict Equality Comparison Algorithm (<a
+                    href="#sec-11.9.1">11.9.1</a>), then set <i>found</i> to <b>true</b>.</li>
               </ol>
             </li>
             <li>If <i>found</i> is <b>true</b>, then
@@ -19234,7 +19235,7 @@
                       </ol>
                     </li>
                     <li>If <i>input</i> is equal to <i>clauseSelector</i> as defined by the Strict Equality Comparison Algorithm
-                        (11.9.1), then</li>
+                        (<a href="#sec-11.9.1">11.9.1</a>), then</li>
                     <li>set <i>foundInB</i> to <b>true</b>.</li>
                   </ol>
                 </li>
@@ -20273,7 +20274,7 @@
         <li>Perform the abstract operation MakeConstructor with argument <i>closure</i>.</li>
         <li>Call the InitializeBinding concrete method of <i>envRec</i> passing <i>name</i> and <i>closure</i> as the
             arguments.</li>
-        <li>Return Normal<a href="#sec-8.2.3">Completion</a>(<i>closure</i>).</li>
+        <li>Return <a href="#sec-8.2.3">NormalCompletion</a>(<i>closure</i>).</li>
       </ol>
 
       <div class="note">
@@ -21636,7 +21637,7 @@
                     sans-serif">%FunctionPrototype%</span>.</li>
               </ol>
             </li>
-            <li>Else if Type(<i>superclass</i>) is not Object, throw a <b>TypeError</b> exception.</li>
+            <li>Else if <a href="#sec-8">Type</a>(<i>superclass</i>) is not Object, throw a <b>TypeError</b> exception.</li>
             <li>Else if IsConstructor(<i>superclass</i>) is <b>false</b>, then</li>
             <li>throw a <b>TypeError</b> exception.</li>
             <li>Else
@@ -27206,10 +27207,11 @@
         <p>The <code>slice</code> method takes two arguments, <var>start</var> and <var>end</var>, and returns a substring of the
         result of converting this object to a String, starting from element position <var>start</var> and running to, but not
         including, element position <var>end</var> (or through the end of the String if <var>end</var> is <b>undefined</b>). If
-        <var>start</var> is negative, it is treated as <span style="font-family: Times New Roman"><i>sourceLength</i>+<i>start</i>
-        </span>where <var>sourceLength</var> is the length of the String. If <var>end</var> is negative, it is treated as <span
-        style="font-family: Times New Roman"><i>sourceLength</i>+<i>end</i></span> where <var>sourceLength</var> is the length of
-        the String. The result is a String value, not a String object. The following steps are taken:</p>
+        <var>start</var> is negative, it is treated as <span style="font-family: Times New
+        Roman"><i>sourceLength</i>+<i>start</i></span> where <var>sourceLength</var> is the length of the String. If
+        <var>end</var> is negative, it is treated as <span style="font-family: Times New
+        Roman"><i>sourceLength</i>+<i>end</i></span> where <var>sourceLength</var> is the length of the String. The result is a
+        String value, not a String object. The following steps are taken:</p>
 
         <ol class="proc">
           <li>Let <i>O</i> be <a href="#sec-9.2.1">CheckObjectCoercible</a>(<b>this</b> value).</li>
@@ -27552,7 +27554,7 @@
           <li>Let <i>O</i> be <a href="#sec-9.2.1">CheckObjectCoercible</a>(<b>this</b> value).</li>
           <li>Let <i>S</i> be <a href="#sec-9.1.8">ToString</a>(<i>O</i>).</li>
           <li><a href="#sec-8.2.3">ReturnIfAbrupt</a>(<i>S</i>).</li>
-          <li>Let <i>n</i> be the result of calling ToInteger(<i>count</i>).</li>
+          <li>Let <i>n</i> be the result of calling <a href="#sec-9.1.4">ToInteger</a>(<i>count</i>).</li>
           <li><a href="#sec-8.2.3">ReturnIfAbrupt</a>(<i>n</i>).</li>
           <li>If <i>n</i> &lt; 0, then throw a <b>RangeError</b> exception.</li>
           <li>If <i>n</i> is  +&infin;, then throw a <b>RangeError</b> exception.</li>
@@ -27633,9 +27635,11 @@
 
         <p>The <b>length</b> property of the <b>endsWith</b> method is <b>1</b>.</p>
 
-        <p class="Note">NOTE 1&#x9;Returns <b>true</b> if the sequence of elements of <i>searchString</i> converted to a String is
-        the same as the corresponding elements of this object (converted to a String) starting at <i>endPosition</i> &ndash;
-        length(this).  Otherwise returns <b>false</b>.</p>
+        <div class="note">
+          <p><span class="nh">NOTE 1</span> Returns <b>true</b> if the sequence of elements of <i>searchString</i> converted to a
+          String is the same as the corresponding elements of this object (converted to a String) starting at <i>endPosition</i>
+          &ndash; length(this).  Otherwise returns <b>false</b>.</p>
+        </div>
 
         <div class="note">
           <p><span class="nh">NOTE 2</span> The <b>endsWith</b> function is intentionally generic; it does not require that its
@@ -28960,7 +28964,7 @@
 
           <li>
             <p>The comparison of values to determine the smallest value is done using the Abstract Relational Comparison Algorithm
-            (11.8.1) except that +0 is considered to be larger than &minus;0.</p>
+            (<a href="#sec-11.8.1">11.8.1</a>) except that +0 is considered to be larger than &minus;0.</p>
           </li>
         </ul>
 
@@ -31860,7 +31864,7 @@
           <figcaption><span id="table-34">Table 34</span> &mdash; ControlEscape Character Values</figcaption>
           <table class="real-table">
             <tr>
-              <th><span style="background-color: #C0C0C0">ControlEscape</span> </th>
+              <th><span style="background-color: #C0C0C0">ControlEscape</span></th>
               <th>Code Unit</th>
               <th>Name</th>
               <th>Symbol</th>
@@ -34656,11 +34660,11 @@
         <figcaption><span id="table-35">Table 35</span> &ndash; The <i>TypedArray</i> Constructors</figcaption>
         <table class="real-table">
           <tr>
-            <td style="background-color: #BFBFBF"><span style="background-color: #C0C0C0">Constructor Name</span> </td>
+            <td style="background-color: #BFBFBF"><span style="background-color: #C0C0C0">Constructor Name</span></td>
             <th style="background-color: #BFBFBF">Element<br>Type</th>
             <th style="background-color: #BFBFBF">Element Size</th>
             <th style="background-color: #BFBFBF">Conversion Operation</th>
-            <td style="background-color: #BFBFBF"><span style="background-color: #C0C0C0">Description</span> </td>
+            <td style="background-color: #BFBFBF"><span style="background-color: #C0C0C0">Description</span></td>
             <th style="background-color: #BFBFBF">Equivalent C Type</th>
           </tr>
           <tr>
@@ -40129,14 +40133,16 @@
 
         <li>
           <p>The CV of <span class="prod"><span class="nt">OctalEscapeSequence</span> <span class="geq">::</span> <span
-          class="nt">OctalDigit</span></span> [lookahead &notin; <i>DecimalDigit</i>] is the character whose code unit value is
-          the MV of the <i>OctalDigit</i>.</p>
+          class="nt">OctalDigit</span> <span class="grhsannot">[lookahead &notin; <span
+          class="nt">DecimalDigit</span>]</span></span> is the character whose code unit value is the MV of the
+          <i>OctalDigit</i>.</p>
         </li>
 
         <li>
           <p>The CV of <span class="prod"><span class="nt">OctalEscapeSequence</span> <span class="geq">::</span> <span
-          class="nt">ZeroToThree</span> <span class="nt">OctalDigit</span></span> [lookahead &notin; <i>DecimalDigit</i>] is the
-          character whose code unit value is (8 times the MV of the <i>ZeroToThree</i>) plus the MV of the <i>OctalDigit</i>.</p>
+          class="nt">ZeroToThree</span> <span class="nt">OctalDigit</span> <span class="grhsannot">[lookahead &notin; <span
+          class="nt">DecimalDigit</span>]</span></span> is the character whose code unit value is (8 times the MV of the
+          <i>ZeroToThree</i>) plus the MV of the <i>OctalDigit</i>.</p>
         </li>
 
         <li>
@@ -40860,7 +40866,8 @@
     <li>
       <p>The identifiers "<code>implements</code>", "<code>interface</code>", "<code>let</code>", "<code>package</code>",
       "<code>private</code>", "<code>protected</code>", "<code>public</code>", "<code>static</code>", and "<code>yield</code>" are
-      classified as <i>FutureReservedWord</i> tokens within <a href="#sec-10.1.1">strict mode code</a>. (7.6.1.2).</p>
+      classified as <i>FutureReservedWord</i> tokens within <a href="#sec-10.1.1">strict mode code</a>. (<a
+      href="#sec-7.6.1.2">7.6.1.2</a>).</p>
     </li>
 
     <li>
@@ -40985,7 +40992,7 @@
       <p>It is a <b>SyntaxError</b> to use within <a href="#sec-10.1.1">strict mode code</a> the identifiers <code>eval</code> or
       <code>arguments</code> as the <i>Identifier</i> of a <i>FunctionDeclaration</i> or <i>FunctionExpression</i> or as a formal
       parameter name (<a href="#sec-13.1">13.1</a>). Attempting to dynamically define such a strict mode function using the
-      <code>Function</code> constructor (15.3.1) will throw a <b>SyntaxError</b> exception.</p>
+      <code>Function</code> constructor (<a href="#sec-15.3.1">15.3.1</a>) will throw a <b>SyntaxError</b> exception.</p>
     </li>
   </ul>
 </section>
