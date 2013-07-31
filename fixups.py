@@ -3,6 +3,7 @@ import collections, re
 from warnings import warn
 from array import array
 import os
+import contextlib
 
 def findall(e, name):
     if e.name == name:
@@ -230,6 +231,9 @@ def fixup_formatting(doc, docx):
                 assert len(kid.attrs) == 0 or list(kid.attrs.keys()) == ['class']
         rewrite_spans(p)
 
+def is_marker(e):
+    return ht_name_is(e, 'span') and e.attrs.get('class') == 'marker'
+
 unrecognized_styles = collections.defaultdict(int)
 
 def fixup_paragraph_classes(doc):
@@ -268,7 +272,7 @@ def fixup_paragraph_classes(doc):
 
         letter = chr(ord('A') + annex_counters[0] - 1)
         start = 0
-        if ht_name_is(content[start], 'span') and content[start].attrs['class'] == 'marker':
+        if is_marker(content[start]):
             start += 1
         if level == 0:
             # Parse the current content of the heading.
@@ -392,7 +396,7 @@ def fixup_remove_empty_headings(doc):
     def is_empty(item):
         if isinstance(item, str):
             return item.strip() == ''
-        elif item.name == 'span' and item.attrs.get('class') == 'marker':
+        elif is_marker(item):
             # TODO - strip this special case out; I think the generated marker
             # will be empty in the one case where this matters.
             return True
@@ -407,12 +411,27 @@ def fixup_remove_empty_headings(doc):
 
     return doc.replace('h1', remove_if_empty)
 
+@contextlib.contextmanager
+def marker_temporarily_removed(e):
+    # Remove the marker, if any.
+    marker = None
+    if e.content and is_marker(e.content[0]):
+        marker = e.content.pop(0)
+
+    yield
+
+    # Put the marker back, if any.
+    if marker:
+        e.content.insert(0, marker)
+
 def fixup_element_spacing(doc):
     """
     Change "A<i> B</i>" to "A <i>B</i>".
 
     That is, move all start tags to the right of any adjacent whitespace,
     and move all end tags to the left of any adjacent whitespace.
+
+    The exceptions are <pre> and <span class="marker">. These elements are left alone.
     """
 
     def rebuild(parent):
@@ -426,34 +445,36 @@ def fixup_element_spacing(doc):
         for k in parent.content:
             if isinstance(k, str):
                 addstr(k)
-            elif k.name == 'pre':
-                # Don't mess with spaces in a pre element.
+            elif k.name == 'pre' or is_marker(k):
+                # Don't mess with spaces in a pre element or a marker.
                 result.append(k)
             else:
-                discard_space = k.is_block()
-                if k.content:
-                    a = k.content[0]
-                    if isinstance(a, str) and a[:1].isspace():
-                        k.content[0] = a_text = a.lstrip()
-                        if not discard_space:
-                            addstr(a[:len(a) - len(a_text)])
-                        if a_text == '':
-                            del k.content[0]
-                if k.content or k.attrs or k.name not in {'span', 'i', 'b', 'sub', 'sup'}:
-                    result.append(k)
-                if k.content:
-                    b = k.content[-1]
-                    if isinstance(b, str) and b[-1:].isspace():
-                        k.content[-1] = b_text = b.rstrip()
-                        if not discard_space:
-                            addstr(b[len(b_text):])
+                with marker_temporarily_removed(k):
+                    discard_space = k.is_block()
+                    if k.content:
+                        a = k.content[0]
+                        if isinstance(a, str) and a[:1].isspace():
+                            k.content[0] = a_text = a.lstrip()
+                            if not discard_space:
+                                addstr(a[:len(a) - len(a_text)])
+                            if a_text == '':
+                                del k.content[0]
+                    if k.content or k.attrs or k.name not in {'span', 'i', 'b', 'sub', 'sup'}:
+                        result.append(k)
+                    if k.content:
+                        b = k.content[-1]
+                        if isinstance(b, str) and b[-1:].isspace():
+                            k.content[-1] = b_text = b.rstrip()
+                            if not discard_space:
+                                addstr(b[len(b_text):])
 
         parent.content[:] = result
 
     def walk(e):
-        for i, kid in e.kids():
-            walk(kid)
-        rebuild(e)
+        with marker_temporarily_removed(e):
+            for i, kid in e.kids():
+                walk(kid)
+            rebuild(e)
 
     walk(doc)
 
@@ -2171,9 +2192,7 @@ def fixup_add_ecma_flavor(doc, docx):
 
 def fixup_delete_markers(doc):
     def has_marker(e):
-        return bool(e.content
-                    and ht_name_is(e.content[0], 'span')
-                    and e.content[0].attrs.get('class') == 'marker')
+        return len(e.content) != 0 and is_marker(e.content[0])
 
     def del_marker(e):
         return [e.with_content(e.content[1:])]
@@ -2185,10 +2204,10 @@ def fixup(docx, doc):
     fixup_formatting(doc, docx)
     doc = fixup_paragraph_classes(doc)
     doc = fixup_remove_empty_headings(doc)
+    fixup_element_spacing(doc)
 
     doc = fixup_delete_markers(doc)
 
-    fixup_element_spacing(doc)
     fixup_sec_4_3(doc)
     fixup_hr(doc)
     if spec_is_intl(docx):
