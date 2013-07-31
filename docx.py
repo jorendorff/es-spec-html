@@ -264,21 +264,38 @@ class Num:
         self.overrides = overrides
 
 class Lvl:
-    pass
+    """ Data from a <w:lvl> element.
 
-def get_val(e, key):
+    self.start is int.
+    self.pStyle is str.
+    self.numFmt is str.
+    self.lvlText is str.
+    self.suff is str.
+    self.style and self.full_style are CSS dictionaries.
+    """
+
+def get_val(e, key, default_value = None):
     kids = list(e.findall(bloat(key)))
     if kids:
         [kid] = kids
-        return kid.get(k_val)
+        return kid.get(k_val, default_value)
     else:
-        return None
+        return default_value
+
+suff_values = {
+    'nothing': '',
+    'space': ' ',
+    'tab': '\t'
+}
 
 def parse_lvl(docx, e):
     lvl = Lvl()
     assert e.tag == k_lvl
-    lvl.pStyle = get_val(e, 'pStyle')
+    lvl.start = int(get_val(e, 'start', '1'))
     lvl.numFmt = get_val(e, 'numFmt')
+    lvl.pStyle = get_val(e, 'pStyle')
+    lvl.lvlText = get_val(e, 'lvlText')
+    lvl.suff = suff_values[get_val(e, 'suff', 'tab')]
 
     if lvl.pStyle is None:
         style = {}
@@ -302,19 +319,23 @@ def parse_startOverride(e):
     return ov
 
 class Numbering:
-    def __init__(self, abstract_num, num):
+    def __init__(self, abstract_num, num, style_links):
         self.abstract_num = abstract_num
         self.num = num
+        self.style_links = style_links
 
 def parse_numbering(docx, e):
+    # See <http://msdn.microsoft.com/en-us/library/ee922775%28office.14%29.aspx>.
     assert e.tag == k_numbering
 
     # eat crunchy xml, num num num
     abstract_num = {}
+    style_links = {}
     for style in e.findall(k_abstractNum):
-        abstract_id = style.get(k_abstractNumId)
-        assert abstract_id is not None
+        abstract_id = int(style.get(k_abstractNumId))
 
+        # w:numStyleLink. This is a reference to a w:abstractNum that has a
+        # w:styleLink child element.
         nsl = list(style.findall(k_numStyleLink))
         if len(nsl) == 0:
             levels = []
@@ -329,15 +350,21 @@ def parse_numbering(docx, e):
             assert len(list(style.findall(k_lvl))) == 0
             abstract_num[abstract_id] = nsl[0].get(k_val)
 
+        # w:styleLink.
+        link = get_val(style, 'styleLink')
+        if link is not None:
+            assert link not in style_links
+            style_links[link] = abstract_id
+
     # Build the num dictionary (extra level of misdirection in OOXML, awesome)
     num = {}
     for style in e.findall(k_num):
-        numId = style.get(k_numId)
-        assert numId is not None
-        val = get_val(style, 'abstractNumId')
-        assert val is not None
+        numId = int(style.get(k_numId))
+        val = int(get_val(style, 'abstractNumId'))
         overrides = []
         for override in style.findall(k_lvlOverride):
+            # We ignore startOverride, as it happens not to be needed by the
+            # document, yet. I'm sure that won't bite us or anything.
             ilvl = int(override.get(k_ilvl))
             while len(overrides) <= ilvl:
                 overrides.append(None)
@@ -349,7 +376,7 @@ def parse_numbering(docx, e):
                 assert so.val == 1
         num[numId] = Num(val, overrides)
 
-    return Numbering(abstract_num, num)
+    return Numbering(abstract_num, num, style_links)
 
 class Document:
     def _extract(self):
@@ -395,6 +422,26 @@ class Document:
                         print("    " + prop + ": " + value + ";  /* inherited */")
             print("}\n")
 
+    def get_abstract_num_id_and_levels(self, numId, level_limit):
+        num = self.numbering.num[numId]
+        abstract_num_id = num.abstract_num_id
+        abstract_num = self.numbering.abstract_num[abstract_num_id]
+        ov = num.overrides
+        levels = []
+        for i in range(0, level_limit + 1):
+            if i < len(ov) and ov[i] is not None:
+                level = ov[i]
+            elif isinstance(abstract_num, str):
+                # i'm sorry mario but the princess
+                real_abstract_num = self.numbering.style_links[abstract_num]
+                _, base_levels = self.get_abstract_num_id_and_levels(real_abstract_num, i)
+                level = base_levels[i]
+            else:
+                assert isinstance(abstract_num, list)
+                level = abstract_num[i]
+            levels.append(level)
+        return abstract_num_id, levels
+
     def get_list_style_at_level(self, numId, ilvl):
         num = self.numbering.num[numId]
         ilvl = int(ilvl)
@@ -404,7 +451,7 @@ class Document:
         abstract_num = self.numbering.abstract_num[num.abstract_num_id]
         if isinstance(abstract_num, str):
             style = self.styles[abstract_num]
-            return self.get_list_style_at_level(style.full_style['-ooxml-numId'], ilvl)
+            return self.get_list_style_at_level(int(style.full_style['-ooxml-numId']), ilvl)
         else:
             assert isinstance(abstract_num, list)
             if ilvl >= len(abstract_num):

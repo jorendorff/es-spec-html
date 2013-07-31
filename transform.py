@@ -1,6 +1,8 @@
 from xml.etree import ElementTree
 from htmodel import *
 from docx import shorten, parse_pr
+from collections import defaultdict
+import re
 
 def dict_to_css(d):
     return "; ".join(p + ": " + v for p, v in d.items())
@@ -8,10 +10,51 @@ def dict_to_css(d):
 # If True, allow <w:delText> and <w:delInstrText>, ignoring them.
 ALLOW_CHANGES = True
 
-def transform(docx):
-    return transform_element(docx, docx.document)
+# === numbering
 
-def transform_element(docx, e):
+def int_to_lower_roman(i):
+    """ Convert an integer to Roman numerals.
+    From Paul Winkler's recipe: https://code.activestate.com/recipes/81611-roman-numerals/
+    """
+    if i < 1 or i > 3999:
+        raise ValueError("Argument must be between 1 and 3999")
+    vals = (1000, 900,  500, 400, 100,  90, 50,  40, 10,  9,   5,  4,   1)
+    syms = ('m',  'cm', 'd', 'cd','c', 'xc','l','xl','x','ix','v','iv','i')
+    result = ""
+    for val, symbol in zip(vals, syms):
+        count = i // val
+        result += symbol * count
+        i -= val * count
+    return result
+
+def int_to_lower_letter(i):
+    if i > 26:
+        raise ValueError("Don't know any more letters after z.")
+    return "abcdefghijklmnopqrstuvwxyz"[i - 1]
+
+list_formatters = {
+    'lowerLetter': int_to_lower_letter,
+    'upperLetter': lambda i: int_to_lower_letter(i).upper(),
+    'decimal': str,
+    'lowerRoman': int_to_lower_roman,
+    'upperRoman': lambda i: int_to_lower_roman(i).upper()
+}
+
+def render_list_marker(levels, numbers):
+    def repl(m):
+        ilvl = int(m.group(1)) - 1
+        level = levels[ilvl]
+        return list_formatters[level.numFmt](numbers[ilvl])  # should ignore numFmt if isLgl
+    this_level = levels[len(numbers) - 1]
+    text = re.sub(r'%([1-9])', repl, this_level.lvlText)
+    return text + this_level.suff
+
+# === main
+
+def transform(docx):
+    return transform_element(docx, docx.document, numbering_context=defaultdict(list))
+
+def transform_element(docx, e, numbering_context):
     name = shorten(e.tag)
     assert e.tail is None
 
@@ -63,7 +106,7 @@ def transform_element(docx, e):
                 c.append(ht)
 
         for k in e:
-            add(transform_element(docx, k))
+            add(transform_element(docx, k, numbering_context))
         if not css:
             css = None
 
@@ -113,13 +156,27 @@ def transform_element(docx, e):
                 numid = 0
 
             if numid != 0:
+                # Figure out the level of this paragraph.
                 if '-ooxml-ilvl' in css:
                     ilvl = int(css['-ooxml-ilvl'])
                 elif '-ooxml-ilvl' in paragraph_style.full_style:
                     ilvl = int(paragraph_style.full_style['-ooxml-ilvl'])
                 else:
                     ilvl = 0
-                marker = "({}, {})    ".format(numid, ilvl)
+
+                # Bump the numbering accordingly.
+                abstract_num_id, levels = docx.get_abstract_num_id_and_levels(numid, ilvl)
+                current_number = numbering_context[abstract_num_id]
+                if len(current_number) <= ilvl:
+                    while len(current_number) <= ilvl:
+                        start = levels[len(current_number)].start
+                        current_number.append(start)
+                else:
+                    del current_number[ilvl + 1:]
+                    current_number[ilvl] += 1
+
+                # Create a suitable marker.
+                marker = render_list_marker(levels, current_number)
                 s = span(marker, class_="marker")
                 s.style = {}
                 result.content.insert(0, s)
