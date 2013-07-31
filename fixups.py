@@ -2205,13 +2205,13 @@ def fixup(docx, doc):
     doc = fixup_paragraph_classes(doc)
     doc = fixup_remove_empty_headings(doc)
     fixup_element_spacing(doc)
-
-    doc = fixup_delete_markers(doc)
-
     fixup_sec_4_3(doc)
     fixup_hr(doc)
     if spec_is_intl(docx):
         fixup_intl_remove_junk(doc)
+
+    doc = fixup_delete_markers(doc)
+
     fixup_sections(doc, docx)
     fixup_strip_toc(doc, docx)
     fixup_tables(doc)
