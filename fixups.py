@@ -1640,6 +1640,9 @@ def fixup_links(doc, docx):
         globalEnv = "Global Environment Records"
 
     specific_link_source_data_lang = [
+        ("chain productions", "Context-Free Grammars"),
+        ("chain production", "Context-Free Grammars"),
+
         # 5.2
         # Note that there's a hack below to avoid including the parenthesis in the <a> element.
         # We only want to match when the parenthesis is present, but it shouldn't be part of
