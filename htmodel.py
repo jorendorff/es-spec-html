@@ -210,7 +210,8 @@ def write_html(f, ht, indent='', strict=True):
                 f.write(escape(kid))
             else:
                 if strict and not is_ht_inline(kid):
-                    raise ValueError("block element <{}> can't appear in inline content".format(kid.name))
+                    raise ValueError("block element <{}> can't appear in inline content:\n".format(kid.name)
+                                     + repr(kid))
                 write_html(f, kid, indent, strict)
 
         if last is not None:

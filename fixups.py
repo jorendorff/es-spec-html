@@ -1167,6 +1167,29 @@ def fixup_title_page(doc):
             # A few of the lines here are redundant.
             del parent.content[3:]
 
+def fixup_lang_title_page_p_in_p(doc):
+    """
+    Flatten a place where a few <p> elements appear inside another <p>
+    (due to a <pict>).
+    """
+    def fix_p(p):
+        if any(kid.is_block() for i, kid in p.kids()):
+            last = None
+            result = []
+            for item in p.content:
+                if not isinstance(item, str) and item.is_block():
+                    last = None
+                    result.append(item)
+                else:
+                    if last is None:
+                        last = p.with_content([])
+                        result.append(last)
+                    last.content.append(item)
+            return result
+        else:
+            return [p]
+    return doc.replace('p', fix_p)
+
 def fixup_html_head(doc, docx):
     head, body = doc.content
     assert ht_name_is(head, 'head')
@@ -2221,6 +2244,7 @@ def fixup(docx, doc):
     fixup_figures(doc)
     fixup_remove_hr(doc)
     fixup_title_page(doc)
+    doc = fixup_lang_title_page_p_in_p(doc)
     fixup_html_head(doc, docx)
     if spec_is_lang(docx):
         fixup_lang_overview_biblio(doc)
