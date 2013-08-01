@@ -1938,8 +1938,8 @@ def fixup_links(doc, docx):
         r'((introduction of clause 15))',
     ]))
 
-    # Disallow . ( ) at the end since it's usually not meant as part of the URL.
-    url_re = re.compile(r'https?://[0-9A-Za-z;/?:@&=+$,_.!~*()\'-]+[0-9A-Za-z;/?:@&=+$,_!~*\'-]')
+    # Disallow . ( ) , at the end since they usually aren't meant as part of the URL.
+    url_re = re.compile(r'https?://[0-9A-Za-z;/?:@&=+$,_.!~*()\'-]+[0-9A-Za-z;/?:@&=+$_!~*\'-]')
 
     xref_re = re.compile(r'(.*)\{ REF _Ref[0-9]+ (\\r )?\\h \}')
 
