@@ -149,7 +149,7 @@ def escape(s, quote=False):
     This escapes characters that are special in HTML (& < >) and all non-ASCII characters.
     If 'quote' is true, escape quotes (' ") as well.
 
-    Why use character entity refrences for non-ASCII characters? The program
+    Why use character entity references for non-ASCII characters? The program
     encodes the output as UTF-8, so we should be fine without escaping. We
     escape only for maximum robustness against broken tools.
     """
