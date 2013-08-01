@@ -1465,7 +1465,8 @@ def fixup_lang_grammar_post(doc):
         | \[empty\]
         | \[lookahead \  . [^]]* \]     # the . stands for &notin;
         | <[A-Z]+>                      # special character
-        | \(                            # unstick a parenthesis from the following token
+        | [()]                          # unstick a parenthesis from the following token
+        | ;\ _opt                       # a terminal is optional in just one case
         | [^ ]*                         # any other token
         )\s*
         ''')
