@@ -893,6 +893,31 @@ def apply_section_fixup(doc, title, fixup):
         raise ValueError("apply_section_fixup: found multiple sections with title {!r}".format(title))
     return result
 
+def fixup_lang_15_9_1_8(doc):
+    """ Fix a typo in the heading for section 15.9.1.8. """
+
+    wrong_title = "15.9.1.8\tDaylight Saving Time Adjustment"
+
+    def fix_section(sect):
+        heading = sect.content[0]
+        assert ht_name_is(heading, 'h1')
+        return [sect.with_content([fix_heading(heading)] + sect.content[1:])]
+
+    def fix_heading(heading):
+        [secnum, title] = heading.content
+        assert ht_name_is(secnum, 'span')
+        assert secnum.attrs.get('class') == 'secnum'
+        assert title.strip() == wrong_title
+        fixed_title = title.replace('15.9.1.8\t', '')
+        return heading.with_content([secnum, fixed_title])
+
+    try:
+        return apply_section_fixup(doc, wrong_title, fix_section)
+    except ValueError as exc:
+        if not exc.args[0].startswith('could not find section to patch:'):
+            raise
+        return doc
+
 def fixup_lang_15_12_3(doc):
     """ Convert some paragraphs in section 15.12.3 of the Language specification into tables.
 
@@ -2000,7 +2025,9 @@ def fixup_links(doc, docx):
                     prefix = m.group(1)
                 parent.content.insert(i, prefix)
                 i += 1
-            assert not href.startswith('#') or href[1:] in all_ids or href[1:] in non_section_id_hrefs
+            assert (not href.startswith('#')
+                    or href[1:] in all_ids
+                    or href[1:] in non_section_id_hrefs)
             parent.content[i] = html.a(href=href, *s[start:stop])
             i += 1
             if stop < len(s):
@@ -2186,6 +2213,7 @@ def fixup(docx, doc):
     if spec_is_lang(docx):
         fixup_lang_7_9_1(doc, docx)
         fixup_lang_15_10_2_2(doc)
+        doc = fixup_lang_15_9_1_8(doc)
         doc = fixup_lang_15_12_3(doc)
     fixup_lists(doc, docx)
     fixup_list_paragraphs(doc, docx)
