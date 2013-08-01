@@ -5782,8 +5782,8 @@
                 </ol>
               </li>
               <li>Let <i>globalObj</i> be the result of the abstract operation GetGlobalObject.</li>
-              <li>Return the result of calling Put(<i>globalObj</i>,<a href="#sec-8.2.4">GetReferencedName</a>(<i>V</i>),
-                  <i>W</i>, <b>false</b>).</li>
+              <li>Return the result of calling <a href="#sec-9.3.2">Put</a>(<i>globalObj</i>,<a
+                  href="#sec-8.2.4">GetReferencedName</a>(<i>V</i>), <i>W</i>, <b>false</b>).</li>
             </ol>
           </li>
           <li>Else if <a href="#sec-8.2.4">IsPropertyReference</a>(<i>V</i>), then
@@ -5983,35 +5983,35 @@
               fields.</li>
           <li>If the result of <a href="#sec-9.3.6">HasProperty</a>(<i>Obj</i>, "<code>enumerable</code>") is <b>true</b>, then
             <ol class="block">
-              <li>Let <i>enum</i> be the result of Get(<i>Obj</i>, "<code>enumerable</code>").</li>
+              <li>Let <i>enum</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>Obj</i>, "<code>enumerable</code>").</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>enum</i>).</li>
               <li>Set the [[Enumerable]] field of <i>desc</i> to <a href="#sec-9.1.2">ToBoolean</a>(<i>enum</i>).</li>
             </ol>
           </li>
           <li>If the result of <a href="#sec-9.3.6">HasProperty</a>(<i>Obj</i>, "<code>configurable</code>") is <b>true</b>, then
             <ol class="block">
-              <li>Let <i>conf</i>  be the result of Get(<i>Obj</i>, "<code>configurable</code>").</li>
+              <li>Let <i>conf</i>  be the result of <a href="#sec-9.3.1">Get</a>(<i>Obj</i>, "<code>configurable</code>").</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>conf</i>).</li>
               <li>Set the [[Configurable]] field of <i>desc</i> to <a href="#sec-9.1.2">ToBoolean</a>(<i>conf</i>).</li>
             </ol>
           </li>
           <li>If the result of <a href="#sec-9.3.6">HasProperty</a>(<i>Obj</i>, "<code>value</code>") is <b>true</b>, then
             <ol class="block">
-              <li>Let <i>value</i> be the result of Get(<i>Obj</i>, "<code>value</code>").</li>
+              <li>Let <i>value</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>Obj</i>, "<code>value</code>").</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>value</i>).</li>
               <li>Set the [[Value]] field of <i>desc</i> to <i>value</i>.</li>
             </ol>
           </li>
           <li>If the result of <a href="#sec-9.3.6">HasProperty</a>(<i>Obj</i>, "<code>writable</code>") is <b>true</b>, then
             <ol class="block">
-              <li>Let <i>writable</i> be the result of Get(<i>Obj</i>, "<code>writable</code>").</li>
+              <li>Let <i>writable</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>Obj</i>, "<code>writable</code>").</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>writable</i>).</li>
               <li>Set the [[Writable]] field of <i>desc</i> to <a href="#sec-9.1.2">ToBoolean</a>(<i>writable</i>).</li>
             </ol>
           </li>
           <li>If the result of <a href="#sec-9.3.6">HasProperty</a>(<i>Obj</i>, "<code>get</code>") is <b>true</b>, then
             <ol class="block">
-              <li>Let <i>getter</i> be the result of Get(<i>Obj</i>, "<code>get</code>").</li>
+              <li>Let <i>getter</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>Obj</i>, "<code>get</code>").</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>getter</i>).</li>
               <li>If <a href="#sec-9.2.2">IsCallable</a>(<i>getter</i>) is <b>false</b> and <i>getter</i> is not <b>undefined</b>,
                   then throw a <b>TypeError</b> exception.</li>
@@ -6020,7 +6020,7 @@
           </li>
           <li>If the result of <a href="#sec-9.3.6">HasProperty</a>(<i>Obj</i>, "<code>set</code>") is <b>true</b>, then
             <ol class="block">
-              <li>Let <i>setter</i> be the result of Get(<i>Obj</i>, "<code>set</code>").</li>
+              <li>Let <i>setter</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>Obj</i>, "<code>set</code>").</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>setter</i>).</li>
               <li>If <a href="#sec-9.2.2">IsCallable</a>(<i>setter</i>) is <b>false</b> and <i>setter</i> is not <b>undefined</b>,
                   then throw a <b>TypeError</b> exception.</li>
@@ -6836,7 +6836,7 @@
           <var>F</var> and <a href="#sec-8.2.2">List</a> <var>argumentsList</var> the following steps are taken:</p>
 
           <ol class="proc">
-            <li>Let <i>creator</i> be the result of Get(<i>F</i>, @@create).</li>
+            <li>Let <i>creator</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>F</i>, @@create).</li>
             <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>creator</i>).</li>
             <li>If <i>creator</i> is not <b>undefined</b>, then
               <ol class="block">
@@ -9025,7 +9025,7 @@
         <li>If <i>PreferredType</i> was not passed, let <i>hint</i> be "<code>default</code>".</li>
         <li>Else if <i>PreferredType</i> is hint String, let <i>hint</i> be "<code>string</code>".</li>
         <li>Else <i>PreferredType</i> is hint Number, let <i>hint</i> be "<code>number</code>".</li>
-        <li>Let <i>exoticToPrim</i>  be the result of Get(<i>argument</i>, @@ToPrimitive).</li>
+        <li>Let <i>exoticToPrim</i>  be the result of <a href="#sec-9.3.1">Get</a>(<i>argument</i>, @@ToPrimitive).</li>
         <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>exoticToPrim</i>).</li>
         <li>If <i>exoticToPrim</i> is not <b>undefined</b>, then
           <ol class="block">
@@ -9063,7 +9063,7 @@
             <li>Let <i>trySecond</i> be "<code>toString</code>".</li>
           </ol>
         </li>
-        <li>Let <i>first</i> be the result of Get(<i>O</i>, <i>tryFirst</i>).</li>
+        <li>Let <i>first</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <i>tryFirst</i>).</li>
         <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>first</i>).</li>
         <li>If <a href="#sec-9.2.2">IsCallable</a>(<i>first)</i> is <b>true</b> then,
           <ol class="block">
@@ -9074,7 +9074,7 @@
                 return <i>result</i>.</li>
           </ol>
         </li>
-        <li>Let <i>second</i> be the result of Get(<i>O</i>, <i>trySecond</i>  ).</li>
+        <li>Let <i>second</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <i>trySecond</i>  ).</li>
         <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>second</i>).</li>
         <li>If <a href="#sec-9.2.2">IsCallable</a>(<i>second)</i> is <b>true</b> then,
           <ol class="block">
@@ -10478,7 +10478,7 @@
 
       <ol class="proc">
         <li>If <a href="#sec-8">Type</a>(<i>obj</i>) is not Object, then throw a <b>TypeError</b> exception.</li>
-        <li>Let <i>len</i> be the result of Get(<i>obj</i>, <code>"length"</code>).</li>
+        <li>Let <i>len</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>obj</i>, <code>"length"</code>).</li>
         <li>Let <i>n</i> be <a href="#sec-9.1.4">ToInteger</a>(<i>len</i>).</li>
         <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>n</i>).</li>
         <li>Let <i>list</i>  be an empty <a href="#sec-8.2.2">List</a>.</li>
@@ -10486,7 +10486,7 @@
         <li>Repeat while <i>index</i> &lt; <i>n</i>
           <ol class="block">
             <li>Let <i>indexName</i> be <a href="#sec-9.1.8">ToString</a>(<i>index</i>).</li>
-            <li>Let <i>next</i> be the result of Get(<i>obj</i>, <i>indexName</i>).</li>
+            <li>Let <i>next</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>obj</i>, <i>indexName</i>).</li>
             <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>next</i>).</li>
             <li>Append <i>next</i> as the last element of <i>list</i>.</li>
             <li>Set <i>index</i> to <i>index</i> + 1.</li>
@@ -10515,7 +10515,7 @@
           </ol>
         </li>
         <li>If <a href="#sec-8">Type</a>(<i>O</i>) is not Object, return <b>false</b>.</li>
-        <li>Let <i>P</i> be the result of Get(<i>C</i>, <code>"prototype"</code>).</li>
+        <li>Let <i>P</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>C</i>, <code>"prototype"</code>).</li>
         <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>P</i>).</li>
         <li>If <a href="#sec-8">Type</a>(<i>P</i>) is not Object, throw a <b>TypeError</b> exception.</li>
         <li>Repeat
@@ -10544,7 +10544,7 @@
             value of an object.</li>
         <li>If <a href="#sec-9.2.5">IsConstructor</a> (<i>constructor</i>) is <b>false</b>, then throw a <b>TypeError</b>
             exception.</li>
-        <li>Let <i>proto</i> be the result of Get(<i>constructor</i>, <code>"prototype"</code>).</li>
+        <li>Let <i>proto</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>constructor</i>, <code>"prototype"</code>).</li>
         <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>proto</i>).</li>
         <li>If <a href="#sec-8">Type</a>(<i>proto</i>) is not Object, then
           <ol class="block">
@@ -11081,7 +11081,7 @@
             <li>Let <i>envRec</i> be the <a href="#sec-10.2.1">object environment record</a> for which the method was
                 invoked.</li>
             <li>Let <i>bindings</i> be the binding object for <i>envRec</i>.</li>
-            <li>Return the result of Put(<i>bindings</i>, <i>N</i>, <i>V</i>, and <i>S</i>).</li>
+            <li>Return the result of <a href="#sec-9.3.2">Put</a>(<i>bindings</i>, <i>N</i>, <i>V</i>, and <i>S</i>).</li>
           </ol>
         </section>
 
@@ -11106,7 +11106,7 @@
                     exception.</li>
               </ol>
             </li>
-            <li>Return the result of Get(<i>bindings</i>, <i>N</i>).</li>
+            <li>Return the result of <a href="#sec-9.3.1">Get</a>(<i>bindings</i>, <i>N</i>).</li>
           </ol>
         </section>
 
@@ -12580,7 +12580,8 @@
     New Roman">InstantiateArgumentsObject.</span>The following steps are performed:</p>
 
     <ol class="proc">
-      <li>Let <i>len</i> be the result of Get(<i>obj</i>, <b>"<span style="font-family: monospace">length</span>")</b>.</li>
+      <li>Let <i>len</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>obj</i>, <b>"<span style="font-family:
+          monospace">length</span>")</b>.</li>
       <li>Let <i>mappedNames</i> be an empty <a href="#sec-8.2.2">List</a>.</li>
       <li>Let <i>numberOfNonRestFormals</i> be NumberOfParameters of <i>formals</i>.</li>
       <li>Let <i>map</i> be the result of the abstract operation <a href="#sec-8.3.15">ObjectCreate</a> with the intrinsic object
@@ -12678,7 +12679,7 @@
       </li>
       <li>Else <i>map</i> contains a formal parameter mapping for <i>P</i>,
         <ol class="block">
-          <li>Return the result of calling Get(<i>map</i>, <i>P</i>).</li>
+          <li>Return the result of calling <a href="#sec-9.3.1">Get</a>(<i>map</i>, <i>P</i>).</li>
         </ol>
       </li>
     </ol>
@@ -12696,7 +12697,7 @@
           the argument.</li>
       <li>If the value of <i>isMapped</i> is not <b>undefined</b>, then
         <ol class="block">
-          <li>Set <i>desc</i>.[[Value]] to the result of calling Get(<i>map</i>, <i>P</i>).</li>
+          <li>Set <i>desc</i>.[[Value]] to the result of calling <a href="#sec-9.3.1">Get</a>(<i>map</i>, <i>P</i>).</li>
         </ol>
       </li>
       <li>Return <i>desc</i>.</li>
@@ -12727,7 +12728,8 @@
             <ol class="block">
               <li>If <i>Desc</i>.[[Value]] is present, then
                 <ol class="block">
-                  <li>Let <i>putStatus</i> be the result of  Put(<i>map</i>, <i>P</i>, <i>Desc</i>.[[Value]], <b>false</b>).</li>
+                  <li>Let <i>putStatus</i> be the result of  <a href="#sec-9.3.2">Put</a>(<i>map</i>, <i>P</i>,
+                      <i>Desc</i>.[[Value]], <b>false</b>).</li>
                   <li><a href="#sec-5.2">Assert</a>:  <i>putStatus</i> is <b>true</b> because formal parameters mapped by argument
                       objects are always writable.</li>
                 </ol>
@@ -13099,8 +13101,8 @@
           <li>Let <i>spreadValue</i> be <a href="#sec-8.2.4.1">GetValue</a>(<i>spreadRef</i>).</li>
           <li>Let <i>spreadObj</i> be <a href="#sec-9.1.9">ToObject</a>(<i>spreadValue</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>spreadObj</i>).</li>
-          <li>Let <i>lenVal</i> be the result of calling Get(<i>spreadObj</i>, <code>"length"</code>)<span style="font-family:
-              monospace">.</span></li>
+          <li>Let <i>lenVal</i> be the result of calling <a href="#sec-9.3.1">Get</a>(<i>spreadObj</i>,
+              <code>"length"</code>)<span style="font-family: monospace">.</span></li>
           <li>Let <i>spreadLen</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenVal</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>spreadLen</i>).</li>
           <li>Let <i>n</i>=0;</li>
@@ -13144,7 +13146,7 @@
               0.</li>
           <li>Let <i>pad</i> be the Elision Width of <i>Elision</i>; if <i>Elision</i> is not present, use the numeric value
               zero.</li>
-          <li>Call Put(<i>array</i>, <code>"length"</code>, <i>pad</i>, <b>false</b>).</li>
+          <li>Call <a href="#sec-9.3.2">Put</a>(<i>array</i>, <code>"length"</code>, <i>pad</i>, <b>false</b>).</li>
           <li>Return <i>array</i>.</li>
         </ol>
 
@@ -13157,7 +13159,7 @@
           <li>Let <i>len</i> be the result of performing Array Accumulation for <i>ElementList</i> with arguments <i>array</i> and
               0.</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>len</i>).</li>
-          <li>Call Put(<i>array</i>, <code>"length"</code>, <i>len</i>, <b>false</b>).</li>
+          <li>Call <a href="#sec-9.3.2">Put</a>(<i>array</i>, <code>"length"</code>, <i>len</i>, <b>false</b>).</li>
           <li>Return <i>array</i>.</li>
         </ol>
 
@@ -13173,8 +13175,8 @@
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>len</i>).</li>
           <li>Let <i>padding</i> be the Elision Width of <i>Elision</i>; if <i>Elision</i> is not present, use the numeric value
               zero.</li>
-          <li>Call Put(<i>array</i>, <code>"length"</code>, <a href="#sec-9.1.6">ToUint32</a>(<i>padding</i>+<i>len</i>),
-              <b>false</b>).</li>
+          <li>Call <a href="#sec-9.3.2">Put</a>(<i>array</i>, <code>"length"</code>, <a
+              href="#sec-9.1.6">ToUint32</a>(<i>padding</i>+<i>len</i>), <b>false</b>).</li>
           <li>Return <i>array</i>.</li>
         </ol>
       </section>
@@ -13296,13 +13298,14 @@
               <li><a href="#sec-5.2">Assert</a>: this is part of an array comprehension.</li>
               <li><a href="#sec-5.2">Assert</a>: <i>accumulator</i> is an exotic array object so access to its <code>length</code>
                   property should never fail.</li>
-              <li>Let <i>len</i> be the result of Get(<i>accumulator</i>, <code>"length"</code>).</li>
+              <li>Let <i>len</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>accumulator</i>, <code>"length"</code>).</li>
               <li>If <i>len</i>&ge;2<sup>32</sup>-1, then throw a <b>RangeError</b> exception.</li>
-              <li>Let <i>putStatus</i> be the result of Put(<i>O</i>, <a href="#sec-9.1.8">ToString</a>(<i>len</i>), <i>value</i>,
-                  <b>true</b>).</li>
+              <li>Let <i>putStatus</i> be the result of <a href="#sec-9.3.2">Put</a>(<i>O</i>, <a
+                  href="#sec-9.1.8">ToString</a>(<i>len</i>), <i>value</i>, <b>true</b>).</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>putStatus</i>).</li>
               <li>Increase <i>len</i> by 1.</li>
-              <li>Let <i>putStatus</i> be the result of Put(<i>O</i>, <code>"length"</code>, <i>len</i>, <b>true</b>).</li>
+              <li>Let <i>putStatus</i> be the result of <a href="#sec-9.3.2">Put</a>(<i>O</i>, <code>"length"</code>, <i>len</i>,
+                  <b>true</b>).</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>putStatus</i>).</li>
               <li>Return <a href="#sec-8.2.3.1">NormalCompletion</a>(<b>undefined</b>).</li>
             </ol>
@@ -14805,14 +14808,14 @@
           <li>Let <i>spreadValue</i> be <a href="#sec-8.2.4.1">GetValue</a>(<i>spreadRef</i>).</li>
           <li>Let <i>spreadObj</i> be <a href="#sec-9.1.9">ToObject</a>(<i>spreadValue</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>spreadObj</i>).</li>
-          <li>Let <i>lenVal</i> be the result of calling Get(<i>spreadObj</i>, <code>"length"</code>)<span style="font-family:
-              monospace">.</span></li>
+          <li>Let <i>lenVal</i> be the result of calling <a href="#sec-9.3.1">Get</a>(<i>spreadObj</i>,
+              <code>"length"</code>)<span style="font-family: monospace">.</span></li>
           <li>Let <i>spreadLen</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenVal</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>spreadLen</i>).</li>
           <li>Let <i>n</i> = 0.</li>
           <li>Repeat, while <i>n</i> &lt; <i>spreadLen</i>
             <ol class="block">
-              <li>Let <i>nextArg</i> be the result of calling Get(<i>spreadObj</i>, <a
+              <li>Let <i>nextArg</i> be the result of calling <a href="#sec-9.3.1">Get</a>(<i>spreadObj</i>, <a
                   href="#sec-9.1.8">ToString</a>(<i>n</i>)).</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>nextArg</i>).</li>
               <li>Append <i>nextArg</i> as the last element of <i>list</i>.</li>
@@ -14845,14 +14848,14 @@
           <li>Let <i>spreadValue</i> be <a href="#sec-8.2.4.1">GetValue</a>(<i>spreadRef</i>).</li>
           <li>Let <i>spreadObj</i> be <a href="#sec-9.1.9">ToObject</a>(<i>spreadValue</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>spreadObj</i>).</li>
-          <li>Let <i>lenVal</i> be the result of calling Get(<i>spreadObj</i>, <code>"length"</code>)<span style="font-family:
-              monospace">.</span></li>
+          <li>Let <i>lenVal</i> be the result of calling <a href="#sec-9.3.1">Get</a>(<i>spreadObj</i>,
+              <code>"length"</code>)<span style="font-family: monospace">.</span></li>
           <li>Let <i>spreadLen</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenVal</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>spreadLen</i>).</li>
           <li>Let <i>n</i> = 0.</li>
           <li>Repeat, while <i>n</i> &lt; <i>spreadLen</i>
             <ol class="block">
-              <li>Let <i>nextArg</i> be the result of calling Get(<i>spreadObj</i>, <a
+              <li>Let <i>nextArg</i> be the result of calling <a href="#sec-9.3.1">Get</a>(<i>spreadObj</i>, <a
                   href="#sec-9.1.8">ToString</a>(<i>n</i>)).</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>nextArg</i>).</li>
               <li>Append <i>nextArg</i> as the last element of <i>precedingArgs</i>.</li>
@@ -16851,7 +16854,7 @@
 
         <ol class="proc">
           <li>Let <i>P</i> be StringValue of <i>Identifier</i>.</li>
-          <li>Let <i>v</i> be the result of calling Get(<i>obj</i>, <i>P</i>).</li>
+          <li>Let <i>v</i> be the result of calling <a href="#sec-9.3.1">Get</a>(<i>obj</i>, <i>P</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>v</i>).</li>
           <li>If <i>Initialiser</i><sub>opt</sub> is present and <i>v</i> is <b>undefined</b>, then
             <ol class="block">
@@ -16951,7 +16954,7 @@
         <ol class="proc">
           <li>Let <i>lref</i> be the result of evaluating <i>DestructuringAssignmentTarget</i>.</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>lref</i>).</li>
-          <li>Let <i>lenVal</i> be the result of Get(<i>obj</i>, <code>"length"</code>).</li>
+          <li>Let <i>lenVal</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>obj</i>, <code>"length"</code>).</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenVal</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>len</i>).</li>
           <li>Let <i>A</i> be the result of the abstract operation <a href="#sec-8.4.2.2">ArrayCreate</a> with argument 0.</li>
@@ -16963,7 +16966,8 @@
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>exists</i>).</li>
               <li>If <i>exists</i> is <b>true</b>, then
                 <ol class="block">
-                  <li>Let <i>v</i> be the result of Get(<i>obj</i>, <a href="#sec-9.1.8">ToString</a>(<i>index</i>)).</li>
+                  <li>Let <i>v</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>obj</i>, <a
+                      href="#sec-9.1.8">ToString</a>(<i>index</i>)).</li>
                   <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>len</i>).</li>
                   <li>Call the [[DefineOwnProperty]] internal method of <i>A</i> with arguments <a
                       href="#sec-9.1.8">ToString</a>(<i>n</i>) and <a href="#sec-8.2.5">Property Descriptor</a> {[[Value]]:
@@ -16985,7 +16989,7 @@
         class="nt">DestructuringAssignmentTarget</span> <span class="nt">Initialiser</span><sub>opt</sub></span></p>
 
         <ol class="proc">
-          <li>Let <i>v</i> be the result of Get(<i>obj</i>, <i>propertyName</i>).</li>
+          <li>Let <i>v</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>obj</i>, <i>propertyName</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>v</i>).</li>
           <li>If <i>Initialiser</i><sub>opt</sub> is present and <i>v</i> is <b>undefined</b>, then
             <ol class="block">
@@ -18305,7 +18309,7 @@
 
         <ol class="proc">
           <li>Let <i>P</i> be <a href="#sec-9.1.8">ToString</a>(<i>nextIndex</i>).</li>
-          <li>Let <i>v</i> be the result of Get(<i>array</i>, <i>P</i>).</li>
+          <li>Let <i>v</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>array</i>, <i>P</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>v</i>).</li>
           <li>If <i>Initialiser</i><sub>opt</sub> is present and <i>v</i> is <b>undefined</b>, then
             <ol class="block">
@@ -18324,7 +18328,7 @@
 
         <ol class="proc">
           <li>Let <i>A</i> be the result of the abstract operation <a href="#sec-8.4.2.2">ArrayCreate</a> with argument 0.</li>
-          <li>Let <i>lenVal</i> be the result of Get(<i>array</i>, <code>"length")</code>.</li>
+          <li>Let <i>lenVal</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>array</i>, <code>"length")</code>.</li>
           <li>Let <i>arrayLength</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenVal</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>arrayLength</i>).</li>
           <li>Let <i>n</i>=0.</li>
@@ -18336,7 +18340,7 @@
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>exists</i>).</li>
               <li>If <i>exists</i> is <b>true</b>, then
                 <ol class="block">
-                  <li>Let <i>v</i> be the result of Get(<i>array</i>, <i>P</i>).</li>
+                  <li>Let <i>v</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>array</i>, <i>P</i>).</li>
                   <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>v</i>).</li>
                   <li>Call the [[DefineOwnProperty]] internal method of <i>A</i> with arguments <a
                       href="#sec-9.1.8">ToString</a>(<i>n</i>) and <a href="#sec-8.2.5">Property Descriptor</a> {[[Value]]:
@@ -18366,7 +18370,7 @@
         class="nt">BindingPattern</span> <span class="nt">Initialiser</span><sub>opt</sub></span></p>
 
         <ol class="proc">
-          <li>Let <i>v</i> be the result of Get(<i>obj</i>, <i>propertyName</i>).</li>
+          <li>Let <i>v</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>obj</i>, <i>propertyName</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>v</i>).</li>
           <li>If <i>Initialiser</i><sub>opt</sub> is present and <i>v</i> is <b>undefined</b>, then
             <ol class="block">
@@ -18384,7 +18388,7 @@
         class="nt">BindingIdentifier</span> <span class="nt">Initialiser</span><sub>opt</sub></span></p>
 
         <ol class="proc">
-          <li>Let <i>v</i> be the result of Get(<i>obj</i>, <i>propertyName</i>).</li>
+          <li>Let <i>v</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>obj</i>, <i>propertyName</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>v</i>).</li>
           <li>If <i>Initialiser</i><sub>opt</sub> is present and <i>v</i> is <b>undefined</b>, then
             <ol class="block">
@@ -20755,7 +20759,7 @@
       <ol class="proc">
         <li><a href="#sec-5.2">Assert</a>: <i>array</i> is a well formed arguments object and hence it has a valid integer valued
             <span style="font-family: monospace">"<b>length</b>"</span> property.</li>
-        <li>Let <i>status</i> be the result of Get(<i>array</i>, <span style="font-family:
+        <li>Let <i>status</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>array</i>, <span style="font-family:
             monospace">"<b>length</b>"</span>).</li>
         <li>Let <i>argumentsLength</i> be <i>status</i>.[[value]].</li>
         <li>Let <i>A</i> be the result of the abstract operation <a href="#sec-8.4.2.2">ArrayCreate</a> with argument 0.</li>
@@ -20765,7 +20769,7 @@
             <li>Let <i>P</i> be <a href="#sec-9.1.8">ToString</a>(<i>nextIndex</i>).</li>
             <li><a href="#sec-5.2">Assert</a>: <i>array</i> is a well formed arguments object, hence it must have a property
                 <i>P</i>.</li>
-            <li>Let <i>v</i> be the result of Get(<i>array</i>, <i>P</i>).</li>
+            <li>Let <i>v</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>array</i>, <i>P</i>).</li>
             <li>Call the [[DefineOwnProperty]] internal method of <i>A</i> with arguments <a
                 href="#sec-9.1.8">ToString</a>(<i>n</i>) and <a href="#sec-8.2.5">Property Descriptor</a> {[[Value]]:
                 <i>v</i>.[[value]], [[Writable]]: <b>true</b>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}.</li>
@@ -22198,7 +22202,8 @@
             <li>throw a <b>TypeError</b> exception.</li>
             <li>Else
               <ol class="block">
-                <li>Let <i>protoParent</i> be the result of Get(<i>superclass</i>, <code>"prototype"</code>).</li>
+                <li>Let <i>protoParent</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>superclass</i>,
+                    <code>"prototype"</code>).</li>
                 <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>protoParent</i>).</li>
                 <li>If <a href="#sec-8">Type</a>(<i>protoParent</i>) is neither Object or Null, throw a <b>TypeError</b>
                     exception.</li>
@@ -23797,7 +23802,7 @@
           <li>Let <i>descriptors</i> be an empty internal <a href="#sec-8.2.2">List</a>.</li>
           <li>For each element <i>P</i> of <i>names</i> in list order,
             <ol class="block">
-              <li>Let <i>descObj</i> be the result of Get( <i>props</i>, <i>P</i>).</li>
+              <li>Let <i>descObj</i> be the result of <a href="#sec-9.3.1">Get</a>( <i>props</i>, <i>P</i>).</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>descObj</i>).</li>
               <li>Let <i>desc</i> be the result of calling <a href="#sec-8.2.5.5">ToPropertyDescriptor</a> with <i>descObj</i> as
                   the argument.</li>
@@ -24110,7 +24115,7 @@
           <li>If <i>hasTag</i> is <b>false</b>, then let <i>tag</i> be <i>builtinTag</i>.</li>
           <li>Else,
             <ol class="block">
-              <li>Let <i>tag</i> be the result of Get(<i>O</i>, @@toStringTag).</li>
+              <li>Let <i>tag</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, @@toStringTag).</li>
               <li>If <i>tag</i> is an <a href="#sec-8.2.3">abrupt completion</a>, let <i>tag</i> be <a
                   href="#sec-8.2.3.1">NormalCompletion</a>(<code>"???"</code>).</li>
               <li>Let <i>tag</i> be <i>tag</i>.[[value]].</li>
@@ -24606,7 +24611,7 @@
           <li>If <i>Target</i> has a <a href="#sec-8.4.1">[[BoundTargetFunction]]</a> <a href="#sec-8.1.6.2">internal data
               property</a>, then
             <ol class="block">
-              <li>Let <i>targetLen</i> be the result of Get(<i>Target</i>, <code>"length"</code>).</li>
+              <li>Let <i>targetLen</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>Target</i>, <code>"length"</code>).</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>targetLen</i>).</li>
               <li>Let <i>L</i> be the larger of 0 and the result of <i>targetLen</i> minus the number of elements of
                   <i>A</i>.</li>
@@ -24735,7 +24740,7 @@
     <p>An Array object, <var>O</var>,  is said to be <i>sparse</i> if the following algorithm returns <b>true</b>:</p>
 
     <ol class="proc">
-      <li>Let <i>len</i> be the result of Get(<i>O</i>, <b>"length")</b>.</li>
+      <li>Let <i>len</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <b>"length")</b>.</li>
       <li>For each integer <i>i</i> in the range 0&le;<i>i</i>&lt;<a href="#sec-9.1.6">ToUint32</a>(<i>len</i>)
         <ol class="block">
           <li>Let <i>elem</i> be the result of calling the [[GetOwnProperty]] internal method of <i>O</i> with argument <a
@@ -24809,8 +24814,8 @@
               <li>Increase <i>k</i> by 1.</li>
             </ol>
           </li>
-          <li>Let <i>putStatus</i> be the result of Put(<i>array</i>, <code>"length"</code>, <i>numberOfArgs</i>,
-              <b>true</b>).</li>
+          <li>Let <i>putStatus</i> be the result of <a href="#sec-9.3.2">Put</a>(<i>array</i>, <code>"length"</code>,
+              <i>numberOfArgs</i>, <b>true</b>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>putStatus</i>).</li>
           <li>Return  <i>array</i>.</li>
         </ol>
@@ -24859,7 +24864,8 @@
               <li>If <i>intLen</i> &ne; <i>len</i>, then throw a <b>RangeError</b> exception.</li>
             </ol>
           </li>
-          <li>Let <i>putStatus</i> be the result of Put(<i>array</i>, <code>"length"</code>, <i>intLen</i>, <b>true</b>).</li>
+          <li>Let <i>putStatus</i> be the result of <a href="#sec-9.3.2">Put</a>(<i>array</i>, <code>"length"</code>,
+              <i>intLen</i>, <b>true</b>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>putStatus</i>).</li>
           <li>Return  <i>array</i>.</li>
         </ol>
@@ -24923,7 +24929,7 @@
         <p>When the <code>of</code> method is called with any number of arguments, the following steps are taken:</p>
 
         <ol class="proc">
-          <li>Let <i>lenValue</i>  be the result of Get(<i>items</i>, <code>"length"</code>).</li>
+          <li>Let <i>lenValue</i>  be the result of <a href="#sec-9.3.1">Get</a>(<i>items</i>, <code>"length"</code>).</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.4">ToInteger</a>(<i>lenValue</i>).</li>
           <li>Let <i>C</i> be the <b>this</b> value.</li>
           <li>If <a href="#sec-9.2.5">IsConstructor</a>(<i>C</i>) is <b>true</b>, then
@@ -24944,7 +24950,7 @@
           <li>Repeat, while <i>k</i> &lt; <i>len</i>
             <ol class="block">
               <li>Let <i>Pk</i> be <a href="#sec-9.1.8">ToString</a>(<i>k</i>).</li>
-              <li>Let <i>kValue</i> be the result of Get(<i>items</i>, <i>Pk</i>).</li>
+              <li>Let <i>kValue</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>items</i>, <i>Pk</i>).</li>
               <li>Let <i>defineStatus</i> be the result of <a href="#sec-9.3.4">DefinePropertyOrThrow</a>(<i>A</i>,<i>Pk</i>, <a
                   href="#sec-8.2.5">Property Descriptor</a> {[[Value]]: <i>kValue</i>.[[value]], [[Writable]]: <b>true</b>,
                   [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}).</li>
@@ -24952,7 +24958,8 @@
               <li>Increase <i>k</i> by 1.</li>
             </ol>
           </li>
-          <li>Let <i>putStatus</i> be the result of Put(<i>A</i>, <code>"length"</code>, <i>len</i>, <b>true</b>).</li>
+          <li>Let <i>putStatus</i> be the result of <a href="#sec-9.3.2">Put</a>(<i>A</i>, <code>"length"</code>, <i>len</i>,
+              <b>true</b>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>putStatus</i>).</li>
           <li>Return <i>A</i>.</li>
         </ol>
@@ -25020,7 +25027,8 @@
                   <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>done</i>).</li>
                   <li>If <i>done</i> is <b>true</b>, then
                     <ol class="block">
-                      <li>Let <i>putStatus</i> be the result of Put(<i>A</i>, <code>"length"</code>, <i>k</i>, <b>true</b>).</li>
+                      <li>Let <i>putStatus</i> be the result of <a href="#sec-9.3.2">Put</a>(<i>A</i>, <code>"length"</code>,
+                          <i>k</i>, <b>true</b>).</li>
                       <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>putStatus</i>).</li>
                       <li>Return <i>A</i>.</li>
                     </ol>
@@ -25046,7 +25054,7 @@
             </ol>
           </li>
           <li><a href="#sec-5.2">Assert</a>: <i>items</i> is not an Iterator so assume it is Array-like.</li>
-          <li>Let <i>lenValue</i>  be the result of Get(<i>items</i>, <code>"length"</code>).</li>
+          <li>Let <i>lenValue</i>  be the result of <a href="#sec-9.3.1">Get</a>(<i>items</i>, <code>"length"</code>).</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.4">ToInteger</a>(<i>lenValue</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>len</i>).</li>
           <li>Let <i>C</i> be the <b>this</b> value.</li>
@@ -25072,7 +25080,7 @@
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>kPresent</i>).</li>
               <li>If <i>kPresent</i> is <b>true</b>, then
                 <ol class="block">
-                  <li>Let <i>kValue</i> be the result of Get(<i>items</i>, <i>Pk</i>).</li>
+                  <li>Let <i>kValue</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>items</i>, <i>Pk</i>).</li>
                   <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>kValue</i>).</li>
                   <li>If <i>mapping</i> is <b>true</b>, then
                     <ol class="block">
@@ -25092,7 +25100,8 @@
               <li>Increase <i>k</i> by 1.</li>
             </ol>
           </li>
-          <li>Let <i>putStatus</i> be the result of Put(<i>A</i>, <code>"length"</code>, <i>len</i>, <b>true</b>).</li>
+          <li>Let <i>putStatus</i> be the result of <a href="#sec-9.3.2">Put</a>(<i>A</i>, <code>"length"</code>, <i>len</i>,
+              <b>true</b>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>putStatus</i>).</li>
           <li>Return <i>A</i>.</li>
         </ol>
@@ -25178,7 +25187,7 @@
         <ol class="proc">
           <li>Let <i>array</i> be the result of calling <a href="#sec-9.1.9">ToObject</a> on the <b>this</b> value.</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>array</i>).</li>
-          <li>Let <i>func</i> be the result of Get(<i>array</i>, <code>"join"</code>).</li>
+          <li>Let <i>func</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>array</i>, <code>"join"</code>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>func</i>).</li>
           <li>If <a href="#sec-9.2.2">IsCallable</a>(<i>func</i>) is <b>false</b>, then let <i>func</i> be the standard built-in
               method Object.prototype.toString (<a href="#sec-15.2.4.2">15.2.4.2</a>).</li>
@@ -25209,13 +25218,13 @@
           <li>Let <i>array</i> be the result of calling <a href="#sec-9.1.9">ToObject</a> passing the <b>this</b> value as the
               argument.</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>array</i>).</li>
-          <li>Let <i>arrayLen</i> be the result of Get(<i>array</i>, <code>"length"</code>).</li>
+          <li>Let <i>arrayLen</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>array</i>, <code>"length"</code>).</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>arrayLen</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>len</i>).</li>
           <li>Let <i>separator</i> be the String value for the list-separator String appropriate for the host environment&rsquo;s
               current locale (this is derived in an implementation-defined way).</li>
           <li>If <i>len</i> is zero, return the empty String.</li>
-          <li>Let <i>firstElement</i> be the result of Get(<i>array</i>, <code>"0"</code>).</li>
+          <li>Let <i>firstElement</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>array</i>, <code>"0"</code>).</li>
           <li>Let <i>noArgs</i> be an empty <a href="#sec-8.2.2">List</a>.</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>firstElement</i>).</li>
           <li>If <i>firstElement</i> is <b>undefined</b> or <b>null</b>, then
@@ -25235,7 +25244,8 @@
           <li>Repeat, while <i>k</i> &lt; <i>len</i>
             <ol class="block">
               <li>Let <i>S</i> be a String value produced by concatenating <i>R</i> and <i>separator</i>.</li>
-              <li>Let <i>nextElement</i> be the result of Get(<i>array</i>,<a href="#sec-9.1.8">ToString</a>(<i>k</i>)).</li>
+              <li>Let <i>nextElement</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>array</i>,<a
+                  href="#sec-9.1.8">ToString</a>(<i>k</i>)).</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>nextElement</i>).</li>
               <li>If <i>nextElement</i> is <b>undefined</b> or <b>null</b>, then
                 <ol class="block">
@@ -25285,7 +25295,7 @@
           <li>Let <i>A</i> be <b>undefined</b>.</li>
           <li>If <i>O</i> is an  exotic Array object, then
             <ol class="block">
-              <li>Let <i>C</i> be the Get(<i>O</i>, <code>"constructor"</code>).</li>
+              <li>Let <i>C</i> be the <a href="#sec-9.3.1">Get</a>(<i>O</i>, <code>"constructor"</code>).</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>C</i>).</li>
               <li>If <a href="#sec-9.2.5">IsConstructor</a>(<i>C</i>) is <b>true</b>, then
                 <ol class="block">
@@ -25314,7 +25324,7 @@
               <li>If <i>spreadable</i> is <b>true</b>, then
                 <ol class="block">
                   <li>Let <i>k</i> be 0.</li>
-                  <li>Let <i>len</i> be the result of Get(<i>E</i>, <code>"length"</code>).</li>
+                  <li>Let <i>len</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>E</i>, <code>"length"</code>).</li>
                   <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>len</i>).</li>
                   <li>Repeat, while <i>k</i> &lt; <i>len</i>
                     <ol class="block">
@@ -25323,7 +25333,7 @@
                       <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>exists</i>).</li>
                       <li>If <i>exists</i> is <b>true</b>, then
                         <ol class="block">
-                          <li>Let <i>subElement</i> be the result of Get(<i>E</i>, <i>P</i>).</li>
+                          <li>Let <i>subElement</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>E</i>, <i>P</i>).</li>
                           <li>Call the [[DefineOwnProperty]] internal method of <i>A</i> with arguments <a
                               href="#sec-9.1.8">ToString</a>(<i>n</i>) and <a href="#sec-8.2.5">Property Descriptor</a>
                               {[[Value]]: <i>subElement</i>, [[Writable]]: <b>true</b>, [[Enumerable]]: <b>true</b>,
@@ -25346,7 +25356,8 @@
               </li>
             </ol>
           </li>
-          <li>Let <i>putStatus</i> be the result of Put(<i>A</i>, <code>"length"</code>, <i>n</i>, <b>true</b>).</li>
+          <li>Let <i>putStatus</i> be the result of <a href="#sec-9.3.2">Put</a>(<i>A</i>, <code>"length"</code>, <i>n</i>,
+              <b>true</b>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>putStatus</i>).</li>
           <li>Return <i>A</i>.</li>
         </ol>
@@ -25373,7 +25384,7 @@
 
           <ol class="proc">
             <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>O</i>).</li>
-            <li>Let <i>spreadable</i> be the Get(<i>O</i>, @@isConcatSpreadable).</li>
+            <li>Let <i>spreadable</i> be the <a href="#sec-9.3.1">Get</a>(<i>O</i>, @@isConcatSpreadable).</li>
             <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>spreadable</i>).</li>
             <li>If <i>spreadable</i> is not <b>undefined</b>, then return <a
                 href="#sec-9.1.2">ToBoolean</a>(<i>spreadable</i>).</li>
@@ -25396,13 +25407,13 @@
           <li>Let <i>O</i> be the result of calling <a href="#sec-9.1.9">ToObject</a> passing the <b>this</b> value as the
               argument.</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>O</i>).</li>
-          <li>Let <i>lenVal</i> be the result of Get(<i>O</i>, <code>"length"</code>).</li>
+          <li>Let <i>lenVal</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <code>"length"</code>).</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenVal</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>len</i>).</li>
           <li>If <i>separator</i> is <b>undefined</b>, let <i>separator</i> be the single-character String <code>","</code>.</li>
           <li>Let <i>sep</i> be <a href="#sec-9.1.8">ToString</a>(<i>separator</i>).</li>
           <li>If <i>len</i> is zero, return the empty String.</li>
-          <li>Let <i>element0</i> be the result of Get(<i>O</i>, <code>"0"</code>).</li>
+          <li>Let <i>element0</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <code>"0"</code>).</li>
           <li>If <i>element0</i> is <b>undefined</b> or <b>null</b>, let <i>R</i> be the empty String; otherwise, let <i>R</i> be
               <a href="#sec-9.1.8">ToString</a>(<i>element0</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>R</i>).</li>
@@ -25410,7 +25421,8 @@
           <li>Repeat, while <i>k</i> &lt; <i>len</i>
             <ol class="block">
               <li>Let <i>S</i> be the String value produced by concatenating <i>R</i> and <i>sep</i>.</li>
-              <li>Let <i>element</i> be the result of Get(<i>O</i>, <a href="#sec-9.1.8">ToString</a>(<i>k</i>)).</li>
+              <li>Let <i>element</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <a
+                  href="#sec-9.1.8">ToString</a>(<i>k</i>)).</li>
               <li>If <i>element</i> is <b>undefined</b> or <b>null</b>, then let <i>next</i> be the empty String; otherwise, let
                   <i>next</i> be <a href="#sec-9.1.8">ToString</a>(<i>element</i>).</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>next</i>).</li>
@@ -25441,12 +25453,13 @@
           <li>Let <i>O</i> be the result of calling <a href="#sec-9.1.9">ToObject</a> passing the <b>this</b> value as the
               argument.</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>O</i>).</li>
-          <li>Let <i>lenVal</i> be the result of Get(<i>O</i>, <code>"length"</code>).</li>
+          <li>Let <i>lenVal</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <code>"length"</code>).</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenVal</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>len</i>).</li>
           <li>If <i>len</i> is zero,
             <ol class="block">
-              <li>Let <i>putStatus</i> be the result of Put(<i>O</i>, <code>"length"</code>, 0, <b>true</b>).</li>
+              <li>Let <i>putStatus</i> be the result of <a href="#sec-9.3.2">Put</a>(<i>O</i>, <code>"length"</code>, 0,
+                  <b>true</b>).</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>putStatus</i>).</li>
               <li>Return <b>undefined</b>.</li>
             </ol>
@@ -25455,12 +25468,13 @@
             <ol class="block">
               <li>Let <i>newLen</i> be <i>len</i>&ndash;1.</li>
               <li>Let <i>indx</i> be <a href="#sec-9.1.8">ToString</a>(<i>newLen</i>).</li>
-              <li>Let <i>element</i> be the result of Get(<i>O</i>, <i>indx</i>).</li>
+              <li>Let <i>element</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <i>indx</i>).</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>element</i>).</li>
               <li>Let <i>deleteStatus</i> be the result of <a href="#sec-9.3.5">DeletePropertyOrThrow</a>(<i>O</i>,
                   <i>indx</i>).</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>deleteStatus</i>).</li>
-              <li>Let <i>putStatus</i> be the result of Put(<i>O</i>, <code>"length"</code>, <i>newLen</i>, <b>true</b>).</li>
+              <li>Let <i>putStatus</i> be the result of <a href="#sec-9.3.2">Put</a>(<i>O</i>, <code>"length"</code>,
+                  <i>newLen</i>, <b>true</b>).</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>putStatus</i>).</li>
               <li>Return <i>element</i>.</li>
             </ol>
@@ -25489,7 +25503,7 @@
           <li>Let <i>O</i> be the result of calling <a href="#sec-9.1.9">ToObject</a> passing the <b>this</b> value as the
               argument.</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>O</i>).</li>
-          <li>Let <i>lenVal</i> be the result of Get(<i>O</i>, <code>"length"</code>).</li>
+          <li>Let <i>lenVal</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <code>"length"</code>).</li>
           <li>Let <i>n</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenVal</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>n</i>).</li>
           <li>Let <i>items</i> be an internal <a href="#sec-8.2.2">List</a> whose elements are, in left to right order, the
@@ -25497,13 +25511,14 @@
           <li>Repeat, while <i>items</i> is not empty
             <ol class="block">
               <li>Remove the first element from <i>items</i> and let <i>E</i> be the value of the element.</li>
-              <li>Let <i>putStatus</i> be the result of Put(<i>O</i>, <a href="#sec-9.1.8">ToString</a>(<i>n</i>), <i>E</i>,
-                  <b>true</b>).</li>
+              <li>Let <i>putStatus</i> be the result of <a href="#sec-9.3.2">Put</a>(<i>O</i>, <a
+                  href="#sec-9.1.8">ToString</a>(<i>n</i>), <i>E</i>, <b>true</b>).</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>putStatus</i>).</li>
               <li>Increase <i>n</i> by 1.</li>
             </ol>
           </li>
-          <li>Let <i>putStatus</i> be the result of Put(<i>O</i>, <code>"length"</code>, <i>n</i>, <b>true</b>).</li>
+          <li>Let <i>putStatus</i> be the result of <a href="#sec-9.3.2">Put</a>(<i>O</i>, <code>"length"</code>, <i>n</i>,
+              <b>true</b>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>putStatus</i>).</li>
           <li>Return <i>n</i>.</li>
         </ol>
@@ -25529,7 +25544,7 @@
           <li>Let <i>O</i> be the result of calling <a href="#sec-9.1.9">ToObject</a> passing the <b>this</b> value as the
               argument.</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>O</i>).</li>
-          <li>Let <i>lenVal</i> be the result of Get(<i>O</i>, <code>"length"</code>).</li>
+          <li>Let <i>lenVal</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <code>"length"</code>).</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenVal</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>len</i>).</li>
           <li>Let <i>middle</i> be  <a href="#sec-5.2">floor</a>(<i>len</i>/2).</li>
@@ -25539,9 +25554,9 @@
               <li>Let <i>upper</i> be <i>len</i>&minus; <i>lower</i> &minus;1.</li>
               <li>Let <i>upperP</i> be <a href="#sec-9.1.8">ToString</a>(<i>upper</i>).</li>
               <li>Let <i>lowerP</i> be <a href="#sec-9.1.8">ToString</a>(<i>lower</i>).</li>
-              <li>Let <i>lowerValue</i> be the result of Get(<i>O</i>,  <i>lowerP</i>).</li>
+              <li>Let <i>lowerValue</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>,  <i>lowerP</i>).</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>lowerValue</i>).</li>
-              <li>Let <i>upperValue</i> be the result of Get(<i>O</i>, <i>upper</i>).</li>
+              <li>Let <i>upperValue</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <i>upper</i>).</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>upperValue</i>).</li>
               <li>Let <i>lowerExists</i> be the result of <a href="#sec-9.3.6">HasProperty</a>(<i>O</i>, <i>lowerP</i>).</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>lowerExists</i>).</li>
@@ -25549,15 +25564,18 @@
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>upperExists</i>).</li>
               <li>If <i>lowerExists</i> is <b>true</b> and <i>upperExists</i> is <b>true</b>, then
                 <ol class="block">
-                  <li>Let <i>putStatus</i> be the result of Put(<i>O</i>, <i>lowerP</i>, <i>upperValue</i>, <b>true</b>).</li>
+                  <li>Let <i>putStatus</i> be the result of <a href="#sec-9.3.2">Put</a>(<i>O</i>, <i>lowerP</i>,
+                      <i>upperValue</i>, <b>true</b>).</li>
                   <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>putStatus</i>).</li>
-                  <li>Let <i>putStatus</i> be the result of Put(<i>O</i>, <i>upperP</i>, <i>lowerValue</i>, <b>true</b>).</li>
+                  <li>Let <i>putStatus</i> be the result of <a href="#sec-9.3.2">Put</a>(<i>O</i>, <i>upperP</i>,
+                      <i>lowerValue</i>, <b>true</b>).</li>
                   <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>putStatus</i>).</li>
                 </ol>
               </li>
               <li>Else if <i>lowerExists</i> is <b>false</b> and <i>upperExists</i> is <b>true</b>, then
                 <ol class="block">
-                  <li>Let <i>putStatus</i> be the result of Put(<i>O</i>, <i>lowerP</i>, <i>upperValue</i>, <b>true</b>).</li>
+                  <li>Let <i>putStatus</i> be the result of <a href="#sec-9.3.2">Put</a>(<i>O</i>, <i>lowerP</i>,
+                      <i>upperValue</i>, <b>true</b>).</li>
                   <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>putStatus</i>).</li>
                   <li>Let <i>deleteStatus</i> be the result of <a href="#sec-9.3.5">DeletePropertyOrThrow</a> (<i>O</i>,
                       <i>upperP</i>).</li>
@@ -25569,7 +25587,8 @@
                   <li>Let <i>deleteStatus</i> be the result of <a href="#sec-9.3.5">DeletePropertyOrThrow</a> (<i>O</i>,
                       <i>lowerP</i>).</li>
                   <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>deleteStatus</i>).</li>
-                  <li>Let <i>putStatus</i> be the result of Put(<i>O</i>, <i>upperP</i>, <i>lowerValue</i>, <b>true</b>).</li>
+                  <li>Let <i>putStatus</i> be the result of <a href="#sec-9.3.2">Put</a>(<i>O</i>, <i>upperP</i>,
+                      <i>lowerValue</i>, <b>true</b>).</li>
                   <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>putStatus</i>).</li>
                 </ol>
               </li>
@@ -25602,17 +25621,19 @@
           <li>Let <i>O</i> be the result of calling <a href="#sec-9.1.9">ToObject</a> passing the <b>this</b> value as the
               argument.</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>O</i>).</li>
-          <li>Let <i>lenVal</i> be the result of Get(<i>O</i>, <code>"length"</code>).</li>
+          <li>Let <i>lenVal</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <code>"length"</code>).</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenVal</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>len</i>).</li>
           <li>If <i>len</i> is zero, then
             <ol class="block">
-              <li>Let <i>putStatus</i> be the result of Put(<i>O</i>, <code>"length"</code>, 0, <b>true</b>).</li>
+              <li>Let <i>putStatus</i> be the result of <a href="#sec-9.3.2">Put</a>(<i>O</i>, <code>"length"</code>, 0,
+                  <b>true</b>).</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>putStatus</i>).</li>
               <li>Return <b>undefined</b>.</li>
             </ol>
           </li>
-          <li>Let <i>first</i> be the result of Get(<i>O</i>, <span style="font-family: monospace">"<b>0</b>"</span>).</li>
+          <li>Let <i>first</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <span style="font-family:
+              monospace">"<b>0</b>"</span>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>first</i>).</li>
           <li>Let <i>k</i> be 1.</li>
           <li>Repeat, while <i>k</i> &lt; <i>len</i>
@@ -25623,9 +25644,10 @@
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>fromPresent</i>).</li>
               <li>If <i>fromPresent</i> is <b>true</b>, then
                 <ol class="block">
-                  <li>Let <i>fromVal</i> be the result of Get(<i>O</i>, <i>from</i>).</li>
+                  <li>Let <i>fromVal</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <i>from</i>).</li>
                   <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>fromVal</i>).</li>
-                  <li>Let <i>putStatus</i> be the result of Put(<i>O</i>, <i>to</i>, <i>fromVal</i>, <b>true</b>).</li>
+                  <li>Let <i>putStatus</i> be the result of <a href="#sec-9.3.2">Put</a>(<i>O</i>, <i>to</i>, <i>fromVal</i>,
+                      <b>true</b>).</li>
                   <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>putStatus</i>).</li>
                 </ol>
               </li>
@@ -25642,7 +25664,8 @@
           <li>Let <i>deleteStatus</i> be the result of <a href="#sec-9.3.5">DeletePropertyOrThrow</a>(<i>O</i>, <a
               href="#sec-9.1.8">ToString</a>(<i>len</i>&ndash;1)).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>deleteStatus</i>).</li>
-          <li>Let <i>putStatus</i> be the result of Put(<i>O</i>, <code>"length"</code>, <i>len</i>&ndash;1, <b>true</b>).</li>
+          <li>Let <i>putStatus</i> be the result of <a href="#sec-9.3.2">Put</a>(<i>O</i>, <code>"length"</code>,
+              <i>len</i>&ndash;1, <b>true</b>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>putStatus</i>).</li>
           <li>Return <i>first</i>.</li>
         </ol>
@@ -25671,7 +25694,7 @@
               argument.</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>O</i>).</li>
           <li>Let <i>A</i> be the result of the abstract operation <a href="#sec-8.4.2.2">ArrayCreate</a> with argument 0.</li>
-          <li>Let <i>lenVal</i> be the result of Get(<i>O</i>, <code>"length"</code>).</li>
+          <li>Let <i>lenVal</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <code>"length"</code>).</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenVal</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>len</i>).</li>
           <li>Let <i>relativeStart</i> be <a href="#sec-9.1.4">ToInteger</a>(<i>start</i>).</li>
@@ -25691,7 +25714,7 @@
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>kPresent</i>).</li>
               <li>If <i>kPresent</i> is <b>true</b>, then
                 <ol class="block">
-                  <li>Let <i>kValue</i> be the result of Get(<i>O</i>, <i>Pk</i>).</li>
+                  <li>Let <i>kValue</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <i>Pk</i>).</li>
                   <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>kValue</i>).</li>
                   <li>Let <i>status</i> be the result of <a href="#sec-9.3.3">CreateOwnDataProperty</a>(<i>A</i>, <a
                       href="#sec-9.1.8">ToString</a>(<i>n</i>), <i>kValue</i> ).</li>
@@ -25703,7 +25726,8 @@
               <li>Increase <i>n</i> by 1.</li>
             </ol>
           </li>
-          <li>Let <i>putStatus</i> be the result of Put(<i>A</i>, <code>"length"</code>, <i>n</i>, <b>true</b>).</li>
+          <li>Let <i>putStatus</i> be the result of <a href="#sec-9.3.2">Put</a>(<i>A</i>, <code>"length"</code>, <i>n</i>,
+              <b>true</b>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>putStatus</i>).</li>
           <li>Return <i>A</i>.</li>
         </ol>
@@ -25737,7 +25761,8 @@
         <p>Let <var>obj</var> be the result of calling <a href="#sec-9.1.9">ToObject</a> passing the <b>this</b> value as the
         argument.</p>
 
-        <p>Let <var>len</var> be the result of applying Uint32 to the result of Get(<i>obj</i>, <code>"length"</code>).</p>
+        <p>Let <var>len</var> be the result of applying Uint32 to the result of <a href="#sec-9.3.1">Get</a>(<i>obj</i>,
+        <code>"length"</code>).</p>
 
         <p>If <var>comparefn</var> is not <b>undefined</b> and is not a consistent comparison function for the elements of this
         array (see below), the behaviour of <code>sort</code> is implementation-defined.</p>
@@ -25881,9 +25906,9 @@
           <li>If <i>hasj</i> and <i>hask</i> are both <b>false</b>, then return <b>+0</b>.</li>
           <li>If <i>hasj</i> is <b>false</b>, then return 1.</li>
           <li>If <i>hask</i> is <b>false</b>, then return &ndash;1.</li>
-          <li>Let <i>x</i> be the result of Get(<i>obj</i>,<i>jString</i>).</li>
+          <li>Let <i>x</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>obj</i>,<i>jString</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>x</i>).</li>
-          <li>Let <i>y</i> be the result of Get(<i>obj</i>, <i>kString</i>).</li>
+          <li>Let <i>y</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>obj</i>, <i>kString</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>y</i>).</li>
           <li>If <i>x</i> and <i>y</i> are both <b>undefined</b>, return <b>+0</b>.</li>
           <li>If <i>x</i> is <b>undefined</b>, return 1.</li>
@@ -25934,7 +25959,7 @@
               argument.</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>O</i>).</li>
           <li>Let <i>A</i> be the result of the abstract operation <a href="#sec-8.4.2.2">ArrayCreate</a> with argument 0.</li>
-          <li>Let <i>lenVal</i> be the result of Get(<i>O</i>, <code>"length"</code>)</li>
+          <li>Let <i>lenVal</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <code>"length"</code>)</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenVal</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>len</i>).</li>
           <li>Let <i>relativeStart</i> be <a href="#sec-9.1.4">ToInteger</a>(<i>start</i>).</li>
@@ -25951,7 +25976,7 @@
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>fromPresent</i>).</li>
               <li>If <i>fromPresent</i> is <b>true</b>, then
                 <ol class="block">
-                  <li>Let <i>fromValue</i> be the result of Get(<i>O,</i> <i>from</i>).</li>
+                  <li>Let <i>fromValue</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O,</i> <i>from</i>).</li>
                   <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>fromValue</i>).</li>
                   <li>Call the [[DefineOwnProperty]] internal method of <i>A</i> with arguments <a
                       href="#sec-9.1.8">ToString</a>(<i>k</i>) and <a href="#sec-8.2.5">Property Descriptor</a> {[[Value]]:
@@ -25962,8 +25987,8 @@
               <li>Increment <i>k</i> by 1.</li>
             </ol>
           </li>
-          <li>Let <i>putStatus</i> be the result of Put(<i>A</i>, <code>"length"</code>, <i>actualDeleteCount</i>,
-              <b>true</b>).</li>
+          <li>Let <i>putStatus</i> be the result of <a href="#sec-9.3.2">Put</a>(<i>A</i>, <code>"length"</code>,
+              <i>actualDeleteCount</i>, <b>true</b>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>putStatus</i>).</li>
           <li>Let <i>items</i> be an internal <a href="#sec-8.2.2">List</a> whose elements are, in left to right order, the
               portion of the actual argument list starting with <i>item1</i>. The list will be empty if no such items are
@@ -25980,9 +26005,10 @@
                   <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>fromPresent</i>).</li>
                   <li>If <i>fromPresent</i> is <b>true</b>, then
                     <ol class="block">
-                      <li>Let <i>fromValue</i> be the result of Get(<i>O</i>, <i>from</i>).</li>
+                      <li>Let <i>fromValue</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <i>from</i>).</li>
                       <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>fromValue</i>).</li>
-                      <li>Let <i>putStatus</i> be the result of Put(<i>O</i>, <i>to</i>, <i>fromValue</i>, <b>true</b>).</li>
+                      <li>Let <i>putStatus</i> be the result of <a href="#sec-9.3.2">Put</a>(<i>O</i>, <i>to</i>,
+                          <i>fromValue</i>, <b>true</b>).</li>
                       <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>putStatus</i>).</li>
                     </ol>
                   </li>
@@ -26018,9 +26044,10 @@
                   <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>fromPresent</i>).</li>
                   <li>If <i>fromPresent</i> is <b>true</b>, then
                     <ol class="block">
-                      <li>Let <i>fromValue</i> be the result of Get(<i>O</i>, <i>from</i>).</li>
+                      <li>Let <i>fromValue</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <i>from</i>).</li>
                       <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>fromValue</i>).</li>
-                      <li>Let <i>putStatus</i> be the result of Put(<i>O</i>, <i>to</i>, <i>fromValue</i>, <b>true</b>).</li>
+                      <li>Let <i>putStatus</i> be the result of <a href="#sec-9.3.2">Put</a>(<i>O</i>, <i>to</i>,
+                          <i>fromValue</i>, <b>true</b>).</li>
                       <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>putStatus</i>).</li>
                     </ol>
                   </li>
@@ -26040,14 +26067,14 @@
           <li>Repeat, while <i>items</i> is not empty
             <ol class="block">
               <li>Remove the first element from <i>items</i> and let <i>E</i> be the value of that element.</li>
-              <li>Let <i>putStatus</i> be the result of Put(<i>O</i>, <a href="#sec-9.1.8">ToString</a>(<i>k</i>), <i>E</i>,
-                  <b>true</b>).</li>
+              <li>Let <i>putStatus</i> be the result of <a href="#sec-9.3.2">Put</a>(<i>O</i>, <a
+                  href="#sec-9.1.8">ToString</a>(<i>k</i>), <i>E</i>, <b>true</b>).</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>putStatus</i>).</li>
               <li>Increase <i>k</i> by 1.</li>
             </ol>
           </li>
-          <li>Let <i>putStatus</i> be the result of Put(<i>O</i>, <code>"length"</code>, <i>len</i> &ndash;
-              <i>actualDeleteCount</i> + <i>itemCount</i>, <b>true</b>).</li>
+          <li>Let <i>putStatus</i> be the result of <a href="#sec-9.3.2">Put</a>(<i>O</i>, <code>"length"</code>, <i>len</i>
+              &ndash; <i>actualDeleteCount</i> + <i>itemCount</i>, <b>true</b>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>putStatus</i>).</li>
           <li>Return <i>A</i>.</li>
         </ol>
@@ -26081,7 +26108,7 @@
           <li>Let <i>O</i> be the result of calling <a href="#sec-9.1.9">ToObject</a> passing the <b>this</b> value as the
               argument.</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>O</i>).</li>
-          <li>Let <i>lenVal</i> be the result of Get(<i>O</i>, <code>"length"</code>)</li>
+          <li>Let <i>lenVal</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <code>"length"</code>)</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenVal</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>len</i>).</li>
           <li>Let <i>argCount</i> be the number of actual arguments.</li>
@@ -26094,9 +26121,10 @@
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>fromPresent</i>).</li>
               <li>If <i>fromPresent</i> is <b>true</b>, then
                 <ol class="block">
-                  <li>Let <i>fromValue</i> be the result of Get(<i>O</i>, <i>from</i>).</li>
+                  <li>Let <i>fromValue</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <i>from</i>).</li>
                   <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>fromValue</i>).</li>
-                  <li>Let <i>putStatus</i> be the result of Put(<i>O</i>, <i>to</i>, <i>fromValue</i>, <b>true</b>).</li>
+                  <li>Let <i>putStatus</i> be the result of <a href="#sec-9.3.2">Put</a>(<i>O</i>, <i>to</i>, <i>fromValue</i>,
+                      <b>true</b>).</li>
                   <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>putStatus</i>).</li>
                 </ol>
               </li>
@@ -26116,14 +26144,14 @@
           <li>Repeat, while <i>items</i> is not empty
             <ol class="block">
               <li>Remove the first element from <i>items</i> and let <i>E</i> be the value of that element.</li>
-              <li>Let <i>putStatus</i> be the result of Put(<i>O</i>, <a href="#sec-9.1.8">ToString</a>(<i>j</i>), <i>E</i>,
-                  <b>true</b>).</li>
+              <li>Let <i>putStatus</i> be the result of <a href="#sec-9.3.2">Put</a>(<i>O</i>, <a
+                  href="#sec-9.1.8">ToString</a>(<i>j</i>), <i>E</i>, <b>true</b>).</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>putStatus</i>).</li>
               <li>Increase <i>j</i> by 1.</li>
             </ol>
           </li>
-          <li>Let <i>putStatus</i> be the result of Put(<i>O</i>, <code>"length"</code>, <i>len</i>+<i>argCount</i>,
-              <b>true</b>).</li>
+          <li>Let <i>putStatus</i> be the result of <a href="#sec-9.3.2">Put</a>(<i>O</i>, <code>"length"</code>,
+              <i>len</i>+<i>argCount</i>, <b>true</b>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>putStatus</i>).</li>
           <li>Return <i>len</i>+<i>argCount</i>.</li>
         </ol>
@@ -26157,7 +26185,7 @@
           <li>Let <i>O</i> be the result of calling <a href="#sec-9.1.9">ToObject</a> passing the <b>this</b> value as the
               argument.</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>O</i>).</li>
-          <li>Let <i>lenValue</i>  be the result of Get(<i>O</i>, <code>"length"</code>)</li>
+          <li>Let <i>lenValue</i>  be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <code>"length"</code>)</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenValue</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>len</i>).</li>
           <li>If <i>len</i> is 0, return -1.</li>
@@ -26183,7 +26211,8 @@
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>kPresent</i>).</li>
               <li>If <i>kPresent</i> is <b>true</b>, then
                 <ol class="block">
-                  <li>Let <i>elementK</i> be the result of Get(<i>O</i>, <a href="#sec-9.1.8">ToString</a>(<i>k</i>)).</li>
+                  <li>Let <i>elementK</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <a
+                      href="#sec-9.1.8">ToString</a>(<i>k</i>)).</li>
                   <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>elementK</i>).</li>
                   <li>Let <i>same</i> be the result of performing Strict Equality Comparison <i>searchElement</i> ===
                       <i>elementK</i>.</li>
@@ -26225,7 +26254,7 @@
           <li>Let <i>O</i> be the result of calling <a href="#sec-9.1.9">ToObject</a> passing the <b>this</b> value as the
               argument.</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>O</i>).</li>
-          <li>Let <i>lenValue</i>  be the result of Get(<i>O</i>, <code>"length"</code>)</li>
+          <li>Let <i>lenValue</i>  be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <code>"length"</code>)</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenValue</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>len</i>).</li>
           <li>If <i>len</i> is 0, return -1.</li>
@@ -26245,7 +26274,8 @@
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>kPresent</i>).</li>
               <li>If <i>kPresent</i> is <b>true</b>, then
                 <ol class="block">
-                  <li>Let <i>elementK</i> be the result of Get(<i>O</i>, <a href="#sec-9.1.8">ToString</a>(<i>k</i>)).</li>
+                  <li>Let <i>elementK</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <a
+                      href="#sec-9.1.8">ToString</a>(<i>k</i>)).</li>
                   <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>elementK</i>).</li>
                   <li>Let <i>same</i> be the result of performing Strict Equality Comparison <br><i>searchElement</i> ===
                       <i>elementK</i>.</li>
@@ -26301,7 +26331,7 @@
           <li>Let <i>O</i> be the result of calling <a href="#sec-9.1.9">ToObject</a> passing the <b>this</b> value as the
               argument.</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>O</i>).</li>
-          <li>Let <i>lenValue</i>  be the result of Get(<i>O</i>, <code>"length"</code>)</li>
+          <li>Let <i>lenValue</i>  be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <code>"length"</code>)</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenValue</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>len</i>).</li>
           <li>If <a href="#sec-9.2.2">IsCallable</a>(<i>callbackfn</i>) is <b>false</b>, throw a <b>TypeError</b> exception.</li>
@@ -26313,7 +26343,7 @@
               <li>Let <i>kPresent</i> be the result of <a href="#sec-9.3.6">HasProperty</a>(<i>O</i>, <i>Pk</i>).</li>
               <li>If <i>kPresent</i> is <b>true</b>, then
                 <ol class="block">
-                  <li>Let <i>kValue</i> be the result of Get(<i>O</i>, <i>Pk</i>).</li>
+                  <li>Let <i>kValue</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <i>Pk</i>).</li>
                   <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>kValue</i>).</li>
                   <li>Let <i>testResult</i> be the result of calling the [[Call]] internal method of <i>callbackfn</i> with
                       <i>T</i> as <i>thisArgument</i> and a <a href="#sec-8.2.2">List</a> containing <i>kValue</i>, <i>k</i>, and
@@ -26371,7 +26401,7 @@
           <li>Let <i>O</i> be the result of calling <a href="#sec-9.1.9">ToObject</a> passing the <b>this</b> value as the
               argument.</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>O</i>).</li>
-          <li>Let <i>lenValue</i>  be the result of Get(<i>O</i>, <code>"length"</code>).</li>
+          <li>Let <i>lenValue</i>  be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <code>"length"</code>).</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenValue</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>len</i>).</li>
           <li>If <a href="#sec-9.2.2">IsCallable</a>(<i>callbackfn</i>) is <b>false</b>, throw a <b>TypeError</b> exception.</li>
@@ -26384,7 +26414,7 @@
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>kPresent</i>).</li>
               <li>If <i>kPresent</i> is <b>true</b>, then
                 <ol class="block">
-                  <li>Let <i>kValue</i> be the result of Get(<i>O</i>, <i>Pk</i>).</li>
+                  <li>Let <i>kValue</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <i>Pk</i>).</li>
                   <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>kValue</i>).</li>
                   <li>Let <i>testResult</i> be the result of calling the [[Call]] internal method of <i>callbackfn</i> with
                       <i>T</i> as <i>thisArgument</i> and a <a href="#sec-8.2.2">List</a> containing <i>kValue</i>, <i>k</i>, and
@@ -26438,7 +26468,7 @@
           <li>Let <i>O</i> be the result of calling <a href="#sec-9.1.9">ToObject</a> passing the <b>this</b> value as the
               argument.</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>O</i>).</li>
-          <li>Let <i>lenValue</i>  be the result of Get(<i>O</i>, <code>"length"</code>)</li>
+          <li>Let <i>lenValue</i>  be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <code>"length"</code>)</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenValue</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>len</i>).</li>
           <li>If <a href="#sec-9.2.2">IsCallable</a>(<i>callbackfn</i>) is <b>false</b>, throw a <b>TypeError</b> exception.</li>
@@ -26451,7 +26481,7 @@
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>kPresent</i>).</li>
               <li>If <i>kPresent</i> is <b>true</b>, then
                 <ol class="block">
-                  <li>Let <i>kValue</i> be the result of Get(<i>O</i>, <i>Pk</i>).</li>
+                  <li>Let <i>kValue</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <i>Pk</i>).</li>
                   <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>kValue</i>).</li>
                   <li>Let <i>funcResult</i> be  the result of calling the [[Call]] internal method of <i>callbackfn</i> with
                       <i>T</i> as <i>thisArgument</i> and a <a href="#sec-8.2.2">List</a> containing <i>kValue</i>, <i>k</i>, and
@@ -26504,7 +26534,7 @@
           <li>Let <i>O</i> be the result of calling <a href="#sec-9.1.9">ToObject</a> passing the <b>this</b> value as the
               argument.</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>O</i>).</li>
-          <li>Let <i>lenValue</i>  be the result of Get(<i>O</i>, <code>"length"</code>)</li>
+          <li>Let <i>lenValue</i>  be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <code>"length"</code>)</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenValue</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>len</i>).</li>
           <li>If <a href="#sec-9.2.2">IsCallable</a>(<i>callbackfn</i>) is <b>false</b>, throw a <b>TypeError</b> exception.</li>
@@ -26519,7 +26549,7 @@
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>kPresent</i>).</li>
               <li>If <i>kPresent</i> is <b>true</b>, then
                 <ol class="block">
-                  <li>Let <i>kValue</i> be the result of Get(<i>O</i>, <i>Pk</i>).</li>
+                  <li>Let <i>kValue</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <i>Pk</i>).</li>
                   <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>kValue</i>).</li>
                   <li>Let <i>mappedValue</i> be the result of calling the [[Call]] internal method of <i>callbackfn</i> with
                       <i>T</i> as <i>thisArgument</i> and a <a href="#sec-8.2.2">List</a> containing <i>kValue</i>, <i>k</i>, and
@@ -26577,7 +26607,7 @@
           <li>Let <i>O</i> be the result of calling <a href="#sec-9.1.9">ToObject</a> passing the <b>this</b> value as the
               argument.</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>O</i>).</li>
-          <li>Let <i>lenValue</i>  be the result of Get(<i>O</i>, <code>"length"</code>).</li>
+          <li>Let <i>lenValue</i>  be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <code>"length"</code>).</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenValue</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>len</i>).</li>
           <li>If <a href="#sec-9.2.2">IsCallable</a>(<i>callbackfn</i>) is <b>false</b>, throw a <b>TypeError</b> exception.</li>
@@ -26592,7 +26622,7 @@
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>kPresent</i>).</li>
               <li>If <i>kPresent</i> is <b>true</b>, then
                 <ol class="block">
-                  <li>Let <i>kValue</i> be the result of Get(<i>O</i>, <i>Pk</i>).</li>
+                  <li>Let <i>kValue</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <i>Pk</i>).</li>
                   <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>kValue</i>).</li>
                   <li>Let <i>selected</i> be the result of calling the [[Call]] internal method of <i>callbackfn</i> with <i>T</i>
                       as <i>thisArgument</i> and a <a href="#sec-8.2.2">List</a> containing <i>kValue</i>, <i>k</i>, and <i>O</i>
@@ -26656,7 +26686,7 @@
           <li>Let <i>O</i> be the result of calling <a href="#sec-9.1.9">ToObject</a> passing the <b>this</b> value as the
               argument.</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>O</i>).</li>
-          <li>Let <i>lenValue</i>  be the result of Get(<i>O</i>, <code>"length"</code>).</li>
+          <li>Let <i>lenValue</i>  be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <code>"length"</code>).</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenValue</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>len</i>).</li>
           <li>If <a href="#sec-9.2.2">IsCallable</a>(<i>callbackfn</i>) is <b>false</b>, throw a <b>TypeError</b> exception.</li>
@@ -26677,7 +26707,7 @@
                   <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>kPresent</i>).</li>
                   <li>If <i>kPresent</i> is <b>true</b>, then
                     <ol class="block">
-                      <li>Let <i>accumulator</i> be the result of Get(<i>O</i>, <i>Pk</i>).</li>
+                      <li>Let <i>accumulator</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <i>Pk</i>).</li>
                       <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>accumulator</i>).</li>
                     </ol>
                   </li>
@@ -26694,7 +26724,7 @@
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>kPresent</i>).</li>
               <li>If <i>kPresent</i> is <b>true</b>, then
                 <ol class="block">
-                  <li>Let <i>kValue</i> be the result of Get(<i>O</i>, <i>Pk</i>).</li>
+                  <li>Let <i>kValue</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <i>Pk</i>).</li>
                   <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>kValue</i>).</li>
                   <li>Let <i>accumulator</i> be the result of calling the [[Call]] internal method of <i>callbackfn</i> with
                       <b>undefined</b> as <i>thisArgument</i> and a <a href="#sec-8.2.2">List</a> containing <i>accumulator</i>,
@@ -26749,7 +26779,7 @@
           <li>Let <i>O</i> be the result of calling <a href="#sec-9.1.9">ToObject</a> passing the <b>this</b> value as the
               argument.</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>O</i>).</li>
-          <li>Let <i>lenValue</i>  be the result of Get(<i>O</i>, <code>"length"</code>).</li>
+          <li>Let <i>lenValue</i>  be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <code>"length"</code>).</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenValue</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>len</i>).</li>
           <li>If <a href="#sec-9.2.2">IsCallable</a>(<i>callbackfn</i>) is <b>false</b>, throw a <b>TypeError</b> exception.</li>
@@ -26770,7 +26800,7 @@
                   <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>kPresent</i>).</li>
                   <li>If <i>kPresent</i> is <b>true</b>, then
                     <ol class="block">
-                      <li>Let <i>accumulator</i> be the result of Get(<i>O</i>, <i>Pk</i>).</li>
+                      <li>Let <i>accumulator</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <i>Pk</i>).</li>
                       <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>accumulator</i>).</li>
                     </ol>
                   </li>
@@ -26787,7 +26817,7 @@
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>kPresent</i>).</li>
               <li>If <i>kPresent</i> is <b>true</b>, then
                 <ol class="block">
-                  <li>Let <i>kValue</i> be the result of Get(<i>O</i>, <i>Pk</i>).</li>
+                  <li>Let <i>kValue</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <i>Pk</i>).</li>
                   <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>kValue</i>).</li>
                   <li>Let <i>accumulator</i> be the result of calling the [[Call]] internal method of <i>callbackfn</i> with
                       <b>undefined</b> as <i>thisArgument</i> and a <a href="#sec-8.2.2">List</a> containing <i>accumulator</i>,
@@ -26844,7 +26874,7 @@
           <li>Let <i>O</i> be the result of calling <a href="#sec-9.1.9">ToObject</a> passing the <b>this</b> value as the
               argument.</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>O</i>).</li>
-          <li>Let <i>lenValue</i>  be the result of Get(<i>O</i>, <code>"length"</code>).</li>
+          <li>Let <i>lenValue</i>  be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <code>"length"</code>).</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.4">ToInteger</a>(<i>lenValue</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>len</i>).</li>
           <li>If <a href="#sec-9.2.2">IsCallable</a>(<i>predicate</i>) is <b>false</b>, throw a <b>TypeError</b> exception.</li>
@@ -26857,7 +26887,7 @@
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>kPresent</i>).</li>
               <li>If <i>kPresent</i> is <b>true</b>, then
                 <ol class="block">
-                  <li>Let <i>kValue</i> be the result of Get(<i>O</i>, <i>Pk</i>).</li>
+                  <li>Let <i>kValue</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <i>Pk</i>).</li>
                   <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>kValue</i>).</li>
                   <li>Let <i>testResult</i> be the result of calling the [[Call]] internal method of <i>predicate</i> with
                       <i>T</i> as <i>thisArgument</i> and a <a href="#sec-8.2.2">List</a> containing <i>kValue</i>, <i>k</i>, and
@@ -26914,7 +26944,7 @@
           <li>Let <i>O</i> be the result of calling <a href="#sec-9.1.9">ToObject</a> passing the <b>this</b> value as the
               argument.</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>O</i>).</li>
-          <li>Let <i>lenValue</i>  be the result of Get(<i>O</i>, <code>"length"</code>).</li>
+          <li>Let <i>lenValue</i>  be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <code>"length"</code>).</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.4">ToInteger</a>(<i>lenValue</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>len</i>).</li>
           <li>If <a href="#sec-9.2.2">IsCallable</a>(<i>predicate</i>) is <b>false</b>, throw a <b>TypeError</b> exception.</li>
@@ -26927,7 +26957,7 @@
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>kPresent</i>).</li>
               <li>If <i>kPresent</i> is <b>true</b>, then
                 <ol class="block">
-                  <li>Let <i>kValue</i> be the result of Get(<i>O</i>, <i>Pk</i>).</li>
+                  <li>Let <i>kValue</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <i>Pk</i>).</li>
                   <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>kValue</i>).</li>
                   <li>Let <i>testResult</i> be the result of calling the [[Call]] internal method of <i>predicate</i> with
                       <i>T</i> as <i>thisArgument</i> and a <a href="#sec-8.2.2">List</a> containing <i>kValue</i>, <i>k</i>, and
@@ -27090,7 +27120,7 @@
                 of <i>O</i>.</li>
             <li>Let <i>itemKind</i> be the value of the [[ArrayIterationKind]] <a href="#sec-8.1.6.2">internal data property</a>
                 of <i>O</i>.</li>
-            <li>Let <i>lenValue</i>  be the result of Get(<i>a</i>, <code>"length"</code>).</li>
+            <li>Let <i>lenValue</i>  be the result of <a href="#sec-9.3.1">Get</a>(<i>a</i>, <code>"length"</code>).</li>
             <li>Let <i>len</i> be <a href="#sec-9.1.6">ToUint32</a>(<i>lenValue</i>).</li>
             <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>len</i>).</li>
             <li>If <i>itemKind</i> contains the substring <b>"<span style="font-family: monospace">sparse</span>"</b>, then
@@ -27122,7 +27152,7 @@
                 <i>index</i>+1.</li>
             <li>If <i>itemKind</i> contains the substring <b>"<span style="font-family: monospace">value</span>"</b>, then
               <ol class="block">
-                <li>Let <i>elementValue</i> be the result of Get(<i>a</i>, <i>elementKey</i>).</li>
+                <li>Let <i>elementValue</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>a</i>, <i>elementKey</i>).</li>
                 <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>elementValue</i>).</li>
               </ol>
             </li>
@@ -27298,12 +27328,13 @@
 
         <ol class="proc">
           <li><a href="#sec-5.2">Assert</a>: <i>codeUnits</i> is a well-formed rest parameter object.</li>
-          <li>Let <i>length</i> be the result of Get(<i>codeUnits</i>, <code>"length"</code>)<code>.</code></li>
+          <li>Let <i>length</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>codeUnits</i>,
+              <code>"length"</code>)<code>.</code></li>
           <li>Let <i>elements</i> be  a new <a href="#sec-8.2.2">List</a>.</li>
           <li>Let <i>nextIndex</i> be 0.</li>
           <li>Repeat while <i>nextIndex</i> &lt; <i>length</i>
             <ol class="block">
-              <li>Let <i>next</i> be the result of Get(<i>codeUnits</i>, <a
+              <li>Let <i>next</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>codeUnits</i>, <a
                   href="#sec-9.1.8">ToString</a>(<i>nextIndex</i>)).</li>
               <li>Let <i>nextCU</i> be <a href="#sec-9.1.7">ToUint16</a>(<i>next</i>).</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>nextCU</i>).</li>
@@ -27327,12 +27358,13 @@
 
         <ol class="proc">
           <li><a href="#sec-5.2">Assert</a>: <i>codePoints</i> is a well-formed rest parameter object.</li>
-          <li>Let <i>length</i> be the result of Get(<i>codePoints</i>, <code>"length"</code>)<code>.</code></li>
+          <li>Let <i>length</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>codePoints</i>,
+              <code>"length"</code>)<code>.</code></li>
           <li>Let <i>elements</i> be  a new <a href="#sec-8.2.2">List</a>.</li>
           <li>Let <i>nextIndex</i> be 0.</li>
           <li>Repeat while <i>nextIndex</i> &lt; <i>length</i>
             <ol class="block">
-              <li>Let <i>next</i> be the result of Get(<i>codePoints</i>, <a
+              <li>Let <i>next</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>codePoints</i>, <a
                   href="#sec-9.1.8">ToString</a>(<i>nextIndex</i>)).</li>
               <li>Let <i>nextCP</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>next</i>).</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>nextCP</i>).</li>
@@ -27363,10 +27395,11 @@
           <li><a href="#sec-5.2">Assert</a>: <i>substitutions</i> is a well-formed rest parameter object.</li>
           <li>Let <i>cooked</i> be <a href="#sec-9.1.9">ToObject</a>(<i>callSite</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>cooked</i>).</li>
-          <li>Let <i>rawValue</i> be the result of Get(<i>cooked</i>, <code>"raw"</code>)<code>.</code></li>
+          <li>Let <i>rawValue</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>cooked</i>,
+              <code>"raw"</code>)<code>.</code></li>
           <li>Let <i>raw</i> be <a href="#sec-9.1.9">ToObject</a>(<i>rawValue</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>raw</i>).</li>
-          <li>Let <i>len</i> be the result of Get(<i>raw</i>, <code>"length"</code>)<code>.</code></li>
+          <li>Let <i>len</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>raw</i>, <code>"length"</code>)<code>.</code></li>
           <li>Let <i>literalSegments</i> be ToUint(<i>len</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>literalSegments</i>).</li>
           <li>If <i>literalSegments</i> = 0, then return the empty string.</li>
@@ -27375,7 +27408,7 @@
           <li>Repeat
             <ol class="block">
               <li>Let <i>nextKey</i> be <a href="#sec-9.1.8">ToString</a>(<i>nextIndex</i>).</li>
-              <li>Let <i>next</i> be the result of Get(<i>raw</i>, <i>nextKey</i>).</li>
+              <li>Let <i>next</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>raw</i>, <i>nextKey</i>).</li>
               <li>Let <i>nextSeg</i> be <a href="#sec-9.1.8">ToString</a>(<i>next</i>).</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>nextSeg</i>).</li>
               <li>Append in order the code unit elements of <i>nextSeg</i> to the end of <i>stringElements</i>.</li>
@@ -27385,7 +27418,7 @@
                       <i>stringElements</i>. If <i>length</i> is 0, the empty string is returned.</li>
                 </ol>
               </li>
-              <li>Let <i>next</i> be the result of Get(<i>substitutions</i>, <i>nextKey</i>).</li>
+              <li>Let <i>next</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>substitutions</i>, <i>nextKey</i>).</li>
               <li>Let <i>nextSub</i> be <a href="#sec-9.1.8">ToString</a>(<i>next</i>).</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>nextSub</i>).</li>
               <li>Append in order the code unit elements of <i>nextSub</i> to the end of <i>stringElements</i>.</li>
@@ -31436,7 +31469,7 @@
               argument.</li>
           <li>Let <i>tv</i> be <a href="#sec-9.1.1">ToPrimitive</a>(<i>O</i>, hint Number).</li>
           <li>If <i>tv</i> is a Number and is not finite, return <b>null</b>.</li>
-          <li>Let <i>toISO</i> be the result of Get(<i>O</i>, <code>"toISOString"</code>).</li>
+          <li>Let <i>toISO</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <code>"toISOString"</code>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>toISO</i>).</li>
           <li>If <a href="#sec-9.2.2">IsCallable</a>(<i>toISO</i>) is <b>false</b>, throw a <b>TypeError</b> exception.</li>
           <li>Return the result of calling the [[Call]] internal method of <i>toISO</i> with <i>O</i> as <i>thisArgument</i> and
@@ -33119,7 +33152,8 @@
               <i>P</i>.</li>
           <li>Set the value of <i>obj&rsquo;s</i> [[OriginalFlags]] <a href="#sec-8.1.6.2">internal data property</a> to
               <i>F</i>.</li>
-          <li>Let <i>putStatus</i> be the result of Put(<i>obj</i>, <code>"lastIndex"</code>, 0, <b>true</b>).</li>
+          <li>Let <i>putStatus</i> be the result of <a href="#sec-9.3.2">Put</a>(<i>obj</i>, <code>"lastIndex"</code>, 0,
+              <b>true</b>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>putStatus</i>).</li>
           <li>Return <i>obj</i>.</li>
         </ol>
@@ -33249,10 +33283,11 @@
           <li>Let <i>matcher</i> be the value of <i>R&rsquo;s</i> [[RegExpMatcher]] <a href="#sec-8.1.6.2">internal data
               property</a>.</li>
           <li>Let <i>length</i> be the length of <i>S</i>.</li>
-          <li>Let <i>lastIndex</i> be the result of Get(<i>R</i>,"<code>lastIndex</code>").</li>
+          <li>Let <i>lastIndex</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>R</i>,"<code>lastIndex</code>").</li>
           <li>Let <i>i</i> be the value of <a href="#sec-9.1.4">ToInteger</a>(<i>lastIndex</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>i</i>).</li>
-          <li>Let <i>global</i> be the result of <a href="#sec-9.1.2">ToBoolean</a>(Get(<i>R</i>, "<code>global"))</code>.</li>
+          <li>Let <i>global</i> be the result of <a href="#sec-9.1.2">ToBoolean</a>(<a href="#sec-9.3.1">Get</a>(<i>R</i>,
+              "<code>global"))</code>.</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>global</i>).</li>
           <li>If <i>global</i> is <b>false</b>, then let <i>i</i> = 0.</li>
           <li>Let <i>matchSucceeded</i> be <b>false</b>.</li>
@@ -33260,7 +33295,8 @@
             <ol class="block">
               <li>If <i>i</i> &lt; 0 or <i>i</i> &gt; <i>length</i>, then
                 <ol class="block">
-                  <li>Let <i>putStatus</i> be the result of Put(<i>R</i>, "<code>lastIndex"</code>, 0, <b>true</b>).</li>
+                  <li>Let <i>putStatus</i> be the result of <a href="#sec-9.3.2">Put</a>(<i>R</i>, "<code>lastIndex"</code>, 0,
+                      <b>true</b>).</li>
                   <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>putStatus</i>).</li>
                   <li>Return <b>null</b>.</li>
                 </ol>
@@ -33282,7 +33318,8 @@
           <li>Let <i>e</i> be <i>r</i>'s <i>endIndex</i> value.</li>
           <li>If <i>global</i> is <b>true</b>,
             <ol class="block">
-              <li>Let <i>putStatus</i> be the result of Put(<i>R</i>, "<code>lastIndex"</code>, <i>e</i>, <b>true</b>).</li>
+              <li>Let <i>putStatus</i> be the result of <a href="#sec-9.3.2">Put</a>(<i>R</i>, "<code>lastIndex"</code>, <i>e</i>,
+                  <b>true</b>).</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>putStatus</i>).</li>
             </ol>
           </li>
@@ -33471,25 +33508,29 @@
               <b>TypeError</b> exception.</li>
           <li>If the value of <i>R&rsquo;s</i> [[RegExpMatcher]] <a href="#sec-8.1.6.2">internal data property</a> is
               <b>undefined</b>, then throw a <b>TypeError</b> exception.</li>
-          <li>Let <i>pattern</i> be the result of <a href="#sec-9.1.8">ToString</a>(Get(<i>R</i>, <code>"source"</code>)).</li>
+          <li>Let <i>pattern</i> be the result of <a href="#sec-9.1.8">ToString</a>(<a href="#sec-9.3.1">Get</a>(<i>R</i>,
+              <code>"source"</code>)).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>pattern</i>).</li>
           <li>Let <i>result</i> be the String value formed by concatenating <span style="font-family:
               monospace">"<b>/</b>"</span>, <i>pattern</i>, and <span style="font-family: monospace">"<b>/</b>"</span>.</li>
-          <li>Let <i>global</i> be the result of <a href="#sec-9.1.2">ToBoolean</a>(Get(<i>R</i>, <code>"global"</code>)).</li>
+          <li>Let <i>global</i> be the result of <a href="#sec-9.1.2">ToBoolean</a>(<a href="#sec-9.3.1">Get</a>(<i>R</i>,
+              <code>"global"</code>)).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>global</i>).</li>
           <li>If <i>global</i> is <b>true</b>, then append <code>"g"</code> as the last character of <i>result</i>.</li>
-          <li>Let <i>ignoreCase</i> be the result of <a href="#sec-9.1.2">ToBoolean</a>(Get(<i>R</i>,
+          <li>Let <i>ignoreCase</i> be the result of <a href="#sec-9.1.2">ToBoolean</a>(<a href="#sec-9.3.1">Get</a>(<i>R</i>,
               <code>"ignoreCase"</code>)).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>ignoreCase</i>).</li>
           <li>If <i>ignoreCase</i> is <b>true</b>, then append <code>"i"</code> as the last character of <i>result</i>.</li>
-          <li>Let <i>multiline</i> be the result of <a href="#sec-9.1.2">ToBoolean</a>(Get(<i>R</i>,
+          <li>Let <i>multiline</i> be the result of <a href="#sec-9.1.2">ToBoolean</a>(<a href="#sec-9.3.1">Get</a>(<i>R</i>,
               <code>"multiline"</code>)).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>multiline</i>).</li>
           <li>If <i>multiline</i> is <b>true</b>, then append <code>"m"</code> as the last character of <i>result</i>.</li>
-          <li>Let <i>unicode</i> be the result of <a href="#sec-9.1.2">ToBoolean</a>(Get(<i>R</i>, <code>"unicode"</code>)).</li>
+          <li>Let <i>unicode</i> be the result of <a href="#sec-9.1.2">ToBoolean</a>(<a href="#sec-9.3.1">Get</a>(<i>R</i>,
+              <code>"unicode"</code>)).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>unicode</i>).</li>
           <li>If <i>unicode</i> is <b>true</b>, then append <code>"u"</code> as the last character of <i>result</i>.</li>
-          <li>Let <i>sticky</i> be the result of <a href="#sec-9.1.2">ToBoolean</a>(Get(<i>R</i>, <code>"sticky"</code>)).</li>
+          <li>Let <i>sticky</i> be the result of <a href="#sec-9.1.2">ToBoolean</a>(<a href="#sec-9.3.1">Get</a>(<i>R</i>,
+              <code>"sticky"</code>)).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>sticky</i>).</li>
           <li>If <i>sticky</i> is <b>true</b>, then append <code>"y"</code> as the last character of <i>result</i>.</li>
           <li>Return <i>result</i>.</li>
@@ -33516,7 +33557,8 @@
               <b>undefined</b>, then throw a <b>TypeError</b> exception.</li>
           <li>Let <i>S</i> be the value of <a href="#sec-9.1.8">ToString</a>(<i>string</i>)</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>S</i>).</li>
-          <li>Let <i>global</i> be the result of <a href="#sec-9.1.2">ToBoolean</a>(Get(<i>rx</i>, <code>"global"</code>)).</li>
+          <li>Let <i>global</i> be the result of <a href="#sec-9.1.2">ToBoolean</a>(<a href="#sec-9.3.1">Get</a>(<i>rx</i>,
+              <code>"global"</code>)).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>global</i>).</li>
           <li>If <i>global</i> is not <b>true</b>, then
             <ol class="block">
@@ -33526,7 +33568,8 @@
           </li>
           <li>Else <i>global</i> is <b>true</b>,
             <ol class="block">
-              <li>Let <i>putStatus</i> be the result of Put(<i>rx</i>, <code>"lastIndex"</code>, 0, <b>true</b>).</li>
+              <li>Let <i>putStatus</i> be the result of <a href="#sec-9.3.2">Put</a>(<i>rx</i>, <code>"lastIndex"</code>, 0,
+                  <b>true</b>).</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>putStatus</i>).</li>
               <li>Let <i>A</i> be the result of the abstract operation <a href="#sec-8.4.2.2">ArrayCreate</a> with argument
                   0.</li>
@@ -33541,13 +33584,13 @@
                   <li>If <i>result</i> is <b>null</b>, then set <i>lastMatch</i> to <b>false</b>.</li>
                   <li>Else <i>result</i> is not <b>null</b>,
                     <ol class="block">
-                      <li>Let <i>thisIndex</i>  be the result of <a href="#sec-9.1.4">ToInteger</a>(Get(<i>rx</i>,
-                          <code>"lastIndex"</code>)).</li>
+                      <li>Let <i>thisIndex</i>  be the result of <a href="#sec-9.1.4">ToInteger</a>(<a
+                          href="#sec-9.3.1">Get</a>(<i>rx</i>, <code>"lastIndex"</code>)).</li>
                       <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>thisIndex</i>).</li>
                       <li>If <i>thisIndex</i> = <i>previousLastIndex</i> then
                         <ol class="block">
-                          <li>Let <i>putStatus</i> be the result of Put(<i>rx</i>, <code>"lastIndex"</code>, <i>thisIndex</i>+1,
-                              <b>true</b>).</li>
+                          <li>Let <i>putStatus</i> be the result of <a href="#sec-9.3.2">Put</a>(<i>rx</i>,
+                              <code>"lastIndex"</code>, <i>thisIndex</i>+1, <b>true</b>).</li>
                           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>putStatus</i>).</li>
                           <li>Set <i>previousLastIndex</i> to <i>thisIndex</i>+1.</li>
                         </ol>
@@ -33557,7 +33600,7 @@
                           <li>Set <i>previousLastIndex</i> to <i>thisIndex</i>.</li>
                         </ol>
                       </li>
-                      <li>Let <i>matchStr</i> be the result of Get(<i>result</i>, <code>"0"</code>).</li>
+                      <li>Let <i>matchStr</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>result</i>, <code>"0"</code>).</li>
                       <li>Let <i>defineStatus</i> be the result of <a href="#sec-9.3.4">DefinePropertyOrThrow</a>(<i>A</i>, <a
                           href="#sec-9.1.8">ToString</a>(<i>n</i>), <a href="#sec-8.2.5">Property Descriptor</a> {[[Value]]:
                           <i>matchStr</i>, [[Writable]]: <b>true</b>, [[Enumerable]]: <b>true</b>, [[configurable]]:
@@ -33982,11 +34025,11 @@
         <ol class="proc">
           <li>Let <i>O</i> be the <b>this</b> value.</li>
           <li>If <a href="#sec-8">Type</a>(<i>O</i>) is not Object, throw a <b>TypeError</b> exception.</li>
-          <li>Let <i>name</i> be the result of Get(<i>O</i>, <code>"name"</code>).</li>
+          <li>Let <i>name</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <code>"name"</code>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>name</i>).</li>
           <li>If <i>name</i> is <b>undefined</b>, then let <i>name</i> be <span style="font-family:
               monospace">"<b>Error</b>"</span>; else let <i>name</i> be <a href="#sec-9.1.8">ToString</a>(<i>name</i>).</li>
-          <li>Let <i>msg</i> be the result of Get(<i>O</i>, <code>"message"</code>).</li>
+          <li>Let <i>msg</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <code>"message"</code>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>msg</i>).</li>
           <li>If <i>msg</i> is <b>undefined</b>, then let <i>msg</i> be the empty String; else let <i>msg</i> be <a
               href="#sec-9.1.8">ToString</a>(<i>msg</i>).</li>
@@ -34474,14 +34517,14 @@
       passed to the above parse function.</p>
 
       <ol class="proc">
-        <li>Let <i>val</i> be the result of Get(<i>holder</i>, <i>name</i>).</li>
+        <li>Let <i>val</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>holder</i>, <i>name</i>).</li>
         <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>val</i>).</li>
         <li>If <i>val</i> is an object, then
           <ol class="block">
             <li>If <i>val</i> is an exotic Array object then
               <ol class="block">
                 <li>Set <i>I</i> to 0.</li>
-                <li>Let <i>len</i> be the result of Get(<i>val</i>, <code>"length"</code>).</li>
+                <li>Let <i>len</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>val</i>, <code>"length"</code>).</li>
                 <li><a href="#sec-5.2">Assert</a>: <i>len</i> is not an <a href="#sec-8.2.3">abrupt completion</a> and its value
                     is a positive integer.</li>
                 <li>Repeat while <i>I</i> &lt; <i>len</i>,
@@ -34652,11 +34695,11 @@
       follows:</p>
 
       <ol class="proc">
-        <li>Let <i>value</i> be the result of Get(<i>holder</i>, <i>key</i>).</li>
+        <li>Let <i>value</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>holder</i>, <i>key</i>).</li>
         <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>value</i>).</li>
         <li>If <a href="#sec-8">Type</a>(<i>value</i>) is Object, then
           <ol class="block">
-            <li>Let <i>toJSON</i> be the result of Get(<i>value</i>, <code>"toJSON"</code>).</li>
+            <li>Let <i>toJSON</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>value</i>, <code>"toJSON"</code>).</li>
             <li>If <a href="#sec-9.2.2">IsCallable</a>(<i>toJSON</i>) is <b>true</b>
               <ol class="block">
                 <li>Let <i>value</i> be the result of calling the [[Call]] internal method of <i>toJSON</i> passing <i>value</i>
@@ -34882,7 +34925,7 @@
         <li>Let <i>partial</i> be an empty <a href="#sec-8.2.2">List</a>.</li>
         <li><a href="#sec-5.2">Assert</a>: <i>value</i> is a standard array object and hence its <code>"length"</code> property is
             a non-negative integer.</li>
-        <li>Let <i>len</i> be the result of Get(<i>value</i>, <code>"length"</code>)</li>
+        <li>Let <i>len</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>value</i>, <code>"length"</code>)</li>
         <li>Let <i>index</i> be 0.</li>
         <li>Repeat while <i>index</i> &lt; <i>len</i>
           <ol class="block">
@@ -35653,7 +35696,7 @@
                 data property</a>.</li>
             <li>Let <i>elementType</i> be the string value of the Element Type value in { REF _Ref342822617 \h }Table 36 for
                 <i>constructorName</i>.</li>
-            <li>Let <i>arrayLength</i> be the result of Get(<i>array</i>, <b>"<span style="font-family:
+            <li>Let <i>arrayLength</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>array</i>, <b>"<span style="font-family:
                 monospace">length</span>"</b>).</li>
             <li>Let <i>numberLength</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>arrayLength</i>).</li>
             <li>Let <i>elementLength</i> be <a href="#sec-9.1.4">ToInteger</a>(<i>numberLength</i>).</li>
@@ -35670,7 +35713,7 @@
             <li>Repeat, while <i>k</i> &lt; <i>elementLength</i>
               <ol class="block">
                 <li>Let <i>Pk</i> be <a href="#sec-9.1.8">ToString</a>(<i>k</i>).</li>
-                <li>Let <i>kValue</i> be the result of Get(<i>O</i>, <i>Pk</i>).</li>
+                <li>Let <i>kValue</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <i>Pk</i>).</li>
                 <li>Let <i>kNumber</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>kValue</i>).</li>
                 <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>kNumber</i>).</li>
                 <li>Perform SetValueInBuffer(<i>data</i>, <i>k &times;</i> <i>elementSize</i>, <i>elementType</i>,
@@ -35806,7 +35849,7 @@
           <p>When the <code>of</code> method is called with any number of arguments, the following steps are taken:</p>
 
           <ol class="proc">
-            <li>Let <i>lenValue</i>  be the result of Get(<i>items</i>, <code>"length"</code>).</li>
+            <li>Let <i>lenValue</i>  be the result of <a href="#sec-9.3.1">Get</a>(<i>items</i>, <code>"length"</code>).</li>
             <li>Let <i>len</i> be <a href="#sec-9.1.4">ToInteger</a>(<i>lenValue</i>).</li>
             <li>Let <i>C</i> be the <b>this</b> value.</li>
             <li>If <a href="#sec-9.2.5">IsConstructor</a>(<i>C</i>) is <b>true</b>, then
@@ -35826,8 +35869,9 @@
             <li>Repeat, while <i>k</i> &lt; <i>len</i>
               <ol class="block">
                 <li>Let <i>Pk</i> be <a href="#sec-9.1.8">ToString</a>(<i>k</i>).</li>
-                <li>Let <i>kValue</i> be the result of Get(<i>items</i>, <i>Pk</i>).</li>
-                <li>Let <i>defineStatus</i> be the result of Put(<i>A</i>,<i>Pk</i>, <i>kValue</i>.[[value]], <b>true</b>).</li>
+                <li>Let <i>kValue</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>items</i>, <i>Pk</i>).</li>
+                <li>Let <i>defineStatus</i> be the result of <a href="#sec-9.3.2">Put</a>(<i>A</i>,<i>Pk</i>,
+                    <i>kValue</i>.[[value]], <b>true</b>).</li>
                 <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>defineStatus</i>).</li>
                 <li>Increase <i>k</i> by 1.</li>
               </ol>
@@ -35911,7 +35955,8 @@
                       </ol>
                     </li>
                     <li>Else, let <i>mappedValue</i> be <i>kValue</i>.</li>
-                    <li>Let <i>putStatus</i> be the result of Put(<i>A</i>, <i>Pk</i>, <i>mappedValue</i>, <b>true</b>).</li>
+                    <li>Let <i>putStatus</i> be the result of <a href="#sec-9.3.2">Put</a>(<i>A</i>, <i>Pk</i>,
+                        <i>mappedValue</i>, <b>true</b>).</li>
                     <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>putStatus</i>).</li>
                     <li>Increase <i>k</i> by 1.</li>
                   </ol>
@@ -35921,7 +35966,7 @@
               </ol>
             </li>
             <li><a href="#sec-5.2">Assert</a>: <i>items</i> is not an Iterator so assume it is Array-like.</li>
-            <li>Let <i>lenValue</i>  be the result of Get(<i>items</i>, <code>"length"</code>).</li>
+            <li>Let <i>lenValue</i>  be the result of <a href="#sec-9.3.1">Get</a>(<i>items</i>, <code>"length"</code>).</li>
             <li>Let <i>len</i> be <a href="#sec-9.1.4">ToInteger</a>(<i>lenValue</i>).</li>
             <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>len</i>).</li>
             <li>Let <i>newObj</i> be the result of <a href="#sec-8.3.16.2.1">OrdinaryConstruct</a>(<i>C</i>, (<i>len</i>)).</li>
@@ -35931,7 +35976,7 @@
             <li>Repeat, while <i>k</i> &lt; <i>len</i>
               <ol class="block">
                 <li>Let <i>Pk</i> be <a href="#sec-9.1.8">ToString</a>(<i>k</i>).</li>
-                <li>Let <i>kValue</i> be the result of Get(<i>items</i>, <i>Pk</i>).</li>
+                <li>Let <i>kValue</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>items</i>, <i>Pk</i>).</li>
                 <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>kValue</i>).</li>
                 <li>If <i>mapping</i> is <b>true</b>, then
                   <ol class="block">
@@ -35942,7 +35987,8 @@
                   </ol>
                 </li>
                 <li>Else, let <i>mappedValue</i> be <i>kValue</i>.</li>
-                <li>Let <i>putStatus</i> be the result of Put(<i>A</i>, <i>Pk</i>, <i>mappedValue</i>, <b>true</b>).</li>
+                <li>Let <i>putStatus</i> be the result of <a href="#sec-9.3.2">Put</a>(<i>A</i>, <i>Pk</i>, <i>mappedValue</i>,
+                    <b>true</b>).</li>
                 <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>putStatus</i>).</li>
                 <li>Increase <i>k</i> by 1.</li>
               </ol>
@@ -36129,7 +36175,7 @@
                 data property</a>.</li>
             <li>Let <i>src</i> be the result of  <a href="#sec-9.1.9">ToObject</a>(<i>array</i>).</li>
             <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>src</i>).</li>
-            <li>Let <i>srcLen</i> be the result of Get(<i>src</i>, <code>"length"</code>).</li>
+            <li>Let <i>srcLen</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>src</i>, <code>"length"</code>).</li>
             <li>Let <i>numberLength</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>srcLen</i>).</li>
             <li>Let <i>srcLength</i> be <a href="#sec-9.1.4">ToInteger</a>(<i>numberLength</i>).</li>
             <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>srcLength</i>).</li>
@@ -36143,7 +36189,7 @@
             <li>Repeat, while <i>targetByteIndex</i> &lt; <i>limit</i>
               <ol class="block">
                 <li>Let <i>Pk</i> be <a href="#sec-9.1.8">ToString</a>(<i>k</i>).</li>
-                <li>Let <i>kValue</i> be the result of Get(<i>src</i>, <i>Pk</i>).</li>
+                <li>Let <i>kValue</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>src</i>, <i>Pk</i>).</li>
                 <li>Let <i>kNumber</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>kValue</i>).</li>
                 <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>kNumber</i>).</li>
                 <li>Perform SetValueInBuffer(<i>targetBuffer</i>, <i>k &times;</i> <i>targetElementSize</i>, <i>targetType</i>,
@@ -36266,7 +36312,7 @@
             <li>Let <i>srcByteOffset</i> be the value of <i>O</i>&rsquo;s [[ByteOffset]] <a href="#sec-8.1.6.2">internal data
                 property</a>.</li>
             <li>Let <i>beginByteOffset</i> be <i>srcByteOffset</i> + <i>beginIndex</i> &times; <i>elementSize</i>.</li>
-            <li>Let <i>constructor</i> be the result of Get(<i>O</i>, <code>"constructor"</code>).</li>
+            <li>Let <i>constructor</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <code>"constructor"</code>).</li>
             <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>constructor</i>).</li>
             <li>If <a href="#sec-9.2.5">IsConstructor</a>(<i>constructor</i>) is <b>false</b>, then throw a <b>TypeError</b>
                 exception.</li>
@@ -37077,7 +37123,7 @@
                 </ol>
               </li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>iter</i>).</li>
-              <li>Let <i>adder</i> be the result of Get(<i>map</i>, <code>"set"</code>)<b>.</b></li>
+              <li>Let <i>adder</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>map</i>, <code>"set"</code>)<b>.</b></li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>adder</i>).</li>
               <li>If <a href="#sec-9.2.2">IsCallable</a>(<i>adder</i>) is <b>false</b>, throw a <b>TypeError</b> Exception.</li>
             </ol>
@@ -37101,9 +37147,9 @@
               <li>If <i>done</i> is <b>true</b>, then return <a href="#sec-8.2.3.1">NormalCompletion</a>(<i>map</i>).</li>
               <li>Let <i>nextItem</i> be IteratorValue(<i>next</i>).</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>nextItem</i>).</li>
-              <li>Let <i>k</i> be the result of Get(<i>nextItem</i>, <code>"0"</code>).</li>
+              <li>Let <i>k</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>nextItem</i>, <code>"0"</code>).</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>k</i>).</li>
-              <li>Let <i>v</i> be the result of Get(<i>nextItem</i>, <code>"1"</code>).</li>
+              <li>Let <i>v</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>nextItem</i>, <code>"1"</code>).</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>v</i>).</li>
               <li>Let <i>status</i> be the result of calling the [[Call]] internal method of <i>adder</i> with <i>map</i> as
                   <i>thisArgument</i> and a <a href="#sec-8.2.2">List</a> whose elements are <i>k</i> and <i>v</i> as
@@ -37741,7 +37787,7 @@
                 </ol>
               </li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>iter</i>).</li>
-              <li>Let <i>adder</i> be the result of Get(<i>map</i>, <code>"set"</code>)<b>.</b></li>
+              <li>Let <i>adder</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>map</i>, <code>"set"</code>)<b>.</b></li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>adder</i>).</li>
               <li>If <a href="#sec-9.2.2">IsCallable</a>(<i>adder</i>) is <b>false</b>, throw a <b>TypeError</b> Exception.</li>
             </ol>
@@ -37758,9 +37804,9 @@
               <li>If <i>done</i> is <b>true</b>, then return <a href="#sec-8.2.3.1">NormalCompletion</a>(<i>map</i>).</li>
               <li>Let <i>nextValue</i> be IteratorValue(<i>next</i>).</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>nextValue</i>).</li>
-              <li>Let <i>k</i> be the result of Get(<i>nextValue</i>, <code>"0"</code>).</li>
+              <li>Let <i>k</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>nextValue</i>, <code>"0"</code>).</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>k</i>).</li>
-              <li>Let <i>v</i> be the result of Get(<i>nextValue</i>, <code>"1"</code>).</li>
+              <li>Let <i>v</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>nextValue</i>, <code>"1"</code>).</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>v</i>).</li>
               <li>Let <i>status</i> be the result of calling the [[Call]] internal method of <i>adder</i> with <i>map</i> as
                   <i>thisArgument</i> and a <a href="#sec-8.2.2">List</a> whose elements are <i>k</i> and <i>v</i> as
@@ -38051,7 +38097,7 @@
             <ol class="block">
               <li>Let <i>iter</i> be the result of GetIterator(<i>iterable</i>).</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>iter</i>).</li>
-              <li>Let <i>adder</i> be the result of Get(<i>set</i>, <code>"add"</code>)<b>.</b></li>
+              <li>Let <i>adder</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>set</i>, <code>"add"</code>)<b>.</b></li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>adder</i>).</li>
               <li>If <a href="#sec-9.2.2">IsCallable</a>(<i>adder</i>) is <b>false</b>, throw a <b>TypeError</b> Exception.</li>
             </ol>
@@ -38660,7 +38706,7 @@
             <ol class="block">
               <li>Let <i>iter</i> be the result of GetIterator(<i>iterable</i>).</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>iter</i>).</li>
-              <li>Let <i>adder</i> be the result of Get(<i>set</i>, <code>"add"</code>)<b>.</b></li>
+              <li>Let <i>adder</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>set</i>, <code>"add"</code>)<b>.</b></li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>adder</i>).</li>
               <li>If <a href="#sec-9.2.2">IsCallable</a>(<i>adder</i>) is <b>false</b>, throw a <b>TypeError</b> Exception.</li>
             </ol>
@@ -39875,7 +39921,7 @@
 
           <ol class="proc">
             <li><a href="#sec-5.2">Assert</a>: <a href="#sec-8">Type</a>(<i>itrResult</i>) is Object.</li>
-            <li>Let <i>done</i> be the result of Get(<i>itrResult</i>, <code>"done"</code>).</li>
+            <li>Let <i>done</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>itrResult</i>, <code>"done"</code>).</li>
             <li>Return <a href="#sec-9.1.2">ToBoolean</a>(<i>done</i>).</li>
           </ol>
         </section>
@@ -39888,7 +39934,7 @@
 
           <ol class="proc">
             <li><a href="#sec-5.2">Assert</a>: <a href="#sec-8">Type</a>(<i>itrResult</i>) is Object.</li>
-            <li>Return the result of Get(<i>itrResult</i>, <code>"value</code>).</li>
+            <li>Return the result of <a href="#sec-9.3.1">Get</a>(<i>itrResult</i>, <code>"value</code>).</li>
           </ol>
         </section>
 
