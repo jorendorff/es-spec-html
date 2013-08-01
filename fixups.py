@@ -487,8 +487,8 @@ def fixup_sections(doc, docx):
     def starts_with_section_number(s):
         return re.match(r'[1-9]|[A-Z]\.[1-9][0-9]*', s) is not None
 
-    def heading_info_lang(h):
-        """ For language spec only:
+    def heading_info(h):
+        """
         h is an h1 element. Return a pair (sec_num, title).
         sec_num is the section number, as a string, or None.
         title is the title, another string, or None.
@@ -550,29 +550,6 @@ def fixup_sections(doc, docx):
 
         return num.strip(), title
 
-    def heading_info_intl(h, counters):
-        """ For Internationalization spec only:
-            h is an h1 element. Return a pair (sec_num, title).
-            sec_num is the section number, as a string, or None.
-            title is the title, another string, or None.
-            Also update the counters.
-        """
-        cls = h.attrs.get('class')
-        s = h.content[0].lstrip()
-        num = None
-        title = s
-        if cls and level_re.match(cls):
-            level = int(cls[1:]) - 1
-            assert level < len(counters)
-            counters[level] += 1
-            for i in range(level + 1, len(counters)):
-                counters[i] = 0
-            num = ".".join(map(str, counters[0:level + 1]))
-        else:
-            if s.startswith('Annex'):
-                num, tab, title = s.partition('\t')
-        return num, title
-
     def contains(a, b):
         """ True if section `a` contains section `b` as a subsection.
         `a` and `b` are section numbers, which are strings; but some sections
@@ -586,13 +563,10 @@ def fixup_sections(doc, docx):
         else:
             return num
 
-    def wrap(sec_num, sec_title, start, counters):
+    def wrap(sec_num, sec_title, start):
         """ Wrap the section starting at body[start] in a section element. """
         sec_id = sec_num_to_id(sec_num).strip() if sec_num else None
 
-        # clone the counters so that they are used only for recursion,
-        # not when bumping against content that forces a return
-        newCounters = array('h', counters)
         j = start + 1
         while j < len(body):
             kid = body[j]
@@ -607,16 +581,13 @@ def fixup_sections(doc, docx):
                     if sec_title == "Copyright notice":
                         break
                 elif kid.name == 'h1':
-                    if spec_is_lang(docx):
-                        kid_num, kid_title = heading_info_lang(kid)
-                    else:
-                        kid_num, kid_title = heading_info_intl(kid, newCounters)
+                    kid_num, kid_title = heading_info(kid)
 
                     # Hack: most numberless sections are subsections, but the
                     # Bibliography is not contained in any other section.
                     if kid_title != 'Bibliography' and contains(sec_id, kid_num):
                         # kid starts a subsection. Wrap it!
-                        wrap(kid_num, kid_title, j, newCounters)
+                        wrap(kid_num, kid_title, j)
                     else:
                         # kid starts the next section. Done!
                         break
@@ -638,15 +609,9 @@ def fixup_sections(doc, docx):
         # Actually do the wrapping.
         body[start:stop] = [html.section(*body[start:stop], **attrs)]
 
-    counters = [0, 0, 0, 0, 0]
-    if spec_is_lang(docx):
-        for i, kid in body_elt.kids("h1"):
-            num, title = heading_info_lang(kid)
-            wrap(num, title, i, counters)
-    else:
-        for i, kid in body_elt.kids("h1"):
-            num, title = heading_info_intl(kid, counters)
-            wrap(num, title, i, counters)
+    for i, kid in body_elt.kids("h1"):
+        num, title = heading_info(kid)
+        wrap(num, title, i)
 
     # remove some h1 attributes that we don't need anymore (or never needed)
     for h in findall(doc, 'h1'):
