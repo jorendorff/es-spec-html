@@ -169,7 +169,7 @@ def parse_pr(e):
             if left is not None:
                 left = int(left)
                 assert left >= 0
-                #put('padding-left', str(left / 20) + 'pt')
+                put('margin-left', str(left / 20) + 'pt')
 
             hanging = k.get(k_hanging)
             if hanging is not None:
@@ -320,9 +320,9 @@ def parse_lvl(docx, e):
         style = {}
     else:
         style = docx.styles[lvl.pStyle].full_style.copy()
-    for kid in e.findall('pPr'):
+    for kid in e.findall(k_pPr):
         style.update(parse_pr(kid))
-    for kid in e.findall('rPr'):
+    for kid in e.findall(k_rPr):
         style.update(parse_pr(kid))
     lvl.full_style = style
 
@@ -462,6 +462,7 @@ class Document:
         return abstract_num_id, levels
 
     def get_list_style_at_level(self, numId, ilvl):
+        """ Returns a Lvl object; its .full_style attribute is a CSS dictionary. """
         num = self.numbering.num[numId]
         ilvl = int(ilvl)
         ov = num.overrides

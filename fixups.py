@@ -2182,6 +2182,14 @@ def fixup_delete_markers(doc):
 
     return doc.find_replace(has_marker, del_marker)
 
+def fixup_remove_margin_style(doc):
+    def has_margins(e):
+        return e.style is not None and any(k.startswith('margin-') for k in e.style)
+    def without_margins(e):
+        style = {k: v for k, v in e.style.items() if not k.startswith('margin-')}
+        return [e.with_(style=style)]
+    return doc.find_replace(has_margins, without_margins)
+
 def fixup(docx, doc):
     fixup_list_styles(doc, docx)
     fixup_formatting(doc, docx)
@@ -2223,5 +2231,6 @@ def fixup(docx, doc):
     fixup_add_disclaimer(doc, docx)
     fixup_add_ecma_flavor(doc, docx)
     #doc = fixup_delete_markers(doc)
+    doc = fixup_remove_margin_style(doc)
     return doc
 
