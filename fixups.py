@@ -1611,6 +1611,7 @@ def fixup_links(doc, docx):
                    and heading_content[0].attrs['class'] in ('secnum', 'marker')):
                 del heading_content[0]
             title = ht_text(heading_content).strip()
+            title = " ".join(title.split())
             sections_by_title[title] = '#' + sect.attrs['id']
 
     fallback_section_titles = {
@@ -1643,6 +1644,7 @@ def fixup_links(doc, docx):
         # Note that there's a hack below to avoid including the parenthesis in the <a> element.
         # We only want to match when the parenthesis is present, but it shouldn't be part of
         # the link.
+        ("Assert", "Algorithm Conventions"),
         ("abs(", "Algorithm Conventions"),
         ("sign(", "Algorithm Conventions"),
         ("modulo", "Algorithm Conventions"),
@@ -1659,10 +1661,9 @@ def fixup_links(doc, docx):
         ("List", "The List and Record Specification Type"),
         ("Completion Record", "The Completion Record Specification Type"),
         ("Completion", "The Completion Record Specification Type"),
-        ("NormalValue", "The Completion Record Specification Type"),
-        ("NormalCompletion", "The Completion Record Specification Type"),
         ("abrupt completion", "The Completion Record Specification Type"),
-        ("ReturnIfAbrupt", "The Completion Record Specification Type"),
+        ("NormalCompletion", "NormalCompletion"),
+        ("ReturnIfAbrupt", "ReturnIfAbrupt"),
         ("Reference", "The Reference Specification Type"),
         ("GetBase", "The Reference Specification Type"),
         ("GetReferencedName", "The Reference Specification Type"),
@@ -1675,7 +1676,8 @@ def fixup_links(doc, docx):
         ("IsSuperReference", "The Reference Specification Type"),
         ("GetValue", "GetValue (V)"),
         ("PutValue", "PutValue (V, W)"),
-        #("Property Descriptor", "The Property Descriptor Specification Types"),  # sic
+        ("GetThisValue", "GetThisValue (V)"),
+        ("Property Descriptor", "The Property Descriptor Specification Type"),
         ("property key value", "The Object Type"),
         ("property key", "The Object Type"),
         ("IsAccessorDescriptor", "IsAccessorDescriptor ( Desc )"),
@@ -1683,6 +1685,55 @@ def fixup_links(doc, docx):
         ("IsGenericDescriptor", "IsGenericDescriptor ( Desc )"),
         ("FromPropertyDescriptor", "FromPropertyDescriptor ( Desc )"),
         ("ToPropertyDescriptor", "ToPropertyDescriptor ( Obj )"),
+        ("CompletePropertyDescriptor", "CompletePropertyDescriptor ( Desc, LikeDesc )"),
+        ("internal data property", "Object Internal Methods and Internal Data Properties"),
+        #("[[GetInheritance]]", "[[GetInheritance]] ( )"),
+        #("[[SetInheritance]]", "[[SetInheritance]] (V)"),
+        #("[[IsExtensible]]", "[[IsExtensible]] ( )"),
+        #("[[PreventExtensions]]", "[[PreventExtensions]] ( )"),
+        #("[[HasOwnProperty]]", "[[HasOwnProperty]] (P)"),
+        #("[[GetOwnProperty]]", "[[GetOwnProperty]] (P)"),
+        ("OrdinaryGetOwnProperty", "OrdinaryGetOwnProperty (O, P)"),
+        #("[[DefineOwnProperty]]", "[[DefineOwnProperty]] (P, Desc)"),
+        ("OrdinaryDefineOwnProperty", "OrdinaryDefineOwnProperty (O, P, Desc)"),
+        ("IsCompatiblePropertyDescriptor", "IsCompatiblePropertyDescriptor (Extensible, Desc, Current)"),
+        ("ValidateAndApplyPropertyDescriptor", "ValidateAndApplyPropertyDescriptor (O, P, extensible, Desc, current)"),
+        #("[[HasProperty]]", "[[HasProperty]](P)"),
+        #("[[Get]]", "[[Get]] (P, Receiver)"),
+        #("[[Set]]", "[[Set]] ( P, V, Receiver)"),
+        #("[[Invoke]]", "[[Invoke]] (P, ArgumentsList, Receiver)"),
+        #("[[Delete]]", "[[Delete]] (P)"),
+        #("[[Enumerate]]", "[[Enumerate]] ()"),
+        #("[[OwnPropertyKeys]]", "[[OwnPropertyKeys]] ( )"),
+        ("ObjectCreate", "ObjectCreate(proto, internalDataList) Abstract Operation"),
+        ("ordinary Function object", "Ordinary Function Objects"),
+        ("ordinary function object", "Ordinary Function Objects"),
+        #("[[Call]]", "[[Call]] ( thisArgument, argumentsList)"),
+        #("[[Construct]]", "[[Construct]] ( argumentsList)"),
+        ("OrdinaryConstruct", "OrdinaryConstruct (F, argumentsList)"),
+        ("FunctionAllocate", "FunctionAllocate Abstract Operation"),
+        ("FunctionInitialise", "FunctionInitialise Abstract Operation"),
+        ("FunctionCreate", "FunctionCreate Abstract Operation"),
+        ("GeneratorFunctionCreate", "GeneratorFunctionCreate Abstract Operation"),
+        ("AddRestrictedFunctionProperties", "AddRestrictedFunctionProperties Abstract Operation"),
+        ("MakeConstructor", "MakeConstructor Abstract Operation"),
+        ("Bound Function", "Bound Function Exotic Objects"),
+        ("bound function", "Bound Function Exotic Objects"),
+        ("[[BoundTargetFunction]]", "Bound Function Exotic Objects"),
+        ("[[BoundThis]]", "Bound Function Exotic Objects"),
+        ("[[BoundArguments]]", "Bound Function Exotic Objects"),
+        ("BoundFunctionCreate", "BoundFunctionCreate Abstract Operation"),
+        ("Array exotic object", "Array Exotic Objects"),
+        ("ArrayCreate", "ArrayCreate Abstract Operation"),
+        ("ArraySetLength", "ArraySetLength Abstract Operation"),
+        ("String exotic object", "String Exotic Objects"),
+        ("StringCreate", "StringCreate Abstract Operation"),
+        ("Symbol exotic objects", "Symbol Exotic Objects"),
+        ("exotic arguments object", "Exotic Arguments Objects"),
+        ("IntegerIndexedObjectCreate", "IntegerIndexedObjectCreate Abstract Operation"),
+        ("IntegerIndexedElementGet", "IntegerIndexedElementGet ( O, index ) Abstract Operation"),
+        ("IntegerIndexedElementSet", "IntegerIndexedElementSet ( O, index, value ) Abstract Operation"),
+        ("CreateBuiltinFunction", "CreateBuiltinFunction Abstract Operation"),
 
         # clause 9
         ("ToPrimitive", "ToPrimitive"),
@@ -1697,10 +1748,29 @@ def fixup_links(doc, docx):
         ("ToPropertyKey", "ToPropertyKey"),
         ("CheckObjectCoercible", "CheckObjectCoercible"),
         ("IsCallable", "IsCallable"),
-        #("SameValue (according to 9.12)", "The SameValue Algorithm"),
-        #("SameValue", "The SameValue Algorithm"),
-        #("the SameValue algorithm (9.12)", "The SameValue Algorithm"),
-        #("the SameValue Algorithm (9.12)", "The SameValue Algorithm"),
+        ("SameValue (according to 9.12)", "SameValue(x, y)"),
+        ("SameValue", "SameValue(x, y)"),
+        ("the SameValue algorithm (9.12)", "SameValue(x, y)"),
+        ("the SameValue Algorithm (9.12)", "SameValue(x, y)"),
+        ("SameValueZero", "SameValueZero(x, y)"),
+        ("IsConstructor", "IsConstructor"),
+        ("IsPropertyKey", "IsPropertyKey"),
+        ("IsExtensible", "IsExtensible (O)"),
+        #("Get(", "Get (O, P)"),
+        #("Put(", "Put (O, P, V, Throw)"),
+        ("CreateOwnDataProperty", "CreateOwnDataProperty (O, P, V)"),
+        ("DefinePropertyOrThrow", "DefinePropertyOrThrow (O, P, desc)"),
+        ("DeletePropertyOrThrow", "DeletePropertyOrThrow (O, P)"),
+        ("HasProperty", "HasProperty (O, P)"),
+        ("GetMethod", "GetMethod (O, P)"),
+        ("Invoke", "Invoke(O,P, [args])"),
+        ("SetIntegrityLevel", "SetIntegrityLevel (O, level)"),
+        ("TestIntegrityLevel", "TestIntegrityLevel (O, level)"),
+        ("CreateArrayFromList", "CreateArrayFromList (elements)"),
+        ("CreateListFromArrayLike", "CreateListFromArrayLike (obj)"),
+        ("OrdinaryHasInstance", "OrdinaryHasInstance (C, O)"),
+        ("GetPrototypeFromConstructor", "GetPrototypeFromConstructor ( constructor, intrinsicDefaultProto )"),
+        ("OrdinaryCreateFromConstructor", "OrdinaryCreateFromConstructor ( constructor, intrinsicDefaultProto, internalDataList )"),
 
         # 10.1
         ("strict mode code (see 10.1.1)", "Strict Mode Code"),
@@ -1743,6 +1813,9 @@ def fixup_links(doc, docx):
 
         # clause 15
         ("direct call (see 15.1.2.1.1) to the eval function", "Direct Call to Eval"),
+
+        # 15.3
+        #("Function.prototype.bind", "Function.prototype.bind (thisArg [, arg1 [, arg2, …]])"),
 
         # 15.9
         ("this time value", "Properties of the Date Prototype Object"),
@@ -1949,6 +2022,7 @@ def fixup_links(doc, docx):
             if (i != -1
                 and can_link(current_section, target)  # don't link sections to themselves
                 and (i == 0 or not s[i-1].isalnum())  # check for word break before
+                and s[i + len(text):i + len(text) + 2] != "]]"  # don't link the HasInstance in [[HasInstance]]
                 and (text.endswith('(')
                      or i + len(text) == len(s)
                      or not s[i + len(text)].isalnum())  # and after
