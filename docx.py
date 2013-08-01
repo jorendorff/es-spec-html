@@ -48,7 +48,13 @@ def parse_color(s):
         return None
 
 def parse_pr(e):
-    font_keys = {k_ascii, k_hAnsi, k_cs, k_eastAsia, bloat('hint')}
+    font_keys = {
+        k_ascii, bloat('asciiTheme'),
+        k_hAnsi, bloat('hAnsiTheme'),
+        k_cs, bloat('cstheme'),
+        k_eastAsia, bloat('eastAsiaTheme'),
+        bloat('hint')
+    }
 
     assert e.text is None
 
@@ -73,10 +79,23 @@ def parse_pr(e):
                 put('font-weight', 'bold')
 
         elif name == 'rFonts':
-            # There are some cases of <rFonts eastAsia="Calibri"/> which Word
-            # apparently ignores; we ignore them too.  When cs= and ascii= are
-            # both present with different values (awesome), apparently Word
-            # uses ascii=, so we do the same.
+            # ascii, hAnsi, cs, and eastAsia are four different fixed subsets
+            # of the Unicode character set. A single w:rFonts element can
+            # contain all four, and the corresponding run of text is rendered
+            # using one of four fonts, for each character, depending on which
+            # subset that character falls into.
+            #
+            # We don't implement any of that, because for any given w:rFonts
+            # element, it seems the same font is specified for all the
+            # attributes that are actually defined.
+            #
+            # It's unclear what is supposed to happen when one or more of the
+            # four attributes is missing.
+            #
+            # In addition there are four more possible attributes: asciiTheme,
+            # hAnsiTheme, cstheme, eastAsiaTheme.  Handling these correctly
+            # apparently requires you to parse a whole extra file, theme1.xml.
+            #
             assert set(k.keys()) <= font_keys
             font = k.get(k_ascii) or k.get(k_cs)
             if font is not None:
@@ -84,7 +103,7 @@ def parse_pr(e):
                 assert k.get(k_hAnsi, font) == font
 
                 if font == 'Symbol':
-                    font = None  # vomit(); vomit(); forget()
+                    font = None  # appears once in the document, superfluous
                 elif font == 'Mistral':
                     font = None  # fanciful, drop it
                 elif font in ('Courier', 'Courier New'):
