@@ -83,7 +83,7 @@ def transform_element(docx, e, numbering_context):
         # Layout data
         return None
 
-    elif name == 'delText' or name == 'delInstrText':
+    elif name in ('del', 'delText', 'delInstrText'):
         assert ALLOW_CHANGES
         return None
 
