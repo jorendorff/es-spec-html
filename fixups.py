@@ -935,7 +935,6 @@ def fixup_lists(e, docx):
             if '-ooxml-ilvl' in k.style:
                 del k.style['-ooxml-ilvl']
 
-
     if have_list_items:
         # Walk the elements from left to right. If we find any <li> elements,
         # wrap them in <ol> elements to the appropriate depth.
@@ -966,8 +965,7 @@ def fixup_lists(e, docx):
                         if k.content and isinstance(k.content[0], str):
                             k.content[0] = k.content[0].lstrip()
 
-                # Well, what is its depth? Does it
-                # have a bullet or numbering?
+                # Well, what is its depth? Does it have a bullet or numbering?
                 bullet = False
                 if k.attrs.get('class') == 'ul':
                     # big hack for ListBullet style, whose relevant information is lost in translation
@@ -989,12 +987,13 @@ def fixup_lists(e, docx):
                 elif k.style and '-ooxml-ilvl' in k.style:
                     depth = int(k.style['-ooxml-ilvl'])
                     bullet = has_bullet(docx, k)
-
-                    # While we're here, delete the magic style attributes.
-                    del k.style['-ooxml-ilvl']
-                    del k.style['-ooxml-numId']
                 else:
                     depth = 0
+
+                # While we're here, delete the magic style attributes.
+                for propname in ('-ooxml-numId', '-ooxml-ilvl'):
+                    if propname in k.style:
+                        del k.style[propname]
 
                 # Close any open lists at greater depth.
                 while lists and lists[-1][0] > depth:
