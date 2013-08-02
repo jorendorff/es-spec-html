@@ -1110,47 +1110,62 @@ def fixup_list_paragraphs(doc, docx):
                         i -= 1
                     li.content[:i] = [html.p(*li.content[:i])]
 
-@InPlaceFixup
-def fixup_picts(doc, docx):
-    """ Replace Figure 1 with canned HTML. Remove div.w-pict elements. """
-    def walk(e):
-        i = 0
-        while i < len(e.content):
-            child = e.content[i]
-            if isinstance(child, str):
-                i += 1
-            elif child.name == 'div' and child.attrs.get('class') == 'w-pict':
-                if spec_is_lang(docx):
-                    # Remove the div element, but retain its contents.
-                    e.content[i:i + 1] = child.content
-                else:
-                    # in Internationalization spec, these are totally redundant
-                    del e.content[i]
-            elif (child.name == 'p'
-                  and len(child.content) == 1
-                  and ht_name_is(child.content[0], "div")
-                  and child.content[0].attrs.get('class') == 'w-pict'):
-                pict = child.content[0]
-                is_figure_1 = False
-                if i + 1 < len(e.content):
-                    caption = e.content[i + 1]
-                    if ht_name_is(caption, 'figcaption') and caption.content and caption.content[0].startswith('Figure 1'):
-                        is_figure_1 = True
 
-                if is_figure_1:
-                    image = html.object(
-                        html.img(src="figure-1.png", width="719", height="354", alt="An image of lots of boxes and arrows."),
-                        type="image/svg+xml", width="719", height="354", data="figure-1.svg")
-                    del e.content[i + 1]
-                    e.content[i] = html.figure(image, caption)
-                else:
-                    # Remove the div element, but retain its contents.
-                    e.content[i:i + 1] = pict.content
-            else:
-                walk(child)
-                i += 1
+def map_body(doc, f):
+    head, body = doc.content
+    return doc.with_content([head, f(body)])
 
-    walk(doc)
+@Fixup
+def fixup_figure_1(doc, docx):
+    image = html.object(
+        html.img(src="figure-1.png", width="719", height="354", alt="An image of lots of boxes and arrows."),
+        type="image/svg+xml", width="719", height="354", data="figure-1.svg")
+
+    def f(sect):
+        # Find the index of figure 1 within sect.content.
+        c = sect.content
+        for i, e in enumerate(c):
+            if ht_name_is(e, 'figure') and i + 1 < len(c):
+                caption = c[i + 1]
+                if (ht_name_is(caption, 'figcaption')
+                      and caption.content
+                      and caption.content[0].startswith('Figure { SEQ Figure \* ARABIC }1')):
+                    # Found figure 1!
+                    figure = html.figure(image, caption)
+                    return [sect.with_content(c[:i] + [figure] + c[i + 2:])]
+        warn("figure 1 not found")
+        return [sect]
+
+    return apply_section_fixup(doc, 'Objects', f)
+
+@Fixup
+def fixup_remove_picts(doc, docx):
+    """ Remove div.w-pict elements. """
+
+    def is_pict(e):
+        return (e.name == 'div' and e.attrs.get('class') == 'w-pict')
+
+    def is_pict_only_paragraph(e):
+        return (e.name == 'p'
+                and len(e.content) == 1
+                and not isinstance(e.content[0], str)
+                and is_pict(e.content[0]))
+
+    def rm_pict_only_paragraph(e):
+        # Remove the <p> and <div> elements, but retain their contents.
+        return e.content[0].content
+
+    def rm_pict(e):
+        if spec_is_lang(docx):
+            # Remove the div element, but retain its contents.
+            return e.content
+        else:
+            # in Internationalization spec, these are totally redundant
+            return []
+
+    return (doc
+            .find_replace(is_pict_only_paragraph, rm_pict_only_paragraph)
+            .find_replace(is_pict, rm_pict))
 
 @InPlaceFixup
 def fixup_figures(doc, docx):
@@ -1161,11 +1176,13 @@ def fixup_figures(doc, docx):
             prefix = 'Table { SEQ Table \* ARABIC }'
             if isinstance(s, str) and s.startswith(prefix):
                 stop = len(prefix)
-                while stop < len(s) and '0' <= s[stop] and s[stop] <= '9':
+                while stop < len(s) and '0' <= s[stop] <= '9':
                     stop += 1
                 table_id = s[len(prefix):stop]
                 child.content[0] = html.span(id = 'table-' + table_id, * 'Table ' + table_id)
-                child.content.insert(1, s[stop:])
+                rest = s[stop:]
+                if rest:
+                    child.content.insert(1, rest)
             # The iterator is actually ok with this mutation, but it's tricky.
             figure = parent.content[i + 1]
             del parent.content[i]
@@ -2311,10 +2328,6 @@ def fixup_add_disclaimer(doc, docx):
         content = body.content[:position] + [disclaimer] + body.content[position:]
         return body.with_content(content)
 
-    def map_body(doc, f):
-        head, body = doc.content
-        return doc.with_content([head, f(body)])
-
     return map_body(doc, with_disclaimer)
 
 @InPlaceFixup
@@ -2367,7 +2380,9 @@ def get_fixups(docx):
         yield fixup_lang_15_12_3
     yield fixup_lists
     yield fixup_list_paragraphs
-    yield fixup_picts
+    if spec_is_lang(docx):
+        yield fixup_figure_1
+    yield fixup_remove_picts
     yield fixup_figures
     yield fixup_remove_hr
     yield fixup_title_page
