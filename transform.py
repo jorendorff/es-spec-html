@@ -64,7 +64,7 @@ def transform_element(docx, e, numbering_context):
 
     elif name == 'instrText':
         assert len(e) == 0
-        if e.text.startswith(' SEQ ') or e.text.startswith(' REF '):
+        if e.text.startswith(' REF '):
             return '{' + e.text + '}'
         return None
 

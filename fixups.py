@@ -1127,7 +1127,7 @@ def replace_figure(doc, section_title, n, alt, width, height, has_svg=False):
                 caption = c[i + 1]
                 if (ht_name_is(caption, 'figcaption')
                       and caption.content
-                      and caption.content[0].startswith('Figure { SEQ Figure \\* ARABIC }' + str(n))):
+                      and caption.content[0].startswith('Figure ' + str(n))):
                     # Found figure
                     figure = html.figure(image, caption)
                     return sect.with_content(c[:i] + [figure] + c[i + 2:])
@@ -1180,7 +1180,7 @@ def fixup_figures(doc, docx):
         if child.name == 'figcaption' and i + 1 < len(parent.content) and ht_name_is(parent.content[i + 1], 'figure'):
             # add id to table captions that can have cross-references in word
             s = child.content[0]
-            prefix = 'Table { SEQ Table \* ARABIC }'
+            prefix = 'Table '
             if isinstance(s, str) and s.startswith(prefix):
                 stop = len(prefix)
                 while stop < len(s) and '0' <= s[stop] <= '9':
