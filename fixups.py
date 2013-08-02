@@ -1143,6 +1143,10 @@ def fixup_remove_picts(doc, docx):
     def is_pict(e):
         return (e.name == 'div' and e.attrs.get('class') == 'w-pict')
 
+    def rm_pict(e):
+        # Remove the <div> element, but retain its contents.
+        return e.content
+
     def is_pict_only_paragraph(e):
         return (e.name == 'p'
                 and len(e.content) == 1
@@ -1152,14 +1156,6 @@ def fixup_remove_picts(doc, docx):
     def rm_pict_only_paragraph(e):
         # Remove the <p> and <div> elements, but retain their contents.
         return e.content[0].content
-
-    def rm_pict(e):
-        if spec_is_lang(docx):
-            # Remove the div element, but retain its contents.
-            return e.content
-        else:
-            # in Internationalization spec, these are totally redundant
-            return []
 
     return (doc
             .find_replace(is_pict_only_paragraph, rm_pict_only_paragraph)
