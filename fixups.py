@@ -1196,7 +1196,7 @@ def fixup_title_page(doc, docx):
         if parent.name == 'p' and child.name == 'h1':
             # A p element shouldn't contain an h1, so make this an hgroup.
             parent.name = 'hgroup'
-            if len(parent.content) != 6:
+            if len(parent.content) != 7:
                 continue
 
             # A few of the lines here are redundant.

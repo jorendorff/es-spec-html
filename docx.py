@@ -10,6 +10,9 @@ namespaces = {
     'urn:schemas-microsoft-com:office:office': 'office',
     'http://www.w3.org/XML/1998/namespace': 'xml',
     'urn:schemas-microsoft-com:office:word': 'msword',
+    'http://schemas.openxmlformats.org/drawingml/2006/picture': 'pic',
+    'http://schemas.openxmlformats.org/drawingml/2006/main': 'a',
+    'http://schemas.openxmlformats.org/officeDocument/2006/relationships': 'r'
 }
 
 def shorten(name):

@@ -91,6 +91,17 @@ def transform_element(docx, e, numbering_context):
         assert shorten(e[0].tag) == 'compat:Choice'
         return transform_element(docx, e[0], numbering_context)
 
+    elif name == 'pic:pic':
+        # DrawingML Pictures - http://officeopenxml.com/drwPic.php
+        # The actual image is given by e/pic:blipFill/a:blip/@r:embed
+        # and the file word/_rels/document.xml.rels in the docx zip.
+        image = img()
+        for k in e:
+            if shorten(k.tag) == 'pic:nvPicPr':  # "non-visual picture properties"
+                for gk in k:
+                    if shorten(k.tag) == 'pic:cNvPr':  # no idea
+                        image.attrs['title'] = gk.get("name", '?')
+        return image
     else:
         assert e.text is None
 
