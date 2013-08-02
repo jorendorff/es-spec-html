@@ -1284,7 +1284,7 @@
       structure, behaviour, and state are all inherited.</p>
 
       <p>All objects that do not directly contain a particular property that their prototype contains share that property and its
-      value. { REF _Ref355342664 \h }Figure 1 illustrates this:</p>
+      value. Figure 1 illustrates this:</p>
 
       <p><b>CF</b> is a constructor (and also an object). Five objects have been created by using <code>new</code> expressions:
       <b>cf<sub>1</sub></b>, <b>cf<sub>2</sub></b>, <b>cf<sub>3</sub></b>, <b>cf<sub>4</sub></b>, and <b>cf<sub>5</sub></b>. Each
@@ -5151,8 +5151,10 @@
         <h1><span class="secnum"><a href="#sec-8.1.6.4" title="link to this section">8.1.6.4</a></span> Well-Known Symbols and
             Intrinsics</h1>
 
-        <p>Well-known symbols are built-in <a href="#sec-8.4.4">Symbol exotic objects</a> (<a href="#sec-10.3">10.3</a>) and the
-        value of their [[Private]] attribute is <b>false</b>.</p>
+        <p>Well-known symbols are built-in <a href="#sec-8.4.4">Symbol exotic objects</a> (<a href="#sec-8.4.4">8.4.4</a>) that
+        are explicitly referenced by algorithms of this specification.  They are typically used as the keys of properties whose
+        values serve as extension points of a specification algorithm.  Unless otherwise specified, well-known symbols objects are
+        shared by all Code Realms (<a href="#sec-10.3">10.3</a>) and the value of their [[Private]] attribute is <b>false</b>.</p>
 
         <p>Within this specification a well-known symbol is referred to by using a notation of the form @@name, where
         &ldquo;name&rdquo; is one of the values listed in <a href="#table-10">Table 10</a>.</p>
@@ -6902,12 +6904,12 @@
           <li>If <i>functionKind</i> is not present, then let <i>functionKind</i> be <span style="font-family:
               sans-serif">"</span><code>normal</code><span style="font-family: sans-serif">"</span>.</li>
           <li>Let <i>F</i> be a newly created <a href="#sec-8.3.16">ordinary function object</a> with the internal data properties
-              listed in { REF _Ref341173563 \h }<span style="font-family: sans-serif">Table 13</span>. All of those internal data
+              listed in <span style="font-family: sans-serif"><a href="#table-13">Table 13</a></span>. All of those internal data
               properties are initialized to <b>undefined</b>.</li>
           <li>Set <i>F</i>&rsquo;s essential internal methods except for [[Get]] and [[GetOwnProperty]] to the default ordinary
-              object definitions specified in { REF _Ref359588675 \r \h }&lrm;8.3.</li>
+              object definitions specified in <a href="#sec-8.3">8.3</a>.</li>
           <li>Set <i>F</i>&rsquo;s essential internal methods for  [[Call]], [[Get]] and [[GetOwnProperty]] to the default
-              ordinary object definitions specified in { REF _Ref359588500 \r \h }&lrm;8.3.16.</li>
+              ordinary object definitions specified in <a href="#sec-8.3.16">8.3.16</a>.</li>
           <li>Set the [[FunctionKind]] <a href="#sec-8.1.6.2">internal data property</a> of <i>F</i> to <i>functionKind</i>.</li>
           <li>Set the [[Prototype]] <a href="#sec-8.1.6.2">internal data property</a> of <i>F</i> to
               <i>functionPrototype</i>.</li>
@@ -7978,8 +7980,8 @@
               property</a>.</li>
           <li>Let <i>arrayTypeName</i> be the string value <i>O</i>&rsquo;s [[TypedArrayName]] <a href="#sec-8.1.6.2">internal
               data property</a>.</li>
-          <li>Let <i>elementSize</i> be the Number value of the Element Size value specified in Table 36 for
-              <i>arrayTypeName</i>.</li>
+          <li>Let <i>elementSize</i> be the Number value of the Element Size value specified in <a href="#table-36">Table 36</a>
+              for <i>arrayTypeName</i>.</li>
           <li>Let <i>indexedPosition</i> = (<i>index</i> &times; <i>elementSize</i>) + <i>offset</i>.</li>
           <li>Let <i>elementType</i> be the string value of the Element Type value in <a href="#table-36">Table 36</a> for
               <i>arrayTypeName</i>.</li>
@@ -8010,8 +8012,8 @@
               property</a>.</li>
           <li>Let <i>arrayTypeName</i> be the string value <i>O</i>&rsquo;s [[TypedArrayName]] <a href="#sec-8.1.6.2">internal
               data property</a>.</li>
-          <li>Let <i>elementSize</i> be the Number value of the Element Size value specified in Table 36 for
-              <i>arrayTypeName</i>.</li>
+          <li>Let <i>elementSize</i> be the Number value of the Element Size value specified in <a href="#table-36">Table 36</a>
+              for <i>arrayTypeName</i>.</li>
           <li>Let <i>indexedPosition</i> = (<i>index</i> &times; <i>elementSize</i>) + <i>offset</i>.</li>
           <li>Let <i>elementType</i> be the string value of the Element Type value in <a href="#table-36">Table 36</a> for
               <i>arrayTypeName</i>.</li>
@@ -15133,8 +15135,7 @@
           </ol>
         </li>
         <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>val</i>).</li>
-        <li>Return a String determined by <a href="#sec-8">Type</a>(<i>val</i>) according to { REF _Ref327355399 \h }<b>Table
-            31</b> .</li>
+        <li>Return a String determined by <a href="#sec-8">Type</a>(<i>val</i>) according to <b>Table 31</b> .</li>
       </ol>
 
       <p><b>Table 31</b> <b>&mdash; typeof Operator Results</b></p>
@@ -21600,8 +21601,8 @@
       <h1><span class="secnum"><a href="#sec-13.4.1.2" title="link to this section">13.4.1.2</a></span> Runtime Semantics</h1>
 
       <div class="note">
-        <p><span class="nh">NOTE:</span> Abstract operations relating to generator objects are defined in { REF _Ref359327247 \r
-        \h }&lrm;15.19.4.3.</p>
+        <p><span class="nh">NOTE:</span> Abstract operations relating to generator objects are defined in <a
+        href="#sec-15.19.4.3">15.19.4.3</a>.</p>
       </div>
 
       <p><b>Runtime Semantics: EvaluateBody</b></p>
@@ -24871,7 +24872,7 @@
           Constructor</h1>
 
       <p>The value of the [[Prototype]] <a href="#sec-8.1.6.2">internal data property</a> of the Array constructor is the Function
-      prototype object ({ REF _Ref359681817 \r \h }&lrm;15.3.3).</p>
+      prototype object (<a href="#sec-15.3.3">15.3.3</a>).</p>
 
       <p>Besides and the <code>length</code> property (whose value is <b>1</b>), the Array constructor has the following
       properties:</p>
@@ -27281,7 +27282,7 @@
           Constructor</h1>
 
       <p>The value of the [[Prototype]] <a href="#sec-8.1.6.2">internal data property</a> of the String constructor is the
-      standard built-in Function prototype object ({ REF _Ref359681817 \r \h }&lrm;15.3.3).</p>
+      standard built-in Function prototype object (<a href="#sec-15.3.3">15.3.3</a>).</p>
 
       <p>Besides the <code>length</code> property (whose value is <b>1</b>), the String constructor has the following
       properties:</p>
@@ -28581,7 +28582,7 @@
           Constructor</h1>
 
       <p>The value of the [[Prototype]] <a href="#sec-8.1.6.2">internal data property</a> of the Boolean constructor is the
-      Function prototype object ({ REF _Ref359681817 \r \h }&lrm;15.3.3).</p>
+      Function prototype object (<a href="#sec-15.3.3">15.3.3</a>).</p>
 
       <p>Besides the <code>length</code> property (whose value is <b>1</b>), the Boolean constructor has the following
       property:</p>
@@ -28754,7 +28755,7 @@
           Constructor</h1>
 
       <p>The value of the [[Prototype]] <a href="#sec-8.1.6.2">internal data property</a> of the Number constructor is the
-      Function prototype object ({ REF _Ref359681817 \r \h }&lrm;15.3.3).</p>
+      Function prototype object (<a href="#sec-15.3.3">15.3.3</a>).</p>
 
       <p>Besides the <code>length</code> property (whose value is <b>1</b>), the Number constructor has the following
       properties:</p>
@@ -34103,9 +34104,9 @@
           Structure</h1>
 
       <p>When an ECMAScript implementation detects a runtime error, it throws an new instance of one of the <i>NativeError</i>
-      objects defined in { REF _Ref359855575 \r \h }&lrm;15.11.6. Each of these objects has the structure described below,
-      differing only in the name used as the constructor name instead of <i>NativeError</i>, in the <b>name</b> property of the
-      prototype object, and in the implementation-defined <code>message</code> property of the prototype object.</p>
+      objects defined in <a href="#sec-15.11.6">15.11.6</a>. Each of these objects has the structure described below, differing
+      only in the name used as the constructor name instead of <i>NativeError</i>, in the <b>name</b> property of the prototype
+      object, and in the implementation-defined <code>message</code> property of the prototype object.</p>
 
       <p>For each error object, references to <i>NativeError</i> in the definition should be replaced with the appropriate error
       object name from <a href="#sec-15.11.6">15.11.6</a>.</p>
@@ -35093,8 +35094,8 @@
             <li>Let <i>block</i> be <i>arrayBuffer&rsquo;s</i> [[ArrayBufferData]] <a href="#sec-8.1.6.2">internal data
                 property</a>.</li>
             <li>If <i>block</i> is <b>undefined</b> or <b>null</b>, then throw a <b>TypeError</b> exception.</li>
-            <li>Let <i>elementSize</i> be the Number value of the Element Size value specified in Table 36 for
-                <i>valueType</i>.</li>
+            <li>Let <i>elementSize</i> be the Number value of the Element Size value specified in <a href="#table-36">Table 36</a>
+                for <i>valueType</i>.</li>
             <li>Let <i>rawValue</i> be the <i>elementSize</i> bytes starting at <i>byteIndex</i> of <i>block</i>.</li>
             <li>If <i>islittleEndian</i> is <b>undefined</b>, set <i>isLittleEndian</i> to either <b>true</b> or <b>false</b>.
                 The choice is implementation dependent and should be the alternative that is most efficient for the
@@ -35265,7 +35266,7 @@
             ArrayBuffer Constructor</h1>
 
         <p>The value of the [[Prototype]] <a href="#sec-8.1.6.2">internal data property</a> of the ArrayBuffer constructor is the
-        Function prototype object ({ REF _Ref359681817 \r \h }&lrm;15.3.3).</p>
+        Function prototype object (<a href="#sec-15.3.3">15.3.3</a>).</p>
 
         <p>Besides its <code>length</code> property (whose value is 1), the ArrayBuffer constructor has the following
         properties:</p>
@@ -35274,8 +35275,8 @@
           <h1><span class="secnum"><a href="#sec-15.13.5.3.1" title="link to this section">15.13.5.3.1</a></span>
               ArrayBuffer.prototype</h1>
 
-          <p>The initial value of ArrayBuffer.prototype is the ArrayBuffer prototype object ({ REF _Ref360364298 \r \h
-          }&lrm;15.13.5.4).</p>
+          <p>The initial value of ArrayBuffer.prototype is the ArrayBuffer prototype object (<a
+          href="#sec-15.13.5.4">15.13.5.4</a>).</p>
 
           <p>This property has the attributes { [[Writable]]: <b>false</b>, [[Enumerable]]: <b>false</b>, [[Configurable]]:
           <b>false</b> }.</p>
@@ -35555,8 +35556,8 @@
 
           <ol class="proc">
             <li><a href="#sec-5.2">Assert</a>:  <a href="#sec-8">Type</a>(<i>length</i>) is not Object.</li>
-            <li>Let <i>elementType</i> be the string value of the Element Type value in <a href="#table-35">Table 35</a>Table
-                35Table 36 for this <i>TypedArray</i> constructor.</li>
+            <li>Let <i>elementType</i> be the string value of the Element Type value in <a href="#table-35">Table 35</a><a
+                href="#table-35">Table 35</a><a href="#table-36">Table 36</a> for this <i>TypedArray</i> constructor.</li>
             <li>Let <i>O</i> be the <b>this</b> value.</li>
             <li>If <a href="#sec-8">Type</a>(<i>O</i>) is not Object or if <i>O</i> does not have an [[ViewedArrayBuffer]] <a
                 href="#sec-8.1.6.2">internal data property</a> or if the value of <i>O&rsquo;s</i> [[ViewedArrayBuffer]] <a
@@ -35803,8 +35804,8 @@
             %TypedArray% Intrinsic Object</h1>
 
         <p>the %TypedArray% intrinsic object is a built-in function object. The value of the [[Prototype]] <a
-        href="#sec-8.1.6.2">internal data property</a> of %TypedArray% is the Function prototype object ({ REF _Ref359681817 \r \h
-        }&lrm;15.3.3).</p>
+        href="#sec-8.1.6.2">internal data property</a> of %TypedArray% is the Function prototype object (<a
+        href="#sec-15.3.3">15.3.3</a>).</p>
 
         <p>Besides a <code>length</code> property (whose value is 3), %TypedArray% has the following properties:</p>
 
@@ -35812,8 +35813,8 @@
           <h1><span class="secnum"><a href="#sec-15.13.6.3.1" title="link to this section">15.13.6.3.1</a></span>
               %TypedArray%.prototype</h1>
 
-          <p>The initial value of %TypedArray%.prototype is the %TypedArrayPrototype% intrinsic object ({ REF _Ref359681458 \r \h
-          }&lrm;15.13.6.3).</p>
+          <p>The initial value of %TypedArray%.prototype is the %TypedArrayPrototype% intrinsic object (<a
+          href="#sec-15.13.6.3">15.13.6.3</a>).</p>
 
           <p>This property has the attributes { [[Writable]]: <span class="value">false</span>, [[Enumerable]]: <span
           class="value">false</span>, [[Configurable]]: <span class="value">false</span> }.</p>
@@ -36021,8 +36022,8 @@
             %TypedArrayPrototype% Object</h1>
 
         <p>The value of the [[Prototype]] <a href="#sec-8.1.6.2">internal data property</a> of the %TypedArrayPrototype% object is
-        the standard built-in Object prototype object ({ REF _Ref360007187 \r \h }&lrm;15.2.4). The %TypedArrayPrototype% object
-        is an ordinary object. It does not have a [[ViewedArrayBuffer]] or or any other of the internal data properties that are
+        the standard built-in Object prototype object (<a href="#sec-15.2.4">15.2.4</a>). The %TypedArrayPrototype% object is an
+        ordinary object. It does not have a [[ViewedArrayBuffer]] or or any other of the internal data properties that are
         specific to <i>TypedArray</i> instance objects.</p>
 
         <section id="sec-15.13.6.4.1">
@@ -36207,8 +36208,8 @@
                 data property</a>.</li>
             <li>Let <i>targetType</i> be the string value of the Element Type value in <a href="#table-36">Table 36</a> for
                 <i>targetName</i>.</li>
-            <li>Let <i>targetElementSize</i> be the Number value of the Element Size value specified in Table 36 for
-                <i>targetName</i>.</li>
+            <li>Let <i>targetElementSize</i> be the Number value of the Element Size value specified in <a href="#table-36">Table
+                36</a> for <i>targetName</i>.</li>
             <li>Let <i>targetByteOffset</i> be the value of <i>target</i>&rsquo;s [[ByteOffset]] <a href="#sec-8.1.6.2">internal
                 data property</a>.</li>
             <li>Let <i>srcBuffer</i> be the value of <i>typedArray</i>&rsquo;s [[ViewedArrayBuffer]] <a
@@ -36218,8 +36219,8 @@
                 href="#sec-8.1.6.2">internal data property</a>.</li>
             <li>Let <i>srcType</i> be the string value of the Element Type value in <a href="#table-36">Table 36</a> for
                 <i>srcName</i> .</li>
-            <li>Let <i>srcElementSize</i> be the Number value of the Element Size value specified in Table 36 for
-                <i>srcName</i>.</li>
+            <li>Let <i>srcElementSize</i> be the Number value of the Element Size value specified in <a href="#table-36">Table
+                36</a> for <i>srcName</i>.</li>
             <li>Let <i>srcLength</i> be the value of <i>typedArray</i>&rsquo;s [[ArrayLength]] <a href="#sec-8.1.6.2">internal
                 data property</a>.</li>
             <li>Let <i>srcByteOffset</i> be the value of <i>typedArray</i>&rsquo;s [[ByteOffset]] <a href="#sec-8.1.6.2">internal
@@ -36305,7 +36306,7 @@
               %TypedArray%.prototype.toString ( )</h1>
 
           <p>The value of the %TypedArray%.prototype.toString data property is the same built-in function object as the
-          Array.prototype.toString method defined in { REF _Ref360108309 \r \h }&lrm;15.4.3.2.</p>
+          Array.prototype.toString method defined in <a href="#sec-15.4.3.2">15.4.3.2</a>.</p>
         </section>
 
         <section id="sec-15.13.6.4.10">
@@ -36313,7 +36314,7 @@
               %TypedArray%.prototype.toLocaleString ( )</h1>
 
           <p>The value of the %TypedArray%.prototype.toLocaleString data property is the same built-in function object as the
-          Array.prototype.toLocaleString method defined in { REF _Ref360108678 \r \h }&lrm;15.4.3.3.</p>
+          Array.prototype.toLocaleString method defined in <a href="#sec-15.4.3.3">15.4.3.3</a>.</p>
         </section>
 
         <section id="sec-15.13.6.4.11">
@@ -36511,8 +36512,8 @@
           <h1><span class="secnum"><a href="#sec-15.13.6.6.1" title="link to this section">15.13.6.6.1</a></span>
               <i>TypedArray</i>.prototype</h1>
 
-          <p>The initial value of <i>TypedArray</i>.prototype is the corresponding <i>TypedArray</i> prototype object ({ REF
-          _Ref359681458 \r \h }&lrm;15.13.6.3).</p>
+          <p>The initial value of <i>TypedArray</i>.prototype is the corresponding <i>TypedArray</i> prototype object (<a
+          href="#sec-15.13.6.3">15.13.6.3</a>).</p>
 
           <p>This property has the attributes { [[Writable]]: <span class="value">false</span>, [[Enumerable]]: <span
           class="value">false</span>, [[Configurable]]: <span class="value">false</span> }.</p>
@@ -36524,9 +36525,9 @@
             <i>TypedArray</i> Prototype Objects</h1>
 
         <p>The value of the [[Prototype]] <a href="#sec-8.1.6.2">internal data property</a> of a <i>TypedArray</i> prototype
-        object is the standard built-in %TypedArrayPrototype% object ({ REF _Ref359681458 \r \h }&lrm;15.13.6.3). A
-        <i>TypedArray</i> prototype object is an ordinary object. It does not have a [[ViewedArrayBuffer]] or or any other of the
-        internal data properties that are specific to <i>TypedArray</i> instance objects.</p>
+        object is the standard built-in %TypedArrayPrototype% object (<a href="#sec-15.13.6.3">15.13.6.3</a>). A <i>TypedArray</i>
+        prototype object is an ordinary object. It does not have a [[ViewedArrayBuffer]] or or any other of the internal data
+        properties that are specific to <i>TypedArray</i> instance objects.</p>
 
         <section id="sec-15.13.6.7.1">
           <h1><span class="secnum"><a href="#sec-15.13.6.7.1" title="link to this section">15.13.6.7.1</a></span>
@@ -36588,7 +36589,8 @@
               property</a>.</li>
           <li>Let <i>viewSize</i> be the value of <i>v&rsquo;s</i> [[ByteLength]] <a href="#sec-8.1.6.2">internal data
               property</a>.</li>
-          <li>Let <i>elementSize</i> be the Number value of the Element Size value specified in Table 36 for <i>type</i>.</li>
+          <li>Let <i>elementSize</i> be the Number value of the Element Size value specified in <a href="#table-36">Table 36</a>
+              for <i>type</i>.</li>
           <li>If <i>getIndex</i> +<i>elementSize</i> &gt; <i>viewSize</i>, then throw a <b>RangeError</b> exception.</li>
           <li>Let <i>bufferIndex</i> be <i>getOffset</i>+<i>viewOffset</i>.</li>
           <li>Return the result of the GetValueFromBuffer(<i>buffer</i>, <i>bufferIndex</i>, <i>type</i>,
@@ -36617,7 +36619,8 @@
               property</a>.</li>
           <li>Let <i>viewSize</i> be the value of <i>v&rsquo;s</i> [[ByteLength]] <a href="#sec-8.1.6.2">internal data
               property</a>.</li>
-          <li>Let <i>elementSize</i> be the Number value of the Element Size value specified in Table 36 for <i>type</i>.</li>
+          <li>Let <i>elementSize</i> be the Number value of the Element Size value specified in <a href="#table-36">Table 36</a>
+              for <i>type</i>.</li>
           <li>If <i>getIndex</i> +<i>elementSize</i> &gt; <i>viewSize</i>, then throw a <b>RangeError</b> exception.</li>
           <li>Let <i>bufferIndex</i> be <i>getOffset</i>+<i>viewOffset</i>.</li>
           <li>Return the result of the SetValueInBuffer(<i>buffer</i>, <i>bufferIndex</i>, <i>type</i>, <i>value</i>
@@ -36726,7 +36729,7 @@
             DataView Constructor</h1>
 
         <p>The value of the [[Prototype]] <a href="#sec-8.1.6.2">internal data property</a> of the <code>DataView</code>
-        constructor is the <code>Function</code> prototype object ({ REF _Ref359681817 \r \h }&lrm;15.3.3).</p>
+        constructor is the <code>Function</code> prototype object (<a href="#sec-15.3.3">15.3.3</a>).</p>
 
         <p>Besides the internal properties and the length property (whose value is 3), the DataView constructor has the following
         properties:</p>
@@ -36735,8 +36738,8 @@
           <h1><span class="secnum"><a href="#sec-15.13.7.3.1" title="link to this section">15.13.7.3.1</a></span>
               DataView.prototype</h1>
 
-          <p>The initial value of <code>DataView.prototype</code> is the DataView prototype object ({ REF _Ref359756731 \r \h
-          }&lrm;15.13.7.4).</p>
+          <p>The initial value of <code>DataView.prototype</code> is the DataView prototype object (<a
+          href="#sec-15.13.7.4">15.13.7.4</a>).</p>
 
           <p>This property has the attributes { [[Writable]]: <b>false</b>, [[Enumerable]]: <b>false</b>, [[Configurable]]:
           <b>false</b> }.</p>
@@ -42395,7 +42398,7 @@
     <h1><span class="secnum"><a href="#sec-B.3.1" title="link to this section">B.3.1</a></span> __proto___ Property Names in
         Object Initialisers</h1>
 
-    <p>In { REF _Ref361069560 \r \h }&lrm;11.1.5 the Property Definition Evaluation algorithm for the production <span
+    <p>In <a href="#sec-11.1.5">11.1.5</a> the Property Definition Evaluation algorithm for the production <span
     class="prod"><span class="nt">PropertyDefinition</span> <span class="geq">:</span> <span class="nt">PropertyName</span> <code
     class="t">:</code> <span class="nt">AssignmentExpression</span></span>  is replaced with the following:</p>
 

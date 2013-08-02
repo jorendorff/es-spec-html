@@ -2081,9 +2081,13 @@ def fixup_links(doc, docx):
         # Oxford comma, like "13.3, 13.4 and 13.5"
         r' (SECTION) and\b',
 
-        # in the Language spec, a few internal cross references to tables
-        # are marked as such, so we get ugly but easy-to-find text after transformation
-        r'\{ REF _Ref[0-9]+ \\h \}((Table [1-9][0-9]*))',
+        # Some cross-references are marked with Word fields.
+        # In the Language spec, all REF fields are stripped out at this point
+        # whether they refer to a section or not; hence the very strange and precarious
+        # (SECTION|) in this regexp -- to allow group 2 to match the empty string.
+        r'{ REF \w+ (?:\\r )?\\h }' + '\N{LEFT-TO-RIGHT MARK}' + r'?((SECTION|))',
+
+        r'((Table [1-9][0-9]*))'
     ]))
 
     section_link_regexes_intl = list(map(compile, [
@@ -2100,7 +2104,7 @@ def fixup_links(doc, docx):
     # Disallow . ( ) , at the end since they usually aren't meant as part of the URL.
     url_re = re.compile(r'https?://[0-9A-Za-z;/?:@&=+$,_.!~*()\'-]+[0-9A-Za-z;/?:@&=+$_!~*\'-]')
 
-    xref_re = re.compile(r'(.*)\{ REF _Ref[0-9]+ (\\r )?\\h \}')
+    xref_re = re.compile(r'(.*)\{ REF _Ref[0-9]+ (\\r )?\\h \}' + '\N{LEFT-TO-RIGHT MARK}' + r'?')
 
     def find_link(s, current_section):
         best = None
@@ -2135,6 +2139,8 @@ def fixup_links(doc, docx):
                     id = "http://ecma-international.org/ecma-262/5.1/#sec-" + link_text[5:]
                 elif link_text.startswith('Table '):
                     id = 'table-' + link_text[6:]
+                elif link_text == "":
+                    id = None
                 else:
                     # Get the target section id.
                     sec_num = link_text
@@ -2144,11 +2150,11 @@ def fixup_links(doc, docx):
                         sec_num = sec_num[5:].lstrip()
                     id = "sec-" + sec_num
 
-                if id not in all_ids and not id.startswith('http'):
+                if id is not None and id not in all_ids and not id.startswith('http'):
                     warn("no such section: " + m.group(2))
                     m = link_re.search(s, m.end(1))
                 else:
-                    if not id.startswith('http'):
+                    if id is not None and not id.startswith('http'):
                         id = "#" + id
                     hit = m.start(1), m.end(1), id
                     if best is None or hit < best:
@@ -2164,7 +2170,7 @@ def fixup_links(doc, docx):
         return best
 
     def linkify(parent, i, s, current_section):
-        while True:
+        while s:
             m = find_link(s, current_section)
             if m is None:
                 return
@@ -2176,16 +2182,18 @@ def fixup_links(doc, docx):
                     prefix = m.group(1)
                 parent.content.insert(i, prefix)
                 i += 1
-            assert (not href.startswith('#')
-                    or href[1:] in all_ids
-                    or href[1:] in non_section_id_hrefs)
-            parent.content[i] = html.a(href=href, *s[start:stop])
-            i += 1
-            if stop < len(s):
-                parent.content.insert(i, s[stop:])
+
+            if href is not None:
+                assert (not href.startswith('#')
+                        or href[1:] in all_ids
+                        or href[1:] in non_section_id_hrefs)
+                parent.content[i] = html.a(href=href, *s[start:stop])
+                i += 1
             else:
-                break
+                del parent.content[i]
             s = s[stop:]
+            if s:
+                parent.content.insert(i, s)
 
     def visit(e, current_section):
         id = e.attrs.get('id')
