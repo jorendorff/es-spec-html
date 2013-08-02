@@ -573,7 +573,7 @@ def fixup_sections(doc, docx):
                 # Special hack: Annex headings have line breaks inside the header.
                 # Parse the heading and modify it in-place to be less horrible. :-P
                 assert num.startswith('Annex')
-                status = re.sub(r'{SEQ .* }', '', c[2])
+                status = c[2]
                 assert status in ('(informative)', '(normative)')
                 assert ht_name_is(c[3], 'br')
                 title = ''
