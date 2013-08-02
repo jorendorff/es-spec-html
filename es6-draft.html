@@ -7981,7 +7981,7 @@
           <li>Let <i>elementSize</i> be the Number value of the Element Size value specified in Table 36 for
               <i>arrayTypeName</i>.</li>
           <li>Let <i>indexedPosition</i> = (<i>index</i> &times; <i>elementSize</i>) + <i>offset</i>.</li>
-          <li>Let <i>elementType</i> be the string value of the Element Type value in { REF _Ref342822617 \h }Table 36 for
+          <li>Let <i>elementType</i> be the string value of the Element Type value in <a href="#table-36">Table 36</a> for
               <i>arrayTypeName</i>.</li>
           <li>Return the result of GetValueFromBuffer(<i>buffer</i>, <i>indexedPosition</i>, <i>elementType</i>).</li>
         </ol>
@@ -8013,7 +8013,7 @@
           <li>Let <i>elementSize</i> be the Number value of the Element Size value specified in Table 36 for
               <i>arrayTypeName</i>.</li>
           <li>Let <i>indexedPosition</i> = (<i>index</i> &times; <i>elementSize</i>) + <i>offset</i>.</li>
-          <li>Let <i>elementType</i> be the string value of the Element Type value in { REF _Ref342822617 \h }Table 36 for
+          <li>Let <i>elementType</i> be the string value of the Element Type value in <a href="#table-36">Table 36</a> for
               <i>arrayTypeName</i>.</li>
           <li>Let <i>status</i> be the result of SetValueInBuffer(<i>buffer</i>, <i>indexedPosition</i>, <i>elementType</i>,
               <i>numValue</i>).</li>
@@ -35147,7 +35147,7 @@
             <li>Let <i>block</i> be <i>arrayBuffer&rsquo;s</i> [[ArrayBufferData]] <a href="#sec-8.1.6.2">internal data
                 property</a>.</li>
             <li>If <i>block</i> is <b>undefined</b> or <b>null</b>, then throw a <b>TypeError</b> exception.</li>
-            <li>Let <i>elementSize</i> be the Number value of the Element Size value specified in { REF _Ref342822617 \h }Table 36
+            <li>Let <i>elementSize</i> be the Number value of the Element Size value specified in <a href="#table-36">Table 36</a>
                 on the row with Element Type is <i>type</i>.</li>
             <li>Let <i>rawValue</i> be the <i>elementSize</i> bytes starting at <i>byteIndex</i> of <i>arrayBuffer</i>.</li>
             <li>If <i>isLittleEndian</i> is <b>undefined</b>, set <i>isLittleEndian</i> to either <b>true</b> or <b>false</b>.
@@ -35173,10 +35173,10 @@
             </li>
             <li>Else,
               <ol class="block">
-                <li>Let <i>n</i> be the Size Element value in { REF _Ref342822617 \h }Table 36 for the row containing the value of
+                <li>Let <i>n</i> be the Size Element value in <a href="#table-36">Table 36</a> for the row containing the value of
                     <i>type</i> as its Element Type entry.</li>
-                <li>Let <i>convOp</i> be the abstract operation named in the Conversion Operation column in { REF _Ref342822617 \h
-                    }Table 36 for the row containing the value of <i>type</i> as its Element Type entry.</li>
+                <li>Let <i>convOp</i> be the abstract operation named in the Conversion Operation column in <a
+                    href="#table-36">Table 36</a> for the row containing the value of <i>type</i> as its Element Type entry.</li>
                 <li>Let <i>intValue</i> be the result of calling <i>convOp</i> with <i>value</i> as its argument .</li>
                 <li>If <i>intValue</i> &ge; 0, then
                   <ol class="block">
@@ -35426,7 +35426,7 @@
             same underlying binary scalar data type. There is a distinct <i>TypedArray</i> constructor for each of tbe nine
             support element types.</h1>
 
-        <p>For each constructor in the { REF _Ref342822617 \h }Table 36 is a separate <i>TypedArray</i> constructor object, with
+        <p>For each constructor in the <a href="#table-36">Table 36</a> is a separate <i>TypedArray</i> constructor object, with
         corresponding prototype object and instances.</p>
 
         <figure>
@@ -35569,7 +35569,7 @@
                 <b>TypeError</b> exception.</li>
             <li>Let <i>constructorName</i> be the string value <i>O</i>&rsquo;s [[TypedArrayName]] <a href="#sec-8.1.6.2">internal
                 data property</a>.</li>
-            <li>Let <i>elementType</i> be the string value of the Element Type value in { REF _Ref342822617 \h }Table 36 for
+            <li>Let <i>elementType</i> be the string value of the Element Type value in <a href="#table-36">Table 36</a> for
                 <i>constructorName</i>.</li>
             <li>Let <i>numberLength</i> be <a href="#sec-9.1.3">ToNumber</a>(<i>length</i>).</li>
             <li>Let <i>elementLength</i> be <a href="#sec-9.1.4">ToInteger</a>(<i>numberLength</i>).</li>
@@ -35578,7 +35578,7 @@
                 exception.</li>
             <li>Let <i>data</i> be the result of calling AllocateArrayBuffer(%ArrayBuffer%).</li>
             <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>data</i>).</li>
-            <li>Let <i>elementSize</i> be the Size Element value in { REF _Ref342822617 \h }Table 36 for
+            <li>Let <i>elementSize</i> be the Size Element value in <a href="#table-36">Table 36</a> for
                 <i>constructorName</i>.</li>
             <li>Let <i>byteLength</i> be <i>elementSize</i> &times; <i>elementLength</i>.</li>
             <li>Let <i>status</i> be the result of SetArrayBufferData(<i>data</i>, <i>byteLength</i>)5.</li>
@@ -35617,20 +35617,20 @@
                 <b>TypeError</b> exception.</li>
             <li>Let <i>constructorName</i> be the string value <i>O</i>&rsquo;s [[TypedArrayName]] <a href="#sec-8.1.6.2">internal
                 data property</a>.</li>
-            <li>Let <i>elementType</i> be the string value of the Element Type value in { REF _Ref342822617 \h }Table 36 for
+            <li>Let <i>elementType</i> be the string value of the Element Type value in <a href="#table-36">Table 36</a> for
                 <i>constructorName</i>.</li>
             <li>Let <i>elementLength</i> be the value of <i>srcArray&rsquo;s</i> [[ArrayLength]] <a href="#sec-8.1.6.2">internal
                 data property</a>.</li>
             <li>Let <i>srcName</i> be the string value <i>srcArray&rsquo;s</i> [[TypedArrayName]] <a href="#sec-8.1.6.2">internal
                 data property</a>.</li>
-            <li>Let <i>srcType</i> be the string value of the Element Type value in { REF _Ref342822617 \h }Table 36 for
+            <li>Let <i>srcType</i> be the string value of the Element Type value in <a href="#table-36">Table 36</a> for
                 <i>srcName</i>.</li>
             <li>Let <i>srcData</i> be the value of <i>srcArray&rsquo;s</i> [[ViewedArrayBuffer]] <a href="#sec-8.1.6.2">internal
                 data property</a>.</li>
             <li>Let <i>data</i> be the result of calling CloneArrayBuffer(<i>srcData</i>, <i>srcType,elementType</i>,
                 <i>elementLength</i>).</li>
             <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>data</i>).</li>
-            <li>Let <i>elementSize</i> be the Size Element value in { REF _Ref342822617 \h }Table 36 <i>constructorName</i>.</li>
+            <li>Let <i>elementSize</i> be the Size Element value in <a href="#table-36">Table 36</a> <i>constructorName</i>.</li>
             <li>Let <i>byteLength</i> be <i>elementSize</i> &times; <i>elementLength</i>.</li>
             <li>Let <i>data</i> be the result of SetArrayBufferData(<i>data</i>, <i>byteLength</i>).</li>
             <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>data</i>).</li>
@@ -35671,7 +35671,7 @@
                 <b>TypeError</b> exception.</li>
             <li>Let <i>constructorName</i> be the string value <i>O</i>&rsquo;s [[TypedArrayName]] <a href="#sec-8.1.6.2">internal
                 data property</a>.</li>
-            <li>Let <i>elementType</i> be the string value of the Element Type value in { REF _Ref342822617 \h }Table 36 for
+            <li>Let <i>elementType</i> be the string value of the Element Type value in <a href="#table-36">Table 36</a> for
                 <i>constructorName</i>.</li>
             <li>Let <i>arrayLength</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>array</i>, <b>"<span style="font-family:
                 monospace">length</span>"</b>).</li>
@@ -35682,7 +35682,7 @@
                 exception.</li>
             <li>Let <i>data</i> be the result of calling AllocateArrayBuffer(%ArrayBuffer%).</li>
             <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>data</i>).</li>
-            <li>Let <i>elementSize</i> be the Size Element value in { REF _Ref342822617 \h }Table 36 for
+            <li>Let <i>elementSize</i> be the Size Element value in <a href="#table-36">Table 36</a> for
                 <i>constructorName</i>.</li>
             <li>Let <i>byteLength</i> be <i>elementSize</i> &times; <i>elementLength</i>.</li>
             <li>Let <i>status</i> be the result of SetArrayBufferData(<i>data</i>, <i>byteLength</i>)</li>
@@ -35735,9 +35735,9 @@
                 <b>TypeError</b> exception.</li>
             <li>Let <i>constructorName</i> be the string value <i>O</i>&rsquo;s [[TypedArrayName]] <a href="#sec-8.1.6.2">internal
                 data property</a>.</li>
-            <li>Let <i>elementType</i> be the string value of the Element Type value in { REF _Ref342822617 \h }Table 36 for
+            <li>Let <i>elementType</i> be the string value of the Element Type value in <a href="#table-36">Table 36</a> for
                 <i>constructorName</i>.</li>
-            <li>Let <i>elementSize</i> be the Number value of the Element Size value in { REF _Ref342822617 \h }Table 36 for
+            <li>Let <i>elementSize</i> be the Number value of the Element Size value in <a href="#table-36">Table 36</a> for
                 <i>constructorName</i>.</li>
             <li><a href="#sec-5.2">Assert</a>:  the value of <i>O&rsquo;s</i> [[ViewedArrayBuffer]] <a
                 href="#sec-8.1.6.2">internal data property</a> is <b>undefined</b>.</li>
@@ -36144,9 +36144,9 @@
             <li>If <i>targetOffset</i> &lt; 0, then throw a <b>RangeError</b> exception.</li>
             <li>Let <i>targetName</i> be the string value <i>target</i>&rsquo;s [[TypedArrayName]] <a href="#sec-8.1.6.2">internal
                 data property</a>.</li>
-            <li>Let <i>targetElementSize</i> be the Number value of the Element Size value specified in { REF _Ref342822617 \h
-                }Table 36 for <i>targetName</i>.</li>
-            <li>Let <i>targetType</i> be the string value of the Element Type value in { REF _Ref342822617 \h }Table 36 for
+            <li>Let <i>targetElementSize</i> be the Number value of the Element Size value specified in <a href="#table-36">Table
+                36</a> for <i>targetName</i>.</li>
+            <li>Let <i>targetType</i> be the string value of the Element Type value in <a href="#table-36">Table 36</a> for
                 <i>targetName</i>.</li>
             <li>Let <i>targetByteOffset</i> be the value of <i>target</i>&rsquo;s [[ByteOffset]] <a href="#sec-8.1.6.2">internal
                 data property</a>.</li>
@@ -36205,7 +36205,7 @@
             <li>If <i>targetOffset</i> &lt; 0, then throw a <b>RangeError</b> exception.</li>
             <li>Let <i>targetName</i> be the string value <i>target</i>&rsquo;s [[TypedArrayName]] <a href="#sec-8.1.6.2">internal
                 data property</a>.</li>
-            <li>Let <i>targetType</i> be the string value of the Element Type value in { REF _Ref342822617 \h }Table 36 for
+            <li>Let <i>targetType</i> be the string value of the Element Type value in <a href="#table-36">Table 36</a> for
                 <i>targetName</i>.</li>
             <li>Let <i>targetElementSize</i> be the Number value of the Element Size value specified in Table 36 for
                 <i>targetName</i>.</li>
@@ -36216,7 +36216,7 @@
             <li>If <i>srcBuffer</i> is <b>undefined</b>, then throw a <b>TypeError</b> exception.</li>
             <li>Let <i>srcName</i> be the string value <i>typedArray</i>&rsquo;s [[TypedArrayName]] <a
                 href="#sec-8.1.6.2">internal data property</a>.</li>
-            <li>Let <i>srcType</i> be the string value of the Element Type value in { REF _Ref342822617 \h }Table 36 for
+            <li>Let <i>srcType</i> be the string value of the Element Type value in <a href="#table-36">Table 36</a> for
                 <i>srcName</i> .</li>
             <li>Let <i>srcElementSize</i> be the Number value of the Element Size value specified in Table 36 for
                 <i>srcName</i>.</li>
@@ -36282,9 +36282,9 @@
             <li>Let <i>newLength</i> be <i>endIndex</i> - <i>beginIndex</i>.</li>
             <li>Let <i>constructorName</i> be the string value <i>O</i>&rsquo;s [[TypedArrayName]] <a href="#sec-8.1.6.2">internal
                 data property</a>.</li>
-            <li>Let <i>elementType</i> be the string value of the Element Type value in { REF _Ref342822617 \h }Table 36 for
+            <li>Let <i>elementType</i> be the string value of the Element Type value in <a href="#table-36">Table 36</a> for
                 <i>constructorName</i>.</li>
-            <li>Let <i>elementSize</i> be the Number value of the Element Size value specified in { REF _Ref342822617 \h }Table 36
+            <li>Let <i>elementSize</i> be the Number value of the Element Size value specified in <a href="#table-36">Table 36</a>
                 for <i>constructorName</i>.</li>
             <li>Let <i>srcByteOffset</i> be the value of <i>O</i>&rsquo;s [[ByteOffset]] <a href="#sec-8.1.6.2">internal data
                 property</a>.</li>
@@ -36477,7 +36477,7 @@
             Constructors</h1>
 
         <p>Each of these <i>TypedArray</i> constructor objects has the structure described below, differing only in the name used
-        as the constructor name instead of <i>TypedArray</i>, in { REF _Ref342822617 \h }Table 36.</p>
+        as the constructor name instead of <i>TypedArray</i>, in <a href="#table-36">Table 36</a>.</p>
 
         <p>When a <i>TypedArray</i> constructor is called as a function rather than as a constructor, it creates and initialises a
         new <i>TypedArray</i> object. Thus the function call <code><i>TypedArray</i> (&hellip;)</code> is equivalent to the object
@@ -36502,7 +36502,7 @@
         is the %TypedArray% intrinsic object ({ REF _Ref360007791 \r \h }&lrm;15.13.6.1).</p>
 
         <p>Each <i>TypedArray</i> constructor has a [[TypedArrayConstructor]] <a href="#sec-8.1.6.2">internal data property</a>
-        whose String value is the the constructor name in the corresponding row in { REF _Ref342822617 \h }Table 36.</p>
+        whose String value is the the constructor name in the corresponding row in <a href="#table-36">Table 36</a>.</p>
 
         <p>Besides a <code>length</code> property (whose value is 3), each <i>TypedArray</i> constructor has the following
         properties:</p>
@@ -36541,7 +36541,7 @@
               <i>TypedArray</i>.prototype.BYTES_PER_ELEMENT</h1>
 
           <p>The value of <i>TypedArray</i>.prototype.BYTES_PER_ELEMENT is the Number value of the Element Size value specified in
-          { REF _Ref342822617 \h }Table 36 for <i>TypedArray</i>.</p>
+          <a href="#table-36">Table 36</a> for <i>TypedArray</i>.</p>
 
           <p>This property has the attributes { [[Writable]]: <b>false</b>, [[Enumerable]]: <b>false</b>, [[Configurable]]:
           <b>false</b> }.</p>
@@ -37654,8 +37654,8 @@
             Iterator Instances</h1>
 
         <p>Map Iterator instances are ordinary objects that inherit properties from the Map Iterator prototype (the intrinsic,
-        %MapIteratorPrototype%.) Map Iterator instances are initially created with the internal properties described in { REF
-        _Ref339292871 \h }Table 37.</p>
+        %MapIteratorPrototype%.) Map Iterator instances are initially created with the internal properties described in <a
+        href="#table-37">Table 37</a>.</p>
 
         <figure>
           <figcaption><span id="table-37">Table 37</span> &mdash; Internal Data Properties of Map Iterator Instances</figcaption>
@@ -38601,7 +38601,7 @@
             Iterator Instances</h1>
 
         <p>Set Iterator instances inherit properties from the Set Iterator prototype (the intrinsic,  %SetIteratorPrototype%.) Set
-        Iterator instances are initially created with the internal properties specified in { REF _Ref338591904 \h }Table 38.</p>
+        Iterator instances are initially created with the internal properties specified in <a href="#table-38">Table 38</a>.</p>
 
         <figure>
           <figcaption><span id="table-38">Table 38</span> &mdash; Internal Data Properties of Set Iterator Instances</figcaption>
@@ -39712,8 +39712,8 @@
         <h1><span class="secnum"><a href="#sec-15.19.4.2" title="link to this section">15.19.4.2</a></span> Properties of
             Generator Instances</h1>
 
-        <p>Generator instances are initially created with the internal data properties described in { REF _Ref339292871 \h }Table
-        37.</p>
+        <p>Generator instances are initially created with the internal data properties described in <a href="#table-37">Table
+        37</a>.</p>
 
         <figure>
           <figcaption><span id="table-39">Table 39</span> &mdash; Internal Data Properties of Generator Instances</figcaption>

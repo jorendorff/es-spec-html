@@ -1963,14 +1963,12 @@ def fixup_links(doc, docx):
         # clause 10
         ("InitializeCollator", "InitializeCollator (collator, locales, options)"),
         ("CompareStrings", "CompareStrings"),
-        ("Table 1", "Table 1"),
 
         # clause 11
         ("InitializeNumberFormat", "InitializeNumberFormat (numberFormat, locales, options)"),
         ("FormatNumber", "FormatNumber"),
         ("ToRawPrecision", "ToRawPrecision"),
         ("ToRawFixed", "ToRawFixed"),
-        ("Table 2", "Table 2"),
 
         # clause 12
         ("InitializeDateTimeFormat", "InitializeDateTimeFormat (dateTimeFormat, locales, options)"),
@@ -1979,16 +1977,12 @@ def fixup_links(doc, docx):
         ("BestFitFormatMatcher", "BestFitFormatMatcher"),
         ("FormatDateTime", "FormatDateTime"),
         ("ToLocalTime", "ToLocalTime"),
-        ("Table 3", "Table 3"),
     ]
 
     non_section_ids_lang = {
     }
 
     non_section_ids_intl = {
-        "Table 1": "table-1",
-        "Table 2": "table-2",
-        "Table 3": "table-3",
         "CompareStrings": "CompareStrings",
         "FormatNumber": "FormatNumber",
         "ToRawPrecision": "ToRawPrecision",
@@ -2002,22 +1996,14 @@ def fixup_links(doc, docx):
         "introduction of clause 15": "http://ecma-international.org/ecma-262/5.1/#sec-15",
     }
 
-    max_table_lang = 35;
-
-    max_table_intl = 3;
-
     # Build specific_links from specific_link_source_data, sections_by_title,
     # and fallback_section_titles.
     if spec_is_lang(docx):
         specific_link_source_data = specific_link_source_data_lang
         non_section_ids = non_section_ids_lang
-        max_table = max_table_lang
     else:
         specific_link_source_data = specific_link_source_data_intl
         non_section_ids = non_section_ids_intl
-        max_table = max_table_lang
-    for id in range(1, max_table + 1):
-        non_section_ids["Table " + str(id)] = "table-" + str(id);
     non_section_id_hrefs = []
     for id in non_section_ids:
         non_section_id_hrefs.append(non_section_ids[id])
@@ -2085,7 +2071,7 @@ def fixup_links(doc, docx):
 
         # in the Language spec, a few internal cross references to tables
         # are marked as such, so we get ugly but easy-to-find text after transformation
-        r'\{ REF _Ref[0-9]+ \\h \}((Table [0-9]+))',
+        r'\{ REF _Ref[0-9]+ \\h \}((Table [1-9][0-9]*))',
     ]))
 
     section_link_regexes_intl = list(map(compile, [
@@ -2135,6 +2121,8 @@ def fixup_links(doc, docx):
                     id = non_section_ids[link_text]
                 elif link_text.startswith('ES5, '):
                     id = "http://ecma-international.org/ecma-262/5.1/#sec-" + link_text[5:]
+                elif link_text.startswith('Table '):
+                    id = 'table-' + link_text[6:]
                 else:
                     # Get the target section id.
                     sec_num = link_text
@@ -2143,6 +2131,7 @@ def fixup_links(doc, docx):
                     elif sec_num.lower().startswith('annex'):
                         sec_num = sec_num[5:].lstrip()
                     id = "sec-" + sec_num
+
                 if id not in all_ids and not id.startswith('http'):
                     warn("no such section: " + m.group(2))
                     m = link_re.search(s, m.end(1))
