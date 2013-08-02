@@ -877,7 +877,7 @@ def fixup_lang_15_10_2_2(doc, docx):
         assert li.style['-ooxml-ilvl'] == '0'
         li.style['-ooxml-ilvl'] = '3'
 
-def apply_section_fixup(doc, title, fixup):
+def map_section(doc, title, fixup):
     hits = 0
 
     def match(e):
@@ -903,11 +903,14 @@ def apply_section_fixup(doc, title, fixup):
         else:
             return False
 
-    result = doc.find_replace(match, fixup)
+    def replacement(e):
+        return [fixup(e)]
+
+    result = doc.find_replace(match, replacement)
     if hits == 0:
         raise ValueError("could not find section to patch: {!r}".format(title))
     elif hits > 1:
-        raise ValueError("apply_section_fixup: found multiple sections with title {!r}".format(title))
+        raise ValueError("map_section: found multiple sections with title {!r}".format(title))
     return result
 
 @Fixup
@@ -919,7 +922,7 @@ def fixup_lang_15_9_1_8(doc, docx):
     def fix_section(sect):
         heading = sect.content[0]
         assert ht_name_is(heading, 'h1')
-        return [sect.with_content([fix_heading(heading)] + sect.content[1:])]
+        return sect.with_content([fix_heading(heading)] + sect.content[1:])
 
     def fix_heading(heading):
         [secnum, title] = heading.content
@@ -929,12 +932,7 @@ def fixup_lang_15_9_1_8(doc, docx):
         fixed_title = title.replace('15.9.1.8\t', '')
         return heading.with_content([secnum, fixed_title])
 
-    try:
-        return apply_section_fixup(doc, wrong_title, fix_section)
-    except ValueError as exc:
-        if not exc.args[0].startswith('could not find section to patch:'):
-            raise
-        return doc
+    return map_section(doc, wrong_title, fix_section)
 
 @Fixup
 def fixup_lang_15_12_3(doc, docx):
@@ -954,10 +952,10 @@ def fixup_lang_15_12_3(doc, docx):
                 while j < len(sect.content) and ht_name_is(sect.content[j], 'p'):
                     j += 1
                 tbl = html.table(*map(row, sect.content[i:j]), class_='lightweight')
-                return [sect.with_content_slice(i, j, [tbl])]
+                return sect.with_content_slice(i, j, [tbl])
         raise ValueError("fixup_lang_15_12_3: could not find text to patch in section")
 
-    return apply_section_fixup(doc, 'JSON.stringify ( value [ , replacer [ , space ] ] )', fixup)
+    return map_section(doc, 'JSON.stringify ( value [ , replacer [ , space ] ] )', fixup)
 
 
 def starts_with_marker(content):
@@ -1132,11 +1130,11 @@ def fixup_figure_1(doc, docx):
                       and caption.content[0].startswith('Figure { SEQ Figure \* ARABIC }1')):
                     # Found figure 1!
                     figure = html.figure(image, caption)
-                    return [sect.with_content(c[:i] + [figure] + c[i + 2:])]
+                    return sect.with_content(c[:i] + [figure] + c[i + 2:])
         warn("figure 1 not found")
-        return [sect]
+        return sect
 
-    return apply_section_fixup(doc, 'Objects', f)
+    return map_section(doc, 'Objects', f)
 
 @Fixup
 def fixup_remove_picts(doc, docx):
