@@ -59,6 +59,29 @@ def version_is_intl_1_final(docx):
     return os.path.basename(docx.filename) == 'es-intl-1-final.docx'
 
 
+# === Kinds of fixups
+
+class Fixup:
+    def __init__(self, fn):
+        self.fn = fn
+        self.name = fn.__name__
+    def __call__(self, doc, docx):
+        return self.fn(doc, docx)
+
+class InPlaceFixup:
+    """
+    A kind of fixup that modifies the document in-place
+    rather than creating a copy with some changes.
+    """
+    def __init__(self, fn):
+        self.fn = fn
+        self.name = fn.__name__
+    def __call__(self, doc, docx):
+        result = self.fn(doc, docx)
+        assert result is None
+        return doc
+
+
 # === Fixups
 
 def has_bullet(docx, p):
@@ -72,6 +95,7 @@ def has_bullet(docx, p):
     s = docx.get_list_style_at_level(numId, ilvl)
     return s is not None and s.numFmt == 'bullet'
 
+@InPlaceFixup
 def fixup_list_styles(doc, docx):
     """ Make sure bullet lists are never p.Alg4 or other particular styles.
 
@@ -99,6 +123,7 @@ def looks_like_nonterminal(text):
 def is_marker(e):
     return ht_name_is(e, 'span') and e.attrs.get('class') == 'marker'
 
+@InPlaceFixup
 def fixup_formatting(doc, docx):
     """
     Convert runs of span elements to more HTML-like code.
@@ -264,7 +289,8 @@ def ht_concat(c1, c2):
     else:
         return c1 + c2
 
-def fixup_paragraph_classes(doc):
+@Fixup
+def fixup_paragraph_classes(doc, docx):
     annex_counters = [0, 0, 0, 0]
 
     tag_names = {
@@ -341,7 +367,8 @@ def fixup_paragraph_classes(doc):
 
     return doc.replace('p', replace_tag_name)
 
-def fixup_remove_empty_headings(doc):
+@Fixup
+def fixup_remove_empty_headings(doc, docx):
     def is_empty(item):
         if isinstance(item, str):
             return item.strip() == ''
@@ -373,7 +400,8 @@ def marker_temporarily_removed(e):
     if marker:
         e.content.insert(0, marker)
 
-def fixup_element_spacing(doc):
+@InPlaceFixup
+def fixup_element_spacing(doc, docx):
     """
     Change "A<i> B</i>" to "A <i>B</i>".
 
@@ -436,7 +464,8 @@ def doc_body(doc):
 def ht_name_is(ht, name):
     return not isinstance(ht, str) and ht.name == name
 
-def fixup_sec_4_3(doc):
+@InPlaceFixup
+def fixup_sec_4_3(doc, docx):
     for parent, i, kid in all_parent_index_child_triples(doc):
         # Hack: Sections 4.3.{7,8,16} are messed up in the document. Wrong style. Fix it.
         if (kid.name == "h1"
@@ -458,7 +487,8 @@ def fixup_sec_4_3(doc):
                     h1_content.append(item)
             del parent.content[i]
 
-def fixup_hr(doc):
+@InPlaceFixup
+def fixup_hr(doc, docx):
     """ Replace <p><hr></p> with <hr>.
 
     Word treats an explicit page break as occurring within a paragraph rather
@@ -481,7 +511,8 @@ def fixup_hr(doc):
                 body.content[i:i + 1] = result
                 break
 
-def fixup_intl_remove_junk(doc):
+@InPlaceFixup
+def fixup_intl_remove_junk(doc, docx):
     """ Remove doc ids that only matter within Ecma, and some junk that Word inserts """
     for parent, i, child in all_parent_index_child_triples(doc):
         if child.name == 'h1' and child.attrs.get('class') == 'ECMAWorkgroup':
@@ -491,6 +522,7 @@ def fixup_intl_remove_junk(doc):
         if child.name == 'div' and child.attrs.get('class') == 'inner-title':
             child.content[0], _, _ = child.content[0].partition('INTERNATIONAL STANDARD© ISO/IEC')
 
+@InPlaceFixup
 def fixup_sections(doc, docx):
     """ Group h1 elements and subsequent elements of all kinds together into sections. """
 
@@ -636,6 +668,7 @@ def fixup_sections(doc, docx):
         if h.attrs.get('class') != None:
             del h.attrs['class']
 
+@InPlaceFixup
 def fixup_strip_toc(doc, docx):
     """ Delete the table of contents in the document.
 
@@ -663,7 +696,8 @@ def fixup_strip_toc(doc, docx):
         i1, first_section = next(section_iterator)
     body.content[i0: i1] = [toc]
 
-def fixup_tables(doc):
+@InPlaceFixup
+def fixup_tables(doc, docx):
     """ Turn highlighted td elements into th elements.
 
     Also, OOXML puts all table cell content in paragraphs; strip out the extra
@@ -706,7 +740,8 @@ def fixup_tables(doc):
                 if not span.attrs and not span.style:
                     td.content = span.content
 
-def fixup_pre(doc):
+@InPlaceFixup
+def fixup_pre(doc, docx):
     """ Convert p elements containing only monospace font to pre.
 
     Precedes fixup_notes, which considers pre elements to be part of notes.
@@ -719,7 +754,8 @@ def fixup_pre(doc):
                 e.name = 'pre'
                 e.content = span.content
 
-def fixup_notes(doc):
+@InPlaceFixup
+def fixup_notes(doc, docx):
     """ Wrap each NOTE and EXAMPLE in div.note and wrap the labels "NOTE", "NOTE 2", etc. in span.nh. """
 
     def find_nh(p, strict=False):
@@ -780,7 +816,6 @@ def fixup_notes(doc):
                 # Wrap the whole note in a div.note element.
                 parent.content[i:j] = [html.div(*parent.content[i:j], class_="note")]
 
-
 def ht_text(ht):
     if isinstance(ht, str):
         return ht
@@ -804,6 +839,7 @@ def find_section(doc, title):
                 return sect
     raise ValueError("No section has the title " + repr(title))
 
+@InPlaceFixup
 def fixup_lang_7_9_1(doc, docx):
     """ Fix the ilvl attributes on the bullets in section 7.9.1.
 
@@ -826,7 +862,8 @@ def fixup_lang_7_9_1(doc, docx):
         lst[i].style['-ooxml-numId'] = bullet_numid
         assert has_bullet(docx, lst[i])
 
-def fixup_lang_15_10_2_2(doc):
+@InPlaceFixup
+def fixup_lang_15_10_2_2(doc, docx):
     """ Fix the ilvl attributes on the nested procedure in section 15.10.2.2
         of the Language specification.
 
@@ -873,7 +910,8 @@ def apply_section_fixup(doc, title, fixup):
         raise ValueError("apply_section_fixup: found multiple sections with title {!r}".format(title))
     return result
 
-def fixup_lang_15_9_1_8(doc):
+@Fixup
+def fixup_lang_15_9_1_8(doc, docx):
     """ Fix a typo in the heading for section 15.9.1.8. """
 
     wrong_title = "15.9.1.8\tDaylight Saving Time Adjustment"
@@ -898,7 +936,8 @@ def fixup_lang_15_9_1_8(doc):
             raise
         return doc
 
-def fixup_lang_15_12_3(doc):
+@Fixup
+def fixup_lang_15_12_3(doc, docx):
     """ Convert some paragraphs in section 15.12.3 of the Language specification into tables.
 
     Precedes fixup_lists which needs the table to exist in order to translate
@@ -925,6 +964,7 @@ def starts_with_marker(content):
     assert isinstance(content, list)
     return content and is_marker(content[0])
 
+@InPlaceFixup
 def fixup_lists(e, docx):
     """ Wrap each li element in a list of the appropriate type.
 
@@ -1041,6 +1081,7 @@ def fixup_lists(e, docx):
 
         kids[:] = new_content
 
+@InPlaceFixup
 def fixup_list_paragraphs(doc, docx):
     """ Put some more space between list items in certain lists. """
 
@@ -1069,6 +1110,7 @@ def fixup_list_paragraphs(doc, docx):
                         i -= 1
                     li.content[:i] = [html.p(*li.content[:i])]
 
+@InPlaceFixup
 def fixup_picts(doc, docx):
     """ Replace Figure 1 with canned HTML. Remove div.w-pict elements. """
     def walk(e):
@@ -1110,7 +1152,8 @@ def fixup_picts(doc, docx):
 
     walk(doc)
 
-def fixup_figures(doc):
+@InPlaceFixup
+def fixup_figures(doc, docx):
     for parent, i, child in all_parent_index_child_triples(doc):
         if child.name == 'figcaption' and i + 1 < len(parent.content) and ht_name_is(parent.content[i + 1], 'figure'):
             # add id to table captions that can have cross-references in word
@@ -1128,13 +1171,15 @@ def fixup_figures(doc):
             del parent.content[i]
             figure.content.insert(0, child)
 
-def fixup_remove_hr(doc):
+@InPlaceFixup
+def fixup_remove_hr(doc, docx):
     """ Remove all remaining hr elements. """
     for parent, i, child in all_parent_index_child_triples(doc):
         if child.name == 'hr':
             del parent.content[i]
 
-def fixup_title_page(doc):
+@InPlaceFixup
+def fixup_title_page(doc, docx):
     """ Apply a fixup or two for the title page. """
     for parent, i, child in all_parent_index_child_triples(doc):
         if parent.name == 'p' and child.name == 'h1':
@@ -1146,7 +1191,8 @@ def fixup_title_page(doc):
             # A few of the lines here are redundant.
             del parent.content[3:]
 
-def fixup_lang_title_page_p_in_p(doc):
+@Fixup
+def fixup_lang_title_page_p_in_p(doc, docx):
     """
     Flatten a place where a few <p> elements appear inside another <p>
     (due to a <pict>).
@@ -1169,6 +1215,7 @@ def fixup_lang_title_page_p_in_p(doc):
             return [p]
     return doc.replace('p', fix_p)
 
+@InPlaceFixup
 def fixup_html_head(doc, docx):
     head, body = doc.content
     assert ht_name_is(head, 'head')
@@ -1193,7 +1240,8 @@ def fixup_html_head(doc, docx):
     head.content.insert(2, html.link(rel='stylesheet', href=stylesheet))
     doc.attrs['lang'] = 'en-GB'
 
-def fixup_lang_overview_biblio(doc):
+@InPlaceFixup
+def fixup_lang_overview_biblio(doc, docx):
     sect = find_section(doc, "Overview")
     for i, p in enumerate(sect.content):
         if p.name == 'p':
@@ -1237,7 +1285,8 @@ def fixup_lang_overview_biblio(doc):
     assert dot_space
     p.content[0:1] = [html.span(title.strip(), class_="book-title"), dot_space + rest]
 
-def fixup_simplify_formatting(doc):
+@InPlaceFixup
+def fixup_simplify_formatting(doc, docx):
     """ Convert formatting spans into HTML markup that does the same thing.
 
     (Sometimes this converts to semantic markup, like using a var or span.nt
@@ -1298,11 +1347,15 @@ def fixup_simplify_formatting(doc):
 
         return content
 
+    # Regarding functional vs. stateful fixups: This is easily converted to
+    # doc.replace('span', simplify_style_span), but simplify_style_span itself
+    # is all mutation, so it would be misleading to do so.
     for parent, i, span in all_parent_index_child_triples_reversed(doc):
         if span.name == 'span':
             parent.content[i:i + 1] = simplify_style_span(span)
 
-def fixup_lang_grammar_pre(doc):
+@InPlaceFixup
+def fixup_lang_grammar_pre(doc, docx):
     """ Convert runs of div.lhs and div.rhs elements in doc to pre elements.
 
     Keep the text; throw everything else away.
@@ -1476,7 +1529,8 @@ def fixup_lang_grammar_pre(doc):
         elif is_nonterminal(child):
             strip_grammar_inline(parent, i)
 
-def fixup_lang_grammar_post(doc):
+@InPlaceFixup
+def fixup_lang_grammar_post(doc, docx):
     """ Generate nice markup from the stripped-down pre.syntax elements
     created by fixup_lang_grammar_pre. """
 
@@ -1593,7 +1647,8 @@ def fixup_lang_grammar_post(doc):
             [result] = markup_syntax(syntax.strip(), 'prod')
             child.content = result.content
 
-def fixup_intl_insert_ids(doc):
+@InPlaceFixup
+def fixup_intl_insert_ids(doc, docx):
     """ Internationalization spec only: Create ids for the definitions of
         abstract operations that don't have their own sections, so that we
         can link to them directly.
@@ -1616,6 +1671,7 @@ def fixup_intl_insert_ids(doc):
                         p.content.insert(1, html.span(id = id, *id))
                         p.content[2] = content[len(prefix + id):]
 
+@InPlaceFixup
 def fixup_links(doc, docx):
     sections_by_title = {}
     for sect in findall(doc, 'section'):
@@ -2136,7 +2192,8 @@ def fixup_links(doc, docx):
 
     visit(doc_body(doc), None)
 
-def fixup_generate_toc(doc):
+@InPlaceFixup
+def fixup_generate_toc(doc, docx):
     """ Generate a table of contents from the section headings. """
 
     def make_toc_list(e, depth=0):
@@ -2181,6 +2238,7 @@ def fixup_generate_toc(doc):
     assert not section.content
     section.content = [html.h1("Contents")] + make_toc_list(doc_body(doc))
 
+@Fixup
 def fixup_add_disclaimer(doc, docx):
     div = html.div
     p = html.p
@@ -2248,8 +2306,18 @@ def fixup_add_disclaimer(doc, docx):
             p("For copyright information, see Ecma International’s legal disclaimer in the document itself."),
             id="unofficial")
         position = 0
-    doc_body(doc).content.insert(position, disclaimer)
 
+    def with_disclaimer(body):
+        content = body.content[:position] + [disclaimer] + body.content[position:]
+        return body.with_content(content)
+
+    def map_body(doc, f):
+        head, body = doc.content
+        return doc.with_content([head, f(body)])
+
+    return map_body(doc, with_disclaimer)
+
+@InPlaceFixup
 def fixup_add_ecma_flavor(doc, docx):
     if version_is_intl_1_final(docx):
         hgroup = doc_body(doc).content[0]
@@ -2265,7 +2333,8 @@ def fixup_add_ecma_flavor(doc, docx):
         doc_body(doc).content.insert(0, html.img(src="Ecma_RVB-003.jpg", alt="Ecma International Logo.",
             height="146", width="373"))
 
-def fixup_remove_margin_style(doc):
+@Fixup
+def fixup_remove_margin_style(doc, docx):
     def has_margins(e):
         return e.style is not None and any(k.startswith('margin-') for k in e.style)
     def without_margins(e):
@@ -2273,49 +2342,54 @@ def fixup_remove_margin_style(doc):
         return [e.with_(style=style)]
     return doc.find_replace(has_margins, without_margins)
 
+
+# === Main
+
+def get_fixups(docx):
+    yield fixup_list_styles
+    yield fixup_formatting
+    yield fixup_paragraph_classes
+    yield fixup_remove_empty_headings
+    yield fixup_element_spacing
+    yield fixup_sec_4_3
+    yield fixup_hr
+    if spec_is_intl(docx):
+        yield fixup_intl_remove_junk
+    yield fixup_sections
+    yield fixup_strip_toc
+    yield fixup_tables
+    yield fixup_pre
+    yield fixup_notes
+    if spec_is_lang(docx):
+        yield fixup_lang_7_9_1
+        yield fixup_lang_15_10_2_2
+        yield fixup_lang_15_9_1_8
+        yield fixup_lang_15_12_3
+    yield fixup_lists
+    yield fixup_list_paragraphs
+    yield fixup_picts
+    yield fixup_figures
+    yield fixup_remove_hr
+    yield fixup_title_page
+    yield fixup_lang_title_page_p_in_p
+    yield fixup_html_head
+    if spec_is_lang(docx):
+        yield fixup_lang_overview_biblio
+    yield fixup_simplify_formatting
+    if spec_is_lang(docx):
+        yield fixup_lang_grammar_pre
+        yield fixup_lang_grammar_post
+    if spec_is_intl(docx):
+        yield fixup_intl_insert_ids
+    yield fixup_links
+    yield fixup_generate_toc
+    yield fixup_add_disclaimer
+    yield fixup_add_ecma_flavor
+    yield fixup_remove_margin_style
+
 def fixup(docx, doc):
-    # Perform all fixups in order and return the resulting document. (Many
-    # fixups modify the document in place, so abandon all hope of referential
-    # transparency.)
-    fixup_list_styles(doc, docx)
-    fixup_formatting(doc, docx)
-    doc = fixup_paragraph_classes(doc)
-    doc = fixup_remove_empty_headings(doc)
-    fixup_element_spacing(doc)
-    fixup_sec_4_3(doc)
-    fixup_hr(doc)
-    if spec_is_intl(docx):
-        fixup_intl_remove_junk(doc)
-    fixup_sections(doc, docx)
-    fixup_strip_toc(doc, docx)
-    fixup_tables(doc)
-    fixup_pre(doc)
-    fixup_notes(doc)
-    if spec_is_lang(docx):
-        fixup_lang_7_9_1(doc, docx)
-        fixup_lang_15_10_2_2(doc)
-        doc = fixup_lang_15_9_1_8(doc)
-        doc = fixup_lang_15_12_3(doc)
-    fixup_lists(doc, docx)
-    fixup_list_paragraphs(doc, docx)
-    fixup_picts(doc, docx)
-    fixup_figures(doc)
-    fixup_remove_hr(doc)
-    fixup_title_page(doc)
-    doc = fixup_lang_title_page_p_in_p(doc)
-    fixup_html_head(doc, docx)
-    if spec_is_lang(docx):
-        fixup_lang_overview_biblio(doc)
-    fixup_simplify_formatting(doc)
-    if spec_is_lang(docx):
-        fixup_lang_grammar_pre(doc)
-        fixup_lang_grammar_post(doc)
-    if spec_is_intl(docx):
-        fixup_intl_insert_ids(doc)
-    fixup_links(doc, docx)
-    fixup_generate_toc(doc)
-    fixup_add_disclaimer(doc, docx)
-    fixup_add_ecma_flavor(doc, docx)
-    doc = fixup_remove_margin_style(doc)
+    for f in get_fixups(docx):
+        print(f.name)
+        doc = f(doc, docx)
     return doc
 
