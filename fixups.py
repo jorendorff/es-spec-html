@@ -1,9 +1,21 @@
+""" fixups.py - Refine the HTML document produced by transform.py.
+
+The HTML markup produced by transform.py is extremely crude.
+These fixups add links, lists, a stylesheet, and sections.
+A great deal of the work done here is document-specific.
+
+The entry point is fixup().
+"""
+
 import htmodel as html
 import collections, re
 from warnings import warn
 from array import array
 import os
 import contextlib
+
+
+# === Useful functions
 
 def findall(e, name):
     if e.name == name:
@@ -45,6 +57,9 @@ def version_is_51_final(docx):
 
 def version_is_intl_1_final(docx):
     return os.path.basename(docx.filename) == 'es-intl-1-final.docx'
+
+
+# === Fixups
 
 def has_bullet(docx, p):
     """ True if the given paragraph is of a style that has a bullet. """
@@ -2250,15 +2265,6 @@ def fixup_add_ecma_flavor(doc, docx):
         doc_body(doc).content.insert(0, html.img(src="Ecma_RVB-003.jpg", alt="Ecma International Logo.",
             height="146", width="373"))
 
-def fixup_delete_markers(doc):
-    def has_marker(e):
-        return len(e.content) != 0 and is_marker(e.content[0])
-
-    def del_marker(e):
-        return [e.with_content(e.content[1:])]
-
-    return doc.find_replace(has_marker, del_marker)
-
 def fixup_remove_margin_style(doc):
     def has_margins(e):
         return e.style is not None and any(k.startswith('margin-') for k in e.style)
@@ -2268,6 +2274,9 @@ def fixup_remove_margin_style(doc):
     return doc.find_replace(has_margins, without_margins)
 
 def fixup(docx, doc):
+    # Perform all fixups in order and return the resulting document. (Many
+    # fixups modify the document in place, so abandon all hope of referential
+    # transparency.)
     fixup_list_styles(doc, docx)
     fixup_formatting(doc, docx)
     doc = fixup_paragraph_classes(doc)
@@ -2307,7 +2316,6 @@ def fixup(docx, doc):
     fixup_generate_toc(doc)
     fixup_add_disclaimer(doc, docx)
     fixup_add_ecma_flavor(doc, docx)
-    #doc = fixup_delete_markers(doc)
     doc = fixup_remove_margin_style(doc)
     return doc
 
