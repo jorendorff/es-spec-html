@@ -64,7 +64,21 @@ def transform_element(docx, e, numbering_context):
 
     elif name == 'instrText':
         assert len(e) == 0
+        # To translate the Intl spec correctly would involve finding sequences
+        # like:
+        #
+        #     <r><fldChar fldCharType="begin" /></r>
+        #     <r><instrText> REF _Ref277198209 \h </instrText></r>
+        #     <r><fldChar fldCharType="separate" />
+        #     ...
+        #     <r><fldChar fldCharType="end" />
+        #
+        # This might have other benefits, too, like making the table of
+        # contents easier to find and making us less dependent upon the author
+        # to remember to update fields before saving.
+        # 
         if e.text.startswith(' REF '):
+            # The REF field: https://office.microsoft.com/en-us/word-help/field-codes-ref-field-HA102017423.aspx
             return '{' + e.text + '}'
         return None
 
