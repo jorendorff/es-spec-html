@@ -1,5 +1,4 @@
 cd public_html
-put es5.1-final.html
 put es6-draft.html
 put es6-draft.css
 put figure-1.svg
