@@ -87,6 +87,10 @@ def transform_element(docx, e, numbering_context):
         assert ALLOW_CHANGES
         return None
 
+    elif name == 'compat:AlternateContent':
+        assert shorten(e[0].tag) == 'compat:Choice'
+        return transform_element(docx, e[0], numbering_context)
+
     else:
         assert e.text is None
 
