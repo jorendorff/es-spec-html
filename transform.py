@@ -184,7 +184,7 @@ def transform_element(docx, e, numbering_context):
             result.style = css
             return result
 
-        elif name == 'pict':
+        elif name == 'pict' or name == 'drawing':
             return div(*c, class_='w-pict')
 
         elif name == 'sym':
