@@ -1113,11 +1113,11 @@ def map_body(doc, f):
     head, body = doc.content
     return doc.with_content([head, f(body)])
 
-@Fixup
-def fixup_figure_1(doc, docx):
-    image = html.object(
-        html.img(src="figure-1.png", width="719", height="354", alt="An image of lots of boxes and arrows."),
-        type="image/svg+xml", width="719", height="354", data="figure-1.svg")
+def replace_figure(doc, section_title, n, alt, width, height, has_svg=False):
+    image = html.img(src="figure-{}.png".format(n), width=str(width), height=str(height), alt=alt)
+    if has_svg:
+        image = html.object(image, type="image/svg+xml", width=str(width), height=str(height),
+                            data="figure-{}.svg".format(n))
 
     def f(sect):
         # Find the index of figure 1 within sect.content.
@@ -1127,14 +1127,27 @@ def fixup_figure_1(doc, docx):
                 caption = c[i + 1]
                 if (ht_name_is(caption, 'figcaption')
                       and caption.content
-                      and caption.content[0].startswith('Figure { SEQ Figure \* ARABIC }1')):
-                    # Found figure 1!
+                      and caption.content[0].startswith('Figure { SEQ Figure \\* ARABIC }' + str(n))):
+                    # Found figure
                     figure = html.figure(image, caption)
                     return sect.with_content(c[:i] + [figure] + c[i + 2:])
-        warn("figure 1 not found")
+        warn("figure {} not found".format(n))
         return sect
 
-    return map_section(doc, 'Objects', f)
+    return map_section(doc, section_title, f)
+
+@Fixup
+def fixup_figure_1(doc, docx):
+    return replace_figure(doc, "Objects", 1,
+                          alt="An image of lots of boxes and arrows.",
+                          width=719, height=354,
+                          has_svg=True)
+
+@Fixup
+def fixup_figure_2(doc, docx):
+    return replace_figure(doc, "GeneratorFunction Objects", 2,
+                          alt="A staggering variety of boxes and arrows.",
+                          width=968, height=958)
 
 @Fixup
 def fixup_remove_picts(doc, docx):
@@ -2365,6 +2378,7 @@ def get_fixups(docx):
     yield fixup_list_paragraphs
     if spec_is_lang(docx):
         yield fixup_figure_1
+        yield fixup_figure_2
     yield fixup_remove_picts
     yield fixup_figures
     yield fixup_remove_hr
