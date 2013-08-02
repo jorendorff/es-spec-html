@@ -169,12 +169,12 @@ def escape(s, quote=False):
 empty_tags = {'meta', 'br', 'hr', 'link'}
 non_indenting_tags = {'html', 'body'}
 
-def save_html(filename, ht):
+def save_html(filename, ht, strict=True):
     assert ht.name == 'html'
 
     with open(filename, 'w', encoding='utf-8') as f:
         f.write("<!doctype html>\n")
-        write_html(f, ht)
+        write_html(f, ht, strict=strict)
 
 def write_html(f, ht, indent='', strict=True):
     WIDTH = 130

@@ -11,7 +11,7 @@ import htmodel as html
 import collections, re
 from warnings import warn
 from array import array
-import os
+import os, time
 import contextlib
 
 
@@ -859,7 +859,7 @@ def fixup_lang_7_9_1(doc, docx):
     assert [int(elt.style['-ooxml-ilvl']) for elt in lst] == [2, 0, 0, 2, 2]
     for i in (1, 2):
         lst[i].style['-ooxml-ilvl'] = '3'
-        lst[i].style['-ooxml-numId'] = bullet_numid
+        lst[i].style['-ooxml-numId'] = str(bullet_numid)
         assert has_bullet(docx, lst[i])
 
 @InPlaceFixup
@@ -2388,8 +2388,21 @@ def get_fixups(docx):
     yield fixup_remove_margin_style
 
 def fixup(docx, doc):
+    logdir = "_fixup_log"
+    if os.path.isdir(logdir):
+        print("logging enabled")
+    else:
+        logdir = None
+
     for f in get_fixups(docx):
         print(f.name)
+        t0 = time.time()
         doc = f(doc, docx)
+        if logdir:
+            filename = os.path.join(logdir, f.name + ".html")
+            print("writing " + filename)
+            html.save_html(filename, doc, strict=False)
+        t1 = time.time()
+        print("done ({} msec)".format(int(1000 * (t1 - t0))))
     return doc
 
