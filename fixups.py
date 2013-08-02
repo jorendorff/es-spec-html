@@ -520,7 +520,8 @@ def fixup_intl_remove_junk(doc, docx):
         if child.name == 'h1' and child.attrs.get('class') == 'StandardNumber' and child.content[0] == 'ECMA-XXX':
             del parent.content[i]
         if child.name == 'div' and child.attrs.get('class') == 'inner-title':
-            child.content[0], _, _ = child.content[0].partition('INTERNATIONAL STANDARD© ISO/IEC')
+            t = child.content[0].partition('INTERNATIONAL STANDARD\N{COPYRIGHT SIGN}\N{NO-BREAK SPACE}ISO/IEC')
+            child.content[0], _, _ = t
 
 @InPlaceFixup
 def fixup_sections(doc, docx):
@@ -1254,9 +1255,10 @@ def fixup_html_head(doc, docx):
             title = "ECMAScript Language Specification ECMA-262 6th Edition - DRAFT"
     else:
         if version_is_intl_1_final(docx):
-            title = "ECMAScript Internationalization API Specification – ECMA-402 Edition 1.0"
+            title = "ECMAScript Internationalization API Specification - ECMA-402 Edition 1.0"
         else:
-            title = "ECMAScript Internationalization API Specification – ECMA-402 Edition 1.0 – DRAFT"
+            title = "ECMAScript Internationalization API Specification - ECMA-402 Edition 1.0 - DRAFT"
+    title = title.replace(' - ', ' \N{EN DASH} ')
     head.content.insert(1, html.title(title))
     if spec_is_lang(docx):
         stylesheet = 'es6-draft.css'
@@ -1914,7 +1916,7 @@ def fixup_links(doc, docx):
         ("direct call (see 15.1.2.1.1) to the eval function", "Direct Call to Eval"),
 
         # 15.3
-        #("Function.prototype.bind", "Function.prototype.bind (thisArg [, arg1 [, arg2, …]])"),
+        #("Function.prototype.bind", "Function.prototype.bind (thisArg [, arg1 [, arg2, \N{HORIZONTAL ELLIPSIS}]])"),
 
         # 15.9
         ("this time value", "Properties of the Date Prototype Object"),
@@ -2317,7 +2319,7 @@ def fixup_add_disclaimer(doc, docx):
               "the specification comprehensible. You can help improve the program ",
               a("here", href="https://github.com/jorendorff/es-spec-html"),
               "."),
-            p("For copyright information, see Ecma International’s legal disclaimer in the document itself."),
+            p("For copyright information, see Ecma International\u2019s legal disclaimer in the document itself."),
             id="unofficial")
         position = 0
 
