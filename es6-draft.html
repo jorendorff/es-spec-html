@@ -5183,7 +5183,7 @@
               <td>A method that returns the default iterator for an object. Called by the semantics of the for-of statement.</td>
             </tr>
             <tr>
-              <td>@@<a href="#sec-9.1.1">ToPrimitive</a></td>
+              <td>@@ToPrimitive</td>
               <td>A method that converts an object to a corresponding primitive value. Called by the <a href="#sec-9.1.1">ToPrimitive</a> abstract operation.</td>
             </tr>
             <tr>
@@ -31476,8 +31476,7 @@
         "<code>string</code>",  All other built-in ECMAScript objects treat "<code>default</code>" as being equivalent to
         "<code>number</code>".</p>
 
-        <p>When the <code>@@<a href="#sec-9.1.1">ToPrimitive</a></code> method is called with argument <var>hint</var>, the
-        following steps are taken:</p>
+        <p>When the <code>@@ToPrimitive</code> method is called with argument <var>hint</var>, the following steps are taken:</p>
 
         <ol class="proc">
           <li>Let <i>O</i> be this Date object<b>.</b></li>

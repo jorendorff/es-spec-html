@@ -2112,7 +2112,7 @@ def fixup_links(doc, docx):
             i = s.find(text)
             if (i != -1
                 and can_link(current_section, target)  # don't link sections to themselves
-                and (i == 0 or not s[i-1].isalnum())  # check for word break before
+                and (i == 0 or not (s[i-1].isalnum() or s[i-1] == '@'))  # check for word break before
                 and s[i + len(text):i + len(text) + 2] != "]]"  # don't link the HasInstance in [[HasInstance]]
                 and (text.endswith('(')
                      or i + len(text) == len(s)
