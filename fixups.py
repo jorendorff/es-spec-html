@@ -367,10 +367,6 @@ def fixup_lists(doc, docx):
                 assert(ht_name_is(stack[-1].content[-1], 'li'))
                 stack[-1].content[-1].content.append(e)
 
-        # previous_ilvl keeps track of which lists (numIds) we have seen and
-        # the ilvl of the most recent item in that list.
-        previous_ilvl = {}
-
         def open_list(p, numId, ilvl, margin):
             assert margin >= stack[-1].left_margin
 
@@ -393,18 +389,10 @@ def fixup_lists(doc, docx):
 
             append_non_list_item(lst)
             stack.append(List(numId=numId, ilvl=ilvl, left_margin=margin, content=lst.content))
-            if numId not in previous_ilvl:
-                previous_ilvl[numId] = []
-            previous_ilvl[numId].append(ilvl)
 
         def close_list():
             popped_numId, popped_ilvl, _, _ = stack.pop()
             assert len(stack) >= 1
-            assert popped_ilvl == previous_ilvl[popped_numId][-1]
-            stack_for_numId = previous_ilvl[popped_numId]
-            del stack_for_numId[-1]
-            if len(stack_for_numId) == 0:
-                del previous_ilvl[popped_numId]
 
         for i, p in enumerate(body.content):
             # Get numbering info for this paragraph.
