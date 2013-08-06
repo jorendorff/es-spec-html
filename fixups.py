@@ -13,7 +13,6 @@ from warnings import warn
 from array import array
 import os, time
 import contextlib
-import transform
 
 
 # === Useful functions
@@ -67,7 +66,10 @@ class Fixup:
         self.fn = fn
         self.name = fn.__name__
     def __call__(self, doc, docx):
-        return self.fn(doc, docx)
+        result = self.fn(doc, docx)
+        assert result is not None
+        assert isinstance(result, html.Element)
+        return result
 
 class InPlaceFixup:
     """
@@ -84,6 +86,134 @@ class InPlaceFixup:
 
 
 # === Fixups
+
+def int_to_lower_roman(i):
+    """ Convert an integer to Roman numerals.
+    From Paul Winkler's recipe: https://code.activestate.com/recipes/81611-roman-numerals/
+    """
+    if i < 1 or i > 3999:
+        raise ValueError("Argument must be between 1 and 3999")
+    vals = (1000, 900,  500, 400, 100,  90, 50,  40, 10,  9,   5,  4,   1)
+    syms = ('m',  'cm', 'd', 'cd','c', 'xc','l','xl','x','ix','v','iv','i')
+    result = ""
+    for val, symbol in zip(vals, syms):
+        count = i // val
+        result += symbol * count
+        i -= val * count
+    return result
+
+def int_to_lower_letter(i):
+    if i > 26:
+        raise ValueError("Don't know any more letters after z.")
+    return "abcdefghijklmnopqrstuvwxyz"[i - 1]
+
+list_formatters = {
+    'lowerLetter': int_to_lower_letter,
+    'upperLetter': lambda i: int_to_lower_letter(i).upper(),
+    'decimal': str,
+    'lowerRoman': int_to_lower_roman,
+    'upperRoman': lambda i: int_to_lower_roman(i).upper()
+}
+
+def render_list_marker(levels, numbers):
+    def repl(m):
+        ilvl = int(m.group(1)) - 1
+        level = levels[ilvl]
+        return list_formatters[level.numFmt](numbers[ilvl])  # should ignore numFmt if isLgl
+    this_level = levels[len(numbers) - 1]
+    text = re.sub(r'%([1-9])', repl, this_level.lvlText)
+    return text + this_level.suff
+
+@Fixup
+def fixup_add_numbering(doc, docx):
+    """ Add span.marker elements and -ooxml-indentation style properties to the document. """
+
+    numbering_context = collections.defaultdict(list)
+
+    def add_numbering(p):
+        cls = p.attrs and p.attrs.get('class')
+        paragraph_style = docx.styles[cls]
+
+        numid = ilvl = None
+        def computed_style(name, default_value, using_list_styles=False):
+            """
+            Get computed style for the given property name.
+            Returns a string, or default_value if no such property is defined anywhere.
+            """
+            # This paragraph's properties override everything else.
+            if p.style and name in p.style:
+                return p.style[name]
+
+            # Properties inherited from a numbering w:lvl>w:pPr are
+            # next-highest in precedence.
+            if using_list_styles:
+                lvl = docx.get_list_style_at_level(numid, ilvl)
+                if lvl is not None and name in lvl.full_style:
+                    return lvl.full_style[name]
+
+            # After that come the properties defined in paragraph
+            # style. Note that full_style incorporates properties that are
+            # inherited via the w:basedOn chain.
+            if name in paragraph_style.full_style:
+                return paragraph_style.full_style[name]
+
+            # Not specified anywhere.
+            return default_value
+
+        numid = int(computed_style('-ooxml-numId', '0'))
+
+        has_numbering = numid != 0
+        if has_numbering:
+            # Figure out the level of this paragraph.
+            ilvl = int(computed_style('-ooxml-ilvl', '0'))
+
+            # Bump the numbering accordingly.
+            abstract_num_id, levels = docx.get_abstract_num_id_and_levels(numid, ilvl)
+            current_number = numbering_context[abstract_num_id]
+            if len(current_number) <= ilvl:
+                while len(current_number) <= ilvl:
+                    start = levels[len(current_number)].start
+                    current_number.append(start)
+            else:
+                del current_number[ilvl + 1:]
+                current_number[ilvl] += 1
+
+            # Create a suitable marker.
+            marker = render_list_marker(levels, current_number)
+            s = html.span(marker, class_="marker")
+            s.style = {}
+            content = [s] + p.content
+        else:
+            content = p.content
+
+        # Figure out the actual physical indentation of the number on this
+        # paragraph, net of everything. (This is used in fixup_lists_early
+        # to infer nesting lists, whether a paragraph is inside a list
+        # item, etc.)
+        def points(s):
+            if s == '0':
+                return 0
+            assert s.endswith('pt')
+            return float(s[:-2])
+        margin_left = points(computed_style('margin-left', '0', using_list_styles=has_numbering))
+        text_indent = points(computed_style('text-indent', '0', using_list_styles=has_numbering))
+        if p.style is None:
+            css = {}
+        else:
+            css = p.style.copy()
+        css['-ooxml-indentation'] = str(margin_left + text_indent) + 'pt'
+
+        return p.with_(style=css, content=content)
+
+    def fix_body(body):
+        result = []
+        for p in body.content:
+            if p.name == 'p':
+                p = add_numbering(p)
+            result.append(p)
+        return [body.with_content(result)]
+
+    return doc.find_replace(lambda e: e.name in ('body', 'td'), fix_body)
 
 def has_bullet(docx, p):
     """ True if the given paragraph is of a style that has a bullet. """
@@ -498,7 +628,7 @@ def fixup_lists(doc, docx):
                 else:
                     depth = current.marker_type
                     i = len(current.content)
-                    formatters = [str, transform.int_to_lower_letter, transform.int_to_lower_roman]
+                    formatters = [str, int_to_lower_letter, int_to_lower_roman]
                     marker_formatter = formatters[depth % 3]
                     # Bizarrely, there is no dot after lowercase-letter markers at nesting depth 4.
                     html_marker_str = marker_formatter(i) + ('.' if depth != 4 else '') + '\t'
@@ -2432,6 +2562,7 @@ def fixup_add_ecma_flavor(doc, docx):
 # === Main
 
 def get_fixups(docx):
+    yield fixup_add_numbering
     yield fixup_list_styles
     yield fixup_formatting
     yield fixup_lists

@@ -10,51 +10,13 @@ def dict_to_css(d):
 # If True, allow <w:delText> and <w:delInstrText>, ignoring them.
 ALLOW_CHANGES = True
 
-# === numbering
-
-def int_to_lower_roman(i):
-    """ Convert an integer to Roman numerals.
-    From Paul Winkler's recipe: https://code.activestate.com/recipes/81611-roman-numerals/
-    """
-    if i < 1 or i > 3999:
-        raise ValueError("Argument must be between 1 and 3999")
-    vals = (1000, 900,  500, 400, 100,  90, 50,  40, 10,  9,   5,  4,   1)
-    syms = ('m',  'cm', 'd', 'cd','c', 'xc','l','xl','x','ix','v','iv','i')
-    result = ""
-    for val, symbol in zip(vals, syms):
-        count = i // val
-        result += symbol * count
-        i -= val * count
-    return result
-
-def int_to_lower_letter(i):
-    if i > 26:
-        raise ValueError("Don't know any more letters after z.")
-    return "abcdefghijklmnopqrstuvwxyz"[i - 1]
-
-list_formatters = {
-    'lowerLetter': int_to_lower_letter,
-    'upperLetter': lambda i: int_to_lower_letter(i).upper(),
-    'decimal': str,
-    'lowerRoman': int_to_lower_roman,
-    'upperRoman': lambda i: int_to_lower_roman(i).upper()
-}
-
-def render_list_marker(levels, numbers):
-    def repl(m):
-        ilvl = int(m.group(1)) - 1
-        level = levels[ilvl]
-        return list_formatters[level.numFmt](numbers[ilvl])  # should ignore numFmt if isLgl
-    this_level = levels[len(numbers) - 1]
-    text = re.sub(r'%([1-9])', repl, this_level.lvlText)
-    return text + this_level.suff
 
 # === main
 
 def transform(docx):
-    return transform_element(docx, docx.document, numbering_context=defaultdict(list))
+    return transform_element(docx, docx.document)
 
-def transform_element(docx, e, numbering_context):
+def transform_element(docx, e):
     name = shorten(e.tag)
     assert e.tail is None
 
@@ -99,7 +61,7 @@ def transform_element(docx, e, numbering_context):
 
     elif name == 'ins':
         assert ALLOW_CHANGES
-        return [transform_element(docx, k, numbering_context) for k in e]
+        return [transform_element(docx, k) for k in e]
 
     elif name in ('del', 'delText', 'delInstrText'):
         assert ALLOW_CHANGES
@@ -107,7 +69,7 @@ def transform_element(docx, e, numbering_context):
 
     elif name == 'compat:AlternateContent':
         assert shorten(e[0].tag) == 'compat:Choice'
-        return transform_element(docx, e[0], numbering_context)
+        return transform_element(docx, e[0])
 
     elif name == 'pic:pic':
         # DrawingML Pictures - http://officeopenxml.com/drwPic.php
@@ -139,7 +101,7 @@ def transform_element(docx, e, numbering_context):
                 c.append(ht)
 
         for k in e:
-            add(transform_element(docx, k, numbering_context))
+            add(transform_element(docx, k))
         if not css:
             css = None
 
@@ -178,75 +140,6 @@ def transform_element(docx, e, numbering_context):
             else:
                 cls = 'Normal'
             result.attrs['class'] = cls
-
-            # Numbering.
-            paragraph_style = docx.styles[cls]
-
-            numid = ilvl = None
-            def computed_style(name, default_value, using_list_styles=False):
-                """
-                Get computed style for the given property name.
-                Returns a string, or default_value if no such property is defined anywhere.
-                """
-                # This paragraph's properties override everything else.
-                if css and name in css:
-                    return css[name]
-
-                # Properties inherited from a numbering w:lvl>w:pPr are
-                # next-highest in precedence.
-                if using_list_styles:
-                    lvl = docx.get_list_style_at_level(numid, ilvl)
-                    if lvl is not None and name in lvl.full_style:
-                        return lvl.full_style[name]
-
-                # After that come the properties defined in paragraph
-                # style. Note that full_style incorporates properties that are
-                # inherited via the w:basedOn chain.
-                if name in paragraph_style.full_style:
-                    return paragraph_style.full_style[name]
-
-                # Not specified anywhere.
-                return default_value
-
-            numid = int(computed_style('-ooxml-numId', '0'))
-
-            has_numbering = numid != 0
-            if has_numbering:
-                # Figure out the level of this paragraph.
-                ilvl = int(computed_style('-ooxml-ilvl', '0'))
-
-                # Bump the numbering accordingly.
-                abstract_num_id, levels = docx.get_abstract_num_id_and_levels(numid, ilvl)
-                current_number = numbering_context[abstract_num_id]
-                if len(current_number) <= ilvl:
-                    while len(current_number) <= ilvl:
-                        start = levels[len(current_number)].start
-                        current_number.append(start)
-                else:
-                    del current_number[ilvl + 1:]
-                    current_number[ilvl] += 1
-
-                # Create a suitable marker.
-                marker = render_list_marker(levels, current_number)
-                s = span(marker, class_="marker")
-                s.style = {}
-                result.content.insert(0, s)
-
-            # Figure out the actual physical indentation of the number on this
-            # paragraph, net of everything. (This is used in fixup_lists_early
-            # to infer nesting lists, whether a paragraph is inside a list
-            # item, etc.)
-            def points(s):
-                if s == '0':
-                    return 0
-                assert s.endswith('pt')
-                return float(s[:-2])
-            margin_left = points(computed_style('margin-left', '0', using_list_styles=has_numbering))
-            text_indent = points(computed_style('text-indent', '0', using_list_styles=has_numbering))
-            if css is None:
-                css = {}
-            css['-ooxml-indentation'] = str(margin_left + text_indent) + 'pt'
-
             result.style = css
             return result
 
