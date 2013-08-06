@@ -96,7 +96,6 @@ def has_bullet(docx, p):
     s = docx.get_list_style_at_level(numId, ilvl)
     return s is not None and s.numFmt == 'bullet'
 
-# ??? Can we remove this entirely?
 @InPlaceFixup
 def fixup_list_styles(doc, docx):
     """ Make sure bullet lists are never p.Alg4 or other particular styles.
