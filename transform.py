@@ -177,21 +177,39 @@ def transform_element(docx, e, numbering_context):
 
             # Numbering.
             paragraph_style = docx.styles[cls]
-            if css and '-ooxml-numId' in css:
-                numid = int(css['-ooxml-numId'])
-            elif '-ooxml-numId' in paragraph_style.full_style:
-                numid = int(paragraph_style.full_style['-ooxml-numId'])
-            else:
-                numid = 0
 
-            if numid != 0:
+            numid = ilvl = None
+            def computed_style(name, default_value, using_list_styles=False):
+                """
+                Get computed style for the given property name.
+                Returns a string, or default_value if no such property is defined anywhere.
+                """
+                # This paragraph's properties override everything else.
+                if css and name in css:
+                    return css[name]
+
+                # Properties inherited from a numbering w:lvl>w:pPr are
+                # next-highest in precedence.
+                if using_list_styles:
+                    lvl = docx.get_list_style_at_level(numid, ilvl)
+                    if lvl is not None and name in lvl.full_style:
+                        return lvl.full_style[name]
+
+                # After that come the properties defined in paragraph
+                # style. Note that full_style incorporates properties that are
+                # inherited via the w:basedOn chain.
+                if name in paragraph_style.full_style:
+                    return paragraph_style.full_style[name]
+
+                # Not specified anywhere.
+                return default_value
+
+            numid = int(computed_style('-ooxml-numId', '0'))
+
+            has_numbering = numid != 0
+            if has_numbering:
                 # Figure out the level of this paragraph.
-                if '-ooxml-ilvl' in css:
-                    ilvl = int(css['-ooxml-ilvl'])
-                elif '-ooxml-ilvl' in paragraph_style.full_style:
-                    ilvl = int(paragraph_style.full_style['-ooxml-ilvl'])
-                else:
-                    ilvl = 0
+                ilvl = int(computed_style('-ooxml-ilvl', '0'))
 
                 # Bump the numbering accordingly.
                 abstract_num_id, levels = docx.get_abstract_num_id_and_levels(numid, ilvl)
@@ -209,6 +227,21 @@ def transform_element(docx, e, numbering_context):
                 s = span(marker, class_="marker")
                 s.style = {}
                 result.content.insert(0, s)
+
+            # Figure out the actual physical indentation of the number on this
+            # paragraph, net of everything. (This is used in fixup_lists_early
+            # to infer nesting lists, whether a paragraph is inside a list
+            # item, etc.)
+            def points(s):
+                if s == '0':
+                    return 0
+                assert s.endswith('pt')
+                return float(s[:-2])
+            margin_left = points(computed_style('margin-left', '0', using_list_styles=has_numbering))
+            text_indent = points(computed_style('text-indent', '0', using_list_styles=has_numbering))
+            if css is None:
+                css = {}
+            css['-ooxml-indentation'] = str(margin_left + text_indent) + 'pt'
 
             result.style = css
             return result

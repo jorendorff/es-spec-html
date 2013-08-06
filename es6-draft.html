@@ -7771,12 +7771,13 @@
             </ol>
           </li>
           <li>Return the result of calling the ordinary object [[HasOwnProperty]] internal method (<a href="#sec-8.3.5">8.3.5</a>)
-              on <i>O</i> with argument <i>P</i>.
-            <ol class="nested proc">
-              <li><b>[[GetOwnProperty]] ( P )</b></li>
-            </ol>
-          </li>
+              on <i>O</i> with argument <i>P</i>.</li>
         </ol>
+      </section>
+
+      <section id="sec-8.4.6.2">
+        <h1><span class="secnum"><a href="#sec-8.4.6.2" title="link to this section">8.4.6.2</a></span> <b>[[GetOwnProperty]] ( P
+            )</b></h1>
 
         <p>When the [[GetOwnProperty]] internal method of an Integer Indexed exotic object <var>S</var> is called with <a
         href="#sec-8.1.6">property key</a> <var>P</var> the following steps are taken:</p>
@@ -7956,7 +7957,7 @@
           <li>Set <i>A</i>&rsquo;s essential internal methods to the default ordinary object definitions specified in <a
               href="#sec-8.3">8.3</a>.</li>
           <li>Set the [[Get]] internal method of <i>A</i> as specified in <a href="#sec-8.4.6.1">8.4.6.1</a>.</li>
-          <li>Set the [[Set]] internal method of <i>A</i> as specified in 8.4.6.2.</li>
+          <li>Set the [[Set]] internal method of <i>A</i> as specified in <a href="#sec-8.4.6.2">8.4.6.2</a>.</li>
           <li>Set the [[Prototype]] <a href="#sec-8.1.6.2">internal data property</a> of <i>A</i> to <i>prototype</i>.</li>
           <li>Set the [[Extensible]] <a href="#sec-8.1.6.2">internal data property</a> of <i>A</i> to <b>true</b>.</li>
           <li>Return <i>A</i>.</li>
@@ -15483,32 +15484,30 @@
       <ul>
         <li>
           <p>If either operand is <b>NaN</b>, the result is <b>NaN</b>.</p>
+        </li>
 
-          <ul>
-            <li>
-              <p>The sign of the result equals the sign of the dividend.</p>
-            </li>
+        <li>
+          <p>The sign of the result equals the sign of the dividend.</p>
+        </li>
 
-            <li>
-              <p>If the dividend is an infinity, or the divisor is a zero, or both, the result is <b>NaN</b>.</p>
-            </li>
+        <li>
+          <p>If the dividend is an infinity, or the divisor is a zero, or both, the result is <b>NaN</b>.</p>
+        </li>
 
-            <li>
-              <p>If the dividend is finite and the divisor is an infinity, the result equals the dividend.</p>
-            </li>
+        <li>
+          <p>If the dividend is finite and the divisor is an infinity, the result equals the dividend.</p>
+        </li>
 
-            <li>
-              <p>If the dividend is a zero and the divisor is nonzero and finite, the result is the same as the dividend.</p>
-            </li>
+        <li>
+          <p>If the dividend is a zero and the divisor is nonzero and finite, the result is the same as the dividend.</p>
+        </li>
 
-            <li>
-              <p>In the remaining cases, where neither an infinity, nor a zero, nor <b>NaN</b> is involved, the floating-point
-              remainder r from a dividend n and a divisor d is defined by the mathematical relation r = n &minus; (d &times; q)
-              where q is an integer that is negative only if n/d is negative and positive only if n/d is positive, and whose
-              magnitude is as large as possible without exceeding the magnitude of the true mathematical quotient of n and d. r is
-              computed and rounded to the nearest representable value using IEEE 754 round-to-nearest mode.</p>
-            </li>
-          </ul>
+        <li>
+          <p>In the remaining cases, where neither an infinity, nor a zero, nor <b>NaN</b> is involved, the floating-point
+          remainder r from a dividend n and a divisor d is defined by the mathematical relation r = n &minus; (d &times; q) where
+          q is an integer that is negative only if n/d is negative and positive only if n/d is positive, and whose magnitude is as
+          large as possible without exceeding the magnitude of the true mathematical quotient of n and d. r is computed and
+          rounded to the nearest representable value using IEEE 754 round-to-nearest mode.</p>
         </li>
       </ul>
     </section>
@@ -16127,35 +16126,36 @@
 
       <div class="note">
         <p><span class="nh">NOTE 1</span> Given the above definition of equality:</p>
-      </div>
 
-      <ul>
-        <li>String comparison can be forced by: <code>"" + a == "" + b</code>.</li>
-        <li>Numeric comparison can be forced by: <code>+a == +b</code>.</li>
-        <li>Boolean comparison can be forced by: <code>!a == !b</code>.</li>
-      </ul>
+        <ul>
+          <li>String comparison can be forced by: <code>"" + a == "" + b</code>.</li>
+          <li>Numeric comparison can be forced by: <code>+a == +b</code>.</li>
+          <li>Boolean comparison can be forced by: <code>!a == !b</code>.</li>
+        </ul>
+      </div>
 
       <div class="note">
         <p><span class="nh">NOTE 2</span> The equality operators maintain the following invariants:</p>
-      </div>
 
-      <ul>
-        <li><code>A</code> <code>!=</code> <code>B</code> is equivalent to <code>!(A</code> <code>==</code> <code>B)</code>.</li>
-        <li><code>A</code> <code>==</code> <code>B</code> is equivalent to <code>B</code> <code>==</code> <code>A</code>, except
-            in the order of evaluation of <code>A</code> and <code>B</code>.</li>
-      </ul>
+        <ul>
+          <li><code>A</code> <code>!=</code> <code>B</code> is equivalent to <code>!(A</code> <code>==</code>
+              <code>B)</code>.</li>
+          <li><code>A</code> <code>==</code> <code>B</code> is equivalent to <code>B</code> <code>==</code> <code>A</code>, except
+              in the order of evaluation of <code>A</code> and <code>B</code>.</li>
+        </ul>
+      </div>
 
       <div class="note">
         <p><span class="nh">NOTE 3</span> The equality operator is not always transitive. For example, there might be two distinct
         String objects, each representing the same String value; each String object would be considered equal to the String value
         by the <code>==</code> operator, but the two String objects would not be equal to each other. For Example:</p>
-      </div>
 
-      <ul>
-        <li><code>new String("a")</code> <code>==</code> <code>"a"</code> and <code>"a"</code> <code>==</code>  <code>new
-            String("a")</code>are both <b>true</b>.</li>
-        <li><code>new String("a")</code> <code>==</code> <code>new String("a")</code> is <b>false</b>.</li>
-      </ul>
+        <ul>
+          <li><code>new String("a")</code> <code>==</code> <code>"a"</code> and <code>"a"</code> <code>==</code>  <code>new
+              String("a")</code>are both <b>true</b>.</li>
+          <li><code>new String("a")</code> <code>==</code> <code>new String("a")</code> is <b>false</b>.</li>
+        </ul>
+      </div>
 
       <div class="note">
         <p><span class="nh">NOTE 4</span> Comparison of Strings uses a simple equality test on sequences of code unit values.
@@ -42101,20 +42101,19 @@
           <li>Let <i>escapedV</i> be the string value that is the same as <i>V</i> except that each occurrence of the character
               <code>"</code> (code unit value 0x0022)  in <i>V</i> has been replaced with the six character sequence
               <code>"&amp;quot;"</code>.</li>
-          <li>Let <i>p1</i> be the string value that is the concatenation of the following string values:</li>
+          <li>Let <i>p1</i> be the string value that is the concatenation of the following string values:
+            <ul>
+              <li><i>p1</i></li>
+              <li>a single space code unit 0x0020</li>
+              <li><i>attribute</i></li>
+              <li><code>"="</code></li>
+              <li><code>&prime;"&prime;</code></li>
+              <li><i>escapedV</i></li>
+              <li><code>&prime;"&prime;</code></li>
+            </ul>
+          </li>
         </ol>
       </li>
-    </ol>
-    <ul>
-      <li><i>p1</i></li>
-      <li>a single space code unit 0x0020</li>
-      <li><i>attribute</i></li>
-      <li><code>"="</code></li>
-      <li><code>&prime;"&prime;</code></li>
-      <li><i>escapedV</i></li>
-      <li><code>&prime;"&prime;</code></li>
-    </ul>
-    <ol class="proc">
       <li>Let <i>p2</i> be the string value that is the concatenation of <i>p1</i> and <code>"&gt;"</code>.</li>
       <li>Let <i>p3</i> be the string value that is the concatenation of <i>p2</i> and <i>S</i>.</li>
       <li>Let <i>p4</i> be the string value that is the concatenation of <i>p2</i>, <code>"&lt;/"</code>, <i>tag</i>, and

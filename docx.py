@@ -33,7 +33,7 @@ def bloat(name):
     assert ':' not in name
     return '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}' + name
 
-k_val = bloat("val")
+k_val = bloat('val')
 k_ascii = bloat('ascii')
 k_hAnsi = bloat('hAnsi')
 k_cs = bloat('cs')
@@ -42,6 +42,7 @@ k_fill = bloat('fill')
 k_color = bloat('color')
 k_left = bloat('left')
 k_hanging = bloat('hanging')
+k_firstLine = bloat('firstLine')
 
 
 def parse_color(s):
@@ -135,7 +136,6 @@ def parse_pr(e):
                 color = parse_color(k.get(k_fill))
             else:
                 color = None
-                    
 
             if color is not None:
                 put('background-color', color)
@@ -168,17 +168,18 @@ def parse_pr(e):
         # todo: pBdr
 
         elif name == 'ind':
-            left = k.get(k_left)
-            if left is not None:
-                left = int(left)
-                assert left >= 0
-                put('margin-left', str(left / 20) + 'pt')
+            def fetch(key, css_prop, is_flipped=False):
+                val = k.get(key)
+                if val is not None:
+                    val = round(int(val), -1)  # round to nearest ten (nearest half point)
+                    assert val >= 0
+                    if is_flipped:
+                        val = -val
+                    put(css_prop, str(val / 20) + 'pt')
 
-            hanging = k.get(k_hanging)
-            if hanging is not None:
-                hanging = int(hanging)
-                assert hanging >= 0
-                #put('text-indent', str((hanging - left) / 20) + 'pt')
+            fetch(k_left, 'margin-left')
+            fetch(k_firstLine, 'text-indent')
+            fetch(k_hanging, 'text-indent', is_flipped=True)
 
         elif name == 'numPr':
             for item in k:

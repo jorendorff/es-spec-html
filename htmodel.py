@@ -140,7 +140,7 @@ class Element:
         self is left unmodified, but the result is not a deep copy: it may be
         self or an Element whose tree shares some parts of self.
         """
-
+        assert isinstance(name, str) # detect common bug
         return self.find_replace(lambda e: e.name == name, replacement)
 
 def escape(s, quote=False):
@@ -198,7 +198,7 @@ def write_html(f, ht, indent='', strict=True):
     def is_ht_inline(ht):
         return isinstance(ht, str) or _tag_data[ht.name][0] == 'I'
 
-    def write_inline_content(f, content, indent, allow_last_block, strict):
+    def write_inline_content(f, content, indent, allow_last_block, strict, strict_blame):
         if allow_last_block and isinstance(content[-1], Element) and content[-1].name in ('ol', 'ul', 'table'):
             last = content[-1]
             content = content[:-1]
@@ -211,7 +211,7 @@ def write_html(f, ht, indent='', strict=True):
             else:
                 if strict and not is_ht_inline(kid):
                     raise ValueError("block element <{}> can't appear in inline content:\n".format(kid.name)
-                                     + repr(kid))
+                                     + repr(strict_blame))
                 write_html(f, kid, indent, strict)
 
         if last is not None:
@@ -242,7 +242,7 @@ def write_html(f, ht, indent='', strict=True):
         # Dump content_to_wrap to a temporary buffer.
         tmpf = StringIO()
         tmpf.write(start_tag(ht))
-        write_inline_content(tmpf, content_to_wrap, indent + '  ', allow_last_block=False, strict=strict)
+        write_inline_content(tmpf, content_to_wrap, indent + '  ', allow_last_block=False, strict=strict, strict_blame=ht)
         if last_block is None:
             tmpf.write('</{}>'.format(ht.name))
         text = tmpf.getvalue()
@@ -277,7 +277,7 @@ def write_html(f, ht, indent='', strict=True):
                             raise ValueError("<{}> element may only contain tags, not text".format(ht.name))
                         else:
                             raise ValueError("<{}> element may not contain inline element <{}>".format(ht.name, content[0].name))
-                    write_inline_content(f, content, indent + '  ', ht.name == 'li', strict)
+                    write_inline_content(f, content, indent + '  ', ht.name == 'li', strict, strict_blame=ht)
                 else:
                     if strict and info[1] not in 'b?':
                         raise ValueError("<{}> element may not contain block element <{}>".format(ht.name, content[0].name))
@@ -312,7 +312,7 @@ def write_html(f, ht, indent='', strict=True):
         assert info in ('Ii', 'I0')
         f.write(start_tag(ht))
         if info != 'I0':
-            write_inline_content(f, content, indent + '  ', False, strict)
+            write_inline_content(f, content, indent + '  ', False, strict, ht)
             f.write('</{}>'.format(ht.name))
 
 _tag_data = {}

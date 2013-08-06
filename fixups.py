@@ -89,12 +89,13 @@ def has_bullet(docx, p):
     if not p.style:
         return False
     numId = int(p.style.get('-ooxml-numId', '0'))
-    if numId == '0':
+    if numId == 0:
         return False
     ilvl = p.style.get('-ooxml-ilvl', '0')
     s = docx.get_list_style_at_level(numId, ilvl)
     return s is not None and s.numFmt == 'bullet'
 
+# ??? Can we remove this entirely?
 @InPlaceFixup
 def fixup_list_styles(doc, docx):
     """ Make sure bullet lists are never p.Alg4 or other particular styles.
@@ -274,6 +275,224 @@ def fixup_formatting(doc, docx):
                 assert len(kid.attrs) == 0 or list(kid.attrs.keys()) == ['class']
         rewrite_spans(p)
 
+tag_names = {
+    'ANNEX': 'h1.l1',
+    'a2': 'h1.l2',
+    'a3': 'h1.l3',
+    'a4': 'h1.l4',
+    # Algorithm styles are handled via their list attributes
+    'Alg2': None,
+    'Alg3': None,
+    'Alg4': None,
+    'Alg40': None,
+    'Alg41': None,
+    'Algorithm': None,
+    'bibliography': 'li.bibliography-entry',
+    'BulletNotlast': 'li',
+    'Caption': 'figcaption',
+    'CodeSample3': 'pre',
+    'CodeSample4': 'pre',
+    'DateTitle': 'h1',
+    'ECMAWorkgroup': 'h1.ECMAWorkgroup',
+    'Example': '.Note',
+    'Figuretitle': 'figcaption',
+    'Heading1': 'h1.l1',
+    'Heading2': 'h1.l2',
+    'Heading3': 'h1.l3',
+    'Heading4': 'h1.l4',
+    'Heading5': 'h1.l5',
+    'Introduction': 'h1',
+    'ListBullet': 'li.ul',
+    'M0': None,
+    'M4': None,
+    'M20': 'div.math-display',
+    'MathDefinition4': 'div.display',
+    'MathSpecialCase3': 'li',
+    'Note': '.Note',
+    'RefNorm': 'p.formal-reference',
+    'StandardNumber': 'h1.StandardNumber',
+    'StandardTitle': 'h1',
+    'Syntax': 'h2',
+    'SyntaxDefinition': 'div.rhs',
+    'SyntaxDefinition2': 'div.rhs',
+    'SyntaxRule': 'div.lhs',
+    'SyntaxRule2': 'div.lhs',
+    'Tabletitle': 'figcaption',
+    'TermNum': 'h1',
+    'Terms': 'p.Terms',
+    'zzBiblio': 'h1',
+    'zzSTDTitle': 'div.inner-title'
+}
+
+heading_styles = {k for k, v in tag_names.items()
+                        if v == 'h1' or v == 'h2' or (v is not None and v.startswith('h1.'))}
+
+def map_body(doc, f):
+    head, body = doc.content
+    return doc.with_content([head, f(body)])
+
+@Fixup
+def fixup_lists(doc, docx):
+    List = collections.namedtuple('List', ['numId', 'ilvl', 'left_margin', 'content'])
+
+    def without_numbering_info(style):
+        s = None
+        for k in ('-ooxml-numId', '-ooxml-ilvl'):
+            if k in style:
+                if s is None:
+                    s = style.copy()
+                del s[k]
+        if s is None:
+            return style
+        return s
+
+    def fix_body(body):
+        # We start and end lists based entirely on indentation.
+
+        # In a single left-to-right pass over the document,
+        # group paragraphs into lists.
+        result = []
+
+        # stack is a stack of Lists.
+        # stack[-1].content is the innermost content-list.
+        stack = [List(numId=0, ilvl=None, left_margin=-1e300, content=result)]
+        def append_non_list_item(e):
+            if len(stack) == 1:
+                # The enclosing element is the <body>. Just add this element to it.
+                stack[-1].content.append(e)
+            else:
+                # The enclosing element is a list. It can contain only list
+                # items, so put this paragraph or list in with the preceding
+                # list item.
+                assert(ht_name_is(stack[-1].content[-1], 'li'))
+                stack[-1].content[-1].content.append(e)
+
+        # previous_ilvl keeps track of which lists (numIds) we have seen and
+        # the ilvl of the most recent item in that list.
+        previous_ilvl = {}
+
+        def open_list(p, numId, ilvl, margin):
+            assert margin >= stack[-1].left_margin
+
+            s = docx.get_list_style_at_level(numId, ilvl)
+            is_bulleted_list = s is not None and s.numFmt == 'bullet'
+            if is_bulleted_list:
+                lst = html.ul()
+            else:
+                if len(stack) == 1:
+                    cls = 'proc'
+                elif (margin > (stack[-1].left_margin + 0.75 * 72)
+                      and p.content
+                      and is_marker(p.content[0])
+                      and p.content[0].content == ['1.\t']):
+                    # Very deeply nested list with decimal numbering.
+                    cls = 'nested proc'
+                else:
+                    cls = 'block'
+                lst = html.ol(class_=cls)
+
+            append_non_list_item(lst)
+            stack.append(List(numId=numId, ilvl=ilvl, left_margin=margin, content=lst.content))
+            if numId not in previous_ilvl:
+                previous_ilvl[numId] = []
+            previous_ilvl[numId].append(ilvl)
+
+        def close_list():
+            popped_numId, popped_ilvl, _, _ = stack.pop()
+            assert len(stack) >= 1
+            assert popped_ilvl == previous_ilvl[popped_numId][-1]
+            stack_for_numId = previous_ilvl[popped_numId]
+            del stack_for_numId[-1]
+            if len(stack_for_numId) == 0:
+                del previous_ilvl[popped_numId]
+
+        for i, p in enumerate(body.content):
+            # Get numbering info for this paragraph.
+            numId = ilvl = None
+            if p.style and '-ooxml-numId' in p.style and p.style['-ooxml-numId'] != '0':
+                numId = int(p.style['-ooxml-numId'])
+                ilvl = int(p.style.get('-ooxml-ilvl', '0'))
+
+            # Determine the indentation depth.
+            margin = 0.0
+            if p.style and '-ooxml-indentation' in p.style:
+                margin_str = p.style['-ooxml-indentation']
+                if margin_str.endswith('pt'):
+                    margin = float(margin_str[:-2])
+
+                    # work around https://bugs.ecmascript.org/show_bug.cgi?id=1713
+                    if margin < 0:
+                        margin = 0
+                else:
+                    assert margin_str == '0' and margin == 0.0
+
+            # Figure out if this paragraph is a list item.
+            is_list_item = (numId is not None
+                            and numId != 0
+                            and p.attrs.get('class') not in heading_styles
+                            and len(p.content) != 0
+                            and is_marker(p.content[0])
+                            and p.content[0].content[0] != '8.4.6.2\t')  # work around https://bugs.ecmascript.org/show_bug.cgi?id=1715
+
+            # Close any more-indented active lists.
+            #
+            # Since -ooxml-indentation refers to the indentation of the numbering, not the text,
+            # treat non-numbered paragraphs as being an additional 36pt (1/4 inch) to the left.
+            # This is not meant to make sense.
+            #
+            effective_margin = margin
+            if not is_list_item:
+                effective_margin -= 36
+            while stack[-1].left_margin > effective_margin:
+                close_list()
+
+            if not is_list_item:
+                if p.style and '-ooxml-numId' in p.style:
+                    p = p.with_(style=without_numbering_info(p.style))
+                append_non_list_item(p)
+            else:
+                # If it is indented more than the previous paragraph, open a
+                # new list.
+                if margin > stack[-1].left_margin:
+                    if numId == stack[-1].numId:
+                        assert ilvl > stack[-1].ilvl
+                    open_list(p, numId, ilvl, margin)
+
+                assert margin == stack[-1].left_margin
+
+                attrs = p.attrs
+                if 'class' in attrs:
+                    attrs = attrs.copy()
+                    del attrs['class']
+
+                # Change the <p> to <li>, strip the marker and class=, and
+                # strip the -ooxml-numId/ilvl style.  Push the result to the
+                # innermost current list.
+                stack[-1].content.append(
+                    p.with_(
+                        name='li',
+                        content=p.content[1:],
+                        attrs=attrs,
+                        style=without_numbering_info(p.style)))
+
+        return [body.with_content(result)]
+
+    def contains_paragraphs(e):
+        return e.name in ('body', 'td')
+
+    return doc.find_replace(contains_paragraphs, fix_body)
+
+@Fixup
+def fixup_remove_margin_style(doc, docx):
+    def is_margin_property(name):
+        return name.startswith('margin-') or name in ('text-indent', '-ooxml-indentation')
+    def has_margins(e):
+        return e.style is not None and any(is_margin_property(k) for k in e.style)
+    def without_margins(e):
+        style = {k: v for k, v in e.style.items() if not is_margin_property(k)}
+        return [e.with_(style=style)]
+    return doc.find_replace(has_margins, without_margins)
+
 unrecognized_styles = collections.defaultdict(int)
 
 def ht_concat(c1, c2):
@@ -293,55 +512,6 @@ def ht_concat(c1, c2):
 def fixup_paragraph_classes(doc, docx):
     annex_counters = [0, 0, 0, 0]
 
-    tag_names = {
-        'ANNEX': 'h1.l1',
-        'a2': 'h1.l2',
-        'a3': 'h1.l3',
-        'a4': 'h1.l4',
-        # Algorithm styles are handled via their list attributes
-        'Alg2': None,
-        'Alg3': None,
-        'Alg4': None,
-        'Alg40': None,
-        'Alg41': None,
-        'Algorithm': None,
-        'bibliography': 'li.bibliography-entry',
-        'BulletNotlast': 'li',
-        'Caption': 'figcaption',
-        'CodeSample3': 'pre',
-        'CodeSample4': 'pre',
-        'DateTitle': 'h1',
-        'ECMAWorkgroup': 'h1.ECMAWorkgroup',
-        'Example': '.Note',
-        'Figuretitle': 'figcaption',
-        'Heading1': 'h1.l1',
-        'Heading2': 'h1.l2',
-        'Heading3': 'h1.l3',
-        'Heading4': 'h1.l4',
-        'Heading5': 'h1.l5',
-        'Introduction': 'h1',
-        'ListBullet': 'li.ul',
-        'M0': None,
-        'M4': None,
-        'M20': 'div.math-display',
-        'MathDefinition4': 'div.display',
-        'MathSpecialCase3': 'li',
-        'Note': '.Note',
-        'RefNorm': 'p.formal-reference',
-        'StandardNumber': 'h1.StandardNumber',
-        'StandardTitle': 'h1',
-        'Syntax': 'h2',
-        'SyntaxDefinition': 'div.rhs',
-        'SyntaxDefinition2': 'div.rhs',
-        'SyntaxRule': 'div.lhs',
-        'SyntaxRule2': 'div.lhs',
-        'Tabletitle': 'figcaption',
-        'TermNum': 'h1',
-        'Terms': 'p.Terms',
-        'zzBiblio': 'h1',
-        'zzSTDTitle': 'div.inner-title'
-    }
-
     def replace_tag_name(e):
         num = e.style and e.style.get('-ooxml-numId', '0') != '0'
         default_tag = 'li' if num else 'p'
@@ -353,6 +523,10 @@ def fixup_paragraph_classes(doc, docx):
 
         if cls not in tag_names:
             unrecognized_styles[cls] += 1
+
+        # work around https://bugs.ecmascript.org/show_bug.cgi?id=1715
+        if e.content and is_marker(e.content[0]) and e.content[0].content[0] == '8.4.6.2\t':
+            cls = 'Heading4'
 
         attrs = e.attrs.copy()
         del attrs['class']
@@ -783,8 +957,8 @@ def fixup_notes(doc, docx):
                 return left, right
 
     def can_be_included(next_sibling):
-        return (next_sibling.name == 'pre'
-                or (next_sibling.name in ('p', 'li')
+        return (next_sibling.name in ('pre', 'ul')
+                or (next_sibling.name == 'p'
                     and next_sibling.attrs.get("class") == "Note"
                     and find_nh(next_sibling, strict=False) is None))
 
@@ -839,29 +1013,6 @@ def find_section(doc, title):
             if s.strip() == title:
                 return sect
     raise ValueError("No section has the title " + repr(title))
-
-@InPlaceFixup
-def fixup_lang_7_9_1(doc, docx):
-    """ Fix the ilvl attributes on the bullets in section 7.9.1.
-
-    Precedes fixup_lists which consumes this data.
-    """
-
-    # Ridiculous: select some style in which level 3 list items get a bullet.
-    for bullet_numid in docx.numbering.num:
-        style = docx.get_list_style_at_level(bullet_numid, '3')
-        if style and style.numFmt == 'bullet':
-            break
-    else:
-        raise ValueError("bulleted list style not found")
-
-    sect = find_section(doc, 'Rules of Automatic Semicolon Insertion')
-    lst = sect.content[2:7]
-    assert [int(elt.style['-ooxml-ilvl']) for elt in lst] == [2, 0, 0, 2, 2]
-    for i in (1, 2):
-        lst[i].style['-ooxml-ilvl'] = '3'
-        lst[i].style['-ooxml-numId'] = str(bullet_numid)
-        assert has_bullet(docx, lst[i])
 
 @InPlaceFixup
 def fixup_lang_15_10_2_2(doc, docx):
@@ -937,148 +1088,37 @@ def fixup_lang_15_9_1_8(doc, docx):
 
 @Fixup
 def fixup_lang_15_12_3(doc, docx):
-    """ Convert some paragraphs in section 15.12.3 of the Language specification into tables.
+    """ Convert some paragraphs in section 15.12.3 of the Language specification into tables. """
+    def is_target(e):
+        return e.name == 'li' and any(p.name == 'p' and ht_text(p).startswith('backspace\t')
+                                      for i, p in e.kids())
 
-    Precedes fixup_lists which needs the table to exist in order to translate
-    the lists properly.
-    """
-    def fixup(sect):
+    def fix_target(li):
         def row(p):
             word, char = ht_text(p).strip().split('\t')
             return html.tr(html.td(word), html.td(html.span(char, class_="string value")))
 
-        for i, p in sect.kids():
+        for i, p in li.kids():
             if p.name == 'p' and ht_text(p).startswith('backspace\t'):
                 j = i + 1
-                while j < len(sect.content) and ht_name_is(sect.content[j], 'p'):
+                while j < len(li.content) and ht_name_is(li.content[j], 'p'):
                     j += 1
-                tbl = html.table(*map(row, sect.content[i:j]), class_='lightweight')
-                return sect.with_content_slice(i, j, [tbl])
-        raise ValueError("fixup_lang_15_12_3: could not find text to patch in section")
+                tbl = html.table(*map(row, li.content[i:j]), class_='lightweight')
+                return [li.with_content_slice(i, j, [tbl])]
+        raise ValueError("fixup_lang_15_12_3: could not find text to patch in target list item")
 
-    return map_section(doc, 'JSON.stringify ( value [ , replacer [ , space ] ] )', fixup)
+    def fix_sect(sect):
+        result = sect.find_replace(is_target, fix_target)
+        if result is sect:
+            raise ValueError("fixup_lang_15_12_3: could not find list item to patch in section")
+        return result
+
+    return map_section(doc, 'JSON.stringify ( value [ , replacer [ , space ] ] )', fix_sect)
 
 
 def starts_with_marker(content):
     assert isinstance(content, list)
     return content and is_marker(content[0])
-
-@InPlaceFixup
-def fixup_lists(e, docx):
-    """ Wrap each li element in a list of the appropriate type.
-
-    This comes fairly early in the sequence, since it assumes the document is
-    still pretty flat.
-    """
-
-    if e.name in ('ol', 'ul'):
-        # Unexpected. Don't rewire an existing list.
-        warn("list already exists in fixup_lists: " + repr(e)[:300])
-        return
-
-    have_list_items = False
-    for _, k in e.kids():
-        fixup_lists(k, docx)
-        if k.name == 'li':
-            have_list_items = True
-        elif k.name == 'p' and k.style:
-            # We already decided this isn't a list item, so any remaining
-            # numbering info on it is superfluous.
-            if '-ooxml-numId' in k.style:
-                del k.style['-ooxml-numId']
-            if '-ooxml-ilvl' in k.style:
-                del k.style['-ooxml-ilvl']
-
-    if have_list_items:
-        # Walk the elements from left to right. If we find any <li> elements,
-        # wrap them in <ol> elements to the appropriate depth.
-        kids = e.content
-        new_content = []
-        lists = []
-        inIntlAnnex = False
-        inIntlDateTimeFormatLocaleData = False
-        for k in kids:
-            if isinstance(k, str) or k.name != 'li':
-                if lists and k.name == 'table' and k.attrs.get('class') == 'lightweight':
-                    # Totally special case: put the table into the preceding cell.
-                    # See fixup_lang_15_12_3.
-                    last_list = lists[-1][1]
-                    last_list_item = last_list.content[-1]
-                    last_list_item.content.append(k)
-                else:
-                    # Not a list item. Close all open lists. Add k to new_content.
-                    del lists[:]
-                    new_content.append(k)
-            else:
-                # Oh no. It is a list item.
-                # For now we begin by removing the autogenerated marker in favor of winging it.
-                if starts_with_marker(k.content):
-                    del k.content[0]
-                    if k.name in ('p', 'li'):
-                        # And since this is a paragraph, trim any leading whitespace we exposed.
-                        if k.content and isinstance(k.content[0], str):
-                            k.content[0] = k.content[0].lstrip()
-
-                # Well, what is its depth? Does it have a bullet or numbering?
-                bullet = False
-                if k.attrs.get('class') == 'ul':
-                    # big hack for ListBullet style, whose relevant information is lost in translation
-                    depth = 0
-                    bullet = True
-                    del k.attrs['class']
-                    # and now a really gruesome hack: sublists in the Internationalization API spec
-                    if spec_is_intl(docx) and k.content[0] == "In all functionality:":
-                        inIntlAnnex = True
-                    if inIntlAnnex:
-                        if not k.content[0].startswith('In '):
-                            depth = 1
-                    if spec_is_intl(docx) and isinstance(k.content[0], str) and k.content[0].startswith("[[localeData]][locale] must have a formats property"):
-                        inIntlDateTimeFormatLocaleData = True
-                    if inIntlDateTimeFormatLocaleData:
-                        content = k.content[0]
-                        if content.startswith("weekday") or content.startswith("year") or content.startswith("month") or content.startswith("hour"):
-                            depth = 1
-                elif k.style and '-ooxml-ilvl' in k.style:
-                    depth = int(k.style['-ooxml-ilvl'])
-                    bullet = has_bullet(docx, k)
-                else:
-                    depth = 0
-
-                # While we're here, delete the magic style attributes.
-                for propname in ('-ooxml-numId', '-ooxml-ilvl'):
-                    if propname in k.style:
-                        del k.style[propname]
-
-                # Close any open lists at greater depth.
-                while lists and lists[-1][0] > depth:
-                    del lists[-1]
-
-                # If we have a list at equal depth, but it's the wrong kind, close it too.
-                if lists and lists[-1][0] == depth and bullet != (lists[-1][1].name == 'ul'):
-                    del lists[-1]
-
-                # If we don't already have a list at that depth, open one.
-                if not lists or depth > lists[-1][0]:
-                    if bullet:
-                        new_list = html.ul()
-                    else:
-                        if not lists:
-                            cls = 'proc'
-                        elif depth > lists[-1][0] + 1:
-                            cls = 'nested proc'
-                        else:
-                            cls = 'block'
-                        new_list = html.ol(class_=cls)
-
-                    # If there is an enclosing list, add new_list to the last <li>
-                    # of the enclosing list, not the enclosing list itself.
-                    # If there is no enclosing list, add new_list to new_content.
-                    (lists[-1][1].content[-1].content if lists else new_content).append(new_list)
-                    lists.append((depth, new_list))
-
-                lists[-1][1].content.append(k)
-
-        kids[:] = new_content
 
 @InPlaceFixup
 def fixup_list_paragraphs(doc, docx):
@@ -1108,11 +1148,6 @@ def fixup_list_paragraphs(doc, docx):
                     while i > 0 and is_block(li.content[i - 1]):
                         i -= 1
                     li.content[:i] = [html.p(*li.content[:i])]
-
-
-def map_body(doc, f):
-    head, body = doc.content
-    return doc.with_content([head, f(body)])
 
 def replace_figure(doc, section_title, n, alt, width, height, has_svg=False):
     image = html.img(src="figure-{}.png".format(n), width=str(width), height=str(height), alt=alt)
@@ -2353,21 +2388,14 @@ def fixup_add_ecma_flavor(doc, docx):
         doc_body(doc).content.insert(0, html.img(src="Ecma_RVB-003.jpg", alt="Ecma International Logo.",
             height="146", width="373"))
 
-@Fixup
-def fixup_remove_margin_style(doc, docx):
-    def has_margins(e):
-        return e.style is not None and any(k.startswith('margin-') for k in e.style)
-    def without_margins(e):
-        style = {k: v for k, v in e.style.items() if not k.startswith('margin-')}
-        return [e.with_(style=style)]
-    return doc.find_replace(has_margins, without_margins)
-
 
 # === Main
 
 def get_fixups(docx):
     yield fixup_list_styles
     yield fixup_formatting
+    yield fixup_lists
+    yield fixup_remove_margin_style
     yield fixup_paragraph_classes
     yield fixup_remove_empty_headings
     yield fixup_element_spacing
@@ -2381,11 +2409,8 @@ def get_fixups(docx):
     yield fixup_pre
     yield fixup_notes
     if spec_is_lang(docx):
-        yield fixup_lang_7_9_1
-        yield fixup_lang_15_10_2_2
         yield fixup_lang_15_9_1_8
         yield fixup_lang_15_12_3
-    yield fixup_lists
     yield fixup_list_paragraphs
     if spec_is_lang(docx):
         yield fixup_figure_1
@@ -2408,7 +2433,6 @@ def get_fixups(docx):
     yield fixup_generate_toc
     yield fixup_add_disclaimer
     yield fixup_add_ecma_flavor
-    yield fixup_remove_margin_style
 
 def fixup(docx, doc):
     logdir = "_fixup_log"
