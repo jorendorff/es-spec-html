@@ -333,7 +333,7 @@ def map_body(doc, f):
 
 @Fixup
 def fixup_lists(doc, docx):
-    List = collections.namedtuple('List', ['numId', 'ilvl', 'left_margin', 'content'])
+    List = collections.namedtuple('List', ['parent', 'numId', 'ilvl', 'left_margin', 'content'])
 
     def without_numbering_info(style):
         s = None
@@ -353,31 +353,32 @@ def fixup_lists(doc, docx):
         # group paragraphs into lists.
         result = []
 
-        # stack is a stack of Lists.
-        # stack[-1].content is the innermost content-list.
-        stack = [List(numId=0, ilvl=None, left_margin=-1e300, content=result)]
+        # current is the current innermost List.
+        current = List(parent=None, numId=0, ilvl=None, left_margin=-1e300, content=result)
         def append_non_list_item(e):
-            if len(stack) == 1:
+            if current.parent is None:
                 # The enclosing element is the <body>. Just add this element to it.
-                stack[-1].content.append(e)
+                current.content.append(e)
             else:
                 # The enclosing element is a list. It can contain only list
                 # items, so put this paragraph or list in with the preceding
                 # list item.
-                assert(ht_name_is(stack[-1].content[-1], 'li'))
-                stack[-1].content[-1].content.append(e)
+                assert(ht_name_is(current.content[-1], 'li'))
+                current.content[-1].content.append(e)
 
         def open_list(p, numId, ilvl, margin):
-            assert margin >= stack[-1].left_margin
+            nonlocal current
+
+            assert margin >= current.left_margin
 
             s = docx.get_list_style_at_level(numId, ilvl)
             is_bulleted_list = s is not None and s.numFmt == 'bullet'
             if is_bulleted_list:
                 lst = html.ul()
             else:
-                if len(stack) == 1:
+                if current.parent is None:
                     cls = 'proc'
-                elif (margin > (stack[-1].left_margin + 0.75 * 72)
+                elif (margin > (current.left_margin + 0.75 * 72)
                       and p.content
                       and is_marker(p.content[0])
                       and p.content[0].content == ['1.\t']):
@@ -388,11 +389,13 @@ def fixup_lists(doc, docx):
                 lst = html.ol(class_=cls)
 
             append_non_list_item(lst)
-            stack.append(List(numId=numId, ilvl=ilvl, left_margin=margin, content=lst.content))
+            current = List(parent=current, numId=numId, ilvl=ilvl, left_margin=margin,
+                           content=lst.content)
 
         def close_list():
-            popped_numId, popped_ilvl, _, _ = stack.pop()
-            assert len(stack) >= 1
+            nonlocal current
+            current = current.parent
+            assert current is not None
 
         for i, p in enumerate(body.content):
             # Get numbering info for this paragraph.
@@ -431,7 +434,7 @@ def fixup_lists(doc, docx):
             effective_margin = margin
             if not is_list_item:
                 effective_margin -= 36
-            while stack[-1].left_margin > effective_margin:
+            while current.left_margin > effective_margin:
                 close_list()
 
             if not is_list_item:
@@ -441,12 +444,12 @@ def fixup_lists(doc, docx):
             else:
                 # If it is indented more than the previous paragraph, open a
                 # new list.
-                if margin > stack[-1].left_margin:
-                    if numId == stack[-1].numId:
-                        assert ilvl > stack[-1].ilvl
+                if margin > current.left_margin:
+                    if numId == current.numId:
+                        assert ilvl > current.ilvl
                     open_list(p, numId, ilvl, margin)
 
-                assert margin == stack[-1].left_margin
+                assert margin == current.left_margin
 
                 attrs = p.attrs
                 if 'class' in attrs:
@@ -456,7 +459,7 @@ def fixup_lists(doc, docx):
                 # Change the <p> to <li>, strip the marker and class=, and
                 # strip the -ooxml-numId/ilvl style.  Push the result to the
                 # innermost current list.
-                stack[-1].content.append(
+                current.content.append(
                     p.with_(
                         name='li',
                         content=p.content[1:],
