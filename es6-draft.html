@@ -8235,7 +8235,6 @@
         </li>
         <li>Let <i>trapResult</i> be the result of calling the [[Call]] internal method of <i>trap</i> with <i>handler</i> as the
             <b>this</b> value and a new <a href="#sec-8.2.2">List</a> containing <i>target</i>.</li>
-        <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>trapResult</i>).</li>
         <li>Let <i>booleanTrapResult</i> be <a href="#sec-9.1.2">ToBoolean</a>(<i>trapResult</i>)</li>
         <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>booleanTrapResult</i>).</li>
         <li>Let <i>targetIsExtensible</i> be the result of calling the [[IsExtensible]] internal method of <i>target</i>.</li>
@@ -14540,17 +14539,6 @@
         <li>Return the result of the abstract operation EvaluateCall with arguments <i>ref</i>, <i>Arguments</i>, and
             <i>tailCall</i>.</li>
       </ol>
-
-      <p>A tail position call must either release any transient internal resources associated with the currently executing
-      function execution context before invoking the target function or reuse those resources in support of the target
-      function.</p>
-
-      <div class="note">
-        <p><span class="nh">NOTE 1</span> For example, a tail position call should only grow an implementation&rsquo;s
-        activication record stack by the amount that the size of the target function&rsquo;s activation record exceeds the size of
-        the calling function&rsquo;s activation record. If the target function&rsquo;s activation record is smaller, then the
-        total size of the stack should decrease.</p>
-      </div>
 
       <p><b>Runtime Semantics: EvaluateCall Abstract Operation</b></p>
 
@@ -22051,7 +22039,6 @@
         <li>If IsStatic of <i>ClassElement</i> is <b>true</b>, return <i>list</i>.</li>
         <li>If PropName of <i>ClassElement</i> is <b><span style="font-family: sans-serif">&Prime;</span><span style="font-family:
             monospace">constructor</span><span style="font-family: sans-serif">&Prime;</span></b>, return <i>list</i>.</li>
-        <li>If IsStatic of <i>ClassElement</i> is <b>true</b>, return <i>list</i>.</li>
         <li>Append  <i>ClassElement</i> to the end of <i>list</i>.</li>
         <li>Return <i>list</i>.</li>
       </ol>
@@ -24063,7 +24050,6 @@
         <ol class="proc">
           <li>If the <b>this</b> value is <b>undefined</b>, return <code>"[object Undefined]"</code>.</li>
           <li>If the <b>this</b> value is <b>null</b>, return <code>"[object Null]"</code>.</li>
-          <li>If <a href="#sec-8">Type</a>(the <b>this</b> value) is Symbol, then return <code>"[object Symbol]"</code>.</li>
           <li>Let <i>O</i> be the result of calling <a href="#sec-9.1.9">ToObject</a> passing the <b>this</b> value as the
               argument.</li>
           <li>If <i>O</i> is an exotic Symbol object, then return <code>"[object Symbol]"</code>.</li>
@@ -25035,7 +25021,6 @@
           <li>Let <i>lenValue</i>  be the result of <a href="#sec-9.3.1">Get</a>(<i>items</i>, <code>"length"</code>).</li>
           <li>Let <i>len</i> be <a href="#sec-9.1.4">ToInteger</a>(<i>lenValue</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>len</i>).</li>
-          <li>Let <i>C</i> be the <b>this</b> value.</li>
           <li>If <a href="#sec-9.2.5">IsConstructor</a>(<i>C</i>) is <b>true</b>, then
             <ol class="block">
               <li>Let <i>newObj</i> be the result of calling the [[Construct]] internal method of <i>C</i> with an argument list
@@ -35555,8 +35540,6 @@
 
           <ol class="proc">
             <li><a href="#sec-5.2">Assert</a>:  <a href="#sec-8">Type</a>(<i>length</i>) is not Object.</li>
-            <li>Let <i>elementType</i> be the string value of the Element Type value in <a href="#table-35">Table 35</a><a
-                href="#table-35">Table 35</a><a href="#table-36">Table 36</a> for this <i>TypedArray</i> constructor.</li>
             <li>Let <i>O</i> be the <b>this</b> value.</li>
             <li>If <a href="#sec-8">Type</a>(<i>O</i>) is not Object or if <i>O</i> does not have an [[ViewedArrayBuffer]] <a
                 href="#sec-8.1.6.2">internal data property</a> or if the value of <i>O&rsquo;s</i> [[ViewedArrayBuffer]] <a

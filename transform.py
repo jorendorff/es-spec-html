@@ -63,7 +63,7 @@ def transform_element(docx, e):
         assert ALLOW_CHANGES
         return [transform_element(docx, k) for k in e]
 
-    elif name in ('del', 'delText', 'delInstrText'):
+    elif name in ('del', 'delText', 'delInstrText', 'moveFrom'):
         assert ALLOW_CHANGES
         return None
 
