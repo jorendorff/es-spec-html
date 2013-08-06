@@ -1082,6 +1082,24 @@ def fixup_tables(doc, docx):
                 if not span.attrs and not span.style:
                     td.content = span.content
 
+@Fixup
+def fixup_table_formatting(doc, docx):
+    def fix_table(table):
+        def has_borders_or_shading(e):
+            s = e.style
+            return s and any(k.startswith(('border', '-ooxml-border', 'background'))
+                             for k in s)
+
+        formatted = any(cell.name == 'th' or has_borders_or_shading(cell)
+                          for _, row in table.kids('tr')
+                            for _, cell in row.kids())
+        if not formatted and table.attrs and table.attrs.get('class') == 'real-table':
+            attrs = table.attrs.copy()
+            attrs['class'] = 'lightweight-table'
+            return [table.with_(attrs=attrs)]
+        return [table]
+    return doc.replace('table', fix_table)
+
 @InPlaceFixup
 def fixup_pre(doc, docx):
     """ Convert p elements containing only monospace font to pre.
@@ -2586,6 +2604,7 @@ def get_fixups(docx):
     yield fixup_sections
     yield fixup_strip_toc
     yield fixup_tables
+    yield fixup_table_formatting
     yield fixup_pre
     yield fixup_notes
     if spec_is_lang(docx):

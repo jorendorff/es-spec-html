@@ -226,14 +226,7 @@ def transform_element(docx, e):
         elif name == 'tbl':
             assert not e.keys()
             tbl = table(*c, class_="real-table")
-            if css:
-                if '-ooxml-border-insideH' in css:
-                    # borders between rows
-                    row_border = css.pop('-ooxml-border-insideH')
-                if '-ooxml-border-insideV' in css:
-                    # borders between columns
-                    col_border = css.pop('-ooxml-border-insideV')
-                ##tbl.style = css
+            ##tbl.style = css
             return figure(tbl)
 
         elif name == 'tr':
