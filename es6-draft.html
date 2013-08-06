@@ -2128,18 +2128,18 @@
   escape sequence is effectively ignored as part of the comment. Within other contexts, such an escape sequence contextually
   contributes one Unicode character.</p>
 
-  <p class="Note">NOTE</p>
-
-  <p class="Note">ECMAScript differs from the Java programming language in the behaviour of Unicode escape sequences. In a Java
-  program, if the Unicode escape sequence <code>\u000A</code>, for example, occurs within a single-line comment, it is interpreted
-  as a line terminator (Unicode character <code>000A</code> is line feed) and therefore the next Unicode character is not part of
-  the comment. Similarly, if the Unicode escape sequence <code>\u000A</code> occurs within a string literal in a Java program, it
-  is likewise interpreted as a line terminator, which is not allowed within a string literal&mdash;one must write <code>\n</code>
-  instead of <code>\u000A</code> to cause a line feed to be part of the string value of a string literal. In an ECMAScript
-  program, a Unicode escape sequence occurring within a comment is never interpreted and therefore cannot contribute to
-  termination of the comment. Similarly, a Unicode escape sequence occurring within a string literal in an ECMAScript program
-  always contributes a Unicode character to the literal and is never interpreted as a line terminator or as a quote mark that
-  might terminate the string literal.</p>
+  <div class="note">
+    <p><span class="nh">NOTE</span> ECMAScript differs from the Java programming language in the behaviour of Unicode escape
+    sequences. In a Java program, if the Unicode escape sequence <code>\u000A</code>, for example, occurs within a single-line
+    comment, it is interpreted as a line terminator (Unicode character <code>000A</code> is line feed) and therefore the next
+    Unicode character is not part of the comment. Similarly, if the Unicode escape sequence <code>\u000A</code> occurs within a
+    string literal in a Java program, it is likewise interpreted as a line terminator, which is not allowed within a string
+    literal&mdash;one must write <code>\n</code> instead of <code>\u000A</code> to cause a line feed to be part of the string
+    value of a string literal. In an ECMAScript program, a Unicode escape sequence occurring within a comment is never interpreted
+    and therefore cannot contribute to termination of the comment. Similarly, a Unicode escape sequence occurring within a string
+    literal in an ECMAScript program always contributes a Unicode character to the literal and is never interpreted as a line
+    terminator or as a quote mark that might terminate the string literal.</p>
+  </div>
 
   <p>ECMAScript String values (<a href="#sec-8.4">8.4</a>) are computational sequences of 16-bit integer values called &ldquo;code
   units&rdquo;. ECMAScript language constructs that generate string values from <span class="nt">SourceCharacter</span> sequences
@@ -4535,14 +4535,11 @@
       <p>Properties are identified using key values.  A key value is either an ECMAScript String value or a Exotic Symbol
       object.</p>
 
-      <ul>
-        <li>Property keys are used to access properties and their values.</li>
-      </ul>
-
-      <p>There are two kinds of access for properties: <i>get</i> and <i>set</i>, corresponding to value retrieval and assignment,
-      respectively. The properties accessible via get and set access includes both <i>own properties</i> that are a direct part of
-      an object and <i>inherited properties</i> which are provided by another associated object via a property inheritance
-      relationship. Inherited properties may be either own or inherited properties of the associated object.</p>
+      <p>Property keys are used to access properties and their values. There are two kinds of access for properties: <i>get</i>
+      and <i>set</i>, corresponding to value retrieval and assignment, respectively. The properties accessible via get and set
+      access includes both <i>own properties</i> that are a direct part of an object and <i>inherited properties</i> which are
+      provided by another associated object via a property inheritance relationship. Inherited properties may be either own or
+      inherited properties of the associated object.</p>
 
       <p>All objects are logically collections of properties, but there are multiple forms of objects that differ in their
       semantics for accessing and manipulating their properties.  O<i>rdinary objects</i> are the most common form of objects and
@@ -12694,8 +12691,7 @@
       <li>Let <i>allowed</i> be the result of calling the default [[DefineOwnProperty]] internal method (<a
           href="#sec-8.3.9">8.3.9</a>) on the arguments object passing <i>P</i> and <i>Desc</i>  as the arguments.</li>
       <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>allowed</i>).</li>
-      <li>If <i>allowed</i> is <b>false</b>, then</li>
-      <li>return <b>false</b>.</li>
+      <li>If <i>allowed</i> is <b>false</b>, then return <b>false</b>.</li>
       <li>If the value of <i>isMapped</i> is not <b>undefined</b>, then
         <ol class="block">
           <li>If <a href="#sec-8.2.5.1">IsAccessorDescriptor</a>(<i>Desc</i>) is <b>true</b>, then
@@ -23594,8 +23590,7 @@
         <ol class="proc">
           <li>If <i>value</i> is supplied, then
             <ol class="block">
-              <li>If <a href="#sec-8">Type</a>(<i>value</i>)  is Object, then</li>
-              <li>return <i>value</i>.</li>
+              <li>If <a href="#sec-8">Type</a>(<i>value</i>)  is Object, then return <i>value</i>.</li>
               <li>If <a href="#sec-8">Type</a>(<i>value</i>) is String, return <a
                   href="#sec-9.1.9">ToObject</a>(<i>value</i>).</li>
               <li>If <a href="#sec-8">Type</a>(<i>value</i>) is Boolean, return <a
@@ -24722,12 +24717,10 @@
       global object. When <code>Array</code> is called as a function rather than as a constructor, it creates and initialises a
       new Array object. Thus the function call <span style="font-family: monospace"><b>Array(</b>&hellip;<b>)</b></span> is
       equivalent to the object creation expression <span style="font-family:
-      monospace"><b>new&nbsp;Array(</b>&hellip;<b>)</b></span> with the same arguments.</p>
-
-      <p>However, if the <b>this</b> value value passed in the call is an Object with an [[ArrayInitialisationState]] <a
-      href="#sec-8.1.6.2">internal data property</a> whose value is <span class="value">undefined</span>, it initialises the
-      <b>this</b> value using the argument values.  This permits <code>Array</code> to be used both as factory method and to
-      perform constructor instance initialization.</p>
+      monospace"><b>new&nbsp;Array(</b>&hellip;<b>)</b></span> with the same arguments. However, if the <b>this</b> value value
+      passed in the call is an Object with an [[ArrayInitialisationState]] <a href="#sec-8.1.6.2">internal data property</a> whose
+      value is <span class="value">undefined</span>, it initialises the <b>this</b> value using the argument values.  This permits
+      <code>Array</code> to be used both as factory method and to perform constructor instance initialization.</p>
 
       <p>The <code>Array</code> constructor is designed to be subclassable. It may be used as the value of an <code>extends</code>
       clause of a class declaration. Subclass constructors that intended to inherit the specified <code>Array</code> behaviour
@@ -28669,10 +28662,8 @@
           Instances</h1>
 
       <p>Boolean instances are ordinary objects that inherit properties from the Boolean prototype object. Boolean instances have
-      a [[BooleanData]] <a href="#sec-8.1.6.2">internal data property</a>.</p>
-
-      <p>The [[BooleanData]] <a href="#sec-8.1.6.2">internal data property</a> is the Boolean value represented by this Boolean
-      object.</p>
+      a [[BooleanData]] <a href="#sec-8.1.6.2">internal data property</a>. The [[BooleanData]] <a href="#sec-8.1.6.2">internal
+      data property</a> is the Boolean value represented by this Boolean object.</p>
     </section>
   </section>
 
@@ -29306,10 +29297,8 @@
           Instances</h1>
 
       <p>Number instances are ordinary objects that inherit properties from the Number prototype object. Number instances also
-      have a [[NumberData]] <a href="#sec-8.1.6.2">internal data property</a>.</p>
-
-      <p>The [[NumberData]] <a href="#sec-8.1.6.2">internal data property</a> is the Number value represented by this Number
-      object.</p>
+      have a [[NumberData]] <a href="#sec-8.1.6.2">internal data property</a>. The [[NumberData]] <a href="#sec-8.1.6.2">internal
+      data property</a> is the Number value represented by this Number object.</p>
     </section>
   </section>
 
@@ -29323,10 +29312,8 @@
     href="#sec-8.1.6.2">internal data property</a> whose value is <span class="value">true</span>.</p>
 
     <p>The Math is not a function object. It does not have a [[Construct]] internal method; it is not possible to use the Math
-    object as a constructor with the <code>new</code> operator.</p>
-
-    <p>The Math object also does not have a [[Call]] internal method; it is not possible to invoke the Math object as a
-    function.</p>
+    object as a constructor with the <code>new</code> operator. The Math object also does not have a [[Call]] internal method; it
+    is not possible to invoke the Math object as a function.</p>
 
     <div class="note">
       <p><span class="nh">NOTE</span> In this specification, the phrase &ldquo;the Number value for <var>x</var>&rdquo; has a
@@ -31487,10 +31474,8 @@
           Instances</h1>
 
       <p>Date instances are ordinary objects that inherit properties from the Date prototype object. Date instances also have a
-      [[DateValue]] <a href="#sec-8.1.6.2">internal data property</a>.</p>
-
-      <p>The [[DateValue]] <a href="#sec-8.1.6.2">internal data property</a> is the <a href="#sec-15.9.1.1">time value</a>
-      represented by this Date object.</p>
+      [[DateValue]] <a href="#sec-8.1.6.2">internal data property</a>. The [[DateValue]] <a href="#sec-8.1.6.2">internal data
+      property</a> is the <a href="#sec-15.9.1.1">time value</a> represented by this Date object.</p>
     </section>
   </section>
 
@@ -33796,10 +33781,9 @@
           Instances</h1>
 
       <p>RegExp instances are ordinary objects that inherit properties from the RegExp prototype object. RegExp instances have
-      internal data properties [[RegExpMatcher]], [[OriginalSource]], and [[OriginalFlags]].</p>
-
-      <p>The value of the [[RegExpMatcher]] <a href="#sec-8.1.6.2">internal data property</a> is an implementation dependent
-      representation of the <span class="nt">Pattern</span> of the RegExp object.</p>
+      internal data properties [[RegExpMatcher]], [[OriginalSource]], and [[OriginalFlags]]. The value of the [[RegExpMatcher]] <a
+      href="#sec-8.1.6.2">internal data property</a> is an implementation dependent representation of the <span
+      class="nt">Pattern</span> of the RegExp object.</p>
 
       <div class="note">
         <p><span class="nh">NOTE</span> Prior to the 6<sup>th</sup> Edition, <code>RegExp</code> instances were specified as
@@ -35405,109 +35389,104 @@
       <h1><span class="secnum"><a href="#sec-15.13.6" title="link to this section">15.13.6</a></span> <i>TypedArray</i>
           Objects</h1>
 
-      <section id="sec-15.13.6.1.1">
-        <h1><span class="secnum"><a href="#sec-15.13.6.1.1" title="link to this section">15.13.6.1.1</a></span> <i>TypedArray</i>
-            objects present an array-like view of any underlying binary data buffer. Each element of a TypedArray instance has the
-            same underlying binary scalar data type. There is a distinct <i>TypedArray</i> constructor for each of tbe nine
-            support element types.</h1>
+      <p><i>TypedArray</i> objects present an array-like view of any underlying binary data buffer. Each element of a TypedArray
+      instance has the same underlying binary scalar data type. There is a distinct <i>TypedArray</i> constructor for each of tbe
+      nine support element types. For each constructor in the <a href="#table-36">Table 36</a> is a separate <i>TypedArray</i>
+      constructor object, with corresponding prototype object and instances.</p>
 
-        <p>For each constructor in the <a href="#table-36">Table 36</a> is a separate <i>TypedArray</i> constructor object, with
-        corresponding prototype object and instances.</p>
+      <figure>
+        <figcaption><span id="table-36">Table 36</span> &ndash; The <i>TypedArray</i> Constructors</figcaption>
+        <table class="real-table">
+          <tr>
+            <td style="background-color: #BFBFBF"><span style="background-color: #C0C0C0">Constructor Name</span></td>
+            <th style="background-color: #BFBFBF">Element<br>Type</th>
+            <th style="background-color: #BFBFBF">Element Size</th>
+            <th style="background-color: #BFBFBF">Conversion Operation</th>
+            <td style="background-color: #BFBFBF"><span style="background-color: #C0C0C0">Description</span></td>
+            <th style="background-color: #BFBFBF">Equivalent C Type</th>
+          </tr>
+          <tr>
+            <td>Int8Array</td>
+            <td>Int8</td>
+            <td>1</td>
+            <td>ToInt8</td>
+            <td>8-bit 2&rsquo;s complement signed integer</td>
+            <td>signed char</td>
+          </tr>
+          <tr>
+            <td>Uint8Array</td>
+            <td>Uint8</td>
+            <td>1</td>
+            <td>ToUint8</td>
+            <td>8-bit unsigned integer</td>
+            <td>unsigned char</td>
+          </tr>
+          <tr>
+            <td>Uint8ClampedArray</td>
+            <td>Uint8C</td>
+            <td>1</td>
+            <td>ToUint8Clamp</td>
+            <td>8-bit unsigned integer (clamped)</td>
+            <td>unsigned char</td>
+          </tr>
+          <tr>
+            <td>Int16Array</td>
+            <td>Int16</td>
+            <td>2</td>
+            <td>ToInt16</td>
+            <td>16-bit 2&rsquo;s complement signed integer</td>
+            <td>Short</td>
+          </tr>
+          <tr>
+            <td>Uint16Array</td>
+            <td>Uint16</td>
+            <td>2</td>
+            <td><a href="#sec-9.1.7">ToUint16</a></td>
+            <td>16-bit unsigned integer</td>
+            <td>unsigned short</td>
+          </tr>
+          <tr>
+            <td>Int32Array</td>
+            <td>Int32</td>
+            <td>4</td>
+            <td><a href="#sec-9.1.5">ToInt32</a></td>
+            <td>32-bit 2&rsquo;s complement signed integer</td>
+            <td>Int</td>
+          </tr>
+          <tr>
+            <td>Uint32Array</td>
+            <td>Uint32</td>
+            <td>4</td>
+            <td><a href="#sec-9.1.6">ToUint32</a></td>
+            <td>32-bit unsigned integer</td>
+            <td>unsigned int</td>
+          </tr>
+          <tr>
+            <td>Float32Array</td>
+            <td>Float32</td>
+            <td>4</td>
+            <td></td>
+            <td>32-bit IEEE floating point</td>
+            <td>Float</td>
+          </tr>
+          <tr>
+            <td>Float64Array</td>
+            <td>Float64</td>
+            <td>8</td>
+            <td></td>
+            <td>64-bit IEEE floating point</td>
+            <td>Double</td>
+          </tr>
+        </table>
+      </figure>
 
-        <figure>
-          <figcaption><span id="table-36">Table 36</span> &ndash; The <i>TypedArray</i> Constructors</figcaption>
-          <table class="real-table">
-            <tr>
-              <td style="background-color: #BFBFBF"><span style="background-color: #C0C0C0">Constructor Name</span></td>
-              <th style="background-color: #BFBFBF">Element<br>Type</th>
-              <th style="background-color: #BFBFBF">Element Size</th>
-              <th style="background-color: #BFBFBF">Conversion Operation</th>
-              <td style="background-color: #BFBFBF"><span style="background-color: #C0C0C0">Description</span></td>
-              <th style="background-color: #BFBFBF">Equivalent C Type</th>
-            </tr>
-            <tr>
-              <td>Int8Array</td>
-              <td>Int8</td>
-              <td>1</td>
-              <td>ToInt8</td>
-              <td>8-bit 2&rsquo;s complement signed integer</td>
-              <td>signed char</td>
-            </tr>
-            <tr>
-              <td>Uint8Array</td>
-              <td>Uint8</td>
-              <td>1</td>
-              <td>ToUint8</td>
-              <td>8-bit unsigned integer</td>
-              <td>unsigned char</td>
-            </tr>
-            <tr>
-              <td>Uint8ClampedArray</td>
-              <td>Uint8C</td>
-              <td>1</td>
-              <td>ToUint8Clamp</td>
-              <td>8-bit unsigned integer (clamped)</td>
-              <td>unsigned char</td>
-            </tr>
-            <tr>
-              <td>Int16Array</td>
-              <td>Int16</td>
-              <td>2</td>
-              <td>ToInt16</td>
-              <td>16-bit 2&rsquo;s complement signed integer</td>
-              <td>Short</td>
-            </tr>
-            <tr>
-              <td>Uint16Array</td>
-              <td>Uint16</td>
-              <td>2</td>
-              <td><a href="#sec-9.1.7">ToUint16</a></td>
-              <td>16-bit unsigned integer</td>
-              <td>unsigned short</td>
-            </tr>
-            <tr>
-              <td>Int32Array</td>
-              <td>Int32</td>
-              <td>4</td>
-              <td><a href="#sec-9.1.5">ToInt32</a></td>
-              <td>32-bit 2&rsquo;s complement signed integer</td>
-              <td>Int</td>
-            </tr>
-            <tr>
-              <td>Uint32Array</td>
-              <td>Uint32</td>
-              <td>4</td>
-              <td><a href="#sec-9.1.6">ToUint32</a></td>
-              <td>32-bit unsigned integer</td>
-              <td>unsigned int</td>
-            </tr>
-            <tr>
-              <td>Float32Array</td>
-              <td>Float32</td>
-              <td>4</td>
-              <td></td>
-              <td>32-bit IEEE floating point</td>
-              <td>Float</td>
-            </tr>
-            <tr>
-              <td>Float64Array</td>
-              <td>Float64</td>
-              <td>8</td>
-              <td></td>
-              <td>64-bit IEEE floating point</td>
-              <td>Double</td>
-            </tr>
-          </table>
-        </figure>
+      <p>In the definitions below,  references to <i>TypedArray</i> should be replaced with the appropriate constructor name from
+      the above table. The phrase &ldquo;the element size in bytes&rdquo; refers to the value in the Element Size column of the
+      table in the row corresponding to the constructor. The phrase &ldquo;element Type&rdquo; refers to the value in the Element
+      Type column for that row.</p>
 
-        <p>In the definitions below,  references to <i>TypedArray</i> should be replaced with the appropriate constructor name
-        from the above table. The phrase &ldquo;the element size in bytes&rdquo; refers to the value in the Element Size column of
-        the table in the row corresponding to the constructor. The phrase &ldquo;element Type&rdquo; refers to the value in the
-        Element Type column for that row.</p>
-      </section>
-
-      <section id="sec-15.13.6.2">
-        <h1><span class="secnum"><a href="#sec-15.13.6.2" title="link to this section">15.13.6.2</a></span> The %TypedArray%
+      <section id="sec-15.13.6.1">
+        <h1><span class="secnum"><a href="#sec-15.13.6.1" title="link to this section">15.13.6.1</a></span> The %TypedArray%
             Intrinsic Object</h1>
 
         <p>The %TypedArray% intrinsic object is a constructor-like function object that all of the <i>TypedArray</i> constructor
@@ -35529,8 +35508,8 @@
         <p>The actual behaviour of a <code>super</code> call of %TypedArray% depends upon the number  and kind of arguments that
         are passed to it.</p>
 
-        <section id="sec-15.13.6.2.1">
-          <h1><span class="secnum"><a href="#sec-15.13.6.2.1" title="link to this section">15.13.6.2.1</a></span> %TypedArray% (
+        <section id="sec-15.13.6.1.1">
+          <h1><span class="secnum"><a href="#sec-15.13.6.1.1" title="link to this section">15.13.6.1.1</a></span> %TypedArray% (
               length )</h1>
 
           <p>This description applies if and only if the %TypedArray% function is called with exactly one argument and the Type of
@@ -35575,8 +35554,8 @@
           </ol>
         </section>
 
-        <section id="sec-15.13.6.2.2">
-          <h1><span class="secnum"><a href="#sec-15.13.6.2.2" title="link to this section">15.13.6.2.2</a></span> %TypedArray% (
+        <section id="sec-15.13.6.1.2">
+          <h1><span class="secnum"><a href="#sec-15.13.6.1.2" title="link to this section">15.13.6.1.2</a></span> %TypedArray% (
               typedArray )</h1>
 
           <p>This description applies if and only if the %TypedArray% function is called with exactly one argument and the Type of
@@ -35628,8 +35607,8 @@
           </ol>
         </section>
 
-        <section id="sec-15.13.6.2.3">
-          <h1><span class="secnum"><a href="#sec-15.13.6.2.3" title="link to this section">15.13.6.2.3</a></span> %TypedArray% (
+        <section id="sec-15.13.6.1.3">
+          <h1><span class="secnum"><a href="#sec-15.13.6.1.3" title="link to this section">15.13.6.1.3</a></span> %TypedArray% (
               array )</h1>
 
           <p>This description applies if and only if the %TypedArray% function is called with exactly one argument and the Type of
@@ -35692,8 +35671,8 @@
           </ol>
         </section>
 
-        <section id="sec-15.13.6.2.4">
-          <h1><span class="secnum"><a href="#sec-15.13.6.2.4" title="link to this section">15.13.6.2.4</a></span> %TypedArray% (
+        <section id="sec-15.13.6.1.4">
+          <h1><span class="secnum"><a href="#sec-15.13.6.1.4" title="link to this section">15.13.6.1.4</a></span> %TypedArray% (
               buffer, byteOffset=0, length=undefined )</h1>
 
           <p>This description applies if and only if the %TypedArray% function is called with more than one argument or if it is
@@ -35764,16 +35743,16 @@
           </ol>
         </section>
 
-        <section id="sec-15.13.6.2.5">
-          <h1><span class="secnum"><a href="#sec-15.13.6.2.5" title="link to this section">15.13.6.2.5</a></span> %TypedArray% (
+        <section id="sec-15.13.6.1.5">
+          <h1><span class="secnum"><a href="#sec-15.13.6.1.5" title="link to this section">15.13.6.1.5</a></span> %TypedArray% (
               binary data stuff )</h1>
 
           <p style="background-color: #FFC000">TODO: this is a place holder assuming that we may need to construct TypedArrays
           from binary data objects.</p>
         </section>
 
-        <section id="sec-15.13.6.2.6">
-          <h1><span class="secnum"><a href="#sec-15.13.6.2.6" title="link to this section">15.13.6.2.6</a></span> %TypedArray% (
+        <section id="sec-15.13.6.1.6">
+          <h1><span class="secnum"><a href="#sec-15.13.6.1.6" title="link to this section">15.13.6.1.6</a></span> %TypedArray% (
               all other argument combinations )</h1>
 
           <p>If the %TypedArray% function is called with arguments that do match any of the preceeding argument descriptions a
@@ -35781,8 +35760,8 @@
         </section>
       </section>
 
-      <section id="sec-15.13.6.3">
-        <h1><span class="secnum"><a href="#sec-15.13.6.3" title="link to this section">15.13.6.3</a></span> Properties of the
+      <section id="sec-15.13.6.2">
+        <h1><span class="secnum"><a href="#sec-15.13.6.2" title="link to this section">15.13.6.2</a></span> Properties of the
             %TypedArray% Intrinsic Object</h1>
 
         <p>the %TypedArray% intrinsic object is a built-in function object. The value of the [[Prototype]] <a
@@ -35791,8 +35770,8 @@
 
         <p>Besides a <code>length</code> property (whose value is 3), %TypedArray% has the following properties:</p>
 
-        <section id="sec-15.13.6.3.1">
-          <h1><span class="secnum"><a href="#sec-15.13.6.3.1" title="link to this section">15.13.6.3.1</a></span>
+        <section id="sec-15.13.6.2.1">
+          <h1><span class="secnum"><a href="#sec-15.13.6.2.1" title="link to this section">15.13.6.2.1</a></span>
               %TypedArray%.prototype</h1>
 
           <p>The initial value of %TypedArray%.prototype is the %TypedArrayPrototype% intrinsic object (<a
@@ -35802,8 +35781,8 @@
           class="value">false</span>, [[Configurable]]: <span class="value">false</span> }.</p>
         </section>
 
-        <section id="sec-15.13.6.3.2">
-          <h1><span class="secnum"><a href="#sec-15.13.6.3.2" title="link to this section">15.13.6.3.2</a></span> %TypedArray%.of
+        <section id="sec-15.13.6.2.2">
+          <h1><span class="secnum"><a href="#sec-15.13.6.2.2" title="link to this section">15.13.6.2.2</a></span> %TypedArray%.of
               ( ...items )</h1>
 
           <p>When the <code>of</code> method is called with any number of arguments, the following steps are taken:</p>
@@ -35853,8 +35832,8 @@
           </div>
         </section>
 
-        <section id="sec-15.13.6.3.3">
-          <h1><span class="secnum"><a href="#sec-15.13.6.3.3" title="link to this section">15.13.6.3.3</a></span>
+        <section id="sec-15.13.6.2.3">
+          <h1><span class="secnum"><a href="#sec-15.13.6.2.3" title="link to this section">15.13.6.2.3</a></span>
               %TypedArray%.from ( source , mapfn=undefined, thisArg=undefined )</h1>
 
           <p>When the <code>from</code> method is called with  argument <var>source</var>, and optional arguments <i>mapfn</i> and
@@ -35965,8 +35944,8 @@
           </div>
         </section>
 
-        <section id="sec-15.13.6.3.4">
-          <h1><span class="secnum"><a href="#sec-15.13.6.3.4" title="link to this section">15.13.6.3.4</a></span> %TypedArray% [
+        <section id="sec-15.13.6.2.4">
+          <h1><span class="secnum"><a href="#sec-15.13.6.2.4" title="link to this section">15.13.6.2.4</a></span> %TypedArray% [
               @@create ] ( )</h1>
 
           <p>The @@create method of %TypedArray% performs the following steps:</p>
@@ -35999,8 +35978,8 @@
         </section>
       </section>
 
-      <section id="sec-15.13.6.4">
-        <h1><span class="secnum"><a href="#sec-15.13.6.4" title="link to this section">15.13.6.4</a></span> Properties of the
+      <section id="sec-15.13.6.3">
+        <h1><span class="secnum"><a href="#sec-15.13.6.3" title="link to this section">15.13.6.3</a></span> Properties of the
             %TypedArrayPrototype% Object</h1>
 
         <p>The value of the [[Prototype]] <a href="#sec-8.1.6.2">internal data property</a> of the %TypedArrayPrototype% object is
@@ -36008,15 +35987,15 @@
         ordinary object. It does not have a [[ViewedArrayBuffer]] or or any other of the internal data properties that are
         specific to <i>TypedArray</i> instance objects.</p>
 
-        <section id="sec-15.13.6.4.1">
-          <h1><span class="secnum"><a href="#sec-15.13.6.4.1" title="link to this section">15.13.6.4.1</a></span>
+        <section id="sec-15.13.6.3.1">
+          <h1><span class="secnum"><a href="#sec-15.13.6.3.1" title="link to this section">15.13.6.3.1</a></span>
               %TypedArray%.prototype.constructor</h1>
 
           <p>The initial value of %TypedArray%.prototype.constructor is the %TypedArray% intrinsic object.</p>
         </section>
 
-        <section id="sec-15.13.6.4.2">
-          <h1><span class="secnum"><a href="#sec-15.13.6.4.2" title="link to this section">15.13.6.4.2</a></span> get
+        <section id="sec-15.13.6.3.2">
+          <h1><span class="secnum"><a href="#sec-15.13.6.3.2" title="link to this section">15.13.6.3.2</a></span> get
               %TypedArray%.prototype.buffer</h1>
 
           <p>%TypedArray%.<code>prototype.buffer</code> is an accessor property whose set accessor function is <span
@@ -36035,8 +36014,8 @@
           </ol>
         </section>
 
-        <section id="sec-15.13.6.4.3">
-          <h1><span class="secnum"><a href="#sec-15.13.6.4.3" title="link to this section">15.13.6.4.3</a></span> get
+        <section id="sec-15.13.6.3.3">
+          <h1><span class="secnum"><a href="#sec-15.13.6.3.3" title="link to this section">15.13.6.3.3</a></span> get
               %TypedArray%.prototype.byteLength</h1>
 
           <p>%TypedArray%.<code>prototype.byteLength</code> is an accessor property whose set accessor function is <span
@@ -36057,8 +36036,8 @@
           </ol>
         </section>
 
-        <section id="sec-15.13.6.4.4">
-          <h1><span class="secnum"><a href="#sec-15.13.6.4.4" title="link to this section">15.13.6.4.4</a></span> get
+        <section id="sec-15.13.6.3.4">
+          <h1><span class="secnum"><a href="#sec-15.13.6.3.4" title="link to this section">15.13.6.3.4</a></span> get
               %TypedArray%.prototype.byteOffset</h1>
 
           <p>%TypedArray%.<code>prototype.byteOffset</code> is an accessor property whose set accessor function is <span
@@ -36079,8 +36058,8 @@
           </ol>
         </section>
 
-        <section id="sec-15.13.6.4.5">
-          <h1><span class="secnum"><a href="#sec-15.13.6.4.5" title="link to this section">15.13.6.4.5</a></span> get
+        <section id="sec-15.13.6.3.5">
+          <h1><span class="secnum"><a href="#sec-15.13.6.3.5" title="link to this section">15.13.6.3.5</a></span> get
               %TypedArray%.prototype.length</h1>
 
           <p>%TypedArray%.<code>prototype.length</code> is an accessor property whose set accessor function is <span
@@ -36101,8 +36080,8 @@
           </ol>
         </section>
 
-        <section id="sec-15.13.6.4.6">
-          <h1><span class="secnum"><a href="#sec-15.13.6.4.6" title="link to this section">15.13.6.4.6</a></span>
+        <section id="sec-15.13.6.3.6">
+          <h1><span class="secnum"><a href="#sec-15.13.6.3.6" title="link to this section">15.13.6.3.6</a></span>
               %TypedArray%.prototype.set(array, offset = 0 )</h1>
 
           <p>Set multiple values in this <i>TypedArray</i>, reading the values from the object <i>array</i>. The optional
@@ -36162,8 +36141,8 @@
           </ol>
         </section>
 
-        <section id="sec-15.13.6.4.7">
-          <h1><span class="secnum"><a href="#sec-15.13.6.4.7" title="link to this section">15.13.6.4.7</a></span>
+        <section id="sec-15.13.6.3.7">
+          <h1><span class="secnum"><a href="#sec-15.13.6.3.7" title="link to this section">15.13.6.3.7</a></span>
               %TypedArray%.prototype.set(typedArray, offset = 0 )</h1>
 
           <p>Set multiple values in this <i>TypedArray</i>, reading the values from the <var>typedArray</var> parameter object.
@@ -36232,8 +36211,8 @@
           </ol>
         </section>
 
-        <section id="sec-15.13.6.4.8">
-          <h1><span class="secnum"><a href="#sec-15.13.6.4.8" title="link to this section">15.13.6.4.8</a></span>
+        <section id="sec-15.13.6.3.8">
+          <h1><span class="secnum"><a href="#sec-15.13.6.3.8" title="link to this section">15.13.6.3.8</a></span>
               %TypedArray%.prototype.subarray(begin = 0, end = this.length )</h1>
 
           <p>Returns a new <i>TypedArray</i> object whose element types is the same as this <i>TypedArray</i> and whose
@@ -36283,99 +36262,99 @@
           </ol>
         </section>
 
-        <section id="sec-15.13.6.4.9">
-          <h1><span class="secnum"><a href="#sec-15.13.6.4.9" title="link to this section">15.13.6.4.9</a></span>
+        <section id="sec-15.13.6.3.9">
+          <h1><span class="secnum"><a href="#sec-15.13.6.3.9" title="link to this section">15.13.6.3.9</a></span>
               %TypedArray%.prototype.toString ( )</h1>
 
           <p>The value of the %TypedArray%.prototype.toString data property is the same built-in function object as the
           Array.prototype.toString method defined in <a href="#sec-15.4.3.2">15.4.3.2</a>.</p>
         </section>
 
-        <section id="sec-15.13.6.4.10">
-          <h1><span class="secnum"><a href="#sec-15.13.6.4.10" title="link to this section">15.13.6.4.10</a></span>
+        <section id="sec-15.13.6.3.10">
+          <h1><span class="secnum"><a href="#sec-15.13.6.3.10" title="link to this section">15.13.6.3.10</a></span>
               %TypedArray%.prototype.toLocaleString ( )</h1>
 
           <p>The value of the %TypedArray%.prototype.toLocaleString data property is the same built-in function object as the
           Array.prototype.toLocaleString method defined in <a href="#sec-15.4.3.3">15.4.3.3</a>.</p>
         </section>
 
-        <section id="sec-15.13.6.4.11">
-          <h1><span class="secnum"><a href="#sec-15.13.6.4.11" title="link to this section">15.13.6.4.11</a></span>
+        <section id="sec-15.13.6.3.11">
+          <h1><span class="secnum"><a href="#sec-15.13.6.3.11" title="link to this section">15.13.6.3.11</a></span>
               %TypedArray%.prototype.join (separator)</h1>
         </section>
 
-        <section id="sec-15.13.6.4.12">
-          <h1><span class="secnum"><a href="#sec-15.13.6.4.12" title="link to this section">15.13.6.4.12</a></span>
+        <section id="sec-15.13.6.3.12">
+          <h1><span class="secnum"><a href="#sec-15.13.6.3.12" title="link to this section">15.13.6.3.12</a></span>
               %TypedArray%.prototype.reverse ( )</h1>
         </section>
 
-        <section id="sec-15.13.6.4.13">
-          <h1><span class="secnum"><a href="#sec-15.13.6.4.13" title="link to this section">15.13.6.4.13</a></span>
+        <section id="sec-15.13.6.3.13">
+          <h1><span class="secnum"><a href="#sec-15.13.6.3.13" title="link to this section">15.13.6.3.13</a></span>
               %TypedArray%.prototype.slice ( )</h1>
         </section>
 
-        <section id="sec-15.13.6.4.14">
-          <h1><span class="secnum"><a href="#sec-15.13.6.4.14" title="link to this section">15.13.6.4.14</a></span>
+        <section id="sec-15.13.6.3.14">
+          <h1><span class="secnum"><a href="#sec-15.13.6.3.14" title="link to this section">15.13.6.3.14</a></span>
               %TypedArray%.prototype.sort ( )</h1>
         </section>
 
-        <section id="sec-15.13.6.4.15">
-          <h1><span class="secnum"><a href="#sec-15.13.6.4.15" title="link to this section">15.13.6.4.15</a></span>
+        <section id="sec-15.13.6.3.15">
+          <h1><span class="secnum"><a href="#sec-15.13.6.3.15" title="link to this section">15.13.6.3.15</a></span>
               %TypedArray%.prototype.indexOf ( )</h1>
         </section>
 
-        <section id="sec-15.13.6.4.16">
-          <h1><span class="secnum"><a href="#sec-15.13.6.4.16" title="link to this section">15.13.6.4.16</a></span>
+        <section id="sec-15.13.6.3.16">
+          <h1><span class="secnum"><a href="#sec-15.13.6.3.16" title="link to this section">15.13.6.3.16</a></span>
               %TypedArray%.prototype.lastIndexOf ( )</h1>
         </section>
 
-        <section id="sec-15.13.6.4.17">
-          <h1><span class="secnum"><a href="#sec-15.13.6.4.17" title="link to this section">15.13.6.4.17</a></span>
+        <section id="sec-15.13.6.3.17">
+          <h1><span class="secnum"><a href="#sec-15.13.6.3.17" title="link to this section">15.13.6.3.17</a></span>
               %TypedArray%.prototype.every ( )</h1>
         </section>
 
-        <section id="sec-15.13.6.4.18">
-          <h1><span class="secnum"><a href="#sec-15.13.6.4.18" title="link to this section">15.13.6.4.18</a></span>
+        <section id="sec-15.13.6.3.18">
+          <h1><span class="secnum"><a href="#sec-15.13.6.3.18" title="link to this section">15.13.6.3.18</a></span>
               %TypedArray%.prototype.some ( )</h1>
         </section>
 
-        <section id="sec-15.13.6.4.19">
-          <h1><span class="secnum"><a href="#sec-15.13.6.4.19" title="link to this section">15.13.6.4.19</a></span>
+        <section id="sec-15.13.6.3.19">
+          <h1><span class="secnum"><a href="#sec-15.13.6.3.19" title="link to this section">15.13.6.3.19</a></span>
               %TypedArray%.prototype.forEach ( )</h1>
         </section>
 
-        <section id="sec-15.13.6.4.20">
-          <h1><span class="secnum"><a href="#sec-15.13.6.4.20" title="link to this section">15.13.6.4.20</a></span>
+        <section id="sec-15.13.6.3.20">
+          <h1><span class="secnum"><a href="#sec-15.13.6.3.20" title="link to this section">15.13.6.3.20</a></span>
               %TypedArray%.prototype.map ( )</h1>
         </section>
 
-        <section id="sec-15.13.6.4.21">
-          <h1><span class="secnum"><a href="#sec-15.13.6.4.21" title="link to this section">15.13.6.4.21</a></span>
+        <section id="sec-15.13.6.3.21">
+          <h1><span class="secnum"><a href="#sec-15.13.6.3.21" title="link to this section">15.13.6.3.21</a></span>
               %TypedArray%.prototype.filter ( )</h1>
         </section>
 
-        <section id="sec-15.13.6.4.22">
-          <h1><span class="secnum"><a href="#sec-15.13.6.4.22" title="link to this section">15.13.6.4.22</a></span>
+        <section id="sec-15.13.6.3.22">
+          <h1><span class="secnum"><a href="#sec-15.13.6.3.22" title="link to this section">15.13.6.3.22</a></span>
               %TypedArray%.prototype.reduce ( )</h1>
         </section>
 
-        <section id="sec-15.13.6.4.23">
-          <h1><span class="secnum"><a href="#sec-15.13.6.4.23" title="link to this section">15.13.6.4.23</a></span>
+        <section id="sec-15.13.6.3.23">
+          <h1><span class="secnum"><a href="#sec-15.13.6.3.23" title="link to this section">15.13.6.3.23</a></span>
               %TypedArray%.prototype.reduceRight ( )</h1>
         </section>
 
-        <section id="sec-15.13.6.4.24">
-          <h1><span class="secnum"><a href="#sec-15.13.6.4.24" title="link to this section">15.13.6.4.24</a></span>
+        <section id="sec-15.13.6.3.24">
+          <h1><span class="secnum"><a href="#sec-15.13.6.3.24" title="link to this section">15.13.6.3.24</a></span>
               %TypedArray%.prototype.find ( )</h1>
         </section>
 
-        <section id="sec-15.13.6.4.25">
-          <h1><span class="secnum"><a href="#sec-15.13.6.4.25" title="link to this section">15.13.6.4.25</a></span>
+        <section id="sec-15.13.6.3.25">
+          <h1><span class="secnum"><a href="#sec-15.13.6.3.25" title="link to this section">15.13.6.3.25</a></span>
               %TypedArray%.prototype.findIndex ( )</h1>
         </section>
 
-        <section id="sec-15.13.6.4.26">
-          <h1><span class="secnum"><a href="#sec-15.13.6.4.26" title="link to this section">15.13.6.4.26</a></span>
+        <section id="sec-15.13.6.3.26">
+          <h1><span class="secnum"><a href="#sec-15.13.6.3.26" title="link to this section">15.13.6.3.26</a></span>
               %TypedArray%.prototype.entries ( )</h1>
 
           <p>The following steps are taken:</p>
@@ -36389,8 +36368,8 @@
           </ol>
         </section>
 
-        <section id="sec-15.13.6.4.27">
-          <h1><span class="secnum"><a href="#sec-15.13.6.4.27" title="link to this section">15.13.6.4.27</a></span>
+        <section id="sec-15.13.6.3.27">
+          <h1><span class="secnum"><a href="#sec-15.13.6.3.27" title="link to this section">15.13.6.3.27</a></span>
               %TypedArray%.prototype.keys ( )</h1>
 
           <p>The following steps are taken:</p>
@@ -36404,8 +36383,8 @@
           </ol>
         </section>
 
-        <section id="sec-15.13.6.4.28">
-          <h1><span class="secnum"><a href="#sec-15.13.6.4.28" title="link to this section">15.13.6.4.28</a></span>
+        <section id="sec-15.13.6.3.28">
+          <h1><span class="secnum"><a href="#sec-15.13.6.3.28" title="link to this section">15.13.6.3.28</a></span>
               %TypedArray%.prototype.values (   )</h1>
 
           <p>The following steps are taken:</p>
@@ -36419,20 +36398,20 @@
           </ol>
         </section>
 
-        <section id="sec-15.13.6.4.29">
-          <h1><span class="secnum"><a href="#sec-15.13.6.4.29" title="link to this section">15.13.6.4.29</a></span>
+        <section id="sec-15.13.6.3.29">
+          <h1><span class="secnum"><a href="#sec-15.13.6.3.29" title="link to this section">15.13.6.3.29</a></span>
               %TypedArray%.prototype [ @@iterator ]  (   )</h1>
 
           <p>The initial value of the @@iterator property is the same function object as the initial value of the
           %TypedArray%<b>.prototype.values</b> property.</p>
         </section>
 
-        <section id="sec-15.13.6.4.30">
-          <h1><span class="secnum"><a href="#sec-15.13.6.4.30" title="link to this section">15.13.6.4.30</a></span> get %</h1>
+        <section id="sec-15.13.6.3.30">
+          <h1><span class="secnum"><a href="#sec-15.13.6.3.30" title="link to this section">15.13.6.3.30</a></span> get %</h1>
         </section>
 
-        <section id="sec-15.13.6.4.31">
-          <h1><span class="secnum"><a href="#sec-15.13.6.4.31" title="link to this section">15.13.6.4.31</a></span>
+        <section id="sec-15.13.6.3.31">
+          <h1><span class="secnum"><a href="#sec-15.13.6.3.31" title="link to this section">15.13.6.3.31</a></span>
               TypedArray%.prototype [ @@toStringTag ]</h1>
 
           <p>%TypedArray%.<code>prototype[@@toStringTag]</code> is an accessor property whose set accessor function is <span
@@ -36455,8 +36434,8 @@
         </section>
       </section>
 
-      <section id="sec-15.13.6.5">
-        <h1><span class="secnum"><a href="#sec-15.13.6.5" title="link to this section">15.13.6.5</a></span> The <i>TypedArray</i>
+      <section id="sec-15.13.6.4">
+        <h1><span class="secnum"><a href="#sec-15.13.6.4" title="link to this section">15.13.6.4</a></span> The <i>TypedArray</i>
             Constructors</h1>
 
         <p>Each of these <i>TypedArray</i> constructor objects has the structure described below, differing only in the name used
@@ -36477,12 +36456,12 @@
         to initialise subclass instances.</p>
       </section>
 
-      <section id="sec-15.13.6.6">
-        <h1><span class="secnum"><a href="#sec-15.13.6.6" title="link to this section">15.13.6.6</a></span> Properties of the
+      <section id="sec-15.13.6.5">
+        <h1><span class="secnum"><a href="#sec-15.13.6.5" title="link to this section">15.13.6.5</a></span> Properties of the
             <i>TypedArray</i> Constructors</h1>
 
         <p>The value of the [[Prototype]] <a href="#sec-8.1.6.2">internal data property</a> of each <i>TypedArray</i> constructor
-        is the %TypedArray% intrinsic object ({ REF _Ref360007791 \r \h }&lrm;15.13.6.1).</p>
+        is the %TypedArray% intrinsic object (<a href="#sec-15.13.6.1">15.13.6.1</a>).</p>
 
         <p>Each <i>TypedArray</i> constructor has a [[TypedArrayConstructor]] <a href="#sec-8.1.6.2">internal data property</a>
         whose String value is the the constructor name in the corresponding row in <a href="#table-36">Table 36</a>.</p>
@@ -36490,8 +36469,8 @@
         <p>Besides a <code>length</code> property (whose value is 3), each <i>TypedArray</i> constructor has the following
         properties:</p>
 
-        <section id="sec-15.13.6.6.1">
-          <h1><span class="secnum"><a href="#sec-15.13.6.6.1" title="link to this section">15.13.6.6.1</a></span>
+        <section id="sec-15.13.6.5.1">
+          <h1><span class="secnum"><a href="#sec-15.13.6.5.1" title="link to this section">15.13.6.5.1</a></span>
               <i>TypedArray</i>.prototype</h1>
 
           <p>The initial value of <i>TypedArray</i>.prototype is the corresponding <i>TypedArray</i> prototype object (<a
@@ -36502,8 +36481,8 @@
         </section>
       </section>
 
-      <section id="sec-15.13.6.7">
-        <h1><span class="secnum"><a href="#sec-15.13.6.7" title="link to this section">15.13.6.7</a></span> Properties of
+      <section id="sec-15.13.6.6">
+        <h1><span class="secnum"><a href="#sec-15.13.6.6" title="link to this section">15.13.6.6</a></span> Properties of
             <i>TypedArray</i> Prototype Objects</h1>
 
         <p>The value of the [[Prototype]] <a href="#sec-8.1.6.2">internal data property</a> of a <i>TypedArray</i> prototype
@@ -36511,16 +36490,16 @@
         prototype object is an ordinary object. It does not have a [[ViewedArrayBuffer]] or or any other of the internal data
         properties that are specific to <i>TypedArray</i> instance objects.</p>
 
-        <section id="sec-15.13.6.7.1">
-          <h1><span class="secnum"><a href="#sec-15.13.6.7.1" title="link to this section">15.13.6.7.1</a></span>
+        <section id="sec-15.13.6.6.1">
+          <h1><span class="secnum"><a href="#sec-15.13.6.6.1" title="link to this section">15.13.6.6.1</a></span>
               <i>TypedArray</i>.prototype.constructor</h1>
 
           <p>The initial value of a <i>TypedArray</i>.prototype.constructor is the corresponding standard built-in
           <i>TypedArray</i> constructor.</p>
         </section>
 
-        <section id="sec-15.13.6.7.2">
-          <h1><span class="secnum"><a href="#sec-15.13.6.7.2" title="link to this section">15.13.6.7.2</a></span>
+        <section id="sec-15.13.6.6.2">
+          <h1><span class="secnum"><a href="#sec-15.13.6.6.2" title="link to this section">15.13.6.6.2</a></span>
               <i>TypedArray</i>.prototype.BYTES_PER_ELEMENT</h1>
 
           <p>The value of <i>TypedArray</i>.prototype.BYTES_PER_ELEMENT is the Number value of the Element Size value specified in
@@ -36531,8 +36510,8 @@
         </section>
       </section>
 
-      <section id="sec-15.13.6.8">
-        <h1><span class="secnum"><a href="#sec-15.13.6.8" title="link to this section">15.13.6.8</a></span> Properties of
+      <section id="sec-15.13.6.7">
+        <h1><span class="secnum"><a href="#sec-15.13.6.7" title="link to this section">15.13.6.7</a></span> Properties of
             <i>TypedArray</i> Instances</h1>
 
         <p><i>TypedArray</i> instances are exotic Integer Indexed Delegation objects. Each <i>TypedArray</i> instances inherits
@@ -41718,10 +41697,9 @@
         <div class="lhs"><span class="nt">LegacyOctalIntegerLiteral</span> <span class="geq">::</span></div>
         <div class="rhs"><code class="t">0</code> <span class="nt">OctalDigit</span></div>
         <div class="rhs"><span class="nt">LegacyOctalIntegerLiteral</span> <span class="nt">OctalDigit</span></div>
-        <div class="rhs"><span class="nt">Static</span></div>
       </div>
 
-      <p><b>Semantics</b></p>
+      <p><b>Static Semantics</b></p>
 
       <ul>
         <li>
@@ -41940,19 +41918,17 @@
               <li>Let <i>c</i> be the code unit at position <i>k</i> within <i>string</i>.</li>
               <li>If <i>c</i> is <code>%</code>,
                 <ol class="block">
-                  <li>If <i>k</i> &le; <i>length</i>&minus;6 and</li>
-                  <li>the code unit at position <i>k</i>+1 within <i>string</i> is <code>u</code> and</li>
-                  <li>the four code units at positions <i>k</i>+2, <i>k</i>+3, <i>k</i>+4, and <i>k</i>+5 within <i>string</i> are
-                      all hexadecimal digits, then
+                  <li>If <i>k</i> &le; <i>length</i>&minus;6 and the code unit at position <i>k</i>+1 within <i>string</i> is
+                      <code>u</code> and the four code units at positions <i>k</i>+2, <i>k</i>+3, <i>k</i>+4, and <i>k</i>+5
+                      within <i>string</i> are all hexadecimal digits, then
                     <ol class="block">
                       <li>Let <i>c</i> be the code unit whose value is the integer represented by the four hexadecimal digits at
                           positions <i>k</i>+2, <i>k</i>+3, <i>k</i>+4, and <i>k</i>+5 within <i>string</i>.</li>
                       <li>Increase <i>k</i> by 5.</li>
                     </ol>
                   </li>
-                  <li>Else if <i>k</i> &le; <i>length</i>&minus;3 and</li>
-                  <li>the two code units at positions <i>k</i>+1 and <i>k</i>+2 within <i>string</i> are both hexadecimal digits,
-                      then.
+                  <li>Else if <i>k</i> &le; <i>length</i>&minus;3 and the two code units at positions <i>k</i>+1 and <i>k</i>+2
+                      within <i>string</i> are both hexadecimal digits, then.
                     <ol class="block">
                       <li>Let <i>c</i> be the code unit whose value is the integer represented by two zeroes plus the two
                           hexadecimal digits at positions <i>k</i>+1 and <i>k</i>+2 within <i>string</i>.</li>

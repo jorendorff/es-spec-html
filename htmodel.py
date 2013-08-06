@@ -364,4 +364,4 @@ def _init(v):
 
 _init(vars())
 
-__all__ = list(_tag_data.keys())
+__all__ = ['Element'] + list(_tag_data.keys())

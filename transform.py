@@ -88,6 +88,15 @@ def transform_element(docx, e):
         # Transform all children.
         css = {}
         c = []
+        def last_is_deleted():
+            if len(c) == 0:
+                return False
+            last = c[-1]
+            return (isinstance(last, Element)
+                    and last.name == 'p'
+                    and last.style is not None
+                    and last.style.get('-ooxml-deleted') == '1')
+
         def add(ht):
             if isinstance(ht, dict):
                 css.update(ht)
@@ -97,11 +106,26 @@ def transform_element(docx, e):
             elif isinstance(ht, str) and c and isinstance(c[-1], str):
                 # Merge adjacent strings.
                 c[-1] += ht
+            elif (isinstance(ht, Element)
+                  and c
+                  and isinstance(c[-1], Element)
+                  and last_is_deleted()):
+                # Merge paragraphs that were joined by deleting the paragraph break.
+                #print("Merging this:\n" + repr(c[-1]) + "into this:\n" + repr(ht))
+                if ht.name == 'p':
+                    c[-1] = ht.with_content(c[-1].content + ht.content)
+                else:
+                    del c[-1]
+                    c.append(ht)
             elif ht is not None:
                 c.append(ht)
 
         for k in e:
             add(transform_element(docx, k))
+
+        if last_is_deleted():
+            del c[-1]
+
         if not css:
             css = None
 
