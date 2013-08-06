@@ -989,9 +989,18 @@ def fixup_notes(doc, docx):
 
     def can_be_included(next_sibling):
         return (next_sibling.name in ('pre', 'ul')
-                or (next_sibling.name == 'p'
+                or (# total special case for the section on Number.prototype.toExponential()
+                    next_sibling.name == 'ol'
+                    and len(next_sibling.content) == 1)
+                or (# the next sibling is p.Note but doesn't have a NOTE heading
+                    next_sibling.name == 'p'
                     and next_sibling.attrs.get("class") == "Note"
-                    and find_nh(next_sibling, strict=False) is None))
+                    and find_nh(next_sibling, strict=False) is None)
+                or (# the next sibling is <p> and begins with a lowercase word
+                    next_sibling.name == 'p'
+                    and next_sibling.content
+                    and isinstance(next_sibling.content[0], str)
+                    and next_sibling.content[0].strip().split(None, 1)[0].islower()))
 
     for parent, i, p in all_parent_index_child_triples(doc):
         if p.name == 'p':

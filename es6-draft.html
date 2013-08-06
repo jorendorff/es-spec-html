@@ -29182,15 +29182,15 @@
         <div class="note">
           <p><span class="nh">NOTE</span> For implementations that provide more accurate conversions than required by the rules
           above, it is recommended that the following alternative version of step 9.b.i be used as a guideline:</p>
-        </div>
 
-        <ol class="proc">
-          <li>Let <i>e</i>, <i>n</i>, and <i>f</i> be integers such that <i>f</i> &ge; 0, 10<sup><i>f</i></sup> &le; n &lt;
-              10<sup><i>f</i>+1</sup>, the number value for n &times; 10<sup><i>e</i>&ndash;<i>f</i></sup> is x, and <i>f</i> is
-              as small as possible. If there are multiple possibilities for <i>n</i>, choose the value of <i>n</i> for which
-              <i>n</i> &times; 10<sup><i>e</i>&ndash;<i>f</i></sup> is closest in value to <i>x</i>. If there are two such
-              possible values of <i>n</i>, choose the one that is even.</li>
-        </ol>
+          <ol class="proc">
+            <li>Let <i>e</i>, <i>n</i>, and <i>f</i> be integers such that <i>f</i> &ge; 0, 10<sup><i>f</i></sup> &le; n &lt;
+                10<sup><i>f</i>+1</sup>, the number value for n &times; 10<sup><i>e</i>&ndash;<i>f</i></sup> is x, and <i>f</i> is
+                as small as possible. If there are multiple possibilities for <i>n</i>, choose the value of <i>n</i> for which
+                <i>n</i> &times; 10<sup><i>e</i>&ndash;<i>f</i></sup> is closest in value to <i>x</i>. If there are two such
+                possible values of <i>n</i>, choose the one that is even.</li>
+          </ol>
+        </div>
       </section>
 
       <section id="sec-15.7.3.7">
@@ -32047,9 +32047,9 @@
           divisor of two numbers (represented in unary notation). The following example calculates the gcd of 10 and 15:</p>
 
           <pre>"aaaaaaaaaa,aaaaaaaaaaaaaaa".replace(/^(a+)\1*,\1+$/,"$1")</pre>
-        </div>
 
-        <p>which returns the gcd in unary notation <code>"aaaaa"</code>.</p>
+          <p>which returns the gcd in unary notation <code>"aaaaa"</code>.</p>
+        </div>
 
         <div class="note">
           <p><span class="nh">NOTE 3</span> Step 4 of the RepeatMatcher clears <var>Atom's</var> captures each time <span
@@ -32064,10 +32064,10 @@
           <p>and not</p>
 
           <pre>["zaacbbbcac", "z", "ac", "a", "bbb", "c"]</pre>
-        </div>
 
-        <p>because each iteration of the outermost <code>*</code> clears all captured Strings contained in the quantified <span
-        class="nt">Atom</span>, which in this case includes capture Strings numbered 2, 3, 4, and 5.</p>
+          <p>because each iteration of the outermost <code>*</code> clears all captured Strings contained in the quantified <span
+          class="nt">Atom</span>, which in this case includes capture Strings numbered 2, 3, 4, and 5.</p>
+        </div>
 
         <div class="note">
           <p><span class="nh">NOTE 4</span> Step 1 of the RepeatMatcher's <var>d</var> closure states that, once the minimum
