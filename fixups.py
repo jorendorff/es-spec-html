@@ -13,6 +13,7 @@ from warnings import warn
 from array import array
 import os, time
 import contextlib
+import transform
 
 
 # === Useful functions
@@ -333,9 +334,30 @@ def map_body(doc, f):
 
 @Fixup
 def fixup_lists(doc, docx):
-    List = collections.namedtuple('List', ['parent', 'numId', 'ilvl', 'left_margin', 'content'])
+    """ Group numbered paragraphs into lists. """
+
+    # A List represents either an element that is <ol>, <ul>, or <body>.
+    #
+    # parent: The List that contains this List, or None if this List is the
+    # document body.
+    #
+    # left_margin: The x coordinate of the list marker, in points.
+    #
+    # content: This ol/ul/body element's .content list.
+    #
+    # numId, ilvl: The OOXML numbering info for this element, used only for
+    # assertions. (List structure is recovered from indentation alone.)
+    #
+    # marker_type: 'bullet' or an integer indicating the level of nesting, so
+    # that an outermost ol.proc has marker_type=0, the first nested ol.block
+    # gets marker_type=1, and so on. Used only to assert that the markers
+    # are correct.
+    #
+    List = collections.namedtuple('List', ['parent', 'left_margin', 'content',
+                                           'numId', 'ilvl', 'marker_type'])
 
     def without_numbering_info(style):
+        """ Return a dictionary just like style but without numbering entries. """
         s = None
         for k in ('-ooxml-numId', '-ooxml-ilvl'):
             if k in style:
@@ -347,14 +369,13 @@ def fixup_lists(doc, docx):
         return s
 
     def fix_body(body):
-        # We start and end lists based entirely on indentation.
-
-        # In a single left-to-right pass over the document,
-        # group paragraphs into lists.
+        # In a single left-to-right pass over the document, group paragraphs
+        # into lists.  We start and end lists based on indentation alone.
         result = []
 
         # current is the current innermost List.
-        current = List(parent=None, numId=0, ilvl=None, left_margin=-1e300, content=result)
+        current = List(parent=None, left_margin=-1e300, content=result,
+                       numId=0, ilvl=None, marker_type=None)
         def append_non_list_item(e):
             if current.parent is None:
                 # The enclosing element is the <body>. Just add this element to it.
@@ -375,22 +396,26 @@ def fixup_lists(doc, docx):
             is_bulleted_list = s is not None and s.numFmt == 'bullet'
             if is_bulleted_list:
                 lst = html.ul()
+                marker_type = 'bullet'
             else:
-                if current.parent is None:
+                if current.parent is None or current.marker_type == 'bullet':
                     cls = 'proc'
+                    marker_type = 0
                 elif (margin > (current.left_margin + 0.75 * 72)
                       and p.content
                       and is_marker(p.content[0])
                       and p.content[0].content == ['1.\t']):
                     # Very deeply nested list with decimal numbering.
                     cls = 'nested proc'
+                    marker_type = 0
                 else:
                     cls = 'block'
+                    marker_type = current.marker_type + 1
                 lst = html.ol(class_=cls)
 
             append_non_list_item(lst)
-            current = List(parent=current, numId=numId, ilvl=ilvl, left_margin=margin,
-                           content=lst.content)
+            current = List(parent=current, left_margin=margin, content=lst.content,
+                           numId=numId, ilvl=ilvl, marker_type=marker_type)
 
         def close_list():
             nonlocal current
@@ -423,7 +448,8 @@ def fixup_lists(doc, docx):
                             and p.attrs.get('class') not in heading_styles
                             and len(p.content) != 0
                             and is_marker(p.content[0])
-                            and p.content[0].content[0] != '8.4.6.2\t')  # work around https://bugs.ecmascript.org/show_bug.cgi?id=1715
+                            and # work around https://bugs.ecmascript.org/show_bug.cgi?id=1715
+                                p.content[0].content[0] != '8.4.6.2\t')
 
             # Close any more-indented active lists.
             #
@@ -451,20 +477,35 @@ def fixup_lists(doc, docx):
 
                 assert margin == current.left_margin
 
+                # Change the <p> to <li>, strip the marker and class=, and
+                # strip the -ooxml-numId/ilvl style.  Add the result to the
+                # current list.
                 attrs = p.attrs
                 if 'class' in attrs:
                     attrs = attrs.copy()
                     del attrs['class']
+                li = p.with_(name='li',
+                             content=p.content[1:],
+                             attrs=attrs,
+                             style=without_numbering_info(p.style))
+                current.content.append(li)
 
-                # Change the <p> to <li>, strip the marker and class=, and
-                # strip the -ooxml-numId/ilvl style.  Push the result to the
-                # innermost current list.
-                current.content.append(
-                    p.with_(
-                        name='li',
-                        content=p.content[1:],
-                        attrs=attrs,
-                        style=without_numbering_info(p.style)))
+                # Assert that the marker HTML will generate for this list item
+                # is the same as the one that appears in the Word doc.
+                marker_str = p.content[0].content[0]
+                if current.marker_type == 'bullet':
+                    # U+F0B7 is not a Unicode character, this is Word nonsense
+                    assert marker_str == '\uf0b7\t'
+                else:
+                    depth = current.marker_type
+                    i = len(current.content)
+                    formatters = [str, transform.int_to_lower_letter, transform.int_to_lower_roman]
+                    marker_formatter = formatters[depth % 3]
+                    # Bizarrely, there is no dot after lowercase-letter markers at nesting depth 4.
+                    html_marker_str = marker_formatter(i) + ('.' if depth != 4 else '') + '\t'
+                    if html_marker_str != marker_str:
+                        warn("Word marker is {!r}, HTML will show {!r}".format(marker_str, html_marker_str))
+                        print(li)
 
         return [body.with_content(result)]
 
