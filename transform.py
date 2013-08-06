@@ -97,6 +97,10 @@ def transform_element(docx, e, numbering_context):
         # Layout data
         return None
 
+    elif name == 'ins':
+        assert ALLOW_CHANGES
+        return [transform_element(docx, k, numbering_context) for k in e]
+
     elif name in ('del', 'delText', 'delInstrText'):
         assert ALLOW_CHANGES
         return None
