@@ -131,9 +131,6 @@ def transform_element(docx, e):
                 return result
 
         elif name == 'p':
-            if len(c) == 0:
-                return None
-
             result = p(*c)
             if css and '@cls' in css:
                 cls = css.pop('@cls')

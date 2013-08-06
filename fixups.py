@@ -87,6 +87,12 @@ class InPlaceFixup:
 
 # === Fixups
 
+@Fixup
+def fixup_strip_empty_paragraphs(doc, docx):
+    def is_empty_para(e):
+        return e.name == 'p' and len(e.content) == 0
+    return doc.find_replace(is_empty_para, lambda e: [])
+
 def int_to_lower_roman(i):
     """ Convert an integer to Roman numerals.
     From Paul Winkler's recipe: https://code.activestate.com/recipes/81611-roman-numerals/
@@ -1383,7 +1389,9 @@ def fixup_remove_picts(doc, docx):
 @InPlaceFixup
 def fixup_figures(doc, docx):
     for parent, i, child in all_parent_index_child_triples(doc):
-        if child.name == 'figcaption' and i + 1 < len(parent.content) and ht_name_is(parent.content[i + 1], 'figure'):
+        if (child.name == 'figcaption'
+              and i + 1 < len(parent.content)
+              and ht_name_is(parent.content[i + 1], 'figure')):
             # add id to table captions that can have cross-references in word
             s = child.content[0]
             prefix = 'Table '
@@ -2562,6 +2570,7 @@ def fixup_add_ecma_flavor(doc, docx):
 # === Main
 
 def get_fixups(docx):
+    yield fixup_strip_empty_paragraphs
     yield fixup_add_numbering
     yield fixup_list_styles
     yield fixup_formatting
