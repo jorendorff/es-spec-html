@@ -5596,8 +5596,7 @@
                   <li>Set <i>base</i>  to <a href="#sec-9.1.9">ToObject</a>(<i>base</i>).</li>
                 </ol>
               </li>
-              <li>Let <i>succeeded</i> be the</li>
-              <li>result of calling  the [[Set]] internal method of <i>base</i> passing <a
+              <li>Let <i>succeeded</i> be the result of calling  the [[Set]] internal method of <i>base</i> passing <a
                   href="#sec-8.2.4">GetReferencedName</a>(<i>V</i>), <i>W</i>, and <a
                   href="#sec-8.2.4.3">GetThisValue</a>(<i>V</i>)  as arguments.</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>succeeded</i>).</li>
@@ -13309,9 +13308,7 @@
         <li>Return PropName of <i>PropertyName</i>.</li>
       </ol>
 
-      <p><i>Literal</i></p>
-
-      <p><span class="prod"><span class="nt">PropertyName</span> <span class="geq">:</span> <span
+      <p><span class="prod"><span class="nt">LiteralPropertyName</span> <span class="geq">:</span> <span
       class="nt">StringLiteral</span></span></p>
 
       <ol class="proc">
@@ -16539,11 +16536,9 @@
         <p><span class="prod"><span class="nt">AssignmentPropertyList</span> <span class="geq">:</span> <span
         class="nt">AssignmentPropertyList</span> <code class="t">,</code> <span class="nt">AssignmentProperty</span></span></p>
 
-        <p>Let <i>status</i> be</p>
-
         <ol class="proc">
-          <li>the result of performing Destructuring Assignment Evaluation for <i>AssignmentPropertyList</i> using <i>obj</i> as
-              the argument.</li>
+          <li>Let <i>status</i> be the result of performing Destructuring Assignment Evaluation for <i>AssignmentPropertyList</i>
+              using <i>obj</i> as the argument.</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>status</i>).</li>
           <li>Return the result of performing Destructuring Assignment Evaluation for <i>AssignmentProperty</i> using <i>obj</i>
               as the argument.</li>
@@ -19399,7 +19394,7 @@
     <section id="sec-12.11.1.2">
       <h1><span class="secnum"><a href="#sec-12.11.1.2" title="link to this section">12.11.1.2</a></span> Runtime Semantics</h1>
 
-      <p style="background-color: #FFFFFF"><b>Runtime Semantics: Case Block</b> <b>Evaluation</b></p>
+      <p><b>Runtime Semantics: Case Block</b> <b>Evaluation</b></p>
 
       <p>With argument <var>input</var>.</p>
 
@@ -20221,21 +20216,11 @@
       <ol class="proc">
         <li>Return 0.</li>
       </ol>
-
-      <div class="gp">
-        <div class="lhs"><span class="nt">FormalParameterList</span> <span class="geq">:</span></div>
-        <div class="rhs"><span class="nt">FunctionRestParameter</span></div>
-      </div>
-
+      <div class="lhs">FormalParameterList <span style="font-family: sans-serif"><b>:</b></span> FunctionRestParameter</div>
       <ol class="proc">
         <li>Return 0.</li>
       </ol>
-
-      <div class="gp">
-        <div class="lhs"><span class="nt">FormalParameterList</span> <span class="geq">:</span></div>
-        <div class="rhs"><span class="nt">FormalsList</span> <code class="t">,</code> <span class="nt">FunctionRestParameter</span></div>
-      </div>
-
+      <div class="lhs">FormalParameterList <span style="font-family: sans-serif"><b>:</b></span> FormalsList <code>,</code> FunctionRestParameter</div>
       <ol class="proc">
         <li>Return the ExpectedArgumentCount of <i>FormalsList</i>.</li>
       </ol>
@@ -20386,8 +20371,7 @@
       <div class="lhs">FormalParameterList <span style="font-family: sans-serif"><b>:</b></span> FunctionRestParameter</div>
       <ol class="proc">
         <li>Return the result of performing Indexed Binding Initialisation for <i>FunctionRestParameter</i> using <i>value</i>, 0,
-            and <i>environment</i> as the arguments</li>
-        <li>.</li>
+            and <i>environment</i> as the arguments.</li>
       </ol>
       <div class="lhs">FormalParameterList <span style="font-family: sans-serif"><b>:</b></span> FormalsList</div>
       <ol class="proc">
@@ -20973,11 +20957,7 @@
 
       <p><b>Static Semantics:  <span class="nt">ReferencesSuper</span></b></p>
 
-      <div class="gp">
-        <div class="lhs"><span class="nt">MethodDefinition</span> <span class="geq">:</span></div>
-        <div class="rhs"><span class="nt">PropertyName</span> <code class="t">(</code> <span class="nt">FormalParameters</span> <code class="t">)</code> <code class="t">{</code> <span class="nt">FunctionBody</span> <code class="t">}</code></div>
-      </div>
-
+      <div class="lhs">MethodDefinition <span style="font-family: sans-serif"><b>:</b></span> PropertyName <code>(</code> FormalParameters <code>)</code>  <code>{</code> FunctionBody <code>}</code></div>
       <ol class="proc">
         <li>If <i>FormalParameters</i> Contains <code>super</code> is <b>true</b>, then return <b>true.</b></li>
         <li>Return <i>FunctionBody</i> Contains <code>super</code>.</li>
@@ -21897,8 +21877,8 @@
               </ol>
             </li>
             <li>Else if <a href="#sec-8">Type</a>(<i>superclass</i>) is not Object, throw a <b>TypeError</b> exception.</li>
-            <li>Else if <a href="#sec-9.2.5">IsConstructor</a>(<i>superclass</i>) is <b>false</b>, then</li>
-            <li>throw a <b>TypeError</b> exception.</li>
+            <li>Else if <a href="#sec-9.2.5">IsConstructor</a>(<i>superclass</i>) is <b>false</b>, then throw a <b>TypeError</b>
+                exception.</li>
             <li>Else
               <ol class="block">
                 <li>Let <i>protoParent</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>superclass</i>,
@@ -36092,12 +36072,8 @@
         </section>
 
         <section id="sec-15.13.6.3.30">
-          <h1><span class="secnum"><a href="#sec-15.13.6.3.30" title="link to this section">15.13.6.3.30</a></span> get %</h1>
-        </section>
-
-        <section id="sec-15.13.6.3.31">
-          <h1><span class="secnum"><a href="#sec-15.13.6.3.31" title="link to this section">15.13.6.3.31</a></span>
-              TypedArray%.prototype [ @@toStringTag ]</h1>
+          <h1><span class="secnum"><a href="#sec-15.13.6.3.30" title="link to this section">15.13.6.3.30</a></span> get
+              %TypedArray%.prototype [ @@toStringTag ]</h1>
 
           <p>%TypedArray%.<code>prototype[@@toStringTag]</code> is an accessor property whose set accessor function is <span
           class="value">undefined</span>. Its get accessor function performs the following steps:</p>

@@ -208,14 +208,7 @@ def parse_pr(e):
                 # (optionally) display at the end of the paragraph. The only
                 # possibly interesting thing here is if the pilcrow is deleted,
                 # indicating this paragraph has been joined with the next one.
-                deleted = 0
-                for j in k:
-                    j_name = shorten(j.tag)
-                    if j_name == 'del' and deleted == 0:
-                        deleted = 1
-                    elif j_name == 'ins':
-                        deleted = -1
-                if deleted == 1:
+                if any(shorten(j.tag) == 'del' for j in k):
                     put('-ooxml-deleted', '1')
             else:
                 for k, v in parse_pr(k).items():
