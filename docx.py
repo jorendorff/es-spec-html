@@ -99,7 +99,14 @@ def parse_pr(e):
             # In addition there are four more possible attributes: asciiTheme,
             # hAnsiTheme, cstheme, eastAsiaTheme.  Handling these correctly
             # apparently requires you to parse a whole extra file, theme1.xml.
-            #
+
+            # These are the fonts mentioned in rFonts elements in the Language
+            # Specification, including both document.xml and styles.xml:
+            #   Arial, Arial Unicode MS, ArialMT, CG Times, Century,
+            #   Courier New, Garamond, Geneva, Helvetica, MS Gothic,
+            #   Mistral, Symbol, Tahoma, Times, Times New Roman, Tms Rmn,
+            #   Verdana, Wingdings
+
             assert set(k.keys()) <= font_keys
             font = k.get(k_ascii) or k.get(k_cs)
             if font is not None:
@@ -110,11 +117,11 @@ def parse_pr(e):
                     font = None  # appears once in the document, superfluous
                 elif font == 'Mistral':
                     font = None  # fanciful, drop it
-                elif font in ('Courier', 'Courier New'):
+                elif font in ('Courier New'):
                     font = 'monospace'
-                elif font in ('Arial', 'Helvetica'):
+                elif font in ('Arial', 'ArialMT', 'Arial Unicode MS', 'Helvetica'):
                     font = 'sans-serif'
-                elif font == 'CG Times':
+                elif font in ('CG Times', 'Times', 'Tms Rmn'):
                     font = 'Times New Roman'
 
                 if font is not None:

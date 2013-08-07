@@ -5764,10 +5764,10 @@
         <ol class="proc">
           <li>If <i>Desc</i> is <b>undefined</b>, then return <b>undefined</b>.</li>
           <li>If <i>Desc</i> has an [[Origin]] field, then return <i>Desc</i>.[[Origin]].</li>
-          <li>Let <i>obj</i> be the result of <span style="font-family: Tms Rmn">the abstract operation <a
-              href="#sec-8.3.15">ObjectCreate</a> with the intrinsic object %ObjectPrototype% as its argument</span>.</li>
+          <li>Let <i>obj</i> be the result of the abstract operation <a href="#sec-8.3.15">ObjectCreate</a> with the intrinsic
+              object %ObjectPrototype% as its argument.</li>
           <li><a href="#sec-5.2">Assert</a>: <i>obj</i> is an extensible ordinary object with no own properties.</li>
-          <li>If <i>Desc</i> has a [[Value]] field<span style="font-family: Times New Roman">, then</span>
+          <li>If <i>Desc</i> has a [[Value]] field, then
             <ol class="block">
               <li>Call <a href="#sec-8.3.7.1">OrdinaryDefineOwnProperty</a> with arguments <i>obj</i>, "<b><span
                   style="font-family: monospace">value</span>"</b>, and <a href="#sec-8.2.5">Property Descriptor</a> {[[Value]]:
@@ -5775,35 +5775,35 @@
                   <b>true</b>}</li>
             </ol>
           </li>
-          <li>If <i>Desc</i> has a [[Writable]] field<span style="font-family: Times New Roman">, then</span>
+          <li>If <i>Desc</i> has a [[Writable]] field, then
             <ol class="block">
               <li>Call <a href="#sec-8.3.7.1">OrdinaryDefineOwnProperty</a> with arguments <i>obj</i>, "<code>writable</code>",
                   and <a href="#sec-8.2.5">Property Descriptor</a> {[[Value]]: <i>Desc</i>.[[Writable]], [[Writable]]:
                   <b>true</b>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}.</li>
             </ol>
           </li>
-          <li>If <i>Desc</i> has a [[Get]] field<span style="font-family: Times New Roman">, then</span>
+          <li>If <i>Desc</i> has a [[Get]] field, then
             <ol class="block">
               <li>Call <a href="#sec-8.3.7.1">OrdinaryDefineOwnProperty</a> with arguments <i>obj</i>, "<code>get",</code> and <a
                   href="#sec-8.2.5">Property Descriptor</a> {[[Value]]: <i>Desc</i>.[[Set]], [[Writable]]: <b>true</b>,
                   [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}.</li>
             </ol>
           </li>
-          <li>If <i>Desc</i> has a [[Set]] field<span style="font-family: Times New Roman">, then</span>
+          <li>If <i>Desc</i> has a [[Set]] field, then
             <ol class="block">
               <li>Call <a href="#sec-8.3.7.1">OrdinaryDefineOwnProperty</a> with arguments <i>obj</i>, "<code>set</code>", and <a
                   href="#sec-8.2.5">Property Descriptor</a> {[[Value]]: <i>Desc</i>.[[Set]], [[Writable]]: <b>true</b>,
                   [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}.</li>
             </ol>
           </li>
-          <li>If <i>Desc</i> has a [[Enumerable]] field<span style="font-family: Times New Roman">, then</span>
+          <li>If <i>Desc</i> has a [[Enumerable]] field, then
             <ol class="block">
               <li>Call <a href="#sec-8.3.7.1">OrdinaryDefineOwnProperty</a> with arguments <i>obj</i>, "<code>enumerable</code>",
                   and <a href="#sec-8.2.5">Property Descriptor</a> {[[Value]]: <i>Desc</i>.[[Enumerable]], [[Writable]]:
                   <b>true</b>, [[Enumerable]]: <b>true</b>, [[Configurable]]: <b>true</b>}.</li>
             </ol>
           </li>
-          <li>If <i>Desc</i> has a [[Configurable]] field<span style="font-family: Times New Roman">, then</span>
+          <li>If <i>Desc</i> has a [[Configurable]] field, then
             <ol class="block">
               <li>Call <a href="#sec-8.3.7.1">OrdinaryDefineOwnProperty</a> with arguments <i>obj</i> ,
                   "<code>configurable</code>", and <a href="#sec-8.2.5">Property Descriptor</a> {[[Value]]:
@@ -7700,18 +7700,14 @@
                   <li>If <i>intIndex</i> &ge; <i>length</i>, then return <b>false</b>.</li>
                   <li>If <a href="#sec-8.2.5.1">IsAccessorDescriptor</a>(<i>Desc</i>) is <b>true</b>, then return
                       <b>false.</b></li>
-                  <li>If <i>Desc</i> has a [[Configurable]] field <span style="font-family: Times New Roman">and if
-                      <i>Desc</i>.[[Configurable]]</span> <span style="font-family: Times New Roman">is <b>true</b>,</span> <span
-                      style="font-family: Times New Roman">then</span> <span style="font-family: Times New Roman">return
-                      <b>false<i>.</i></b></span></li>
-                  <li>If <i>Desc</i> has an [[Enumerable]] field <span style="font-family: Times New Roman">and if
-                      <i>Desc</i>.[[</span>Enumerable<span style="font-family: Times New Roman">]] is <b>false</b>, then</span>
-                      <span style="font-family: Times New Roman">return <b>false<i>.</i></b></span></li>
+                  <li>If <i>Desc</i> has a [[Configurable]] field and if <i>Desc</i>.[[Configurable]] is <b>true</b>, then return
+                      <b>false<i>.</i></b></li>
+                  <li>If <i>Desc</i> has an [[Enumerable]] field and if <i>Desc</i>.[[Enumerable]] is <b>false</b>, then return
+                      <b>false<i>.</i></b></li>
                   <li>Let <i>writable</i> be <b>true</b> if the integer indexed properties of  <i>O</i> are writable and
                       <b>false</b> if they are not.</li>
                   <li>Let <i>makeReadOnly</i> be <b>false</b>.</li>
-                  <li>If <i>Desc</i> has a [[Writable]] field<span style="font-family: Times New Roman">,</span> <span
-                      style="font-family: Times New Roman">then<b><i>.</i></b></span>
+                  <li>If <i>Desc</i> has a [[Writable]] field, then<b><i>.</i></b>
                     <ol class="block">
                       <li>If <i>Desc</i>.[[<span style="font-family: sans-serif">Writable</span>]] is <b>true</b> and
                           <i>writable</i> is <b>false</b>, then return <b>false</b>.</li>
@@ -7719,7 +7715,7 @@
                           <i>writable</i> is <b>true</b>, then let <i>makeReadOnly</i> be <b>true</b>.</li>
                     </ol>
                   </li>
-                  <li>If <i>Desc</i> has an [[Value]] field<span style="font-family: Times New Roman">, then</span>
+                  <li>If <i>Desc</i> has an [[Value]] field, then
                     <ol class="block">
                       <li>If <i>writable</i> be <b>false</b>, then
                         <ol class="block">
