@@ -225,7 +225,7 @@ def transform_element(docx, e):
 
         elif name == 'tbl':
             assert not e.keys()
-            tbl = table(*c, class_="real-table")
+            tbl = table(*c)
             ##tbl.style = css
             return figure(tbl)
 

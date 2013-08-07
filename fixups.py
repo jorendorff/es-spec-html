@@ -1084,7 +1084,11 @@ def fixup_tables(doc, docx):
 
 @Fixup
 def fixup_table_formatting(doc, docx):
+    """ Mark each table as either .real-table or .lightweight-table. """
     def fix_table(table):
+        if table.attrs and 'class' in table.attrs:
+            return [table]
+
         def has_borders_or_shading(e):
             s = e.style
             return s and any(k.startswith(('border', '-ooxml-border', 'background'))
@@ -1093,11 +1097,12 @@ def fixup_table_formatting(doc, docx):
         formatted = any(cell.name == 'th' or has_borders_or_shading(cell)
                           for _, row in table.kids('tr')
                             for _, cell in row.kids())
-        if not formatted and table.attrs and table.attrs.get('class') == 'real-table':
-            attrs = table.attrs.copy()
+        attrs = table.attrs.copy()
+        if formatted:
+            attrs['class'] = 'real-table'
+        else:
             attrs['class'] = 'lightweight-table'
-            return [table.with_(attrs=attrs)]
-        return [table]
+        return [table.with_(attrs=attrs)]
     return doc.replace('table', fix_table)
 
 @InPlaceFixup
