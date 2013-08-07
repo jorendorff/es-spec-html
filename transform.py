@@ -16,6 +16,19 @@ ALLOW_CHANGES = True
 def transform(docx):
     return transform_element(docx, docx.document)
 
+def is_deleted(element, pr_child_name):
+    for pr in element:
+        if shorten(pr.tag) == pr_child_name:
+            deleted = 0
+            for j in pr:
+                j_name = shorten(j.tag)
+                if j_name == 'del' and deleted == 0:
+                    deleted = 1
+                elif j_name == 'ins':
+                    deleted = -1
+            return deleted > 0
+    return False
+
 def transform_element(docx, e):
     name = shorten(e.tag)
     assert e.tail is None
@@ -225,12 +238,17 @@ def transform_element(docx, e):
 
         elif name == 'tbl':
             assert not e.keys()
+            if len(c) == 0:
+                return None
             tbl = table(*c)
             ##tbl.style = css
             return figure(tbl)
 
         elif name == 'tr':
-            return tr(*c)
+            if is_deleted(e, 'trPr'):
+                return None
+            else:
+                return tr(*c)
 
         elif name == 'tc':
             result = td(*c)
