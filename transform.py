@@ -19,14 +19,10 @@ def transform(docx):
 def is_deleted(element, pr_child_name):
     for pr in element:
         if shorten(pr.tag) == pr_child_name:
-            deleted = 0
             for j in pr:
-                j_name = shorten(j.tag)
-                if j_name == 'del' and deleted == 0:
-                    deleted = 1
-                elif j_name == 'ins':
-                    deleted = -1
-            return deleted > 0
+                if shorten(j.tag) == 'del':
+                    return True
+            return False
     return False
 
 def transform_element(docx, e):
@@ -247,10 +243,11 @@ def transform_element(docx, e):
         elif name == 'tr':
             if is_deleted(e, 'trPr'):
                 return None
-            else:
-                return tr(*c)
+            return tr(*c)
 
         elif name == 'tc':
+            if is_deleted(e, 'tcPr'):
+                return None
             result = td(*c)
             result.style = css
             return result
