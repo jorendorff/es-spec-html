@@ -649,17 +649,6 @@ def fixup_lists(doc, docx):
 
     return doc.find_replace(contains_paragraphs, fix_body)
 
-@Fixup
-def fixup_remove_margin_style(doc, docx):
-    def is_margin_property(name):
-        return name.startswith('margin-') or name in ('text-indent', '-ooxml-indentation')
-    def has_margins(e):
-        return e.style is not None and any(is_margin_property(k) for k in e.style)
-    def without_margins(e):
-        style = {k: v for k, v in e.style.items() if not is_margin_property(k)}
-        return [e.with_(style=style)]
-    return doc.find_replace(has_margins, without_margins)
-
 unrecognized_styles = collections.defaultdict(int)
 
 def ht_concat(c1, c2):
@@ -851,6 +840,17 @@ def fixup_hr(doc, docx):
                 result.append(b)
                 body.content[i:i + 1] = result
                 break
+
+@Fixup
+def fixup_remove_margin_style(doc, docx):
+    def is_margin_property(name):
+        return name.startswith('margin-') or name in ('text-indent', '-ooxml-indentation')
+    def has_margins(e):
+        return e.style is not None and any(is_margin_property(k) for k in e.style)
+    def without_margins(e):
+        style = {k: v for k, v in e.style.items() if not is_margin_property(k)}
+        return [e.with_(style=style)]
+    return doc.find_replace(has_margins, without_margins)
 
 @InPlaceFixup
 def fixup_intl_remove_junk(doc, docx):
@@ -2614,12 +2614,12 @@ def get_fixups(docx):
     yield fixup_list_styles
     yield fixup_formatting
     yield fixup_lists
-    yield fixup_remove_margin_style
     yield fixup_paragraph_classes
     yield fixup_remove_empty_headings
     yield fixup_element_spacing
     yield fixup_sec_4_3
     yield fixup_hr
+    yield fixup_remove_margin_style
     if spec_is_intl(docx):
         yield fixup_intl_remove_junk
     yield fixup_sections
