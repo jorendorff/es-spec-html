@@ -182,6 +182,7 @@ div.display { margin: 1em 0 1em 2em; }
 
 /* Grammar productions */
 div.gp { margin-left: 2.4em; margin-top: 0.9em; }
+div.gp.prod { margin-left: 0; }  /* one-line production */
 div.rhs { margin-left: 2.4em; }  /* right-hand side */
 div.pile { margin-left: 2.4em; max-width: 40em; }
 div.keyword.pile code { float: left; width: 25%; }
@@ -228,13 +229,13 @@ div.rhs > span.grhsmod,
 div.rhs > span.chgloss,
 div.rhs > span.gprose,
 div.rhs > var,
-span.prod > span.geq,
-span.prod > code.t,
-span.prod > span.nt,
-span.prod > span.grhsannot,
-span.prod > span.grhsmod,
-span.prod > span.chgloss,
-span.prod > span.gprose,
+.prod > span.geq,
+.prod > code.t,
+.prod > span.nt,
+.prod > span.grhsannot,
+.prod > span.grhsmod,
+.prod > span.chgloss,
+.prod > span.gprose,
 div.rhs > var {
     margin-left: 5pt;
 }
@@ -246,14 +247,14 @@ div.rhs > span.grhsmod:first-child,
 div.rhs > span.chgloss:first-child,
 div.rhs > span.gprose:first-child,
 div.rhs > var:first-child,
-span.prod > span.geq:first-child,
-span.prod > code.t:first-child,
-span.prod > span.nt:first-child,
-span.prod > span.grhsannot:first-child,
-span.prod > span.grhsmod:first-child,
-span.prod > span.chprose:first-child,
-span.prod > span.gprose:first-child,
-span.prod > var:first-child {
+.prod > span.geq:first-child,
+.prod > code.t:first-child,
+.prod > span.nt:first-child,
+.prod > span.grhsannot:first-child,
+.prod > span.grhsmod:first-child,
+.prod > span.chprose:first-child,
+.prod > span.gprose:first-child,
+.prod > var:first-child {
     margin-left: 0;
 }
 

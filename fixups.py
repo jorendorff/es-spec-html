@@ -1927,13 +1927,23 @@ def fixup_lang_grammar_post(doc, docx):
             syntax = syntax.lstrip('\n')
             for production in syntax.split('\n\n'):
                 lines = production.splitlines()
-
                 assert not lines[0][:1].isspace()
-                lines_out = markup_syntax(lines[0], 'lhs')
-                for line in lines[1:]:
-                    assert line.startswith('    ')
-                    lines_out += markup_syntax(line.strip(), 'rhs')
-                divs.append(html.div(*lines_out, class_='gp'))
+
+                done = False
+                if len(lines) == 1:
+                    qq = markup_syntax(lines[0].strip(), 'prod')
+                    if len(qq) == 1:
+                        d = qq[0] if qq else html.div()
+                        d.attrs['class'] = 'gp prod'
+                        divs.append(d)
+                        done = True
+
+                if not done:
+                    lines_out = markup_syntax(lines[0], 'lhs')
+                    for line in lines[1:]:
+                        assert line.startswith('    ')
+                        lines_out += markup_syntax(line.strip(), 'rhs')
+                    divs.append(html.div(*lines_out, class_='gp'))
             parent.content[i:i + 1] = divs
         elif child.name == 'span' and child.attrs.get('class') == 'prod':
             [syntax] = child.content
