@@ -589,7 +589,7 @@ def fixup_lists(doc, docx):
             # Close any more-indented active lists.
             #
             # Since -ooxml-indentation refers to the indentation of the numbering, not the text,
-            # treat non-numbered paragraphs as being an additional 36pt (1/4 inch) to the left.
+            # treat non-numbered paragraphs as being an additional 36pt (1/2 inch) to the left.
             # This is not meant to make sense.
             #
             effective_margin = margin
@@ -1621,14 +1621,32 @@ def fixup_lang_grammar_pre(doc, docx):
     Keep the text; throw everything else away.
     """
 
-    def is_grammar_block(p):
+    def is_indented(p):
+        if p.style:
+            ind = p.style.get('-ooxml-indentation')
+            if ind is not None and ind.endswith('pt'):
+                ind = float(ind[:-2])
+                return ind >= 18
+        return False
+
+    def is_grammar_block(p, continued):
         if ht_name_is(p, 'div'):
             return p.attrs.get('class') in ('lhs', 'rhs')
         elif ht_name_is(p, 'p'):
             # Some plain old paragraphs are also grammar.
-            return (len(p.content) != 0
-                    and is_nonterminal(p.content[0])
-                    and find_inline_grammar_stop_index(p, 0) == len(p.content))
+            if len(p.content) == 0:
+                return False
+            elif is_nonterminal(p.content[0]) and find_inline_grammar_stop_index(p, 0) == len(p.content):
+                return True
+            elif continued and is_indented(p):
+                i = 0
+                while i < len(p.content):
+                    if not is_grammar_inline_at(p, i):
+                        return False
+                    i += 1
+                return True
+            else:
+                return False
         else:
             return False
 
@@ -1661,7 +1679,7 @@ def fixup_lang_grammar_pre(doc, docx):
 
     def strip_grammar_block(parent, i):
         j = i + 1
-        while j < len(parent.content) and is_grammar_block(parent.content[j]):
+        while j < len(parent.content) and is_grammar_block(parent.content[j], True):
             j += 1
         syntax = ''
         for e in parent.content[i:j]:
@@ -1800,7 +1818,7 @@ def fixup_lang_grammar_pre(doc, docx):
                     content.insert(i + 1, ' ')
 
     for parent, i, child in all_parent_index_child_triples(doc):
-        if is_grammar_block(child):
+        if is_grammar_block(child, False):
             strip_grammar_block(parent, i)
         elif is_nonterminal(child):
             strip_grammar_inline(parent, i)
