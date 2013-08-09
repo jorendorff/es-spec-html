@@ -1716,7 +1716,9 @@ def fixup_lang_grammar_pre(doc, docx):
         else:
             return False
 
-    inline_grammar_re = re.compile('^\s*(?:$|\[empty\]|\[no\s*$|here\]|\[lookahead \N{NOT AN ELEMENT OF}|{|}|\])')
+    notin = "\N{NOT AN ELEMENT OF}"
+    inline_grammar_re = re.compile(
+        r'^\s*(?:$|\[empty\]|\[no\s*$|here\]|\[lookahead ' + notin + r'|{|}|\])')
 
     def is_grammar_inline_at(parent, i):
         ht = parent.content[i]
