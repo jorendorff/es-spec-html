@@ -1636,7 +1636,7 @@ def fixup_lang_grammar_pre(doc, docx):
             # Some plain old paragraphs are also grammar.
             if len(p.content) == 0:
                 return False
-            elif is_nonterminal(p.content[0]) and find_inline_grammar_stop_index(p, 0) == len(p.content):
+            elif is_nonterminal(p.content[0]) and find_inline_production_stop_index(p, 0) == len(p.content):
                 return True
             elif continued and is_indented(p):
                 i = 0
@@ -1748,12 +1748,12 @@ def fixup_lang_grammar_pre(doc, docx):
                 s += inline_grammar_text(ht.content)
         return s
 
-    def find_inline_grammar_stop_index(e, i):
+    def find_inline_production_stop_index(e, i):
         # This algorithm is ugly. The only thing it has going for it is the
         # lack of evidence that something smarter would do a better job.
 
-        # Skip any whitespace immediately following parent.content[i]. If that
-        # puts us at the end of parent, there is no grammar production here;
+        # Skip any whitespace immediately following e.content[i]. If that
+        # puts us at the end of e, there is no grammar production here;
         # return without doing anything.
         content = e.content
         j = i + 1
@@ -1785,7 +1785,7 @@ def fixup_lang_grammar_pre(doc, docx):
 
         # Find the end of the production.
         j += 1
-        while j < len(content) and is_grammar_inline_at(parent, j):
+        while j < len(content) and is_grammar_inline_at(e, j):
             j += 1
 
         return j
@@ -1796,7 +1796,7 @@ def fixup_lang_grammar_pre(doc, docx):
         Replace it with a span.prod element.
         """
 
-        j = find_inline_grammar_stop_index(parent, i)
+        j = find_inline_production_stop_index(parent, i)
         if j is None:
             return
 

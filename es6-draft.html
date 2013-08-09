@@ -14368,10 +14368,8 @@
         <div class="rhs"><code class="t">super</code> <code class="t">[</code> <span class="nt">Expression</span> <code class="t">]</code></div>
         <div class="rhs"><code class="t">super</code> <code class="t">.</code> <span class="nt">IdentifierName</span></div>
         <div class="rhs"><code class="t">new</code> <code class="t">super</code> <span class="nt">Arguments</span><sub>opt</sub></div>
+        <div class="rhs"><span class="nt">CallExpression</span> <code class="t">:</code> <code class="t">super</code> <span class="nt">Arguments</span></div>
       </div>
-
-      <p><span class="prod"><span class="nt">CallExpression</span> <span class="geq">:</span> <code class="t">super</code> <span
-      class="nt">Arguments</span></span></p>
 
       <ul>
         <li>
@@ -19573,8 +19571,9 @@
         href="#sec-10.4">LexicalEnvironment</a> is always restored to its former state.</p>
       </div>
 
-      <p><span class="prod"><span class="nt">CaseClause</span> <span class="geq">:</span> <code class="t">case</code> <span
-      class="nt">Expression</span> <code class="t">:</code></span></p>
+      <div class="gp">
+        <div class="lhs"><span class="nt">CaseClause</span> <span class="geq">:</span> <code class="t">case</code> <span class="nt">Expression</span> <code class="t">:</code></div>
+      </div>
 
       <ol class="proc">
         <li>Return <a href="#sec-8.2.3.1">NormalCompletion</a>(<span style="font-family: sans-serif">empty</span>).</li>
@@ -19587,8 +19586,9 @@
         <li>Return the result of evaluating <i>StatementList</i>.</li>
       </ol>
 
-      <p><span class="prod"><span class="nt">DefaultClause</span> <span class="geq">:</span> <code
-      class="t">default:</code></span></p>
+      <div class="gp">
+        <div class="lhs"><span class="nt">DefaultClause</span> <span class="geq">:</span> <code class="t">default:</code></div>
+      </div>
 
       <ol class="proc">
         <li>Return <a href="#sec-8.2.3.1">NormalCompletion</a>(<span style="font-family: sans-serif">empty</span>).</li>
@@ -20627,8 +20627,9 @@
         </li>
       </ul>
 
-      <p><span class="prod"><span class="nt">ConciseBody</span> <span class="geq">:</span> <span class="grhsannot">[lookahead
-      &notin; {<code class="t">{</code>}]</span> <span class="nt">AssignmentExpression</span></span></p>
+      <p><span class="prod"><span class="nt">ConciseBody</span> <span class="geq">:</span> <code class="t">[lookahead</code> <code
+      class="t">&notin;</code> <code class="t">{</code> <code class="t">{</code></span> <span style="font-family:
+      sans-serif">}]</span> <i>AssignmentExpression</i></p>
 
       <ul>
         <li>It is a Syntax Error if <span style="font-family: Times New Roman"><i>AssignmentExpression</i> Contains
