@@ -841,17 +841,6 @@ def fixup_hr(doc, docx):
                 body.content[i:i + 1] = result
                 break
 
-@Fixup
-def fixup_remove_margin_style(doc, docx):
-    def is_margin_property(name):
-        return name.startswith('margin-') or name in ('text-indent', '-ooxml-indentation')
-    def has_margins(e):
-        return e.style is not None and any(is_margin_property(k) for k in e.style)
-    def without_margins(e):
-        style = {k: v for k, v in e.style.items() if not is_margin_property(k)}
-        return [e.with_(style=style)]
-    return doc.find_replace(has_margins, without_margins)
-
 @InPlaceFixup
 def fixup_intl_remove_junk(doc, docx):
     """ Remove doc ids that only matter within Ecma, and some junk that Word inserts """
@@ -1048,6 +1037,14 @@ def fixup_tables(doc, docx):
     Precedes fixup_pre, which converts p elements containing only code into
     pre elements; we don't want code elements in tables to handled that way.
     """
+
+    def is_negligible_css_property(name):
+        return name == '-ooxml-indentation' or name.startswith('margin-')
+
+    def is_vacuous(e):
+        return not e.attrs and (e.style is None
+                                or all(is_negligible_css_property(p) for p in e.style))
+
     for td in findall(doc, 'td'):
         if td.style and td.style.get('background-color') in ('#C0C0C0', '#D8D8D8'):
             td.name = 'th'
@@ -1065,7 +1062,7 @@ def fixup_tables(doc, docx):
                     del span.style['background-color']
 
             # If the p is vacuous, kill it.
-            if not p.attrs and not p.style:
+            if is_vacuous(p):
                 td.content = p.content
 
             # Ditto if it happens to contain an empty span.
@@ -1079,7 +1076,7 @@ def fixup_tables(doc, docx):
                         del span.style['font-weight']
                     if span.style.get('font-style') == 'italic':
                         del span.style['font-style']
-                if not span.attrs and not span.style:
+                if is_vacuous(span):
                     td.content = span.content
 
 @Fixup
@@ -1616,6 +1613,17 @@ def fixup_simplify_formatting(doc, docx):
     for parent, i, span in all_parent_index_child_triples_reversed(doc):
         if span.name == 'span':
             parent.content[i:i + 1] = simplify_style_span(span)
+
+@Fixup
+def fixup_remove_margin_style(doc, docx):
+    def is_margin_property(name):
+        return name.startswith('margin-') or name in ('text-indent', '-ooxml-indentation')
+    def has_margins(e):
+        return e.style is not None and any(is_margin_property(k) for k in e.style)
+    def without_margins(e):
+        style = {k: v for k, v in e.style.items() if not is_margin_property(k)}
+        return [e.with_(style=style)]
+    return doc.find_replace(has_margins, without_margins)
 
 @InPlaceFixup
 def fixup_lang_grammar_pre(doc, docx):
@@ -2619,7 +2627,6 @@ def get_fixups(docx):
     yield fixup_element_spacing
     yield fixup_sec_4_3
     yield fixup_hr
-    yield fixup_remove_margin_style
     if spec_is_intl(docx):
         yield fixup_intl_remove_junk
     yield fixup_sections
@@ -2644,6 +2651,7 @@ def get_fixups(docx):
     if spec_is_lang(docx):
         yield fixup_lang_overview_biblio
     yield fixup_simplify_formatting
+    yield fixup_remove_margin_style
     if spec_is_lang(docx):
         yield fixup_lang_grammar_pre
         yield fixup_lang_grammar_post
