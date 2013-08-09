@@ -1614,17 +1614,6 @@ def fixup_simplify_formatting(doc, docx):
         if span.name == 'span':
             parent.content[i:i + 1] = simplify_style_span(span)
 
-@Fixup
-def fixup_remove_margin_style(doc, docx):
-    def is_margin_property(name):
-        return name.startswith('margin-') or name in ('text-indent', '-ooxml-indentation')
-    def has_margins(e):
-        return e.style is not None and any(is_margin_property(k) for k in e.style)
-    def without_margins(e):
-        style = {k: v for k, v in e.style.items() if not is_margin_property(k)}
-        return [e.with_(style=style)]
-    return doc.find_replace(has_margins, without_margins)
-
 @InPlaceFixup
 def fixup_lang_grammar_pre(doc, docx):
     """ Convert runs of div.lhs and div.rhs elements in doc to pre elements.
@@ -1933,6 +1922,17 @@ def fixup_lang_grammar_post(doc, docx):
             [syntax] = child.content
             [result] = markup_syntax(syntax.strip(), 'prod')
             child.content = result.content
+
+@Fixup
+def fixup_remove_margin_style(doc, docx):
+    def is_margin_property(name):
+        return name.startswith('margin-') or name in ('text-indent', '-ooxml-indentation')
+    def has_margins(e):
+        return e.style is not None and any(is_margin_property(k) for k in e.style)
+    def without_margins(e):
+        style = {k: v for k, v in e.style.items() if not is_margin_property(k)}
+        return [e.with_(style=style)]
+    return doc.find_replace(has_margins, without_margins)
 
 @InPlaceFixup
 def fixup_intl_insert_ids(doc, docx):
@@ -2651,10 +2651,10 @@ def get_fixups(docx):
     if spec_is_lang(docx):
         yield fixup_lang_overview_biblio
     yield fixup_simplify_formatting
-    yield fixup_remove_margin_style
     if spec_is_lang(docx):
         yield fixup_lang_grammar_pre
         yield fixup_lang_grammar_post
+    yield fixup_remove_margin_style
     if spec_is_intl(docx):
         yield fixup_intl_insert_ids
     yield fixup_links
