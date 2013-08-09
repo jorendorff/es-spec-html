@@ -1638,12 +1638,7 @@ def fixup_lang_grammar_pre(doc, docx):
                 return False
             elif is_nonterminal(p.content[0]) and find_inline_production_stop_index(p, 0) == len(p.content):
                 return True
-            elif continued and is_indented(p):
-                i = 0
-                while i < len(p.content):
-                    if not is_grammar_inline_at(p, i):
-                        return False
-                    i += 1
+            elif continued and is_indented(p) and find_inline_grammar_stop_index(p, 0) == len(p.content):
                 return True
             else:
                 return False
@@ -1698,6 +1693,10 @@ def fixup_lang_grammar_pre(doc, docx):
                 else:
                     syntax += '    '  # indent each rhs
                 syntax += line + '\n'
+
+        # One-line productions
+        if syntax.count('\n') == 1 and " :" in syntax:
+            syntax = syntax.lstrip()
 
         # Hack - not all the paragraphs marked as syntax are actually
         # things we want to replace. So as a heuristic, only make the
@@ -1758,12 +1757,12 @@ def fixup_lang_grammar_pre(doc, docx):
         content = e.content
         j = i + 1
         if j >= len(content):
-            return
+            return None
         if isinstance(content[j], str):
             if content[j].strip() == '':
                 j += 1
                 if j >= len(content):
-                    return
+                    return None
 
         # Hack: some productions are written (roughly) <b>::</b><code>.</code>
         # with no space between. Insert a space to make it work.
@@ -1781,13 +1780,13 @@ def fixup_lang_grammar_pre(doc, docx):
         if not free_pass:
             jtext = ht_text(content[j]).lstrip()
             if not jtext.startswith(':') or jtext.split(None, 1)[0].rstrip(':') != '':
-                return
+                return None
 
-        # Find the end of the production.
-        j += 1
-        while j < len(content) and is_grammar_inline_at(e, j):
+        return find_inline_grammar_stop_index(e, j + 1)
+
+    def find_inline_grammar_stop_index(e, j):
+        while j < len(e.content) and is_grammar_inline_at(e, j):
             j += 1
-
         return j
 
     def strip_grammar_inline(parent, i):
