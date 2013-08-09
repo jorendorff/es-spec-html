@@ -1624,8 +1624,16 @@ def fixup_lang_grammar_pre(doc, docx):
     Keep the text; throw everything else away.
     """
 
-    def is_grammar_block(div):
-        return ht_name_is(div, 'div') and div.attrs.get('class') in ('lhs', 'rhs')
+    def is_grammar_block(p):
+        if ht_name_is(p, 'div'):
+            return p.attrs.get('class') in ('lhs', 'rhs')
+        elif ht_name_is(p, 'p'):
+            # Some plain old paragraphs are also grammar.
+            return (len(p.content) != 0
+                    and is_nonterminal(p.content[0])
+                    and find_inline_grammar_stop_index(p, 0) == len(p.content))
+        else:
+            return False
 
     def lines(div):
         line = ''
@@ -1725,19 +1733,14 @@ def fixup_lang_grammar_pre(doc, docx):
                 s += inline_grammar_text(ht.content)
         return s
 
-    def strip_grammar_inline(parent, i):
-        """ Find a grammar production in parent, starting at parent.content[i].
-
-        Replace it with a span.prod element.
-        """
-
+    def find_inline_grammar_stop_index(e, i):
         # This algorithm is ugly. The only thing it has going for it is the
         # lack of evidence that something smarter would do a better job.
 
         # Skip any whitespace immediately following parent.content[i]. If that
         # puts us at the end of parent, there is no grammar production here;
         # return without doing anything.
-        content = parent.content
+        content = e.content
         j = i + 1
         if j >= len(content):
             return
@@ -1770,7 +1773,20 @@ def fixup_lang_grammar_pre(doc, docx):
         while j < len(content) and is_grammar_inline_at(parent, j):
             j += 1
 
+        return j
+
+    def strip_grammar_inline(parent, i):
+        """ Find a grammar production in parent, starting at parent.content[i].
+
+        Replace it with a span.prod element.
+        """
+
+        j = find_inline_grammar_stop_index(parent, i)
+        if j is None:
+            return
+
         # Strip out all formatting and replace parent.content[i:j] with a new span.prod.
+        content = parent.content
         text = inline_grammar_text(content[i:j])
         text = ' '.join(text.strip().split())
         content[i:j] = [html.span(text, class_='prod')]

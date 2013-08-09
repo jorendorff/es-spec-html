@@ -18565,7 +18565,9 @@
 
         <p><b>Static Semantics:  Early Errors</b></p>
 
-        <p><span class="prod"><span class="nt">IterationStatement</span> <span class="geq">:</span></span></p>
+        <div class="gp">
+          <div class="lhs"><span class="nt">IterationStatement</span> <span class="geq">:</span></div>
+        </div>
 
         <p><code>for</code> <code>(</code><span class="nt">LeftHandSideExpression</span>  <code>in</code> <span
         class="nt">Expression</span> <code>)</code> <span class="nt">Statement</span></p>
@@ -18616,7 +18618,9 @@
           parenthesises surround <span class="nt">Expression</span>.</p>
         </div>
 
-        <p><span class="prod"><span class="nt">IterationStatement</span> <span class="geq">:</span></span></p>
+        <div class="gp">
+          <div class="lhs"><span class="nt">IterationStatement</span> <span class="geq">:</span></div>
+        </div>
 
         <p><code>for</code> <code>(</code><span class="nt">ForDeclaration</span> <code>in</code> <span
         class="nt">Expression</span> <code>)</code> <span class="nt">Statement</span></p>
@@ -33970,9 +33974,13 @@
 
         <h2>Syntax</h2>
 
-        <p><span class="prod"><span class="nt">JSONWhiteSpace</span> <span class="geq">::</span></span></p>
-
-        <div class="lhs">&lt;TAB&gt;<br>&lt;CR&gt;<br>&lt;LF&gt;<br>&lt;SP&gt;</div>
+        <div class="gp">
+          <div class="lhs"><span class="nt">JSONWhiteSpace</span> <span class="geq">::</span></div>
+          <div class="rhs">&lt;TAB&gt;</div>
+          <div class="rhs">&lt;CR&gt;</div>
+          <div class="rhs">&lt;LF&gt;</div>
+          <div class="rhs">&lt;SP&gt;</div>
+        </div>
 
         <div class="gp">
           <div class="lhs"><span class="nt">JSONString</span> <span class="geq">::</span></div>
@@ -33984,10 +33992,11 @@
           <div class="rhs"><span class="nt">JSONStringCharacter</span> <span class="nt">JSONStringCharacters</span><sub>opt</sub></div>
         </div>
 
-        <p><span class="prod"><span class="nt">JSONStringCharacter</span> <span class="geq">::</span></span></p>
-
-        <div class="lhs">SourceCharacter <span style="font-family: sans-serif"><b>but not one of</b></span> <code>"</code> <span style="font-family: sans-serif"><b>or</b></span> <b><span style="font-family: monospace">\</span> <span style="font-family: sans-serif">or</span></b> U+0000 <span style="font-family: sans-serif"><b>through</b></span> U+001F</div>
-        <div class="lhs"><code>\</code> JSONEscapeSequence</div>
+        <div class="gp">
+          <div class="lhs"><span class="nt">JSONStringCharacter</span> <span class="geq">::</span></div>
+          <div class="rhs"><span class="nt">SourceCharacter</span> <span class="grhsmod">but not one of</span> <code class="t">"</code> <span class="grhsmod">or</span> <code class="t">\</code> <span class="grhsmod">or</span> <span class="gprose">U+0000 through U+001F</span></div>
+          <div class="rhs"><code class="t">\</code> <span class="nt">JSONEscapeSequence</span></div>
+        </div>
 
         <div class="gp">
           <div class="lhs"><span class="nt">JSONEscapeSequence</span> <span class="geq">::</span></div>
