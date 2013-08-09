@@ -13472,19 +13472,19 @@
       <div class="gp">
         <div class="lhs"><span class="nt">TemplateLiteral</span> <span class="geq">:</span></div>
         <div class="rhs"><span class="nt">NoSubstitutionTemplate</span></div>
-        <div class="rhs"><span class="nt">TemplateHead</span> <span class="nt">Expression</span> <code class="t">[Lexical</code> <code class="t">goal</code> <span class="nt">InputElementTemplateTail</span> <code class="t">]</code> <span class="nt">TemplateSpans</span></div>
+        <div class="rhs"><span class="nt">TemplateHead</span> <span class="nt">Expression</span> <span class="grhsannot">[Lexical goal <span class="nt">InputElementTemplateTail</span>]</span> <span class="nt">TemplateSpans</span></div>
       </div>
 
       <div class="gp">
         <div class="lhs"><span class="nt">TemplateSpans</span> <span class="geq">:</span></div>
         <div class="rhs"><span class="nt">TemplateTail</span></div>
-        <div class="rhs"><span class="nt">TemplateMiddleList</span> <code class="t">[Lexical</code> <code class="t">goal</code> <span class="nt">InputElementTemplateTail</span> <code class="t">]</code> <span class="nt">TemplateTail</span></div>
+        <div class="rhs"><span class="nt">TemplateMiddleList</span> <span class="grhsannot">[Lexical goal <span class="nt">InputElementTemplateTail</span>]</span> <span class="nt">TemplateTail</span></div>
       </div>
 
       <div class="gp">
         <div class="lhs"><span class="nt">TemplateMiddleList</span> <span class="geq">:</span></div>
         <div class="rhs"><span class="nt">TemplateMiddle</span> <span class="nt">Expression</span></div>
-        <div class="rhs"><span class="nt">TemplateMiddleList</span> <code class="t">[Lexical</code> <code class="t">goal</code> <span class="nt">InputElementTemplateTail</span> <code class="t">]</code> <span class="nt">TemplateMiddle</span> <span class="nt">Expression</span></div>
+        <div class="rhs"><span class="nt">TemplateMiddleList</span> <span class="grhsannot">[Lexical goal <span class="nt">InputElementTemplateTail</span>]</span> <span class="nt">TemplateMiddle</span> <span class="nt">Expression</span></div>
       </div>
 
       <p><b>Static Semantics</b></p>
@@ -13507,11 +13507,7 @@
         </li>
         <li>Return a <a href="#sec-8.2.2">List</a> containing the single element, <i>string</i>.</li>
       </ol>
-
-      <p><span class="prod"><span class="nt">TemplateLiteral</span> <span class="geq">:</span> <span
-      class="nt">TemplateHead</span> <span class="nt">Expression</span></span> <span style="font-family: sans-serif">[Lexical
-      goal</span> <i>InputElementTemplateTail</i><span style="font-family: sans-serif">]</span> <i>TemplateSpans</i></p>
-
+      <div class="gp prod"><span class="nt">TemplateLiteral</span> <span class="geq">:</span> <span class="nt">TemplateHead</span> <span class="nt">Expression</span> <span class="grhsannot">[Lexical goal <span class="nt">InputElementTemplateTail</span>]</span> <span class="nt">TemplateSpans</span></div>
       <ol class="proc">
         <li>If <i>raw</i> is <b>false</b>, then
           <ol class="block">
@@ -13540,11 +13536,7 @@
         </li>
         <li>Return a <a href="#sec-8.2.2">List</a> containing the single element, <i>tail</i>.</li>
       </ol>
-
-      <p><span class="prod"><span class="nt">TemplateSpans</span> <span class="geq">:</span> <span
-      class="nt">TemplateMiddleList</span></span> <span style="font-family: sans-serif">[Lexical goal</span>
-      <i>InputElementTemplateTail</i><span style="font-family: sans-serif">]</span> <i>TemplateTail</i></p>
-
+      <div class="gp prod"><span class="nt">TemplateSpans</span> <span class="geq">:</span> <span class="nt">TemplateMiddleList</span> <span class="grhsannot">[Lexical goal <span class="nt">InputElementTemplateTail</span>]</span> <span class="nt">TemplateTail</span></div>
       <ol class="proc">
         <li>Let <i>middle</i> be TemplateStrings of <i>TemplateMiddleList</i> with argument <i>raw</i>.</li>
         <li>If <i>raw</i> is <b>false</b>, then
@@ -13574,11 +13566,7 @@
         </li>
         <li>Return a <a href="#sec-8.2.2">List</a> containing the single element, <i>string</i>.</li>
       </ol>
-
-      <p><span class="prod"><span class="nt">TemplateMiddleList</span> <span class="geq">:</span> <span
-      class="nt">TemplateMiddleList</span></span> <span style="font-family: sans-serif">[Lexical goal</span>
-      <i>InputElementTemplateTail</i><span style="font-family: sans-serif">]</span> <i>TemplateMiddle Expression</i></p>
-
+      <div class="gp prod"><span class="nt">TemplateMiddleList</span> <span class="geq">:</span> <span class="nt">TemplateMiddleList</span> <span class="grhsannot">[Lexical goal <span class="nt">InputElementTemplateTail</span>]</span> <span class="nt">TemplateMiddle</span> <span class="nt">Expression</span></div>
       <ol class="proc">
         <li>Let <i>front</i> be TemplateStrings of <i>TemplateMiddleList</i> with argument <i>raw</i>.</li>
         <li>If <i>raw</i> is <b>false</b>, then
@@ -13605,11 +13593,7 @@
             production as the argument.</li>
         <li>Return a <a href="#sec-8.2.2">List</a> containing the one element which is <i>siteObj</i>.</li>
       </ol>
-
-      <p><span class="prod"><span class="nt">TemplateLiteral</span> <span class="geq">:</span> <span
-      class="nt">TemplateHead</span> <span class="nt">Expression</span></span> <span style="font-family: sans-serif">[Lexical
-      goal</span> <i>InputElementTemplateTail</i><span style="font-family: sans-serif">]</span> <i>TemplateSpans</i></p>
-
+      <div class="gp prod"><span class="nt">TemplateLiteral</span> <span class="geq">:</span> <span class="nt">TemplateHead</span> <span class="nt">Expression</span> <span class="grhsannot">[Lexical goal <span class="nt">InputElementTemplateTail</span>]</span> <span class="nt">TemplateSpans</span></div>
       <ol class="proc">
         <li>Let <i>siteObj</i> be the result of the abstract operation GetTemplateCallSite passing this <i>TemplateLiteral</i>
             production as the argument.</li>
@@ -13688,11 +13672,7 @@
       <ol class="proc">
         <li>Return an empty <a href="#sec-8.2.2">List</a>.</li>
       </ol>
-
-      <p><span class="prod"><span class="nt">TemplateSpans</span> <span class="geq">:</span> <span
-      class="nt">TemplateMiddleList</span></span> <span style="font-family: sans-serif">[Lexical goal</span>
-      <i>InputElementTemplateTail</i><span style="font-family: sans-serif">]</span> <i>TemplateTail</i></p>
-
+      <div class="gp prod"><span class="nt">TemplateSpans</span> <span class="geq">:</span> <span class="nt">TemplateMiddleList</span> <span class="grhsannot">[Lexical goal <span class="nt">InputElementTemplateTail</span>]</span> <span class="nt">TemplateTail</span></div>
       <ol class="proc">
         <li>Return the result of SubstitutionEvaluation of <i>TemplateMiddleList</i>.</li>
       </ol>
@@ -13702,11 +13682,7 @@
         <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>sub</i>).</li>
         <li>Return a <a href="#sec-8.2.2">List</a> containing only <i>sub</i>.</li>
       </ol>
-
-      <p><span class="prod"><span class="nt">TemplateMiddleList</span> <span class="geq">:</span> <span
-      class="nt">TemplateMiddleList</span></span> <span style="font-family: sans-serif">[Lexical goal</span>
-      <i>InputElementTemplateTail</i><span style="font-family: sans-serif">]</span> <i>TemplateMiddle Expression</i></p>
-
+      <div class="gp prod"><span class="nt">TemplateMiddleList</span> <span class="geq">:</span> <span class="nt">TemplateMiddleList</span> <span class="grhsannot">[Lexical goal <span class="nt">InputElementTemplateTail</span>]</span> <span class="nt">TemplateMiddle</span> <span class="nt">Expression</span></div>
       <ol class="proc">
         <li>Let <i>preceeding</i> be the result of SubstitutionEvaluation of <i>TemplateMiddleList</i> .</li>
         <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>preceeding</i>).</li>
@@ -13723,11 +13699,7 @@
         <li>Return the string value whose elements are the TV of <i>NoSubstitutionTemplate</i> as defined in <a
             href="#sec-7.8.5">7.8.5</a>.</li>
       </ol>
-
-      <p><span class="prod"><span class="nt">TemplateLiteral</span> <span class="geq">:</span> <span
-      class="nt">TemplateHead</span> <span class="nt">Expression</span></span> <span style="font-family: sans-serif">[Lexical
-      goal</span> <i>InputElementTemplateTail</i><span style="font-family: sans-serif">]</span> <i>TemplateSpans</i></p>
-
+      <div class="gp prod"><span class="nt">TemplateLiteral</span> <span class="geq">:</span> <span class="nt">TemplateHead</span> <span class="nt">Expression</span> <span class="grhsannot">[Lexical goal <span class="nt">InputElementTemplateTail</span>]</span> <span class="nt">TemplateSpans</span></div>
       <ol class="proc">
         <li>Let <i>head</i> be the TV of <i>TemplateHead</i> as defined in <a href="#sec-7.8.5">7.8.5</a>.</li>
         <li>Let <i>sub</i> be the result of evaluating <i>Expression</i>.</li>
@@ -13743,11 +13715,7 @@
         <li>Let <i>tail</i> be the TV of <i>TemplateTail</i> as defined in <a href="#sec-7.8.5">7.8.5</a>.</li>
         <li>Return the string whose elements are the code units of <i>tail</i>.</li>
       </ol>
-
-      <p><span class="prod"><span class="nt">TemplateSpans</span> <span class="geq">:</span> <span
-      class="nt">TemplateMiddleList</span></span> <span style="font-family: sans-serif">[Lexical goal</span>
-      <i>InputElementTemplateTail</i><span style="font-family: sans-serif">]</span> <i>TemplateTail</i></p>
-
+      <div class="gp prod"><span class="nt">TemplateSpans</span> <span class="geq">:</span> <span class="nt">TemplateMiddleList</span> <span class="grhsannot">[Lexical goal <span class="nt">InputElementTemplateTail</span>]</span> <span class="nt">TemplateTail</span></div>
       <ol class="proc">
         <li>Let <i>head</i> be the result of evaluating <i>TemplateMiddleList</i>.</li>
         <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>head</i>).</li>
@@ -13763,11 +13731,7 @@
         <li>Return the sequence of characters consisting of the code units of <i>head</i> followed by the elements of
             <i>middle</i>.</li>
       </ol>
-
-      <p><span class="prod"><span class="nt">TemplateMiddleList</span> <span class="geq">:</span> <span
-      class="nt">TemplateMiddleList</span></span> <span style="font-family: sans-serif">[Lexical goal</span>
-      <i>InputElementTemplateTail</i><span style="font-family: sans-serif">]</span> <i>TemplateMiddle Expression</i></p>
-
+      <div class="gp prod"><span class="nt">TemplateMiddleList</span> <span class="geq">:</span> <span class="nt">TemplateMiddleList</span> <span class="grhsannot">[Lexical goal <span class="nt">InputElementTemplateTail</span>]</span> <span class="nt">TemplateMiddle</span> <span class="nt">Expression</span></div>
       <ol class="proc">
         <li>Let <i>rest</i> be the result of evaluating <i>TemplateMiddleList</i> .</li>
         <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>rest</i>).</li>
@@ -13838,7 +13802,7 @@
 
     <div class="gp">
       <div class="lhs"><span class="nt">MemberExpression</span> <span class="geq">:</span></div>
-      <div class="rhs"><code class="t">[Lexical</code> <code class="t">goal</code> <span class="nt">InputElementRegExp</span> <code class="t">]</code> <span class="nt">PrimaryExpression</span></div>
+      <div class="rhs"><span class="grhsannot">[Lexical goal <span class="nt">InputElementRegExp</span>]</span> <span class="nt">PrimaryExpression</span></div>
       <div class="rhs"><span class="nt">MemberExpression</span> <code class="t">[</code> <span class="nt">Expression</span> <code class="t">]</code></div>
       <div class="rhs"><span class="nt">MemberExpression</span> <code class="t">.</code> <span class="nt">IdentifierName</span></div>
       <div class="rhs"><span class="nt">MemberExpression</span> <span class="nt">TemplateLiteral</span></div>
@@ -20206,7 +20170,7 @@
 
     <div class="gp">
       <div class="lhs"><span class="nt">YieldExpression</span> <span class="geq">:</span></div>
-      <div class="rhs"><code class="t">yield</code> <span class="nt">YieldDelegator</span><sub>opt</sub> <code class="t">[Lexical</code> <code class="t">goal</code> <span class="nt">InputElementRegExp</span> <code class="t">]</code> <span class="nt">AssignmentExpression</span></div>
+      <div class="rhs"><code class="t">yield</code> <span class="nt">YieldDelegator</span><sub>opt</sub> <span class="grhsannot">[Lexical goal <span class="nt">InputElementRegExp</span>]</span> <span class="nt">AssignmentExpression</span></div>
     </div>
 
     <div class="gp">

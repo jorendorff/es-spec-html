@@ -1718,7 +1718,7 @@ def fixup_lang_grammar_pre(doc, docx):
 
     notin = "\N{NOT AN ELEMENT OF}"
     inline_grammar_re = re.compile(
-        r'^\s*(?:$|\[empty\]|\[no\s*$|here\]|\[lookahead ' + notin + r'|{|}|\])')
+        r'^\s*(?:$|\[empty\]|\[no\s*$|here\]|\[Lexical goal|\[lookahead ' + notin + r'|{|}|\])')
 
     def is_grammar_inline_at(parent, i):
         ht = parent.content[i]
@@ -1839,6 +1839,7 @@ def fixup_lang_grammar_post(doc, docx):
         | \[no\ LineTerminator\ here\]
         | \[desc \  [^]]* \]
         | \[empty\]
+        | \[Lexical\ goal\ [A-Z][A-Za-z]*\]
         | \[lookahead \  . [^]]* \]     # the . stands for &notin;
         | <[A-Z]+>                      # special character
         | [()]                          # unstick a parenthesis from the following token
@@ -1881,6 +1882,13 @@ def fixup_lang_grammar_post(doc, docx):
                                         class_='grhsannot'))
             elif token.startswith('[desc '):
                 markup.append(html.span(token[6:-1].strip(), class_='gprose'))
+            elif token.startswith('[Lexical goal '):
+                assert token.endswith(']')
+                n = len('[Lexical goal ')
+                markup.append(html.span(token[:n],
+                                        html.span(token[n:-1].strip(), class_='nt'),
+                                        ']',
+                                        class_='grhsannot'))
             elif token.startswith('[lookahead '):
                 start = '[lookahead \N{NOT AN ELEMENT OF} '
                 assert token.startswith(start)
