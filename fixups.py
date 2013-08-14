@@ -327,6 +327,8 @@ def fixup_formatting(doc, docx):
         # If the paragraph begins and ends in the same font, treat that font
         # as the paragraph's font, which we will drop.
         paragraph_style = inherited_style.copy()
+        if paragraph_style.get('font-family') == 'monospace':
+            del paragraph_style['font-family']
         if items:
             start_font = items[0][1].get('font-family')
             if start_font is not None and start_font != 'monospace':
@@ -418,8 +420,6 @@ tag_names = {
     'bibliography': 'li.bibliography-entry',
     'BulletNotlast': 'li',
     'Caption': 'figcaption',
-    'CodeSample3': 'pre',
-    'CodeSample4': 'pre',
     'DateTitle': 'h1',
     'ECMAWorkgroup': 'h1.ECMAWorkgroup',
     'Example': '.Note',
