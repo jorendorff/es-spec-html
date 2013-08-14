@@ -1094,19 +1094,26 @@ def fixup_table_formatting(doc, docx):
         return [table.with_(attrs=attrs)]
     return doc.replace('table', fix_table)
 
-@InPlaceFixup
+@Fixup
 def fixup_pre(doc, docx):
     """ Convert p elements containing only monospace font to pre.
 
     Precedes fixup_notes, which considers pre elements to be part of notes.
     """
 
-    for e in findall(doc, 'p'):
-        if len(e.content) == 1:
-            [span] = e.content
-            if ht_name_is(span, 'span') and span.style and span.style.get('font-family') == 'monospace':
-                e.name = 'pre'
-                e.content = span.content
+    def is_code_para(e):
+        if e.name == 'table':
+            return None  # do not walk this subtree
+        elif e.name == 'p' and len(e.content) == 1:
+            [kid] = e.content
+            return ht_name_is(kid, 'span') and kid.style and kid.style.get('font-family') == 'monospace'
+        else:
+            return False  # don't convert this element, but do walk the subtree
+
+    def convert_para(e):
+        return [e.with_(name='pre', content=e.content[0].content)]
+
+    return doc.find_replace(is_code_para, convert_para)
 
 @InPlaceFixup
 def fixup_notes(doc, docx):
