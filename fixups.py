@@ -260,7 +260,7 @@ def looks_like_nonterminal(text):
 def is_marker(e):
     return ht_name_is(e, 'span') and e.attrs.get('class') == 'marker'
 
-@InPlaceFixup
+@Fixup
 def fixup_formatting(doc, docx):
     """
     Convert runs of span elements to more HTML-like code.
@@ -305,14 +305,12 @@ def fixup_formatting(doc, docx):
             if is_marker(first):
                 rewritable_content_start += 1
 
-        spans = parent.content[rewritable_content_start:]  # copies the array
-
         cls = parent.attrs['class']
         inherited_style = docx.styles[cls].full_style
 
         # Determine the style of each run of content in the paragraph.
         items = []
-        for kid in spans:
+        for kid in parent.content[rewritable_content_start:]:
             if not isinstance(kid, str) and kid.name == 'span':
                 run_style = inherited_style.copy()
                 run_style.update(kid.style)
@@ -399,17 +397,11 @@ def fixup_formatting(doc, docx):
             result += all_content[content_index:i1]  # add any trailing plain content
             return result
 
-        parent.content[rewritable_content_start:] = build_result(ranges, 0, len(all_content))
+        return [parent.with_content_slice(rewritable_content_start,
+                                          len(parent.content),
+                                          build_result(ranges, 0, len(all_content)))]
 
-    for p in findall(doc, 'p'):
-        # We assert the spans don't have attrs because we are going to
-        # rewrite these guys retaining only the style. This fixup needs to
-        # happen early enough in rewriting that this isn't a problem; it also
-        # has to be early so that other markup doesn't get in the way.
-        for i, kid in p.kids():
-            if kid.name == 'span':
-                assert len(kid.attrs) == 0 or list(kid.attrs.keys()) == ['class']
-        rewrite_spans(p)
+    return doc.replace('p', rewrite_spans)
 
 tag_names = {
     'ANNEX': 'h1.l1',
