@@ -117,7 +117,7 @@ def parse_pr(e):
                     font = None  # appears once in the document, superfluous
                 elif font == 'Mistral':
                     font = None  # fanciful, drop it
-                elif font in ('Courier New'):
+                elif font == 'Courier New':
                     font = 'monospace'
                 elif font in ('Arial', 'ArialMT', 'Arial Unicode MS', 'Helvetica'):
                     font = 'sans-serif'
