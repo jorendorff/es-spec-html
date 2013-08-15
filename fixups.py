@@ -1544,7 +1544,7 @@ def fixup_lang_overview_biblio(doc, docx):
     assert dot_space
     p.content[0:1] = [html.span(title.strip(), class_="book-title"), dot_space + rest]
 
-@InPlaceFixup
+@Fixup
 def fixup_simplify_formatting(doc, docx):
     """ Convert formatting spans into HTML markup that does the same thing.
 
@@ -1562,7 +1562,7 @@ def fixup_simplify_formatting(doc, docx):
         if not span.style:
             return span.content
 
-        style = span.style.copy()
+        style = span.style
         content = span.content
 
         if content == ["opt"] and style == {'font-family': 'sans-serif', 'vertical-align': 'sub'}:
@@ -1587,6 +1587,7 @@ def fixup_simplify_formatting(doc, docx):
         elif style == {'font-family': 'Times New Roman', 'font-weight': 'bold'}:
             return [html.span(*content, class_='value')]
 
+        style = style.copy()
         if style.get('font-style') == 'italic':
             content = [html.i(*content)]
             del style['font-style']
@@ -1599,19 +1600,12 @@ def fixup_simplify_formatting(doc, docx):
         if style.get('vertical-align') == 'sub':
             content = [html.sub(*content)]
             del style['vertical-align']
-
         if style:
             content = [html.span(*content)]
             content[0].style = style
-
         return content
 
-    # Regarding functional vs. stateful fixups: This is easily converted to
-    # doc.replace('span', simplify_style_span), but simplify_style_span itself
-    # is all mutation, so it would be misleading to do so.
-    for parent, i, span in all_parent_index_child_triples_reversed(doc):
-        if span.name == 'span':
-            parent.content[i:i + 1] = simplify_style_span(span)
+    return doc.replace('span', simplify_style_span)
 
 @InPlaceFixup
 def fixup_lang_grammar_pre(doc, docx):
