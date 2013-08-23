@@ -623,11 +623,14 @@ def fixup_lists(doc, docx):
                     i = len(current.content)
                     formatters = [str, int_to_lower_letter, int_to_lower_roman]
                     marker_formatter = formatters[depth % 3]
-                    # Bizarrely, there is no dot after lowercase-letter markers at nesting depth 4.
-                    html_marker_str = marker_formatter(i) + ('.' if depth != 4 else '') + '\t'
+                    html_marker_str = marker_formatter(i) + '.\t'
                     if html_marker_str != marker_str:
-                        warn("Word marker is {!r}, HTML will show {!r}".format(marker_str, html_marker_str))
-                        print(li)
+                        # OK, we should warn about this.
+                        # ...but until https://bugs.ecmascript.org/show_bug.cgi?id=1808
+                        # is fixed it is just too noisy to warn on every case.
+                        if html_marker_str.strip() != marker_str.strip() + ".":
+                            warn("Word marker is {!r}, HTML will show {!r}".format(marker_str, html_marker_str))
+                            print(li)
 
         return [body.with_content(result)]
 
@@ -1998,15 +2001,12 @@ def fixup_links(doc, docx):
                                        "{} Objects",
                                        "The {} Constructor")):
                     # Kill this as an algorithm name; we shouldn't link it.
-                    print("{}: superceded by previous section".format(alg))
                     algorithm_name_to_section[alg] = None
                 elif alg in algorithm_name_to_section:
                     # Mark as a duplicate. (Don't delete the entry; that would
                     # be a bug if there are 3, 5, 7 sections with this name.)
-                    print("{}: duplicate!".format(alg))
                     algorithm_name_to_section[alg] = None
                 else:
-                    print("{} => {}".format(alg, sec_id))
                     algorithm_name_to_section[alg] = sec_id
             sections_by_title[title] = sec_id
 
