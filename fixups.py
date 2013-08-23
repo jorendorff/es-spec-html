@@ -561,10 +561,6 @@ def fixup_lists(doc, docx):
                 margin_str = p.style['-ooxml-indentation']
                 if margin_str.endswith('pt'):
                     margin = float(margin_str[:-2])
-
-                    # work around https://bugs.ecmascript.org/show_bug.cgi?id=1713
-                    if margin < 0:
-                        margin = 0
                 else:
                     assert margin_str == '0' and margin == 0.0
 
