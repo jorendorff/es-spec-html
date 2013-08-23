@@ -458,22 +458,27 @@ class Document:
     def get_abstract_num_id_and_levels(self, numId, level_limit):
         num = self.numbering.num[numId]
         abstract_num_id = num.abstract_num_id
-        abstract_num = self.numbering.abstract_num[abstract_num_id]
         ov = num.overrides
-        levels = []
+        levels = self.get_num_levels(abstract_num_id, level_limit)
         for i in range(0, level_limit + 1):
             if i < len(ov) and ov[i] is not None:
-                level = ov[i]
-            elif isinstance(abstract_num, str):
+                levels[i] = ov[i]
+        return abstract_num_id, levels
+
+    def get_num_levels(self, abstract_num_id, level_limit):
+        abstract_num = self.numbering.abstract_num[abstract_num_id]
+        levels = []
+        for i in range(0, level_limit + 1):
+            if isinstance(abstract_num, str):
                 # i'm sorry mario but the princess
                 real_abstract_num = self.numbering.style_links[abstract_num]
-                _, base_levels = self.get_abstract_num_id_and_levels(real_abstract_num, i)
+                base_levels = self.get_num_levels(real_abstract_num, i)
                 level = base_levels[i]
             else:
                 assert isinstance(abstract_num, list)
                 level = abstract_num[i]
             levels.append(level)
-        return abstract_num_id, levels
+        return levels
 
     def get_list_style_at_level(self, numId, ilvl):
         """ Returns a Lvl object; its .full_style attribute is a CSS dictionary. """
