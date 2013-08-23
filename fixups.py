@@ -1261,27 +1261,6 @@ def map_section(doc, title, fixup):
     return result
 
 @Fixup
-def fixup_lang_15_9_1_8(doc, docx):
-    """ Fix a typo in the heading for section 15.9.1.8. """
-
-    wrong_title = "15.9.1.8\tDaylight Saving Time Adjustment"
-
-    def fix_section(sect):
-        heading = sect.content[0]
-        assert ht_name_is(heading, 'h1')
-        return sect.with_content([fix_heading(heading)] + sect.content[1:])
-
-    def fix_heading(heading):
-        [secnum, title] = heading.content
-        assert ht_name_is(secnum, 'span')
-        assert secnum.attrs.get('class') == 'secnum'
-        assert title.strip() == wrong_title
-        fixed_title = title.replace('15.9.1.8\t', '')
-        return heading.with_content([secnum, fixed_title])
-
-    return map_section(doc, wrong_title, fix_section)
-
-@Fixup
 def fixup_lang_15_12_3(doc, docx):
     """ Convert some paragraphs in section 15.12.3 of the Language specification into tables. """
     def is_target(e):
@@ -2034,7 +2013,8 @@ def fixup_links(doc, docx):
             alg = title_as_algorithm_name(title, sec_id)
             if alg is not None:
                 if any(pattern.format(alg) in sections_by_title
-                       for pattern in ("{} Object Structure" ,
+                       for pattern in ("{}",
+                                       "{} Object Structure" ,
                                        "{} Constructors",
                                        "{} Objects",
                                        "The {} Constructor")):
@@ -2637,7 +2617,6 @@ def get_fixups(docx):
     yield fixup_pre
     yield fixup_notes
     if spec_is_lang(docx):
-        yield fixup_lang_15_9_1_8
         yield fixup_lang_15_12_3
     yield fixup_list_paragraphs
     if spec_is_lang(docx):
