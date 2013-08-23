@@ -1990,6 +1990,35 @@ def fixup_intl_insert_ids(doc, docx):
 
 @InPlaceFixup
 def fixup_links(doc, docx):
+    algorithm_name_re = re.compile(r'''(?x)
+        ^(
+            %?[A-Z][A-Za-z0-9.%]{3,}
+            (?: \s* \[ \s* @@[A-Za-z0-9.%]* \s* \]
+              | \s* \[\[ \s* [A-Za-z0-9.%]* \s* \]\] )?
+        )
+        :?   # Ignore stray colon in a few headings
+        (?:
+            # Arguments (or something else in parentheses); or "Abstract Operation"; or both.
+            (?: \s* \( .* \) )? \s* Abstract \s+ Operation \s*
+            | \s* \( .* \)
+        )
+        $
+    ''')
+
+    def title_as_algorithm_name(title, sec_id):
+        if sec_id.startswith('#sec-15.10.2.'):
+            # This is ClassAtom or the name of some other nonterminal.
+            # Not an algorithm or builtin-method name. Skip it for now.
+            return None
+
+        m = algorithm_name_re.match(title)
+        if m is not None:
+            return m.group(1)
+        # Also allow matches like "ToPrimitive".
+        if re.match(r'[A-Z][a-z]+[A-Z][A-Za-z0-9]+', title) is not None:
+            return title
+
+    algorithm_name_to_section = {}
     sections_by_title = {}
     for sect in findall(doc, 'section'):
         if 'id' in sect.attrs and sect.content and sect.content[0].name == 'h1':
@@ -2000,7 +2029,26 @@ def fixup_links(doc, docx):
                 del heading_content[0]
             title = ht_text(heading_content).strip()
             title = " ".join(title.split())
-            sections_by_title[title] = '#' + sect.attrs['id']
+            sec_id = '#' + sect.attrs['id']
+            sections_by_title[title] = sec_id
+            alg = title_as_algorithm_name(title, sec_id)
+            if alg is not None:
+                if any(pattern.format(alg) in sections_by_title
+                       for pattern in ("{} Object Structure" ,
+                                       "{} Constructors",
+                                       "{} Objects",
+                                       "The {} Constructor")):
+                    # Kill this as an algorithm name; we shouldn't link it.
+                    print("{}: superceded by previous section".format(alg))
+                    algorithm_name_to_section[alg] = None
+                elif alg in algorithm_name_to_section:
+                    # Mark as a duplicate. (Don't delete the entry; that would
+                    # be a bug if there are 3, 5, 7 sections with this name.)
+                    print("{}: duplicate!".format(alg))
+                    algorithm_name_to_section[alg] = None
+                else:
+                    print("{} => {}".format(alg, sec_id))
+                    algorithm_name_to_section[alg] = sec_id
 
     fallback_section_titles = {
         "The List and Record Specification Type": "The List Specification Type",
@@ -2021,6 +2069,31 @@ def fixup_links(doc, docx):
         s = source[5:] if source.startswith('#sec-') else source
         t = target[5:] if target.startswith('#sec-') else target
         return linkability_overrides.get((s, t), source != target)
+
+    def has_word_breaks(s, i, text):
+        # Check for word break before
+        if i == 0:
+            pass
+        elif s[i-1].isalnum() or s[i-1] in '%@':
+            return False
+
+        # Check for word break after
+        j = i + len(text)
+        if j == len(s):
+            pass
+        elif text.endswith('('):
+            pass
+        elif s[j].isalnum():
+            return False
+        elif s[j:j + 2] == "]]":
+            # don't treat the HasInstance in [[HasInstance]] as a separate word
+            return False
+        elif s[j:j + 1] == '.' and s[j + 1:j + 2].isalpha():
+            # don't treat the foo in foo.bar as a separate word
+            return False
+
+        return True
+
 
     if version_is_5(docx):
         globalEnv = "The Global Environment"
@@ -2065,103 +2138,28 @@ def fixup_links(doc, docx):
         ("unresolvable Reference", "The Reference Specification Type"),
         ("Unresolvable Reference", "The Reference Specification Type"),
         ("IsSuperReference", "The Reference Specification Type"),
-        ("GetValue", "GetValue (V)"),
-        ("PutValue", "PutValue (V, W)"),
-        ("GetThisValue", "GetThisValue (V)"),
         ("Property Descriptor", "The Property Descriptor Specification Type"),
         ("property key value", "The Object Type"),
         ("property key", "The Object Type"),
-        ("IsAccessorDescriptor", "IsAccessorDescriptor ( Desc )"),
-        ("IsDataDescriptor", "IsDataDescriptor ( Desc )"),
-        ("IsGenericDescriptor", "IsGenericDescriptor ( Desc )"),
-        ("FromPropertyDescriptor", "FromPropertyDescriptor ( Desc )"),
-        ("ToPropertyDescriptor", "ToPropertyDescriptor ( Obj )"),
-        ("CompletePropertyDescriptor", "CompletePropertyDescriptor ( Desc, LikeDesc )"),
         ("internal data property", "Object Internal Methods and Internal Data Properties"),
-        #("[[GetInheritance]]", "[[GetInheritance]] ( )"),
-        #("[[SetInheritance]]", "[[SetInheritance]] (V)"),
-        #("[[IsExtensible]]", "[[IsExtensible]] ( )"),
-        #("[[PreventExtensions]]", "[[PreventExtensions]] ( )"),
-        #("[[HasOwnProperty]]", "[[HasOwnProperty]] (P)"),
-        #("[[GetOwnProperty]]", "[[GetOwnProperty]] (P)"),
-        ("OrdinaryGetOwnProperty", "OrdinaryGetOwnProperty (O, P)"),
-        #("[[DefineOwnProperty]]", "[[DefineOwnProperty]] (P, Desc)"),
-        ("OrdinaryDefineOwnProperty", "OrdinaryDefineOwnProperty (O, P, Desc)"),
-        ("IsCompatiblePropertyDescriptor", "IsCompatiblePropertyDescriptor (Extensible, Desc, Current)"),
-        ("ValidateAndApplyPropertyDescriptor", "ValidateAndApplyPropertyDescriptor (O, P, extensible, Desc, current)"),
-        #("[[HasProperty]]", "[[HasProperty]](P)"),
-        #("[[Get]]", "[[Get]] (P, Receiver)"),
-        #("[[Set]]", "[[Set]] ( P, V, Receiver)"),
-        #("[[Invoke]]", "[[Invoke]] (P, ArgumentsList, Receiver)"),
-        #("[[Delete]]", "[[Delete]] (P)"),
-        #("[[Enumerate]]", "[[Enumerate]] ()"),
-        #("[[OwnPropertyKeys]]", "[[OwnPropertyKeys]] ( )"),
-        ("ObjectCreate", "ObjectCreate(proto, internalDataList) Abstract Operation"),
         ("ordinary Function object", "Ordinary Function Objects"),
         ("ordinary function object", "Ordinary Function Objects"),
-        #("[[Call]]", "[[Call]] ( thisArgument, argumentsList)"),
-        #("[[Construct]]", "[[Construct]] ( argumentsList)"),
-        ("OrdinaryConstruct", "OrdinaryConstruct (F, argumentsList)"),
-        ("FunctionAllocate", "FunctionAllocate Abstract Operation"),
-        ("FunctionInitialise", "FunctionInitialise Abstract Operation"),
-        ("FunctionCreate", "FunctionCreate Abstract Operation"),
-        ("GeneratorFunctionCreate", "GeneratorFunctionCreate Abstract Operation"),
-        ("AddRestrictedFunctionProperties", "AddRestrictedFunctionProperties Abstract Operation"),
-        ("MakeConstructor", "MakeConstructor Abstract Operation"),
         ("Bound Function", "Bound Function Exotic Objects"),
         ("bound function", "Bound Function Exotic Objects"),
         ("[[BoundTargetFunction]]", "Bound Function Exotic Objects"),
         ("[[BoundThis]]", "Bound Function Exotic Objects"),
         ("[[BoundArguments]]", "Bound Function Exotic Objects"),
-        ("BoundFunctionCreate", "BoundFunctionCreate Abstract Operation"),
         ("Array exotic object", "Array Exotic Objects"),
-        ("ArrayCreate", "ArrayCreate Abstract Operation"),
-        ("ArraySetLength", "ArraySetLength Abstract Operation"),
         ("String exotic object", "String Exotic Objects"),
-        ("StringCreate", "StringCreate Abstract Operation"),
         ("Symbol exotic objects", "Symbol Exotic Objects"),
         ("exotic arguments object", "Exotic Arguments Objects"),
-        ("IntegerIndexedObjectCreate", "IntegerIndexedObjectCreate Abstract Operation"),
-        ("IntegerIndexedElementGet", "IntegerIndexedElementGet ( O, index ) Abstract Operation"),
-        ("IntegerIndexedElementSet", "IntegerIndexedElementSet ( O, index, value ) Abstract Operation"),
-        ("CreateBuiltinFunction", "CreateBuiltinFunction Abstract Operation"),
 
         # clause 9
-        ("ToPrimitive", "ToPrimitive"),
-        ("ToBoolean", "ToBoolean"),
-        ("ToNumber", "ToNumber"),
-        ("ToInteger", "ToInteger"),
-        ("ToInt32", "ToInt32: (Signed 32 Bit Integer)"),
-        ("ToUint32", "ToUint32: (Unsigned 32 Bit Integer)"),
-        ("ToUint16", "ToUint16: (Unsigned 16 Bit Integer)"),
-        ("ToString", "ToString"),
-        ("ToObject", "ToObject"),
-        ("ToPropertyKey", "ToPropertyKey"),
-        ("CheckObjectCoercible", "CheckObjectCoercible"),
-        ("IsCallable", "IsCallable"),
         ("SameValue (according to 9.12)", "SameValue(x, y)"),
-        ("SameValue", "SameValue(x, y)"),
         ("the SameValue algorithm (9.12)", "SameValue(x, y)"),
         ("the SameValue Algorithm (9.12)", "SameValue(x, y)"),
-        ("SameValueZero", "SameValueZero(x, y)"),
-        ("IsConstructor", "IsConstructor"),
-        ("IsPropertyKey", "IsPropertyKey"),
-        ("IsExtensible", "IsExtensible (O)"),
         ("Get(", "Get (O, P)"),
         ("Put(", "Put (O, P, V, Throw)"),
-        ("CreateOwnDataProperty", "CreateOwnDataProperty (O, P, V)"),
-        ("DefinePropertyOrThrow", "DefinePropertyOrThrow (O, P, desc)"),
-        ("DeletePropertyOrThrow", "DeletePropertyOrThrow (O, P)"),
-        ("HasProperty", "HasProperty (O, P)"),
-        ("GetMethod", "GetMethod (O, P)"),
-        ("Invoke", "Invoke(O,P, [args])"),
-        ("SetIntegrityLevel", "SetIntegrityLevel (O, level)"),
-        ("TestIntegrityLevel", "TestIntegrityLevel (O, level)"),
-        ("CreateArrayFromList", "CreateArrayFromList (elements)"),
-        ("CreateListFromArrayLike", "CreateListFromArrayLike (obj)"),
-        ("OrdinaryHasInstance", "OrdinaryHasInstance (C, O)"),
-        ("GetPrototypeFromConstructor", "GetPrototypeFromConstructor ( constructor, intrinsicDefaultProto )"),
-        ("OrdinaryCreateFromConstructor", "OrdinaryCreateFromConstructor ( constructor, intrinsicDefaultProto, internalDataList )"),
 
         # 10.1
         ("strict mode code (see 10.1.1)", "Strict Mode Code"),
@@ -2180,9 +2178,6 @@ def fixup_links(doc, docx):
         ("Declarative Environment Record", "Environment Records"),
         ("Object Environment Record", "Environment Records"),
         ("object environment record", "Environment Records"),
-        ("GetIdentifierReference", "GetIdentifierReference (lex, name, strict)"),
-        ("NewDeclarativeEnvironment", "NewDeclarativeEnvironment (E)"),
-        ("NewObjectEnvironment", "NewObjectEnvironment (O, E)"),
         ("the global environment", globalEnv),
         ("the Global Environment", globalEnv),
 
@@ -2232,53 +2227,13 @@ def fixup_links(doc, docx):
         ("msFromTime", "Hours, Minutes, Second, and Milliseconds"),
         ("msPerSecond", "Hours, Minutes, Second, and Milliseconds"),
         ("msPerMinute", "Hours, Minutes, Second, and Milliseconds"),
-        ("msPerHour", "Hours, Minutes, Second, and Milliseconds"),
-        ("MakeTime", "MakeTime (hour, min, sec, ms)"),
-        ("MakeDay", "MakeDay (year, month, date)"),
-        ("MakeDate", "MakeDate (day, time)"),
-        ("TimeClip", "TimeClip (time)")
+        ("msPerHour", "Hours, Minutes, Second, and Milliseconds")
     ]
 
     specific_link_source_data_intl = [
         # clause 5
         ("List", "Notational Conventions"),
-        ("Record", "Notational Conventions"),
-
-        # clause 6
-        ("IsStructurallyValidLanguageTag", "IsStructurallyValidLanguageTag (locale)"),
-        ("CanonicalizeLanguageTag", "CanonicalizeLanguageTag (locale)"),
-        ("DefaultLocale", "DefaultLocale ()"),
-        ("IsWellFormedCurrencyCode", "IsWellFormedCurrencyCode (currency)"),
-
-        # clause 9
-        ("CanonicalizeLocaleList", "CanonicalizeLocaleList (locales)"),
-        ("BestAvailableLocale", "BestAvailableLocale (availableLocales, locale)"),
-        ("LookupMatcher", "LookupMatcher (availableLocales, requestedLocales)"),
-        ("BestFitMatcher", "BestFitMatcher (availableLocales, requestedLocales)"),
-        ("ResolveLocale", "ResolveLocale (availableLocales, requestedLocales, options, relevantExtensionKeys, localeData)"),
-        ("LookupSupportedLocales", "LookupSupportedLocales (availableLocales, requestedLocales)"),
-        ("BestFitSupportedLocales", "BestFitSupportedLocales (availableLocales, requestedLocales)"),
-        ("SupportedLocales", "SupportedLocales (availableLocales, requestedLocales, options)"),
-        ("GetOption", "GetOption (options, property, type, values, fallback)"),
-        ("GetNumberOption", "GetNumberOption (options, property, minimum, maximum, fallback)"),
-
-        # clause 10
-        ("InitializeCollator", "InitializeCollator (collator, locales, options)"),
-        ("CompareStrings", "CompareStrings"),
-
-        # clause 11
-        ("InitializeNumberFormat", "InitializeNumberFormat (numberFormat, locales, options)"),
-        ("FormatNumber", "FormatNumber"),
-        ("ToRawPrecision", "ToRawPrecision"),
-        ("ToRawFixed", "ToRawFixed"),
-
-        # clause 12
-        ("InitializeDateTimeFormat", "InitializeDateTimeFormat (dateTimeFormat, locales, options)"),
-        ("ToDateTimeOptions", "ToDateTimeOptions"),
-        ("BasicFormatMatcher", "BasicFormatMatcher"),
-        ("BestFitFormatMatcher", "BestFitFormatMatcher"),
-        ("FormatDateTime", "FormatDateTime"),
-        ("ToLocalTime", "ToLocalTime"),
+        ("Record", "Notational Conventions")
     ]
 
     non_section_ids_lang = {
@@ -2298,17 +2253,25 @@ def fixup_links(doc, docx):
         "introduction of clause 15": "http://ecma-international.org/ecma-262/5.1/#sec-15",
     }
 
-    # Build specific_links from specific_link_source_data, sections_by_title,
-    # and fallback_section_titles.
+    # Build specific_links from algorithm_name_to_section,
+    # specific_link_source_data, sections_by_title, and
+    # fallback_section_titles. This occurs in four easy steps.
+    #
+    # 1: Figure out which source data to use.
     if spec_is_lang(docx):
         specific_link_source_data = specific_link_source_data_lang
         non_section_ids = non_section_ids_lang
     else:
         specific_link_source_data = specific_link_source_data_intl
         non_section_ids = non_section_ids_intl
+
+    # 2: Create some data structures.
+    specific_link_dict = dict(specific_link_source_data)
     non_section_id_hrefs = []
     for id in non_section_ids:
         non_section_id_hrefs.append(non_section_ids[id])
+
+    # 3. Build specific_links using the specific_link_source_data.
     specific_links = []
     for text, title in specific_link_source_data:
         if title in sections_by_title:
@@ -2323,6 +2286,18 @@ def fixup_links(doc, docx):
             if not sec.startswith('http'):
                 sec = '#' + sec
         specific_links.append((text, sec))
+
+    # 4. Add additional specific_links based on algorithm names that appear in
+    # section headings.
+    algorithm_pairs = sorted(algorithm_name_to_section.items(),
+                             key=lambda pair: (-len(pair[0]), pair[0]))
+    for alg, sec_id in algorithm_pairs:
+        if sec_id is not None:
+            if alg in specific_link_dict:
+                warn("section {} {} is also the target of a specific_link entry ({!r}: {!r})".format(
+                    sec_id, alg, alg, specific_link_dict[alg]))
+            else:
+                specific_links.append((alg, sec_id))
 
     # Assert that the specific_links above make sense; that is, that each link
     # with a "(7.9)" or "(see 7.9)" in it actually points to the named section.
@@ -2402,11 +2377,7 @@ def fixup_links(doc, docx):
             i = s.find(text)
             if (i != -1
                 and can_link(current_section, target)  # don't link sections to themselves
-                and (i == 0 or not (s[i-1].isalnum() or s[i-1] == '@'))  # check for word break before
-                and s[i + len(text):i + len(text) + 2] != "]]"  # don't link the HasInstance in [[HasInstance]]
-                and (text.endswith('(')
-                     or i + len(text) == len(s)
-                     or not s[i + len(text)].isalnum())  # and after
+                and has_word_breaks(s, i, text)
                 and (best is None or i < best[0])):
                 # New best hit.
                 n = len(text)
