@@ -4401,13 +4401,14 @@
 
       <ul>
         <li>
-          <p>A <i>data property</i> associates a key value with an ECMAScript language value and a set of Boolean attributes.</p>
+          <p>A <i>data property</i> associates a key value with an <a href="#sec-8.1">ECMAScript language value</a> and a set of
+          Boolean attributes.</p>
         </li>
 
         <li>
           <p>A <i>accessor property</i> associates a key value with one or two accessor functions, and a set of Boolean
-          attributes. The accessor functions are used to store or retrieve an ECMAScript language value that is associated with
-          the property.</p>
+          attributes. The accessor functions are used to store or retrieve an <a href="#sec-8.1">ECMAScript language value</a>
+          that is associated with the property.</p>
         </li>
       </ul>
 
@@ -4441,7 +4442,7 @@
             </tr>
             <tr>
               <td style="border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black">[[Value]]</td>
-              <td style="border-bottom: 1px solid black; border-right: 1px solid black">Any ECMAScript language type</td>
+              <td style="border-bottom: 1px solid black; border-right: 1px solid black">Any <a href="#sec-8.1">ECMAScript language type</a></td>
               <td style="border-bottom: 1px solid black; border-right: 1px solid black">The value retrieved by a get access of the property.</td>
             </tr>
             <tr>
@@ -4550,11 +4551,11 @@
         thrown.</p>
 
         <p>Internal data properties correspond to internal state that is associated with objects and used by various ECMAScript
-        specification algorithms.  Depending upon the specific internal data property such state may consist of values of any
-        ECMAScript language type or of specific ECMA specification type values. Unless explicitly specified otherwise, internal
-        data properties are allocated as part of the process of creating an ECMAScript object and may not be dynamically added to
-        ECMAScript objects. Unless specified otherwise, the initial value of an internal data property is the value <span
-        class="value">undefined</span>.</p>
+        specification algorithms.  Depending upon the specific internal data property such state may consist of values of any <a
+        href="#sec-8.1">ECMAScript language type</a> or of specific ECMA specification type values. Unless explicitly specified
+        otherwise, internal data properties are allocated as part of the process of creating an ECMAScript object and may not be
+        dynamically added to ECMAScript objects. Unless specified otherwise, the initial value of an internal data property is the
+        value <span class="value">undefined</span>.</p>
 
         <p><a href="#table-8">Table 8</a> summarises the <i>essential internal methods</i> used by this specification that are
         applicable to all ECMAScript objects. Every object must have algorithms for all of the essential internal methods.
@@ -4566,9 +4567,9 @@
         parameter value. If an internal method  explicitly returns a value, its parameter list is followed by the symbol
         &ldquo;&rarr;&rdquo; and the type name of the returned value. The type names used in signatures refer to the types defined
         in <a href="#sec-8">Clause 8</a> augmented by the following additional names. &ldquo;<i>any</i>&rdquo; means the value may
-        be any ECMAScript language type. An internal method implicitly returns a <a href="#sec-8.2.3">Completion Record</a> as
-        described in 8.8. In addition to its parameters, an internal method always has access to the object upon which it is
-        invoked as a method.</p>
+        be any <a href="#sec-8.1">ECMAScript language type</a>. An internal method implicitly returns a <a
+        href="#sec-8.2.3">Completion Record</a> as described in 8.8. In addition to its parameters, an internal method always has
+        access to the object upon which it is invoked as a method.</p>
 
         <figure>
           <figcaption><span id="table-8">Table 8</span> &mdash; Essential Internal Methods</figcaption>
@@ -5219,10 +5220,11 @@
     <p>A specification type corresponds to meta-values that are used within algorithms to describe the semantics of ECMAScript
     language constructs and ECMAScript language types. The specification types are <a href="#sec-8.2.4">Reference</a>, <a
     href="#sec-8.2.2">List</a>, <a href="#sec-8.2.3">Completion</a>, <a href="#sec-8.2.5">Property Descriptor</a>, <a
-    href="#sec-10.2">Lexical Environment</a>, <a href="#sec-10.2.1">Environment Record</a>, and Data Block. Specification type
-    values are specification artefacts that do not necessarily correspond to any specific entity within an ECMAScript
-    implementation. Specification type values may be used to describe intermediate results of ECMAScript expression evaluation but
-    such values cannot be stored as properties of objects or values of ECMAScript language variables.</p>
+    href="#sec-10.2">Lexical Environment</a>, <a href="#sec-10.2.1">Environment Record</a>, and <a href="#sec-8.2.1">Data
+    Block</a>. Specification type values are specification artefacts that do not necessarily correspond to any specific entity
+    within an ECMAScript implementation. Specification type values may be used to describe intermediate results of ECMAScript
+    expression evaluation but such values cannot be stored as properties of objects or values of ECMAScript language
+    variables.</p>
 
     <section id="sec-8.2.1">
       <h1><span class="secnum"><a href="#sec-8.2.1" title="link to this section">8.2.1</a></span> Data Blocks</h1>
@@ -5232,7 +5234,8 @@
       with the rest of this spec.</i></b></p>
 
       <p>This spec introduces a new, spec-internal block datatype, intuitively representing a contiguously allocated block of
-      binary data. Blocks are not ECMAScript language values and appear only in the program store (aka heap).</p>
+      binary data. Blocks are not <a href="#sec-8.1">ECMAScript language values</a> and appear only in the program store (aka
+      heap).</p>
 
       <p>A block is one of:</p>
 
@@ -5323,7 +5326,7 @@
           </tr>
           <tr>
             <td>[[value]]</td>
-            <td>any ECMAScript language value or <b>empty</b></td>
+            <td>any <a href="#sec-8.1">ECMAScript language value</a> or <b>empty</b></td>
             <td>The value that was produced.</td>
           </tr>
           <tr>
@@ -5856,8 +5859,8 @@
     to <b>false</b> it may not be subsequently changed to <b>true</b>.</p>
 
     <p>In the following algorithm descriptions, assume <var>O</var> is an ordinary ECMAScript object, <var>P</var> is a <a
-    href="#sec-8.1.6">property key value</a>, <var>V</var>  is any ECMAScript language value, and <span class="nt">Desc</span> is
-    a Property Description record.</p>
+    href="#sec-8.1.6">property key value</a>, <var>V</var>  is any <a href="#sec-8.1">ECMAScript language value</a>, and <span
+    class="nt">Desc</span> is a Property Description record.</p>
 
     <section id="sec-8.3.1">
       <h1><span class="secnum"><a href="#sec-8.3.1" title="link to this section">8.3.1</a></span> [[GetInheritance]] ( )</h1>
@@ -6184,8 +6187,8 @@
     <section id="sec-8.3.9">
       <h1><span class="secnum"><a href="#sec-8.3.9" title="link to this section">8.3.9</a></span> [[Get]] (P, Receiver)</h1>
 
-      <p>When the [[Get]] internal method of <var>O</var> is called with <a href="#sec-8.1.6">property key</a> <var>P</var> and
-      ECMAScript language value <span class="nt">Receiver</span> the following steps are taken:</p>
+      <p>When the [[Get]] internal method of <var>O</var> is called with <a href="#sec-8.1.6">property key</a> <var>P</var> and <a
+      href="#sec-8.1">ECMAScript language value</a> <span class="nt">Receiver</span> the following steps are taken:</p>
 
       <ol class="proc">
         <li><a href="#sec-5.2">Assert</a>: <a href="#sec-9.2.6">IsPropertyKey</a>(<i>P</i>) is <b>true</b>.</li>
@@ -6215,7 +6218,8 @@
           Receiver)</h1>
 
       <p>When the [[Set]] internal method of <var>O</var> is called with <a href="#sec-8.1.6">property key</a> <var>P</var>, value
-      <var>V</var>, and ECMAScript language value <span class="nt">Receiver</span>, the following steps are taken:</p>
+      <var>V</var>, and <a href="#sec-8.1">ECMAScript language value</a> <span class="nt">Receiver</span>, the following steps are
+      taken:</p>
 
       <ol class="proc">
         <li><a href="#sec-5.2">Assert</a>: <a href="#sec-9.2.6">IsPropertyKey</a>(<i>P</i>) is <b>true</b>.</li>
@@ -6281,8 +6285,8 @@
           Receiver)</h1>
 
       <p>When the [[Invoke]] internal method of <var>O</var> is called with <a href="#sec-8.1.6">property key</a> <span
-      style="font-family: Times New Roman"><i>P</i>,  <a href="#sec-8.2.2">List</a> <i>ArgumentsList</i>,</span> and ECMAScript
-      language value <span class="nt">Receiver</span> the following steps are taken:</p>
+      style="font-family: Times New Roman"><i>P</i>,  <a href="#sec-8.2.2">List</a> <i>ArgumentsList</i>,</span> and <a
+      href="#sec-8.1">ECMAScript language value</a> <span class="nt">Receiver</span> the following steps are taken:</p>
 
       <ol class="proc">
         <li><a href="#sec-5.2">Assert</a>: <a href="#sec-9.2.6">IsPropertyKey</a>(<i>P</i>) is <b>true</b>.</li>
@@ -6494,8 +6498,8 @@
             argumentsList)</h1>
 
         <p>The [[Call]] internal method for an <a href="#sec-8.3.16">ordinary Function object</a> <var>F</var> is called with
-        parameters <var>thisArgument</var> and <var>argumentsList</var>, a <a href="#sec-8.2.2">List</a> of ECMAScript language
-        values. The following steps are taken:</p>
+        parameters <var>thisArgument</var> and <var>argumentsList</var>, a <a href="#sec-8.2.2">List</a> of <a
+        href="#sec-8.1">ECMAScript language values</a>. The following steps are taken:</p>
 
         <ol class="proc">
           <li>If <i>F</i>&rsquo;s [[Code]] <a href="#sec-8.1.6.2">internal data property</a> has the value <b>undefined</b>, then
@@ -6571,8 +6575,8 @@
             argumentsList)</h1>
 
         <p>The [[Construct]] internal method for an <a href="#sec-8.3.16">ordinary Function object</a> <var>F</var> is called with
-        a single parameter <var>argumentsList</var> which is a possibly empty <a href="#sec-8.2.2">List</a> of ECMAScript language
-        values. The following steps are taken:</p>
+        a single parameter <var>argumentsList</var> which is a possibly empty <a href="#sec-8.2.2">List</a> of <a
+        href="#sec-8.1">ECMAScript language values</a>. The following steps are taken:</p>
 
         <ol class="proc">
           <li>Return the result of <a href="#sec-8.3.16.2.1">OrdinaryConstruct</a>(<i>F</i>, <i>argumentsList</i>).</li>
@@ -6618,8 +6622,8 @@
             Receiver)</h1>
 
         <p>When the [[Get]] internal method of <a href="#sec-8.3.16">ordinary function object</a> <var>F</var> is called with <a
-        href="#sec-8.1.6">property key</a> <var>P</var> and ECMAScript language value <span class="nt">Receiver</span> the
-        following steps are taken:</p>
+        href="#sec-8.1.6">property key</a> <var>P</var> and <a href="#sec-8.1">ECMAScript language value</a> <span
+        class="nt">Receiver</span> the following steps are taken:</p>
 
         <ol class="proc">
           <li>Let <i>v</i> be the result of calling the default ordinary object [[Get]] internal method (<a
@@ -6926,7 +6930,7 @@
 
         <p>When the [[Call]] internal method of an exotic <a href="#sec-8.4.1">bound function</a> object, <var>F</var>, which was
         created using the bind function is called with parameters <var>thisArgument</var> and <var>argumentsList</var>, a <a
-        href="#sec-8.2.2">List</a> of ECMAScript language values, the following steps are taken:</p>
+        href="#sec-8.2.2">List</a> of <a href="#sec-8.1">ECMAScript language values</a>, the following steps are taken:</p>
 
         <ol class="proc">
           <li>Let <i>boundArgs</i> be the value of <i>F&rsquo;s</i> <a href="#sec-8.4.1">[[BoundArguments]]</a> <a
@@ -7423,7 +7427,8 @@
         <h1><span class="secnum"><a href="#sec-8.4.4.9" title="link to this section">8.4.4.9</a></span> [[Get]] (P, Receiver)</h1>
 
         <p>When the [[Get]] internal method of an exotic Symbol object <var>O</var> is called with <a href="#sec-8.1.6">property
-        key</a> <var>P</var> and ECMAScript language value <span class="nt">Receiver</span> the following steps are taken:</p>
+        key</a> <var>P</var> and <a href="#sec-8.1">ECMAScript language value</a> <span class="nt">Receiver</span> the following
+        steps are taken:</p>
 
         <ol class="proc">
           <li><a href="#sec-5.2">Assert</a>: <a href="#sec-9.2.6">IsPropertyKey</a>(<i>P</i>) is <b>true</b>.</li>
@@ -7436,8 +7441,8 @@
             Receiver)</h1>
 
         <p>When the [[Set]] internal method of an exotic Symbol object <var>O</var> is called with <a href="#sec-8.1.6">property
-        key</a> <var>P</var>, value <var>V</var>, and ECMAScript language value <span class="nt">Receiver</span>, the following
-        steps are taken:</p>
+        key</a> <var>P</var>, value <var>V</var>, and <a href="#sec-8.1">ECMAScript language value</a> <span
+        class="nt">Receiver</span>, the following steps are taken:</p>
 
         <ol class="proc">
           <li>Return <b>false</b>.</li>
@@ -7450,8 +7455,8 @@
 
         <p>When the [[Invoke]] internal method of an exotic Symbol object <var>O</var> is called with <a
         href="#sec-8.1.6">property key</a> <span style="font-family: Times New Roman"><i>P</i>,  <a href="#sec-8.2.2">List</a>
-        <i>ArgumentsList</i>,</span> and ECMAScript language value <span class="nt">Receiver</span> the following steps are
-        taken:</p>
+        <i>ArgumentsList</i>,</span> and <a href="#sec-8.1">ECMAScript language value</a> <span class="nt">Receiver</span> the
+        following steps are taken:</p>
 
         <ol class="proc">
           <li>Throw a <b>TypeError</b> exception..</li>
@@ -7662,8 +7667,8 @@
         <h1><span class="secnum"><a href="#sec-8.4.6.4" title="link to this section">8.4.6.4</a></span> [[Get]] (P, Receiver)</h1>
 
         <p>When the [[Get]] internal method of an Integer Indexed exotic object <var>O</var> is called with <a
-        href="#sec-8.1.6">property key</a> <var>P</var> and ECMAScript language value <span class="nt">Receiver</span> the
-        following steps are taken:</p>
+        href="#sec-8.1.6">property key</a> <var>P</var> and <a href="#sec-8.1">ECMAScript language value</a> <span
+        class="nt">Receiver</span> the following steps are taken:</p>
 
         <ol class="proc">
           <li><a href="#sec-5.2">Assert</a>: <a href="#sec-9.2.6">IsPropertyKey</a>(<i>P</i>) is <b>true</b>.</li>
@@ -7690,8 +7695,8 @@
             Receiver)</h1>
 
         <p>When the [[Set]] internal method of an Integer Indexed exotic object <var>O</var> is called with <a
-        href="#sec-8.1.6">property key</a> <var>P</var>, value <var>V</var>, and ECMAScript language value <span
-        class="nt">Receiver</span>, the following steps are taken:</p>
+        href="#sec-8.1.6">property key</a> <var>P</var>, value <var>V</var>, and <a href="#sec-8.1">ECMAScript language value</a>
+        <span class="nt">Receiver</span>, the following steps are taken:</p>
 
         <ol class="proc">
           <li><a href="#sec-5.2">Assert</a>: <a href="#sec-9.2.6">IsPropertyKey</a>(<i>P</i>) is <b>true</b>.</li>
@@ -7869,8 +7874,8 @@
     in the presence of all possible invariant violations.</p>
 
     <p>In the following algorithm descriptions, assume <var>O</var> is an ECMAScript proxy object, <var>P</var> is a <a
-    href="#sec-8.1.6">property key value</a>, <var>V</var> is any ECMAScript language value, <span style="font-family: Times New
-    Roman">Desc</span> is a Property Description record, and <var>B</var> is a Boolean flag.</p>
+    href="#sec-8.1.6">property key value</a>, <var>V</var> is any <a href="#sec-8.1">ECMAScript language value</a>, <span
+    style="font-family: Times New Roman">Desc</span> is a Property Description record, and <var>B</var> is a Boolean flag.</p>
 
     <section id="sec-8.5.1">
       <h1><span class="secnum"><a href="#sec-8.5.1" title="link to this section">8.5.1</a></span> [[GetInheritance]] ( )</h1>
@@ -8361,7 +8366,8 @@
       <h1><span class="secnum"><a href="#sec-8.5.9" title="link to this section">8.5.9</a></span> [[Get]] (P, Receiver)</h1>
 
       <p>When the [[Get]] internal method of an exotic Proxy object <var>O</var> is called with <a href="#sec-8.1.6">property
-      key</a> <var>P</var> and ECMAScript language value <span class="nt">Receiver</span> the following steps are taken:</p>
+      key</a> <var>P</var> and <a href="#sec-8.1">ECMAScript language value</a> <span class="nt">Receiver</span> the following
+      steps are taken:</p>
 
       <ol class="proc">
         <li><a href="#sec-5.2">Assert</a>: <a href="#sec-9.2.6">IsPropertyKey</a>(<i>P</i>) is <b>true</b>.</li>
@@ -8426,8 +8432,8 @@
       <h1><span class="secnum"><a href="#sec-8.5.10" title="link to this section">8.5.10</a></span> [[Set]] ( P, V, Receiver)</h1>
 
       <p>When the [[Set]] internal method of an exotic Proxy object <var>O</var> is called with <a href="#sec-8.1.6">property
-      key</a> <var>P</var>, value <var>V</var>, and ECMAScript language value <span class="nt">Receiver</span>, the following
-      steps are taken:</p>
+      key</a> <var>P</var>, value <var>V</var>, and <a href="#sec-8.1">ECMAScript language value</a> <span
+      class="nt">Receiver</span>, the following steps are taken:</p>
 
       <ol class="proc">
         <li><a href="#sec-5.2">Assert</a>: <a href="#sec-9.2.6">IsPropertyKey</a>(<i>P</i>) is <b>true</b>.</li>
@@ -8494,7 +8500,7 @@
 
       <p>When the [[Invoke]] internal method of an exotic Proxy object <var>O</var> is called with <a href="#sec-8.1.6">property
       key</a> <span style="font-family: Times New Roman"><i>P</i>,  <a href="#sec-8.2.2">List</a> <i>ArgumentsList</i>,</span> and
-      ECMAScript language value <span class="nt">Receiver</span> the following steps are taken:</p>
+      <a href="#sec-8.1">ECMAScript language value</a> <span class="nt">Receiver</span> the following steps are taken:</p>
 
       <ol class="proc">
         <li><a href="#sec-5.2">Assert</a>: <a href="#sec-9.2.6">IsPropertyKey</a>(<i>P</i>) is <b>true</b>..</li>
@@ -8649,7 +8655,8 @@
           argumentsList)</h1>
 
       <p>The [[Call]] internal method of an exotic Proxy object <var>O</var> is called with parameters <var>thisArgument</var> and
-      <var>argumentsList</var>, a <a href="#sec-8.2.2">List</a> of ECMAScript language values. The following steps are taken:</p>
+      <var>argumentsList</var>, a <a href="#sec-8.2.2">List</a> of <a href="#sec-8.1">ECMAScript language values</a>. The
+      following steps are taken:</p>
 
       <ol class="proc">
         <li>Let <i>handler</i> be the value of the [[ProxyHandler]] internal data  property of <i>O</i>.</li>
@@ -8680,8 +8687,8 @@
           Method</h1>
 
       <p>The [[Construct]] internal method of an exotic Proxy object <var>O</var> is called with a single parameter
-      <var>argumentsList</var> which is a possibly empty <a href="#sec-8.2.2">List</a> of ECMAScript language values. The
-      following steps are taken:</p>
+      <var>argumentsList</var> which is a possibly empty <a href="#sec-8.2.2">List</a> of <a href="#sec-8.1">ECMAScript language
+      values</a>. The following steps are taken:</p>
 
       <ol class="proc">
         <li>Let <i>handler</i> be the value of the [[ProxyHandler]] internal data  property of <i>O</i>.</li>
@@ -8732,8 +8739,8 @@
 
     <p>The ECMAScript language implicitly performs automatic type conversion as needed. To clarify the semantics of certain
     constructs it is useful to define a set of conversion abstract operations. The conversion abstract operations are polymorphic;
-    they can accept a value of any ECMAScript language type or of a <a href="#sec-8.2.3">Completion Record</a> value.  But no
-    other specification types are used with these operations.</p>
+    they can accept a value of any <a href="#sec-8.1">ECMAScript language type</a> or of a <a href="#sec-8.2.3">Completion
+    Record</a> value.  But no other specification types are used with these operations.</p>
 
     <section id="sec-9.1.1">
       <h1><span class="secnum"><a href="#sec-9.1.1" title="link to this section">9.1.1</a></span> ToPrimitive</h1>
@@ -8798,8 +8805,8 @@
                 <i>argument</i> as <i>thisArgument</i> and a <a href="#sec-8.2.2">List</a> containing <i>hint</i> as
                 <i>argumentsList</i>.</li>
             <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>result</i>).</li>
-            <li>If <i>result</i> is an ECMAScript language value and <a href="#sec-8">Type</a>(<i>result</i>) is not Object, then
-                return <i>result</i>.</li>
+            <li>If <i>result</i> is an <a href="#sec-8.1">ECMAScript language value</a> and <a
+                href="#sec-8">Type</a>(<i>result</i>) is not Object, then return <i>result</i>.</li>
             <li>Else, throw a <b>TypeError</b> exception.</li>
           </ol>
         </li>
@@ -8833,8 +8840,8 @@
             <li>Let <i>result</i> be the result of calling the [[Call]] internal method of <i>first</i>, with <i>O</i> as
                 <i>thisArgument</i> and an empty <a href="#sec-8.2.2">List</a> as <i>argumentsList</i>.</li>
             <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>result</i>).</li>
-            <li>If <i>result</i> is an ECMAScript language value and <a href="#sec-8">Type</a>(<i>result</i>) is not Object, then
-                return <i>result</i>.</li>
+            <li>If <i>result</i> is an <a href="#sec-8.1">ECMAScript language value</a> and <a
+                href="#sec-8">Type</a>(<i>result</i>) is not Object, then return <i>result</i>.</li>
           </ol>
         </li>
         <li>Let <i>second</i> be the result of <a href="#sec-9.3.1">Get</a>(<i>O</i>, <i>trySecond</i>).</li>
@@ -8844,8 +8851,8 @@
             <li>Let <i>result</i> be the result of calling the [[Call]] internal method of <i>second</i>, with <i>O</i> as
                 <i>thisArgument</i> and an empty <a href="#sec-8.2.2">List</a> as <i>argumentsList</i>.</li>
             <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>result</i>).</li>
-            <li>If <i>result</i> is an ECMAScript language value and <a href="#sec-8">Type</a>(<i>result</i>) is not Object, then
-                return <i>result</i>.</li>
+            <li>If <i>result</i> is an <a href="#sec-8.1">ECMAScript language value</a> and <a
+                href="#sec-8">Type</a>(<i>result</i>) is not Object, then return <i>result</i>.</li>
           </ol>
         </li>
         <li>Throw a <b>TypeError</b> exception.</li>
@@ -9754,8 +9761,9 @@
     <section id="sec-9.2.2">
       <h1><span class="secnum"><a href="#sec-9.2.2" title="link to this section">9.2.2</a></span> IsCallable</h1>
 
-      <p>The abstract operation IsCallable determines if its <var>argument</var>, which must be an ECMAScript language value or a
-      <a href="#sec-8.2.3">Completion Record</a>, is a callable function Object according to <a href="#table-21">Table 21</a>:</p>
+      <p>The abstract operation IsCallable determines if its <var>argument</var>, which must be an <a href="#sec-8.1">ECMAScript
+      language value</a> or a <a href="#sec-8.2.3">Completion Record</a>, is a callable function Object according to <a
+      href="#table-21">Table 21</a>:</p>
 
       <figure>
         <figcaption><span id="table-21">Table 21</span> &mdash; IsCallable Results</figcaption>
@@ -9800,7 +9808,8 @@
       <h1><span class="secnum"><a href="#sec-9.2.3" title="link to this section">9.2.3</a></span> SameValue(x, y)</h1>
 
       <p>The internal comparison abstract operation SameValue(<var>x</var>, <var>y</var>), where <var>x</var> and <var>y</var> are
-      ECMAScript language values, produces <b>true</b> or <b>false</b>. Such a comparison is performed as follows:</p>
+      <a href="#sec-8.1">ECMAScript language values</a>, produces <b>true</b> or <b>false</b>. Such a comparison is performed as
+      follows:</p>
 
       <ol class="proc">
         <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>x</i>).</li>
@@ -9838,7 +9847,8 @@
       <h1><span class="secnum"><a href="#sec-9.2.4" title="link to this section">9.2.4</a></span> SameValueZero(x, y)</h1>
 
       <p>The internal comparison abstract operation SameValueZero(<var>x</var>, <var>y</var>), where <var>x</var> and <var>y</var>
-      are ECMAScript language values, produces <b>true</b> or <b>false</b>. Such a comparison is performed as follows:</p>
+      are <a href="#sec-8.1">ECMAScript language values</a>, produces <b>true</b> or <b>false</b>. Such a comparison is performed
+      as follows:</p>
 
       <ol class="proc">
         <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>x</i>).</li>
@@ -9879,8 +9889,9 @@
     <section id="sec-9.2.5">
       <h1><span class="secnum"><a href="#sec-9.2.5" title="link to this section">9.2.5</a></span> IsConstructor</h1>
 
-      <p>The abstract operation IsConstructor determines if its <var>argument</var>, which must be an ECMAScript language value or
-      a <a href="#sec-8.2.3">Completion Record</a>, is a function object with a [[Construct]] internal method.</p>
+      <p>The abstract operation IsConstructor determines if its <var>argument</var>, which must be an <a
+      href="#sec-8.1">ECMAScript language value</a> or a <a href="#sec-8.2.3">Completion Record</a>, is a function object with a
+      [[Construct]] internal method.</p>
 
       <ol class="proc">
         <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>argument</i>).</li>
@@ -9893,8 +9904,9 @@
     <section id="sec-9.2.6">
       <h1><span class="secnum"><a href="#sec-9.2.6" title="link to this section">9.2.6</a></span> IsPropertyKey</h1>
 
-      <p>The abstract operation IsPropertyKey determines if its <var>argument</var>, which must be an ECMAScript language value or
-      a <a href="#sec-8.2.3">Completion Record</a>, is a value that may be used as a <a href="#sec-8.1.6">property key</a>.</p>
+      <p>The abstract operation IsPropertyKey determines if its <var>argument</var>, which must be an <a
+      href="#sec-8.1">ECMAScript language value</a> or a <a href="#sec-8.2.3">Completion Record</a>, is a value that may be used
+      as a <a href="#sec-8.1.6">property key</a>.</p>
 
       <ol class="proc">
         <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>argument</i>).</li>
@@ -10228,8 +10240,8 @@
       following steps:</p>
 
       <ol class="proc">
-        <li><a href="#sec-5.2">Assert</a>: <i>elements</i> is a <a href="#sec-8.2.2">List</a> whose elements are all ECMAScript
-            language values.</li>
+        <li><a href="#sec-5.2">Assert</a>: <i>elements</i> is a <a href="#sec-8.2.2">List</a> whose elements are all <a
+            href="#sec-8.1">ECMAScript language values</a>.</li>
         <li>Let <i>array</i> be the result of the abstract operation <a href="#sec-8.4.2.2">ArrayCreate</a> with argument 0.</li>
         <li>Let <i>n</i> be 0.</li>
         <li>For each element <i>e</i> of <i>elements</i>
@@ -10513,10 +10525,10 @@
       records</i> and <i>object environment records</i>.  Declarative environment records are used to define the effect of
       ECMAScript language syntactic elements such as <span class="nt">FunctionDeclarations</span>, <span
       class="nt">VariableDeclarations</span>, and <span class="nt">Catch</span> clauses that directly associate identifier
-      bindings with ECMAScript language values. Object environment records are used to define the effect of ECMAScript elements
-      such as <span class="nt">WithStatement</span> that associate identifier bindings with the properties of some object. Global
-      Environment Records and Function Environment Records are specializations  that are used for specifically for <span
-      class="nt">Script</span> global declarations and for top-level declarations within functions.</p>
+      bindings with <a href="#sec-8.1">ECMAScript language values</a>. Object environment records are used to define the effect of
+      ECMAScript elements such as <span class="nt">WithStatement</span> that associate identifier bindings with the properties of
+      some object. Global Environment Records and Function Environment Records are specializations  that are used for specifically
+      for <span class="nt">Script</span> global declarations and for top-level declarations within functions.</p>
 
       <p>For specification purposes Environment Record values can be thought of as existing in a simple object-oriented hierarchy
       where Environment Record is an abstract class with three concrete subclasses, declarative environment record, object
@@ -10545,11 +10557,11 @@
           </tr>
           <tr>
             <td style="border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; border-top: 1px solid black">InitialiseBinding(N,V)</td>
-            <td style="border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; border-top: 1px solid black">Set the value of an already existing but uninitialised binding in an environment record. The String value N is the text of the bound name. V is the value for the binding and is a value of any ECMAScript language type.</td>
+            <td style="border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; border-top: 1px solid black">Set the value of an already existing but uninitialised binding in an environment record. The String value N is the text of the bound name. V is the value for the binding and is a value of any <a href="#sec-8.1">ECMAScript language type</a>.</td>
           </tr>
           <tr>
             <td style="border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; border-top: 1px solid black">SetMutableBinding(N,V, S)</td>
-            <td style="border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; border-top: 1px solid black">Set the value of an already existing mutable binding in an environment record. The String value <var>N</var> is the text of the bound name. <var>V</var> is the value for the binding and may be a value of any ECMAScript language type. <var>S</var> is a Boolean flag.  If <var>S</var> is <b>true</b> and the binding cannot be set throw a <b>TypeError</b> exception. <var>S</var> is used to identify strict mode references.</td>
+            <td style="border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; border-top: 1px solid black">Set the value of an already existing mutable binding in an environment record. The String value <var>N</var> is the text of the bound name. <var>V</var> is the value for the binding and may be a value of any <a href="#sec-8.1">ECMAScript language type</a>. <var>S</var> is a Boolean flag.  If <var>S</var> is <b>true</b> and the binding cannot be set throw a <b>TypeError</b> exception. <var>S</var> is used to identify strict mode references.</td>
           </tr>
           <tr>
             <td style="border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; border-top: 1px solid black">GetBindingValue(N,S)</td>
@@ -14125,7 +14137,7 @@
         <li><a href="#sec-5.2">Assert</a>: If <i>tailPosition</i> is <b>true</b>, the above call will not return here, but instead
             evaluation will continue with the resumption of <i>leafCallerContext</i> as the running execution context.</li>
         <li><a href="#sec-5.2">Assert</a>: If <i>result</i> is not an <a href="#sec-8.2.3">abrupt completion</a> then <a
-            href="#sec-8">Type</a>(<i>result</i>) is an ECMAScript language type</li>
+            href="#sec-8">Type</a>(<i>result</i>) is an <a href="#sec-8.1">ECMAScript language type</a></li>
         <li>Return <i>result</i>.</li>
       </ol>
 
@@ -14155,7 +14167,7 @@
             instead evaluation will continue with the resumption of <i>leafCallerContext</i> as the running execution
             context.</li>
         <li><a href="#sec-5.2">Assert</a>: If <i>result</i> is not an <a href="#sec-8.2.3">abrupt completion</a> then <a
-            href="#sec-8">Type</a>(<i>result</i>) is an ECMAScript language type</li>
+            href="#sec-8">Type</a>(<i>result</i>) is an <a href="#sec-8.1">ECMAScript language type</a></li>
         <li>Return <i>result</i>.</li>
       </ol>
     </section>
@@ -36409,9 +36421,10 @@
   <section id="sec-15.14">
     <h1><span class="secnum"><a href="#sec-15.14" title="link to this section">15.14</a></span> Map Objects</h1>
 
-    <p>Map objects are collections of key/value pairs where both the keys and values may be arbitrary ECMAScript language values.
-    A distinct key value may only occur in one key/value pair within the Map&rsquo;s collection. Distinct key values as
-    discriminated using the a comparision algorithm that is selected when the Map is created.</p>
+    <p>Map objects are collections of key/value pairs where both the keys and values may be arbitrary <a
+    href="#sec-8.1">ECMAScript language values</a>. A distinct key value may only occur in one key/value pair within the
+    Map&rsquo;s collection. Distinct key values as discriminated using the a comparision algorithm that is selected when the Map
+    is created.</p>
 
     <p>A Map object can iterate its elements in insertion order. Map object must be implemented using either hash tables or other
     mechanisms that, on average, provide access times that are sublinear on the number of elements in the collection. The data
@@ -37035,12 +37048,12 @@
   <section id="sec-15.15">
     <h1><span class="secnum"><a href="#sec-15.15" title="link to this section">15.15</a></span> WeakMap Objects</h1>
 
-    <p>WeakMap objects are collections of key/value pairs where the keys are ECMAScript objects and values may be arbitrary
-    ECMAScript language values. A WeakMap may be queried to see if it contains an key/value pair with a specific key, but no
-    mechanisms is provided for enumerating the objects it holds as keys. If an object that is being used as the key of a WeakMap
-    key/value pair is only reachable by following a chain of references that start within that WeakMap, then that key/value pair
-    is inaccessible and is automatically removed from the WeakMap. WeakMap implementations must detect and remove such key/value
-    pairs and any associated resources.</p>
+    <p>WeakMap objects are collections of key/value pairs where the keys are ECMAScript objects and values may be arbitrary <a
+    href="#sec-8.1">ECMAScript language values</a>. A WeakMap may be queried to see if it contains an key/value pair with a
+    specific key, but no mechanisms is provided for enumerating the objects it holds as keys. If an object that is being used as
+    the key of a WeakMap key/value pair is only reachable by following a chain of references that start within that WeakMap, then
+    that key/value pair is inaccessible and is automatically removed from the WeakMap. WeakMap implementations must detect and
+    remove such key/value pairs and any associated resources.</p>
 
     <p>An implementation may impose an arbitrarily determined latency between the time a key/value pair of a WeakMap becomes
     inaccessible and the time when the key/value pair is removed from the WeakMap. If this latency was observable to ECMAScript
@@ -37373,9 +37386,9 @@
   <section id="sec-15.16">
     <h1><span class="secnum"><a href="#sec-15.16" title="link to this section">15.16</a></span> Set Objects</h1>
 
-    <p>Set objects are collections of ECMAScript language values. A distinct value may only occur once as an element of a
-    Set&rsquo;s collection. Distinct values are discriminated using a comparision algorithm that is selected when the Set is
-    created.</p>
+    <p>Set objects are collections of <a href="#sec-8.1">ECMAScript language values</a>. A distinct value may only occur once as
+    an element of a Set&rsquo;s collection. Distinct values are discriminated using a comparision algorithm that is selected when
+    the Set is created.</p>
 
     <p>A Set object can iterate its elements in insertion order. Set objects must be implemented using either hash tables or other
     mechanisms that, on average, provide access times that are sublinear on the number of elements in the collection. The data

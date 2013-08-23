@@ -2105,12 +2105,14 @@ def fixup_links(doc, docx):
 
         # clause 8
         ("Type(", "Types"),
+        ("ECMAScript language values", "ECMAScript Language Types"),
+        ("ECMAScript language value", "ECMAScript Language Types"),
+        ("ECMAScript language type", "ECMAScript Language Types"),
+        ("Data Block", "Data Blocks"),
         ("List", "The List and Record Specification Type"),
         ("Completion Record", "The Completion Record Specification Type"),
         ("Completion", "The Completion Record Specification Type"),
         ("abrupt completion", "The Completion Record Specification Type"),
-        ("NormalCompletion", "NormalCompletion"),
-        ("ReturnIfAbrupt", "ReturnIfAbrupt"),
         ("Reference", "The Reference Specification Type"),
         ("GetBase", "The Reference Specification Type"),
         ("GetReferencedName", "The Reference Specification Type"),
