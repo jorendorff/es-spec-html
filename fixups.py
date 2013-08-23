@@ -193,9 +193,8 @@ def fixup_add_numbering(doc, docx):
             content = p.content
 
         # Figure out the actual physical indentation of the number on this
-        # paragraph, net of everything. (This is used in fixup_lists_early
-        # to infer nesting lists, whether a paragraph is inside a list
-        # item, etc.)
+        # paragraph, net of everything. (This is used in fixup_lists to infer
+        # nesting lists, whether a paragraph is inside a list item, etc.)
         def points(s):
             if s == '0':
                 return 0
@@ -1194,36 +1193,6 @@ def ht_text(ht):
     else:
         return ht_text(ht.content)
 
-def find_section(doc, title):
-    # super slow algorithm
-    for sect in findall(doc, 'section'):
-        if sect.content and ht_name_is(sect.content[0], 'h1'):
-            h = sect.content[0]
-            i = 0
-            if i < len(h.content) and is_marker(h.content[i]):
-                i += 1
-            if i < len(h.content) and ht_name_is(h.content[i], 'span') and h.content[i].attrs.get('class') == 'secnum':
-                i += 1
-            s = ht_text(h.content[i:])
-            if s.strip() == title:
-                return sect
-    raise ValueError("No section has the title " + repr(title))
-
-@InPlaceFixup
-def fixup_lang_15_10_2_2(doc, docx):
-    """ Fix the ilvl attributes on the nested procedure in section 15.10.2.2
-        of the Language specification.
-
-    Precedes fixup_lists which consumes this data.
-    """
-    sect = find_section(doc, 'Pattern')
-    assert len(sect.content) == 11
-    assert [e.name for e in sect.content] == ['h1', 'p', 'li', 'li', 'li', 'li', 'li', 'li', 'li', 'li', 'div']
-    for li in sect.content[4:10]:
-        assert li.name == 'li'
-        assert li.style['-ooxml-ilvl'] == '0'
-        li.style['-ooxml-ilvl'] = '3'
-
 def map_section(doc, title, fixup):
     hits = 0
 
@@ -1477,6 +1446,21 @@ def fixup_html_head(doc, docx):
         stylesheet = 'es5.1.css'
     head.content.insert(2, html.link(rel='stylesheet', href=stylesheet))
     doc.attrs['lang'] = 'en-GB'
+
+def find_section(doc, title):
+    # super slow algorithm
+    for sect in findall(doc, 'section'):
+        if sect.content and ht_name_is(sect.content[0], 'h1'):
+            h = sect.content[0]
+            i = 0
+            if i < len(h.content) and is_marker(h.content[i]):
+                i += 1
+            if i < len(h.content) and ht_name_is(h.content[i], 'span') and h.content[i].attrs.get('class') == 'secnum':
+                i += 1
+            s = ht_text(h.content[i:])
+            if s.strip() == title:
+                return sect
+    raise ValueError("No section has the title " + repr(title))
 
 @InPlaceFixup
 def fixup_lang_overview_biblio(doc, docx):
@@ -2009,7 +1993,6 @@ def fixup_links(doc, docx):
             title = ht_text(heading_content).strip()
             title = " ".join(title.split())
             sec_id = '#' + sect.attrs['id']
-            sections_by_title[title] = sec_id
             alg = title_as_algorithm_name(title, sec_id)
             if alg is not None:
                 if any(pattern.format(alg) in sections_by_title
@@ -2029,6 +2012,7 @@ def fixup_links(doc, docx):
                 else:
                     print("{} => {}".format(alg, sec_id))
                     algorithm_name_to_section[alg] = sec_id
+            sections_by_title[title] = sec_id
 
     fallback_section_titles = {
         "The List and Record Specification Type": "The List Specification Type",
