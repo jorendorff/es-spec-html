@@ -1931,21 +1931,31 @@
     case roman numerals.  If more than three levels are required these rules repeat with the fourth level using numeric labels.
     For example:</p>
 
-    <p><span class="marker">1.&#x9;</span>Top-level step</p>
-
-    <p><span class="marker">a.&#x9;</span>Substep.</p>
-
-    <p><span class="marker">b.&#x9;</span>Substep.</p>
-
-    <p><span class="marker">i.&#x9;</span>Subsubstep.</p>
-
-    <p><span class="marker">ii.&#x9;</span>Subsubstep.</p>
-
-    <p><span class="marker">1.&#x9;</span>Subsubsubstep</p>
-
-    <p><span class="marker">a.&#x9;</span>Subsubsubsubstep</p>
-
-    <p><span class="marker">i.&#x9;</span>Subsubsubsubsubstep</p>
+    <ol class="proc">
+      <li>Top-level step
+        <ol class="block">
+          <li>Substep.</li>
+          <li>Substep.
+            <ol class="block">
+              <li>Subsubstep.</li>
+              <li>Subsubstep.
+                <ol class="block">
+                  <li>Subsubsubstep
+                    <ol class="block">
+                      <li>Subsubsubsubstep
+                        <ol class="block">
+                          <li>Subsubsubsubsubstep</li>
+                        </ol>
+                      </li>
+                    </ol>
+                  </li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+        </ol>
+      </li>
+    </ol>
 
     <p>A step or substep may be written as an &ldquo;if&rdquo; predicate that conditions its substeps.  In this case, the substeps
     are only applied if the predicate is true. If a step or substep begins with the word &ldquo;else&rdquo;, it is a predicate

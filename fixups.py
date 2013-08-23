@@ -141,27 +141,45 @@ def fixup_add_numbering(doc, docx):
         paragraph_style = docx.styles[cls]
 
         numid = ilvl = None
-        def computed_style(name, default_value, using_list_styles=False):
+        def computed_style(name, default_value):
             """
             Get computed style for the given property name.
             Returns a string, or default_value if no such property is defined anywhere.
             """
+
             # This paragraph's properties override everything else.
             if p.style and name in p.style:
                 return p.style[name]
 
-            # Properties inherited from a numbering w:lvl>w:pPr are
+            # If pPr>numPr>numId is present on the paragraph, then
+            # properties inherited from the corresponding w:lvl>w:pPr are
             # next-highest in precedence.
-            if using_list_styles:
-                lvl = docx.get_list_style_at_level(numid, ilvl)
+            def fetch_from_numbering(style):
+                if style is None or name in ('-ooxml-numId', '-ooxml-ilvl'):
+                    return None
+                _numid = int(style.get('-ooxml-numId', '0'))
+                if _numid == 0:
+                    return None
+                _ilvl = int(style.get('-ooxml-ilvl', '0'))
+                lvl = docx.get_list_style_at_level(_numid, _ilvl)
                 if lvl is not None and name in lvl.full_style:
                     return lvl.full_style[name]
+
+            val = fetch_from_numbering(p.style)
+            if val is not None:
+                return val
 
             # After that come the properties defined in paragraph
             # style. Note that full_style incorporates properties that are
             # inherited via the w:basedOn chain.
             if name in paragraph_style.full_style:
                 return paragraph_style.full_style[name]
+
+            # Lastly, properties inherted from numbering based on the paragraph
+            # style.
+            val = fetch_from_numbering(paragraph_style.full_style)
+            if val is not None:
+                return val
 
             # Not specified anywhere.
             return default_value
@@ -200,12 +218,17 @@ def fixup_add_numbering(doc, docx):
                 return 0
             assert s.endswith('pt')
             return float(s[:-2])
-        margin_left = points(computed_style('margin-left', '0', using_list_styles=has_numbering))
-        text_indent = points(computed_style('text-indent', '0', using_list_styles=has_numbering))
+        margin_left = points(computed_style('margin-left', '0'))
+        text_indent = points(computed_style('text-indent', '0'))
         if p.style is None:
             css = {}
         else:
             css = p.style.copy()
+        if has_numbering:
+            # In case this element's numbering is due to paragraph style, copy
+            # that to the paragraph's own .style.
+            css['-ooxml-ilvl'] = str(ilvl)
+            css['-ooxml-numId'] = str(numid)
         css['-ooxml-indentation'] = str(margin_left + text_indent) + 'pt'
 
         return p.with_(style=css, content=content)
@@ -570,8 +593,8 @@ def fixup_lists(doc, docx):
                             and p.attrs.get('class') not in heading_styles
                             and len(p.content) != 0
                             and is_marker(p.content[0])
-                            and # work around https://bugs.ecmascript.org/show_bug.cgi?id=1715
-                                p.content[0].content[0] != '8.4.6.2\t')
+                            and re.match(r'^(?:\uf0b7|[1-9][0-9]*\.|[a-z]\.?|[ivxlcdm]+\.)\t$',
+                                         p.content[0].content[0]))
 
             # Close any more-indented active lists.
             #
