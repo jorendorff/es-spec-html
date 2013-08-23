@@ -1,6 +1,6 @@
 import zipfile
 from xml.etree import ElementTree
-from cgi import escape
+from html import escape
 import re
 
 namespaces = {
