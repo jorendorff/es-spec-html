@@ -2167,10 +2167,10 @@ def fixup_links(doc, docx):
         ("Function Environment Record", "Function Environment Records"),
         ("Function environment record", "Function Environment Records"),
         ("function environment record", "Function Environment Records"),
+        ("the global environment record", globalEnv),
         ("the global environment", globalEnv),
         ("the Global Environment", globalEnv),
         ("global environment record", globalEnv),
-        ("the global environment record", globalEnv),
         ("Global Environment Record", globalEnv),
         ("Global Environment Records", globalEnv),
 

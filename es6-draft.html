@@ -11162,7 +11162,7 @@
           identifier is one of the identifiers bound by the record:</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be <a href="#sec-10.2.1.4">the global environment</a> record for which the method was
+            <li>Let <i>envRec</i> be <a href="#sec-10.2.1.4">the global environment record</a> for which the method was
                 invoked.</li>
             <li>Let <i>DclRec</i> be <i>envRec&rsquo;s</i> DeclarativeEnvironment.</li>
             <li>If the result of calling <i>DclRec&rsquo;s</i> HasBinding concrete method with argument <i>N</i> is <b>true</b>,
@@ -11183,7 +11183,7 @@
           deletion.</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be <a href="#sec-10.2.1.4">the global environment</a> record for which the method was
+            <li>Let <i>envRec</i> be <a href="#sec-10.2.1.4">the global environment record</a> for which the method was
                 invoked.</li>
             <li>Let <i>DclRec</i> be <i>envRec&rsquo;s</i> DeclarativeEnvironment.</li>
             <li><a href="#sec-5.2">Assert</a>: <i>DclRec</i> does not already have a binding for <i>N</i>.</li>
@@ -11201,7 +11201,7 @@
           exist in this environment record for <var>N</var>.</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be <a href="#sec-10.2.1.4">the global environment</a> record for which the method was
+            <li>Let <i>envRec</i> be <a href="#sec-10.2.1.4">the global environment record</a> for which the method was
                 invoked.</li>
             <li>Let <i>DclRec</i> be <i>envRec&rsquo;s</i> DeclarativeEnvironment.</li>
             <li><a href="#sec-5.2">Assert</a>: <i>DclRec</i> does not already have a binding for <i>N</i>.</li>
@@ -11219,7 +11219,7 @@
           <var>N</var> to the value of argument <var>V</var>. An uninitialised binding for <var>N</var> must already exist.</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be <a href="#sec-10.2.1.4">the global environment</a> record for which the method was
+            <li>Let <i>envRec</i> be <a href="#sec-10.2.1.4">the global environment record</a> for which the method was
                 invoked.</li>
             <li>Let <i>DclRec</i> be <i>envRec&rsquo;s</i> DeclarativeEnvironment.</li>
             <li>If the result of calling <i>DclRec&rsquo;s</i> HasBinding concrete method with argument <i>N</i> is <b>true</b>,
@@ -11364,7 +11364,7 @@
           <h1><span class="secnum"><a href="#sec-10.2.1.4.11" title="link to this section">10.2.1.4.11</a></span> GetThisBinding
               ()</h1>
           <ol class="proc">
-            <li>Let <i>envRec</i> be <a href="#sec-10.2.1.4">the global environment</a> record for which the method was
+            <li>Let <i>envRec</i> be <a href="#sec-10.2.1.4">the global environment record</a> for which the method was
                 invoked.</li>
             <li>Let <i>ObjRec</i> be <i>envRec&rsquo;s</i> ObjectEnvironment.</li>
             <li>Let <i>bindings</i> be the binding object for <i>ObjRec</i>.</li>
@@ -11381,7 +11381,7 @@
           class="prod"><span class="nt">FunctionDeclaration</span> <span class="geq">:</span></span></p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be <a href="#sec-10.2.1.4">the global environment</a> record for which the method was
+            <li>Let <i>envRec</i> be <a href="#sec-10.2.1.4">the global environment record</a> for which the method was
                 invoked.</li>
             <li>Let <i>varDeclaredNames</i> be <i>envRec&rsquo;s</i> VarNames <a href="#sec-8.2.2">List</a>.</li>
             <li>If <i>varDeclaredNames</i> contains the value of <i>N</i>, return <b>true</b>.</li>
@@ -11399,7 +11399,7 @@
           class="geq">:</span></span></p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be <a href="#sec-10.2.1.4">the global environment</a> record for which the method was
+            <li>Let <i>envRec</i> be <a href="#sec-10.2.1.4">the global environment record</a> for which the method was
                 invoked.</li>
             <li>Let <i>DclRec</i> be <i>envRec&rsquo;s</i> DeclarativeEnvironment.</li>
             <li>Return the result of calling <i>DclRec&rsquo;s</i> HasBinding concrete method with argument <i>N</i>.</li>
@@ -11415,7 +11415,7 @@
           <var>N</var>. Redundent var declarations and var declarations for pre-existing global object properties are allowed.</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be <a href="#sec-10.2.1.4">the global environment</a> record for which the method was
+            <li>Let <i>envRec</i> be <a href="#sec-10.2.1.4">the global environment record</a> for which the method was
                 invoked.</li>
             <li>Let <i>ObjRec</i> be <i>envRec&rsquo;s</i> ObjectEnvironment.</li>
             <li>If the result of calling <i>ObjRec&rsquo;s</i> HasBinding concrete method with argument <i>N</i> is <b>true</b>,
@@ -11435,7 +11435,7 @@
           argument <var>N</var>.</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be <a href="#sec-10.2.1.4">the global environment</a> record for which the method was
+            <li>Let <i>envRec</i> be <a href="#sec-10.2.1.4">the global environment record</a> for which the method was
                 invoked.</li>
             <li>Let <i>ObjRec</i> be <i>envRec&rsquo;s</i> ObjectEnvironment.</li>
             <li>Let <i>globalObject</i> be the binding object for <i>ObjRec</i>.</li>
@@ -11888,7 +11888,7 @@
       Roman"><i>script</i>,</span> <span style="font-family: Times New Roman"><i>env</i>,</span> <span style="font-family: Times
       New Roman">and <i>deletableBindings</i></span>. <var>script</var> is the <span class="nt">ScriptBody</span> that for which
       the <a href="#sec-10.4">execution context</a> is being established.  <var>env</var> is <a href="#sec-10.2.1.4">the global
-      environment</a> record in which bindings are to be created. <var>deletableBindings</var> is <span class="value">true</span>
+      environment record</a> in which bindings are to be created. <var>deletableBindings</var> is <span class="value">true</span>
       if the bindings that are created should be deletable.</p>
 
       <ol class="proc">
