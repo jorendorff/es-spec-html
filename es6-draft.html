@@ -22252,77 +22252,77 @@
         <h1><span class="secnum"><a href="#sec-15.1.4.20" title="link to this section">15.1.4.20</a></span> ArrayBuffer ( . . .
             )</h1>
 
-        <p>See <a href="#sec-15.17">15.17</a>.</p>
+        <p>See <a href="#sec-15.13.5.2">15.13.5.2</a>.</p>
       </section>
 
       <section id="sec-15.1.4.21">
         <h1><span class="secnum"><a href="#sec-15.1.4.21" title="link to this section">15.1.4.21</a></span> Int8Array ( . . .
             )</h1>
 
-        <p>See <a href="#sec-15.17">15.17</a>.</p>
+        <p>See <a href="#sec-15.13.6.4">15.13.6.4</a>.</p>
       </section>
 
       <section id="sec-15.1.4.22">
         <h1><span class="secnum"><a href="#sec-15.1.4.22" title="link to this section">15.1.4.22</a></span> UInt8Array ( . . .
             )</h1>
 
-        <p>See <a href="#sec-15.17">15.17</a>.</p>
+        <p>See <a href="#sec-15.13.6.4">15.13.6.4</a>.</p>
       </section>
 
       <section id="sec-15.1.4.23">
         <h1><span class="secnum"><a href="#sec-15.1.4.23" title="link to this section">15.1.4.23</a></span> UInt8ClampedArray ( .
             . . )</h1>
 
-        <p>See <a href="#sec-15.17">15.17</a>.</p>
+        <p>See <a href="#sec-15.13.6.4">15.13.6.4</a>.</p>
       </section>
 
       <section id="sec-15.1.4.24">
         <h1><span class="secnum"><a href="#sec-15.1.4.24" title="link to this section">15.1.4.24</a></span> Int16Array ( . . .
             )</h1>
 
-        <p>See <a href="#sec-15.17">15.17</a>.</p>
+        <p>See <a href="#sec-15.13.6.4">15.13.6.4</a>.</p>
       </section>
 
       <section id="sec-15.1.4.25">
         <h1><span class="secnum"><a href="#sec-15.1.4.25" title="link to this section">15.1.4.25</a></span> UInt16Array ( . . .
             )</h1>
 
-        <p>See <a href="#sec-15.17">15.17</a>.</p>
+        <p>See <a href="#sec-15.13.6.4">15.13.6.4</a>.</p>
       </section>
 
       <section id="sec-15.1.4.26">
         <h1><span class="secnum"><a href="#sec-15.1.4.26" title="link to this section">15.1.4.26</a></span> Int32Array ( . . .
             )</h1>
 
-        <p>See <a href="#sec-15.17">15.17</a>.</p>
+        <p>See <a href="#sec-15.13.6.4">15.13.6.4</a>.</p>
       </section>
 
       <section id="sec-15.1.4.27">
         <h1><span class="secnum"><a href="#sec-15.1.4.27" title="link to this section">15.1.4.27</a></span> UInt32Array ( . . .
             )</h1>
 
-        <p>See <a href="#sec-15.17">15.17</a>.</p>
+        <p>See <a href="#sec-15.13.6.4">15.13.6.4</a>.</p>
       </section>
 
       <section id="sec-15.1.4.28">
         <h1><span class="secnum"><a href="#sec-15.1.4.28" title="link to this section">15.1.4.28</a></span> Float32Array ( . . .
             )</h1>
 
-        <p>See <a href="#sec-15.17">15.17</a>.</p>
+        <p>See <a href="#sec-15.13.6.4">15.13.6.4</a>.</p>
       </section>
 
       <section id="sec-15.1.4.29">
         <h1><span class="secnum"><a href="#sec-15.1.4.29" title="link to this section">15.1.4.29</a></span> Float64Array ( . . .
             )</h1>
 
-        <p>See <a href="#sec-15.17">15.17</a>.</p>
+        <p>See <a href="#sec-15.13.6.4">15.13.6.4</a>.</p>
       </section>
 
       <section id="sec-15.1.4.30">
         <h1><span class="secnum"><a href="#sec-15.1.4.30" title="link to this section">15.1.4.30</a></span> DataView ( . . .
             )</h1>
 
-        <p>See <a href="#sec-15.17">15.17</a>.</p>
+        <p>See <a href="#sec-15.13.7.2">15.13.7.2</a>.</p>
       </section>
     </section>
 
@@ -35396,7 +35396,7 @@
               %TypedArray%.prototype.slice ( start, end )</h1>
 
           <p>The interpretation and use of the arguments of %TypedArray%<code>.prototype.slice</code> are the same as for
-          <code><a href="#sec-15.4.3.10">Array.prototype.slice</a></code> as defined in <a href="#sec-15.4.3.18">15.4.3.18</a>.
+          <code><a href="#sec-15.4.3.10">Array.prototype.slice</a></code> as defined in <a href="#sec-15.4.3.10">15.4.3.10</a>.
           The following steps are taken:</p>
 
           <ol class="proc">
@@ -35453,7 +35453,7 @@
               %TypedArray%.prototype.sort ( comparefn )</h1>
 
           <p>%TypedArray%<code>.prototype.sort</code> is a distinct function that implements the same requirements as those of
-          <code><a href="#sec-15.4.3.11">Array.prototype.sort</a></code> as defined in <a href="#sec-15.4.3.8">15.4.3.8</a>.
+          <code><a href="#sec-15.4.3.11">Array.prototype.sort</a></code> as defined in <a href="#sec-15.4.3.11">15.4.3.11</a>.
           However, the implementation of the %TypedArray%<code>.prototype.sort</code> algorithm may be optimized to assume that
           the this value is an object that has a fixed length and whose integer indexed properties are not sparse. The only
           internal methods of the this object call that the algorithm may use are  [[Get]] and [[Set]].</p>
@@ -35501,7 +35501,7 @@
               %TypedArray%.prototype.indexOf (searchElement, fromIndex = 0 )</h1>
 
           <p>%TypedArray%<code>.prototype.indexOf</code> is a distinct function that implements the same algorithm as <code><a
-          href="#sec-15.4.3.14">Array.prototype.indexOf</a></code> as defined in <a href="#sec-15.4.3.8">15.4.3.8</a>. However,
+          href="#sec-15.4.3.14">Array.prototype.indexOf</a></code> as defined in <a href="#sec-15.4.3.14">15.4.3.14</a>. However,
           the implementation of the algorithm may be optimized to assume that the this value is an object that has a fixed length
           and whose integer indexed properties are not sparse.</p>
 
@@ -35525,7 +35525,7 @@
               %TypedArray%.prototype.every ( callbackfn, thisArg = undefined )</h1>
 
           <p>%TypedArray%<code>.prototype.every</code> is a distinct function that implements the same algorithm as <code><a
-          href="#sec-15.4.3.16">Array.prototype.every</a></code> as defined in <a href="#sec-15.4.3.15">15.4.3.15</a>. However,
+          href="#sec-15.4.3.16">Array.prototype.every</a></code> as defined in <a href="#sec-15.4.3.16">15.4.3.16</a>. However,
           the implementation of the algorithm may be optimized to assume that the this value is an object that has a fixed length
           and whose integer indexed properties are not sparse.</p>
 
@@ -35537,7 +35537,7 @@
               %TypedArray%.prototype.some ( callbackfn, thisArg = undefined )</h1>
 
           <p>%TypedArray%<code>.prototype.some</code> is a distinct function that implements the same algorithm as <code><a
-          href="#sec-15.4.3.17">Array.prototype.some</a></code> as defined in <a href="#sec-15.4.3.15">15.4.3.15</a>. However, the
+          href="#sec-15.4.3.17">Array.prototype.some</a></code> as defined in <a href="#sec-15.4.3.17">15.4.3.17</a>. However, the
           implementation of the algorithm may be optimized to assume that the this value is an object that has a fixed length and
           whose integer indexed properties are not sparse.</p>
 
@@ -35561,7 +35561,7 @@
               %TypedArray%.prototype.map ( callbackfn, thisArg = undefined )</h1>
 
           <p>The interpretation and use of the arguments of %TypedArray%<code>.prototype.map</code> are the same as for  <code><a
-          href="#sec-15.4.3.19">Array.prototype.map</a></code> as defined in <a href="#sec-15.4.3.18">15.4.3.18</a>.</p>
+          href="#sec-15.4.3.19">Array.prototype.map</a></code> as defined in <a href="#sec-15.4.3.19">15.4.3.19</a>.</p>
 
           <p>When the <code>map</code> method is called with one or two arguments, the following steps are taken:</p>
 
@@ -35714,7 +35714,7 @@
               %TypedArray%.prototype.findIndex ( predicate, thisArg = undefined )</h1>
 
           <p>%TypedArray%<code>.prototype.findIndex</code> is a distinct function that implements the same algorithm as <code><a
-          href="#sec-15.4.3.24">Array.prototype.findIndex</a></code> as defined in <a href="#sec-15.4.3.23">15.4.3.23</a>.
+          href="#sec-15.4.3.24">Array.prototype.findIndex</a></code> as defined in <a href="#sec-15.4.3.24">15.4.3.24</a>.
           However, the implementation of the algorithm may be optimized to assume that the this value is an object that has a
           fixed length and whose integer indexed properties are not sparse.</p>
 
@@ -35726,7 +35726,7 @@
               %TypedArray%.prototype.fill (value, start = 0, end = this.length )</h1>
 
           <p>%TypedArray%<code>.prototype.fill</code> is a distinct function that implements the same algorithm as <code><a
-          href="#sec-15.4.3.30">Array.prototype.fill</a></code> as defined in <a href="#sec-15.4.3.23">15.4.3.23</a>. However, the
+          href="#sec-15.4.3.30">Array.prototype.fill</a></code> as defined in <a href="#sec-15.4.3.30">15.4.3.30</a>. However, the
           implementation of the algorithm may be optimized to assume that the this value is an object that has a fixed length and
           whose integer indexed properties are not sparse.</p>
 
@@ -35738,7 +35738,7 @@
               %TypedArray%.prototype.copyWithin (target, start, end = this.length )</h1>
 
           <p>%TypedArray%<code>.prototype.copyWithin</code> is a distinct function that implements the same algorithm as
-          <code>Array.prototype.copyWithin</code> as defined in <a href="#sec-15.4.3.23">15.4.3.23</a>. However, the
+          <code>Array.prototype.copyWithin</code> as defined in <a href="#sec-15.4.3.31">15.4.3.31</a>. However, the
           implementation of the algorithm may be optimized to assume that the this value is an object that has a fixed length and
           whose integer indexed properties are not sparse.</p>
 
@@ -35751,7 +35751,7 @@
 
           <p>The initial value of the %TypedArray%.<code>prototype.entries</code> data property is the same built-in function
           object as the <code><a href="#sec-15.4.3.25">Array.prototype.entries</a></code> method defined in <a
-          href="#sec-15.4.3.2">15.4.3.2</a>.</p>
+          href="#sec-15.4.3.25">15.4.3.25</a>.</p>
         </section>
 
         <section id="sec-15.13.6.3.29">
@@ -35769,7 +35769,7 @@
 
           <p>The initial value of the %TypedArray%.<code>prototype.values</code> data property is the same built-in function
           object as the <code><a href="#sec-15.4.3.27">Array.prototype.values</a></code> method defined in <a
-          href="#sec-15.4.3.2">15.4.3.2</a>.</p>
+          href="#sec-15.4.3.27">15.4.3.27</a>.</p>
         </section>
 
         <section id="sec-15.13.6.3.31">
