@@ -4926,7 +4926,7 @@
         <p>Well-known symbols are built-in <a href="#sec-8.4.4">Symbol exotic objects</a> (<a href="#sec-8.4.4">8.4.4</a>) that
         are explicitly referenced by algorithms of this specification.  They are typically used as the keys of properties whose
         values serve as extension points of a specification algorithm.  Unless otherwise specified, well-known symbols objects are
-        shared by all Code Realms (<a href="#sec-10.3">10.3</a>).</p>
+        shared by all <a href="#sec-10.3">Code Realms (10.3)</a>.</p>
 
         <p>Within this specification a well-known symbol is referred to by using a notation of the form @@name, where
         &ldquo;name&rdquo; is one of the values listed in <a href="#table-10">Table 10</a>.</p>
@@ -4970,12 +4970,13 @@
         </figure>
 
         <p>Well-known intrinsics are built-in objects that are explicitly referenced by the algorithms of this specification and
-        which usually have Realm specific identities. Unless otherwise specified each intrinsic object actually corresponds to a
-        set of similar objects, one per Realm.</p>
+        which usually have <a href="#sec-10.3">Realm</a> specific identities. Unless otherwise specified each intrinsic object
+        actually corresponds to a set of similar objects, one per <a href="#sec-10.3">Realm</a>.</p>
 
-        <p>Within this specification a reference such as %name% means the intrinsic object, associated with the current Realm,
-        corresponding to the name. Determination of the current Realm and its intrinsics is described in <a
-        href="#sec-10.4">10.4</a>. The well-known intrinsics are listed in <a href="#table-11">Table 11</a>.</p>
+        <p>Within this specification a reference such as %name% means the intrinsic object, associated with <a
+        href="#sec-10.4">the current Realm</a>, corresponding to the name. Determination of <a href="#sec-10.4">the current
+        Realm</a> and its intrinsics is described in <a href="#sec-10.4">10.4</a>. The well-known intrinsics are listed in <a
+        href="#table-11">Table 11</a>.</p>
 
         <figure>
           <figcaption><span id="table-11">Table 11</span> &mdash; Well-known Intrinsic Objects</figcaption>
@@ -6464,8 +6465,8 @@
           </tr>
           <tr>
             <td>[[Realm]]</td>
-            <td>Realm Record</td>
-            <td>The Code Realm in which the function was created and which provides any intrinsic objects that are accessed when evaluating the function.</td>
+            <td><a href="#sec-10.3">Realm</a> Record</td>
+            <td>The <a href="#sec-10.3">Code Realm</a> in which the function was created and which provides any intrinsic objects that are accessed when evaluating the function.</td>
           </tr>
           <tr>
             <td style="border-bottom: 1px solid #808080; border-left: 1px solid #808080; border-right: 1px solid #808080; border-top: 1px solid #808080">[[ThisMode]]</td>
@@ -6504,12 +6505,13 @@
         <ol class="proc">
           <li>If <i>F</i>&rsquo;s [[Code]] <a href="#sec-8.1.6.2">internal data property</a> has the value <b>undefined</b>, then
               throw a <b>TypeError</b> exception.</li>
-          <li>Let <i>callerContext</i> be the running execution context.</li>
-          <li>If, <i>callerContext</i> is not already suspended, then Suspend <i>callerContext</i>.</li>
-          <li>Let <i>calleeContext</i> be a new ECMAScript Code execution context.</li>
+          <li>Let <i>callerContext</i> be <a href="#sec-10.4">the running execution context</a>.</li>
+          <li>If, <i>callerContext</i> is not already <a href="#sec-10.4">suspended</a>, then <a href="#sec-10.4">Suspend</a>
+              <i>callerContext</i>.</li>
+          <li>Let <i>calleeContext</i> be a new <a href="#sec-10.4">ECMAScript Code execution context</a>.</li>
           <li>Let <i>calleeRealm</i> be the value of <i>F&rsquo;s</i> [[Realm]] <a href="#sec-8.1.6.2">internal data
               property</a>.</li>
-          <li>Set <i>calleeContext&rsquo;s</i> Realm to <i>calleeRealm</i>.</li>
+          <li>Set <i>calleeContext&rsquo;s</i> <a href="#sec-10.3">Realm</a> to <i>calleeRealm</i>.</li>
           <li>Let <i>thisMode</i> be the value of <i>F</i>&rsquo;s [[ThisMode]] <a href="#sec-8.1.6.2">internal data
               property</a>.</li>
           <li>If <i>thisMode</i> is <span style="font-family: sans-serif">lexical</span>, then
@@ -6540,33 +6542,34 @@
           </li>
           <li>Set the <a href="#sec-10.4">LexicalEnvironment</a> of <i>calleeContext</i> to <i>localEnv</i>.</li>
           <li>Set the <a href="#sec-10.4">VariableEnvironment</a> of <i>calleeContext</i> to <i>localEnv</i>.</li>
-          <li>Push <i>calleeContext</i> onto the execution context stack; <i>calleeContext</i> is now the running execution
-              context.</li>
+          <li>Push <i>calleeContext</i> onto <a href="#sec-10.4">the execution context stack</a>; <i>calleeContext</i> is now <a
+              href="#sec-10.4">the running execution context</a>.</li>
           <li>Let <i>status</i> be the result of performing Function Declaration Instantiation using the function <i>F</i>,
               <i>argumentsList</i> , and <i>localEnv</i> as described in <a href="#sec-10.5.3">10.5.3</a>.</li>
           <li>If <i>status</i> is an <a href="#sec-8.2.3">abrupt completion</a>, then
             <ol class="block">
-              <li>Remove <i>calleeContext</i> from the execution context stack and restore <i>callerContext</i> as the running
-                  execution context.</li>
+              <li>Remove <i>calleeContext</i> from <a href="#sec-10.4">the execution context stack</a> and restore
+                  <i>callerContext</i> as <a href="#sec-10.4">the running execution context</a>.</li>
               <li>Return <i>status</i>.</li>
             </ol>
           </li>
           <li>Let <i>result</i> be the result of EvaluateBody of the production that is the value of <i>F</i>'s [[Code]] <a
               href="#sec-8.1.6.2">internal data property</a> passing <i>F</i> as the argument.</li>
-          <li>Remove <i>calleeContext</i> from the execution context stack and restore <i>callerContext</i> as the running
-              execution context.</li>
+          <li>Remove <i>calleeContext</i> from <a href="#sec-10.4">the execution context stack</a> and restore
+              <i>callerContext</i> as <a href="#sec-10.4">the running execution context</a>.</li>
           <li>Return <i>result</i>.</li>
         </ol>
 
         <div class="note">
-          <p><span class="nh">NOTE 1</span> Most ordinary functions use a Function <a href="#sec-10.2.1">Environment Record</a> as
-          their <a href="#sec-10.4">LexicalEnvironment</a>. Ordinary functions that are arrow functions use a <a
-          href="#sec-10.2.1">Declarative Environment Record</a> as their <a href="#sec-10.4">LexicalEnvironment</a>.</p>
+          <p><span class="nh">NOTE 1</span> Most ordinary functions use a <a href="#sec-10.2.1.3">Function Environment Record</a>
+          as their <a href="#sec-10.4">LexicalEnvironment</a>. Ordinary functions that are arrow functions use a <a
+          href="#sec-10.2.1.1">Declarative Environment Record</a> as their <a href="#sec-10.4">LexicalEnvironment</a>.</p>
         </div>
 
         <div class="note">
-          <p><span class="nh">NOTE 2</span> When <var>calleeContext</var> is removed from the execution context stack it must not
-          be destroyed because it may have been suspended and retained by a generator object for later resumption<i>.</i></p>
+          <p><span class="nh">NOTE 2</span> When <var>calleeContext</var> is removed from <a href="#sec-10.4">the execution
+          context stack</a> it must not be destroyed because it may have been <a href="#sec-10.4">suspended</a> and retained by a
+          generator object for later resumption<i>.</i></p>
         </div>
       </section>
 
@@ -6689,8 +6692,8 @@
           <li>Set the [[Prototype]] <a href="#sec-8.1.6.2">internal data property</a> of <i>F</i> to
               <i>functionPrototype</i>.</li>
           <li>Set the [[Extensible]] <a href="#sec-8.1.6.2">internal data property</a> of <i>F</i> to <b>true</b>.</li>
-          <li>Set the [[Realm]]  <a href="#sec-8.1.6.2">internal data property</a> of <i>F</i> to the running execution
-              context&rsquo;s Realm.</li>
+          <li>Set the [[Realm]]  <a href="#sec-8.1.6.2">internal data property</a> of <i>F</i> to <a href="#sec-10.4">the running
+              execution context</a>&rsquo;s <a href="#sec-10.3">Realm</a>.</li>
           <li>Return <i>F</i>.</li>
         </ol>
       </section>
@@ -6807,11 +6810,12 @@
               [[Configurable]]: <b>false</b>}).</li>
         </ol>
 
-        <p>The %ThrowTypeError% object is a unique function object that is defined once for each Realm as follows:</p>
+        <p>The %ThrowTypeError% object is a unique function object that is defined once for each <a href="#sec-10.3">Realm</a> as
+        follows:</p>
 
         <ol class="proc">
-          <li><a href="#sec-5.2">Assert</a>: <span style="font-family: sans-serif">%FunctionPrototype%</span> for the current
-              Realm has already been initialized.</li>
+          <li><a href="#sec-5.2">Assert</a>: <span style="font-family: sans-serif">%FunctionPrototype%</span> for <a
+              href="#sec-10.4">the current Realm</a> has already been initialized.</li>
           <li><span style="font-family: Times New Roman">Let <i>functionPrototype</i> be the intrinsic object</span>
               %FunctionPrototype%.</li>
           <li>Let <i>scope</i> be <a href="#sec-10.2.1.4">the Global Environment</a>.</li>
@@ -7836,8 +7840,8 @@
         steps. It returns a bult-in function object created by following steps:</p>
 
         <ol class="proc">
-          <li>Let <i>func</i> be a new built-in function object, in the current Realm, that when called performs the action
-              described by <i>steps</i>.</li>
+          <li>Let <i>func</i> be a new built-in function object, in <a href="#sec-10.4">the current Realm</a>, that when called
+              performs the action described by <i>steps</i>.</li>
           <li>Return <i>func</i>.</li>
         </ol>
       </section>
@@ -10340,8 +10344,8 @@
                 <i>constructor&rsquo;s</i> [[Realm]].</li>
             <li>Else,
               <ol class="block">
-                <li>Let <i>ctx</i> be the running execution context.</li>
-                <li>Let <i>realm</i> be <i>ctx&rsquo;s</i> Realm.</li>
+                <li>Let <i>ctx</i> be <a href="#sec-10.4">the running execution context</a>.</li>
+                <li>Let <i>realm</i> be <i>ctx&rsquo;s</i> <a href="#sec-10.3">Realm</a>.</li>
               </ol>
             </li>
             <li>Let <i>proto</i> be <i>realm&rsquo;s</i> intrinsic object named <i>intrinsicDefaultProto</i>.</li>
@@ -10352,9 +10356,9 @@
 
       <div class="note">
         <p><span class="nh">NOTE</span> If <var>constructor</var> does not supply a [[Prototype]] value, the default value that is
-        used is obtained from the Code Realm of the <var>constructor</var> function rather than from the running execution
-        context.  This accounts for the possibility that a built-in @@create method from a different Code Realm might be installed
-        on <var>constructor</var>.</p>
+        used is obtained from the <a href="#sec-10.3">Code Realm</a> of the <var>constructor</var> function rather than from <a
+        href="#sec-10.4">the running execution context</a>.  This accounts for the possibility that a built-in @@create method
+        from a different <a href="#sec-10.3">Code Realm</a> might be installed on <var>constructor</var>.</p>
       </div>
     </section>
 
@@ -10527,14 +10531,16 @@
       class="nt">VariableDeclarations</span>, and <span class="nt">Catch</span> clauses that directly associate identifier
       bindings with <a href="#sec-8.1">ECMAScript language values</a>. Object environment records are used to define the effect of
       ECMAScript elements such as <span class="nt">WithStatement</span> that associate identifier bindings with the properties of
-      some object. Global Environment Records and Function Environment Records are specializations  that are used for specifically
-      for <span class="nt">Script</span> global declarations and for top-level declarations within functions.</p>
+      some object. <a href="#sec-10.2.1.4">Global Environment Records</a> and <a href="#sec-10.2.1.3">Function Environment
+      Records</a> are specializations  that are used for specifically for <span class="nt">Script</span> global declarations and
+      for top-level declarations within functions.</p>
 
       <p>For specification purposes Environment Record values can be thought of as existing in a simple object-oriented hierarchy
-      where Environment Record is an abstract class with three concrete subclasses, declarative environment record, object
-      environment record, and global environment record. Function environment records are a subclass of declarative environment
-      record. The abstract class includes the abstract specification methods defined in <a href="#table-22">Table 22</a>. These
-      abstract methods have distinct concrete algorithms for each of the concrete subclasses.</p>
+      where Environment Record is an abstract class with three concrete subclasses, <a href="#sec-10.2.1.1">declarative
+      environment record</a>, <a href="#sec-10.2.1.2">object environment record</a>, and <a href="#sec-10.2.1.4">global
+      environment record</a>. Function environment records are a subclass of <a href="#sec-10.2.1.1">declarative environment
+      record</a>. The abstract class includes the abstract specification methods defined in <a href="#table-22">Table 22</a>.
+      These abstract methods have distinct concrete algorithms for each of the concrete subclasses.</p>
 
       <figure>
         <figcaption><span id="table-22">Table 22</span> &mdash; Abstract Methods of Environment Records</figcaption>
@@ -10590,9 +10596,9 @@
         <h1><span class="secnum"><a href="#sec-10.2.1.1" title="link to this section">10.2.1.1</a></span> Declarative Environment
             Records</h1>
 
-        <p>Each <a href="#sec-10.2.1">declarative environment record</a> is associated with an ECMAScript program scope containing
-        variable, constant, let, class, module, import, and/or function declarations. A <a href="#sec-10.2.1">declarative
-        environment record</a> binds the set of identifiers defined by the declarations contained within its scope.</p>
+        <p>Each declarative environment record is associated with an ECMAScript program scope containing variable, constant, let,
+        class, module, import, and/or function declarations. A declarative environment record binds the set of identifiers defined
+        by the declarations contained within its scope.</p>
 
         <p>The behaviour of the concrete specification methods for Declarative Environment Records is defined by the following
         algorithms.</p>
@@ -10604,7 +10610,7 @@
           argument identifier is one of the identifiers bound by the record:</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1">declarative environment record</a> for which the method was
+            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1.1">declarative environment record</a> for which the method was
                 invoked.</li>
             <li>If <i>envRec</i> has a binding for the name that is the value of <i>N</i>, return <b>true</b>.</li>
             <li>Return <b>false</b>.</li>
@@ -10621,7 +10627,7 @@
           has the value <b>true</b> the new binding is marked as being subject to deletion.</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1">declarative environment record</a> for which the method was
+            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1.1">declarative environment record</a> for which the method was
                 invoked.</li>
             <li><a href="#sec-5.2">Assert</a>: <i>envRec</i> does not already have a binding for <i>N</i>.</li>
             <li>Create a mutable binding in <i>envRec</i> for <i>N</i> and record that it is uninitialised. If <i>D</i> is
@@ -10639,7 +10645,7 @@
           exist in this environment record for <var>N</var>.</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1">declarative environment record</a> for which the method was
+            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1.1">declarative environment record</a> for which the method was
                 invoked.</li>
             <li><a href="#sec-5.2">Assert</a>: <i>envRec</i> does not already have a binding for <i>N</i>.</li>
             <li>Create an immutable binding in <i>envRec</i> for <i>N</i> and record that it is uninitialised.</li>
@@ -10655,7 +10661,7 @@
           <var>N</var> to the value of argument <var>V</var>. An uninitialised binding for <var>N</var> must already exist.</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1">declarative environment record</a> for which the method was
+            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1.1">declarative environment record</a> for which the method was
                 invoked.</li>
             <li><a href="#sec-5.2">Assert</a>: <i>envRec</i> must have an uninitialised binding for <i>N</i>.</li>
             <li>Set the bound value for <i>N</i> in <i>envRec</i> to <i>V</i>.</li>
@@ -10674,7 +10680,7 @@
           <span class="value">true</span>.</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1">declarative environment record</a> for which the method was
+            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1.1">declarative environment record</a> for which the method was
                 invoked.</li>
             <li><a href="#sec-5.2">Assert</a>: <i>envRec</i> must have a binding for <i>N</i>.</li>
             <li>If the binding for <i>N</i> in <i>envRec</i> has not yet been initialised throw a <b>ReferenceError</b>
@@ -10696,7 +10702,7 @@
           <b>ReferenceError</b> exception.</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1">declarative environment record</a> for which the method was
+            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1.1">declarative environment record</a> for which the method was
                 invoked.</li>
             <li><a href="#sec-5.2">Assert</a>: <i>envRec</i> has a binding for <i>N</i>.</li>
             <li>If the binding for <i>N</i> in <i>envRec</i> is an uninitialised binding, then
@@ -10721,7 +10727,7 @@
           can only delete bindings that have been explicitly designated as being subject to deletion.</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1">declarative environment record</a> for which the method was
+            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1.1">declarative environment record</a> for which the method was
                 invoked.</li>
             <li>If <i>envRec</i> does not have a binding for the name that is the value of <i>N</i>, return <b>true</b>.</li>
             <li>If the binding for <i>N</i> in <i>envRec</i> cannot be deleted, return <b>false</b>.</li>
@@ -10768,15 +10774,15 @@
         <h1><span class="secnum"><a href="#sec-10.2.1.2" title="link to this section">10.2.1.2</a></span> Object Environment
             Records</h1>
 
-        <p>Each <a href="#sec-10.2.1">object environment record</a> is associated with an object called its <i>binding object</i>.
-        An <a href="#sec-10.2.1">object environment record</a> binds the set of string identifier names that directly correspond
-        to the property names of its binding object. Property keys that are not strings in the form of an <span
-        class="nt">IdentifierName</span> are not included in the set of bound identifiers. Both own and inherited properties are
-        included in the set regardless of the setting of their [[Enumerable]] attribute. Because properties can be dynamically
-        added and deleted from objects, the set of identifiers bound by an <a href="#sec-10.2.1">object environment record</a> may
-        potentially change as a side-effect of any operation that adds or deletes properties. Any bindings that are created as a
-        result of such a side-effect are considered to be a mutable binding even if the Writable attribute of the corresponding
-        property has the value <b>false</b>. Immutable bindings do not exist for object environment records.</p>
+        <p>Each object environment record is associated with an object called its <i>binding object</i>. An object environment
+        record binds the set of string identifier names that directly correspond to the property names of its binding object.
+        Property keys that are not strings in the form of an <span class="nt">IdentifierName</span> are not included in the set of
+        bound identifiers. Both own and inherited properties are included in the set regardless of the setting of their
+        [[Enumerable]] attribute. Because properties can be dynamically added and deleted from objects, the set of identifiers
+        bound by an object environment record may potentially change as a side-effect of any operation that adds or deletes
+        properties. Any bindings that are created as a result of such a side-effect are considered to be a mutable binding even if
+        the Writable attribute of the corresponding property has the value <b>false</b>. Immutable bindings do not exist for
+        object environment records.</p>
 
         <p>Object environment records also have a possibly empty <a href="#sec-8.2.2">List</a> of strings called
         <var>unscopables</var>. The strings in this <a href="#sec-8.2.2">List</a> are exclude from the environment records set of
@@ -10784,9 +10790,8 @@
 
         <p>Object environment records created for <code>with</code> statements (<a href="#sec-12.10">12.10</a>) can provide their
         binding object as an implicit this value for use in function calls. The capability is controlled by a
-        <var>withEnvironment</var> Boolean value that is associated with each <a href="#sec-10.2.1">object environment record</a>.
-        By default, the value of <var>withEnvironment</var> is <b>false</b> for any <a href="#sec-10.2.1">object environment
-        record</a>.</p>
+        <var>withEnvironment</var> Boolean value that is associated with each object environment record.  By default, the value of
+        <var>withEnvironment</var> is <b>false</b> for any object environment record.</p>
 
         <p>The behaviour of the concrete specification methods for Object Environment Records is defined by the following
         algorithms.</p>
@@ -10798,7 +10803,7 @@
           if its associated binding object has a property whose name is the value of the argument <var>N</var>:</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1">object environment record</a> for which the method was
+            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1.2">object environment record</a> for which the method was
                 invoked.</li>
             <li>If <i>N</i> is an element of <i>envRec&rsquo;s unscopables</i>, then return <b>false</b>.</li>
             <li>Let <i>bindings</i> be the binding object for <i>envRec</i>.</li>
@@ -10816,7 +10821,7 @@
           the new property&rsquo;s [[Configurable]] attribute is set to <b>true</b>, otherwise it is set to <b>false</b>.</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1">object environment record</a> for which the method was
+            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1.2">object environment record</a> for which the method was
                 invoked.</li>
             <li>Let <i>bindings</i> be the binding object for <i>envRec</i>.</li>
             <li>If <i>D</i> is <b>true</b> then let <i>configValue</i> be <b>true</b> otherwise let <i>configValue</i> be
@@ -10850,7 +10855,7 @@
           <var>N</var> to the value of argument <var>V</var>. An uninitialised binding for <var>N</var> must already exist.</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1">object environment record</a> for which the method was
+            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1.2">object environment record</a> for which the method was
                 invoked.</li>
             <li><a href="#sec-5.2">Assert</a>: <i>envRec</i> must have an uninitialised binding for <i>N</i>.</li>
             <li>Record that the binding for <i>N</i> in <i>envRec</i> has been initialised.</li>
@@ -10870,7 +10875,7 @@
           argument <var>S</var>.</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1">object environment record</a> for which the method was
+            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1.2">object environment record</a> for which the method was
                 invoked.</li>
             <li>Let <i>bindings</i> be the binding object for <i>envRec</i>.</li>
             <li>Return the result of <a href="#sec-9.3.2">Put</a>(<i>bindings</i>, <i>N</i>, <i>V</i>, and <i>S</i>).</li>
@@ -10887,7 +10892,7 @@
           <var>S</var> argument:</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1">object environment record</a> for which the method was
+            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1.2">object environment record</a> for which the method was
                 invoked.</li>
             <li>Let <i>bindings</i> be the binding object for <i>envRec</i>.</li>
             <li>Let <i>value</i> be the result of <a href="#sec-9.3.6">HasProperty</a>(<i>bindings</i>, <i>N</i>).</li>
@@ -10911,7 +10916,7 @@
           value <b>true</b>.</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1">object environment record</a> for which the method was
+            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1.2">object environment record</a> for which the method was
                 invoked.</li>
             <li>Let <i>bindings</i> be the binding object for <i>envRec</i>.</li>
             <li>Return the result of calling the [[Delete]] internal method of <i>bindings</i> passing <i>N</i> as the
@@ -10949,7 +10954,7 @@
           flag is <b>true</b>.</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1">object environment record</a> for which the method was
+            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1.2">object environment record</a> for which the method was
                 invoked.</li>
             <li>If the <i>withEnvironment</i> flag of <i>envRec</i> is <b>true</b>, return the binding object for
                 <i>envRec</i>.</li>
@@ -10962,7 +10967,7 @@
         <h1><span class="secnum"><a href="#sec-10.2.1.3" title="link to this section">10.2.1.3</a></span> Function Environment
             Records</h1>
 
-        <p>A function environment record is a <a href="#sec-10.2.1">declarative environment record</a> that is used to represent
+        <p>A function environment record is a <a href="#sec-10.2.1.1">declarative environment record</a> that is used to represent
         the outer most scope of a function that provides a <code>this</code> binding. In addition to its identifier bindings, a
         function environment record contains the <b>this</b> value used within its scope. If such a function references
         <code>super</code>, its function environment record  also contains the state that is used to perform <code>super</code>
@@ -10974,7 +10979,7 @@
         href="#sec-8.1.6">property key</a> used for unqualified super invocations from within the function.  The default value for
         <span class="nt">HomeObject</span> and <span class="nt">MethodName</span> is <span class="value">undefined</span>.</p>
 
-        <p>Methods environment records support all of <a href="#sec-10.2.1">Declarative Environment Record</a> methods listed in
+        <p>Methods environment records support all of <a href="#sec-10.2.1.1">Declarative Environment Record</a> methods listed in
         <a href="#table-22">Table 22</a> and share the same specifications for all of those methods except for HasThisBinding and
         HasSuperBinding. In addition, declarative environment records support the methods listed in <a href="#table-23">Table
         23</a>:</p>
@@ -11008,7 +11013,7 @@
           <h1><span class="secnum"><a href="#sec-10.2.1.3.1" title="link to this section">10.2.1.3.1</a></span> HasThisBinding
               ()</h1>
 
-          <p>Function Environment Records always provide a <code>this</code> binding.</p>
+          <p><a href="#sec-10.2.1.3">Function Environment Records</a> always provide a <code>this</code> binding.</p>
 
           <ol class="proc">
             <li>Return <b>true</b>.</li>
@@ -11058,23 +11063,23 @@
             Records</h1>
 
         <p>A global environment record is used to represent the outer most scope that is shared by all of the ECMAScript <span
-        style="font-family: Times New Roman"><i>Script</i> elements that are processed in a common Realm (<a
-        href="#sec-10.3">10.3</a>)</span>. A global environment provides the bindings for built-in globals (<a
+        style="font-family: Times New Roman"><i>Script</i> elements that are processed in a common <a href="#sec-10.3">Realm</a>
+        (<a href="#sec-10.3">10.3</a>)</span>. A global environment provides the bindings for built-in globals (<a
         href="#sec-15.1">15.1</a>), properties of the global object, and for all declarations that are not function code and that
         occur within <span class="nt">Script</span> productions.</p>
 
         <p>A global environment record is logically a single record but it is specified as a composite encapsulating an <a
-        href="#sec-10.2.1">object environment record</a> and a <a href="#sec-10.2.1">declarative environment record</a>.  The <a
-        href="#sec-10.2.1">object environment record</a> has as its base object the global object of the associated Realm. This
-        global object is also the value of the global environment record&rsquo;s <var>thisValue</var>. The <a
-        href="#sec-10.2.1">object environment record</a> component of a global environment record contains the bindings for all
-        built-in globals (<a href="#sec-15.1">15.1</a>) and all bindings introduced by a <span
+        href="#sec-10.2.1.2">object environment record</a> and a <a href="#sec-10.2.1.1">declarative environment record</a>.  The
+        <a href="#sec-10.2.1.2">object environment record</a> has as its base object the global object of the associated <a
+        href="#sec-10.3">Realm</a>. This global object is also the value of the global environment record&rsquo;s
+        <var>thisValue</var>. The <a href="#sec-10.2.1.2">object environment record</a> component of a global environment record
+        contains the bindings for all built-in globals (<a href="#sec-15.1">15.1</a>) and all bindings introduced by a <span
         class="nt">FunctionDeclaration</span> or <span class="nt">VariableStatement</span> contained in global code. The bindings
-        for all other ECMAScript declarations in global code are contained in the <a href="#sec-10.2.1">declarative environment
+        for all other ECMAScript declarations in global code are contained in the <a href="#sec-10.2.1.1">declarative environment
         record</a> component of the global environment record.</p>
 
-        <p>Properties may be created directly on a global object.  Hence, the <a href="#sec-10.2.1">object environment record</a>
-        component of a global environment record may contain both bindings created explicitly by  <span
+        <p>Properties may be created directly on a global object.  Hence, the <a href="#sec-10.2.1.2">object environment
+        record</a> component of a global environment record may contain both bindings created explicitly by  <span
         class="nt">FunctionDeclaration</span> or <span class="nt">VariableStatement</span> declarations and binding created
         implicitly as properties of the global object. In order to identify which bindings were explicitly created using
         declarations, a global environment record maintains a list of the names bound using its CreateGlobalVarBindings and
@@ -11092,15 +11097,15 @@
             </tr>
             <tr>
               <td style="border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black">ObjectEnvironment</td>
-              <td style="border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black">A <a href="#sec-10.2.1">Object Environment Record</a> whose base object is the global object.  Contains global built-in bindings as well as bindings for <span class="nt">FunctionDeclaration</span> or <span class="nt">VariableStatement</span> declarations in global code for the associated Realm.</td>
+              <td style="border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black">A <a href="#sec-10.2.1.2">Object Environment Record</a> whose base object is the global object.  Contains global built-in bindings as well as bindings for <span class="nt">FunctionDeclaration</span> or <span class="nt">VariableStatement</span> declarations in global code for the associated <a href="#sec-10.3">Realm</a>.</td>
             </tr>
             <tr>
               <td style="border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; border-top: 1px solid black">DeclarativeEnvironment</td>
-              <td style="border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; border-top: 1px solid black">A <a href="#sec-10.2.1">Declarative Environment Record</a> that contains bindings for all declarations in global for the associated Realm code except for <span class="nt">FunctionDeclaration</span> and <span class="nt">VariableStatement</span> declarations.</td>
+              <td style="border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; border-top: 1px solid black">A <a href="#sec-10.2.1.1">Declarative Environment Record</a> that contains bindings for all declarations in global for the associated <a href="#sec-10.3">Realm</a> code except for <span class="nt">FunctionDeclaration</span> and <span class="nt">VariableStatement</span> declarations.</td>
             </tr>
             <tr>
               <td style="border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; border-top: 1px solid black">VarNames</td>
-              <td style="border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; border-top: 1px solid black">A <a href="#sec-8.2.2">List</a> containing the string names bound by <span class="nt">FunctionDeclaration</span> or <span class="nt">VariableStatement</span> declarations in global code for the associated Realm.</td>
+              <td style="border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; border-top: 1px solid black">A <a href="#sec-8.2.2">List</a> containing the string names bound by <span class="nt">FunctionDeclaration</span> or <span class="nt">VariableStatement</span> declarations in global code for the associated <a href="#sec-10.3">Realm</a>.</td>
             </tr>
           </table>
         </figure>
@@ -11224,7 +11229,7 @@
                     and <i>V</i>.</li>
               </ol>
             </li>
-            <li><a href="#sec-5.2">Assert</a>: If the binding exists it must be in the <a href="#sec-10.2.1">object environment
+            <li><a href="#sec-5.2">Assert</a>: If the binding exists it must be in the <a href="#sec-10.2.1.2">object environment
                 record</a>.</li>
             <li>Let <i>ObjRec</i> be <i>envRec&rsquo;s</i> ObjectEnvironment.</li>
             <li>Return the result of calling <i>ObjRec&rsquo;s</i> InitialiseBinding concrete method with arguments <i>N</i> and
@@ -11244,7 +11249,7 @@
           the Boolean argument <var>S</var>.</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1">declarative environment record</a> for which the method was
+            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1.1">declarative environment record</a> for which the method was
                 invoked.</li>
             <li>Let <i>DclRec</i> be <i>envRec&rsquo;s</i> DeclarativeEnvironment.</li>
             <li>If the result of calling <i>DclRec&rsquo;s</i> HasBinding concrete method with argument <i>N</i> is <b>true</b>,
@@ -11271,7 +11276,7 @@
           the value of the Boolean argument <var>S</var>.</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1">declarative environment record</a> for which the method was
+            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1.1">declarative environment record</a> for which the method was
                 invoked.</li>
             <li>Let <i>DclRec</i> be <i>envRec&rsquo;s</i> DeclarativeEnvironment.</li>
             <li>If the result of calling <i>DclRec&rsquo;s</i> HasBinding concrete method with argument <i>N</i> is <b>true</b>,
@@ -11295,7 +11300,7 @@
           only delete bindings that have been explicitly designated as being subject to deletion.</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1">declarative environment record</a> for which the method was
+            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1.1">declarative environment record</a> for which the method was
                 invoked.</li>
             <li>Let <i>DclRec</i> be <i>envRec&rsquo;s</i> DeclarativeEnvironment.</li>
             <li>If the result of calling <i>DclRec&rsquo;s</i> HasBinding concrete method with argument <i>N</i> is <b>true</b>,
@@ -11328,8 +11333,8 @@
           <h1><span class="secnum"><a href="#sec-10.2.1.4.8" title="link to this section">10.2.1.4.8</a></span> HasThisBinding
               ()</h1>
 
-          <p>Global Environment Records always provide a <code>this</code> binding whose value is the associated global
-          object.</p>
+          <p><a href="#sec-10.2.1.4">Global Environment Records</a> always provide a <code>this</code> binding whose value is the
+          associated global object.</p>
 
           <ol class="proc">
             <li>Return <b>true</b>.</li>
@@ -11348,7 +11353,7 @@
           <h1><span class="secnum"><a href="#sec-10.2.1.4.10" title="link to this section">10.2.1.4.10</a></span>
               WithBaseObject()</h1>
 
-          <p>Global Environment Records always return <b>undefined</b> as their WithBaseObject.</p>
+          <p><a href="#sec-10.2.1.4">Global Environment Records</a> always return <b>undefined</b> as their WithBaseObject.</p>
 
           <ol class="proc">
             <li>Return <b>undefined</b>.</li>
@@ -11453,11 +11458,11 @@
               CreateGlobalVarBinding (N, D)</h1>
 
           <p>The concrete <a href="#sec-10.2.1">Environment Record</a> method CreateGlobalVarBinding for global environment
-          records creates a mutable binding in the associated <a href="#sec-10.2.1">object environment record</a> and records the
-          bound name in the associated VarNames <a href="#sec-8.2.2">List</a>.  If a binding already exists, it is reused.</p>
+          records creates a mutable binding in the associated <a href="#sec-10.2.1.2">object environment record</a> and records
+          the bound name in the associated VarNames <a href="#sec-8.2.2">List</a>.  If a binding already exists, it is reused.</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1">declarative environment record</a> for which the method was
+            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1.1">declarative environment record</a> for which the method was
                 invoked.</li>
             <li>Let <i>ObjRec</i> be <i>envRec&rsquo;s</i> ObjectEnvironment.</li>
             <li>If the result of calling <i>ObjRec&rsquo;s</i> HasBinding concrete method with argument <i>N</i> is <b>false</b>,
@@ -11483,11 +11488,12 @@
               CreateGlobalFunctionBinding (N, V, D)</h1>
 
           <p>The concrete <a href="#sec-10.2.1">Environment Record</a> method CreateGlobalFunctionBinding for global environment
-          records creates a mutable binding in the associated <a href="#sec-10.2.1">object environment record</a> and records the
-          bound name in the associated VarNames <a href="#sec-8.2.2">List</a>.  If a binding already exists, it is replaced.</p>
+          records creates a mutable binding in the associated <a href="#sec-10.2.1.2">object environment record</a> and records
+          the bound name in the associated VarNames <a href="#sec-8.2.2">List</a>.  If a binding already exists, it is
+          replaced.</p>
 
           <ol class="proc">
-            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1">declarative environment record</a> for which the method was
+            <li>Let <i>envRec</i> be the <a href="#sec-10.2.1.1">declarative environment record</a> for which the method was
                 invoked.</li>
             <li>Let <i>ObjRec</i> be <i>envRec&rsquo;s</i> ObjectEnvironment.</li>
             <li>Let <i>globalObject</i> be the binding object for <i>ObjRec</i>.</li>
@@ -11573,7 +11579,7 @@
 
         <ol class="proc">
           <li>Let <i>env</i> be a new <a href="#sec-10.2">Lexical Environment</a>.</li>
-          <li>Let <i>envRec</i> be a new <a href="#sec-10.2.1">declarative environment record</a> containing no bindings.</li>
+          <li>Let <i>envRec</i> be a new <a href="#sec-10.2.1.1">declarative environment record</a> containing no bindings.</li>
           <li>Set <i>env&rsquo;s</i> environment record to be <i>envRec</i>.</li>
           <li>Set the <a href="#sec-10.2">outer lexical environment reference</a> of <i>env</i> to <i>E</i>.</li>
           <li>Return <i>env</i>.</li>
@@ -11590,7 +11596,7 @@
 
         <ol class="proc">
           <li>Let <i>env</i> be a new <a href="#sec-10.2">Lexical Environment</a>.</li>
-          <li>Let <i>envRec</i> be a new <a href="#sec-10.2.1">object environment record</a> containing <i>O</i> as the binding
+          <li>Let <i>envRec</i> be a new <a href="#sec-10.2.1.2">object environment record</a> containing <i>O</i> as the binding
               object.</li>
           <li>Let <i>envRec&rsquo;s</i> unscopables be an empty <a href="#sec-8.2.2">List</a>.</li>
           <li>Set <i>env&rsquo;s</i> environment record to be <i>envRec</i>.</li>
@@ -11610,7 +11616,8 @@
           <li><a href="#sec-5.2">Assert</a>: The value of <i>F&rsquo;s</i> [[ThisMode]] <a href="#sec-8.1.6.2">internal data
               property</a> is not <span style="font-family: sans-serif">lexical</span>.</li>
           <li>Let <i>env</i> be a new <a href="#sec-10.2">Lexical Environment</a>.</li>
-          <li>Let <i>envRec</i> be a new Function environment record containing containing no bindings.</li>
+          <li>Let <i>envRec</i> be a new <a href="#sec-10.2.1.3">Function environment record</a> containing containing no
+              bindings.</li>
           <li>Set <i>envRec&rsquo;s</i> <i>thisValue</i> to <i>T</i>.</li>
           <li>If <i>F</i> has a [[HomeObject]] <a href="#sec-8.1.6.2">internal data property</a>, then
             <ol class="block">
@@ -11722,8 +11729,8 @@
           <td style="border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black">Any state needed to perform, suspend, and resume evaluation of the code associated with this execution context.</td>
         </tr>
         <tr>
-          <td style="border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black">Realm</td>
-          <td style="border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black">The Realm from which associated code accesses ECMAScript resources.</td>
+          <td style="border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black"><a href="#sec-10.3">Realm</a></td>
+          <td style="border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black">The <a href="#sec-10.3">Realm</a> from which associated code accesses ECMAScript resources.</td>
         </tr>
       </table>
     </figure>
@@ -11735,7 +11742,8 @@
     execution context status among execution contexts usually occurs in stack-like last-in/first-out manner.  However, some
     ECMAScript features require non-LIFO transitions of the running execution context.</p>
 
-    <p>The value is the Realm component of the running execution context is also called the <i>current Realm</i>.</p>
+    <p>The value is the <a href="#sec-10.3">Realm</a> component of the running execution context is also called the <i>current <a
+    href="#sec-10.3">Realm</a></i>.</p>
 
     <p>Execution contexts for ECMAScript code have the additional state components listed in <a href="#table-29">Table 29</a>.</p>
 
@@ -11791,11 +11799,12 @@
       <h1><span class="secnum"><a href="#sec-10.4.1" title="link to this section">10.4.1</a></span> Identifier Resolution</h1>
 
       <p>Identifier resolution is the process of determining the binding of an <span class="nt">IdentifierName</span> using the <a
-      href="#sec-10.4">LexicalEnvironment</a> of the running execution context. During execution of ECMAScript code, Identifier
-      Resolution is performed using the following algorithm:</p>
+      href="#sec-10.4">LexicalEnvironment</a> of <a href="#sec-10.4">the running execution context</a>. During execution of
+      ECMAScript code, Identifier Resolution is performed using the following algorithm:</p>
 
       <ol class="proc">
-        <li>Let <i>env</i> be the running execution context&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a>.</li>
+        <li>Let <i>env</i> be <a href="#sec-10.4">the running execution context</a>&rsquo;s <a
+            href="#sec-10.4">LexicalEnvironment</a>.</li>
         <li>If the syntactic production that is being evaluated is contained in <a href="#sec-10.1.1">strict mode code</a>, then
             let <i>strict</i> be <b>true</b>, else let <i>strict</i> be <b>false</b>.</li>
         <li>Return the result of calling <a href="#sec-10.2.2.1">GetIdentifierReference</a> abstract operation passing <i>env</i>,
@@ -11814,7 +11823,8 @@
       style="font-family: Times New Roman">GetThisEnvironment</span> performs the following steps:</p>
 
       <ol class="proc">
-        <li>Let <i>lex</i> be the running execution context&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a>.</li>
+        <li>Let <i>lex</i> be <a href="#sec-10.4">the running execution context</a>&rsquo;s <a
+            href="#sec-10.4">LexicalEnvironment</a>.</li>
         <li>Repeat
           <ol class="block">
             <li>Let <i>envRec</i> be <i>lex</i>&rsquo;s environment record.</li>
@@ -11836,8 +11846,8 @@
       <h1><span class="secnum"><a href="#sec-10.4.3" title="link to this section">10.4.3</a></span> ThisResolution</h1>
 
       <p>The abstract operation ThisResolution is the process of determining the binding of the keyword <code>this</code> using
-      the <a href="#sec-10.4">LexicalEnvironment</a> of the running execution context. ThisResolution performs the following
-      steps:</p>
+      the <a href="#sec-10.4">LexicalEnvironment</a> of <a href="#sec-10.4">the running execution context</a>. ThisResolution
+      performs the following steps:</p>
 
       <ol class="proc">
         <li>Let <i>env</i> be the result of performing the <a href="#sec-10.4.2">GetThisEnvironment</a> abstract operation.</li>
@@ -11849,12 +11859,12 @@
       <h1><span class="secnum"><a href="#sec-10.4.4" title="link to this section">10.4.4</a></span> GetGlobalObject</h1>
 
       <p>The abstract operation <span style="font-family: Times New Roman">GetGlobalObject</span> returns the global object used
-      by the currently running execution context. <span style="font-family: Times New Roman">GetGlobalObject</span> performs the
-      following steps:</p>
+      by <a href="#sec-10.4">the currently running execution context</a>. <span style="font-family: Times New
+      Roman">GetGlobalObject</span> performs the following steps:</p>
 
       <ol class="proc">
-        <li>Let <i>ctx</i> be the running execution context.</li>
-        <li>Let <i>currentRealm</i> be <i>ctx&rsquo;s</i> Realm.</li>
+        <li>Let <i>ctx</i> be <a href="#sec-10.4">the running execution context</a>.</li>
+        <li>Let <i>currentRealm</i> be <i>ctx&rsquo;s</i> <a href="#sec-10.3">Realm</a>.</li>
         <li>Return <i>currentRealm</i>.[[globalThis]].</li>
       </ol>
     </section>
@@ -11869,16 +11879,17 @@
           Instantiation</h1>
 
       <div class="note">
-        <p><span class="nh">NOTE</span> When an execution context is established for evaluating scripts,  declarations are
-        instantiated in the current global environment.  Each global binding declarated in the code is instantiated.</p>
+        <p><span class="nh">NOTE</span> When an <a href="#sec-10.4">execution context</a> is established for evaluating scripts,
+        declarations are instantiated in the current global environment.  Each global binding declarated in the code is
+        instantiated.</p>
       </div>
 
       <p>Global Declaration Instantiation is performed as follows using arguments <span style="font-family: Times New
       Roman"><i>script</i>,</span> <span style="font-family: Times New Roman"><i>env</i>,</span> <span style="font-family: Times
       New Roman">and <i>deletableBindings</i></span>. <var>script</var> is the <span class="nt">ScriptBody</span> that for which
-      the execution context is being established.  <var>env</var> is <a href="#sec-10.2.1.4">the global environment</a> record in
-      which bindings are to be created. <var>deletableBindings</var> is <span class="value">true</span> if the bindings that are
-      created should be deletable.</p>
+      the <a href="#sec-10.4">execution context</a> is being established.  <var>env</var> is <a href="#sec-10.2.1.4">the global
+      environment</a> record in which bindings are to be created. <var>deletableBindings</var> is <span class="value">true</span>
+      if the bindings that are created should be deletable.</p>
 
       <ol class="proc">
         <li>Let <i>strict</i> be IsStrict of <i>script</i>.</li>
@@ -12030,16 +12041,17 @@
       appears that the binding semantics of formal parameters  is like to change again.</p>
 
       <div class="note">
-        <p><span class="nh">NOTE</span> When an execution context is established for evaluating function code a new <a
-        href="#sec-10.2.1">Declarative Environment Record</a> is created and bindings for each formal parameter, and each function
-        level variable, constant, or function declarated in the function are instantiated in the environment record. Formal
-        parameters and functions are initialised as part of this process.  All other bindings are initialised during execution of
-        the function code.</p>
+        <p><span class="nh">NOTE</span> When an <a href="#sec-10.4">execution context</a> is established for evaluating function
+        code a new <a href="#sec-10.2.1.1">Declarative Environment Record</a> is created and bindings for each formal parameter,
+        and each function level variable, constant, or function declarated in the function are instantiated in the environment
+        record. Formal parameters and functions are initialised as part of this process.  All other bindings are initialised
+        during execution of the function code.</p>
       </div>
 
       <p>Function Declaration Instantiation is performed as follows using arguments <var>func,</var> <var>argumentsList</var>, and
-      <var>env</var>. <var>func</var> is the function object that for which the execution context is being established.
-      <var>env</var> is the <a href="#sec-10.2.1">declarative environment record</a> in which bindings are to be created.</p>
+      <var>env</var>. <var>func</var> is the function object that for which the <a href="#sec-10.4">execution context</a> is being
+      established.  <var>env</var> is the <a href="#sec-10.2.1.1">declarative environment record</a> in which bindings are to be
+      created.</p>
 
       <ol class="proc">
         <li>Let <i>code</i> be the value of the [[Code]] <a href="#sec-8.1.6.2">internal data property</a> of <i>func</i>.</li>
@@ -12206,13 +12218,13 @@
 
       <div class="note">
         <p><span class="nh">NOTE</span>  When a <span class="nt">Block</span> or <span class="nt">CaseBlock</span> production is
-        evaluated a new <a href="#sec-10.2.1">Declarative Environment Record</a> is created and bindings for each block scoped
+        evaluated a new <a href="#sec-10.2.1.1">Declarative Environment Record</a> is created and bindings for each block scoped
         variable, constant, or function declarated in the block are instantiated in the environment record.</p>
       </div>
 
       <p>Block Declaration Instantiation is performed as follows using arguments <var>code</var> and <var>env</var>.
       <var>code</var> is the grammar production corresponding to the body of the block.  <var>env</var> is the <a
-      href="#sec-10.2.1">declarative environment record</a> in which bindings are to be created.</p>
+      href="#sec-10.2.1.1">declarative environment record</a> in which bindings are to be created.</p>
 
       <ol class="proc">
         <li>Let <i>declarations</i> be the LexicalDeclarations of <i>code</i>.</li>
@@ -12492,11 +12504,12 @@
     <div class="note">
       <p><span class="nh">NOTE 1</span> For non-strict mode functions the integer indexed data properties of an arguments object
       whose numeric name values are less than the number of formal parameters of the corresponding function object initially share
-      their values with the corresponding argument bindings in the function&rsquo;s execution context. This means that changing
-      the property changes the corresponding value of the argument binding and vice-versa. This correspondence is broken if such a
-      property is deleted and then redefined or if the property is changed into an accessor property. For strict mode functions,
-      the values of the arguments object&rsquo;s properties are simply a copy of the arguments passed to the function and there is
-      no dynamic linkage between the property values and the formal parameter values.</p>
+      their values with the corresponding argument bindings in the function&rsquo;s <a href="#sec-10.4">execution context</a>.
+      This means that changing the property changes the corresponding value of the argument binding and vice-versa. This
+      correspondence is broken if such a property is deleted and then redefined or if the property is changed into an accessor
+      property. For strict mode functions, the values of the arguments object&rsquo;s properties are simply a copy of the
+      arguments passed to the function and there is no dynamic linkage between the property values and the formal parameter
+      values.</p>
     </div>
 
     <div class="note">
@@ -13028,7 +13041,8 @@
               @@iterator, and an empty <a href="#sec-8.2.2">List</a>.</li>
           <li>Let <i>keys</i> be <a href="#sec-9.1.9">ToObject</a>(<i>iterator</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>keys</i>).</li>
-          <li>Let <i>oldEnv</i> be the running execution context&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a>.</li>
+          <li>Let <i>oldEnv</i> be <a href="#sec-10.4">the running execution context</a>&rsquo;s <a
+              href="#sec-10.4">LexicalEnvironment</a>.</li>
           <li>Repeat
             <ol class="block">
               <li>Let <i>nextResult</i> be the result of <a href="#sec-15.19.4.3.6">IteratorNext</a>(<i>keys</i>).</li>
@@ -13050,10 +13064,12 @@
               <li>Let <i>status</i> be the result of performing Binding Initialisation for <i>ForBinding</i> passing
                   <i>nextValue</i> and <i>forEnv</i> as the arguments.</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>status</i>).</li>
-              <li>Set the running execution context&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a> to <i>forEnv</i>.</li>
+              <li>Set <a href="#sec-10.4">the running execution context</a>&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a> to
+                  <i>forEnv</i>.</li>
               <li>Let <i>continue</i> be the result of performing ComprehensionEvaluation for <i>tail</i> with argument
                   <i>accumulator</i>.</li>
-              <li>Set the running execution context&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a> to <i>oldEnv</i>.</li>
+              <li>Set <a href="#sec-10.4">the running execution context</a>&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a> to
+                  <i>oldEnv</i>.</li>
               <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>continue</i>).</li>
             </ol>
           </li>
@@ -13444,7 +13460,8 @@
         <ol class="proc">
           <li>If <i>GeneratorComprehension</i> is contained in <a href="#sec-10.1.1">strict mode code</a>, then let <i>strict</i>
               be <b>true</b>; otherwise let <i>strict</i> be <b>false</b>.</li>
-          <li>Let <i>scope</i> be the <a href="#sec-10.4">LexicalEnvironment</a> of the running execution context.</li>
+          <li>Let <i>scope</i> be the <a href="#sec-10.4">LexicalEnvironment</a> of <a href="#sec-10.4">the running execution
+              context</a>.</li>
           <li><span style="font-family: Times New Roman">Let <i>parameters</i> be the production:  <i>FormalParameters</i></span>
               <b>:</b> [empty].</li>
           <li>Using <i>Comprehension</i> from the production that is being evaluated, let <i>body</i> be the supplemental
@@ -14135,7 +14152,8 @@
         <li>Let <i>result</i> be the result of calling the [[Call]] internal method on <i>func</i>, passing <i>thisValue</i> as
             the <i>thisArgument</i> and <i>argList</i> as the <i>argumentsList</i>.</li>
         <li><a href="#sec-5.2">Assert</a>: If <i>tailPosition</i> is <b>true</b>, the above call will not return here, but instead
-            evaluation will continue with the resumption of <i>leafCallerContext</i> as the running execution context.</li>
+            evaluation will continue with the resumption of <i>leafCallerContext</i> as <a href="#sec-10.4">the running execution
+            context</a>.</li>
         <li><a href="#sec-5.2">Assert</a>: If <i>result</i> is not an <a href="#sec-8.2.3">abrupt completion</a> then <a
             href="#sec-8">Type</a>(<i>result</i>) is an <a href="#sec-8.1">ECMAScript language type</a></li>
         <li>Return <i>result</i>.</li>
@@ -14164,8 +14182,8 @@
         <li>Let <i>result</i> be the result of calling the [[Invoke]] internal method on <i>base</i>, passing <i>key</i>,
             <i>argList</i>, and <i>thisValue</i>.</li>
         <li><a href="#sec-5.2">Assert</a>: If <i>tailPosition</i> is <b>true</b>, the above [[Invoke]] will not return here, but
-            instead evaluation will continue with the resumption of <i>leafCallerContext</i> as the running execution
-            context.</li>
+            instead evaluation will continue with the resumption of <i>leafCallerContext</i> as <a href="#sec-10.4">the running
+            execution context</a>.</li>
         <li><a href="#sec-5.2">Assert</a>: If <i>result</i> is not an <a href="#sec-8.2.3">abrupt completion</a> then <a
             href="#sec-8">Type</a>(<i>result</i>) is an <a href="#sec-8.1">ECMAScript language type</a></li>
         <li>Return <i>result</i>.</li>
@@ -15886,8 +15904,8 @@
 
         <li>
           <p>It is a Syntax Error if <span class="nt">LeftHandSideExpression</span> is an <span class="nt">Identifier</span> that
-          can be statically determined to always resolve to a <a href="#sec-10.2.1">declarative environment record</a> binding and
-          the resolved binding is an immutable binding.</p>
+          can be statically determined to always resolve to a <a href="#sec-10.2.1.1">declarative environment record</a> binding
+          and the resolved binding is an immutable binding.</p>
         </li>
 
         <li>
@@ -15901,7 +15919,7 @@
       <ul>
         <li>
           <p>It is a Syntax Error if the <span class="nt">LeftHandSideExpression</span> is an <span class="nt">Identifier</span>
-          that can be statically determined to always resolve to a <a href="#sec-10.2.1">declarative environment record</a>
+          that can be statically determined to always resolve to a <a href="#sec-10.2.1.1">declarative environment record</a>
           binding and the resolved binding is an immutable binding.</p>
         </li>
 
@@ -16060,7 +16078,7 @@
 
           <li>
             <p>It is a Syntax Error if <span class="nt">Identifier</span> <var>does not statically resolve to a <a
-            href="#sec-10.2.1">declarative environment record</a> binding or if the resolved binding is an immutable
+            href="#sec-10.2.1.1">declarative environment record</a> binding or if the resolved binding is an immutable
             binding.</var></p>
           </li>
         </ul>
@@ -16090,7 +16108,7 @@
 
           <li>
             <p>It is a Syntax Error if <span class="nt">LeftHandSideExpression</span> is an <span class="nt">Identifier</span>
-            that can be statically determined to always resolve to a <a href="#sec-10.2.1">declarative environment record</a>
+            that can be statically determined to always resolve to a <a href="#sec-10.2.1.1">declarative environment record</a>
             binding and the resolved binding is an immutable binding.</p>
           </li>
 
@@ -16643,13 +16661,16 @@
       </ol>
       <div class="gp prod"><span class="nt">Block</span> <span class="geq">:</span> <code class="t">{</code> <span class="nt">StatementList</span> <code class="t">}</code></div>
       <ol class="proc">
-        <li>Let <i>oldEnv</i> be the running execution context&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a>.</li>
+        <li>Let <i>oldEnv</i> be <a href="#sec-10.4">the running execution context</a>&rsquo;s <a
+            href="#sec-10.4">LexicalEnvironment</a>.</li>
         <li>Let <i>blockEnv</i> be the result of calling <a href="#sec-10.2.2.2">NewDeclarativeEnvironment</a> passing
             <i>oldEnv</i> as the argument.</li>
         <li>Perform Block Declaration Instantiation using <i>StatementList</i> and <i>blockEnv</i>.</li>
-        <li>Set the running execution context&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a> to <i>blockEnv</i>.</li>
+        <li>Set <a href="#sec-10.4">the running execution context</a>&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a> to
+            <i>blockEnv</i>.</li>
         <li>Let <i>blockValue</i> be the result of evaluating <i>StatementList</i>.</li>
-        <li>Set the running execution context&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a> to <i>oldEnv</i>.</li>
+        <li>Set <a href="#sec-10.4">the running execution context</a>&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a> to
+            <i>oldEnv</i>.</li>
         <li>If <i>blockValue</i>.[[type]] is <span style="font-family: sans-serif">normal</span> and <i>blockValue</i>.[[value]]
             is <span style="font-family: sans-serif">empty</span>,  then
           <ol class="block">
@@ -16699,9 +16720,9 @@
 
       <div class="note">
         <p><span class="nh">NOTE</span> A <code>let</code> and <code>const</code> declarations define variables that are scoped to
-        the running execution context&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a>. The variables are created when their
-        containing <a href="#sec-10.2">Lexical Environment</a> is instantiated but may not be accessed in any way until the
-        variable&rsquo;s <span class="nt">LexicalBinding</span> is evaluated. A variable defined by a <span
+        <a href="#sec-10.4">the running execution context</a>&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a>. The variables
+        are created when their containing <a href="#sec-10.2">Lexical Environment</a> is instantiated but may not be accessed in
+        any way until the variable&rsquo;s <span class="nt">LexicalBinding</span> is evaluated. A variable defined by a <span
         class="nt">LexicalBinding</span> with an <span class="nt">Initialiser</span> is assigned the value of its <span
         style="font-family: Times New Roman"><i>Initialiser</i>&rsquo;s</span> <span class="nt">AssignmentExpression</span> when
         the <span class="nt">LexicalBinding</span> is evaluated, not when the variable is created. If a <span
@@ -16850,7 +16871,8 @@
         </ol>
         <div class="gp prod"><span class="nt">LexicalBinding</span> <span class="geq">:</span> <span class="nt">BindingIdentifier</span></div>
         <ol class="proc">
-          <li>Let <i>env</i> be the running execution context&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a>.</li>
+          <li>Let <i>env</i> be <a href="#sec-10.4">the running execution context</a>&rsquo;s <a
+              href="#sec-10.4">LexicalEnvironment</a>.</li>
           <li>Return the result of performing Binding Initialisation for <i>BindingIdentifier</i> passing <b>undefined</b> and
               <i>env</i> as the arguments.</li>
         </ol>
@@ -16865,7 +16887,8 @@
           <li>Let <i>rhs</i> be the result of evaluating <i>Initialiser</i>.</li>
           <li>Let <i>value</i> be <a href="#sec-8.2.4.1">GetValue</a>(<i>rhs</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>value</i>).</li>
-          <li>Let <i>env</i> be the running execution context&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a>.</li>
+          <li>Let <i>env</i> be <a href="#sec-10.4">the running execution context</a>&rsquo;s <a
+              href="#sec-10.4">LexicalEnvironment</a>.</li>
           <li>Return the result of performing Binding Initialisation for <i>BindingIdentifier</i> passing <i>value</i> and
               <i>env</i> as the arguments.</li>
         </ol>
@@ -16875,7 +16898,8 @@
           <li>Let <i>value</i> be <a href="#sec-8.2.4.1">GetValue</a>(<i>rhs</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>value</i>).</li>
           <li>If <a href="#sec-8">Type</a>(<i>value</i>) is not Object, then throw a <b>TypeError</b> exception.</li>
-          <li>Let <i>env</i> be the running execution context&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a>.</li>
+          <li>Let <i>env</i> be <a href="#sec-10.4">the running execution context</a>&rsquo;s <a
+              href="#sec-10.4">LexicalEnvironment</a>.</li>
           <li>Return the result of performing Binding Initialisation for <i>BindingPattern</i> using <i>value</i> and <i>env</i>
               as the <i>arguments</i>.</li>
         </ol>
@@ -16886,14 +16910,15 @@
       <h1><span class="secnum"><a href="#sec-12.2.2" title="link to this section">12.2.2</a></span> Variable Statement</h1>
 
       <div class="note">
-        <p><span class="nh">NOTE</span> A <code>var</code> statement declares variables that are scoped to the running execution
-        context&rsquo;s <a href="#sec-10.4">VariableEnvironment</a>. Var variables are created when their containing <a
-        href="#sec-10.2">Lexical Environment</a> is instantiated and are initialised to <b>undefined</b> when created. Within the
-        scope of any VariableEnvironemnt a common <span class="nt">Identifier</span> may appear in more than one <span
-        class="nt">VariableDeclaration</span> but those declarations collective define only one variable. A variable defined by a
-        <span class="nt">VariableDeclaration</span> with an <span class="nt">Initialiser</span> is assigned the value of its <span
-        style="font-family: Times New Roman"><i>Initialiser</i>&rsquo;s</span> <span class="nt">AssignmentExpression</span> when
-        the <span class="nt">VariableDeclaration</span> is executed, not when the variable is created.</p>
+        <p><span class="nh">NOTE</span> A <code>var</code> statement declares variables that are scoped to <a href="#sec-10.4">the
+        running execution context</a>&rsquo;s <a href="#sec-10.4">VariableEnvironment</a>. Var variables are created when their
+        containing <a href="#sec-10.2">Lexical Environment</a> is instantiated and are initialised to <b>undefined</b> when
+        created. Within the scope of any VariableEnvironemnt a common <span class="nt">Identifier</span> may appear in more than
+        one <span class="nt">VariableDeclaration</span> but those declarations collective define only one variable. A variable
+        defined by a <span class="nt">VariableDeclaration</span> with an <span class="nt">Initialiser</span> is assigned the value
+        of its <span style="font-family: Times New Roman"><i>Initialiser</i>&rsquo;s</span> <span
+        class="nt">AssignmentExpression</span> when the <span class="nt">VariableDeclaration</span> is executed, not when the
+        variable is created.</p>
       </div>
 
       <h2>Syntax</h2>
@@ -16996,8 +17021,8 @@
         <div class="note">
           <p><span class="nh">NOTE </span> If a <span class="nt">VariableDeclaration</span> is nested within a with statement and
           the <i>Identifier</i> in the <span class="nt">VariableDeclaration</span> is the same as a property name of the binding
-          object of the with statement&rsquo;s <a href="#sec-10.2.1">object environment record</a>, then step 3 will assign value
-          to the property instead of to the <a href="#sec-10.4">VariableEnvironment</a> binding of the <span
+          object of the with statement&rsquo;s <a href="#sec-10.2.1.2">object environment record</a>, then step 3 will assign
+          value to the property instead of to the <a href="#sec-10.4">VariableEnvironment</a> binding of the <span
           class="nt">Identifier</span>.</p>
         </div>
 
@@ -17776,7 +17801,8 @@
         </ol>
         <div class="gp prod"><span class="nt">IterationStatement</span> <span class="geq">:</span> <code class="t">for</code> <code class="t">(</code> <span class="nt">LexicalDeclaration</span> <code class="t">;</code> <span class="nt">Expression</span><sub>opt</sub> <code class="t">;</code> <span class="nt">Expression</span><sub>opt</sub> <code class="t">)</code> <span class="nt">Statement</span></div>
         <ol class="proc">
-          <li>Let <i>oldEnv</i> be the running execution context&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a>.</li>
+          <li>Let <i>oldEnv</i> be <a href="#sec-10.4">the running execution context</a>&rsquo;s <a
+              href="#sec-10.4">LexicalEnvironment</a>.</li>
           <li>Let <i>loopEnv</i> be the result of calling <a href="#sec-10.2.2.2">NewDeclarativeEnvironment</a> passing
               <i>oldEnv</i> as the argument.</li>
           <li>Let <i>isConst</i> be the result of performing IsConstantDeclaration of <i>LexicalDeclaration</i>.</li>
@@ -17797,18 +17823,21 @@
               </li>
             </ol>
           </li>
-          <li>Set the running execution context&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a> to <i>loopEnv</i>.</li>
+          <li>Set <a href="#sec-10.4">the running execution context</a>&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a> to
+              <i>loopEnv</i>.</li>
           <li>Let <i>forDcl</i> be the result of evaluating <i>LexicalDeclaration</i>.</li>
           <li>If LoopContinues(<i>forDcl</i>,<i>labelSet</i>) is <b>false</b>, then
             <ol class="block">
-              <li>Set the running execution context&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a> to <i>oldEnv</i>.</li>
+              <li>Set <a href="#sec-10.4">the running execution context</a>&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a> to
+                  <i>oldEnv</i>.</li>
               <li>Return <i>forDcl</i>.</li>
             </ol>
           </li>
           <li>Let <i>bodyResult</i> be the result of performing For Body Evaluation with the first <i>Expression</i> as the
               <i>testExpr</i> argument, the second <i>Expression</i> as the <i>incrementExpr</i> argument, <i>Statement</i> as the
               <i>stmt</i> argument, and with <i>labelSet</i>.</li>
-          <li>Set the running execution context&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a> to <i>oldEnv</i>.</li>
+          <li>Set <a href="#sec-10.4">the running execution context</a>&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a> to
+              <i>oldEnv</i>.</li>
           <li>Return  <i>bodyResult</i>.</li>
         </ol>
 
@@ -17882,7 +17911,7 @@
 
           <li>
             <p>It is a Syntax Error if <span class="nt">LeftHandSideExpression</span> is an <span class="nt">Identifier</span>
-            that can be statically determined to always resolve to a <a href="#sec-10.2.1">declarative environment record</a>
+            that can be statically determined to always resolve to a <a href="#sec-10.2.1.1">declarative environment record</a>
             binding and the resolved binding is an immutable binding.</p>
           </li>
 
@@ -18095,7 +18124,8 @@
         <b>varBinding</b> or <b>lexicalBinding</b>.</p>
 
         <ol class="proc">
-          <li>Let <i>oldEnv</i> be the running execution context&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a>.</li>
+          <li>Let <i>oldEnv</i> be <a href="#sec-10.4">the running execution context</a>&rsquo;s <a
+              href="#sec-10.4">LexicalEnvironment</a>.</li>
           <li>Let <i>V</i> = <b>undefined</b> .</li>
           <li>Repeat
             <ol class="block">
@@ -18147,8 +18177,8 @@
                       arguments.</li>
                   <li>Let <i>status</i> be <a href="#sec-8.2.3.1">NormalCompletion</a>(<span style="font-family:
                       sans-serif">empty</span>)</li>
-                  <li>Set the running execution context&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a> to
-                      <i>iterationEnv</i>.</li>
+                  <li>Set <a href="#sec-10.4">the running execution context</a>&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a>
+                      to <i>iterationEnv</i>.</li>
                 </ol>
               </li>
               <li>If <i>status</i>.[[type]] is <span style="font-family: sans-serif">normal</span>, then
@@ -18162,7 +18192,8 @@
                   </li>
                 </ol>
               </li>
-              <li>Set the running execution context&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a> to <i>oldEnv</i>.</li>
+              <li>Set <a href="#sec-10.4">the running execution context</a>&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a> to
+                  <i>oldEnv</i>.</li>
               <li>If <i>status</i> is an <a href="#sec-8.2.3">abrupt completion</a> and
                   LoopContinues(<i>status</i>,<i>labelSet</i>) is <b>false</b>, then return <i>status</i>.</li>
             </ol>
@@ -18338,10 +18369,10 @@
     </div>
 
     <div class="note">
-      <p><span class="nh">NOTE</span> The <code>with</code> statement adds an <a href="#sec-10.2.1">object environment record</a>
-      for a computed object to the <a href="#sec-10.2">lexical environment</a> of the running execution context. It then executes
-      a statement using this augmented <a href="#sec-10.2">lexical environment</a>. Finally, it restores the original <a
-      href="#sec-10.2">lexical environment</a>.</p>
+      <p><span class="nh">NOTE</span> The <code>with</code> statement adds an <a href="#sec-10.2.1.2">object environment
+      record</a> for a computed object to the <a href="#sec-10.2">lexical environment</a> of <a href="#sec-10.4">the running
+      execution context</a>. It then executes a statement using this augmented <a href="#sec-10.2">lexical environment</a>.
+      Finally, it restores the original <a href="#sec-10.2">lexical environment</a>.</p>
     </div>
 
     <section id="sec-12.10.1">
@@ -18375,7 +18406,8 @@
         <li>Let <i>val</i> be the result of evaluating <i>Expression</i>.</li>
         <li>Let <i>obj</i> be <a href="#sec-9.1.9">ToObject</a>(<a href="#sec-8.2.4.1">GetValue</a>(<i>val</i>)).</li>
         <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>obj</i>).</li>
-        <li>Let <i>oldEnv</i> be the running execution context&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a>.</li>
+        <li>Let <i>oldEnv</i> be <a href="#sec-10.4">the running execution context</a>&rsquo;s <a
+            href="#sec-10.4">LexicalEnvironment</a>.</li>
         <li>Let <i>newEnv</i> be the result of calling <a href="#sec-10.2.2.3">NewObjectEnvironment</a> passing <i>obj</i> and
             <i>oldEnv</i> as the arguments.</li>
         <li>Set the <i>withEnvironment</i> flag of <i>newEnv&rsquo;s</i> environment record to <b>true</b>.</li>
@@ -18388,9 +18420,11 @@
             <li>Set <i>withEnvironment</i> of <i>newEnv&rsquo;s</i> environment record to <i>blackListArray</i>.</li>
           </ol>
         </li>
-        <li>Set the running execution context&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a> to <i>newEnv</i>.</li>
+        <li>Set <a href="#sec-10.4">the running execution context</a>&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a> to
+            <i>newEnv</i>.</li>
         <li>Let <i>C</i> be the result of evaluating <i>Statement</i>.</li>
-        <li>Set the running execution context&rsquo;s <a href="#sec-10.2">Lexical Environment</a> to <i>oldEnv</i>.</li>
+        <li>Set <a href="#sec-10.4">the running execution context</a>&rsquo;s <a href="#sec-10.2">Lexical Environment</a> to
+            <i>oldEnv</i>.</li>
         <li>Return <i>C</i>.</li>
       </ol>
 
@@ -18717,13 +18751,15 @@
         <li>Let <i>exprRef</i> be the result of evaluating <i>Expression</i>.</li>
         <li>Let <i>switchValue</i> be <a href="#sec-8.2.4.1">GetValue</a>(<i>exprRef</i>).</li>
         <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>switchValue</i>).</li>
-        <li>Let <i>oldEnv</i> be the running execution context&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a>.</li>
+        <li>Let <i>oldEnv</i> be <a href="#sec-10.4">the running execution context</a>&rsquo;s <a
+            href="#sec-10.4">LexicalEnvironment</a>.</li>
         <li>Let <i>blockEnv</i> be the result of calling <a href="#sec-10.2.2.2">NewDeclarativeEnvironment</a> passing
             <i>oldEnv</i> as the argument.</li>
         <li>Perform Block Declaration Instantiation using <i>CaseBlock</i> and <i>blockEnv</i>.</li>
         <li>Let <i>R</i> be the result of performing Case Block Evaluation of <i>CaseBlock</i> with argument
             <i>switchValue</i>.</li>
-        <li>Set the running execution context&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a> to <i>oldEnv</i>.</li>
+        <li>Set <a href="#sec-10.4">the running execution context</a>&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a> to
+            <i>oldEnv</i>.</li>
         <li>Return <i>R</i>.</li>
       </ol>
 
@@ -18977,7 +19013,8 @@
 
       <div class="gp prod"><span class="nt">Catch</span> <span class="geq">:</span> <code class="t">catch</code> <code class="t">(</code> <span class="nt">CatchParameter</span> <code class="t">)</code> <span class="nt">Block</span></div>
       <ol class="proc">
-        <li>Let <i>oldEnv</i> be the running execution context&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a>.</li>
+        <li>Let <i>oldEnv</i> be <a href="#sec-10.4">the running execution context</a>&rsquo;s <a
+            href="#sec-10.4">LexicalEnvironment</a>.</li>
         <li>Let <i>catchEnv</i> be the result of calling <a href="#sec-10.2.2.2">NewDeclarativeEnvironment</a> passing
             <i>oldEnv</i> as the argument.</li>
         <li>For each element <i>argName</i> of the BoundNames of <i>CatchParameter</i>, do
@@ -18990,9 +19027,11 @@
         <li>Let <i>status</i> be the result of performing Binding Initialisation for <i>CatchParameter</i> passing
             <i>thrownValue</i> and <i>catchEnv</i> as arguments.</li>
         <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>status</i>).</li>
-        <li>Set the running execution context&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a> to <i>catchEnv</i>.</li>
+        <li>Set <a href="#sec-10.4">the running execution context</a>&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a> to
+            <i>catchEnv</i>.</li>
         <li>Let <i>B</i> be the result of evaluating <i>Block</i>.</li>
-        <li>Set the running execution context&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a> to <i>oldEnv</i>.</li>
+        <li>Set <a href="#sec-10.4">the running execution context</a>&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a> to
+            <i>oldEnv</i>.</li>
         <li>Return <i>B</i>.</li>
       </ol>
 
@@ -19557,7 +19596,8 @@
         <li>If the <i>FunctionExpression</i> is contained in <a href="#sec-10.1.1">strict code</a> or if its <i>FunctionBody</i>
             is <a href="#sec-10.1.1">strict code</a>, then let <i>strict</i> be <b>true</b>.  Otherwise let <i>strict</i> be
             <b>false</b>.</li>
-        <li>Let <i>scope</i> be the <a href="#sec-10.4">LexicalEnvironment</a> of the running execution context.</li>
+        <li>Let <i>scope</i> be the <a href="#sec-10.4">LexicalEnvironment</a> of <a href="#sec-10.4">the running execution
+            context</a>.</li>
         <li><span style="font-family: Times New Roman">Let <i>closure</i> be the result of performing the <a
             href="#sec-8.3.16.7">FunctionCreate</a> abstract operation with arguments</span> Normal, <span
             class="nt">FormalParameters</span>, <span style="font-family: Times New Roman"><i>FunctionBody, scope</i>, and</span>
@@ -19570,8 +19610,9 @@
         <li>If the <i>FunctionExpression</i> is contained in <a href="#sec-10.1.1">strict code</a> or if its <i>FunctionBody</i>
             is <a href="#sec-10.1.1">strict code</a>, then let <i>strict</i> be <b>true</b>.  Otherwise let <i>strict</i> be
             <b>false</b>.</li>
-        <li>Let <i>funcEnv</i> be the result of calling <a href="#sec-10.2.2.2">NewDeclarativeEnvironment</a> passing the running
-            execution context&rsquo;s <a href="#sec-10.2">Lexical Environment</a> as the argument</li>
+        <li>Let <i>funcEnv</i> be the result of calling <a href="#sec-10.2.2.2">NewDeclarativeEnvironment</a> passing <a
+            href="#sec-10.4">the running execution context</a>&rsquo;s <a href="#sec-10.2">Lexical Environment</a> as the
+            argument</li>
         <li>Let <i>envRec</i> be <i>funcEnv&rsquo;s</i> environment record.</li>
         <li>Let <i>name</i> be StringValue of <i>BindingIdentifier</i>.</li>
         <li>Call the CreateImmutableBinding concrete method of <i>envRec</i> passing <i>name</i> as the argument.</li>
@@ -19817,7 +19858,8 @@
       <div class="gp prod"><span class="nt">ArrowFunction</span> <span class="geq">:</span> <span class="nt">ArrowParameters</span> <code class="t">=&gt;</code> <span class="nt">ConciseBody</span></div>
       <ol class="proc">
         <li>Let <i>strict</i> be <b>true</b>.</li>
-        <li>Let <i>scope</i> be the <a href="#sec-10.4">LexicalEnvironment</a> of the running execution context.</li>
+        <li>Let <i>scope</i> be the <a href="#sec-10.4">LexicalEnvironment</a> of <a href="#sec-10.4">the running execution
+            context</a>.</li>
         <li><span style="font-family: Times New Roman">Let <i>parameters</i> be CoveredFormalsList of</span> <span
             class="nt">ArrowParameters</span>.</li>
         <li><span style="font-family: Times New Roman">Let <i>closure</i> be the result of performing the <a
@@ -20003,7 +20045,8 @@
         <li>Let <i>propKey</i> be the result of evaluating <i>PropertyName</i>.</li>
         <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>propKey</i>).</li>
         <li>Let <i>strict</i> be IsStrict of <i>FunctionBody</i>.</li>
-        <li>Let <i>scope</i> be the running execution context&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a>.</li>
+        <li>Let <i>scope</i> be <a href="#sec-10.4">the running execution context</a>&rsquo;s <a
+            href="#sec-10.4">LexicalEnvironment</a>.</li>
         <li>If isComputedPropertyName(<i>propKey</i>) is <b>true</b>, then
           <ol class="block">
             <li>Let <i>duplicateKey</i> be the result of calling the [[HasOwnProperty]] internal method of <i>object</i> with
@@ -20047,7 +20090,8 @@
         <li>Let <i>propKey</i> be the result of evaluating <i>PropertyName</i>.</li>
         <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>propKey</i>).</li>
         <li>Let <i>strict</i> be IsStrict of <i>FunctionBody</i>.</li>
-        <li>Let <i>scope</i> be the running execution context&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a>.</li>
+        <li>Let <i>scope</i> be <a href="#sec-10.4">the running execution context</a>&rsquo;s <a
+            href="#sec-10.4">LexicalEnvironment</a>.</li>
         <li><span style="font-family: Times New Roman">Let <i>formalParameterList</i> be the production
             <i>FormalParameters</i></span> <b>:</b> [empty]</li>
         <li>If isComputedPropertyName(<i>propKey</i>) is <b>true</b>, then
@@ -20089,7 +20133,8 @@
         <li>Let <i>propKey</i> be the result of evaluating <i>PropertyName</i>.</li>
         <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>propKey</i>).</li>
         <li>Let <i>strict</i> be IsStrict of <i>FunctionBody</i>.</li>
-        <li>Let <i>scope</i> be the running execution context&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a>.</li>
+        <li>Let <i>scope</i> be <a href="#sec-10.4">the running execution context</a>&rsquo;s <a
+            href="#sec-10.4">LexicalEnvironment</a>.</li>
         <li>If isComputedPropertyName(<i>propKey</i>) is <b>true</b>, then
           <ol class="block">
             <li>Let <i>duplicateKey</i> be the result of calling the [[HasOwnProperty]] internal method of <i>object</i> with
@@ -20292,7 +20337,7 @@
 
       <div class="gp prod"><span class="nt">GeneratorBody</span> <span class="geq">:</span> <span class="nt">FunctionBody</span></div>
       <ol class="proc">
-        <li><a href="#sec-5.2">Assert</a>: A Function <a href="#sec-10.2.1">Environment Record</a> containing a this binding has
+        <li><a href="#sec-5.2">Assert</a>: A <a href="#sec-10.2.1.3">Function Environment Record</a> containing a this binding has
             already been activated as the current environment.</li>
         <li>Let <i>env</i> be the result of the <a href="#sec-10.4.2">GetThisEnvironment</a> abstract operation.</li>
         <li>Let <i>G</i> be the result of calling the GetThisBinding concrete method of <i>env</i>.</li>
@@ -20357,7 +20402,8 @@
         <li>Let <i>propKey</i> be the result of evaluating <i>PropertyName</i>.</li>
         <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>propKey</i>).</li>
         <li>Let <i>strict</i> be IsStrict of <i>FunctionBody</i>.</li>
-        <li>Let <i>scope</i> be the running execution context&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a>.</li>
+        <li>Let <i>scope</i> be <a href="#sec-10.4">the running execution context</a>&rsquo;s <a
+            href="#sec-10.4">LexicalEnvironment</a>.</li>
         <li>If isComputedPropertyName(<i>propKey</i>) is <b>true</b>, then
           <ol class="block">
             <li>Let <i>duplicateKey</i> be the result of calling the [[HasOwnProperty]] internal method of <i>object</i> with
@@ -20414,7 +20460,8 @@
         <li>Using <i>FunctionBody</i> from the production that is being evaluated, let <i>body</i> be the supplemental syntactic
             grammar production: <span class="prod"><span class="nt">GeneratorBody</span> <span class="geq">:</span> <span
             class="nt">FunctionBody</span></span> .</li>
-        <li>Let <i>scope</i> be the <a href="#sec-10.4">LexicalEnvironment</a> of the running execution context.</li>
+        <li>Let <i>scope</i> be the <a href="#sec-10.4">LexicalEnvironment</a> of <a href="#sec-10.4">the running execution
+            context</a>.</li>
         <li><span style="font-family: Times New Roman">Let <i>closure</i> be the result of performing the <a
             href="#sec-8.3.16.8">GeneratorFunctionCreate</a> abstract operation with arguments</span> Normal, <span
             class="nt">FormalParameters</span>, <span style="font-family: Times New Roman"><i>body, scope</i>, and</span>
@@ -20433,8 +20480,9 @@
         <li>Using <i>FunctionBody</i> from the production that is being evaluated, let <i>body</i> be the supplemental syntactic
             grammar production: <span class="prod"><span class="nt">GeneratorBody</span> <span class="geq">:</span> <span
             class="nt">FunctionBody</span></span> .</li>
-        <li>Let <i>funcEnv</i> be the result of calling <a href="#sec-10.2.2.2">NewDeclarativeEnvironment</a> passing the running
-            execution context&rsquo;s <a href="#sec-10.2">Lexical Environment</a> as the argument</li>
+        <li>Let <i>funcEnv</i> be the result of calling <a href="#sec-10.2.2.2">NewDeclarativeEnvironment</a> passing <a
+            href="#sec-10.4">the running execution context</a>&rsquo;s <a href="#sec-10.2">Lexical Environment</a> as the
+            argument</li>
         <li>Let <i>envRec</i> be <i>funcEnv&rsquo;s</i> environment record.</li>
         <li>Let <i>name</i> be StringValue of <i>BindingIdentifier</i>.</li>
         <li>Call the CreateImmutableBinding concrete method of <i>envRec</i> passing <i>name</i> as the argument.</li>
@@ -20829,14 +20877,16 @@
         </li>
         <li>Let <i>proto</i> be the result of the abstract operation <a href="#sec-8.3.15">ObjectCreate</a> with argument
             <i>protoParent</i>.</li>
-        <li>Let <i>lex</i> be the <a href="#sec-10.4">LexicalEnvironment</a> of the running execution context.</li>
+        <li>Let <i>lex</i> be the <a href="#sec-10.4">LexicalEnvironment</a> of <a href="#sec-10.4">the running execution
+            context</a>.</li>
         <li>If <i>className</i> is not <b>undefined</b>, then
           <ol class="block">
             <li>Let <i>scope</i> be the result of calling <a href="#sec-10.2.2.2">NewDeclarativeEnvironment</a> passing <i>lex</i>
                 as the argument</li>
             <li>Let <i>envRec</i> be <i>scope&rsquo;s</i> environment record.</li>
             <li>Call the CreateImmutableBinding concrete method of <i>envRec</i> passing <i>className</i> as the argument.</li>
-            <li>Set the running execution context&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a> to <i>scope</i>.</li>
+            <li>Set <a href="#sec-10.4">the running execution context</a>&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a> to
+                <i>scope</i>.</li>
           </ol>
         </li>
         <li>Let <i>constructor</i> be ConstructorMethod of <i>ClassBody</i>.</li>
@@ -20883,7 +20933,8 @@
             <li>Perform Property Definition Evaluation for <i>s</i> with argument <i>F</i>.</li>
           </ol>
         </li>
-        <li>Set the running execution context&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a> to <i>lex</i>.</li>
+        <li>Set <a href="#sec-10.4">the running execution context</a>&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a> to
+            <i>lex</i>.</li>
         <li>Return <i>F</i>.</li>
       </ol>
 
@@ -20895,7 +20946,8 @@
       <ol class="proc">
         <li>Let <i>value</i> be the result of ClassDefinitionEvaluation of <i>ClassTail</i> with argument <b>undefined</b>.</li>
         <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>value</i>).</li>
-        <li>Let <i>env</i> be the running execution context&rsquo;s <a href="#sec-10.4">LexicalEnvironment</a>.</li>
+        <li>Let <i>env</i> be <a href="#sec-10.4">the running execution context</a>&rsquo;s <a
+            href="#sec-10.4">LexicalEnvironment</a>.</li>
         <li>Let <i>status</i> be the result of performing Binding Initialisation for <i>BindingIdentifier</i> passing <i>value</i>
             and <i>env</i> as the arguments.</li>
         <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>status</i>).</li>
@@ -20939,17 +20991,18 @@
       <p>The abstract operation PrepareForTailCall performs the following steps:</p>
 
       <ol class="proc">
-        <li>Let <i>leafContext</i> be the running execution context.</li>
-        <li>Suspend <i>leafContext</i>.</li>
-        <li>Pop <i>leafContext</i> from the execution context context stack. The execution context now on the top of the stack
-            becomes the running execution context, however it remains in its suspended state.</li>
-        <li><a href="#sec-5.2">Assert</a>: <i>leafContext</i> has no further use.  It will never be activated as the running
-            execution context.</li>
+        <li>Let <i>leafContext</i> be <a href="#sec-10.4">the running execution context</a>.</li>
+        <li><a href="#sec-10.4">Suspend</a> <i>leafContext</i>.</li>
+        <li>Pop <i>leafContext</i> from the <a href="#sec-10.4">execution context context stack</a>. The <a
+            href="#sec-10.4">execution context</a> now on the top of the stack becomes <a href="#sec-10.4">the running execution
+            context</a>, however it remains in its <a href="#sec-10.4">suspended</a> state.</li>
+        <li><a href="#sec-5.2">Assert</a>: <i>leafContext</i> has no further use.  It will never be activated as <a
+            href="#sec-10.4">the running execution context</a>.</li>
       </ol>
 
       <p>A tail position call must either release any transient internal resources associated with the currently executing
-      function execution context before invoking the target function or reuse those resources in support of the target
-      function.</p>
+      function <a href="#sec-10.4">execution context</a> before invoking the target function or reuse those resources in support
+      of the target function.</p>
 
       <div class="note">
         <p><span class="nh">NOTE 1</span> For example, a tail position call should only grow an implementation&rsquo;s
@@ -21151,17 +21204,20 @@
             href="#sec-10.5.1">10.5.1</a> using <i>ScriptBody</i>, <i>globalEnv</i>, and <i>deletableBindings</i> as
             arguments.</li>
         <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>status</i>).</li>
-        <li>Let <i>progCxt</i> be a new ECMAScript code execution context.</li>
-        <li>Set the <i>progCxt&rsquo;s</i> Realm  to <i>realm</i>.</li>
+        <li>Let <i>progCxt</i> be a new <a href="#sec-10.4">ECMAScript code execution context</a>.</li>
+        <li>Set the <i>progCxt&rsquo;s</i> <a href="#sec-10.3">Realm</a>  to <i>realm</i>.</li>
         <li>Set the <i>progCxt&rsquo;s</i> <a href="#sec-10.4">VariableEnvironment</a> to <i>globalEnv</i>.</li>
         <li>Set the <i>progCxt&rsquo;s</i> <a href="#sec-10.4">LexicalEnvironment</a> to <i>globalEnv</i>.</li>
-        <li>If there is a currently running execution context, suspend it.</li>
-        <li>Push <i>progCxt</i> on to the execution context stack; <i>progCxt</i> is now the running execution context.</li>
+        <li>If there is a <a href="#sec-10.4">currently running execution context</a>, <a href="#sec-10.4">suspend</a> it.</li>
+        <li>Push <i>progCxt</i> on to <a href="#sec-10.4">the execution context stack</a>; <i>progCxt</i> is now <a
+            href="#sec-10.4">the running execution context</a>.</li>
         <li>Let <i>result</i> be the result of evaluating  <i>ScriptBody</i>.</li>
-        <li>Suspend <i>progCxt</i> and remove it from the execution context stack.</li>
-        <li>If the execution context stack is not empty, resume the context that is now on the top of the execution context stack
-            as the running execution context.  Otherwise, the execution context stack is now empty and there is no running
-            execution context.</li>
+        <li><a href="#sec-10.4">Suspend</a> <i>progCxt</i> and remove it from <a href="#sec-10.4">the execution context
+            stack</a>.</li>
+        <li>If <a href="#sec-10.4">the execution context stack</a> is not empty, resume the context that is now on the top of <a
+            href="#sec-10.4">the execution context stack</a> as <a href="#sec-10.4">the running execution context</a>.  Otherwise,
+            <a href="#sec-10.4">the execution context stack</a> is now empty and there is no running <a href="#sec-10.4">execution
+            context</a>.</li>
         <li>Return <i>result</i>.</li>
       </ol>
 
@@ -21313,7 +21369,7 @@
   <section id="sec-15.1">
     <h1><span class="secnum"><a href="#sec-15.1" title="link to this section">15.1</a></span> The Global Object</h1>
 
-    <p>The unique <i>global object</i> is created before control enters any execution context.</p>
+    <p>The unique <i>global object</i> is created before control enters any <a href="#sec-10.4">execution context</a>.</p>
 
     <p>Unless otherwise specified, the standard built-in properties of the global object have attributes {[[Writable]]:
     <b>true</b>, [[Enumerable]]: <b>false</b>, [[Configurable]]: <b>true</b>}.</p>
@@ -21379,10 +21435,11 @@
           <li>If <i>direct</i> is <b>true</b> and the code that made the direct call to eval is <a href="#sec-10.1.1">strict
               code</a>, then let <i>strictCaller</i> be <b>true</b><i>.</i> Otherwise, let <i>strictCaller</i> be
               <b>false</b><i>.</i></li>
-          <li>Let <i>ctx</i> be the running execution context. If <i>direct</i> is <b>true</b> <i>ctx</i> will be the execution
-              context that performed the direct eval.  If <i>direct</i> is <b>false</b> <i>ctx</i> will be the execution context
-              for the invocation of the eval function.</li>
-          <li>Let <i>evalRealm</i> be <i>ctx&rsquo;s</i> Realm.</li>
+          <li>Let <i>ctx</i> be <a href="#sec-10.4">the running execution context</a>. If <i>direct</i> is <b>true</b> <i>ctx</i>
+              will be the <a href="#sec-10.4">execution context</a> that performed the direct eval.  If <i>direct</i> is
+              <b>false</b> <i>ctx</i> will be the <a href="#sec-10.4">execution context</a> for the invocation of the eval
+              function.</li>
+          <li>Let <i>evalRealm</i> be <i>ctx&rsquo;s</i> <a href="#sec-10.3">Realm</a>.</li>
           <li>If <i>direct</i> is <b>false</b>  and <i>strictScript</i> is <b>false</b>,  then
             <ol class="block">
               <li>Return the result of Script Evaluation for <i>script</i> with arguments <i>evalRealm</i> and <b>true</b>.</li>
@@ -21426,15 +21483,18 @@
           <li>Let <i>status</i> be the result of performing Eval Declaration Instantiation as described in <a
               href="#sec-10.5.5">10.5.5</a> with <i>script</i>, <i>varEnv</i>, and <i>lexEnv</i>.</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>status</i>).</li>
-          <li>Let <i>evalCxt</i> be a new ECMAScript code execution context.</li>
-          <li>Set the <i>evalCxt&rsquo;s</i> Realm  to <i>evalRealm</i>.</li>
+          <li>Let <i>evalCxt</i> be a new <a href="#sec-10.4">ECMAScript code execution context</a>.</li>
+          <li>Set the <i>evalCxt&rsquo;s</i> <a href="#sec-10.3">Realm</a>  to <i>evalRealm</i>.</li>
           <li>Set the <i>evalCxt&rsquo;s</i> <a href="#sec-10.4">VariableEnvironment</a> to <i>varEnv</i>.</li>
           <li>Set the <i>evalCxt&rsquo;s</i> <a href="#sec-10.4">LexicalEnvironment</a> to <i>lexEnv</i>.</li>
-          <li>If there is a currently running execution context, suspend it.</li>
-          <li>Push <i>evalCxt</i> on to the execution context stack; <i>evalCxt</i> is now the running execution context.</li>
+          <li>If there is a <a href="#sec-10.4">currently running execution context</a>, <a href="#sec-10.4">suspend</a> it.</li>
+          <li>Push <i>evalCxt</i> on to <a href="#sec-10.4">the execution context stack</a>; <i>evalCxt</i> is now <a
+              href="#sec-10.4">the running execution context</a>.</li>
           <li>Let <i>result</i> be the result of evaluating <i>script</i>.</li>
-          <li>Suspend <i>evalCxt</i> and remove it from the execution context stack.</li>
-          <li>Resume the context that is now on the top of the execution context stack as the running execution context.</li>
+          <li><a href="#sec-10.4">Suspend</a> <i>evalCxt</i> and remove it from <a href="#sec-10.4">the execution context
+              stack</a>.</li>
+          <li>Resume the context that is now on the top of <a href="#sec-10.4">the execution context stack</a> as <a
+              href="#sec-10.4">the running execution context</a>.</li>
           <li>Return <i>result</i>.</li>
         </ol>
 
@@ -39013,24 +39073,26 @@
               <ol class="block">
                 <li>Set <i>generator&rsquo;s</i> [[GeneratorState]] <a href="#sec-8.1.6.2">internal data property</a> to
                     <code>"completed"</code>.</li>
-                <li>Once a generator enters the <code>"completed"</code> state it never leaves it and its associated execution
-                    context is never resumed. Any execution state associated with <i>generator</i> can be discard at this
-                    point.</li>
+                <li>Once a generator enters the <code>"completed"</code> state it never leaves it and its associated <a
+                    href="#sec-10.4">execution context</a> is never resumed. Any execution state associated with <i>generator</i>
+                    can be discard at this point.</li>
                 <li>Return <i>E</i>.</li>
               </ol>
             </li>
             <li>Let <i>genContext</i> be value of <i>generator&rsquo;s</i> [[GeneratorContext]] <a href="#sec-8.1.6.2">internal
                 data property</a>.</li>
-            <li>Let <i>methodContext</i> be the running execution context.</li>
-            <li>Suspend <i>methodContext</i>.</li>
+            <li>Let <i>methodContext</i> be <a href="#sec-10.4">the running execution context</a>.</li>
+            <li><a href="#sec-10.4">Suspend</a> <i>methodContext</i>.</li>
             <li>Set <i>generator&rsquo;s</i> [[GeneratorState]] <a href="#sec-8.1.6.2">internal data property</a> to
                 <code>"executing"</code>.</li>
-            <li>Push <i>genContext</i> onto the execution context stack; <i>genContext</i> is now the running execution
-                context.</li>
-            <li>Resume the suspended evaluation of <i>genContext</i> using  <i>E</i> as the result of the operation that suspended
-                it.  Let <i>result</i> be the value returned by the resumed compation.</li>
-            <li><a href="#sec-5.2">Assert</a>: When we return here, <i>genContext</i> has already been removed from the execution
-                context stack and <i>methodContext</i> is the currently running execution context.</li>
+            <li>Push <i>genContext</i> onto <a href="#sec-10.4">the execution context stack</a>; <i>genContext</i> is now <a
+                href="#sec-10.4">the running execution context</a>.</li>
+            <li>Resume the <a href="#sec-10.4">suspended</a> evaluation of <i>genContext</i> using  <i>E</i> as the result of the
+                operation that <a href="#sec-10.4">suspended</a> it.  Let <i>result</i> be the value returned by the resumed
+                compation.</li>
+            <li><a href="#sec-5.2">Assert</a>: When we return here, <i>genContext</i> has already been removed from <a
+                href="#sec-10.4">the execution context stack</a> and <i>methodContext</i> is <a href="#sec-10.4">the currently
+                running execution context</a>.</li>
             <li>Return <i>result</i>.</li>
           </ol>
         </section>
@@ -39078,7 +39140,7 @@
             </tr>
             <tr>
               <td>[[GeneratorContext]]</td>
-              <td>The execution context that is used when executing the code of this generator.</td>
+              <td>The <a href="#sec-10.4">execution context</a> that is used when executing the code of this generator.</td>
             </tr>
           </table>
         </figure>
@@ -39094,21 +39156,22 @@
           <ol class="proc">
             <li><a href="#sec-5.2">Assert</a>: The value of <i>generator&rsquo;s</i> [[GeneratorState]] <a
                 href="#sec-8.1.6.2">internal data property</a> is <b>undefined</b>.</li>
-            <li>Let <i>genContext</i> be the running execution context.</li>
+            <li>Let <i>genContext</i> be <a href="#sec-10.4">the running execution context</a>.</li>
             <li>Set the Generator component of <i>genContext</i> to <i>generator.</i></li>
-            <li>Set the code evaluation state of <i>genContext</i> such that when evaluation is resumed for that execution context
-                the following steps will be performed:
+            <li>Set the code evaluation state of <i>genContext</i> such that when evaluation is resumed for that <a
+                href="#sec-10.4">execution context</a> the following steps will be performed:
               <ol class="block">
                 <li>Let <i>result</i> be the result of evaluating <i>generatorBody</i>.</li>
                 <li><a href="#sec-5.2">Assert</a>: If we return here, the generator either threw an exception or performed either
                     an implicit or explicit return.</li>
-                <li>Remove <i>genContext</i> from the execution context stack and restore the execution context that is at the top
-                    of the execution context stack as the running execution context.</li>
+                <li>Remove <i>genContext</i> from <a href="#sec-10.4">the execution context stack</a> and restore the <a
+                    href="#sec-10.4">execution context</a> that is at the top of <a href="#sec-10.4">the execution context
+                    stack</a> as <a href="#sec-10.4">the running execution context</a>.</li>
                 <li>Set <i>generator&rsquo;s</i> [[GeneratorState]] <a href="#sec-8.1.6.2">internal data property</a> to
                     <code>"completed"</code>.</li>
-                <li>Once a generator enters the <code>"completed"</code> state it never leaves it and its associated execution
-                    context is never resumed. Any execution state associated with <i>generator</i> can be discard at this
-                    point.</li>
+                <li>Once a generator enters the <code>"completed"</code> state it never leaves it and its associated <a
+                    href="#sec-10.4">execution context</a> is never resumed. Any execution state associated with <i>generator</i>
+                    can be discard at this point.</li>
                 <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>result</i>).</li>
                 <li>Return <a href="#sec-15.19.4.3.4">CreateItrResultObject</a>(<i>result</i>, <b>true</b>).</li>
               </ol>
@@ -39142,17 +39205,18 @@
                 <b>TypeError</b> exception.</li>
             <li>Let <i>genContext</i> be value of <i>generator&rsquo;s</i> [[GeneratorContext]] <a href="#sec-8.1.6.2">internal
                 data property</a>.</li>
-            <li>Let <i>methodContext</i> be the running execution context.</li>
-            <li>Suspend <i>methodContext</i>.</li>
+            <li>Let <i>methodContext</i> be <a href="#sec-10.4">the running execution context</a>.</li>
+            <li><a href="#sec-10.4">Suspend</a> <i>methodContext</i>.</li>
             <li>Set <i>generator&rsquo;s</i> [[GeneratorState]] <a href="#sec-8.1.6.2">internal data property</a> to
                 <code>"executing"</code>.</li>
-            <li>Push <i>genContext</i> onto the execution context stack; <i>genContext</i> is now the running execution
-                context.</li>
-            <li>Resume the suspended evaluation of <i>genContext</i> using  <a
-                href="#sec-8.2.3.1">NormalCompletion</a>(<i>value</i>) as the result of the operation that suspended it.    Let
-                <i>result</i> be the value returned by the resumed computation.</li>
-            <li><a href="#sec-5.2">Assert</a>: When we return here, <i>genContext</i> has already been removed from the execution
-                context stack and <i>methodContext</i> is the currently running execution context.</li>
+            <li>Push <i>genContext</i> onto <a href="#sec-10.4">the execution context stack</a>; <i>genContext</i> is now <a
+                href="#sec-10.4">the running execution context</a>.</li>
+            <li>Resume the <a href="#sec-10.4">suspended</a> evaluation of <i>genContext</i> using  <a
+                href="#sec-8.2.3.1">NormalCompletion</a>(<i>value</i>) as the result of the operation that <a
+                href="#sec-10.4">suspended</a> it.    Let <i>result</i> be the value returned by the resumed computation.</li>
+            <li><a href="#sec-5.2">Assert</a>: When we return here, <i>genContext</i> has already been removed from <a
+                href="#sec-10.4">the execution context stack</a> and <i>methodContext</i> is <a href="#sec-10.4">the currently
+                running execution context</a>.</li>
             <li>Return <i>result</i>.</li>
           </ol>
         </section>
@@ -39166,13 +39230,15 @@
           <ol class="proc">
             <li><a href="#sec-5.2">Assert</a>: <i>itrNextObj</i> is an Object that implemented the <i>ItrResult</i>
                 interface.</li>
-            <li>Let <i>genContext</i> be the running execution context.</li>
-            <li><a href="#sec-5.2">Assert</a>: <i>genContext</i> is the execution context of a generator.</li>
+            <li>Let <i>genContext</i> be <a href="#sec-10.4">the running execution context</a>.</li>
+            <li><a href="#sec-5.2">Assert</a>: <i>genContext</i> is the <a href="#sec-10.4">execution context</a> of a
+                generator.</li>
             <li>Let <i>generator</i> be the value of the Generator component of <i>genContext</i>.</li>
             <li>Set the value of <i>generator&rsquo;s</i> [[GeneratorState]] <a href="#sec-8.1.6.2">internal data property</a> to
                 <code>"suspendedYield"</code>.</li>
-            <li>Remove <i>genContext</i> from the execution context stack and restore the execution context that is at the top of
-                the execution context stack as the running execution context.</li>
+            <li>Remove <i>genContext</i> from <a href="#sec-10.4">the execution context stack</a> and restore the <a
+                href="#sec-10.4">execution context</a> that is at the top of <a href="#sec-10.4">the execution context stack</a>
+                as <a href="#sec-10.4">the running execution context</a>.</li>
             <li>Set the code evaluation state of <i>genContext</i> such that when evaluation is resumed with a <a
                 href="#sec-8.2.3">Completion</a> <i>resumptionValue</i> the following steps will be performed:
               <ol class="block">
@@ -39181,12 +39247,12 @@
                     abstract operation.</li>
               </ol>
             </li>
-            <li>Resume the suspended evaluation of <i>genContext</i> using  <a
-                href="#sec-8.2.3.1">NormalCompletion</a>(<i>value</i>) as the result of the operation that suspended it.    Let
-                <i>result</i> be the value returned by the resumed computation.</li>
-            <li><a href="#sec-5.2">Assert</a>: When we return here, <i>genContext</i> has already been removed from the execution
-                context stack and the currently running execution context is the context that most recently resumed execution of
-                <i>generator</i>.</li>
+            <li>Resume the <a href="#sec-10.4">suspended</a> evaluation of <i>genContext</i> using  <a
+                href="#sec-8.2.3.1">NormalCompletion</a>(<i>value</i>) as the result of the operation that <a
+                href="#sec-10.4">suspended</a> it.    Let <i>result</i> be the value returned by the resumed computation.</li>
+            <li><a href="#sec-5.2">Assert</a>: When we return here, <i>genContext</i> has already been removed from <a
+                href="#sec-10.4">the execution context stack</a> and <a href="#sec-10.4">the currently running execution
+                context</a> is the context that most recently resumed execution of <i>generator</i>.</li>
             <li>Return <a href="#sec-8.2.3.1">NormalCompletion</a>(<i>itrNextObj</i>).</li>
             <li>NOTE:  This returns to the evaluation of the operation that had most previously resumed evaluation of
                 <i>genContext</i>.</li>
@@ -41793,7 +41859,8 @@
         <li>Let <i>B</i> be environment record for the construct within <i>g</i> that introduces a new environment contour and
             which most closely encloses the declaration of <i>f</i>, all function code references to <i>f</i>, and the definitions
             of all nested functions that contain unshadowed references to <i>f</i>.  This syntactic construct may be the
-            definition of <i>g</i> itself, in which case <i>B</i> is the function environment record for <i>g</i>.</li>
+            definition of <i>g</i> itself, in which case <i>B</i> is the <a href="#sec-10.2.1.3">function environment record</a>
+            for <i>g</i>.</li>
         <li>As part of the instantiation of   <i>B</i>, its CreateMutableBinding concrete method is called with arguments
             &ldquo;f&rdquo; (the string name of the function) and <b>false</b>. This creates an uninitialised binding for the name
             <i>f</i>. Any reference that resolves to that binding prior to step 3 below will throw a <b>ReferenceError</b>
@@ -42115,7 +42182,7 @@
   for looking up the name of the function. The identifier resolution rules (10.1.4 in Edition 3) when applied to such an object
   will, if necessary, follow the object&rsquo;s prototype chain when attempting to resolve an identifier.  This means all the
   properties of Object.prototype are visible as identifiers within that scope.  In practice most implementations of Edition 3 have
-  not implemented this semantics.  Edition 5 changes the specified semantics by using a <a href="#sec-10.2.1">Declarative
+  not implemented this semantics.  Edition 5 changes the specified semantics by using a <a href="#sec-10.2.1.1">Declarative
   Environment Record</a> to bind the name of the function.</p>
 
   <p>14: In Edition 3, the algorithm for the production <span class="prod"><span class="nt">SourceElements</span> <span
@@ -42867,16 +42934,17 @@
       Instantiation</h1>
 
   <div class="note">
-    <p><span class="nh">NOTE</span> When an execution context is established for evaluating function code a new <a
-    href="#sec-10.2.1">Declarative Environment Record</a> is created and bindings for each formal parameter, and each function
-    level variable, constant, or function declarated in the function are instantiated in the environment record. Formal parameters
-    and functions are initialised as part of this process.  All other bindings are initialised during execution of the function
-    code.</p>
+    <p><span class="nh">NOTE</span> When an <a href="#sec-10.4">execution context</a> is established for evaluating function code
+    a new <a href="#sec-10.2.1.1">Declarative Environment Record</a> is created and bindings for each formal parameter, and each
+    function level variable, constant, or function declarated in the function are instantiated in the environment record. Formal
+    parameters and functions are initialised as part of this process.  All other bindings are initialised during execution of the
+    function code.</p>
   </div>
 
   <p>Function Declaration Instantiation is performed as follows using arguments <var>func,</var> <var>argumentsList</var>, and
-  <var>env</var>. <var>func</var> is the function object that for which the execution context is being established.
-  <var>env</var> is the <a href="#sec-10.2.1">declarative environment record</a> in which bindings are to be created.</p>
+  <var>env</var>. <var>func</var> is the function object that for which the <a href="#sec-10.4">execution context</a> is being
+  established.  <var>env</var> is the <a href="#sec-10.2.1.1">declarative environment record</a> in which bindings are to be
+  created.</p>
 
   <ol class="proc">
     <li>Let <i>code</i> be the value of the [[Code]] internal property of <i>func</i>.</li>

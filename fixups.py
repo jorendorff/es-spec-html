@@ -2159,17 +2159,44 @@ def fixup_links(doc, docx):
         ("outer lexical environment reference", "Lexical Environments"),
         ("environment record (10.2.1)", "Environment Records"),
         ("Environment Record", "Environment Records"),
-        ("declarative environment record", "Environment Records"),
-        ("Declarative Environment Record", "Environment Records"),
-        ("Object Environment Record", "Environment Records"),
-        ("object environment record", "Environment Records"),
+        ("declarative environment record", "Declarative Environment Records"),
+        ("Declarative Environment Record", "Declarative Environment Records"),
+        ("Object Environment Record", "Object Environment Records"),
+        ("object environment record", "Object Environment Records"),
+        ("Function Environment Records", "Function Environment Records"),
+        ("Function Environment Record", "Function Environment Records"),
+        ("Function environment record", "Function Environment Records"),
+        ("function environment record", "Function Environment Records"),
         ("the global environment", globalEnv),
         ("the Global Environment", globalEnv),
+        ("global environment record", globalEnv),
+        ("the global environment record", globalEnv),
+        ("Global Environment Record", globalEnv),
+        ("Global Environment Records", globalEnv),
 
         # 10.3
+        ("Code Realms (10.3)", "Code Realms"),
+        ("Code Realm", "Code Realms"),
+        ("Realm", "Code Realms"),
+        ("Realm (10.3)", "Code Realms"),
+
+        # 10.4
         ("LexicalEnvironment", "Execution Contexts"),
         ("VariableEnvironment", "Execution Contexts"),
         ("ThisBinding", "Execution Contexts"),
+        ("the currently running execution context", "Execution Contexts"),
+        ("currently running execution context", "Execution Contexts"),
+        ("the running execution context", "Execution Contexts"),
+        ("the current Realm", "Execution Contexts"),
+        ("ECMAScript code execution context", "Execution Contexts"), 
+        ("ECMAScript Code execution context", "Execution Contexts"), 
+        ("the execution context stack", "Execution Contexts"),
+        ("execution context stack", "Execution Contexts"),
+        ("execution context context stack", "Execution Contexts"),  # sic
+        ("execution context", "Execution Contexts"),
+        ("Suspend", "Execution Contexts"),
+        ("suspend", "Execution Contexts"),
+        ("suspended", "Execution Contexts"),
         ("Identifier Resolution as specified in 10.3.1", "Identifier Resolution"),
         ("Identifier Resolution(10.3.1)", "Identifier Resolution"),
 
@@ -2221,9 +2248,6 @@ def fixup_links(doc, docx):
         ("Record", "Notational Conventions")
     ]
 
-    non_section_ids_lang = {
-    }
-
     non_section_ids_intl = {
         "CompareStrings": "CompareStrings",
         "FormatNumber": "FormatNumber",
@@ -2245,7 +2269,7 @@ def fixup_links(doc, docx):
     # 1: Figure out which source data to use.
     if spec_is_lang(docx):
         specific_link_source_data = specific_link_source_data_lang
-        non_section_ids = non_section_ids_lang
+        non_section_ids = {}
     else:
         specific_link_source_data = specific_link_source_data_intl
         non_section_ids = non_section_ids_intl
