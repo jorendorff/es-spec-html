@@ -11806,7 +11806,7 @@
         <li>If the syntactic production that is being evaluated is contained in <a href="#sec-10.1.1">strict mode code</a>, then
             let <i>strict</i> be <b>true</b>, else let <i>strict</i> be <b>false</b>.</li>
         <li>Return the result of calling <a href="#sec-10.2.2.1">GetIdentifierReference</a> abstract operation passing <i>env</i>,
-            the StringValue of <i>IdentifierName</i>, and <i>strict</i> as arguments.</li>
+            the <a href="#sec-7.6">StringValue</a> of <i>IdentifierName</i>, and <i>strict</i> as arguments.</li>
       </ol>
 
       <p>The result of evaluating an identifier is always a value of type <a href="#sec-8.2.4">Reference</a> with its referenced
@@ -12601,8 +12601,9 @@
     </ol>
     <div class="gp prod"><span class="nt">PrimaryExpression</span> <span class="geq">:</span> <span class="nt">Identifier</span></div>
     <ol class="proc">
-      <li>If this <i>PrimaryExpression</i> is contained in <a href="#sec-10.1.1">strict code</a> and StringValue of
-          <i>Identifier</i> is <code>"eval"</code> or <code>"arguments"</code>, then return <b>false</b>.</li>
+      <li>If this <i>PrimaryExpression</i> is contained in <a href="#sec-10.1.1">strict code</a> and <a
+          href="#sec-7.6">StringValue</a> of <i>Identifier</i> is <code>"eval"</code> or <code>"arguments"</code>, then return
+          <b>false</b>.</li>
       <li>Return <b>true</b>.</li>
     </ol>
     <div class="gp prod"><span class="nt">PrimaryExpression</span> <span class="geq">:</span> <span class="nt">CoverParenthesisedExpressionAndArrowParameterList</span></div>
@@ -13238,8 +13239,8 @@
       <div class="gp prod"><span class="nt">LiteralPropertyName</span> <span class="geq">:</span> <span class="nt">IdentifierName</span></div>
       <ol class="proc">
         <li>If <i>symbol</i> is a <i>ReservedWord</i>, return <b>false</b>.</li>
-        <li>If <i>symbol</i> is an <i>Identifier</i> and StringValue of <i>symbol</i> is the same value as the StringValue of
-            <i>IdentifierName</i>, return <b>true</b>;</li>
+        <li>If <i>symbol</i> is an <i>Identifier</i> and <a href="#sec-7.6">StringValue</a> of <i>symbol</i> is the same value as
+            the <a href="#sec-7.6">StringValue</a> of <i>IdentifierName</i>, return <b>true</b>;</li>
         <li>Return <b>false</b>.</li>
       </ol>
 
@@ -13265,7 +13266,7 @@
 
       <div class="gp prod"><span class="nt">PropertyDefinition</span> <span class="geq">:</span> <span class="nt">IdentifierName</span></div>
       <ol class="proc">
-        <li>Return StringValue of <i>IdentifierName</i>.</li>
+        <li>Return <a href="#sec-7.6">StringValue</a> of <i>IdentifierName</i>.</li>
       </ol>
       <div class="gp prod"><span class="nt">PropertyDefinition</span> <span class="geq">:</span> <span class="nt">PropertyName</span> <code class="t">:</code> <span class="nt">AssignmentExpression</span></div>
       <ol class="proc">
@@ -13328,7 +13329,7 @@
       </ol>
       <div class="gp prod"><span class="nt">PropertyDefinition</span> <span class="geq">:</span> <span class="nt">IdentifierName</span></div>
       <ol class="proc">
-        <li>Return StringValue of <i>IdentifierName</i>.</li>
+        <li>Return <a href="#sec-7.6">StringValue</a> of <i>IdentifierName</i>.</li>
       </ol>
       <div class="gp prod"><span class="nt">PropertyDefinition</span> <span class="geq">:</span> <span class="nt">PropertyName</span> <code class="t">:</code> <span class="nt">AssignmentExpression</span></div>
       <ol class="proc">
@@ -13339,7 +13340,7 @@
       class="nt">IdentifierName</span></span></p>
 
       <ol class="proc">
-        <li>Return StringValue of <i>IdentifierName</i>.</li>
+        <li>Return <a href="#sec-7.6">StringValue</a> of <i>IdentifierName</i>.</li>
       </ol>
       <div class="gp prod"><span class="nt">LiteralPropertyName</span> <span class="geq">:</span> <span class="nt">StringLiteral</span></div>
       <ol class="proc">
@@ -13373,7 +13374,7 @@
       </ol>
       <div class="gp prod"><span class="nt">PropertyDefinition</span> <span class="geq">:</span> <span class="nt">IdentifierName</span></div>
       <ol class="proc">
-        <li>Let <i>propName</i> be StringValue of <i>IdentifierName</i>.</li>
+        <li>Let <i>propName</i> be <a href="#sec-7.6">StringValue</a> of <i>IdentifierName</i>.</li>
         <li>Let <i>exprValue</i> be the result of performing <a href="#sec-10.4.1">Identifier Resolution as specified in
             10.3.1</a> using <i>IdentifierName</i>.</li>
         <li>Let <i>propValue</i> be <a href="#sec-8.2.4.1">GetValue</a>(<i>exprValue</i>).</li>
@@ -13915,24 +13916,24 @@
     <ol class="proc">
       <li>If  <i>MemberExpression</i> Contains <i>symbol</i> is <b>true</b>, return <b>true</b>.</li>
       <li>If <i>symbol</i> is a <i>ReservedWord</i>, return <b>false</b>.</li>
-      <li>If <i>symbol</i> is an <i>Identifier</i> and StringValue of <i>symbol</i> is the same value as the StringValue of
-          <i>IdentifierName</i>, return <b>true</b>;</li>
+      <li>If <i>symbol</i> is an <i>Identifier</i> and <a href="#sec-7.6">StringValue</a> of <i>symbol</i> is the same value as
+          the <a href="#sec-7.6">StringValue</a> of <i>IdentifierName</i>, return <b>true</b>;</li>
       <li>Return <b>false</b>.</li>
     </ol>
     <div class="gp prod"><span class="nt">MemberExpression</span> <span class="geq">:</span> <code class="t">super</code> <code class="t">.</code> <span class="nt">IdentifierName</span></div>
     <ol class="proc">
       <li>If  <i>symbol</i> is the <i>ReservedWord</i> <code>super</code>, return <b>true</b>.</li>
       <li>If <i>symbol</i> is a <i>ReservedWord</i>, return <b>false</b>.</li>
-      <li>If <i>symbol</i> is an <i>Identifier</i> and StringValue of <i>symbol</i> is the same value as the StringValue of
-          <i>IdentifierName</i>, return <b>true</b>;</li>
+      <li>If <i>symbol</i> is an <i>Identifier</i> and <a href="#sec-7.6">StringValue</a> of <i>symbol</i> is the same value as
+          the <a href="#sec-7.6">StringValue</a> of <i>IdentifierName</i>, return <b>true</b>;</li>
       <li>Return <b>false</b>.</li>
     </ol>
     <div class="gp prod"><span class="nt">CallExpression</span> <span class="geq">:</span> <span class="nt">CallExpression</span> <code class="t">.</code> <span class="nt">IdentifierName</span></div>
     <ol class="proc">
       <li>If  <i>CallExpression</i> Contains <i>symbol</i> is <b>true</b>, return <b>true</b>.</li>
       <li>If <i>symbol</i> is a <i>ReservedWord</i>, return <b>false</b>.</li>
-      <li>If <i>symbol</i> is an <i>Identifier</i> and StringValue of <i>symbol</i> is the same value as the StringValue of
-          <i>IdentifierName</i>, return <b>true</b>;</li>
+      <li>If <i>symbol</i> is an <i>Identifier</i> and <a href="#sec-7.6">StringValue</a> of <i>symbol</i> is the same value as
+          the <a href="#sec-7.6">StringValue</a> of <i>IdentifierName</i>, return <b>true</b>;</li>
       <li>Return <b>false</b>.</li>
     </ol>
     <div class="gp prod"><span class="nt">MemberExpression</span> <span class="geq">:</span> <code class="t">new</code> <code class="t">super</code></div>
@@ -14220,7 +14221,7 @@
       </ol>
       <div class="gp prod"><span class="nt">MemberExpression</span> <span class="geq">:</span> <code class="t">super</code> <code class="t">.</code> <span class="nt">IdentifierName</span></div>
       <ol class="proc">
-        <li>Let <i>propertyKey</i> be StringValue of <i>IdentifierName</i>.</li>
+        <li>Let <i>propertyKey</i> be <a href="#sec-7.6">StringValue</a> of <i>IdentifierName</i>.</li>
         <li>If the code matched by the syntactic production that is being evaluated is <a href="#sec-10.1.1">strict mode code</a>,
             let <i>strict</i> be <b>true</b>, else let <i>strict</i> be <b>false</b>.</li>
         <li>Return the result of MakeSuperReference(<i>propertyKey</i>, <i>strict</i>).</li>
@@ -16152,7 +16153,7 @@
         </ol>
         <div class="gp prod"><span class="nt">AssignmentProperty</span> <span class="geq">:</span> <span class="nt">Identifier</span> <span class="nt">Initialiser</span><sub>opt</sub></div>
         <ol class="proc">
-          <li>Let <i>P</i> be StringValue of <i>Identifier</i>.</li>
+          <li>Let <i>P</i> be <a href="#sec-7.6">StringValue</a> of <i>Identifier</i>.</li>
           <li>Let <i>v</i> be the result of calling <a href="#sec-9.3.1">Get</a>(<i>obj</i>, <i>P</i>).</li>
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>v</i>).</li>
           <li>If <i>Initialiser</i><sub>opt</sub> is present and <i>v</i> is <b>undefined</b>, then
@@ -16786,7 +16787,8 @@
         </ol>
         <div class="gp prod"><span class="nt">BindingIdentifier</span> <span class="geq">:</span> <span class="nt">Identifier</span></div>
         <ol class="proc">
-          <li>Return a new <a href="#sec-8.2.2">List</a> containing the StringValue of <i>Identifier</i>.</li>
+          <li>Return a new <a href="#sec-8.2.2">List</a> containing the <a href="#sec-7.6">StringValue</a> of
+              <i>Identifier</i>.</li>
         </ol>
 
         <p><b>Static Semantics:  IsConstantDeclaration</b></p>
@@ -16823,7 +16825,7 @@
         <ol class="proc">
           <li>If <i>environment</i> is not <b>undefined</b>, then
             <ol class="block">
-              <li>Let <i>name</i> be StringValue of <i>Identifier</i>.</li>
+              <li>Let <i>name</i> be <a href="#sec-7.6">StringValue</a> of <i>Identifier</i>.</li>
               <li>Let <i>env</i> be the environment record component of <i>environment</i>.</li>
               <li>Call the InitialiseBinding concrete method of  <i>env</i> passing <i>name</i> and <i>value</i> as the
                   arguments.</li>
@@ -18803,7 +18805,7 @@
 
       <div class="gp prod"><span class="nt">LabelledStatement</span> <span class="geq">:</span> <span class="nt">Identifier</span> <code class="t">:</code> <span class="nt">Statement</span></div>
       <ol class="proc">
-        <li>Let <i>label</i> be the StringValue of <i>Identifier</i>.</li>
+        <li>Let <i>label</i> be the <a href="#sec-7.6">StringValue</a> of <i>Identifier</i>.</li>
         <li>Let <i>newLabelSet</i>  be a new <a href="#sec-8.2.2">List</a> containing  <i>label</i> and the elements of
             <i>labelSet</i>.</li>
         <li>If <i>Statement</i> is either <i>LabelledStatement</i> or <i>BreakableStatement</i>, then
@@ -19578,7 +19580,7 @@
             href="#sec-10.4">the running execution context</a>&rsquo;s <a href="#sec-10.2">Lexical Environment</a> as the
             argument</li>
         <li>Let <i>envRec</i> be <i>funcEnv&rsquo;s</i> environment record.</li>
-        <li>Let <i>name</i> be StringValue of <i>BindingIdentifier</i>.</li>
+        <li>Let <i>name</i> be <a href="#sec-7.6">StringValue</a> of <i>BindingIdentifier</i>.</li>
         <li>Call the CreateImmutableBinding concrete method of <i>envRec</i> passing <i>name</i> as the argument.</li>
         <li><span style="font-family: Times New Roman">Let <i>closure</i> be the result of performing the <a
             href="#sec-8.3.16.7">FunctionCreate</a> abstract operation with arguments</span> Normal, <span
@@ -19660,9 +19662,9 @@
       <div class="gp prod"><span class="nt">ArrowParameters</span> <span class="geq">:</span> <span class="nt">BindingIdentifier</span></div>
       <ul>
         <li>
-          <p>It is a Syntax Error if the <span style="font-family: Times New Roman">StringValue</span> of the sole element of
-          <span style="font-family: Times New Roman">the BoundNames</span> of <span class="nt">BindingIdentifier</span> is
-          <code>eval</code> or <code>arguments</code>.</p>
+          <p>It is a Syntax Error if the <span style="font-family: Times New Roman"><a href="#sec-7.6">StringValue</a></span> of
+          the sole element of <span style="font-family: Times New Roman">the BoundNames</span> of <span
+          class="nt">BindingIdentifier</span> is <code>eval</code> or <code>arguments</code>.</p>
         </li>
       </ul>
       <div class="gp prod"><span class="nt">ArrowParameters</span> <span class="geq">:</span> <span class="nt">CoverParenthesisedExpressionAndArrowParameterList</span></div>
@@ -20448,7 +20450,7 @@
             href="#sec-10.4">the running execution context</a>&rsquo;s <a href="#sec-10.2">Lexical Environment</a> as the
             argument</li>
         <li>Let <i>envRec</i> be <i>funcEnv&rsquo;s</i> environment record.</li>
-        <li>Let <i>name</i> be StringValue of <i>BindingIdentifier</i>.</li>
+        <li>Let <i>name</i> be <a href="#sec-7.6">StringValue</a> of <i>BindingIdentifier</i>.</li>
         <li>Call the CreateImmutableBinding concrete method of <i>envRec</i> passing <i>name</i> as the argument.</li>
         <li><span style="font-family: Times New Roman">Let <i>closure</i> be the result of performing the <a
             href="#sec-8.3.16.8">GeneratorFunctionCreate</a> abstract operation with arguments</span> Normal, <span
@@ -20928,7 +20930,7 @@
 
       <ol class="proc">
         <li>If <i>BindingIdentifier</i><sub>opt</sub> is not  present, then let <i>className</i> be <b>undefined</b>.</li>
-        <li>Else, let <i>className</i> be StringValue of <i>BindingIdentifier</i>.</li>
+        <li>Else, let <i>className</i> be <a href="#sec-7.6">StringValue</a> of <i>BindingIdentifier</i>.</li>
         <li>Let <i>value</i> be the result of ClassDefinitionEvaluation of <i>ClassTail</i> with argument <i>className</i>.</li>
         <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>value</i>).</li>
         <li>Return <a href="#sec-8.2.3.1">NormalCompletion</a>(<i>value</i>).</li>

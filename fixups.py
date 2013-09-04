@@ -2109,6 +2109,7 @@ def fixup_links(doc, docx):
         ("automatic semicolon insertion (see 7.9)", "Automatic Semicolon Insertion"),
         ("automatic semicolon insertion", "Automatic Semicolon Insertion"),
         ("semicolon insertion (see 7.9)", "Automatic Semicolon Insertion"),
+        ("StringValue", "Identifier Names and Identifiers"),
 
         # clause 8
         ("Type(", "Types"),
