@@ -2550,9 +2550,7 @@
 
     <p><b>Static Semantics:  <span class="nt">StringValue</span></b></p>
 
-    <p><span class="prod"><span class="nt">Identifier</span> <span class="geq">::</span> <span
-    class="nt">IdentifierName</span></span> <span style="font-family: sans-serif"><b>but not</b></span> <i>ReservedWord</i></p>
-
+    <div class="gp prod"><span class="nt">Identifier</span> <span class="geq">::</span> <span class="nt">IdentifierName</span> <span class="grhsmod">but not</span> <span class="nt">ReservedWord</span></div>
     <ol class="proc">
       <li>Return the StringValue of <i>IdentifierName</i>.</li>
     </ol>
@@ -12779,11 +12777,7 @@
           <li>Return the result of performing Array Accumulation for <i>SpreadElement</i> with arguments <i>array</i> and
               <i>nextIndex</i>+<i>padding</i>.</li>
         </ol>
-
-        <p><span class="prod"><span class="nt">ElementList</span> <span class="geq">:</span> <span
-        class="nt">ElementList</span></span> <span style="font-family: sans-serif"><b>,</b></span> <i>Elision<sub>opt</sub></i>
-        <i>AssignmentExpression</i></p>
-
+        <div class="gp prod"><span class="nt">ElementList</span> <span class="geq">:</span> <span class="nt">ElementList</span> <code class="t">,</code> <span class="nt">Elision</span><sub>opt</sub> <span class="nt">AssignmentExpression</span></div>
         <ol class="proc">
           <li>Let <i>postIndex</i>  be the result of performing Array Accumulation for <i>ElementList</i> with arguments
               <i>array</i> and <i>nextIndex</i>.</li>
@@ -12800,11 +12794,7 @@
           <li><a href="#sec-5.2">Assert</a>: <i>created</i> is <b>true</b>.</li>
           <li>Return <i>postIndex</i>+<i>padding+</i>1.</li>
         </ol>
-
-        <p><span class="prod"><span class="nt">ElementList</span> <span class="geq">:</span> <span
-        class="nt">ElementList</span></span> <span style="font-family: sans-serif"><b>,</b></span> <i>Elision<sub>opt</sub></i>
-        <i>SpreadElement</i></p>
-
+        <div class="gp prod"><span class="nt">ElementList</span> <span class="geq">:</span> <span class="nt">ElementList</span> <code class="t">,</code> <span class="nt">Elision</span><sub>opt</sub> <span class="nt">SpreadElement</span></div>
         <ol class="proc">
           <li>Let <i>postIndex</i>  be the result of performing Array Accumulation for <i>ElementList</i> with arguments
               <i>array</i> and <i>nextIndex</i>.</li>
@@ -16212,9 +16202,7 @@
 
         <p>with parameters <var>obj</var> and <var>index</var></p>
 
-        <p><span class="prod"><span class="nt">AssignmentElementList</span> <span class="geq">:</span> <span
-        class="nt">Elision</span></span> <span style="font-family: sans-serif"><sub>opt</sub></span> <i>AssignmentElement</i></p>
-
+        <div class="gp prod"><span class="nt">AssignmentElementList</span> <span class="geq">:</span> <span class="nt">Elision</span><sub>opt</sub> <span class="nt">AssignmentElement</span></div>
         <ol class="proc">
           <li>Let <i>skip</i> be the Elision Width of <i>Elision</i>; if <i>Elision</i> is not present, use the numeric value
               zero.</li>
@@ -16224,11 +16212,7 @@
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>status</i>).</li>
           <li>Return <i>index</i>+<i>skip</i>+1.</li>
         </ol>
-
-        <p><span class="prod"><span class="nt">AssignmentElementList</span> <span class="geq">:</span> <span
-        class="nt">AssignmentElementList</span> <code class="t">,</code> <span class="nt">Elision</span></span> <span
-        style="font-family: sans-serif"><sub>opt</sub></span> <i>AssignmentElement</i></p>
-
+        <div class="gp prod"><span class="nt">AssignmentElementList</span> <span class="geq">:</span> <span class="nt">AssignmentElementList</span> <code class="t">,</code> <span class="nt">Elision</span><sub>opt</sub> <span class="nt">AssignmentElement</span></div>
         <ol class="proc">
           <li>Let <i>listNext</i> be the result of performing Indexed Destructuring Assignment Evaluation of
               <i>AssignmentElementList</i> using <i>obj</i> as the <i>obj</i> parameter and <i>index</i> as the <i>index</i>
@@ -17299,10 +17283,7 @@
           <li>Return the result of performing Indexed Binding Initialisation for <i>BindingRestElement</i>  using <i>array,
               next</i>+<i>skip</i> , and <i>environment</i> as arguments.</li>
         </ol>
-
-        <p><span class="prod"><span class="nt">BindingElementList</span> <span class="geq">:</span> <span
-        class="nt">Elision</span></span> <span style="font-family: sans-serif"><sub>opt</sub></span> <i>BindingElement</i></p>
-
+        <div class="gp prod"><span class="nt">BindingElementList</span> <span class="geq">:</span> <span class="nt">Elision</span><sub>opt</sub> <span class="nt">BindingElement</span></div>
         <ol class="proc">
           <li>Let <i>skip</i> be the Elision Width of <i>Elision</i>; if <i>Elision</i> is not present, use the numeric value
               zero.</li>
@@ -17311,11 +17292,7 @@
           <li><a href="#sec-8.2.3.4">ReturnIfAbrupt</a>(<i>status</i>).</li>
           <li>Return <i>nextIndex</i> +<i>skip</i>+1.</li>
         </ol>
-
-        <p><span class="prod"><span class="nt">BindingElementList</span> <span class="geq">:</span> <span
-        class="nt">BindingElementList</span> <code class="t">,</code> <span class="nt">Elision</span></span> <span
-        style="font-family: sans-serif"><sub>opt</sub></span> <i>BindingElement</i></p>
-
+        <div class="gp prod"><span class="nt">BindingElementList</span> <span class="geq">:</span> <span class="nt">BindingElementList</span> <code class="t">,</code> <span class="nt">Elision</span><sub>opt</sub> <span class="nt">BindingElement</span></div>
         <ol class="proc">
           <li>Let <i>listNext</i> be the result of performing Indexed Binding Initialisation for <i>BindingElementList</i> using
               <i>array, nextIndex</i>, and <i>environment</i> as arguments.</li>
@@ -17742,11 +17719,7 @@
 
         <p><b>Static Semantics:  VarDeclaredNames</b></p>
 
-        <p><span class="prod"><span class="nt">IterationStatement</span> <span class="geq">:</span> <code class="t">for</code>
-        <code class="t">(</code> <span class="nt">Expression</span></span> <span style="font-family:
-        sans-serif"><sub>opt</sub></span> <code>;</code> <i>Expression</i><span style="font-family:
-        sans-serif"><sub>opt</sub></span> <code>;</code> <i>Expression</i><sub>opt</sub><code>)</code> <i>Statement</i></p>
-
+        <div class="gp prod"><span class="nt">IterationStatement</span> <span class="geq">:</span> <code class="t">for</code> <code class="t">(</code> <span class="nt">Expression</span><sub>opt</sub> <code class="t">;</code> <span class="nt">Expression</span><sub>opt</sub> <code class="t">;</code> <span class="nt">Expression</span><sub>opt</sub> <code class="t">)</code> <span class="nt">Statement</span></div>
         <ol class="proc">
           <li>Return the VarDeclaredNames of <i>Statement</i>.</li>
         </ol>
@@ -17756,12 +17729,7 @@
           <li>Append to <i>names</i> the elements of the VarDeclaredNames of <i>Statement.</i></li>
           <li>Return <i>names</i>.</li>
         </ol>
-
-        <p><span class="prod"><span class="nt">IterationStatement</span> <span class="geq">:</span> <code class="t">for</code>
-        <code class="t">(</code> <span class="nt">LexicalDeclaration</span> <code class="t">;</code> <span
-        class="nt">Expression</span></span> <span style="font-family: sans-serif"><sub>opt</sub></span> <code>;</code>
-        <i>Expression</i><sub>opt</sub><code>)</code> <i>Statement</i></p>
-
+        <div class="gp prod"><span class="nt">IterationStatement</span> <span class="geq">:</span> <code class="t">for</code> <code class="t">(</code> <span class="nt">LexicalDeclaration</span> <code class="t">;</code> <span class="nt">Expression</span><sub>opt</sub> <code class="t">;</code> <span class="nt">Expression</span><sub>opt</sub> <code class="t">)</code> <span class="nt">Statement</span></div>
         <ol class="proc">
           <li>Return the VarDeclaredNames of <i>Statement</i>.</li>
         </ol>
@@ -17774,11 +17742,7 @@
 
         <p>With argument <var>labelSet</var>.</p>
 
-        <p><span class="prod"><span class="nt">IterationStatement</span> <span class="geq">:</span> <code class="t">for</code>
-        <code class="t">(</code> <span class="nt">Expression</span></span> <span style="font-family:
-        sans-serif"><sub>opt</sub></span> <code>;</code> <i>Expression</i><span style="font-family:
-        sans-serif"><sub>opt</sub></span> <code>;</code> <i>Expression</i><sub>opt</sub><code>)</code> <i>Statement</i></p>
-
+        <div class="gp prod"><span class="nt">IterationStatement</span> <span class="geq">:</span> <code class="t">for</code> <code class="t">(</code> <span class="nt">Expression</span><sub>opt</sub> <code class="t">;</code> <span class="nt">Expression</span><sub>opt</sub> <code class="t">;</code> <span class="nt">Expression</span><sub>opt</sub> <code class="t">)</code> <span class="nt">Statement</span></div>
         <ol class="proc">
           <li>If <i>Expression</i> is present, then
             <ol class="block">
@@ -20508,10 +20472,7 @@
         class="nt">GeneratorExpression</span>.</p>
       </div>
 
-      <p><span class="prod"><span class="nt">YieldExpression</span> <span class="geq">:</span> <code class="t">yield</code> <span
-      class="nt">YieldDelegator</span></span> <span style="font-family: sans-serif"><sub>opt</sub></span>
-      <i>AssignmentExpression</i></p>
-
+      <div class="gp prod"><span class="nt">YieldExpression</span> <span class="geq">:</span> <code class="t">yield</code> <span class="nt">YieldDelegator</span><sub>opt</sub> <span class="nt">AssignmentExpression</span></div>
       <ol class="proc">
         <li>Let <i>exprRef</i> be the result of evaluating <i>AssignmentExpression</i>.</li>
         <li>Let <i>value</i> be <a href="#sec-8.2.4.1">GetValue</a>(<i>exprRef</i>).</li>
@@ -20963,7 +20924,7 @@
       </div>
 
       <p><span class="prod"><span class="nt">ClassExpression</span> <span class="geq">:</span> <code class="t">class</code> <span
-      class="nt">BindingIdentifier</span></span> <span style="font-family: sans-serif"><sub>opt</sub></span>  <i>ClassTail</i></p>
+      class="nt">BindingIdentifier</span><sub>opt</sub> <span class="nt">ClassTail</span></span></p>
 
       <ol class="proc">
         <li>If <i>BindingIdentifier</i><sub>opt</sub> is not  present, then let <i>className</i> be <b>undefined</b>.</li>
@@ -31633,7 +31594,7 @@
           <figcaption><span id="table-35">Table 35</span> &mdash; ControlEscape Character Values</figcaption>
           <table class="real-table">
             <tr>
-              <th><span style="background-color: #C0C0C0">ControlEscape</span></th>
+              <th>ControlEscape</th>
               <th>Code Unit</th>
               <th>Name</th>
               <th>Symbol</th>
@@ -34496,11 +34457,11 @@
         <figcaption><span id="table-36">Table 36</span> &ndash; The <i>TypedArray</i> Constructors</figcaption>
         <table class="real-table">
           <tr>
-            <td style="background-color: #BFBFBF"><span style="background-color: #C0C0C0">Constructor Name</span></td>
+            <th style="background-color: #BFBFBF">Constructor Name</th>
             <th style="background-color: #BFBFBF">Element<br>Type</th>
             <th style="background-color: #BFBFBF">Element Size</th>
             <th style="background-color: #BFBFBF">Conversion Operation</th>
-            <td style="background-color: #BFBFBF"><span style="background-color: #C0C0C0">Description</span></td>
+            <th style="background-color: #BFBFBF">Description</th>
             <th style="background-color: #BFBFBF">Equivalent C Type</th>
           </tr>
           <tr>
@@ -42753,21 +42714,14 @@
 
     <p><b>Static Semantics:  Early Errors</b></p>
 
-    <p><span class="prod"><span class="nt">BindingPattern</span> <span class="geq">:</span> <span
-    class="nt">Irrefutable</span></span> <span style="font-family: sans-serif"><sub>opt</sub></span>
-    <i>ObjectBindingPattern</i></p>
-
+    <div class="gp prod"><span class="nt">BindingPattern</span> <span class="geq">:</span> <span class="nt">Irrefutable</span><sub>opt</sub> <span class="nt">ObjectBindingPattern</span></div>
     <ul>
       <li>
         <p>It is a Syntax Error if the BoundNames of  <span class="nt">ObjectBindingPattern</span> contains the string
         &ldquo;<code>eval</code>&rdquo; or the string &ldquo;<code>arguments</code>&rdquo;.</p>
       </li>
     </ul>
-
-    <p><span class="prod"><span class="nt">BindingPattern</span> <span class="geq">:</span> <span
-    class="nt">Irrefutable</span></span> <span style="font-family: sans-serif"><sub>opt</sub></span>
-    <i>ArrayBindingPattern</i></p>
-
+    <div class="gp prod"><span class="nt">BindingPattern</span> <span class="geq">:</span> <span class="nt">Irrefutable</span><sub>opt</sub> <span class="nt">ArrayBindingPattern</span></div>
     <ul>
       <li>
         <p>It is a Syntax Error if the BoundNames of  <span class="nt">ArrayBindingPattern</span> contains the string
@@ -42777,18 +42731,11 @@
 
     <p><b>Static Semantics:  BoundNames</b></p>
 
-    <p><span class="prod"><span class="nt">BindingPattern</span> <span class="geq">:</span> <span
-    class="nt">Irrefutable</span></span> <span style="font-family: sans-serif"><sub>opt</sub></span>
-    <i>ObjectBindingPattern</i></p>
-
+    <div class="gp prod"><span class="nt">BindingPattern</span> <span class="geq">:</span> <span class="nt">Irrefutable</span><sub>opt</sub> <span class="nt">ObjectBindingPattern</span></div>
     <ol class="proc">
       <li>Return the BoundNames of <i>ObjectBindingPattern</i>.</li>
     </ol>
-
-    <p><span class="prod"><span class="nt">BindingPattern</span> <span class="geq">:</span> <span
-    class="nt">Irrefutable</span></span> <span style="font-family: sans-serif"><sub>opt</sub></span>
-    <i>ArrayBindingPattern</i></p>
-
+    <div class="gp prod"><span class="nt">BindingPattern</span> <span class="geq">:</span> <span class="nt">Irrefutable</span><sub>opt</sub> <span class="nt">ArrayBindingPattern</span></div>
     <ol class="proc">
       <li>Return the BoundNames of <i>ArrayBindingPattern</i>.</li>
     </ol>
@@ -42814,18 +42761,11 @@
       <li>Append to <i>names</i> the elements of BoundNames of <i>BindingRestElement.</i></li>
       <li>Return <i>names</i>.</li>
     </ol>
-
-    <p><span class="prod"><span class="nt">BindingPropertyList</span> <span class="geq">:</span> <span
-    class="nt">Irrefutable</span></span> <span style="font-family: sans-serif"><sub>opt</sub></span>  <i>BindingProperty</i></p>
-
+    <div class="gp prod"><span class="nt">BindingPropertyList</span> <span class="geq">:</span> <span class="nt">Irrefutable</span><sub>opt</sub> <span class="nt">BindingProperty</span></div>
     <ol class="proc">
       <li>Return the BoundNames of <i>BindingProperty</i>.</li>
     </ol>
-
-    <p><span class="prod"><span class="nt">BindingPropertyList</span> <span class="geq">:</span> <span
-    class="nt">BindingPropertyList</span> <code class="t">,</code> <span class="nt">Irrefutable</span></span> <span
-    style="font-family: sans-serif"><sub>opt</sub></span>  <i>BindingProperty</i></p>
-
+    <div class="gp prod"><span class="nt">BindingPropertyList</span> <span class="geq">:</span> <span class="nt">BindingPropertyList</span> <code class="t">,</code> <span class="nt">Irrefutable</span><sub>opt</sub> <span class="nt">BindingProperty</span></div>
     <ol class="proc">
       <li>Let <i>names</i> be BoundNames of <i>BindingPropertyList</i>.</li>
       <li>Append to <i>names</i> the elements of BoundNames of <i>BindingProperty.</i></li>

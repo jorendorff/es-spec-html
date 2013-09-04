@@ -757,6 +757,7 @@ def fixup_element_spacing(doc, docx):
     def rebuild(parent):
         result = []
         def addstr(s):
+            assert s
             if result and isinstance(result[-1], str):
                 result[-1] += s
             else:
@@ -787,6 +788,8 @@ def fixup_element_spacing(doc, docx):
                             k.content[-1] = b_text = b.rstrip()
                             if not discard_space:
                                 addstr(b[len(b_text):])
+                            if b_text == '':
+                                del k.content[-1]
 
         parent.content[:] = result
 
@@ -1710,7 +1713,11 @@ def fixup_lang_grammar_pre(doc, docx):
                 parent.content[i: i + 1] = [ht[:end], ht[end:]]
             return True
         elif ht.name == 'span':
-            return ht.attrs.get('class') == 'nt' or (len(ht.content) == 1 and is_grammar_inline_at(ht, 0))
+            #return ht.attrs.get('class') == 'nt' or (len(ht.content) == 1 and is_grammar_inline_at(ht, 0))
+            if ht.attrs.get('class') == 'nt' or (len(ht.content) == 1 and is_grammar_inline_at(ht, 0)):
+                return True
+            warn("Likely bug in is_grammar_inline_at:\n    {!r}\n    content: {!r}".format(ht, ht.content))
+            return False
         elif ht.name == 'sub':
             return ht.content == ['opt']
         else:
@@ -2450,8 +2457,9 @@ def fixup_links(doc, docx):
                 m = xref_re.match(prefix)
                 if m:
                     prefix = m.group(1)
-                parent.content.insert(i, prefix)
-                i += 1
+                if prefix:
+                    parent.content.insert(i, prefix)
+                    i += 1
 
             if href is not None:
                 assert (not href.startswith('#')
@@ -2470,6 +2478,7 @@ def fixup_links(doc, docx):
         if id is not None:
             current_section = '#' + id
 
+        # FIXME - incrementing i in linkify should save work here :-P
         for i, kid in enumerate(e.content):
             if isinstance(kid, str):
                 if current_section is not None:  # don't linkify front matter, etc.
@@ -2678,10 +2687,19 @@ def fixup(docx, doc):
     else:
         logdir = None
 
+    def verify(e):
+        for x in e.content:
+            if isinstance(x, str):
+                if x == "":
+                    raise ValueError("FAIL in " + repr(e) + ": " + repr(e.content))
+            else:
+                verify(x)                
+
     for f in get_fixups(docx):
         print(f.name)
         t0 = time.time()
         doc = f(doc, docx)
+        verify(doc)
         if logdir:
             filename = os.path.join(logdir, f.name + ".html")
             print("writing " + filename)
