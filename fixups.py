@@ -1997,8 +1997,10 @@ def fixup_links(doc, docx):
         $
     ''')
 
+    pattern_semantics_section_prefix = '#sec-21.2.2.'
+
     def title_as_algorithm_name(title, sec_id):
-        if sec_id.startswith('#sec-15.10.2.'):
+        if sec_id.startswith(pattern_semantics_section_prefix):
             # This is ClassAtom or the name of some other nonterminal.
             # Not an algorithm or builtin-method name. Skip it for now.
             return None
@@ -2112,7 +2114,7 @@ def fixup_links(doc, docx):
         ("StringValue", "Identifier Names and Identifiers"),
 
         # clause 8
-        ("Type(", "Types"),
+        ("Type(", "ECMAScript Data Types and Values"),
         ("ECMAScript language values", "ECMAScript Language Types"),
         ("ECMAScript language value", "ECMAScript Language Types"),
         ("ECMAScript language type", "ECMAScript Language Types"),
@@ -2149,8 +2151,8 @@ def fixup_links(doc, docx):
 
         # clause 9
         ("SameValue (according to 9.12)", "SameValue(x, y)"),
-        ("the SameValue algorithm (9.12)", "SameValue(x, y)"),
-        ("the SameValue Algorithm (9.12)", "SameValue(x, y)"),
+        ("the SameValue algorithm", "SameValue(x, y)"),
+        ("the SameValue Algorithm", "SameValue(x, y)"),
         ("Get(", "Get (O, P)"),
         ("Put(", "Put (O, P, V, Throw)"),
 
@@ -2208,10 +2210,9 @@ def fixup_links(doc, docx):
         ("Identifier Resolution as specified in 10.3.1", "Identifier Resolution"),
         ("Identifier Resolution(10.3.1)", "Identifier Resolution"),
 
-        # 10.5
-        ("Declaration Binding Instantiation", "Declaration Binding Instantiation"),
-        ("declaration binding instantiation (10.5)", "Declaration Binding Instantiation"),
-        ("Function Declaration Binding Instantiation", "Function Declaration Instantiation"),
+        #("Declaration Binding Instantiation", "Declaration Binding Instantiation"),
+        #("declaration binding instantiation (10.5)", "Declaration Binding Instantiation"),
+        #("Function Declaration Binding Instantiation", "Function Declaration Instantiation"),
 
         # clause 14
         ("Directive Prologue", "Directive Prologues and the Use Strict Directive"),
@@ -2369,6 +2370,8 @@ def fixup_links(doc, docx):
         # (SECTION|) in this regexp -- to allow group 2 to match the empty string.
         r'{ REF \w+ (?:\\r )?\\h }' + '\N{LEFT-TO-RIGHT MARK}' + r'?((SECTION|))',
 
+        r'(clause\s+{ REF \w+ (?:\\r )?\\h }([1-9][0-9]+))',
+
         r'((Table [1-9][0-9]*))'
     ]))
 
@@ -2466,7 +2469,8 @@ def fixup_links(doc, docx):
                 assert (not href.startswith('#')
                         or href[1:] in all_ids
                         or href[1:] in non_section_id_hrefs)
-                parent.content[i] = html.a(href=href, *s[start:stop])
+                link_body = re.sub(xref_re, r'\1', s[start:stop])
+                parent.content[i] = html.a(href=href, *[link_body])
                 i += 1
             else:
                 del parent.content[i]
