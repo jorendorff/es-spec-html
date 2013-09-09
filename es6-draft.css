@@ -23,7 +23,18 @@ body > .inner-title {
     font-weight: bold;
     margin-top: 6em;
 }
-body section h1 { font-size: 110%; margin-bottom: 1em; }
+body section h1 {
+    font-size: 110%;
+    margin-bottom: 0.8em;
+    padding-bottom: 0.2em;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: #fdfdfc;
+    box-shadow: 0 0 6px #fdfdfc;
+    margin-left: -7em;
+    padding-left: 7em;
+}
 body > hgroup > h1 { font-size: 150%; margin-top: 0; margin-bottom: 0; }
 h1 span.secnum {
     width: 6em;
@@ -47,8 +58,6 @@ span.errorname, code, pre {
 
 code, pre, .string.value { font-family: "Courier New", monospace; }
 code, .string, .math { white-space: nowrap; }
-
-#sec4\.3 section h1 { font-size: 100%; margin-bottom: 0; }
 
 sup, sub {
     font-size: smaller;

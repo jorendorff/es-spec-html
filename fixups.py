@@ -2547,6 +2547,20 @@ def fixup_generate_toc(doc, docx):
     section.content = [html.h1("Contents")] + make_toc_list(doc_body(doc))
 
 @Fixup
+def fixup_sticky(doc, docx):
+    def fix_section(sect):
+        if (any(ht_name_is(k, "section") for k in sect.content)
+              and ht_name_is(sect.content[0], "h1")):
+            i = 0
+            while not ht_name_is(sect.content[i], "section"):
+                i += 1
+            front = html.div(*sect.content[:i], class_="front")
+            return [sect.with_content([front] + sect.content[i:])]
+        else:
+            return [sect]  # unchanged
+    return doc.replace("section", fix_section)
+
+@Fixup
 def fixup_add_disclaimer(doc, docx):
     div = html.div
     p = html.p
@@ -2682,6 +2696,7 @@ def get_fixups(docx):
         yield fixup_intl_insert_ids
     yield fixup_links
     yield fixup_generate_toc
+    yield fixup_sticky
     yield fixup_add_disclaimer
     yield fixup_add_ecma_flavor
 
