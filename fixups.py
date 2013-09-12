@@ -432,6 +432,8 @@ tag_names = {
     'a2': 'h1.l2',
     'a3': 'h1.l3',
     'a4': 'h1.l4',
+    'a5': 'h1.l5',
+    'a6': 'h1.l6',
     # Algorithm styles are handled via their list attributes
     'Alg2': None,
     'Alg3': None,

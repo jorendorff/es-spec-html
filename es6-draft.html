@@ -41936,40 +41936,49 @@
       </div>
 
       <section id="sec-B.2.2.1">
-        <h1><span class="secnum"><a href="#sec-B.2.2.1" title="link to this section">B.2.2.1</a></span>
-            Object.prototype.__proto__</h1>
+        <div class="front">
+          <h1><span class="secnum"><a href="#sec-B.2.2.1" title="link to this section">B.2.2.1</a></span>
+              Object.prototype.__proto__</h1>
 
-        <p>Object.prototype.__proto__ is an accessor property with attributes { [[Enumerable]]: <span class="value">false</span>,
-        [[Configurable]]: <span class="value">true</span> }. The [[Get]] and [[Set]] attributes are defined as follows</p>
+          <p>Object.prototype.__proto__ is an accessor property with attributes { [[Enumerable]]: <span
+          class="value">false</span>, [[Configurable]]: <span class="value">true</span> }. The [[Get]] and [[Set]] attributes are
+          defined as follows</p>
+        </div>
 
-        <p><span class="marker">B.2.2.1.1&#x9;</span>get Object.prototype.__proto__</p>
+        <section id="sec-B.2.2.1.1">
+          <h1><span class="secnum"><a href="#sec-B.2.2.1.1" title="link to this section">B.2.2.1.1</a></span> get
+              Object.prototype.__proto__</h1>
 
-        <p>The value of the [[Get]] attribute is a built-in function that requires no arguments. It performs the following
-        steps:</p>
+          <p>The value of the [[Get]] attribute is a built-in function that requires no arguments. It performs the following
+          steps:</p>
 
-        <ol class="proc">
-          <li>Let <i>O</i> be the result of calling <a href="#sec-7.1.9">ToObject</a> passing the <b>this</b> value as the
-              argument.</li>
-          <li><a href="#sec-6.2.3.4">ReturnIfAbrupt</a>(<i>O</i>).</li>
-          <li>Return the result of calling the [[GetInheritance]] internal method of <i>O</i>.</li>
-        </ol>
+          <ol class="proc">
+            <li>Let <i>O</i> be the result of calling <a href="#sec-7.1.9">ToObject</a> passing the <b>this</b> value as the
+                argument.</li>
+            <li><a href="#sec-6.2.3.4">ReturnIfAbrupt</a>(<i>O</i>).</li>
+            <li>Return the result of calling the [[GetInheritance]] internal method of <i>O</i>.</li>
+          </ol>
+        </section>
 
-        <p><span class="marker">B.2.2.1.2&#x9;</span>set Object.prototype.__proto__</p>
+        <section id="sec-B.2.2.1.2">
+          <h1><span class="secnum"><a href="#sec-B.2.2.1.2" title="link to this section">B.2.2.1.2</a></span> set
+              Object.prototype.__proto__</h1>
 
-        <p>The value of the [[Set]] attribute is a built-in function that takes an argument <var>proto</var>. It performs the
-        following steps:</p>
+          <p>The value of the [[Set]] attribute is a built-in function that takes an argument <var>proto</var>. It performs the
+          following steps:</p>
 
-        <ol class="proc">
-          <li>Let <i>O</i> be <a href="#sec-7.2.1">CheckObjectCoercible</a>(<b>this</b> value)<i>.</i></li>
-          <li><a href="#sec-6.2.3.4">ReturnIfAbrupt</a>(<i>O</i>).If <a href="#sec-6">Type</a>(<i>proto</i>) is neither Object or
-              Null, then return <i>proto</i>.</li>
-          <li>If <a href="#sec-6">Type</a>(<i>O)</i> is not Object, then return <i>proto</i>.</li>
-          <li>Let <i>status</i> be the result of calling the [[SetInheritance]] internal method of <i>O</i> with argument
-              <i>proto</i>.</li>
-          <li><a href="#sec-6.2.3.4">ReturnIfAbrupt</a>(<i>status</i>).</li>
-          <li>If <i>status</i> is <b>false</b>, then throw a <b>TypeError</b> exception.</li>
-          <li>Return <i>proto</i>.</li>
-        </ol>
+          <ol class="proc">
+            <li>Let <i>O</i> be <a href="#sec-7.2.1">CheckObjectCoercible</a>(<b>this</b> value)<i>.</i></li>
+            <li><a href="#sec-6.2.3.4">ReturnIfAbrupt</a>(<i>O</i>).If <a href="#sec-6">Type</a>(<i>proto</i>) is neither Object
+                or Null, then return <i>proto</i>.</li>
+            <li>If <a href="#sec-6">Type</a>(<i>O)</i> is not Object, then return <i>proto</i>.</li>
+            <li>Let <i>status</i> be the result of calling the [[SetInheritance]] internal method of <i>O</i> with argument
+                <i>proto</i>.</li>
+            <li><a href="#sec-6.2.3.4">ReturnIfAbrupt</a>(<i>status</i>).</li>
+            <li>If <i>status</i> is <b>false</b>, then throw a <b>TypeError</b> exception.</li>
+            <li>Return <i>proto</i>.</li>
+          </ol>
+        </section>
       </section>
     </section>
 
