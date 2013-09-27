@@ -2,6 +2,7 @@ import zipfile
 from xml.etree import ElementTree
 from html import escape
 import re
+import copy
 
 namespaces = {
     'http://schemas.openxmlformats.org/wordprocessingml/2006/main': '',
@@ -306,6 +307,10 @@ class Lvl:
     self.suff is str.
     self.style and self.full_style are CSS dictionaries.
     """
+    def with_start(self, start):
+        clone = copy.copy(self)
+        clone.start = start
+        return clone
 
 def get_val(e, key, default_value = None):
     kids = list(e.findall(bloat(key)))
@@ -396,17 +401,15 @@ def parse_numbering(docx, e):
         val = int(get_val(style, 'abstractNumId'))
         overrides = []
         for override in style.findall(k_lvlOverride):
-            # We ignore startOverride, as it happens not to be needed by the
-            # document, yet. I'm sure that won't bite us or anything.
             ilvl = int(override.get(k_ilvl))
             while len(overrides) <= ilvl:
                 overrides.append(None)
-            [ov] = override
-            if ov.tag == k_lvl:
-                overrides[ilvl] = parse_lvl(docx, ov)
-            else:
-                so = parse_startOverride(ov)
-                assert so.val == 1
+            if len(override) > 0:
+                [ov] = override
+                if ov.tag == k_lvl:
+                    overrides[ilvl] = parse_lvl(docx, ov)
+                else:
+                    overrides[ilvl] = parse_startOverride(ov)
         num[numId] = Num(val, overrides)
 
     return Numbering(abstract_num, num, style_links)
@@ -462,7 +465,11 @@ class Document:
         levels = self.get_num_levels(abstract_num_id, level_limit)
         for i in range(0, level_limit + 1):
             if i < len(ov) and ov[i] is not None:
-                levels[i] = ov[i]
+                if isinstance(ov[i], Lvl):
+                    levels[i] = ov[i]
+                else:
+                    assert isinstance(ov[i], StartOverride)
+                    levels[i] = levels[i].with_start(ov[i].val)
         return abstract_num_id, levels
 
     def get_num_levels(self, abstract_num_id, level_limit):
@@ -484,19 +491,29 @@ class Document:
         """ Returns a Lvl object; its .full_style attribute is a CSS dictionary. """
         num = self.numbering.num[numId]
         ilvl = int(ilvl)
-        ov = num.overrides
-        if ilvl < len(ov) and ov[ilvl] is not None:
-            return ov[ilvl]
+        if ilvl < len(num.overrides):
+            ov = num.overrides[ilvl]
+        else:
+            ov = None
+
+        if isinstance(ov, Lvl):
+            return ov
+
         abstract_num = self.numbering.abstract_num[num.abstract_num_id]
         if isinstance(abstract_num, str):
             style = self.styles[abstract_num]
-            return self.get_list_style_at_level(int(style.full_style['-ooxml-numId']), ilvl)
+            lvl = self.get_list_style_at_level(int(style.full_style['-ooxml-numId']), ilvl)
         else:
             assert isinstance(abstract_num, list)
             if ilvl >= len(abstract_num):
                 return None
             else:
-                return abstract_num[ilvl]
+                lvl = abstract_num[ilvl]
+
+        if isinstance(ov, StartOverride):
+            lvl = lvl.with_start(ov.val)
+
+        return lvl
 
 def load(filename):
     with zipfile.ZipFile(filename) as f:
