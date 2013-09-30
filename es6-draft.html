@@ -8229,8 +8229,9 @@
           <li>Set the <a href="#sec-8.3">VariableEnvironment</a> of <i>calleeContext</i> to <i>localEnv</i>.</li>
           <li>Push <i>calleeContext</i> onto <a href="#sec-8.3">the execution context stack</a>; <i>calleeContext</i> is now <a
               href="#sec-8.3">the running execution context</a>.</li>
-          <li>Let <i>status</i> be the result of performing Function Declaration Instantiation using the function <i>F</i>,
-              <i>argumentsList</i> , and <i>localEnv</i> as described in <a href="#sec-9.1.15.11">9.1.15.11</a>.</li>
+          <li>Let <i>status</i> be the result of performing <a href="#sec-9.1.15.13">Function Declaration Instantiation</a> using
+              the function <i>F</i>, <i>argumentsList</i> , and <i>localEnv</i> as described in <a
+              href="#sec-9.1.15.11">9.1.15.11</a>.</li>
           <li>If <i>status</i> is an <a href="#sec-6.2.3">abrupt completion</a>, then
             <ol class="block">
               <li>Remove <i>calleeContext</i> from <a href="#sec-8.3">the execution context stack</a> and restore
@@ -45921,10 +45922,10 @@
     function code.</p>
   </div>
 
-  <p>Function Declaration Instantiation is performed as follows using arguments <var>func,</var> <var>argumentsList</var>, and
-  <var>env</var>. <var>func</var> is the function object that for which the <a href="#sec-8.3">execution context</a> is being
-  established.  <var>env</var> is the <a href="#sec-8.1.1.1">declarative environment record</a> in which bindings are to be
-  created.</p>
+  <p><a href="#sec-9.1.15.13">Function Declaration Instantiation</a> is performed as follows using arguments <var>func,</var>
+  <var>argumentsList</var>, and <var>env</var>. <var>func</var> is the function object that for which the <a
+  href="#sec-8.3">execution context</a> is being established.  <var>env</var> is the <a href="#sec-8.1.1.1">declarative
+  environment record</a> in which bindings are to be created.</p>
 
   <ol class="proc">
     <li>Let <i>code</i> be the value of the [[Code]] internal property of <i>func</i>.</li>

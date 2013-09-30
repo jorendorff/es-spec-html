@@ -2047,7 +2047,6 @@ def fixup_links(doc, docx):
     fallback_section_titles = {
         "The List and Record Specification Type": "The List Specification Type",
         "The Completion Record Specification Type": "The Completion Specification Type",
-        "Function Declaration Instantiation": None
     }
 
     # Normally, any section can link to any other section, even its own
@@ -2192,6 +2191,7 @@ def fixup_links(doc, docx):
         # 9.1
         ("ordinary Function object", "Ordinary Function Objects"),
         ("ordinary function object", "Ordinary Function Objects"),
+        ("Function Declaration Instantiation", "Function Declaration Instantiation"),
         ("Bound Function", "Bound Function Exotic Objects"),
         ("bound function", "Bound Function Exotic Objects"),
         ("[[BoundTargetFunction]]", "Bound Function Exotic Objects"),
