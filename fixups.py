@@ -2095,6 +2095,7 @@ def fixup_links(doc, docx):
         globalEnv = "Global Environment Records"
 
     specific_link_source_data_lang = [
+        # 5.1
         ("chain productions", "Context-Free Grammars"),
         ("chain production", "Context-Free Grammars"),
 
@@ -2108,18 +2109,14 @@ def fixup_links(doc, docx):
         ("modulo", "Algorithm Conventions"),
         ("floor(", "Algorithm Conventions"),
 
-        # clause 7
-        ("automatic semicolon insertion (7.9)", "Automatic Semicolon Insertion"),
-        ("automatic semicolon insertion (see 7.9)", "Automatic Semicolon Insertion"),
-        ("automatic semicolon insertion", "Automatic Semicolon Insertion"),
-        ("semicolon insertion (see 7.9)", "Automatic Semicolon Insertion"),
-        ("StringValue", "Identifiers and Identifier Names"),
-
-        # clause 8
+        # clause 6
         ("Type(", "ECMAScript Data Types and Values"),
         ("ECMAScript language values", "ECMAScript Language Types"),
         ("ECMAScript language value", "ECMAScript Language Types"),
         ("ECMAScript language type", "ECMAScript Language Types"),
+        ("property key value", "The Object Type"),
+        ("property key", "The Object Type"),
+        ("internal data property", "Object Internal Methods and Internal Data Properties"),
         ("Data Block", "Data Blocks"),
         ("List", "The List and Record Specification Type"),
         ("Completion Record", "The Completion Record Specification Type"),
@@ -2136,35 +2133,15 @@ def fixup_links(doc, docx):
         ("Unresolvable Reference", "The Reference Specification Type"),
         ("IsSuperReference", "The Reference Specification Type"),
         ("Property Descriptor", "The Property Descriptor Specification Type"),
-        ("property key value", "The Object Type"),
-        ("property key", "The Object Type"),
-        ("internal data property", "Object Internal Methods and Internal Data Properties"),
-        ("ordinary Function object", "Ordinary Function Objects"),
-        ("ordinary function object", "Ordinary Function Objects"),
-        ("Bound Function", "Bound Function Exotic Objects"),
-        ("bound function", "Bound Function Exotic Objects"),
-        ("[[BoundTargetFunction]]", "Bound Function Exotic Objects"),
-        ("[[BoundThis]]", "Bound Function Exotic Objects"),
-        ("[[BoundArguments]]", "Bound Function Exotic Objects"),
-        ("Array exotic object", "Array Exotic Objects"),
-        ("String exotic object", "String Exotic Objects"),
-        ("Symbol exotic objects", "Symbol Exotic Objects"),
-        ("exotic arguments object", "Exotic Arguments Objects"),
 
-        # clause 9
+        # clause 7
         ("SameValue (according to 9.12)", "SameValue(x, y)"),
         ("the SameValue algorithm", "SameValue(x, y)"),
         ("the SameValue Algorithm", "SameValue(x, y)"),
         ("Get(", "Get (O, P)"),
         ("Put(", "Put (O, P, V, Throw)"),
 
-        # 10.1
-        ("strict mode code (see 10.1.1)", "Strict Mode Code"),
-        ("strict mode code", "Strict Mode Code"),
-        ("strict code", "Strict Mode Code"),
-        ("base code", "Strict Mode Code"),
-
-        # 10.2
+        # 8.1
         ("Lexical Environment", "Lexical Environments"),
         ("lexical environment", "Lexical Environments"),
         ("outer environment reference", "Lexical Environments"),
@@ -2186,13 +2163,13 @@ def fixup_links(doc, docx):
         ("Global Environment Record", globalEnv),
         ("Global Environment Records", globalEnv),
 
-        # 10.3
+        # 8.2
         ("Code Realms (10.3)", "Code Realms"),
         ("Code Realm", "Code Realms"),
         ("Realm", "Code Realms"),
         ("Realm (10.3)", "Code Realms"),
 
-        # 10.4
+        # 8.3
         ("LexicalEnvironment", "Execution Contexts"),
         ("VariableEnvironment", "Execution Contexts"),
         ("ThisBinding", "Execution Contexts"),
@@ -2212,21 +2189,44 @@ def fixup_links(doc, docx):
         ("Identifier Resolution as specified in 10.3.1", "Identifier Resolution"),
         ("Identifier Resolution(10.3.1)", "Identifier Resolution"),
 
+        # 9.1
+        ("ordinary Function object", "Ordinary Function Objects"),
+        ("ordinary function object", "Ordinary Function Objects"),
+        ("Bound Function", "Bound Function Exotic Objects"),
+        ("bound function", "Bound Function Exotic Objects"),
+        ("[[BoundTargetFunction]]", "Bound Function Exotic Objects"),
+        ("[[BoundThis]]", "Bound Function Exotic Objects"),
+        ("[[BoundArguments]]", "Bound Function Exotic Objects"),
+        ("Array exotic object", "Array Exotic Objects"),
+        ("String exotic object", "String Exotic Objects"),
+        ("Symbol exotic objects", "Symbol Exotic Objects"),
+        ("exotic arguments object", "Exotic Arguments Objects"),
+
+        # 10.2
+        ("strict mode code (see 10.1.1)", "Strict Mode Code"),
+        ("strict mode code", "Strict Mode Code"),
+        ("strict code", "Strict Mode Code"),
+        ("base code", "Strict Mode Code"),
+
+        # 11.6-11.9
+        ("StringValue", "Identifiers and Identifier Names"),
+        ("automatic semicolon insertion (7.9)", "Automatic Semicolon Insertion"),
+        ("automatic semicolon insertion (see 7.9)", "Automatic Semicolon Insertion"),
+        ("automatic semicolon insertion", "Automatic Semicolon Insertion"),
+        ("semicolon insertion (see 7.9)", "Automatic Semicolon Insertion"),
+
         #("Declaration Binding Instantiation", "Declaration Binding Instantiation"),
         #("declaration binding instantiation (10.5)", "Declaration Binding Instantiation"),
         #("Function Declaration Binding Instantiation", "Function Declaration Instantiation"),
 
-        # clause 14
+        # clause 15
         ("Directive Prologue", "Directive Prologues and the Use Strict Directive"),
         ("Use Strict Directive", "Directive Prologues and the Use Strict Directive"),
 
-        # clause 15
-        ("direct call (see 15.1.2.1.1) to the eval function", "Direct Call to Eval"),
+        # clause 18
+        ("direct call (see 18.2.1.1) to the eval function", "Direct Call to Eval"),
 
-        # 15.3
-        #("Function.prototype.bind", "Function.prototype.bind (thisArg [, arg1 [, arg2, \N{HORIZONTAL ELLIPSIS}]])"),
-
-        # 15.9
+        # 20.3
         ("this time value", "Properties of the Date Prototype Object"),
         ("time value", "Time Values and Time Range"),
         ("Day(", "Day Number and Time within Day"),
