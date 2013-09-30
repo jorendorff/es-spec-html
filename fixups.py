@@ -2326,14 +2326,14 @@ def fixup_links(doc, docx):
     # be wrong in the wake of such a change. :)
     #
     for text, target in specific_links:
-        m = re.search(r'\((?:see )?([1-9][0-9]*(?:\.[1-9][0-9]*)*)\)', text)
+        m = re.search(r'\((?:see )?([1-9][0-9]*(?:\.[0-9]+)*)\)', text)
         if m is not None:
             if target != '#sec-' + m.group(1):
                 warn("text refers to section number " + repr(m.group(1)) + ", but actual section is " + repr(target))
 
     all_ids = set([kid.attrs['id'] for _, _, kid in all_parent_index_child_triples(doc) if 'id' in kid.attrs])
 
-    SECTION = r'([1-9A-Z][0-9]*(?:\.[1-9][0-9]*)+|[Cc]lause\s+[1-9][0-9]*|[Aa]nnex\s+[A-Z])'
+    SECTION = r'([1-9A-Z][0-9]*(?:\.[0-9]+)+|[Cc]lause\s+[0-9]+|[Aa]nnex\s+[A-Z])'
     def compile(re_source):
         return re.compile(re_source.replace("SECTION", SECTION))
 
