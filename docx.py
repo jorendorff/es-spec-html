@@ -348,13 +348,13 @@ def parse_lvl(docx, e):
     return lvl
 
 class StartOverride:
-    pass
+    def __init__(self, val):
+        self.val = val
 
 def parse_startOverride(e):
     assert e.tag == k_startOverride
-    ov = StartOverride()
-    ov.val = int(e.get(k_val))
-    return ov
+    val = int(e.get(k_val))
+    return StartOverride(val)
 
 class Numbering:
     def __init__(self, abstract_num, num, style_links):
@@ -410,6 +410,8 @@ def parse_numbering(docx, e):
                     overrides[ilvl] = parse_lvl(docx, ov)
                 else:
                     overrides[ilvl] = parse_startOverride(ov)
+            else:
+                overrides[ilvl] = StartOverride(0)  # land of absurd defaults
         num[numId] = Num(val, overrides)
 
     return Numbering(abstract_num, num, style_links)
