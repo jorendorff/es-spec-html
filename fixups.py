@@ -946,6 +946,11 @@ def fixup_sections(doc, docx):
 
         return num.strip(), title
 
+    def section_number_text_to_sec_num(a):
+        if a.startswith('Annex\N{NO-BREAK SPACE}'):
+            return a[6:]
+        return a
+
     def contains(a, b):
         """ True if section `a` contains section `b` as a subsection.
         `a` and `b` are section numbers, which are strings; but some sections
@@ -955,10 +960,7 @@ def fixup_sections(doc, docx):
             return False
         if b is None:
             return True  # treat numberless sections as subsections
-        if a.startswith('Annex\N{NO-BREAK SPACE}'):
-            prefix = a[6:] + "."
-        else:
-            prefix = a + "."
+        prefix = section_number_text_to_sec_num(a) + "."
         return b.startswith(prefix)
 
     def wrap(sec_num, sec_title, start):
@@ -993,6 +995,7 @@ def fixup_sections(doc, docx):
         attrs = {}
         if sec_num is not None:
             span = html.span(sec_num, class_="secnum")
+            span.attrs["id"] = section_number_text_to_sec_num(sec_num)
             c = body[start].content
             idx = 0
             if c and is_marker(c[0]):
@@ -1013,54 +1016,6 @@ def fixup_sections(doc, docx):
             del h.style['-ooxml-ilvl']
         if h.attrs.get('class') != None:
             del h.attrs['class']
-
-@Fixup
-def fixup_insert_section_ids(doc, docx):
-    """ Give each section an id= number and a section link. """
-
-    def match(e):
-        if (e.name == 'section'
-            and e.content
-            and ht_name_is(e.content[0], 'h1')
-            and e.content[0].content
-            and ht_name_is(e.content[0].content[0], 'span')
-            and e.content[0].content[0].attrs.get('class') == 'secnum'):
-            return True
-        elif e.name in ('section', 'body', 'html'):
-            return False  # no match, but visit children
-        else:
-            return None  # no match and skip entire subtree
-
-    def replacement(section):
-        heading = section.content[0]
-        span_secnum = heading.content[0]
-        [secnum] = span_secnum.content
-        assert isinstance(secnum, str)
-        if secnum.startswith('Annex\N{NO-BREAK SPACE}'):
-            sec_id = secnum[6:]
-        else:
-            sec_id = secnum
-
-        span_secnum = span_secnum.with_content(
-            [html.a(secnum, href="#sec-" + sec_id, title="link to this section")])
-        heading = heading.with_content([span_secnum] + heading.content[1:])
-        attrs = section.attrs.copy() if section.attrs else {}
-        attrs['id'] = "sec-" + sec_id
-        return [section.with_(content=[heading] + section.content[1:], attrs=attrs)]
-
-    ## for section in doc.find(match):
-    ##     h1 = section.content[0]
-    ##     span_secnum = h1.content[0]
-    ##     [secnum] = span_secnum.content
-    ##     assert isinstance(secnum, str)
-    ##     print(secnum, ht_text(h1.content[1:]))
-
-    # TODO: add on section elements:
-    #     attrs['id'] = "sec-" + sec_id
-    # and replace sec_num /*span.secnum*/ with:
-    #     html.a(sec_num, href="#sec-" + sec_id, title="link to this section")
-    return doc.find_replace(match, replacement)
-
 
 def ht_text(ht):
     if isinstance(ht, str):
@@ -1108,6 +1063,157 @@ def fixup_rm_scrap_heap(doc, docx):
     if not found:
         raise ValueError("fixup_rm_scrap_heap: Scrap Heap not found")
     return result
+
+@Fixup
+def fixup_insert_section_ids(doc, docx):
+    """ Give each section an id= number and a section link. """
+
+    def match(e):
+        if (e.name == 'section'
+            and e.content
+            and ht_name_is(e.content[0], 'h1')
+            and e.content[0].content
+            and ht_name_is(e.content[0].content[0], 'span')
+            and e.content[0].content[0].attrs.get('class') == 'secnum'):
+            return True
+        elif e.name in ('section', 'body', 'html'):
+            return False  # no match, but visit children
+        else:
+            return None  # no match and skip entire subtree
+
+    def split_section(section):
+        heading = section.content[0]
+        span_secnum = heading.content[0]
+        [secnum_str] = span_secnum.content
+        assert isinstance(secnum_str, str)
+        if secnum_str.startswith('Annex\N{NO-BREAK SPACE}'):
+            secnum = secnum_str[6:]
+        else:
+            secnum = secnum_str
+        return (heading, span_secnum, secnum_str, secnum)
+ 
+    def mangle(title):
+        # This is unicode-hostile. The goal is to have simple, typeable ids.
+        # I don't know that any headings use any non-ASCII characters.
+        token_re = r'''(?x)
+            \s*
+            (
+                [0-9A-Za-z_\.@:-]+
+                | %[A-Za-z]+% (?: \. [0-9A-Za-z_\.@]+ )
+                | \[\[ [A-Za-z]+ \]\]
+                | " [0-9A-Za-z_:]+ "
+                | \[ \s* @@[A-Za-z]+ \s* \]
+                | = \s* [A-Za-z0-9]+
+                | \. \s+ \. \s+ \.
+                | .
+            )
+        '''
+        tokens = re.findall(token_re, title)
+
+        token_names = {
+            "(": None,
+            ")": None,
+            ",": None,
+            "\N{HORIZONTAL ELLIPSIS}": None,
+            "...": None,
+            "+": "plus",
+            "-": "minus",
+            "*": "mul",
+            "/": "div",
+            "%": "mod"
+        }
+
+        words = []
+        for t in tokens:
+            if t in token_names:
+                w = token_names[t]
+                if w is None:
+                    continue
+            elif t.startswith("=") or t == ". . .":
+                continue
+            else:
+                w = t
+                if w.startswith("["):
+                    w = w.lstrip("[").rstrip("]")
+                    w = w.strip()
+                elif w.startswith('"'):
+                    w = w.strip('"')
+                w = w.rstrip(":")
+                if not any(c.isalpha() for c in w):
+                    continue
+            words.append(w.lower())
+
+        if words and words[0] in ("a", "an", "the"):
+            del words[0]
+
+        return "-".join(words)
+
+    def title_to_id_candidates(title, secnum_str):
+        brief = title_as_algorithm_name(title, secnum_str)
+        mt = mangle(title)
+        if brief is not None:
+            mb = mangle(brief)
+            if mb != mt:
+                yield mb
+        yield mt
+
+    # We need to avoid giving two sections the same id if they have the same
+    # title. For each section in the document, make a list of all possible ids
+    # we could give it.
+    candidates = {}
+    for section in doc.find(match):
+        heading, span_secnum, secnum_str, secnum = split_section(section)
+
+        if secnum in candidates:
+            raise ValueError("multiple sections have the number " + secnum)
+
+        rest = heading.content[1:]
+        if rest and isinstance(rest[0], str) and rest[0].isspace():
+            del rest[0]
+        if rest and ht_name_is(rest[0], "span") and rest[0].attrs.get("class") == "section-status":
+            del rest[0]
+        title = ht_text(rest).strip()
+        idlist = list(title_to_id_candidates(title, secnum))
+        #print("{} {!r}: {!r}".format(secnum, title, idlist))
+        candidates[secnum] = idlist
+
+    for secnum in sorted(candidates):
+        for i in reversed(range(len(secnum))):
+            baseid = candidates[secnum][-1]
+            if secnum[i] == '.':
+                parent = secnum[:i]
+                if parent in candidates:
+                    for parent_id in candidates[parent]:
+                        candidates[secnum].append(parent_id + "-" + baseid)
+                    break
+
+    # Use a Counter to find out which ids are duplicates, and assign to each
+    # section the first id on its list that could not possibly be the id of any
+    # other section in the document.
+    counts = collections.Counter(idc for idlist in candidates.values()
+                                         for idc in idlist)
+    section_ids = {}
+    for secnum, idlist in sorted(candidates.items()):
+        for id in idlist:
+            if counts[id] == 1:
+                section_ids[secnum] = "sec-" + id
+                break
+        else:
+            raise ValueError(
+                "no unique id found for section {}; tried: {!r}".format(secnum, idlist))
+
+    def replacement(section):
+        heading, span_secnum, secnum_str, secnum = split_section(section)
+        sec_id = section_ids[secnum]
+        span_secnum = span_secnum.with_content(
+            [html.a(secnum_str, href="#" + sec_id, title="link to this section")])
+        heading = heading.with_content([span_secnum] + heading.content[1:])
+        attrs = section.attrs.copy() if section.attrs else {}
+        attrs['id'] = sec_id
+        print(secnum, attrs['id'])
+        return [section.with_(content=[heading] + section.content[1:], attrs=attrs)]
+
+    return doc.find_replace(match, replacement)
 
 @InPlaceFixup
 def fixup_strip_toc(doc, docx):
@@ -2055,9 +2161,14 @@ def fixup_intl_insert_ids(doc, docx):
                         p.content.insert(1, html.span(id = id, *id))
                         p.content[2] = content[len(prefix + id):]
 
-@InPlaceFixup
-def fixup_links(doc, docx):
-    algorithm_name_re = re.compile(r'''(?x)
+def title_as_algorithm_name(title, secnum):
+    pattern_semantics_section_prefix = '21.2.2.'  # "Pattern Semantics"
+    if secnum.startswith(pattern_semantics_section_prefix):
+        # This is ClassAtom or the name of some other nonterminal.
+        # Not an algorithm or builtin-method name. Skip it for now.
+        return None
+
+    algorithm_name_re = r'''(?x)
         ^(
             %?[A-Z][A-Za-z0-9.%]{3,}
             (?: \s* \[ \s* @@[A-Za-z0-9.%]* \s* \]
@@ -2070,36 +2181,37 @@ def fixup_links(doc, docx):
             | \s* \( .* \)
         )
         $
-    ''')
+    '''
 
-    pattern_semantics_section_prefix = '#sec-21.2.2.'
+    m = re.match(algorithm_name_re, title)
+    if m is not None:
+        return m.group(1)
+    # Also allow matches like "ToPrimitive".
+    if re.match(r'[A-Z][a-z]+[A-Z][A-Za-z0-9]+', title) is not None:
+        return title
+    return None
 
-    def title_as_algorithm_name(title, sec_id):
-        if sec_id.startswith(pattern_semantics_section_prefix):
-            # This is ClassAtom or the name of some other nonterminal.
-            # Not an algorithm or builtin-method name. Skip it for now.
-            return None
-
-        m = algorithm_name_re.match(title)
-        if m is not None:
-            return m.group(1)
-        # Also allow matches like "ToPrimitive".
-        if re.match(r'[A-Z][a-z]+[A-Z][A-Za-z0-9]+', title) is not None:
-            return title
-
+@InPlaceFixup
+def fixup_links(doc, docx):
     algorithm_name_to_section = {}
     sections_by_title = {}
+    section_numbers_by_id = {}
     for sect in findall(doc, 'section'):
         if 'id' in sect.attrs and sect.content and sect.content[0].name == 'h1':
+            sec_id = sect.attrs['id']
             heading_content = sect.content[0].content[:]
+            secnum_str = ''
             while (heading_content
                    and not isinstance(heading_content[0], str)
                    and heading_content[0].attrs['class'] in ('secnum', 'marker')):
+                span = heading_content[0]
+                if span.attrs['class'] == 'secnum':
+                    secnum_str = ht_text(span.content)
+                    section_numbers_by_id[sec_id] = secnum_str
                 del heading_content[0]
             title = ht_text(heading_content).strip()
             title = " ".join(title.split())
-            sec_id = '#' + sect.attrs['id']
-            alg = title_as_algorithm_name(title, sec_id)
+            alg = title_as_algorithm_name(title, secnum_str)
             if alg is not None:
                 if any(pattern.format(alg) in sections_by_title
                        for pattern in ("{}",
@@ -2114,8 +2226,8 @@ def fixup_links(doc, docx):
                     # be a bug if there are 3, 5, 7 sections with this name.)
                     algorithm_name_to_section[alg] = None
                 else:
-                    algorithm_name_to_section[alg] = sec_id
-            sections_by_title[title] = sec_id
+                    algorithm_name_to_section[alg] = '#' + sec_id
+            sections_by_title[title] = '#' + sec_id
 
     fallback_section_titles = {
         "The List and Record Specification Type": "The List Specification Type",
@@ -2400,8 +2512,12 @@ def fixup_links(doc, docx):
     for text, target in specific_links:
         m = re.search(r'\((?:see )?([1-9][0-9]*(?:\.[0-9]+)*)\)', text)
         if m is not None:
-            if target != '#sec-' + m.group(1):
-                warn("text refers to section number " + repr(m.group(1)) + ", but actual section is " + repr(target))
+            sec_num = m.group(1)
+            if target.startswith('#'):
+                real_sec_num = section_numbers_by_id[target[1:]]
+                if real_sec_num != sec_num:
+                    warn("text refers to section number " + repr(sec_num) + ", "
+                         + "but actual section is " + repr(real_sec_num))
 
     all_ids = set([kid.attrs['id'] for _, _, kid in all_parent_index_child_triples(doc) if 'id' in kid.attrs])
 
@@ -2742,9 +2858,9 @@ def get_fixups(docx):
     if spec_is_intl(docx):
         yield fixup_intl_remove_junk
     yield fixup_sections
-    yield fixup_insert_section_ids
     yield fixup_rm_scrap_heap
     yield fixup_strip_toc
+    yield fixup_insert_section_ids
     yield fixup_tables
     yield fixup_table_formatting
     yield fixup_pre

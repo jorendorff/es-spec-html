@@ -59,6 +59,18 @@ class Element:
         if content is None: content = self.content
         return Element(name, attrs, style, content)
 
+    def find(self, matcher):
+        match_result = matcher(self)
+        assert match_result is True or match_result is False or match_result is None
+        if match_result is None:
+            return
+        for kid in self.content:
+            if isinstance(kid, Element):
+                for x in kid.find(matcher):
+                    yield x
+        if match_result:
+            yield self
+
     def find_replace(self, matcher, replacement):
         """ A sort of map() on htmodel content.
 
