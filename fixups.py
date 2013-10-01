@@ -2195,6 +2195,7 @@ def title_as_algorithm_name(title, secnum):
 def fixup_links(doc, docx):
     algorithm_name_to_section = {}
     sections_by_title = {}
+    sections_by_number = {}
     section_numbers_by_id = {}
     for sect in findall(doc, 'section'):
         if 'id' in sect.attrs and sect.content and sect.content[0].name == 'h1':
@@ -2207,6 +2208,7 @@ def fixup_links(doc, docx):
                 span = heading_content[0]
                 if span.attrs['class'] == 'secnum':
                     secnum_str = ht_text(span.content)
+                    sections_by_number[secnum_str] = sec_id
                     section_numbers_by_id[sec_id] = secnum_str
                 del heading_content[0]
             title = ht_text(heading_content).strip()
@@ -2619,7 +2621,9 @@ def fixup_links(doc, docx):
                         sec_num = sec_num[6:].lstrip()
                     elif sec_num.lower().startswith('annex'):
                         sec_num = sec_num[5:].lstrip()
-                    id = "sec-" + sec_num
+                    id = sections_by_number.get(sec_num)
+                    if id is None:
+                        warn("no such section: " + sec_num)
 
                 if id is not None and id not in all_ids and not id.startswith('http'):
                     warn("no such section: " + m.group(2))
