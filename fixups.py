@@ -1257,8 +1257,10 @@ def map_section(doc, title, fixup):
     return result
 
 @Fixup
-def fixup_lang_15_12_3(doc, docx):
-    """ Convert some paragraphs in section 15.12.3 of the Language specification into tables. """
+def fixup_lang_json_stringify(doc, docx):
+    """ Convert some paragraphs in the section of the Language specification about JSON.stringify
+    into tables. """
+
     def is_target(e):
         return e.name == 'li' and any(p.name == 'p' and ht_text(p).startswith('backspace\t')
                                       for i, p in e.kids())
@@ -1275,12 +1277,12 @@ def fixup_lang_15_12_3(doc, docx):
                     j += 1
                 tbl = html.table(*map(row, li.content[i:j]), class_='lightweight')
                 return [li.with_content_slice(i, j, [tbl])]
-        raise ValueError("fixup_lang_15_12_3: could not find text to patch in target list item")
+        raise ValueError("fixup_lang_json_stringify: could not find text to patch in target list item")
 
     def fix_sect(sect):
         result = sect.find_replace(is_target, fix_target)
         if result is sect:
-            raise ValueError("fixup_lang_15_12_3: could not find list item to patch in section")
+            raise ValueError("fixup_lang_json_stringify: could not find list item to patch in section")
         return result
 
     return map_section(doc, 'JSON.stringify ( value [ , replacer [ , space ] ] )', fix_sect)
@@ -2676,7 +2678,7 @@ def get_fixups(docx):
     yield fixup_pre
     yield fixup_notes
     if spec_is_lang(docx):
-        yield fixup_lang_15_12_3
+        yield fixup_lang_json_stringify
     yield fixup_list_paragraphs
     if spec_is_lang(docx):
         yield fixup_figure_1
