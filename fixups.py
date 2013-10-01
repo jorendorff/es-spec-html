@@ -951,18 +951,18 @@ def fixup_sections(doc, docx):
         `a` and `b` are section numbers, which are strings; but some sections
         do not have numbers, so either or both may be None.
         """
-        return a is not None and (b is None or b.startswith(a + "."))
-
-    def sec_num_to_id(num):
-        if num.startswith('Annex\N{NO-BREAK SPACE}'):
-            return num[6:]
+        if a is None:
+            return False
+        if b is None:
+            return True  # treat numberless sections as subsections
+        if a.startswith('Annex\N{NO-BREAK SPACE}'):
+            prefix = a[6:] + "."
         else:
-            return num
+            prefix = a + "."
+        return b.startswith(prefix)
 
     def wrap(sec_num, sec_title, start):
         """ Wrap the section starting at body[start] in a section element. """
-        sec_id = sec_num_to_id(sec_num).strip() if sec_num else None
-
         j = start + 1
         while j < len(body):
             kid = body[j]
@@ -981,7 +981,7 @@ def fixup_sections(doc, docx):
 
                     # Hack: most numberless sections are subsections, but the
                     # Bibliography is not contained in any other section.
-                    if kid_title != 'Bibliography' and contains(sec_id, kid_num):
+                    if kid_title != 'Bibliography' and contains(sec_num, kid_num):
                         # kid starts a subsection. Wrap it!
                         wrap(kid_num, kid_title, j)
                     else:
@@ -992,10 +992,7 @@ def fixup_sections(doc, docx):
 
         attrs = {}
         if sec_num is not None:
-            attrs['id'] = "sec-" + sec_id
-            span = html.span(
-                html.a(sec_num, href="#sec-" + sec_id, title="link to this section"),
-                class_="secnum")
+            span = html.span(sec_num, class_="secnum")
             c = body[start].content
             idx = 0
             if c and is_marker(c[0]):
@@ -1016,6 +1013,52 @@ def fixup_sections(doc, docx):
             del h.style['-ooxml-ilvl']
         if h.attrs.get('class') != None:
             del h.attrs['class']
+
+@Fixup
+def fixup_insert_section_ids(doc, docx):
+    def match(e):
+        if (e.name == 'section'
+            and e.content
+            and ht_name_is(e.content[0], 'h1')
+            and e.content[0].content
+            and ht_name_is(e.content[0].content[0], 'span')
+            and e.content[0].content[0].attrs.get('class') == 'secnum'):
+            return True
+        elif e.name in ('section', 'body', 'html'):
+            return False  # no match, but visit children
+        else:
+            return None  # no match and skip entire subtree
+
+    def replacement(section):
+        heading = section.content[0]
+        span_secnum = heading.content[0]
+        [secnum] = span_secnum.content
+        assert isinstance(secnum, str)
+        if secnum.startswith('Annex\N{NO-BREAK SPACE}'):
+            sec_id = secnum[6:]
+        else:
+            sec_id = secnum
+
+        span_secnum = span_secnum.with_content(
+            [html.a(secnum, href="#sec-" + sec_id, title="link to this section")])
+        heading = heading.with_content([span_secnum] + heading.content[1:])
+        attrs = section.attrs.copy() if section.attrs else {}
+        attrs['id'] = "sec-" + sec_id
+        return [section.with_(content=[heading] + section.content[1:], attrs=attrs)]
+
+    ## for section in doc.find(match):
+    ##     h1 = section.content[0]
+    ##     span_secnum = h1.content[0]
+    ##     [secnum] = span_secnum.content
+    ##     assert isinstance(secnum, str)
+    ##     print(secnum, ht_text(h1.content[1:]))
+
+    # TODO: add on section elements:
+    #     attrs['id'] = "sec-" + sec_id
+    # and replace sec_num /*span.secnum*/ with:
+    #     html.a(sec_num, href="#sec-" + sec_id, title="link to this section")
+    return doc.find_replace(match, replacement)
+
 
 def ht_text(ht):
     if isinstance(ht, str):
@@ -2697,6 +2740,7 @@ def get_fixups(docx):
     if spec_is_intl(docx):
         yield fixup_intl_remove_junk
     yield fixup_sections
+    yield fixup_insert_section_ids
     yield fixup_rm_scrap_heap
     yield fixup_strip_toc
     yield fixup_tables
