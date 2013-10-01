@@ -1016,6 +1016,8 @@ def fixup_sections(doc, docx):
 
 @Fixup
 def fixup_insert_section_ids(doc, docx):
+    """ Give each section an id= number and a section link. """
+
     def match(e):
         if (e.name == 'section'
             and e.content
