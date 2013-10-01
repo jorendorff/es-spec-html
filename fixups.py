@@ -1017,6 +1017,53 @@ def fixup_sections(doc, docx):
         if h.attrs.get('class') != None:
             del h.attrs['class']
 
+def ht_text(ht):
+    if isinstance(ht, str):
+        return ht
+    elif isinstance(ht, list):
+        return ''.join(map(ht_text, ht))
+    else:
+        return ht_text(ht.content)
+
+def is_section_with_title(e, title):
+    if e.name != 'section':
+        return False
+    if len(e.content) == 0:
+        return False
+    h = e.content[0]
+    if not ht_name_is(h, 'h1'):
+        return False
+    i = 0
+    if i < len(h.content) and ht_name_is(h.content[i], 'span') and h.content[i].attrs.get('class') == 'marker':
+        i += 1
+    if i < len(h.content) and ht_name_is(h.content[i], 'span') and h.content[i].attrs.get('class') == 'secnum':
+        i += 1
+    s = ht_text(h.content[i:])
+    return s.strip() == title
+
+@Fixup
+def fixup_rm_scrap_heap(doc, docx):
+    """ Remove the Scrap Heap. """
+
+    found = False
+
+    def match(e):
+        nonlocal found
+        if found:
+            return True
+        elif is_section_with_title(e, "Scrap Heap"):
+            found = True  # all sections after this are also part of the Scrap Heap
+            return True
+        elif e.name in ('section', 'body', 'html'):
+            return False  # no match, but visit children
+        else:
+            return None  # no match and skip entire subtree
+
+    result = doc.find_replace(match, lambda section: [])
+    if not found:
+        raise ValueError("fixup_rm_scrap_heap: Scrap Heap not found")
+    return result
+
 @InPlaceFixup
 def fixup_strip_toc(doc, docx):
     """ Delete the table of contents in the document.
@@ -1212,39 +1259,18 @@ def fixup_notes(doc, docx):
                 # Wrap the whole note in a div.note element.
                 parent.content[i:j] = [html.div(*parent.content[i:j], class_="note")]
 
-def ht_text(ht):
-    if isinstance(ht, str):
-        return ht
-    elif isinstance(ht, list):
-        return ''.join(map(ht_text, ht))
-    else:
-        return ht_text(ht.content)
-
 def map_section(doc, title, fixup):
     hits = 0
 
     def match(e):
         nonlocal hits
-        if e.name != 'section':
-            if e.name in ('body', 'html'):
-                return False  # no match, but visit children
-            return None  # no match and skip entire subtree
-        if len(e.content) == 0:
-            return False
-        h = e.content[0]
-        if not ht_name_is(h, 'h1'):
-            return False
-        i = 0
-        if i < len(h.content) and ht_name_is(h.content[i], 'span') and h.content[i].attrs.get('class') == 'marker':
-            i += 1
-        if i < len(h.content) and ht_name_is(h.content[i], 'span') and h.content[i].attrs.get('class') == 'secnum':
-            i += 1
-        s = ht_text(h.content[i:])
-        if s.strip() == title:
+        if is_section_with_title(e, title):
             hits += 1
             return True
+        elif e.name in ('section', 'body', 'html'):
+            return False  # no match, but visit children
         else:
-            return False
+            return None  # no match and skip entire subtree
 
     def replacement(e):
         return [fixup(e)]
@@ -2201,7 +2227,6 @@ def fixup_links(doc, docx):
         ("[[BoundArguments]]", "Bound Function Exotic Objects"),
         ("Array exotic object", "Array Exotic Objects"),
         ("String exotic object", "String Exotic Objects"),
-        ("Symbol exotic objects", "Symbol Exotic Objects"),
         ("exotic arguments object", "Exotic Arguments Objects"),
 
         # 10.2
@@ -2672,6 +2697,7 @@ def get_fixups(docx):
     if spec_is_intl(docx):
         yield fixup_intl_remove_junk
     yield fixup_sections
+    yield fixup_rm_scrap_heap
     yield fixup_strip_toc
     yield fixup_tables
     yield fixup_table_formatting
