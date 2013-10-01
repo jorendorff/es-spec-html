@@ -995,7 +995,7 @@ def fixup_sections(doc, docx):
         attrs = {}
         if sec_num is not None:
             span = html.span(sec_num, class_="secnum")
-            span.attrs["id"] = section_number_text_to_sec_num(sec_num)
+            span.attrs["id"] = "sec-" + section_number_text_to_sec_num(sec_num)
             c = body[start].content
             idx = 0
             if c and is_marker(c[0]):
@@ -1209,8 +1209,8 @@ def fixup_insert_section_ids(doc, docx):
             [html.a(secnum_str, href="#" + sec_id, title="link to this section")])
         heading = heading.with_content([span_secnum] + heading.content[1:])
         attrs = section.attrs.copy() if section.attrs else {}
-        attrs['id'] = sec_id
-        print(secnum, attrs['id'])
+        attrs["id"] = sec_id
+        print(secnum, attrs["id"])
         return [section.with_(content=[heading] + section.content[1:], attrs=attrs)]
 
     return doc.find_replace(match, replacement)
@@ -2710,6 +2710,13 @@ def fixup_generate_toc(doc, docx):
         else:
             return []
 
+    def without_attr(e, attr):
+        if e.attrs and attr in e.attrs:
+            attrs = e.attrs.copy()
+            del attrs[attr]
+            return e.with_(attrs=attrs)
+        return e
+
     def make_toc_for(sect, depth):
         if not sect.content:
             return []
@@ -2717,12 +2724,22 @@ def fixup_generate_toc(doc, docx):
         if isinstance(h1, str) or h1.name != 'h1' or h1.content in (['Static Semantics'], ['Runtime Semantics']):
             return []
 
-        output = []
-
         # Copy the content of the header.
-        # TODO - make this clone enough to rip out the h1>span>a title= attribute
         # TODO - make a link when there isn't one
-        output += h1.content[:]  # shallow copy, nodes may appear in tree multiple times
+        output = h1.content[:]  # shallow copy, nodes may appear in tree multiple times
+        if output and ht_name_is(output[0], "span") and output[0].attrs.get("class") == "secnum":
+            # Clumsily strip out the <span id=> and <a href=> attributes
+            span = output[0]
+            span_content = span.content
+            if len(span_content) == 1 and ht_name_is(span_content[0], "a"):
+                a = without_attr(span_content[0], "title")
+                span_content = [a] + span_content[1:]
+            span = without_attr(span, "id")
+            output[0] = span.with_content(span_content)
+        elif "id" in sect.attrs:
+            # Generate a link, since there is an id but no link
+            id = sect.attrs["id"]
+            output = [html.a(output, href="#" + id)]
 
         # Find any subsections.
         if depth < 3:
