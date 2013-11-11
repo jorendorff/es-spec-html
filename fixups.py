@@ -1042,29 +1042,6 @@ def is_section_with_title(e, title):
     return s.strip() == title
 
 @Fixup
-def fixup_rm_scrap_heap(doc, docx):
-    """ Remove the Scrap Heap. """
-
-    found = False
-
-    def match(e):
-        nonlocal found
-        if found:
-            return True
-        elif is_section_with_title(e, "Scrap Heap"):
-            found = True  # all sections after this are also part of the Scrap Heap
-            return True
-        elif e.name in ('section', 'body', 'html'):
-            return False  # no match, but visit children
-        else:
-            return None  # no match and skip entire subtree
-
-    result = doc.find_replace(match, lambda section: [])
-    if not found:
-        raise ValueError("fixup_rm_scrap_heap: Scrap Heap not found")
-    return result
-
-@Fixup
 def fixup_insert_section_ids(doc, docx):
     """ Give each section an id= number and a section link. """
 
@@ -2879,7 +2856,6 @@ def get_fixups(docx):
     if spec_is_intl(docx):
         yield fixup_intl_remove_junk
     yield fixup_sections
-    yield fixup_rm_scrap_heap
     yield fixup_strip_toc
     yield fixup_insert_section_ids
     yield fixup_tables
