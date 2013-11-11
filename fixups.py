@@ -1176,11 +1176,13 @@ def fixup_insert_section_ids(doc, docx):
                 section_ids[secnum] = "sec-" + id
                 break
         else:
-            raise ValueError(
-                "no unique id found for section {}; tried: {!r}".format(secnum, idlist))
+            warn("no unique id found for section {}; tried: {!r}".format(secnum, idlist))
 
     def replacement(section):
         heading, span_secnum, secnum_str, secnum = split_section(section)
+        if secnum not in section_ids:
+            return [section]
+
         sec_id = section_ids[secnum]
         span_secnum = span_secnum.with_content(
             [html.a(secnum_str, href="#" + sec_id, title="link to this section")])
