@@ -2301,7 +2301,7 @@ def fixup_links(doc, docx):
         ("ECMAScript language type", "ECMAScript Language Types"),
         ("property key value", "The Object Type"),
         ("property key", "The Object Type"),
-        ("internal data property", "Object Internal Methods and Internal Data Properties"),
+        ("internal slot", "Object Internal Methods and Internal Slots"),
         ("Data Block", "Data Blocks"),
         ("List", "The List and Record Specification Type"),
         ("Completion Record", "The Completion Record Specification Type"),
@@ -2371,12 +2371,10 @@ def fixup_links(doc, docx):
         ("Suspend", "Execution Contexts"),
         ("suspend", "Execution Contexts"),
         ("suspended", "Execution Contexts"),
-        ("Identifier Resolution as specified in 10.3.1", "Identifier Resolution"),
-        ("Identifier Resolution(10.3.1)", "Identifier Resolution"),
 
         # 9.1
-        ("ordinary Function object", "Ordinary Function Objects"),
-        ("ordinary function object", "Ordinary Function Objects"),
+        ("ECMAScript Function object", "ECMAScript Function Objects"),
+        ("ECMAScript function object", "ECMAScript Function Objects"),
         ("Function Declaration Instantiation", "Function Declaration Instantiation"),
         ("Bound Function", "Bound Function Exotic Objects"),
         ("bound function", "Bound Function Exotic Objects"),
@@ -2385,7 +2383,7 @@ def fixup_links(doc, docx):
         ("[[BoundArguments]]", "Bound Function Exotic Objects"),
         ("Array exotic object", "Array Exotic Objects"),
         ("String exotic object", "String Exotic Objects"),
-        ("exotic arguments object", "Exotic Arguments Objects"),
+        ("exotic arguments object", "Arguments Exotic Objects"),
 
         # 10.2
         ("strict mode code (see 10.1.1)", "Strict Mode Code"),
