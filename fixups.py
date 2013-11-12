@@ -8,11 +8,9 @@ The entry point is fixup().
 """
 
 import htmodel as html
-import collections, re
 from warnings import warn
 from array import array
-import os, time
-import contextlib
+import collections, contextlib, os, time, re, json
 
 
 # === Useful functions
@@ -1202,6 +1200,54 @@ def fixup_insert_section_ids(doc, docx):
             raise ValueError(
                 "no unique id found for section {}; tried: {!r}".format(secnum, idlist))
 
+    # Warn if any old sections no longer exist in the current file.
+    # A ton of code, 5 "easy" steps.
+
+    # 1. Load dict of all sections that were in the previous revision.
+    base, _ = os.path.splitext(docx.filename)
+    all_sections_filename = base + "-all-sections.json"
+    with open(all_sections_filename, 'r') as f:
+        all_old_sections_json = f.read()
+    all_old_sections = json.loads(all_old_sections_json)
+
+    # 2. Load legacy-sections dict.
+    legacy_sections_filename = base + "-sections.js"
+    with open(legacy_sections_filename, 'r') as f:
+        sections_js = f.read()
+    start = sections_js.index(" = {\n") + 3
+    stop = sections_js.index("\n};\n") + 2
+    legacy_sections_json = sections_js[start:stop]
+    legacy_sections = json.loads(legacy_sections_json)
+
+    # 3. Throw if anything in $BASE-sections.js points to a section that no longer exists.
+    all_new_sections = collections.OrderedDict(sorted([(v, k) for k, v in section_ids.items()]))
+    failed = False
+    for obsolete_id, current_id in legacy_sections.items():
+        if current_id not in all_new_sections:
+            warn("Obsolete id {!r} maps to {!r}, which does not exist in the new document"
+                 .format('#' + obsolete_id, '#' + current_id))
+            failed = True
+    if failed:
+        raise ValueError("Either remove obsolete ids from {} or fix the target"
+                         .format(legacy_sections_filename))
+
+    # 4. Warn if anything in the old $BASE-all-sections.json is neither in the
+    #    new document nor in $BASE-sections.js. These should be added to the
+    #    latter.
+    for k, v in all_old_sections.items():
+        if k not in all_new_sections and k not in legacy_sections:
+            warn("Section {!r} (once section {}) no longer exists with the same section-id; add it to {}"
+                 .format("#" + k, v, legacy_sections_filename))
+
+    # 5. Save new section id data set. Include old stuff too, until it's
+    #    manually deleted.
+    all_sections = all_old_sections.copy()
+    all_sections.update(all_new_sections)
+    all_sections = collections.OrderedDict(sorted(all_sections.items()))
+    all_sections_json = json.dumps(all_sections, indent=4)
+    with open(all_sections_filename, 'w') as f:
+        f.write(all_sections_json + "\n")
+
     def replacement(section):
         heading, span_secnum, secnum_str, secnum = split_section(section)
         sec_id = section_ids[secnum]
@@ -1210,7 +1256,6 @@ def fixup_insert_section_ids(doc, docx):
         heading = heading.with_content([span_secnum] + heading.content[1:])
         attrs = section.attrs.copy() if section.attrs else {}
         attrs["id"] = sec_id
-        print(secnum, attrs["id"])
         return [section.with_(content=[heading] + section.content[1:], attrs=attrs)]
 
     return doc.find_replace(match, replacement)
