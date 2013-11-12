@@ -1074,7 +1074,7 @@ def fixup_insert_section_ids(doc, docx):
             \s*
             (
                 [0-9A-Za-z_\.@:-]+
-                | %[A-Za-z]+% (?: \. [0-9A-Za-z_\.@]+ )
+                | %[A-Za-z]+% (?: \. [0-9A-Za-z_\.@]+ )?
                 | \[\[ [A-Za-z]+ \]\]
                 | " [0-9A-Za-z_:]+ "
                 | \[ \s* @@[A-Za-z]+ \s* \]
