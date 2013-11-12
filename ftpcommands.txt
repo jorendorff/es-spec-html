@@ -1,6 +1,7 @@
 cd public_html
 put es6-draft.html
 put es6-draft.css
+put es6-draft-sections.js
 put figure-1.svg
 put figure-1.png
 put figure-2.png

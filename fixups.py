@@ -1696,6 +1696,8 @@ def fixup_html_head(doc, docx):
     else:
         stylesheet = 'es5.1.css'
     head.content.insert(2, html.link(rel='stylesheet', href=stylesheet))
+    base, _ = os.path.splitext(os.path.basename(docx.filename))
+    head.content.insert(3, html.script(src=base + "-sections.js"))
     doc.attrs['lang'] = 'en-GB'
 
 def find_section(doc, title):
