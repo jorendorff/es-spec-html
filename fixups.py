@@ -549,6 +549,8 @@ def fixup_lists(doc, docx):
                 lst = html.ul()
                 marker_type = 'bullet'
             else:
+                if margin > current.left_margin and numId == current.numId:
+                    assert ilvl > current.ilvl
                 if current.parent is None or current.marker_type == 'bullet':
                     cls = 'proc'
                     marker_type = 0
@@ -618,8 +620,6 @@ def fixup_lists(doc, docx):
                 # If it is indented more than the previous paragraph, open a
                 # new list.
                 if margin > current.left_margin:
-                    if numId == current.numId:
-                        assert ilvl > current.ilvl
                     open_list(p, numId, ilvl, margin)
 
                 assert margin == current.left_margin
