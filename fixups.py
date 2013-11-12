@@ -547,6 +547,8 @@ def fixup_lists(doc, docx):
                 lst = html.ul()
                 marker_type = 'bullet'
             else:
+                if margin > current.left_margin and numId == current.numId:
+                    assert ilvl > current.ilvl
                 if current.parent is None or current.marker_type == 'bullet':
                     cls = 'proc'
                     marker_type = 0
@@ -616,8 +618,6 @@ def fixup_lists(doc, docx):
                 # If it is indented more than the previous paragraph, open a
                 # new list.
                 if margin > current.left_margin:
-                    if numId == current.numId:
-                        assert ilvl > current.ilvl
                     open_list(p, numId, ilvl, margin)
 
                 assert margin == current.left_margin
@@ -1040,29 +1040,6 @@ def is_section_with_title(e, title):
     return s.strip() == title
 
 @Fixup
-def fixup_rm_scrap_heap(doc, docx):
-    """ Remove the Scrap Heap. """
-
-    found = False
-
-    def match(e):
-        nonlocal found
-        if found:
-            return True
-        elif is_section_with_title(e, "Scrap Heap"):
-            found = True  # all sections after this are also part of the Scrap Heap
-            return True
-        elif e.name in ('section', 'body', 'html'):
-            return False  # no match, but visit children
-        else:
-            return None  # no match and skip entire subtree
-
-    result = doc.find_replace(match, lambda section: [])
-    if not found:
-        raise ValueError("fixup_rm_scrap_heap: Scrap Heap not found")
-    return result
-
-@Fixup
 def fixup_insert_section_ids(doc, docx):
     """ Give each section an id= number and a section link. """
 
@@ -1197,8 +1174,7 @@ def fixup_insert_section_ids(doc, docx):
                 section_ids[secnum] = "sec-" + id
                 break
         else:
-            raise ValueError(
-                "no unique id found for section {}; tried: {!r}".format(secnum, idlist))
+            warn("no unique id found for section {}; tried: {!r}".format(secnum, idlist))
 
     # Warn if any old sections no longer exist in the current file.
     # A ton of code, 5 "easy" steps.
@@ -1250,6 +1226,9 @@ def fixup_insert_section_ids(doc, docx):
 
     def replacement(section):
         heading, span_secnum, secnum_str, secnum = split_section(section)
+        if secnum not in section_ids:
+            return [section]
+
         sec_id = section_ids[secnum]
         span_secnum = span_secnum.with_content(
             [html.a(secnum_str, href="#" + sec_id, title="link to this section")])
@@ -1760,6 +1739,16 @@ def fixup_lang_overview_biblio(doc, docx):
     assert dot_space
     p.content[0:1] = [html.span(title.strip(), class_="book-title"), dot_space + rest]
 
+def is_grammar_subscript_content(content):
+    if len(content) == 1:
+        s = content[0]
+        return (s == 'opt'
+                or (isinstance(s, str) and s.startswith('[') and s.endswith(']')))
+    return False
+
+def is_grammar_subscript(ht):
+    return ht.name == 'sub' and is_grammar_subscript_content(ht.content)
+
 @Fixup
 def fixup_simplify_formatting(doc, docx):
     """ Convert formatting spans into HTML markup that does the same thing.
@@ -1781,8 +1770,9 @@ def fixup_simplify_formatting(doc, docx):
         style = span.style
         content = span.content
 
-        if content == ["opt"] and style == {'font-family': 'sans-serif', 'vertical-align': 'sub'}:
-            return [html.sub("opt")]
+        if (style == {'font-family': 'sans-serif', 'vertical-align': 'sub'}
+              and is_grammar_subscript_content(content)):
+            return [html.sub(content[0])]
         elif style == {'font-family': 'monospace', 'font-weight': 'bold'}:
             return [html.code(*content)]
         elif (style == {'font-family': 'Times New Roman', 'font-style': 'italic'}
@@ -1865,8 +1855,8 @@ def fixup_lang_grammar_pre(doc, docx):
                 elif ht.name == 'br':
                     all_lines.append(line)
                     line = ''
-                elif ht.name == 'sub' and ht.content == ['opt']:
-                    line += '_opt'
+                elif is_grammar_subscript(ht):
+                    line += '_' + ht.content[0]
                 else:
                     visit(ht.content)
 
@@ -1947,7 +1937,7 @@ def fixup_lang_grammar_pre(doc, docx):
             warn("Likely bug in is_grammar_inline_at:\n    {!r}\n    content: {!r}".format(ht, ht.content))
             return False
         elif ht.name == 'sub':
-            return ht.content == ['opt']
+            return is_grammar_subscript(ht)
         else:
             return ht.name in ('code', 'i', 'b')
 
@@ -1956,8 +1946,8 @@ def fixup_lang_grammar_pre(doc, docx):
         for ht in content:
             if isinstance(ht, str):
                 s += ht
-            elif ht.name == 'sub' and ht.content == ['opt']:
-                s += '_opt'
+            elif is_grammar_subscript(ht):
+                s += '_' + ht.content[0]
             else:
                 s += inline_grammar_text(ht.content)
         return s
@@ -2044,7 +2034,9 @@ def fixup_lang_grammar_post(doc, docx):
 
     syntax_token_re = re.compile(r'''(?x)
         ( See \  (?:clause\ )? [0-9A-Z\.]+  # cross-reference
-        | ((?:[A-Z]+[a-z]|uri)[A-Za-z]* (?:_opt)?)  # nonterminal
+        | ((?:[A-Z]+[a-z]|uri)[A-Za-z]*)    # nonterminal...
+              (_\[ [^]]* \])? (?:_opt)?     # ...with optional subscripts
+        | \[ (?: [+~?]?[A-Z][a-z]+ (?:,\ )?)+ \]  # rhs availability prefix
         | one\ of
         | but\ not\ one\ of
         | but\ not
@@ -2074,6 +2066,7 @@ def fixup_lang_grammar_post(doc, docx):
                 markup.append(' ')
 
             token = m.group(1)
+            assert token
             opt = token.endswith('_opt')
             if opt:
                 token = token[:-4]
@@ -2083,7 +2076,10 @@ def fixup_lang_grammar_post(doc, docx):
                 xref = html.div(token, class_='gsumxref')
             elif m.group(2) is not None:
                 # nonterminal
-                markup.append(html.span(token, class_='nt'))
+                markup.append(html.span(m.group(2), class_='nt'))
+                subscript = m.group(3)
+                if subscript is not None:
+                    markup.append(html.sub(subscript[1:]))
             elif token in ('one of', 'but not', 'but not one of', 'or'):
                 markup.append(html.span(token, class_='grhsmod'))
             elif token == '[empty]':
@@ -2127,10 +2123,13 @@ def fixup_lang_grammar_post(doc, docx):
                     markup[-1] += token
                 else:
                     markup.append(token)
-            else:
+            elif token.startswith('[') and token.endswith(']'):
+                markup.append(html.span(token, class_='grhsannot'))
+            elif token:
                 # A terminal.
-                assert token
                 markup.append(html.code(token, class_='t'))
+            else:
+                assert opt
 
             if opt:
                 markup.append(html.sub('opt'))
@@ -2349,7 +2348,7 @@ def fixup_links(doc, docx):
         ("ECMAScript language type", "ECMAScript Language Types"),
         ("property key value", "The Object Type"),
         ("property key", "The Object Type"),
-        ("internal data property", "Object Internal Methods and Internal Data Properties"),
+        ("internal slot", "Object Internal Methods and Internal Slots"),
         ("Data Block", "Data Blocks"),
         ("List", "The List and Record Specification Type"),
         ("Completion Record", "The Completion Record Specification Type"),
@@ -2419,12 +2418,10 @@ def fixup_links(doc, docx):
         ("Suspend", "Execution Contexts"),
         ("suspend", "Execution Contexts"),
         ("suspended", "Execution Contexts"),
-        ("Identifier Resolution as specified in 10.3.1", "Identifier Resolution"),
-        ("Identifier Resolution(10.3.1)", "Identifier Resolution"),
 
         # 9.1
-        ("ordinary Function object", "Ordinary Function Objects"),
-        ("ordinary function object", "Ordinary Function Objects"),
+        ("ECMAScript Function object", "ECMAScript Function Objects"),
+        ("ECMAScript function object", "ECMAScript Function Objects"),
         ("Function Declaration Instantiation", "Function Declaration Instantiation"),
         ("Bound Function", "Bound Function Exotic Objects"),
         ("bound function", "Bound Function Exotic Objects"),
@@ -2433,7 +2430,7 @@ def fixup_links(doc, docx):
         ("[[BoundArguments]]", "Bound Function Exotic Objects"),
         ("Array exotic object", "Array Exotic Objects"),
         ("String exotic object", "String Exotic Objects"),
-        ("exotic arguments object", "Exotic Arguments Objects"),
+        ("exotic arguments object", "Arguments Exotic Objects"),
 
         # 10.2
         ("strict mode code (see 10.1.1)", "Strict Mode Code"),
@@ -2926,7 +2923,6 @@ def get_fixups(docx):
     if spec_is_intl(docx):
         yield fixup_intl_remove_junk
     yield fixup_sections
-    yield fixup_rm_scrap_heap
     yield fixup_strip_toc
     yield fixup_insert_section_ids
     yield fixup_tables
