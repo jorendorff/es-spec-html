@@ -1692,6 +1692,16 @@ def fixup_lang_overview_biblio(doc, docx):
     assert dot_space
     p.content[0:1] = [html.span(title.strip(), class_="book-title"), dot_space + rest]
 
+def is_grammar_subscript_content(content):
+    if len(content) == 1:
+        s = content[0]
+        return (s == 'opt'
+                or (isinstance(s, str) and s.startswith('[') and s.endswith(']')))
+    return False
+
+def is_grammar_subscript(ht):
+    return ht.name == 'sub' and is_grammar_subscript_content(ht.content)
+
 @Fixup
 def fixup_simplify_formatting(doc, docx):
     """ Convert formatting spans into HTML markup that does the same thing.
@@ -1713,8 +1723,9 @@ def fixup_simplify_formatting(doc, docx):
         style = span.style
         content = span.content
 
-        if content == ["opt"] and style == {'font-family': 'sans-serif', 'vertical-align': 'sub'}:
-            return [html.sub("opt")]
+        if (style == {'font-family': 'sans-serif', 'vertical-align': 'sub'}
+              and is_grammar_subscript_content(content)):
+            return [html.sub(content[0])]
         elif style == {'font-family': 'monospace', 'font-weight': 'bold'}:
             return [html.code(*content)]
         elif (style == {'font-family': 'Times New Roman', 'font-style': 'italic'}
@@ -1797,8 +1808,8 @@ def fixup_lang_grammar_pre(doc, docx):
                 elif ht.name == 'br':
                     all_lines.append(line)
                     line = ''
-                elif ht.name == 'sub' and ht.content == ['opt']:
-                    line += '_opt'
+                elif is_grammar_subscript(ht):
+                    line += '_' + ht.content[0]
                 else:
                     visit(ht.content)
 
@@ -1879,7 +1890,7 @@ def fixup_lang_grammar_pre(doc, docx):
             warn("Likely bug in is_grammar_inline_at:\n    {!r}\n    content: {!r}".format(ht, ht.content))
             return False
         elif ht.name == 'sub':
-            return ht.content == ['opt']
+            return is_grammar_subscript(ht)
         else:
             return ht.name in ('code', 'i', 'b')
 
@@ -1888,8 +1899,8 @@ def fixup_lang_grammar_pre(doc, docx):
         for ht in content:
             if isinstance(ht, str):
                 s += ht
-            elif ht.name == 'sub' and ht.content == ['opt']:
-                s += '_opt'
+            elif is_grammar_subscript(ht):
+                s += '_' + ht.content[0]
             else:
                 s += inline_grammar_text(ht.content)
         return s
@@ -1976,7 +1987,9 @@ def fixup_lang_grammar_post(doc, docx):
 
     syntax_token_re = re.compile(r'''(?x)
         ( See \  (?:clause\ )? [0-9A-Z\.]+  # cross-reference
-        | ((?:[A-Z]+[a-z]|uri)[A-Za-z]* (?:_opt)?)  # nonterminal
+        | ((?:[A-Z]+[a-z]|uri)[A-Za-z]*)    # nonterminal...
+              (_\[ [^]]* \])? (?:_opt)?     # ...with optional subscripts
+        | \[ (?: [+~?]?[A-Z][a-z]+ (?:,\ )?)+ \]  # rhs availability prefix
         | one\ of
         | but\ not\ one\ of
         | but\ not
@@ -2006,6 +2019,7 @@ def fixup_lang_grammar_post(doc, docx):
                 markup.append(' ')
 
             token = m.group(1)
+            assert token
             opt = token.endswith('_opt')
             if opt:
                 token = token[:-4]
@@ -2015,7 +2029,10 @@ def fixup_lang_grammar_post(doc, docx):
                 xref = html.div(token, class_='gsumxref')
             elif m.group(2) is not None:
                 # nonterminal
-                markup.append(html.span(token, class_='nt'))
+                markup.append(html.span(m.group(2), class_='nt'))
+                subscript = m.group(3)
+                if subscript is not None:
+                    markup.append(html.sub(subscript[1:]))
             elif token in ('one of', 'but not', 'but not one of', 'or'):
                 markup.append(html.span(token, class_='grhsmod'))
             elif token == '[empty]':
@@ -2059,10 +2076,13 @@ def fixup_lang_grammar_post(doc, docx):
                     markup[-1] += token
                 else:
                     markup.append(token)
-            else:
+            elif token.startswith('[') and token.endswith(']'):
+                markup.append(html.span(token, class_='grhsannot'))
+            elif token:
                 # A terminal.
-                assert token
                 markup.append(html.code(token, class_='t'))
+            else:
+                assert opt
 
             if opt:
                 markup.append(html.sub('opt'))
