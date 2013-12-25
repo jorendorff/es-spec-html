@@ -1202,7 +1202,12 @@ def fixup_insert_section_ids(doc, docx):
         if current_id not in all_new_sections:
             warn("Obsolete id {!r} maps to {!r}, which does not exist in the new document"
                  .format('#' + obsolete_id, '#' + current_id))
-            failed = True
+
+            # Unfortunately, due to a wacky error in the original document, we
+            # have exactly one of these that should not be treated as an error.
+            # Special-case it.
+            if current_id != "sec-19.4.2.8":
+                failed = True
     if failed:
         raise ValueError("Either remove obsolete ids from {} or fix the target"
                          .format(legacy_sections_filename))
