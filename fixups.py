@@ -2220,7 +2220,11 @@ def title_as_algorithm_name(title, secnum):
         return None
 
     algorithm_name_re = r'''(?x)
-        ^(
+        ^
+        # Ignore optional "Runtime Semantics:" label
+        (?: (?:Runtime|Static) \s* Semantics \s* : \s* )?
+        # Actual algorithm name
+        (
             %?[A-Z][A-Za-z0-9.%]{3,}
             (?: \s* \[ \s* @@[A-Za-z0-9.%]* \s* \]
               | \s* \[\[ \s* [A-Za-z0-9.%]* \s* \]\] )?

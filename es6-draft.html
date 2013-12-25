@@ -382,8 +382,7 @@
           <ol class="toc">
             <li><span class="secnum"><a href="#sec-static-semantics-utf-16-encoding">10.1.1</a></span> Static Semantics:
                 <var>UTF-16 Encoding</var></li>
-            <li><span class="secnum"><a href="#sec-static-semantics-utf16decode-lead-trail">10.1.2</a></span> Static Semantics:
-                UTF16Decode(lead, trail)</li>
+            <li><span class="secnum"><a href="#sec-utf16decode">10.1.2</a></span> Static Semantics: UTF16Decode(lead, trail)</li>
           </ol>
         </li>
         <li><span class="secnum"><a href="#sec-types-of-source-code">10.2</a></span> Types of Source Code
@@ -559,8 +558,8 @@
                 Semantics:  IsValidSimpleAssignmentTarget</li>
             <li><span class="secnum"><a href="#sec-relational-operators-runtime-semantics-evaluation">12.8.3</a></span> Runtime
                 Semantics: Evaluation</li>
-            <li><span class="secnum"><a href="#sec-runtime-semantics-instanceofoperator-o-c">12.8.4</a></span> Runtime Semantics:
-                InstanceofOperator(O, C)</li>
+            <li><span class="secnum"><a href="#sec-instanceofoperator">12.8.4</a></span> Runtime Semantics: InstanceofOperator(O,
+                C)</li>
           </ol>
         </li>
         <li><span class="secnum"><a href="#sec-equality-operators">12.9</a></span> Equality Operators
@@ -6485,8 +6484,8 @@
             <li>Let <i>BC</i> be the value of <i>C&rsquo;s</i> <a
                 href="#sec-bound-function-exotic-objects">[[BoundTargetFunction]]</a> <a
                 href="#sec-object-internal-methods-and-internal-slots">internal slot</a>.</li>
-            <li>Return the result of InstanceofOperator(<i>O</i>,<i>BC</i>)  (see <a
-                href="#sec-runtime-semantics-instanceofoperator-o-c">12.8.4</a>).</li>
+            <li>Return the result of <a href="#sec-instanceofoperator">InstanceofOperator</a>(<i>O</i>,<i>BC</i>)  (see <a
+                href="#sec-instanceofoperator">12.8.4</a>).</li>
           </ol>
         </li>
         <li>If <a href="#sec-ecmascript-data-types-and-values">Type</a>(<i>O</i>) is not Object, return <b>false</b>.</li>
@@ -11590,9 +11589,9 @@
       </ol>
     </section>
 
-    <section id="sec-static-semantics-utf16decode-lead-trail">
-      <h1><span class="secnum" id="sec-10.1.2"><a href="#sec-static-semantics-utf16decode-lead-trail" title="link to this
-          section">10.1.2</a></span> Static Semantics: UTF16Decode(lead, trail)</h1>
+    <section id="sec-utf16decode">
+      <h1><span class="secnum" id="sec-10.1.2"><a href="#sec-utf16decode" title="link to this section">10.1.2</a></span> Static
+          Semantics: UTF16Decode(lead, trail)</h1>
 
       <p>Two code units, <var>lead</var> and <var>trail</var>, that form a UTF-16 surrogate pair are converted to a code point by
       performing the following steps:</p>
@@ -15254,7 +15253,7 @@
               <i>RegularExpressionLiteral</i>.</li>
           <li>Let <i>flags</i> be the string value consisting of the UTF-16 encoding of each code point of FlagText of
               <i>RegularExpressionLiteral</i>.</li>
-          <li>Return the result of RegExpCreate(<i>pattern</i>, <i>flags</i>).</li>
+          <li>Return the result of <a href="#sec-regexpcreate">RegExpCreate</a>(<i>pattern</i>, <i>flags</i>).</li>
         </ol>
       </section>
     </section>
@@ -16168,7 +16167,8 @@
           <li>Let <i>propertyKey</i> be <a href="#sec-topropertykey">ToPropertyKey</a>(<i>propertyNameValue</i>).</li>
           <li>If the code matched by the syntactic production that is being evaluated is <a href="#sec-strict-mode-code">strict
               mode code</a>, let <i>strict</i> be <b>true</b>, else let <i>strict</i> be <b>false</b>.</li>
-          <li>Return the result of MakeSuperReference(<i>propertyKey</i>, <i>strict</i>).</li>
+          <li>Return the result of <a href="#sec-makesuperreference">MakeSuperReference</a>(<i>propertyKey</i>,
+              <i>strict</i>).</li>
         </ol>
         <div class="gp prod"><span class="nt">MemberExpression</span> <span class="geq">:</span> <code class="t">super</code> <code class="t">.</code> <span class="nt">IdentifierName</span></div>
         <ol class="proc">
@@ -16176,13 +16176,15 @@
               <i>IdentifierName</i>.</li>
           <li>If the code matched by the syntactic production that is being evaluated is <a href="#sec-strict-mode-code">strict
               mode code</a>, let <i>strict</i> be <b>true</b>, else let <i>strict</i> be <b>false</b>.</li>
-          <li>Return the result of MakeSuperReference(<i>propertyKey</i>, <i>strict</i>).</li>
+          <li>Return the result of <a href="#sec-makesuperreference">MakeSuperReference</a>(<i>propertyKey</i>,
+              <i>strict</i>).</li>
         </ol>
         <div class="gp prod"><span class="nt">MemberExpression</span> <span class="geq">:</span> <code class="t">new</code> <code class="t">super</code> <span class="nt">Arguments</span><sub>opt</sub></div>
         <ol class="proc">
           <li>If the code matched by the syntactic production that is being evaluated is <a href="#sec-strict-mode-code">strict
               mode code</a>, let <i>strict</i> be <b>true</b>, else let <i>strict</i> be <b>false</b>.</li>
-          <li>Let <i>ref</i> be the result of MakeSuperReference(<b>undefined</b>, <i>strict</i>).</li>
+          <li>Let <i>ref</i> be the result of <a href="#sec-makesuperreference">MakeSuperReference</a>(<b>undefined</b>,
+              <i>strict</i>).</li>
           <li>Let <i>constructor</i> be <a href="#sec-getvalue">GetValue</a>(<i>ref</i>).</li>
           <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>constructor</i>).</li>
           <li>If <i>Arguments</i> is present, then
@@ -16214,7 +16216,8 @@
         <ol class="proc">
           <li>If the code matched by the syntactic production that is being evaluated is <a href="#sec-strict-mode-code">strict
               mode code</a>, let <i>strict</i> be <b>true</b>, else let <i>strict</i> be <b>false</b>.</li>
-          <li>Let <i>ref</i> be the result of MakeSuperReference(<b>undefined</b>, <i>strict</i>).</li>
+          <li>Let <i>ref</i> be the result of <a href="#sec-makesuperreference">MakeSuperReference</a>(<b>undefined</b>,
+              <i>strict</i>).</li>
           <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>ref</i>).</li>
           <li>If this <i>CallExpression</i> is in a tail position (<a href="#sec-continue-statement">13.7</a>) then let
               <i>tailCall</i> be <b>true</b>, otherwise let <i>tailCall</i> be <b>false</b>.</li>
@@ -16223,9 +16226,9 @@
         </ol>
       </section>
 
-      <section id="sec-runtime-semantics-makesuperreference-propertykey-strict">
-        <h1><span class="secnum" id="sec-12.2.5.3"><a href="#sec-runtime-semantics-makesuperreference-propertykey-strict"
-            title="link to this section">12.2.5.3</a></span> Runtime Semantics: MakeSuperReference(propertyKey, strict)</h1>
+      <section id="sec-makesuperreference">
+        <h1><span class="secnum" id="sec-12.2.5.3"><a href="#sec-makesuperreference" title="link to this
+            section">12.2.5.3</a></span> Runtime Semantics: MakeSuperReference(propertyKey, strict)</h1>
         <ol class="proc">
           <li>Let <i>env</i> be the result of performing the <a href="#sec-getthisenvironment">GetThisEnvironment</a> abstract
               operation.</li>
@@ -17761,7 +17764,7 @@
         <li>Let <i>rref</i> be the result of evaluating <i>ShiftExpression</i>.</li>
         <li>Let <i>rval</i> be <a href="#sec-getvalue">GetValue</a>(<i>rref</i>).</li>
         <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>rval</i>).</li>
-        <li>Return the result of InstanceofOperator(<i>lval</i>, <i>rval</i>).</li>
+        <li>Return the result of <a href="#sec-instanceofoperator">InstanceofOperator</a>(<i>lval</i>, <i>rval</i>).</li>
       </ol>
       <div class="gp prod"><span class="nt">RelationalExpression</span> <span class="geq">:</span> <span class="nt">RelationalExpression</span> <code class="t">in</code> <span class="nt">ShiftExpression</span></div>
       <ol class="proc">
@@ -17778,9 +17781,9 @@
       </ol>
     </section>
 
-    <section id="sec-runtime-semantics-instanceofoperator-o-c">
-      <h1><span class="secnum" id="sec-12.8.4"><a href="#sec-runtime-semantics-instanceofoperator-o-c" title="link to this
-          section">12.8.4</a></span> Runtime Semantics: InstanceofOperator(O, C)</h1>
+    <section id="sec-instanceofoperator">
+      <h1><span class="secnum" id="sec-12.8.4"><a href="#sec-instanceofoperator" title="link to this section">12.8.4</a></span>
+          Runtime Semantics: InstanceofOperator(O, C)</h1>
 
       <p>The abstract operation <span style="font-family: Times New Roman">InstanceofOperator(<i>O</i>, <i>C</i>)</span>
       implements the generic algorithm for determining if an object <var>O</var> inherits from the inheritance path defined by
@@ -20696,9 +20699,9 @@
             section">13.6.0</a></span> Semantics</h1>
       </div>
 
-      <section id="sec-runtime-semantics-loopcontinues-completion-labelset">
-        <h1><span class="secnum" id="sec-13.6.0.1"><a href="#sec-runtime-semantics-loopcontinues-completion-labelset" title="link
-            to this section">13.6.0.1</a></span> Runtime Semantics: LoopContinues(completion, labelSet)</h1>
+      <section id="sec-loopcontinues">
+        <h1><span class="secnum" id="sec-13.6.0.1"><a href="#sec-loopcontinues" title="link to this section">13.6.0.1</a></span>
+            Runtime Semantics: LoopContinues(completion, labelSet)</h1>
 
         <p>The abstract operation <span style="font-family: Times New Roman">LoopContinues</span> with arguments
         <var>completion</var> and <var>labelSet</var> is defined by the following step:</p>
@@ -20772,8 +20775,9 @@
               <li>Let <i>stmt</i> be the result of evaluating <i>Statement</i>.</li>
               <li>If <i>stmt</i>.[[value]] is not <span style="font-family: sans-serif">empty</span>, let <i>V</i> =
                   <i>stmt</i>.[[value]]<i>.</i></li>
-              <li>If <i>stmt</i> is an <a href="#sec-completion-record-specification-type">abrupt completion</a> and LoopContinues
-                  (<i>stmt</i>,<i>labelSet</i>) is <b>false</b>, return <i>stmt</i>.</li>
+              <li>If <i>stmt</i> is an <a href="#sec-completion-record-specification-type">abrupt completion</a> and <a
+                  href="#sec-loopcontinues">LoopContinues</a> (<i>stmt</i>,<i>labelSet</i>) is <b>false</b>, return
+                  <i>stmt</i>.</li>
               <li>Let <i>exprRef</i> be the result of evaluating <i>Expression</i>.</li>
               <li>Let <i>exprValue</i> be <a href="#sec-toboolean">ToBoolean</a>(<a
                   href="#sec-getvalue">GetValue</a>(<i>exprRef</i>)).</li>
@@ -20782,7 +20786,8 @@
                 <ol class="block">
                   <li><a href="#sec-algorithm-conventions">Assert</a>: <i>exprValue</i> is an <a
                       href="#sec-completion-record-specification-type">abrupt completion</a>.</li>
-                  <li>If  LoopContinues (<i>exprValue</i>,<i>labelSet</i>) is <b>false</b>, return <i>exprValue.</i></li>
+                  <li>If  <a href="#sec-loopcontinues">LoopContinues</a> (<i>exprValue</i>,<i>labelSet</i>) is <b>false</b>,
+                      return <i>exprValue.</i></li>
                 </ol>
               </li>
             </ol>
@@ -20848,13 +20853,15 @@
                 <ol class="block">
                   <li><a href="#sec-algorithm-conventions">Assert</a>: <i>exprValue</i> is an <a
                       href="#sec-completion-record-specification-type">abrupt completion</a>.</li>
-                  <li>If  LoopContinues (<i>exprValue</i>,<i>labelSet</i>) is <b>false</b>, return <i>exprValue.</i></li>
+                  <li>If  <a href="#sec-loopcontinues">LoopContinues</a> (<i>exprValue</i>,<i>labelSet</i>) is <b>false</b>,
+                      return <i>exprValue.</i></li>
                 </ol>
               </li>
               <li>Let <i>stmt</i> be the result of evaluating <i>Statement</i>.</li>
               <li>If <i>stmt</i>.[[value]] is not <span style="font-family: sans-serif">empty</span>, let <i>V</i> =
                   <i>stmt</i>.[[value]].</li>
-              <li>If LoopContinues (<i>stmt</i>,<i>labelSet</i>) is <b>false</b>, return <i>stmt</i>.</li>
+              <li>If <a href="#sec-loopcontinues">LoopContinues</a> (<i>stmt</i>,<i>labelSet</i>) is <b>false</b>, return
+                  <i>stmt</i>.</li>
             </ol>
           </li>
         </ol>
@@ -20921,7 +20928,8 @@
             <ol class="block">
               <li>Let <i>exprRef</i> be the result of evaluating the first <i>Expression</i>.</li>
               <li>Let <i>exprValue</i> be <a href="#sec-getvalue">GetValue</a>(<i>exprRef</i>).</li>
-              <li>If LoopContinues(<i>exprValue</i>,<i>labelSet</i>) is <b>false</b>, return <i>exprValue.</i></li>
+              <li>If <a href="#sec-loopcontinues">LoopContinues</a>(<i>exprValue</i>,<i>labelSet</i>) is <b>false</b>, return
+                  <i>exprValue.</i></li>
             </ol>
           </li>
           <li>Return the result of performing ForBodyEvaluation with the first <i>Expression</i> as the <i>testExpr</i> argument,
@@ -20931,7 +20939,8 @@
         <div class="gp prod"><span class="nt">IterationStatement</span> <span class="geq">:</span> <code class="t">for</code> <code class="t">(</code> <code class="t">var</code> <span class="nt">VariableDeclarationList</span> <code class="t">;</code> <span class="nt">Expression</span><sub>opt</sub> <code class="t">;</code> <span class="nt">Expression</span><sub>opt</sub> <code class="t">)</code> <span class="nt">Statement</span></div>
         <ol class="proc">
           <li>Let <i>varDcl</i> be the result of evaluating <i>VariableDeclarationList</i>.</li>
-          <li>If LoopContinues(<i>varDcl</i>,<i>labelSet</i>) is <b>false</b>, return <i>varDcl</i>.</li>
+          <li>If <a href="#sec-loopcontinues">LoopContinues</a>(<i>varDcl</i>,<i>labelSet</i>) is <b>false</b>, return
+              <i>varDcl</i>.</li>
           <li>Return the result of performing ForBodyEvaluation with the first <i>Expression</i> as the <i>testExpr</i> argument,
               the second <i>Expression</i> as the <i>incrementExpr</i> argument, <i>Statement</i> as the <i>stmt</i> argument, and
               with <i>labelSet</i>.</li>
@@ -20963,7 +20972,7 @@
           <li>Set <a href="#sec-execution-contexts">the running execution context</a>&rsquo;s <a
               href="#sec-execution-contexts">LexicalEnvironment</a> to <i>loopEnv</i>.</li>
           <li>Let <i>forDcl</i> be the result of evaluating <i>LexicalDeclaration</i>.</li>
-          <li>If LoopContinues(<i>forDcl</i>,<i>labelSet</i>) is <b>false</b>, then
+          <li>If <a href="#sec-loopcontinues">LoopContinues</a>(<i>forDcl</i>,<i>labelSet</i>) is <b>false</b>, then
             <ol class="block">
               <li>Set <a href="#sec-execution-contexts">the running execution context</a>&rsquo;s <a
                   href="#sec-execution-contexts">LexicalEnvironment</a> to <i>oldEnv</i>.</li>
@@ -20997,19 +21006,21 @@
                       href="#sec-getvalue">GetValue</a>(<i>testExprRef</i>))</li>
                   <li>If <i>testExprValue</i> is <b>false</b>, return <a
                       href="#sec-normalcompletion">NormalCompletion</a>(<i>V</i>).</li>
-                  <li>Else if LoopContinues (<i>testExprValue</i>,<i>labelSet</i>) is <b>false</b>, return
-                      <i>testExprValue.</i></li>
+                  <li>Else if <a href="#sec-loopcontinues">LoopContinues</a> (<i>testExprValue</i>,<i>labelSet</i>) is
+                      <b>false</b>, return <i>testExprValue.</i></li>
                 </ol>
               </li>
               <li>Let <i>result</i> be the result of evaluating <i>stmt</i>.</li>
               <li>If <i>result</i>.[[value]] is not <span style="font-family: sans-serif">empty</span>, let <i>V</i> =
                   <i>result</i>.[[value]].</li>
-              <li>If LoopContinues (<i>result</i>,<i>labelSet</i>) is <b>false</b>, return <i>result</i>.</li>
+              <li>If <a href="#sec-loopcontinues">LoopContinues</a> (<i>result</i>,<i>labelSet</i>) is <b>false</b>, return
+                  <i>result</i>.</li>
               <li>If <i>incrementExpr</i> is not [empty], then
                 <ol class="block">
                   <li>Let <i>incExprRef</i> be the result of evaluating <i>incrementExpr</i>.</li>
                   <li>Let <i>incExprValue</i> be <a href="#sec-getvalue">GetValue</a>(<i>incExprRef</i>).</li>
-                  <li>If LoopContinues(<i>incExprValue</i>,<i>labelSet</i>) is <b>false</b>, return <i>incExprValue.</i></li>
+                  <li>If <a href="#sec-loopcontinues">LoopContinues</a>(<i>incExprValue</i>,<i>labelSet</i>) is <b>false</b>,
+                      return <i>incExprValue.</i></li>
                 </ol>
               </li>
             </ol>
@@ -21275,7 +21286,8 @@
           <li>Let <i>exprValue</i> be <a href="#sec-getvalue">GetValue</a>(<i>exprRef</i>).</li>
           <li>If <i>exprValue</i> is an <a href="#sec-completion-record-specification-type">abrupt completion</a>,
             <ol class="block">
-              <li>If LoopContinues(<i>exprValue</i>,<i>labelSet</i>) is <b>false</b>, then return <i>exprValue</i>.</li>
+              <li>If <a href="#sec-loopcontinues">LoopContinues</a>(<i>exprValue</i>,<i>labelSet</i>) is <b>false</b>, then return
+                  <i>exprValue</i>.</li>
               <li>Else, return <a href="#sec-completion-record-specification-type">Completion</a>{[[type]]: <span
                   style="font-family: sans-serif">break</span>, [[value]]: <span style="font-family: sans-serif">empty,</span>
                   [[target]]: <span style="font-family: sans-serif">empty</span>}.</li>
@@ -21300,7 +21312,8 @@
           </li>
           <li>If <i>keys</i> is an <a href="#sec-completion-record-specification-type">abrupt completion</a>, then
             <ol class="block">
-              <li>If LoopContinues(<i>keys</i>,<i>labelSet</i>) is <b>false</b>, then return <i>keys</i>.</li>
+              <li>If <a href="#sec-loopcontinues">LoopContinues</a>(<i>keys</i>,<i>labelSet</i>) is <b>false</b>, then return
+                  <i>keys</i>.</li>
               <li><a href="#sec-algorithm-conventions">Assert</a>:   <i>keys</i>.[[type]] is <span style="font-family:
                   sans-serif">continue</span></li>
               <li>Return <a href="#sec-completion-record-specification-type">Completion</a>{[[type]]: <span style="font-family:
@@ -21390,8 +21403,9 @@
               </li>
               <li>Set <a href="#sec-execution-contexts">the running execution context</a>&rsquo;s <a
                   href="#sec-execution-contexts">LexicalEnvironment</a> to <i>oldEnv</i>.</li>
-              <li>If <i>status</i> is an <a href="#sec-completion-record-specification-type">abrupt completion</a> and
-                  LoopContinues(<i>status</i>,<i>labelSet</i>) is <b>false</b>, then return <i>status</i>.</li>
+              <li>If <i>status</i> is an <a href="#sec-completion-record-specification-type">abrupt completion</a> and  <a
+                  href="#sec-loopcontinues">LoopContinues</a>(<i>status</i>,<i>labelSet</i>) is <b>false</b>, then return
+                  <i>status</i>.</li>
             </ol>
           </li>
         </ol>
@@ -22117,17 +22131,19 @@
         <ol class="proc">
           <li>Let <i>label</i> be the <a href="#sec-identifiers-and-identifier-names">StringValue</a> of
               <i>IdentifierReference</i>.</li>
-          <li>Return the result of LabelledStatementEvaluation(<i>label</i>, <i>Statement</i>, <i>labelSet</i>).</li>
+          <li>Return the result of <a href="#sec-labelledstatementevaluation">LabelledStatementEvaluation</a>(<i>label</i>,
+              <i>Statement</i>, <i>labelSet</i>).</li>
         </ol>
         <div class="gp prod"><span class="nt">LabelledStatement</span> <span class="geq">:</span> <code class="t">yield</code> <code class="t">:</code> <span class="nt">Statement</span></div>
         <ol class="proc">
-          <li>Return the result of LabelledStatementEvaluation(<code>"yield"</code>, <i>Statement</i>, <i>labelSet</i>).</li>
+          <li>Return the result of <a
+              href="#sec-labelledstatementevaluation">LabelledStatementEvaluation</a>(<code>"yield"</code>, <i>Statement</i>,
+              <i>labelSet</i>).</li>
         </ol>
       </div>
 
-      <section id="sec-runtime-semantics-labelledstatementevaluation-label-stmt-labelset">
-        <h1><span class="secnum" id="sec-13.12.3.1"><a
-            href="#sec-runtime-semantics-labelledstatementevaluation-label-stmt-labelset" title="link to this
+      <section id="sec-labelledstatementevaluation">
+        <h1><span class="secnum" id="sec-13.12.3.1"><a href="#sec-labelledstatementevaluation" title="link to this
             section">13.12.3.1</a></span> Runtime Semantics: LabelledStatementEvaluation(label, stmt, labelSet)</h1>
 
         <p>The abstract operation LabelledStatementEvaluation with arguments <var>label</var>, <var>stmt</var>, and
@@ -26939,9 +26955,9 @@
           monospace"><b>%</b>xx</span>&rdquo;.</p>
         </div>
 
-        <section id="sec-runtime-semantics-encode-abstract-operation">
-          <h1><span class="secnum" id="sec-18.2.6.1.1"><a href="#sec-runtime-semantics-encode-abstract-operation" title="link to
-              this section">18.2.6.1.1</a></span> Runtime Semantics: Encode Abstract Operation</h1>
+        <section id="sec-encode">
+          <h1><span class="secnum" id="sec-18.2.6.1.1"><a href="#sec-encode" title="link to this section">18.2.6.1.1</a></span>
+              Runtime Semantics: Encode Abstract Operation</h1>
 
           <p>The encoding and escaping process is described by the abstract operation Encode taking two String arguments
           <var>string</var> and <var>unescapedSet</var>.</p>
@@ -27011,9 +27027,9 @@
           <p><span class="marker">&#x9;</span>Increase <i>k</i> by 1.</p>
         </section>
 
-        <section id="sec-runtime-semantics-decode-abstract-operation">
-          <h1><span class="secnum" id="sec-18.2.6.1.2"><a href="#sec-runtime-semantics-decode-abstract-operation" title="link to
-              this section">18.2.6.1.2</a></span> Runtime Semantics: Decode Abstract Operation</h1>
+        <section id="sec-decode">
+          <h1><span class="secnum" id="sec-18.2.6.1.2"><a href="#sec-decode" title="link to this section">18.2.6.1.2</a></span>
+              Runtime Semantics: Decode Abstract Operation</h1>
 
           <p>The unescaping and decoding process is described by the abstract operation Decode taking two String arguments
           <var>string</var> and <var>reservedSet</var>.</p>
@@ -27263,7 +27279,7 @@
           <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>uriString</i>).</li>
           <li>Let <i>reservedURISet</i> be a String containing one instance of each character valid in <i>uriReserved</i> plus
               &ldquo;<code>#</code>&rdquo;.</li>
-          <li>Return the result of calling Decode(<i>uriString</i>, <i>reservedURISet</i>)</li>
+          <li>Return the result of calling <a href="#sec-decode">Decode</a>(<i>uriString</i>, <i>reservedURISet</i>)</li>
         </ol>
 
         <div class="note">
@@ -27287,7 +27303,8 @@
           <li>Let <i>componentString</i> be <a href="#sec-tostring">ToString</a>(<i>encodedURIComponent</i>).</li>
           <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>componentString</i>).</li>
           <li>Let <i>reservedURIComponentSet</i> be the empty String.</li>
-          <li>Return the result of calling Decode(<i>componentString</i>, <i>reservedURIComponentSet</i>)</li>
+          <li>Return the result of calling <a href="#sec-decode">Decode</a>(<i>componentString</i>,
+              <i>reservedURIComponentSet</i>)</li>
         </ol>
       </section>
 
@@ -27306,7 +27323,7 @@
           <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>uriString</i>).</li>
           <li>Let <i>unescapedURISet</i> be a String containing one instance of each character valid in <i>uriReserved</i> and
               <i>uriUnescaped</i> plus "<code>#</code>".</li>
-          <li>Return the result of calling Encode(<i>uriString</i>, unescapedURISet)</li>
+          <li>Return the result of calling <a href="#sec-encode">Encode</a>(<i>uriString</i>, unescapedURISet)</li>
         </ol>
 
         <div class="note">
@@ -27330,7 +27347,8 @@
           <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>componentString</i>).</li>
           <li>Let <i>unescapedURIComponentSet</i> be a String containing one instance of each character valid in
               <i>uriUnescaped</i>.</li>
-          <li>Return the result of calling Encode(<i>componentString</i>, <i>unescapedURIComponentSet</i>)</li>
+          <li>Return the result of calling <a href="#sec-encode">Encode</a>(<i>componentString</i>,
+              <i>unescapedURIComponentSet</i>)</li>
         </ol>
       </section>
     </section>
@@ -27750,7 +27768,8 @@
               <i>O</i>.</li>
           <li>If the argument <i>Properties</i> is present and not <b>undefined</b>, then
             <ol class="block">
-              <li>Return the result of the abstract operation ObjectDefineProperties(<i>obj</i>, <i>Properties</i>).</li>
+              <li>Return the result of the abstract operation <a
+                  href="#sec-objectdefineproperties">ObjectDefineProperties</a>(<i>obj</i>, <i>Properties</i>).</li>
             </ol>
           </li>
           <li>Return <i>obj</i>.</li>
@@ -27766,14 +27785,14 @@
           properties of an object. When the <b>defineProperties</b> function is called, the following steps are taken:</p>
 
           <ol class="proc">
-            <li>Return the result of the abstract operation ObjectDefineProperties with arguments <i>O</i> and
-                <i>Properties</i>.</li>
+            <li>Return the result of the abstract operation <a href="#sec-objectdefineproperties">ObjectDefineProperties</a> with
+                arguments <i>O</i> and <i>Properties</i>.</li>
           </ol>
         </div>
 
-        <section id="sec-runtime-semantics-objectdefineproperties-abstract-operation">
-          <h1><span class="secnum" id="sec-19.1.2.3.1"><a href="#sec-runtime-semantics-objectdefineproperties-abstract-operation"
-              title="link to this section">19.1.2.3.1</a></span> Runtime Semantics: ObjectDefineProperties Abstract Operation</h1>
+        <section id="sec-objectdefineproperties">
+          <h1><span class="secnum" id="sec-19.1.2.3.1"><a href="#sec-objectdefineproperties" title="link to this
+              section">19.1.2.3.1</a></span> Runtime Semantics: ObjectDefineProperties Abstract Operation</h1>
 
           <p>The abstract operation ObjectDefineProperties with arguments <i>O</i> and <i>Properties</i> performs the following
           steps:</p>
@@ -33680,7 +33699,7 @@
           <li>If <a href="#sec-ecmascript-data-types-and-values">Type</a>(<i>regexp</i>) is Object and <a
               href="#sec-hasproperty">HasProperty</a>(<i>regexp</i>, @@isRegExp) is <b>true</b>, then let <i>rx</i> be
               <i>regexp</i>;</li>
-          <li>Else, let <i>rx</i> be the result of the abstract operation RegExpCreate (<a
+          <li>Else, let <i>rx</i> be the result of the abstract operation <a href="#sec-regexpcreate">RegExpCreate</a> (<a
               href="#sec-abstract-operations-for-the-regexp-constructor">21.2.3.3</a>) with arguments <i>regexp</i> and
               <b>undefined</b>.</li>
           <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>rx</i>).</li>
@@ -33793,8 +33812,9 @@
             <li>Else,
               <ol class="block">
                 <li>Let <i>captures</i> be an empty <a href="#sec-list-and-record-specification-type">List</a>.</li>
-                <li>Let <i>replStr</i> be the result of the abstract operation GetReplaceSubstitution(<i>matched</i>,
-                    <i>string</i>, <i>pos</i>, <i>captures</i>).</li>
+                <li>Let <i>replStr</i> be the result of the abstract operation <a
+                    href="#sec-getreplacesubstitution">GetReplaceSubstitution</a>(<i>matched</i>, <i>string</i>, <i>pos</i>,
+                    <i>captures</i>).</li>
               </ol>
             </li>
             <li>Let <i>tailPos</i> be <i>pos</i> + the number of code units in <i>matched</i>.</li>
@@ -33811,10 +33831,9 @@
           </div>
         </div>
 
-        <section id="sec-runtime-semantics-getreplacesubstitution-abstract-operation">
-          <h1><span class="secnum" id="sec-21.1.3.14.1"><a href="#sec-runtime-semantics-getreplacesubstitution-abstract-operation"
-              title="link to this section">21.1.3.14.1</a></span> Runtime Semantics: GetReplaceSubstitution Abstract
-              Operation</h1>
+        <section id="sec-getreplacesubstitution">
+          <h1><span class="secnum" id="sec-21.1.3.14.1"><a href="#sec-getreplacesubstitution" title="link to this
+              section">21.1.3.14.1</a></span> Runtime Semantics: GetReplaceSubstitution Abstract Operation</h1>
 
           <p>The abstract operation GetReplaceSubstitution(<var>matched</var>, <var>string</var>, <var>position</var>,
           <var>captures</var>) performs the following steps:</p>
@@ -33905,7 +33924,7 @@
           </li>
           <li>Else,
             <ol class="block">
-              <li>Let <i>rx</i> be the result of the abstract operation RegExpCreate (<a
+              <li>Let <i>rx</i> be the result of the abstract operation <a href="#sec-regexpcreate">RegExpCreate</a> (<a
                   href="#sec-abstract-operations-for-the-regexp-constructor">21.2.3.3</a>) with arguments <i>regexp</i> and
                   <b>undefined</b>.</li>
             </ol>
@@ -34003,7 +34022,7 @@
             </li>
             <li>If <i>s</i> = 0, then
               <ol class="block">
-                <li>Let <i>z</i> be the result of SplitMatch(<i>S</i>, 0, <i>R</i>).</li>
+                <li>Let <i>z</i> be the result of <a href="#sec-splitmatch">SplitMatch</a>(<i>S</i>, 0, <i>R</i>).</li>
                 <li>If <i>z</i> is not <b>false</b>, return <i>A</i>.</li>
                 <li>Call <a href="#sec-createdataproperty">CreateDataProperty</a>(<i>A</i>, <span style="font-family:
                     monospace">"<b>0</b>"</span>, <i>S</i>).</li>
@@ -34015,7 +34034,7 @@
             <li>Let <i>q</i> = <i>p</i>.</li>
             <li>Repeat, while <i>q</i> &ne; <i>s</i>
               <ol class="block">
-                <li>Let <i>e</i> be the result of SplitMatch(<i>S, q, R</i>).</li>
+                <li>Let <i>e</i> be the result of <a href="#sec-splitmatch">SplitMatch</a>(<i>S, q, R</i>).</li>
                 <li>If <i>e</i> is <b>false</b>, then let <i>q</i> = <i>q</i>+1.</li>
                 <li>Else  <i>e</i> is an integer index into <i>S</i>,
                   <ol class="block">
@@ -34078,9 +34097,9 @@
           </div>
         </div>
 
-        <section id="sec-runtime-semantics-splitmatch-abstract-operation">
-          <h1><span class="secnum" id="sec-21.1.3.17.1"><a href="#sec-runtime-semantics-splitmatch-abstract-operation" title="link
-              to this section">21.1.3.17.1</a></span> Runtime Semantics: SplitMatch Abstract Operation</h1>
+        <section id="sec-splitmatch">
+          <h1><span class="secnum" id="sec-21.1.3.17.1"><a href="#sec-splitmatch" title="link to this
+              section">21.1.3.17.1</a></span> Runtime Semantics: SplitMatch Abstract Operation</h1>
 
           <p>The abstract operation SplitMatch takes three parameters, a String <var>S</var>, an integer <var>q</var>, and a
           String <var>R</var>, and performs the following in order to return either <b>false</b> or the end index of a match:</p>
@@ -35815,7 +35834,7 @@
         <ol class="proc">
           <li>Let <i>lead</i> be the result of evaluating <i>LeadSurragate</i>.</li>
           <li>Let <i>trail</i> be the result of evaluating <i>TrailSurragate</i>.</li>
-          <li>Let <i>cp</i> be the UTF16Decode(<i>lead</i>, <i>trail</i>).</li>
+          <li>Let <i>cp</i> be the <a href="#sec-utf16decode">UTF16Decode</a>(<i>lead</i>, <i>trail</i>).</li>
           <li>Return the character whose character value is <i>cp</i>.</li>
         </ol>
 
@@ -36223,7 +36242,8 @@
                   <li>Return <i>pattern</i>;</li>
                 </ol>
               </li>
-              <li>Let <i>O</i> be the result of calling the abstract operation RegExpAlloc with argument <i>func</i>.</li>
+              <li>Let <i>O</i> be the result of calling the abstract operation <a href="#sec-regexpalloc">RegExpAlloc</a> with
+                  argument <i>func</i>.</li>
               <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>O</i>).</li>
             </ol>
           </li>
@@ -36246,7 +36266,8 @@
               <li>Let <i>F</i> be <i>flags</i>.</li>
             </ol>
           </li>
-          <li>Return the result of the abstract operation RegExpInitialise with arguments <i>O,</i> <i>P</i>, and <i>F</i> .</li>
+          <li>Return the result of the abstract operation <a href="#sec-regexpinitialise">RegExpInitialise</a> with arguments
+              <i>O,</i> <i>P</i>, and <i>F</i> .</li>
         </ol>
 
         <div class="note">
@@ -36282,9 +36303,9 @@
               this section">21.2.3.3</a></span> Abstract Operations for the RegExp Constructor</h1>
         </div>
 
-        <section id="sec-runtime-semantics-regexpalloc-abstract-operation">
-          <h1><span class="secnum" id="sec-21.2.3.3.1"><a href="#sec-runtime-semantics-regexpalloc-abstract-operation" title="link
-              to this section">21.2.3.3.1</a></span> Runtime Semantics: RegExpAlloc Abstract Operation</h1>
+        <section id="sec-regexpalloc">
+          <h1><span class="secnum" id="sec-21.2.3.3.1"><a href="#sec-regexpalloc" title="link to this
+              section">21.2.3.3.1</a></span> Runtime Semantics: RegExpAlloc Abstract Operation</h1>
 
           <p>When the abstract operation RegExpAlloc with argument <var>constructor</var> is called, the following steps are
           taken:</p>
@@ -36308,9 +36329,9 @@
           </div>
         </section>
 
-        <section id="sec-runtime-semantics-regexpinitialise-abstract-operation">
-          <h1><span class="secnum" id="sec-21.2.3.3.2"><a href="#sec-runtime-semantics-regexpinitialise-abstract-operation"
-              title="link to this section">21.2.3.3.2</a></span> Runtime Semantics: RegExpInitialise Abstract Operation</h1>
+        <section id="sec-regexpinitialise">
+          <h1><span class="secnum" id="sec-21.2.3.3.2"><a href="#sec-regexpinitialise" title="link to this
+              section">21.2.3.3.2</a></span> Runtime Semantics: RegExpInitialise Abstract Operation</h1>
 
           <p>When the abstract operation RegExpInitialise with arguments <i><span style="font-family: Times New
           Roman">obj</span>,</i> <var>pattern</var>, and <var>flags</var> is called, the following steps are taken:</p>
@@ -36345,25 +36366,25 @@
           </ol>
         </section>
 
-        <section id="sec-runtime-semantics-regexpcreate-abstract-operation">
-          <h1><span class="secnum" id="sec-21.2.3.3.3"><a href="#sec-runtime-semantics-regexpcreate-abstract-operation"
-              title="link to this section">21.2.3.3.3</a></span> Runtime Semantics: RegExpCreate Abstract Operation</h1>
+        <section id="sec-regexpcreate">
+          <h1><span class="secnum" id="sec-21.2.3.3.3"><a href="#sec-regexpcreate" title="link to this
+              section">21.2.3.3.3</a></span> Runtime Semantics: RegExpCreate Abstract Operation</h1>
 
           <p>When the abstract operation RegExpCreate with arguments <var>P</var> and <var>F</var> is called, the following steps
           are taken:</p>
 
           <ol class="proc">
-            <li>Let <i>obj</i> be the result of calling the abstract operation RegExpAlloc with argument <span style="font-family:
-                sans-serif">%RegExp%</span>.</li>
+            <li>Let <i>obj</i> be the result of calling the abstract operation <a href="#sec-regexpalloc">RegExpAlloc</a> with
+                argument <span style="font-family: sans-serif">%RegExp%</span>.</li>
             <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>obj</i>).</li>
-            <li>Return the result of the abstract operation RegExpInitialise with arguments <i>obj,</i> <i>P</i>, and <i>F</i>
-                .</li>
+            <li>Return the result of the abstract operation <a href="#sec-regexpinitialise">RegExpInitialise</a> with arguments
+                <i>obj,</i> <i>P</i>, and <i>F</i> .</li>
           </ol>
         </section>
 
-        <section id="sec-runtime-semantics-escaperegexppattern-abstract-operation">
-          <h1><span class="secnum" id="sec-21.2.3.3.4"><a href="#sec-runtime-semantics-escaperegexppattern-abstract-operation"
-              title="link to this section">21.2.3.3.4</a></span> Runtime Semantics: EscapeRegExpPattern Abstract Operation</h1>
+        <section id="sec-escaperegexppattern">
+          <h1><span class="secnum" id="sec-21.2.3.3.4"><a href="#sec-escaperegexppattern" title="link to this
+              section">21.2.3.3.4</a></span> Runtime Semantics: EscapeRegExpPattern Abstract Operation</h1>
 
           <p>When the abstract operation EscapeRegExpPattern with arguments <var>P</var> and <var>F</var> is called, the following
           occurs:</p>
@@ -36423,7 +36444,8 @@
         <p>The @@create method of an object <var>F</var> performs the following:</p>
 
         <ol class="proc">
-          <li>Return the result of calling the abstract operation RegExpAlloc with argument <i>F</i>.</li>
+          <li>Return the result of calling the abstract operation <a href="#sec-regexpalloc">RegExpAlloc</a> with argument
+              <i>F</i>.</li>
         </ol>
 
         <p>The value of the <code>name</code> property of this function is <code>"[Symbol.create]"</code>.</p>
@@ -36480,13 +36502,14 @@
                 <b>TypeError</b> exception.</li>
             <li>Let <i>S</i> be the value of <a href="#sec-tostring">ToString</a>(<i>string</i>)</li>
             <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>S</i>).</li>
-            <li>Return the result of the RegExpExec abstract operation with arguments <i>R</i> and <i>S</i>.</li>
+            <li>Return the result of the <a href="#sec-regexpexec">RegExpExec</a> abstract operation with arguments <i>R</i> and
+                <i>S</i>.</li>
           </ol>
         </div>
 
-        <section id="sec-runtime-semantics-regexpexec-abstract-operation">
-          <h1><span class="secnum" id="sec-21.2.5.2.1"><a href="#sec-runtime-semantics-regexpexec-abstract-operation" title="link
-              to this section">21.2.5.2.1</a></span> Runtime Semantics: RegExpExec Abstract Operation</h1>
+        <section id="sec-regexpexec">
+          <h1><span class="secnum" id="sec-21.2.5.2.1"><a href="#sec-regexpexec" title="link to this
+              section">21.2.5.2.1</a></span> Runtime Semantics: RegExpExec Abstract Operation</h1>
 
           <p>The abstract operation RegExpExec with arguments <i>R</i> (an object) and <i>S</i> (a string) performs the following
           steps:</p>
@@ -36640,7 +36663,7 @@
           <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>global</i>).</li>
           <li>If <i>global</i> is not <b>true</b>, then
             <ol class="block">
-              <li>Return the result of calling the abstract operation RegExpExec (see <a
+              <li>Return the result of calling the abstract operation <a href="#sec-regexpexec">RegExpExec</a> (see <a
                   href="#sec-regexp.prototype.exec">21.2.5.2</a>) with arguments <i>rx</i> and <i>S</i>.</li>
             </ol>
           </li>
@@ -36656,8 +36679,8 @@
               <li>Let <i>lastMatch</i> be <b>true</b>.</li>
               <li>Repeat, while <i>lastMatch</i> is <b>true</b>
                 <ol class="block">
-                  <li>Let <i>result</i> be the result of the abstract operation RegExpExec with arguments <i>rx</i> and
-                      <i>S</i>.</li>
+                  <li>Let <i>result</i> be the result of the abstract operation <a href="#sec-regexpexec">RegExpExec</a> with
+                      arguments <i>rx</i> and <i>S</i>.</li>
                   <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>result</i>).</li>
                   <li>If <i>result</i> is <b>null</b>, then set <i>lastMatch</i> to <b>false</b>.</li>
                   <li>Else <i>result</i> is not <b>null</b>,
@@ -36724,8 +36747,9 @@
         <p>When the <code>replace</code> method is called with arguments <var>S</var> and <var>replaceValue</var> the following
         steps are taken:</p>
 
-        <p style="background-color: #FFC000">TODO:  need tol finish this and have it make use of <b>GetReplaceSubstitution</b>
-        operation in <a href="#sec-string.prototype.replace">21.1.3.14</a></p>
+        <p style="background-color: #FFC000">TODO:  need tol finish this and have it make use of <b><a
+        href="#sec-getreplacesubstitution">GetReplaceSubstitution</a></b> operation in <a
+        href="#sec-string.prototype.replace">21.1.3.14</a></p>
 
         <ol class="proc">
           <li>Let <i>rx</i> be the <b>this</b> value.</li>
@@ -36815,7 +36839,8 @@
           <li>Let <i>flags</i> be the value of <i>R&rsquo;s</i> [[OriginalFlags]] <a
               href="#sec-object-internal-methods-and-internal-slots">internal slot</a>.</li>
           <li>If either <i>src</i> or <i>flags</i> is <b>undefined</b>, then throw a <b>TypeError</b> exception.</li>
-          <li>Return the result of the abstract operation EscapeRegExpPattern with arguments <i>src</i> and <i>flags</i>.</li>
+          <li>Return the result of the abstract operation <a href="#sec-escaperegexppattern">EscapeRegExpPattern</a> with
+              arguments <i>src</i> and <i>flags</i>.</li>
         </ol>
       </section>
 
@@ -36985,7 +37010,8 @@
               <b>TypeError</b> exception.</li>
           <li>Let <i>S</i> be the value of <a href="#sec-tostring">ToString</a>(<i>string</i>)</li>
           <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>S</i>).</li>
-          <li>Let <i>match</i> be the result of the RegExpExec abstract operation with arguments <i>R</i> and <i>S</i>.</li>
+          <li>Let <i>match</i> be the result of the <a href="#sec-regexpexec">RegExpExec</a> abstract operation with arguments
+              <i>R</i> and <i>S</i>.</li>
           <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>match</i>).</li>
           <li>If <i>match</i> is not <b>null</b>, then return <b>true</b>; else return <b>false</b>.</li>
         </ol>
@@ -39177,10 +39203,11 @@
           <ol class="proc">
             <li>Perform an implementation-dependent sequence of calls to the [[Get]] and [[Set]] internal methods of <i>obj</i>,
                 to the <a href="#sec-deletepropertyorthrow">DeletePropertyOrThrow</a> abstract operation with <i>obj</i> as the
-                first argument, and to SortCompare (described below), where the <a href="#sec-object-type">property key</a>
-                argument for each call to [[Get]], [[Set]], or <a href="#sec-deletepropertyorthrow">DeletePropertyOrThrow</a> is
-                the string representation of a nonnegative integer less than <i>len</i> and where the arguments for calls to
-                SortCompare are results of previous calls to the [[Get]] internal method. If <i>obj</i> is not sparse then <a
+                first argument, and to <a href="#sec-sortcompare">SortCompare</a> (described below), where the <a
+                href="#sec-object-type">property key</a> argument for each call to [[Get]], [[Set]], or <a
+                href="#sec-deletepropertyorthrow">DeletePropertyOrThrow</a> is the string representation of a nonnegative integer
+                less than <i>len</i> and where the arguments for calls to <a href="#sec-sortcompare">SortCompare</a> are results
+                of previous calls to the [[Get]] internal method. If <i>obj</i> is not sparse then <a
                 href="#sec-deletepropertyorthrow">DeletePropertyOrThrow</a> must not be called. If any [[Set]] call returns
                 <b>false</b> a <b>TypeError</b> exception is thrown. If an <a
                 href="#sec-completion-record-specification-type">abrupt completion</a> is returned from any of these operations,
@@ -39203,8 +39230,9 @@
 
             <li>
               <p>Then for all nonnegative integers <var>j</var> and <var>k</var>, each less than <var>len</var>, if <span
-              style="font-family: Times New Roman">SortCompare(<i>j</i>,<i>k</i>) &lt; 0</span> (see SortCompare below), then
-              <span style="font-family: Times New Roman"><b>&pi;</b>(<i>j</i>) &lt;</span> <span style="font-family: Times New
+              style="font-family: Times New Roman"><a href="#sec-sortcompare">SortCompare</a>(<i>j</i>,<i>k</i>) &lt; 0</span>
+              (see <a href="#sec-sortcompare">SortCompare</a> below), then <span style="font-family: Times New
+              Roman"><b>&pi;</b>(<i>j</i>) &lt;</span> <span style="font-family: Times New
               Roman"><b>&pi;</b>(<i>k</i>)</span>.</p>
             </li>
           </ul>
@@ -39277,9 +39305,9 @@
           </div>
         </div>
 
-        <section id="sec-runtime-semantics-sortcompare-abstract-operation">
-          <h1><span class="secnum" id="sec-22.1.3.24.1"><a href="#sec-runtime-semantics-sortcompare-abstract-operation"
-              title="link to this section">22.1.3.24.1</a></span> Runtime Semantics: SortCompare Abstract Operation</h1>
+        <section id="sec-sortcompare">
+          <h1><span class="secnum" id="sec-22.1.3.24.1"><a href="#sec-sortcompare" title="link to this
+              section">22.1.3.24.1</a></span> Runtime Semantics: SortCompare Abstract Operation</h1>
 
           <p>When the SortCompare abstract operation is called with two arguments <var>j</var> and <var>k</var>, the following
           steps are taken:</p>
@@ -41333,11 +41361,12 @@
               href="#sec-object-internal-methods-and-internal-slots">internal slot</a>.</li>
         </ol>
 
-        <p>The following version of SortCompare is used by %TypedArray%<code>.prototype.sort</code>. It performs a numeric
-        comparison rather than the string comparsion used in <a href="#sec-array.prototype.sort">22.1.3.24</a>.</p>
+        <p>The following version of <a href="#sec-sortcompare">SortCompare</a> is used by
+        %TypedArray%<code>.prototype.sort</code>. It performs a numeric comparison rather than the string comparsion used in <a
+        href="#sec-array.prototype.sort">22.1.3.24</a>.</p>
 
-        <p>The Typed Array SortCompare abstract operation is called with two arguments <var>j</var> and <var>k</var>, the
-        following steps are taken:</p>
+        <p>The Typed Array <a href="#sec-sortcompare">SortCompare</a> abstract operation is called with two arguments <var>j</var>
+        and <var>k</var>, the following steps are taken:</p>
 
         <ol class="proc">
           <li>Let <i>jString</i> be <a href="#sec-tostring">ToString</a>(<i>j</i>).</li>
@@ -44713,8 +44742,8 @@
               <li>Let <i>status</i> be the result of <a href="#sec-createdataproperty">CreateDataProperty</a>(<i>root</i>, the
                   empty String, <i>unfiltered</i>).</li>
               <li><a href="#sec-algorithm-conventions">Assert</a>: <i>status</i> is <b>true</b>.</li>
-              <li>Return the result of calling the abstract operation Walk, passing <i>root</i> and the empty String. The abstract
-                  operation Walk is described below.</li>
+              <li>Return the result of calling the abstract operation <a href="#sec-walk">Walk</a>, passing <i>root</i> and the
+                  empty String. The abstract operation <a href="#sec-walk">Walk</a> is described below.</li>
             </ol>
           </li>
           <li>Else
@@ -44754,9 +44783,9 @@
         </div>
       </div>
 
-      <section id="sec-runtime-semantics-walk-abstract-operation">
-        <h1><span class="secnum" id="sec-24.3.1.1"><a href="#sec-runtime-semantics-walk-abstract-operation" title="link to this
-            section">24.3.1.1</a></span> Runtime Semantics: Walk Abstract Operation</h1>
+      <section id="sec-walk">
+        <h1><span class="secnum" id="sec-24.3.1.1"><a href="#sec-walk" title="link to this section">24.3.1.1</a></span> Runtime
+            Semantics: Walk Abstract Operation</h1>
 
         <p>The abstract operation Walk is a recursive abstract operation that takes two parameters: a <var>holder</var> object and
         the String <var>name</var> of a property in that object. Walk uses the value of <var>reviver</var> that was originally
@@ -45051,7 +45080,7 @@
           <li>If <i>value</i> is <b>true</b> then return <code>"true"</code>.</li>
           <li>If <i>value</i> is <b>false</b> then return <code>"false"</code>.</li>
           <li>If <a href="#sec-ecmascript-data-types-and-values">Type</a>(<i>value</i>) is String, then return the result of
-              calling the abstract operation Quote with argument <i>value</i>.</li>
+              calling the abstract operation <a href="#sec-quote">Quote</a> with argument <i>value</i>.</li>
           <li>If <a href="#sec-ecmascript-data-types-and-values">Type</a>(<i>value</i>) is Number
             <ol class="block">
               <li>If <i>value</i> is finite then return <a href="#sec-tostring">ToString</a>(<i>value</i>).</li>
@@ -45073,9 +45102,9 @@
         </ol>
       </section>
 
-      <section id="sec-runtime-semantics-quote-abstract-operation">
-        <h1><span class="secnum" id="sec-24.3.2.2"><a href="#sec-runtime-semantics-quote-abstract-operation" title="link to this
-            section">24.3.2.2</a></span> Runtime Semantics: Quote Abstract Operation</h1>
+      <section id="sec-quote">
+        <h1><span class="secnum" id="sec-24.3.2.2"><a href="#sec-quote" title="link to this section">24.3.2.2</a></span> Runtime
+            Semantics: Quote Abstract Operation</h1>
 
         <p>The abstract operation <span style="font-family: Times New Roman">Quote(<i>value</i>)</span> wraps a String value in
         double quotes and escapes characters within it.</p>
@@ -45178,7 +45207,8 @@
               <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>strP</i>).</li>
               <li>If <i>strP</i> is not <b>undefined</b>
                 <ol class="block">
-                  <li>Let <i>member</i> be the result of calling the abstract operation Quote with argument <i>P</i>.</li>
+                  <li>Let <i>member</i> be the result of calling the abstract operation <a href="#sec-quote">Quote</a> with
+                      argument <i>P</i>.</li>
                   <li>Let <i>member</i> be the concatenation of <i>member</i> and the string <code>":</code>".</li>
                   <li>If <i>gap</i> is not the empty String
                     <ol class="block">
@@ -48750,7 +48780,8 @@
               <li>let <i>F</i> be <i>flags</i>.</li>
             </ol>
           </li>
-          <li>Return the result of the abstract operation RegExpInitialise with arguments <i>O,</i> <i>P</i>, and <i>F</i>.</li>
+          <li>Return the result of the abstract operation <a href="#sec-regexpinitialise">RegExpInitialise</a> with arguments
+              <i>O,</i> <i>P</i>, and <i>F</i>.</li>
         </ol>
 
         <div class="note">
@@ -49091,10 +49122,9 @@
   time value</a> is NaN. The 6<sup>th</sup> Edition specifies the result to be the String value is <code>"Invalid
   Date".</code></p>
 
-  <p><a href="#sec-regexp-pattern-flags">21.2.3.1</a>, <a
-  href="#sec-runtime-semantics-escaperegexppattern-abstract-operation">21.2.3.3.4</a>: If any LineTerminator code points in the
-  value of the <code>source</code> property of an RegExp instance must be expressed using an escape sequence. Edition 5.1 only
-  required the escaping of <code>"/"</code>.</p>
+  <p><a href="#sec-regexp-pattern-flags">21.2.3.1</a>, <a href="#sec-escaperegexppattern">21.2.3.3.4</a>: If any LineTerminator
+  code points in the value of the <code>source</code> property of an RegExp instance must be expressed using an escape sequence.
+  Edition 5.1 only required the escaping of <code>"/"</code>.</p>
 
   <p><b>In Edition 5.1</b></p>
 
@@ -49135,8 +49165,8 @@
   <var>trimmedString</var> may be the empty string.</p>
 
   <p>:  Added notes clarifying that ECMAScript&rsquo;s URI syntax is based upon RFC 2396 and not the newer RFC 3986. In the
-  algorithm for Decode, a step was removed that immediately preceded the current step 4.d.vii.10.a because it tested for a
-  condition that cannot occur.</p>
+  algorithm for <a href="#sec-decode">Decode</a>, a step was removed that immediately preceded the current step 4.d.vii.10.a
+  because it tested for a condition that cannot occur.</p>
 
   <p>: Corrected use of variable <var>P</var> in steps 5 and 6 of algorithm.</p>
 
@@ -49164,8 +49194,9 @@
   listed as a recommendation in NOTE 2.</p>
 
   <p>: In <span style="font-family: monospace">split</span> algorithm step 11.a and 13.a, the positional order of the arguments to
-  <span class="nt">SplitMatch</span> was corrected to match the actual parameter signature of <span class="nt">SplitMatch</span>.
-  In step 13.a.iii.7.d, <var>lengthA</var> replaces <var>A</var>.l<span style="font-family: monospace">ength</span>.</p>
+  <span class="nt"><a href="#sec-splitmatch">SplitMatch</a></span> was corrected to match the actual parameter signature of <span
+  class="nt"><a href="#sec-splitmatch">SplitMatch</a></span>.  In step 13.a.iii.7.d, <var>lengthA</var> replaces
+  <var>A</var>.l<span style="font-family: monospace">ength</span>.</p>
 
   <p>: In first paragraph, removed the implication that the individual character property access had &ldquo;array index&rdquo;
   semantics. Modified algorithm steps 3 and 5 such that they do not enforce &ldquo;array index&rdquo; requirement.</p>
