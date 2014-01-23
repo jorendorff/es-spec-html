@@ -2812,6 +2812,46 @@ def fixup_generate_toc(doc, docx):
 
 @Fixup
 def fixup_sticky(doc, docx):
+    """Restructure the document to support sticky headings.
+
+    We use an experimental CSS feature, "position: sticky", on section
+    headings.  The nice result is that if your browser window is scrolled to
+    the middle of a long section, the section heading "sticks" to the top of
+    your viewport instead of scrolling off-screen.  That is, the current
+    section number and title are always visible.
+
+    However, the effect is really weird for sections like:
+
+        <section>
+          <h1>9.7 Banana Objects</h1>
+          ...paragraphs...
+          <section>
+            <h1>9.7.1 Red Bananas</h1>
+            ...paragraphs...
+          </section>
+        </section>
+
+    Try commenting out this fixup and scroll through the document to see the
+    weirdness. Basically *both* headings "stick" to the top of the screen
+    at the same time, one on top of the other.
+
+    The solution is to wrap the first <h1> and its accompanying text in a
+    <div>, like so:
+
+        <section>
+          <div class="front">
+            <h1>9.7 Banana Objects</h1>
+            ...paragraphs...
+          </div>
+          <section>
+            <h1>9.7.1 Red Bananas</h1>
+            ...paragraphs...
+          </section>
+        </section>
+
+    This way, the first <h1> scrolls away when the </div> reaches the top of the
+    screen. So headings do not accumulate.
+    """
     def fix_section(sect):
         if (any(ht_name_is(k, "section") for k in sect.content)
               and ht_name_is(sect.content[0], "h1")):
