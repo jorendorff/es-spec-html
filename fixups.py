@@ -1265,7 +1265,15 @@ def fixup_strip_toc(doc, docx):
             # Skip the copyright notice that appears at the front of ES5.1.
             # The table of contents is right after that.
             i0, first_hr = next(hr_iterator)
+
+        # There may be multiple <hr>s in a row here. Skip those and
+        # find the next <hr> after the table of contents.
+        iprev = i0
         i1, next_hr = next(hr_iterator)
+        while i1 == iprev + 1:
+            iprev = i1
+            i1, next_hr = next(hr_iterator)
+
         i1 += 1
     else:
         section_iterator = body.kids("section")
@@ -1636,7 +1644,11 @@ def fixup_title_page(doc, docx):
         if parent.name == 'p' and child.name == 'h1':
             # A p element shouldn't contain an h1, so make this an hgroup.
             parent.name = 'hgroup'
-            parent.content = [k for k in parent.content if not ht_name_is(k, 'img')]
+
+            # Filter out images and whitespace.
+            parent.content = [k for k in parent.content
+                                    if not ht_name_is(k, 'img') and
+                                       not (isinstance(k, str) and k.isspace())]
             if len(parent.content) != 6:
                 continue
 

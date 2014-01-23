@@ -347,14 +347,37 @@ def parse_lvl(docx, e):
 
     return lvl
 
-class StartOverride:
-    def __init__(self, val):
-        self.val = val
+class LvlOverride:
+    def __init__(self, ilvl, lvl, startOverride):
+        self.ilvl = ilvl
+        self.lvl = lvl
+        self.startOverride = startOverride
+
+def parse_lvlOverride(docx, e):
+    ilvl = int(e.get(k_ilvl))
+
+    lvl = None
+    startOverride = None
+
+    all_lvl = e.findall(k_lvl)
+    if all_lvl:
+        [sole_lvl] = all_lvl
+        lvl = parse_lvl(docx, sole_lvl)
+
+    all_startOverride = e.findall(k_startOverride)
+    if all_startOverride:
+        [sole_startOverride] = all_startOverride
+        startOverride = int(sole_startOverride.get(k_val))
+
+    if len(e) == 0:
+        startOverride = 0  # land of absurd defaults
+
+    return LvlOverride(ilvl, lvl, startOverride)
 
 def parse_startOverride(e):
     assert e.tag == k_startOverride
     val = int(e.get(k_val))
-    return StartOverride(val)
+    return val
 
 class Numbering:
     def __init__(self, abstract_num, num, style_links):
@@ -400,18 +423,11 @@ def parse_numbering(docx, e):
         numId = int(style.get(k_numId))
         val = int(get_val(style, 'abstractNumId'))
         overrides = []
-        for override in style.findall(k_lvlOverride):
-            ilvl = int(override.get(k_ilvl))
-            while len(overrides) <= ilvl:
+        for override_element in style.findall(k_lvlOverride):
+            lvlOverride = parse_lvlOverride(docx, override_element)
+            while len(overrides) <= lvlOverride.ilvl:
                 overrides.append(None)
-            if len(override) > 0:
-                [ov] = override
-                if ov.tag == k_lvl:
-                    overrides[ilvl] = parse_lvl(docx, ov)
-                else:
-                    overrides[ilvl] = parse_startOverride(ov)
-            else:
-                overrides[ilvl] = StartOverride(0)  # land of absurd defaults
+            overrides[lvlOverride.ilvl] = lvlOverride
         num[numId] = Num(val, overrides)
 
     return Numbering(abstract_num, num, style_links)
@@ -467,11 +483,11 @@ class Document:
         levels = self.get_num_levels(abstract_num_id, level_limit)
         for i in range(0, level_limit + 1):
             if i < len(ov) and ov[i] is not None:
-                if isinstance(ov[i], Lvl):
-                    levels[i] = ov[i]
-                else:
-                    assert isinstance(ov[i], StartOverride)
-                    levels[i] = levels[i].with_start(ov[i].val)
+                lvlOverride = ov[i]
+                if lvlOverride.lvl is not None:
+                    levels[i] = lvlOverride.lvl
+                if lvlOverride.startOverride is not None:
+                    levels[i] = levels[i].with_start(lvlOverride.startOverride)
         return abstract_num_id, levels
 
     def get_num_levels(self, abstract_num_id, level_limit):
@@ -493,27 +509,27 @@ class Document:
         """ Returns a Lvl object; its .full_style attribute is a CSS dictionary. """
         num = self.numbering.num[numId]
         ilvl = int(ilvl)
+        lvl = None
         if ilvl < len(num.overrides):
             ov = num.overrides[ilvl]
+            lvl = ov.lvl
         else:
             ov = None
 
-        if isinstance(ov, Lvl):
-            return ov
-
-        abstract_num = self.numbering.abstract_num[num.abstract_num_id]
-        if isinstance(abstract_num, str):
-            style = self.styles[abstract_num]
-            lvl = self.get_list_style_at_level(int(style.full_style['-ooxml-numId']), ilvl)
-        else:
-            assert isinstance(abstract_num, list)
-            if ilvl >= len(abstract_num):
-                return None
+        if lvl is None:
+            abstract_num = self.numbering.abstract_num[num.abstract_num_id]
+            if isinstance(abstract_num, str):
+                style = self.styles[abstract_num]
+                lvl = self.get_list_style_at_level(int(style.full_style['-ooxml-numId']), ilvl)
             else:
-                lvl = abstract_num[ilvl]
+                assert isinstance(abstract_num, list)
+                if ilvl >= len(abstract_num):
+                    return None
+                else:
+                    lvl = abstract_num[ilvl]
 
-        if isinstance(ov, StartOverride):
-            lvl = lvl.with_start(ov.val)
+        if ov is not None and ov.startOverride is not None:
+            lvl = lvl.with_start(ov.startOverride)
 
         return lvl
 
