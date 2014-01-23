@@ -1620,7 +1620,18 @@ def fixup_remove_hr(doc, docx):
 
 @InPlaceFixup
 def fixup_title_page(doc, docx):
-    """ Apply a fixup or two for the title page. """
+    """ Apply a fixup or two for the title page.
+
+    In the original document, there is a single <w:p> paragraph containing
+    several <w:pict> elements, each containing one or more paragraphs (some
+    with Heading style, some Normal).
+
+    A previous step strips out the <w:pict> markup, leaving nested
+    paragraphs.
+
+    Here we convert the outer "paragraph" to an <hgroup> and just leave the
+    rest.  Not super elegant, and the resulting markup may not be valid.
+    """
     for parent, i, child in all_parent_index_child_triples(doc):
         if parent.name == 'p' and child.name == 'h1':
             # A p element shouldn't contain an h1, so make this an hgroup.
