@@ -901,17 +901,6 @@ def fixup_sections(doc, docx):
             return None, None
         s = s.lstrip()
 
-        # Very special hack: The heading for section 9.1.1 contains a tab
-        # character. I don't see a tab in the PDF, though. Snip it out.
-        if s.startswith('9.1\t.1\t'):
-            s = s.replace('9.1\t.1\t', '9.1.1\t')
-
-        # Very special hack: Fix two typos in section numbers.
-        if s.startswith('8.4,4') or s.startswith('15,13'):
-            # Replace only this first comma with a dot.
-            before, comma, after = s.partition(',')
-            s = before + '.' + after
-
         num, tab, title = s.partition('\t')
         if tab == "":
             if 1 < len(c) and ht_name_is(c[1], "span") and c[1].attrs.get("class") == "section-status":
@@ -1066,7 +1055,7 @@ def fixup_insert_section_ids(doc, docx):
         else:
             secnum = secnum_str
         return (heading, span_secnum, secnum_str, secnum)
- 
+
     def mangle(title):
         # This is unicode-hostile. The goal is to have simple, typeable ids.
         # I don't know that any headings use any non-ASCII characters.
@@ -1203,11 +1192,7 @@ def fixup_insert_section_ids(doc, docx):
             warn("Obsolete id {!r} maps to {!r}, which does not exist in the new document"
                  .format('#' + obsolete_id, '#' + current_id))
 
-            # Unfortunately, due to a wacky error in the original document, we
-            # have exactly one of these that should not be treated as an error.
-            # Special-case it.
-            if current_id != "sec-19.4.2.8":
-                failed = True
+            failed = True
     if failed:
         raise ValueError("Either remove obsolete ids from {} or fix the target"
                          .format(legacy_sections_filename))
@@ -2441,8 +2426,8 @@ def fixup_links(doc, docx):
         ("currently running execution context", "Execution Contexts"),
         ("the running execution context", "Execution Contexts"),
         ("the current Realm", "Execution Contexts"),
-        ("ECMAScript code execution context", "Execution Contexts"), 
-        ("ECMAScript Code execution context", "Execution Contexts"), 
+        ("ECMAScript code execution context", "Execution Contexts"),
+        ("ECMAScript Code execution context", "Execution Contexts"),
         ("the execution context stack", "Execution Contexts"),
         ("execution context stack", "Execution Contexts"),
         ("execution context context stack", "Execution Contexts"),  # sic
@@ -3041,7 +3026,7 @@ def fixup(docx, doc):
                 if x == "":
                     raise ValueError("FAIL in " + repr(e) + ": " + repr(e.content))
             else:
-                verify(x)                
+                verify(x)
 
     for f in get_fixups(docx):
         print(f.name)
