@@ -87,6 +87,7 @@ class InPlaceFixup:
 
 @Fixup
 def fixup_strip_empty_paragraphs(doc, docx):
+    """ Empty paragraphs are meaningless in HTML. Drop them. """
     def is_empty_para(e):
         return e.name == 'p' and len(e.content) == 0
     return doc.find_replace(is_empty_para, lambda e: [])
@@ -273,6 +274,146 @@ def fixup_list_styles(doc, docx):
     for p in findall(doc, 'p'):
         if p.attrs.get("class") in wrong_types and has_bullet(docx, p):
             p.attrs['class'] = "Normal"
+
+
+def map_body(doc, f):
+    head, body = doc.content
+    return doc.with_content([head, f(body)])
+
+def title_get_argument_names(title):
+    """ Given a section title, return a list of argument names.
+
+    If title is a string like "Get (O, P)", this returns a list of strings,
+    the arguments: ["O", "P"]. Otherwise it returns an empty list.
+    """
+
+    algorithm_arguments_re = r'''(?x)
+        ^
+        # Ignore optional section number.
+        (?: \d+ (?: \. \d+ )* \s* )?
+        # Ignore optional "Runtime Semantics:" label
+        (?: (?:Runtime|Static) \s* Semantics \s* : \s* )?
+        # Actual algorithm name
+        (?:
+            (?: new \s*)?
+            %?[A-Z][A-Za-z0-9.%]{3,}
+            (?: \s* \[ \s* @@[A-Za-z0-9.%]* \s* \]
+              | \s* \[\[ \s* [A-Za-z0-9.%]* \s* \]\] )?
+            \s* \( (.*) \) \s*
+        |
+            new \s* (?:Map|Set) \s*
+        )
+        (?: Abstract \s+ Operation \s*)?
+        $
+    '''
+
+    m = re.match(algorithm_arguments_re, title)
+    if m is None:
+        return []
+    arguments = m.group(1)
+    ignore_re = r'\.\s*\.\s*\.|\[|\]|' + "\N{HORIZONTAL ELLIPSIS}"
+    arguments = re.sub(ignore_re, '', arguments)
+    arguments = arguments.strip()
+    if arguments == '' or arguments == 'all other argument combinations':
+        return []
+
+    pieces = arguments.split(',')
+    names = []
+    for piece in pieces:
+        if piece.strip() == '':
+            continue
+        m = re.match(r'^\s*(?:\.\s*\.\s*\.\s*)?(\w+)\s*(?:=.*)?$', piece)
+        if m is None:
+            if piece == "reserved1  .":
+                warn("FIXME working around https://bugs.ecmascript.org/show_bug.cgi?id=2626")
+                names.append("reserved1")
+            elif piece == "typedArray  offset":
+                warn("FIXME working around https://bugs.ecmascript.org/show_bug.cgi?id=2627")
+                names += piece.split()
+            else:
+                raise ValueError("title looks like it might be an argument list, but maybe not? %r has argument %r" % (title, piece))
+        else:
+            names.append(m.group(1))
+    return names
+
+@Fixup
+def fixup_vars(doc, docx):
+    """
+    Convert italicized variable names to <var> elements.
+    """
+
+    def slices_by(iterable, break_before):
+        """Break an iterable into slices, using the given predicate
+        to determine when to break.
+
+        This yields nonempty lists.
+
+        `slice_by(range(6), is_even)` would yield [0, 1], then [2, 3],
+        then [4, 5].
+        """
+        x = []
+        for v in iterable:
+            if break_before(v):
+                if x:
+                    yield x
+                    x = []
+            x.append(v)
+        if x:
+            yield x
+
+    def is_heading(p):
+        return ht_name_is(p, 'p') and p.attrs.get('class', '').startswith('Heading')
+
+    def markup_vars(section):
+        if not is_heading(section[0]):
+            return section  # unchanged.
+
+        ## look in the heading for parameter names - we already have code for this somewhere
+        title = ht_text(section[0])
+        arguments = title_get_argument_names(title)
+
+        ## look in each paragraph that precedes a list for
+        ## "is called with arguments O and proto,"
+        ## or "is called with argument string,"
+
+        ## look in the body for declarations of the form "Let script be" in a list
+        ## and of certain other forms outside of lists
+
+        ## Then change them all from whatever markup they're using to <var>.
+        ## That part should be easy using section.replace('*').
+        ##
+        ## Oh wait but it is hard to decide where to put the var and whether to join the
+        ## neighboring runs. I knew there was a reason I hadn't done this yet.
+
+        return section #unchanged for now ???
+
+    def replace_sections(body, fn):
+        new_content = []
+        for slice in slices_by(body.content, is_heading):
+            new_content += markup_vars(slice)
+        return body.with_content(new_content)
+
+    return map_body(doc, lambda body: replace_sections(body, markup_vars))
+
+
+
+## TODO: use a similar approach for span.nt. Scan the whole document for the
+## pattern /NonTerminalLookinThing :+/ to compile a list of all nonterminals in
+## the grammar. Even though we will do it again later. No pain no gain.
+## Then use .replace() to change correctly formatted nonterminals to span.nt.
+
+## TODO: use a similar approach for bold Courier New => <code></code>.
+
+## TODO: use a similar approach for values "undefined", "true", "false" => b.val.
+
+## TODO: figure out what to do with "SyntaxError", "empty" (when used as a
+## special magic value), "normal", "break", "continue", "return" and "throw"
+## as in the NormalCompletion algorithm:
+##
+##    1.  Return Completion{[[type]]: normal, [[value]]: argument,
+##        [[target]]:empty}.
+
+
 
 def looks_like_nonterminal(text):
     return re.match(r'^(?:uri(?:[A-Z][A-Za-z]*)?|[A-Z]+[a-z][A-Za-z]*)$', text) is not None
@@ -476,10 +617,6 @@ tag_names = {
 
 heading_styles = {k for k, v in tag_names.items()
                         if v == 'h1' or v == 'h2' or (v is not None and v.startswith('h1.'))}
-
-def map_body(doc, f):
-    head, body = doc.content
-    return doc.with_content([head, f(body)])
 
 @Fixup
 def fixup_lists(doc, docx):
@@ -2970,6 +3107,7 @@ def get_fixups(docx):
     yield fixup_strip_empty_paragraphs
     yield fixup_add_numbering
     yield fixup_list_styles
+    yield fixup_vars
     yield fixup_formatting
     yield fixup_lists
     yield fixup_paragraph_classes
@@ -3040,4 +3178,3 @@ def fixup(docx, doc):
         t1 = time.time()
         print("done ({} msec)".format(int(1000 * (t1 - t0))))
     return doc
-
