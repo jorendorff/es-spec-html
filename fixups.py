@@ -336,6 +336,64 @@ def title_get_argument_names(title):
             names.append(m.group(1))
     return names
 
+tag_names = {
+    'ANNEX': 'h1.l1',
+
+    # These appear as "a2", "a3", "a4", "a5" in the Word UI,
+    # but they are mapped to internal styleIDs a20, a30, a40, a50.
+    # Note that the document also contains styles named "??", "]", "...", and ".."
+    # whose internal styleIDs are a2, a3, a4, and a5. Of course there are.
+    'a20': 'h1.l2',
+    'a30': 'h1.l3',
+    'a40': 'h1.l4',
+    'a50': 'h1.l5',
+    'a6': 'h1.l6',
+
+    # Algorithm styles are handled via their list attributes.
+    'Alg2': None,
+    'Alg3': None,
+    'Alg4': None,
+    'Alg40': None,
+    'Alg41': None,
+    'Algorithm': None,
+    'bibliography': 'li.bibliography-entry',
+    'BulletNotlast': 'li',
+    'Caption': 'figcaption',
+    'DateTitle': 'h1',
+    'ECMAWorkgroup': 'h1.ECMAWorkgroup',
+    'Example': '.Note',
+    'Figuretitle': 'figcaption',
+    'Heading1': 'h1.l1',
+    'Heading2': 'h1.l2',
+    'Heading3': 'h1.l3',
+    'Heading4': 'h1.l4',
+    'Heading5': 'h1.l5',
+    'Introduction': 'h1',
+    'ListBullet': 'li.ul',
+    'M0': None,
+    'M4': None,
+    'M20': 'div.math-display',
+    'MathDefinition4': 'div.display',
+    'MathSpecialCase3': 'li',
+    'Note': '.Note',
+    'RefNorm': 'p.formal-reference',
+    'StandardNumber': 'h1.StandardNumber',
+    'StandardTitle': 'h1',
+    'Syntax': 'h2',
+    'SyntaxDefinition': 'div.rhs',
+    'SyntaxDefinition2': 'div.rhs',
+    'SyntaxRule': 'div.lhs',
+    'SyntaxRule2': 'div.lhs',
+    'Tabletitle': 'figcaption',
+    'TermNum': 'h1',
+    'Terms': 'p.Terms',
+    'zzBiblio': 'h1',
+    'zzSTDTitle': 'div.inner-title'
+}
+
+heading_styles = {k for k, v in tag_names.items()
+                        if v == 'h1' or v == 'h2' or (v is not None and v.startswith('h1.'))}
+
 @Fixup
 def fixup_vars(doc, docx):
     """
@@ -362,7 +420,7 @@ def fixup_vars(doc, docx):
             yield x
 
     def is_heading(p):
-        return ht_name_is(p, 'p') and p.attrs.get('class', '').startswith('Heading')
+        return ht_name_is(p, 'p') and p.attrs.get('class', '') in heading_styles
 
     def markup_vars(section):
         if not is_heading(section[0]):
@@ -565,58 +623,6 @@ def fixup_formatting(doc, docx):
                                           build_result(ranges, 0, len(all_content)))]
 
     return doc.replace('p', rewrite_spans)
-
-tag_names = {
-    'ANNEX': 'h1.l1',
-    'a2': 'h1.l2',
-    'a3': 'h1.l3',
-    'a4': 'h1.l4',
-    'a5': 'h1.l5',
-    'a6': 'h1.l6',
-    # Algorithm styles are handled via their list attributes
-    'Alg2': None,
-    'Alg3': None,
-    'Alg4': None,
-    'Alg40': None,
-    'Alg41': None,
-    'Algorithm': None,
-    'bibliography': 'li.bibliography-entry',
-    'BulletNotlast': 'li',
-    'Caption': 'figcaption',
-    'DateTitle': 'h1',
-    'ECMAWorkgroup': 'h1.ECMAWorkgroup',
-    'Example': '.Note',
-    'Figuretitle': 'figcaption',
-    'Heading1': 'h1.l1',
-    'Heading2': 'h1.l2',
-    'Heading3': 'h1.l3',
-    'Heading4': 'h1.l4',
-    'Heading5': 'h1.l5',
-    'Introduction': 'h1',
-    'ListBullet': 'li.ul',
-    'M0': None,
-    'M4': None,
-    'M20': 'div.math-display',
-    'MathDefinition4': 'div.display',
-    'MathSpecialCase3': 'li',
-    'Note': '.Note',
-    'RefNorm': 'p.formal-reference',
-    'StandardNumber': 'h1.StandardNumber',
-    'StandardTitle': 'h1',
-    'Syntax': 'h2',
-    'SyntaxDefinition': 'div.rhs',
-    'SyntaxDefinition2': 'div.rhs',
-    'SyntaxRule': 'div.lhs',
-    'SyntaxRule2': 'div.lhs',
-    'Tabletitle': 'figcaption',
-    'TermNum': 'h1',
-    'Terms': 'p.Terms',
-    'zzBiblio': 'h1',
-    'zzSTDTitle': 'div.inner-title'
-}
-
-heading_styles = {k for k, v in tag_names.items()
-                        if v == 'h1' or v == 'h2' or (v is not None and v.startswith('h1.'))}
 
 @Fixup
 def fixup_lists(doc, docx):
@@ -2593,7 +2599,6 @@ def fixup_links(doc, docx):
         ("base code", "Strict Mode Code"),
 
         # 11.6-11.9
-        ("StringValue", "Identifiers and Identifier Names"),
         ("automatic semicolon insertion (7.9)", "Automatic Semicolon Insertion"),
         ("automatic semicolon insertion (see 7.9)", "Automatic Semicolon Insertion"),
         ("automatic semicolon insertion", "Automatic Semicolon Insertion"),
