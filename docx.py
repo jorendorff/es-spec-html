@@ -3,6 +3,7 @@ from xml.etree import ElementTree
 from html import escape
 import re
 import copy
+from warnings import warn
 
 namespaces = {
     'http://schemas.openxmlformats.org/wordprocessingml/2006/main': '',
@@ -92,7 +93,8 @@ def parse_pr(e):
             #
             # We don't implement any of that, because for any given w:rFonts
             # element, it seems the same font is specified for all the
-            # attributes that are actually defined.
+            # attributes that are actually defined. (There is only one
+            # exception in the document; we ignore it.)
             #
             # It's unclear what is supposed to happen when one or more of the
             # four attributes is missing.
@@ -112,7 +114,9 @@ def parse_pr(e):
             font = k.get(k_ascii) or k.get(k_cs)
             if font is not None:
                 assert k.get(k_ascii, font) == font
-                assert k.get(k_hAnsi, font) == font
+                hAnsiFont = k.get(k_hAnsi, font)
+                if hAnsiFont != font:
+                    warn("rFonts: font is {} but hAnsi='{}'; ignoring hAnsi.".format(font, hAnsiFont))
 
                 if font == 'Symbol':
                     font = None  # appears once in the document, superfluous
