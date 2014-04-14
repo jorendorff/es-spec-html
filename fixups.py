@@ -976,7 +976,7 @@ def fixup_sec_4_3(doc, docx):
                     h1_content.append(item)
             del parent.content[i]
 
-@InPlaceFixup
+@Fixup
 def fixup_hr(doc, docx):
     """ Replace <p><hr></p> with <hr>.
 
@@ -987,18 +987,26 @@ def fixup_hr(doc, docx):
     Precedes fixup_sections and fixup_strip_toc, which depend on the <hr> tags.
     """
 
-    body = doc_body(doc)
-    for i, a in body.kids('p'):
-        for j, b in a.kids('hr'):
-            rest = a.content[j + 1:]
-            if all(isinstance(ht, str) and ht.isspace() for ht in rest):
-                result = []
-                if not all(isinstance(ht, str) and ht.isspace() for ht in a.content[:j]):
-                    del a.content[j:]
-                    result.append(a)
-                result.append(b)
-                body.content[i:i + 1] = result
-                break
+    def concat_map(f, seq):
+        results = []
+        for x in seq:
+            for y in f(x):
+                results.append(y)
+        return results
+
+    def bubble_up_hr(p):
+        for i, hr in p.kids('hr'):
+            result = [hr]
+            head = p.content[:i]
+            if not all(isinstance(ht, str) and ht.isspace() for ht in head):
+                result.insert(0, p.with_content(head))
+            tail = p.content[i + 1:]
+            if not all(isinstance(ht, str) and ht.isspace() for ht in head):
+                result += bubble_up_hr(p.with_content(head))
+            return result
+        return [p]
+
+    return doc.replace('p', bubble_up_hr)
 
 @InPlaceFixup
 def fixup_intl_remove_junk(doc, docx):
@@ -1527,6 +1535,10 @@ def fixup_notes(doc, docx):
             elif not (left.startswith('NOTE') or left.startswith('EXAMPLE')):
                 if strict:
                     warn('warning in fixup_notes: no "NOTE" or "EXAMPLE" in p.Note: ' + repr(s))
+
+                # HACK - The document contains one of these. Warn, but return the right answer anyway.
+                if left == 'Note':
+                    return left, right
                 return None
             else:
                 return left, right
