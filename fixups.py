@@ -2000,26 +2000,21 @@ def fixup_lang_grammar_pre(doc, docx):
         else:
             return False
 
-    def lines(div):
-        line = ''
-        all_lines = []
-        def visit(content):
-            nonlocal line
-            for ht in content:
-                if isinstance(ht, str):
-                    line += ht
-                elif ht.name == 'br':
-                    all_lines.append(line)
-                    line = ''
-                elif is_grammar_subscript(ht):
-                    line += '_' + ht.content[0]
-                else:
-                    visit(ht.content)
+    def stripped_lines(div):
+        def ht_to_lines(ht):
+            if isinstance(ht, str):
+                return ht
+            elif ht.name == 'br':
+                return '\n'
+            elif is_grammar_subscript(ht):
+                return '_' + ht.content[0]
+            else:
+                return content_to_lines(ht.content)
 
-        visit(div.content)
-        if line:
-            all_lines.append(line)
-        return all_lines
+        def content_to_lines(content):
+            return ''.join(ht_to_lines(ht) for ht in content)
+
+        return content_to_lines(div.content).rstrip().split('\n')
 
     def is_lhs(text):
         text = re.sub(r'( one of-?)?( See ((\d+|[A-Z])(.\d+)*|clause \d+))?$', '', text)
@@ -2033,7 +2028,7 @@ def fixup_lang_grammar_pre(doc, docx):
             j += 1
         syntax = ''
         for e in parent.content[i:j]:
-            for line in lines(e):
+            for line in stripped_lines(e):
                 line = line.strip()
                 line = ' '.join(line.split())
 
