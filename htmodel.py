@@ -211,7 +211,9 @@ def write_html(f, ht, indent='', strict=True):
         return isinstance(ht, str) or _tag_data[ht.name][0] == 'I'
 
     def write_inline_content(f, content, indent, allow_last_block, strict, strict_blame):
-        if allow_last_block and isinstance(content[-1], Element) and content[-1].name in ('ol', 'ul', 'table'):
+        if (allow_last_block
+              and isinstance(content[-1], Element)
+              and content[-1].name in ('ol', 'ul', 'table', 'figure')):
             last = content[-1]
             content = content[:-1]
         else:
@@ -254,7 +256,8 @@ def write_html(f, ht, indent='', strict=True):
         # Dump content_to_wrap to a temporary buffer.
         tmpf = StringIO()
         tmpf.write(start_tag(ht))
-        write_inline_content(tmpf, content_to_wrap, indent + '  ', allow_last_block=False, strict=strict, strict_blame=ht)
+        write_inline_content(tmpf, content_to_wrap, indent + '  ',
+                             allow_last_block=ht.name == 'li', strict=strict, strict_blame=ht)
         if last_block is None:
             tmpf.write('</{}>'.format(ht.name))
         text = tmpf.getvalue()

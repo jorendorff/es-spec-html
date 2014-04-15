@@ -758,10 +758,13 @@ def fixup_lists(doc, docx):
             # treat non-numbered paragraphs as being an additional 36pt (1/2 inch) to the left.
             # This is not meant to make sense.
             #
+            # Oh. Speaking of things not meant to make sense, let's just mash <figure>s in with
+            # the preceding <li> no matter what, 'k?
+            #
             effective_margin = margin
             if not is_list_item:
                 effective_margin -= 36
-            while current.left_margin > effective_margin:
+            while current.left_margin > effective_margin and p.name != 'figure':
                 close_list()
 
             if not is_list_item:
