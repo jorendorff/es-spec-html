@@ -9720,7 +9720,7 @@
         <li>Let <i>formalParameters</i> be the syntactic production: <span class="prod"><span class="nt">FormalParameters</span>
             <span class="geq">:</span> <span class="grhsannot">[empty]</span></span> .</li>
         <li>Let <i>steps</i> be the following algorithm steps:
-          <ol class="block">
+          <ol class="nested proc">
             <li>Throw a <b>TypeError</b> exception.</li>
           </ol>
         </li>
@@ -38178,7 +38178,7 @@
           <li>Evaluate <i>Disjunction</i> to obtain a Matcher <i>m</i>.</li>
           <li>Return an internal closure that takes two arguments, a String <i>str</i> and an integer <i>index</i>, and performs
               the following:
-            <ol class="block">
+            <ol class="nested proc">
               <li>If <i>Unicode</i> is <b>true</b>, then let <i>Input</i> be a <a
                   href="#sec-list-and-record-specification-type">List</a> of consisting of the sequence of code points of
                   <i>str</i> interpreted as a UTF-16 encoded Unicode string. Otherwise, let <i>Input</i> be a <a
@@ -38228,7 +38228,7 @@
           <li>Evaluate <i>Disjunction</i> to obtain a Matcher <i>m2</i>.</li>
           <li>Return an internal Matcher closure that takes two arguments, a State <i>x</i> and a Continuation <i>c</i>, and
               performs the following:
-            <ol class="block">
+            <ol class="nested proc">
               <li>Call <i>m1</i>(<i>x</i>, <i>c</i>) and let <i>r</i> be its result.</li>
               <li>If <i>r</i> isn't <b>failure</b>, return <i>r</i>.</li>
               <li>Call <i>m2</i>(<i>x</i>, <i>c</i>) and return its result.</li>
@@ -38278,7 +38278,7 @@
           <li>Evaluate <i>Term</i> to obtain a Matcher <i>m2</i>.</li>
           <li>Return an internal Matcher closure that takes two arguments, a State <i>x</i> and a Continuation <i>c</i>, and
               performs the following:
-            <ol class="block">
+            <ol class="nested proc">
               <li>Create a Continuation <i>d</i> that takes a State argument <i>y</i> and returns the result of calling
                   <i>m2</i>(<i>y</i>, <i>c</i>).</li>
               <li>Call <i>m1</i>(<i>x</i>, <i>d</i>) and return its result.</li>
@@ -38338,7 +38338,7 @@
                 productions enclosed by this production's <i>Atom</i>.</li>
             <li>Return an internal Matcher closure that takes two arguments, a State <i>x</i> and a Continuation <i>c</i>, and
                 performs the following:
-              <ol class="block">
+              <ol class="nested proc">
                 <li>Call RepeatMatcher(<i>m</i>, <i>min</i>, <i>max</i>, <i>greedy</i>, <i>x</i>, <i>c</i>, <i>parenIndex</i>,
                     <i>parenCount</i>) and return its result.</li>
               </ol>
@@ -38359,7 +38359,7 @@
             <li>If <i>max</i> is zero, then call <i>c</i>(<i>x</i>) and return its result.</li>
             <li>Create an internal Continuation closure <i>d</i> that takes one State argument <i>y</i> and performs the
                 following:
-              <ol class="block">
+              <ol class="nested proc">
                 <li>If <i>min</i> is zero and <i>y</i>'s <i>endIndex</i> is equal to <i>x</i>'s <i>endIndex</i>, then return
                     <b>failure</b>.</li>
                 <li>If <i>min</i> is zero then let <i>min2</i> be zero; otherwise let <i>min2</i> be <i>min</i>&ndash;1.</li>
@@ -38542,7 +38542,7 @@
             <li>Evaluate <i>Disjunction</i> to obtain a Matcher <i>m</i>.</li>
             <li>Return an internal Matcher closure that takes two arguments, a State <i>x</i> and a Continuation <i>c</i>, and
                 performs the following steps:
-              <ol class="block">
+              <ol class="nested proc">
                 <li>Let <i>d</i> be a Continuation that always returns its State argument as a successful MatchResult.</li>
                 <li>Call <i>m</i>(<i>x</i>, <i>d</i>) and let <i>r</i> be its result.</li>
                 <li>If <i>r</i> is <b>failure</b>, return <b>failure</b>.</li>
@@ -38563,7 +38563,7 @@
             <li>Evaluate <i>Disjunction</i> to obtain a Matcher <i>m</i>.</li>
             <li>Return an internal Matcher closure that takes two arguments, a State <i>x</i> and a Continuation <i>c</i>, and
                 performs the following steps:
-              <ol class="block">
+              <ol class="nested proc">
                 <li>Let <i>d</i> be a Continuation that always returns its State argument as a successful MatchResult.</li>
                 <li>Call <i>m</i>(<i>x</i>, <i>d</i>) and let <i>r</i> be its result.</li>
                 <li>If <i>r</i> isn't <b>failure</b>, return <b>failure</b>.</li>
@@ -38802,10 +38802,10 @@
                 this <i>Atom</i>.</li>
             <li>Return an internal Matcher closure that takes two arguments, a State <i>x</i> and a Continuation <i>c</i>, and
                 performs the following steps:
-              <ol class="block">
+              <ol class="nested proc">
                 <li>Create an internal Continuation closure <i>d</i> that takes one State argument <i>y</i> and performs the
                     following steps:
-                  <ol class="block">
+                  <ol class="nested proc">
                     <li>Let <i>cap</i> be a fresh copy of <i>y</i>'s <i>captures</i> <a
                         href="#sec-list-and-record-specification-type">List</a>.</li>
                     <li>Let <i>xe</i> be <i>x</i>'s <i>endIndex</i>.</li>
@@ -38841,7 +38841,7 @@
           <ol class="proc">
             <li>Return an internal Matcher closure that takes two arguments, a State <i>x</i> and a Continuation <i>c</i>, and
                 performs the following steps:
-              <ol class="block">
+              <ol class="nested proc">
                 <li>Let <i>e</i> be <i>x</i>'s <i>endIndex</i>.</li>
                 <li>If <i>e</i> is <i>InputLength</i>, return <b>failure</b>.</li>
                 <li>Let <i>ch</i> be the character <i>Input</i>[<i>e</i>].</li>
@@ -38985,7 +38985,7 @@
           <li>If <i>n</i>=0 or <i>n</i>&gt;<i>NcapturingParens</i> then throw a <b>SyntaxError</b> exception.</li>
           <li>Return an internal Matcher closure that takes two arguments, a State <i>x</i> and a Continuation <i>c</i>, and
               performs the following steps:
-            <ol class="block">
+            <ol class="nested proc">
               <li>Let <i>cap</i> be <i>x</i>'s <i>captures</i> <a href="#sec-list-and-record-specification-type">List</a>.</li>
               <li>Let <i>s</i> be <i>cap</i>[<i>n</i>].</li>
               <li>If <i>s</i> is <b>undefined</b>, then call <i>c</i>(<i>x</i>) and return its result.</li>
@@ -43909,7 +43909,7 @@
                 </ol>
               </li>
               <li>If <i>next</i> is not <b>false</b>, then
-                <ol class="block">
+                <ol class="nested proc">
                   <li>Let <i>nextValue</i> be <a href="#sec-iteratorvalue">IteratorValue</a>(<i>next</i>).</li>
                   <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>nextValue</i>).</li>
                   <li>Append <i>nextValue</i> to the end of the <a href="#sec-list-and-record-specification-type">List</a>
@@ -50619,7 +50619,7 @@
         <li>Let <i>key</i> be <a href="#sec-topropertykey">ToPropertyKey</a>(<i>propertyKey</i>).</li>
         <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>key</i>).</li>
         <li>If <i>receiver</i> is not present, then
-          <ol class="block">
+          <ol class="nested proc">
             <li>Let <i>receiver</i> be <i>target</i>.</li>
           </ol>
         </li>
@@ -50746,7 +50746,7 @@
         <li>Let <i>key</i> be <a href="#sec-topropertykey">ToPropertyKey</a>(<i>propertyKey</i>).</li>
         <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>key</i>).</li>
         <li>If <i>receiver</i> is not present, then
-          <ol class="block">
+          <ol class="nested proc">
             <li>Let <i>receiver</i> be <i>target</i>.</li>
           </ol>
         </li>
@@ -50996,7 +50996,7 @@
           <li>If <i>realm</i> is <b>undefined</b>, then throw a <b>TypeError</b> exception.</li>
           <li>Let <i>table</i> be <a href="#sec-objectcreate">ObjectCreate</a>(%ObjectPrototype%).</li>
           <li>For each row in Table ???, do
-            <ol class="block">
+            <ol class="nested proc">
               <li>Let <i>key</i> be the string value in the row&rsquo;s &ldquo;Intrinsic Key&rdquo; column.</li>
               <li>Let <i>object</i> be the intrinsic object for <i>realm</i> described in the row&rsquo;s &ldquo;Intrinsic
                   Object&rdquo; column.</li>
@@ -51024,7 +51024,7 @@
           <li>If <i>realm</i> is <b>undefined</b>, then throw a <b>TypeError</b> exception.</li>
           <li>Let <i>props</i> be <a href="#sec-objectcreate">ObjectCreate</a>(%ObjectPrototype%).</li>
           <li>For each property of the Global Object specified in <a href="#sec-global-object">clause 18</a>, , do
-            <ol class="block">
+            <ol class="nested proc">
               <li>Let <i>name</i> be the string value of the property name..</li>
               <li>Let <i>desc</i> be the fully populated data property descriptor for the property containing the specified
                   attributes for the property. For propties whose values are functions, the value the of the [[Value]] attribute
@@ -51481,7 +51481,7 @@
           <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>name</i>).</li>
           <li>Let <i>modules</i> be the value of of <i>loaderRecord.</i>[[ Modules]],</li>
           <li>Repeat for each Record {[[key]], [[value]]} <i>p</i> that is an element of <i>modules</i>,
-            <ol class="block">
+            <ol class="nested proc">
               <li>If <a href="#sec-samevalue">SameValue</a>(<i>p</i>.[[key]], <i>name</i>) is <b>true</b>, then return
                   <b>true</b>.</li>
             </ol>
@@ -51646,7 +51646,7 @@
           <li>Let <i>mod</i> be CreateLinkedModuleInstance( )</li>
           <li>Let <i>keys</i> be the result of calling the ObjectKeys abstract operation passing <i>obj</i> as the argument.</li>
           <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>keys</i>).
-            <ol class="block">
+            <ol class="nested proc">
               <li>For each <i>key</i> in <i>keys</i>, do</li>
               <li>Let <i>value</i> be the result of <a href="#sec-get-o-p">Get</a>(<i>obj</i>, <i>key</i>).</li>
               <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>value</i>).</li>
@@ -51699,9 +51699,9 @@
               exception.</li>
           <li>Let <i>modules</i> be the value of of <i>loaderRecord.</i>[[ Modules]],</li>
           <li>Repeat for each Record {[[ key]], [[value]]} <i>p</i> that is an element of <i>modules</i>,
-            <ol class="block">
+            <ol class="nested proc">
               <li>If <a href="#sec-samevalue">SameValue</a>(<i>p</i>.[[key]], <i>name</i>) is <b>true</b>, then
-                <ol class="block">
+                <ol class="nested proc">
                   <li>Set <i>p</i>.[[value]] to <i>module</i>.</li>
                   <li>Return <i>loader</i>.</li>
                 </ol>
@@ -51987,19 +51987,19 @@
                 <i>m</i>.</li>
             <li>Repeat while <i>index</i> is less than the total number of elements of <i>entries</i>. The number of elements must
                 be redetermined each time this method is evaluated.
-              <ol class="block">
+              <ol class="nested proc">
                 <li>Let <i>e</i> be the Record {[[key]], [[value]]} that is the value of <i>entries</i>[<i>index</i>].</li>
                 <li>Set <i>index</i> to <i>index</i>+1;</li>
                 <li>Set the [[LoaderNextIndex]] <a href="#sec-object-internal-methods-and-internal-slots">internal slot</a> of
                     <i>O</i> to <i>index</i>.</li>
                 <li>If <i>e</i>.[[key]] is not <span style="font-family: sans-serif">empty</span>, then
-                  <ol class="block">
+                  <ol class="nested proc">
                     <li>If <i>itemKind</i> is <b>"<span style="font-family: monospace">key</span>"</b> then, let <i>result</i> be
                         <i>e</i>.[[key]].</li>
                     <li>Else if <i>itemKind</i> is <b>"<span style="font-family: monospace">value</span>"</b> then, let
                         <i>result</i> be <i>e</i>.[[value]].</li>
                     <li>Else,
-                      <ol class="block">
+                      <ol class="nested proc">
                         <li><a href="#sec-algorithm-conventions">Assert</a>: <i>itemKind</i> is <code>"key+value"</code>.</li>
                         <li>Let <i>result</i> be the result of performing <a href="#sec-arraycreate">ArrayCreate</a>(2).</li>
                         <li><a href="#sec-algorithm-conventions">Assert</a>: <i>result</i> is a new, well-formed Array object so

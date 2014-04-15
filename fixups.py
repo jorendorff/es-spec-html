@@ -706,11 +706,11 @@ def fixup_lists(doc, docx):
                 if current.parent is None or current.marker_type == 'bullet':
                     cls = 'proc'
                     marker_type = 0
-                elif (margin > (current.left_margin + 0.75 * 72)
+                elif (margin > (current.left_margin + 0.75 * 36)
                       and p.content
                       and is_marker(p.content[0])
                       and p.content[0].content == ['1.\t']):
-                    # Very deeply nested list with decimal numbering.
+                    # Deeply nested list with decimal numbering.
                     cls = 'nested proc'
                     marker_type = 0
                 else:
