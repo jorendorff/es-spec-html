@@ -1361,7 +1361,7 @@ def fixup_insert_section_ids(doc, docx):
     all_sections = all_old_sections.copy()
     all_sections.update(all_new_sections)
     all_sections = collections.OrderedDict(sorted(all_sections.items()))
-    all_sections_json = json.dumps(all_sections, indent=4)
+    all_sections_json = json.dumps(all_sections, indent=4, separators=(',', ': '))
     with open(all_sections_filename, 'w') as f:
         f.write(all_sections_json + "\n")
 
