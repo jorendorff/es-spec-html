@@ -400,6 +400,34 @@ class Numbering:
         self.num = num
         self.style_links = style_links
 
+    def get_abstract_num_id_and_levels(self, numId, level_limit):
+        num = self.num[numId]
+        abstract_num_id = num.abstract_num_id
+        ov = num.overrides
+        levels = self.get_num_levels(abstract_num_id, level_limit)
+        for i in range(0, level_limit + 1):
+            if i < len(ov) and ov[i] is not None:
+                lvlOverride = ov[i]
+                if lvlOverride.lvl is not None:
+                    levels[i] = lvlOverride.lvl
+                if lvlOverride.startOverride is not None:
+                    levels[i] = levels[i].with_start(lvlOverride.startOverride)
+        return abstract_num_id, levels
+
+    def get_num_levels(self, abstract_num_id, level_limit):
+        abstract_num = self.abstract_num[abstract_num_id]
+        levels = []
+        for i in range(0, level_limit + 1):
+            if abstract_num.num_style_link is not None:
+                # i'm sorry mario but the princess
+                real_abstract_num = self.style_links[abstract_num.num_style_link]
+                base_levels = self.get_num_levels(real_abstract_num, i)
+                level = base_levels[i]
+            else:
+                level = abstract_num.levels[i]
+            levels.append(level)
+        return levels
+
 def parse_numbering(docx, e):
     # See <http://msdn.microsoft.com/en-us/library/ee922775%28office.14%29.aspx>.
     assert e.tag == k_numbering
@@ -490,34 +518,6 @@ class Document:
                     if prop not in s.style:
                         print("    " + prop + ": " + value + ";  /* inherited */")
             print("}\n")
-
-    def get_abstract_num_id_and_levels(self, numId, level_limit):
-        num = self.numbering.num[numId]
-        abstract_num_id = num.abstract_num_id
-        ov = num.overrides
-        levels = self.get_num_levels(abstract_num_id, level_limit)
-        for i in range(0, level_limit + 1):
-            if i < len(ov) and ov[i] is not None:
-                lvlOverride = ov[i]
-                if lvlOverride.lvl is not None:
-                    levels[i] = lvlOverride.lvl
-                if lvlOverride.startOverride is not None:
-                    levels[i] = levels[i].with_start(lvlOverride.startOverride)
-        return abstract_num_id, levels
-
-    def get_num_levels(self, abstract_num_id, level_limit):
-        abstract_num = self.numbering.abstract_num[abstract_num_id]
-        levels = []
-        for i in range(0, level_limit + 1):
-            if abstract_num.num_style_link is not None:
-                # i'm sorry mario but the princess
-                real_abstract_num = self.numbering.style_links[abstract_num.num_style_link]
-                base_levels = self.get_num_levels(real_abstract_num, i)
-                level = base_levels[i]
-            else:
-                level = abstract_num.levels[i]
-            levels.append(level)
-        return levels
 
     def get_list_style_at_level(self, numId, ilvl):
         """ Returns a Lvl object; its .full_style attribute is a CSS dictionary. """
