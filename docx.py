@@ -533,30 +533,7 @@ class Document:
 
     def get_list_style_at_level(self, numId, ilvl):
         """ Returns a Lvl object; its .full_style attribute is a CSS dictionary. """
-        num = self.numbering.num[numId]
-        ilvl = int(ilvl)
-        lvl = None
-        if ilvl < len(num.overrides):
-            ov = num.overrides[ilvl]
-            lvl = ov.lvl
-        else:
-            ov = None
-
-        if lvl is None:
-            abstract_num = self.numbering.abstract_num[num.abstract_num_id]
-            if abstract_num.num_style_link is not None:
-                style = self.styles[abstract_num.num_style_link]
-                lvl = self.get_list_style_at_level(int(style.full_style['-ooxml-numId']), ilvl)
-            else:
-                if ilvl >= len(abstract_num.levels):
-                    return None
-                else:
-                    lvl = abstract_num.levels[ilvl]
-
-        if ov is not None and ov.startOverride is not None:
-            lvl = lvl.with_start(ov.startOverride)
-
-        return lvl
+        return self.numbering.num[numId].computed_levels[int(ilvl)]
 
 def load(filename):
     with zipfile.ZipFile(filename) as f:
