@@ -403,13 +403,35 @@ class Numbering:
         self.abstract_num = abstract_num
         self.num = num
         self.style_links = style_links
+        for abstract_num_id in self.abstract_num:
+            self._compute_abstract_num_levels(abstract_num_id)
+
+    def _compute_abstract_num_levels(self, abstract_num_id):
+        abstract_num = self.abstract_num[abstract_num_id]
+        if abstract_num.computed_levels is not None:
+            return abstract_num.computed_levels
+
+        levels = []
+        for i in range(NUMBERING_LEVELS):
+            if abstract_num.num_style_link is not None:
+                # i'm sorry mario but the princess
+                real_abstract_num = self.style_links[abstract_num.num_style_link]
+                base_levels = self._compute_abstract_num_levels(real_abstract_num)
+                level = base_levels[i]
+            elif i < len(abstract_num.levels):
+                level = abstract_num.levels[i]
+            else:
+                level = None
+            levels.append(level)
+        abstract_num.computed_levels = levels
+        return levels
 
     def get_abstract_num_id_and_levels(self, numId, level_limit):
         num = self.num[numId]
         abstract_num_id = num.abstract_num_id
         ov = num.overrides
-        levels = self.get_num_levels(abstract_num_id, level_limit)
-        for i in range(0, level_limit + 1):
+        levels = self.abstract_num[abstract_num_id].computed_levels[:level_limit + 1]
+        for i in range(level_limit + 1):
             if i < len(ov) and ov[i] is not None:
                 lvlOverride = ov[i]
                 if lvlOverride.lvl is not None:
@@ -417,24 +439,6 @@ class Numbering:
                 if lvlOverride.startOverride is not None:
                     levels[i] = levels[i].with_start(lvlOverride.startOverride)
         return abstract_num_id, levels
-
-    def get_num_levels(self, abstract_num_id, level_limit):
-        abstract_num = self.abstract_num[abstract_num_id]
-        if abstract_num.computed_levels is None:
-            levels = []
-            for i in range(NUMBERING_LEVELS):
-                if abstract_num.num_style_link is not None:
-                    # i'm sorry mario but the princess
-                    real_abstract_num = self.style_links[abstract_num.num_style_link]
-                    base_levels = self.get_num_levels(real_abstract_num, i)
-                    level = base_levels[i]
-                elif i < len(abstract_num.levels):
-                    level = abstract_num.levels[i]
-                else:
-                    level = None
-                levels.append(level)
-            abstract_num.computed_levels = levels
-        return abstract_num.computed_levels[:level_limit + 1]
 
 def parse_numbering(docx, e):
     # See <http://msdn.microsoft.com/en-us/library/ee922775%28office.14%29.aspx>.
