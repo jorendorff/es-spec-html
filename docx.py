@@ -407,17 +407,14 @@ class Numbering:
             self._compute_abstract_num_levels(abstract_num_id)
         for num in self.num.values():
             abstract_num_id = num.abstract_num_id
-            if num.computed_levels is None:
-                ov = num.overrides
-                levels = self.abstract_num[abstract_num_id].computed_levels[:]
-                for i in range(NUMBERING_LEVELS):
-                    if i < len(ov) and ov[i] is not None:
-                        lvlOverride = ov[i]
-                        if lvlOverride.lvl is not None:
-                            levels[i] = lvlOverride.lvl
-                        if lvlOverride.startOverride is not None:
-                            levels[i] = levels[i].with_start(lvlOverride.startOverride)
-                num.computed_levels = levels
+            levels = self.abstract_num[abstract_num_id].computed_levels[:]
+            for i, lvlOverride in enumerate(num.overrides):
+                if lvlOverride is not None:
+                    if lvlOverride.lvl is not None:
+                        levels[i] = lvlOverride.lvl
+                    if lvlOverride.startOverride is not None:
+                        levels[i] = levels[i].with_start(lvlOverride.startOverride)
+            num.computed_levels = levels
 
     def _compute_abstract_num_levels(self, abstract_num_id):
         abstract_num = self.abstract_num[abstract_num_id]
