@@ -133,6 +133,9 @@ def render_list_marker(levels, numbers):
 def fixup_add_numbering(doc, docx):
     """ Add span.marker elements and -ooxml-indentation style properties to the document. """
 
+    # The current state of every numbered thing in the document.
+    # Numbering is very stateful; it must be done in a single forward pass over
+    # the whole document.
     numbering_context = collections.defaultdict(list)
 
     def add_numbering(p):
@@ -195,14 +198,22 @@ def fixup_add_numbering(doc, docx):
             current_number = numbering_context[abstract_num_id]
             if len(current_number) <= ilvl:
                 while len(current_number) <= ilvl:
-                    start = levels[len(current_number)].start
-                    current_number.append(start)
+                    lvl = levels[len(current_number)]
+                    current_number.append((lvl, lvl.start))
             else:
                 del current_number[ilvl + 1:]
-                current_number[ilvl] += 1
+                lvl = levels[ilvl]
+                old_lvl, n = current_number[ilvl]
+
+                # This is a ridiculous hack. No telling what Word is thinking
+                # internally.
+                if old_lvl is not lvl and ilvl == 0:
+                    current_number[ilvl] = lvl, lvl.start
+                else:
+                    current_number[ilvl] = lvl, n + 1
 
             # Create a suitable marker.
-            marker = render_list_marker(levels, current_number)
+            marker = render_list_marker(levels, [n for _, n in current_number])
             s = html.span(marker, class_="marker")
             s.style = {}
             content = [s] + p.content
@@ -791,12 +802,9 @@ def fixup_lists(doc, docx):
                     marker_formatter = formatters[depth % 3]
                     html_marker_str = marker_formatter(i) + '.\t'
                     if html_marker_str != marker_str:
-                        # OK, we should warn about this.
-                        # ...but until https://bugs.ecmascript.org/show_bug.cgi?id=1808
-                        # is fixed it is just too noisy to warn on every case.
-                        if html_marker_str.strip() != marker_str.strip() + ".":
-                            warn("Word marker is {!r}, HTML will show {!r}".format(marker_str, html_marker_str))
-                            print(li)
+                        warn("HTML numbering may differ from Word!")
+                        print("Word marker is {!r}, HTML will show {!r}".format(marker_str, html_marker_str))
+                        print(li)
 
         return [body.with_content(result)]
 
