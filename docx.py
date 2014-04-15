@@ -405,6 +405,19 @@ class Numbering:
         self.style_links = style_links
         for abstract_num_id in self.abstract_num:
             self._compute_abstract_num_levels(abstract_num_id)
+        for num in self.num.values():
+            abstract_num_id = num.abstract_num_id
+            if num.computed_levels is None:
+                ov = num.overrides
+                levels = self.abstract_num[abstract_num_id].computed_levels[:]
+                for i in range(NUMBERING_LEVELS):
+                    if i < len(ov) and ov[i] is not None:
+                        lvlOverride = ov[i]
+                        if lvlOverride.lvl is not None:
+                            levels[i] = lvlOverride.lvl
+                        if lvlOverride.startOverride is not None:
+                            levels[i] = levels[i].with_start(lvlOverride.startOverride)
+                num.computed_levels = levels
 
     def _compute_abstract_num_levels(self, abstract_num_id):
         abstract_num = self.abstract_num[abstract_num_id]
@@ -429,17 +442,6 @@ class Numbering:
     def get_abstract_num_id_and_levels(self, numId, level_limit):
         num = self.num[numId]
         abstract_num_id = num.abstract_num_id
-        if num.computed_levels is None:
-            ov = num.overrides
-            levels = self.abstract_num[abstract_num_id].computed_levels[:]
-            for i in range(NUMBERING_LEVELS):
-                if i < len(ov) and ov[i] is not None:
-                    lvlOverride = ov[i]
-                    if lvlOverride.lvl is not None:
-                        levels[i] = lvlOverride.lvl
-                    if lvlOverride.startOverride is not None:
-                        levels[i] = levels[i].with_start(lvlOverride.startOverride)
-            num.computed_levels = levels
         return abstract_num_id, num.computed_levels[:level_limit + 1]
 
 def parse_numbering(docx, e):
