@@ -436,10 +436,9 @@ class Numbering:
         abstract_num.computed_levels = levels
         return levels
 
-    def get_abstract_num_id_and_levels(self, numId, level_limit):
+    def get_abstract_num_id_and_levels(self, numId):
         num = self.num[numId]
-        abstract_num_id = num.abstract_num_id
-        return abstract_num_id, num.computed_levels[:level_limit + 1]
+        return num.abstract_num_id, num.computed_levels
 
 def parse_numbering(docx, e):
     # See <http://msdn.microsoft.com/en-us/library/ee922775%28office.14%29.aspx>.

@@ -191,7 +191,7 @@ def fixup_add_numbering(doc, docx):
             ilvl = int(computed_style('-ooxml-ilvl', '0'))
 
             # Bump the numbering accordingly.
-            abstract_num_id, levels = docx.numbering.get_abstract_num_id_and_levels(numid, ilvl)
+            abstract_num_id, levels = docx.numbering.get_abstract_num_id_and_levels(numid)
             current_number = numbering_context[abstract_num_id]
             if len(current_number) <= ilvl:
                 while len(current_number) <= ilvl:
