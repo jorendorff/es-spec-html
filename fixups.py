@@ -137,6 +137,7 @@ def fixup_add_numbering(doc, docx):
     # Numbering is very stateful; it must be done in a single forward pass over
     # the whole document.
     numbering_context = collections.defaultdict(list)
+    seen_numids = set()
 
     def add_numbering(p):
         cls = p.attrs and p.attrs.get('class')
@@ -205,9 +206,11 @@ def fixup_add_numbering(doc, docx):
                 lvl = levels[ilvl]
                 old_lvl, n = current_number[ilvl]
 
-                # This is a ridiculous hack. No telling what Word is thinking
-                # internally.
-                if old_lvl is not lvl and ilvl == 0:
+                # Apparent special case in Word: The first time a numId is
+                # seen, the numbering for that ilvl is always reset to the
+                # starting value for that numId-ilvl combo, even if the numId
+                # refers to an abstractNumId that has already been used.
+                if numid not in seen_numids:
                     current_number[ilvl] = lvl, lvl.start
                 else:
                     current_number[ilvl] = lvl, n + 1
@@ -219,6 +222,8 @@ def fixup_add_numbering(doc, docx):
             content = [s] + p.content
         else:
             content = p.content
+
+        seen_numids.add(numid)
 
         # Figure out the actual physical indentation of the number on this
         # paragraph, net of everything. (This is used in fixup_lists to infer
