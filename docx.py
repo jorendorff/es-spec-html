@@ -391,7 +391,7 @@ def parse_startOverride(e):
     val = int(e.get(k_val))
     return val
 
-NUMBERING_LEVELS = 10
+NUMBERING_LEVELS = 9
 
 class Numbering:
     """ Represents the whole content of numbering.xml (a w:Numbering element).
@@ -403,8 +403,12 @@ class Numbering:
         self.abstract_num = abstract_num
         self.num = num
         self.style_links = style_links
+
+        # Compute AbstractNum levels.
         for abstract_num_id in self.abstract_num:
             self._compute_abstract_num_levels(abstract_num_id)
+
+        # Compute Num levels.
         for num in self.num.values():
             abstract_num_id = num.abstract_num_id
             levels = self.abstract_num[abstract_num_id].computed_levels[:]
