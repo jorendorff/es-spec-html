@@ -429,16 +429,18 @@ class Numbering:
     def get_abstract_num_id_and_levels(self, numId, level_limit):
         num = self.num[numId]
         abstract_num_id = num.abstract_num_id
-        ov = num.overrides
-        levels = self.abstract_num[abstract_num_id].computed_levels[:level_limit + 1]
-        for i in range(level_limit + 1):
-            if i < len(ov) and ov[i] is not None:
-                lvlOverride = ov[i]
-                if lvlOverride.lvl is not None:
-                    levels[i] = lvlOverride.lvl
-                if lvlOverride.startOverride is not None:
-                    levels[i] = levels[i].with_start(lvlOverride.startOverride)
-        return abstract_num_id, levels
+        if num.computed_levels is None:
+            ov = num.overrides
+            levels = self.abstract_num[abstract_num_id].computed_levels[:]
+            for i in range(NUMBERING_LEVELS):
+                if i < len(ov) and ov[i] is not None:
+                    lvlOverride = ov[i]
+                    if lvlOverride.lvl is not None:
+                        levels[i] = lvlOverride.lvl
+                    if lvlOverride.startOverride is not None:
+                        levels[i] = levels[i].with_start(lvlOverride.startOverride)
+            num.computed_levels = levels
+        return abstract_num_id, num.computed_levels[:level_limit + 1]
 
 def parse_numbering(docx, e):
     # See <http://msdn.microsoft.com/en-us/library/ee922775%28office.14%29.aspx>.
