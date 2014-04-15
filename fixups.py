@@ -200,23 +200,21 @@ def fixup_add_numbering(doc, docx):
             if len(current_number) <= ilvl:
                 while len(current_number) <= ilvl:
                     lvl = levels[len(current_number)]
-                    current_number.append((lvl, lvl.start))
+                    current_number.append(lvl.start)
             else:
                 del current_number[ilvl + 1:]
-                lvl = levels[ilvl]
-                old_lvl, n = current_number[ilvl]
 
                 # Apparent special case in Word: The first time a numId is
                 # seen, the numbering for that ilvl is always reset to the
                 # starting value for that numId-ilvl combo, even if the numId
                 # refers to an abstractNumId that has already been used.
                 if numid not in seen_numids:
-                    current_number[ilvl] = lvl, lvl.start
+                    current_number[ilvl] = levels[ilvl].start
                 else:
-                    current_number[ilvl] = lvl, n + 1
+                    current_number[ilvl] += 1
 
             # Create a suitable marker.
-            marker = render_list_marker(levels, [n for _, n in current_number])
+            marker = render_list_marker(levels, current_number)
             s = html.span(marker, class_="marker")
             s.style = {}
             content = [s] + p.content
