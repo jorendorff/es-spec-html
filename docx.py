@@ -301,6 +301,12 @@ class Num:
         self.abstract_num_id = abstract_num_id
         self.overrides = overrides
 
+class AbstractNum:
+    def __init__(self, levels, num_style_link):
+        assert levels is None or num_style_link is None
+        self.levels = levels
+        self.num_style_link = num_style_link
+
 class Lvl:
     """ Data from a <w:lvl> element.
 
@@ -384,6 +390,11 @@ def parse_startOverride(e):
     return val
 
 class Numbering:
+    """ Represents the whole content of numbering.xml (a w:Numbering element).
+    self.abstract_num is {abstract_num_id: AbstractNum object}.
+    self.num is {num_id: Num object}.
+    self.style_links is {styleLink value: abstract_num_id}.
+    """
     def __init__(self, abstract_num, num, style_links):
         self.abstract_num = abstract_num
         self.num = num
@@ -396,27 +407,27 @@ def parse_numbering(docx, e):
     # eat crunchy xml, num num num
     abstract_num = {}
     style_links = {}
-    for style in e.findall(k_abstractNum):
-        abstract_id = int(style.get(k_abstractNumId))
+    for ane in e.findall(k_abstractNum):
+        abstract_id = int(ane.get(k_abstractNumId))
 
         # w:numStyleLink. This is a reference to a w:abstractNum that has a
         # w:styleLink child element.
-        nsl = list(style.findall(k_numStyleLink))
+        nsl = list(ane.findall(k_numStyleLink))
         if len(nsl) == 0:
             levels = []
-            for level in style.findall(k_lvl):
+            for level in ane.findall(k_lvl):
                 ilvl = int(level.get(k_ilvl))
                 while len(levels) <= ilvl:
                     levels.append(None)
                 levels[ilvl] = parse_lvl(docx, level)
-            abstract_num[abstract_id] = levels
+            abstract_num[abstract_id] = AbstractNum(levels, None)
         else:
             assert len(nsl) == 1
-            assert len(list(style.findall(k_lvl))) == 0
-            abstract_num[abstract_id] = nsl[0].get(k_val)
+            assert len(list(ane.findall(k_lvl))) == 0
+            abstract_num[abstract_id] = AbstractNum(None, nsl[0].get(k_val))
 
         # w:styleLink.
-        link = get_val(style, 'styleLink')
+        link = get_val(ane, 'styleLink')
         if link is not None:
             assert link not in style_links
             style_links[link] = abstract_id
@@ -498,14 +509,13 @@ class Document:
         abstract_num = self.numbering.abstract_num[abstract_num_id]
         levels = []
         for i in range(0, level_limit + 1):
-            if isinstance(abstract_num, str):
+            if abstract_num.num_style_link is not None:
                 # i'm sorry mario but the princess
-                real_abstract_num = self.numbering.style_links[abstract_num]
+                real_abstract_num = self.numbering.style_links[abstract_num.num_style_link]
                 base_levels = self.get_num_levels(real_abstract_num, i)
                 level = base_levels[i]
             else:
-                assert isinstance(abstract_num, list)
-                level = abstract_num[i]
+                level = abstract_num.levels[i]
             levels.append(level)
         return levels
 
@@ -522,15 +532,14 @@ class Document:
 
         if lvl is None:
             abstract_num = self.numbering.abstract_num[num.abstract_num_id]
-            if isinstance(abstract_num, str):
-                style = self.styles[abstract_num]
+            if abstract_num.num_style_link is not None:
+                style = self.styles[abstract_num.num_style_link]
                 lvl = self.get_list_style_at_level(int(style.full_style['-ooxml-numId']), ilvl)
             else:
-                assert isinstance(abstract_num, list)
-                if ilvl >= len(abstract_num):
+                if ilvl >= len(abstract_num.levels):
                     return None
                 else:
-                    lvl = abstract_num[ilvl]
+                    lvl = abstract_num.levels[ilvl]
 
         if ov is not None and ov.startOverride is not None:
             lvl = lvl.with_start(ov.startOverride)
