@@ -300,12 +300,14 @@ class Num:
     def __init__(self, abstract_num_id, overrides):
         self.abstract_num_id = abstract_num_id
         self.overrides = overrides
+        self.computed_levels = None
 
 class AbstractNum:
     def __init__(self, levels, num_style_link):
         assert levels is None or num_style_link is None
         self.levels = levels
         self.num_style_link = num_style_link
+        self.computed_levels = None
 
 class Lvl:
     """ Data from a <w:lvl> element.
@@ -389,6 +391,8 @@ def parse_startOverride(e):
     val = int(e.get(k_val))
     return val
 
+NUMBERING_LEVELS = 10
+
 class Numbering:
     """ Represents the whole content of numbering.xml (a w:Numbering element).
     self.abstract_num is {abstract_num_id: AbstractNum object}.
@@ -416,17 +420,21 @@ class Numbering:
 
     def get_num_levels(self, abstract_num_id, level_limit):
         abstract_num = self.abstract_num[abstract_num_id]
-        levels = []
-        for i in range(0, level_limit + 1):
-            if abstract_num.num_style_link is not None:
-                # i'm sorry mario but the princess
-                real_abstract_num = self.style_links[abstract_num.num_style_link]
-                base_levels = self.get_num_levels(real_abstract_num, i)
-                level = base_levels[i]
-            else:
-                level = abstract_num.levels[i]
-            levels.append(level)
-        return levels
+        if abstract_num.computed_levels is None:
+            levels = []
+            for i in range(NUMBERING_LEVELS):
+                if abstract_num.num_style_link is not None:
+                    # i'm sorry mario but the princess
+                    real_abstract_num = self.style_links[abstract_num.num_style_link]
+                    base_levels = self.get_num_levels(real_abstract_num, i)
+                    level = base_levels[i]
+                elif i < len(abstract_num.levels):
+                    level = abstract_num.levels[i]
+                else:
+                    level = None
+                levels.append(level)
+            abstract_num.computed_levels = levels
+        return abstract_num.computed_levels[:level_limit + 1]
 
 def parse_numbering(docx, e):
     # See <http://msdn.microsoft.com/en-us/library/ee922775%28office.14%29.aspx>.
