@@ -2029,15 +2029,28 @@ def fixup_lang_grammar_pre(doc, docx):
 
     def content_to_text(content):
         s = ''
+        previous_was_code = False
         for ht in content:
+            ht_is_code = False
             if isinstance(ht, str):
-                s += ht
+                ht_text = ht
             elif ht.name == 'br':
-                s += '\n'
+                ht_text = '\n'
             elif is_grammar_subscript(ht):
-                s += '_' + ht.content[0]
+                ht_text = '_' + ht.content[0]
             else:
-                s += content_to_text(ht.content)
+                ht_is_code = ht.name == 'code'
+                ht_text = content_to_text(ht.content)
+
+            # Hack: terminal symbols (<code>) should never run right up against
+            # the next token.  Insert a space if needed.
+            if (previous_was_code
+                    and not ht_is_code
+                    and not s.endswith((' ', '\n'))
+                    and not ht_text.startswith((' ', '\n', '_'))):
+                s += ' '
+            s += ht_text
+            previous_was_code = ht_is_code
         return s
 
     def is_lhs(text):
