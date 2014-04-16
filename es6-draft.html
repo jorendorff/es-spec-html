@@ -20742,7 +20742,7 @@
 
         <div class="gp">
           <div class="lhs"><span class="nt">LexicalBinding</span><sub>[In, Yield]</sub> <span class="geq">:</span></div>
-          <div class="rhs"><span class="nt">BindingIdentifier</span><sub>[?Yield]</sub> <span class="nt">Initializer</span> <span class="grhsannot">[?In, ?Yield]</span> <code class="t">opt</code></div>
+          <div class="rhs"><span class="nt">BindingIdentifier</span><sub>[?Yield]</sub> <span class="nt">Initializer</span><sub>[?In, ?Yield]</sub><sub>opt</sub></div>
           <div class="rhs"><span class="nt">BindingPattern</span><sub>[?Yield]</sub> <span class="nt">Initializer</span><sub>[?In, ?Yield]</sub></div>
         </div>
       </div>
@@ -20921,7 +20921,7 @@
 
         <div class="gp">
           <div class="lhs"><span class="nt">VariableDeclaration</span><sub>[In, Yield]</sub> <span class="geq">:</span></div>
-          <div class="rhs"><span class="nt">BindingIdentifier</span><sub>[?Yield]</sub> <span class="nt">Initializer</span> <span class="grhsannot">[?In, ?Yield]</span> <code class="t">opt</code></div>
+          <div class="rhs"><span class="nt">BindingIdentifier</span><sub>[?Yield]</sub> <span class="nt">Initializer</span><sub>[?In, ?Yield]</sub><sub>opt</sub></div>
           <div class="rhs"><span class="nt">BindingPattern</span><sub>[Yield]</sub> <span class="nt">Initializer</span><sub>[?In, ?Yield]</sub></div>
         </div>
       </div>
@@ -21063,63 +21063,63 @@
         <h2>Syntax</h2>
 
         <div class="gp">
-          <div class="lhs"><span class="nt">BindingPattern</span> <span class="grhsannot">[Yield,GeneratorParameter]</span> <span class="geq">:</span></div>
-          <div class="rhs"><span class="nt">ObjectBindingPattern</span> <span class="grhsannot">[?Yield,?GeneratorParameter]</span></div>
-          <div class="rhs"><span class="nt">ArrayBindingPattern</span> <span class="grhsannot">[?Yield,?GeneratorParameter]</span></div>
+          <div class="lhs"><span class="nt">BindingPattern</span><sub>[Yield,GeneratorParameter]</sub> <span class="geq">:</span></div>
+          <div class="rhs"><span class="nt">ObjectBindingPattern</span><sub>[?Yield,?GeneratorParameter]</sub></div>
+          <div class="rhs"><span class="nt">ArrayBindingPattern</span><sub>[?Yield,?GeneratorParameter]</sub></div>
         </div>
 
         <div class="gp">
-          <div class="lhs"><span class="nt">ObjectBindingPattern</span> <span class="grhsannot">[Yield,GeneratorParameter]</span> <span class="geq">:</span></div>
+          <div class="lhs"><span class="nt">ObjectBindingPattern</span><sub>[Yield,GeneratorParameter]</sub> <span class="geq">:</span></div>
           <div class="rhs"><code class="t">{</code> <code class="t">}</code></div>
-          <div class="rhs"><code class="t">{</code> <span class="nt">BindingPropertyList</span> <span class="grhsannot">[?Yield,?GeneratorParameter]</span> <code class="t">}</code></div>
-          <div class="rhs"><code class="t">{</code> <span class="nt">BindingPropertyList</span> <span class="grhsannot">[?Yield,?GeneratorParameter]</span> <code class="t">,</code> <code class="t">}</code></div>
+          <div class="rhs"><code class="t">{</code> <span class="nt">BindingPropertyList</span><sub>[?Yield,?GeneratorParameter]</sub> <code class="t">}</code></div>
+          <div class="rhs"><code class="t">{</code> <span class="nt">BindingPropertyList</span><sub>[?Yield,?GeneratorParameter]</sub> <code class="t">,</code> <code class="t">}</code></div>
         </div>
 
         <div class="gp">
-          <div class="lhs"><span class="nt">ArrayBindingPattern</span> <span class="grhsannot">[Yield,GeneratorParameter]</span> <span class="geq">:</span></div>
-          <div class="rhs"><code class="t">[</code> <span class="nt">Elision</span><sub>opt</sub> <span class="nt">BindingRestElement</span> <span class="grhsannot">[?Yield, ?GeneratorParameter]</span> <code class="t">opt</code> <code class="t">]</code></div>
-          <div class="rhs"><code class="t">[</code> <span class="nt">BindingElementList</span> <span class="grhsannot">[?Yield, ?GeneratorParameter]</span> <code class="t">]</code></div>
-          <div class="rhs"><code class="t">[</code> <span class="nt">BindingElementList</span> <span class="grhsannot">[?Yield, ?GeneratorParameter]</span> <code class="t">,</code> <span class="nt">Elision</span><sub>opt</sub> <span class="nt">BindingRestElement</span> <span class="grhsannot">[?Yield, ?GeneratorParameter]</span> <code class="t">opt</code> <code class="t">]</code></div>
+          <div class="lhs"><span class="nt">ArrayBindingPattern</span><sub>[Yield,GeneratorParameter]</sub> <span class="geq">:</span></div>
+          <div class="rhs"><code class="t">[</code> <span class="nt">Elision</span><sub>opt</sub> <span class="nt">BindingRestElement</span><sub>[?Yield, ?GeneratorParameter]</sub><sub>opt</sub> <code class="t">]</code></div>
+          <div class="rhs"><code class="t">[</code> <span class="nt">BindingElementList</span><sub>[?Yield, ?GeneratorParameter]</sub> <code class="t">]</code></div>
+          <div class="rhs"><code class="t">[</code> <span class="nt">BindingElementList</span><sub>[?Yield, ?GeneratorParameter]</sub> <code class="t">,</code> <span class="nt">Elision</span><sub>opt</sub> <span class="nt">BindingRestElement</span><sub>[?Yield, ?GeneratorParameter]</sub><sub>opt</sub> <code class="t">]</code></div>
         </div>
 
         <div class="gp">
-          <div class="lhs"><span class="nt">BindingPropertyList</span> <span class="grhsannot">[Yield,GeneratorParameter]</span> <span class="geq">:</span></div>
-          <div class="rhs"><span class="nt">BindingProperty</span> <span class="grhsannot">[?Yield, ?GeneratorParameter]</span></div>
-          <div class="rhs"><span class="nt">BindingPropertyList</span> <span class="grhsannot">[?Yield, ?GeneratorParameter]</span> <code class="t">,</code> <span class="nt">BindingProperty</span> <span class="grhsannot">[?Yield, ?GeneratorParameter]</span></div>
+          <div class="lhs"><span class="nt">BindingPropertyList</span><sub>[Yield,GeneratorParameter]</sub> <span class="geq">:</span></div>
+          <div class="rhs"><span class="nt">BindingProperty</span><sub>[?Yield, ?GeneratorParameter]</sub></div>
+          <div class="rhs"><span class="nt">BindingPropertyList</span><sub>[?Yield, ?GeneratorParameter]</sub> <code class="t">,</code> <span class="nt">BindingProperty</span><sub>[?Yield, ?GeneratorParameter]</sub></div>
         </div>
 
         <div class="gp">
-          <div class="lhs"><span class="nt">BindingElementList</span> <span class="grhsannot">[Yield,GeneratorParameter]</span> <span class="geq">:</span></div>
-          <div class="rhs"><span class="nt">BindingElisionElement</span> <span class="grhsannot">[?Yield, ?GeneratorParameter]</span></div>
-          <div class="rhs"><span class="nt">BindingElementList</span> <span class="grhsannot">[?Yield, ?GeneratorParameter]</span> <code class="t">,</code> <span class="nt">BindingElisionElement</span> <span class="grhsannot">[?Yield, ?GeneratorParameter]</span></div>
+          <div class="lhs"><span class="nt">BindingElementList</span><sub>[Yield,GeneratorParameter]</sub> <span class="geq">:</span></div>
+          <div class="rhs"><span class="nt">BindingElisionElement</span><sub>[?Yield, ?GeneratorParameter]</sub></div>
+          <div class="rhs"><span class="nt">BindingElementList</span><sub>[?Yield, ?GeneratorParameter]</sub> <code class="t">,</code> <span class="nt">BindingElisionElement</span><sub>[?Yield, ?GeneratorParameter]</sub></div>
         </div>
 
         <div class="gp">
-          <div class="lhs"><span class="nt">BindingElisionElement</span> <span class="grhsannot">[Yield,GeneratorParameter]</span> <span class="geq">:</span></div>
-          <div class="rhs"><span class="nt">Elision</span><sub>opt</sub> <span class="nt">BindingElement</span> <span class="grhsannot">[?Yield, ?GeneratorParameter]</span></div>
+          <div class="lhs"><span class="nt">BindingElisionElement</span><sub>[Yield,GeneratorParameter]</sub> <span class="geq">:</span></div>
+          <div class="rhs"><span class="nt">Elision</span><sub>opt</sub> <span class="nt">BindingElement</span><sub>[?Yield, ?GeneratorParameter]</sub></div>
         </div>
 
         <div class="gp">
-          <div class="lhs"><span class="nt">BindingProperty</span> <span class="grhsannot">[Yield,GeneratorParameter]</span> <span class="geq">:</span></div>
-          <div class="rhs"><span class="nt">SingleNameBinding</span> <span class="grhsannot">[?Yield, ?GeneratorParameter]</span></div>
-          <div class="rhs"><span class="nt">PropertyName</span> <span class="grhsannot">[?Yield, ?GeneratorParameter]</span> <code class="t">:</code> <span class="nt">BindingElement</span> <span class="grhsannot">[?Yield, ?GeneratorParameter]</span></div>
+          <div class="lhs"><span class="nt">BindingProperty</span><sub>[Yield,GeneratorParameter]</sub> <span class="geq">:</span></div>
+          <div class="rhs"><span class="nt">SingleNameBinding</span><sub>[?Yield, ?GeneratorParameter]</sub></div>
+          <div class="rhs"><span class="nt">PropertyName</span><sub>[?Yield, ?GeneratorParameter]</sub> <code class="t">:</code> <span class="nt">BindingElement</span><sub>[?Yield, ?GeneratorParameter]</sub></div>
         </div>
 
         <div class="gp">
           <div class="lhs"><span class="nt">BindingElement</span> <code class="t">[Yield,GeneratorParameter</code> <code class="t">]</code> <span class="geq">:</span></div>
-          <div class="rhs"><span class="nt">SingleNameBinding</span> <span class="grhsannot">[?Yield, ?GeneratorParameter]</span></div>
-          <div class="rhs"><span class="grhsannot">[+GeneratorParameter]</span> <span class="nt">BindingPattern</span> <span class="grhsannot">[?Yield,GeneratorParameter]</span> <span class="nt">Initializer</span><sub>[In]</sub><sub>opt</sub></div>
+          <div class="rhs"><span class="nt">SingleNameBinding</span><sub>[?Yield, ?GeneratorParameter]</sub></div>
+          <div class="rhs"><span class="grhsannot">[+GeneratorParameter]</span> <span class="nt">BindingPattern</span><sub>[?Yield,GeneratorParameter]</sub> <span class="nt">Initializer</span><sub>[In]</sub><sub>opt</sub></div>
           <div class="rhs"><span class="grhsannot">[~GeneratorParameter]</span> <span class="nt">BindingPattern</span><sub>[?Yield]</sub> <span class="nt">Initializer</span><sub>[In, ?Yield]</sub><sub>opt</sub></div>
         </div>
 
         <div class="gp">
-          <div class="lhs"><span class="nt">SingleNameBinding</span> <span class="grhsannot">[Yield,GeneratorParameter]</span> <span class="geq">:</span></div>
+          <div class="lhs"><span class="nt">SingleNameBinding</span><sub>[Yield,GeneratorParameter]</sub> <span class="geq">:</span></div>
           <div class="rhs"><span class="grhsannot">[+GeneratorParameter]</span> <span class="nt">BindingIdentifier</span><sub>[Yield]</sub> <span class="nt">Initializer</span><sub>[In]</sub><sub>opt</sub></div>
           <div class="rhs"><span class="grhsannot">[~GeneratorParameter]</span> <span class="nt">BindingIdentifier</span><sub>[?Yield]</sub> <span class="nt">Initializer</span><sub>[In, ?Yield]</sub><sub>opt</sub></div>
         </div>
 
         <div class="gp">
-          <div class="lhs"><span class="nt">BindingRestElement</span> <span class="grhsannot">[Yield, GeneratorParameter]</span> <span class="geq">:</span></div>
+          <div class="lhs"><span class="nt">BindingRestElement</span><sub>[Yield, GeneratorParameter]</sub> <span class="geq">:</span></div>
           <div class="rhs"><span class="grhsannot">[+GeneratorParameter]</span> <code class="t">...</code> <span class="nt">BindingIdentifier</span><sub>[Yield]</sub></div>
           <div class="rhs"><span class="grhsannot">[~GeneratorParameter]</span> <code class="t">...</code> <span class="nt">BindingIdentifier</span><sub>[?Yield]</sub></div>
         </div>
@@ -23371,8 +23371,8 @@
 
       <div class="gp">
         <div class="lhs"><span class="nt">TryStatement</span><sub>[Yield, Return]</sub> <span class="geq">:</span></div>
-        <div class="rhs"><code class="t">try</code> <span class="nt">Block</span><sub>[?Yield, ?Return]</sub> <span class="nt">Catch</span> <span class="grhsannot">[?Yield, ?Return]</span></div>
-        <div class="rhs"><code class="t">try</code> <span class="nt">Block</span><sub>[?Yield, ?Return]</sub> <span class="nt">Finally</span> <span class="grhsannot">[?Yield, ?Return]</span></div>
+        <div class="rhs"><code class="t">try</code> <span class="nt">Block</span><sub>[?Yield, ?Return]</sub> <span class="nt">Catch</span><sub>[?Yield, ?Return]</sub></div>
+        <div class="rhs"><code class="t">try</code> <span class="nt">Block</span><sub>[?Yield, ?Return]</sub> <span class="nt">Finally</span><sub>[?Yield, ?Return]</sub></div>
         <div class="rhs"><code class="t">try</code> <span class="nt">Block</span><sub>[?Yield, ?Return]</sub> <span class="nt">Catch</span><sub>[?Yield, ?Return]</sub> <span class="nt">Finally</span><sub>[?Yield, ?Return]</sub></div>
       </div>
 
@@ -23388,7 +23388,7 @@
 
       <div class="gp">
         <div class="lhs"><span class="nt">CatchParameter</span><sub>[Yield]</sub> <span class="geq">:</span></div>
-        <div class="rhs"><span class="nt">BindingIdentifier</span> <span class="grhsannot">[?Yield]</span></div>
+        <div class="rhs"><span class="nt">BindingIdentifier</span><sub>[?Yield]</sub></div>
         <div class="rhs"><span class="nt">BindingPattern</span><sub>[?Yield]</sub></div>
       </div>
 
@@ -27625,7 +27625,7 @@
         <div class="gp">
           <div class="lhs"><span class="nt">ExportDeclaration</span> <span class="geq">:</span></div>
           <div class="rhs"><code class="t">export</code> <code class="t">*</code> <span class="nt">FromClause</span> <code class="t">;</code></div>
-          <div class="rhs"><code class="t">export</code> <span class="nt">ExportClause</span> <span class="grhsannot">[NoReference]</span> <span class="nt">FromClause</span> <code class="t">;</code></div>
+          <div class="rhs"><code class="t">export</code> <span class="nt">ExportClause</span><sub>[NoReference]</sub> <span class="nt">FromClause</span> <code class="t">;</code></div>
           <div class="rhs"><code class="t">export</code> <span class="nt">ExportClause</span> <code class="t">;</code></div>
           <div class="rhs"><code class="t">export</code> <span class="nt">VariableStatement</span></div>
           <div class="rhs"><code class="t">export</code> <span class="nt">Declaration</span><sub>[Default]</sub></div>
@@ -27633,20 +27633,20 @@
         </div>
 
         <div class="gp">
-          <div class="lhs"><span class="nt">ExportClause</span> <span class="grhsannot">[NoReference]</span> <span class="geq">:</span></div>
+          <div class="lhs"><span class="nt">ExportClause</span><sub>[NoReference]</sub> <span class="geq">:</span></div>
           <div class="rhs"><code class="t">{</code> <code class="t">}</code></div>
-          <div class="rhs"><code class="t">{</code> <span class="nt">ExportsList</span> <span class="grhsannot">[?NoReference]</span> <code class="t">}</code></div>
-          <div class="rhs"><code class="t">{</code> <span class="nt">ExportsList</span> <span class="grhsannot">[?NoReference]</span> <code class="t">,</code> <code class="t">}</code></div>
+          <div class="rhs"><code class="t">{</code> <span class="nt">ExportsList</span><sub>[?NoReference]</sub> <code class="t">}</code></div>
+          <div class="rhs"><code class="t">{</code> <span class="nt">ExportsList</span><sub>[?NoReference]</sub> <code class="t">,</code> <code class="t">}</code></div>
         </div>
 
         <div class="gp">
-          <div class="lhs"><span class="nt">ExportsList</span> <span class="grhsannot">[NoReference]</span> <span class="geq">:</span></div>
+          <div class="lhs"><span class="nt">ExportsList</span><sub>[NoReference]</sub> <span class="geq">:</span></div>
           <div class="rhs"><span class="nt">ExportSpecifier</span> <span class="grhsannot">[?NoReference]</span></div>
-          <div class="rhs"><span class="nt">ExportsList</span> <span class="grhsannot">[?NoReference]</span> <code class="t">,</code> <span class="nt">ExportSpecifier</span> <span class="grhsannot">[?NoReference]</span></div>
+          <div class="rhs"><span class="nt">ExportsList</span><sub>[?NoReference]</sub> <code class="t">,</code> <span class="nt">ExportSpecifier</span><sub>[?NoReference]</sub></div>
         </div>
 
         <div class="gp">
-          <div class="lhs"><span class="nt">ExportSpecifier</span> <span class="grhsannot">[NoReference]</span> <span class="geq">:</span></div>
+          <div class="lhs"><span class="nt">ExportSpecifier</span><sub>[NoReference]</sub> <span class="geq">:</span></div>
           <div class="rhs"><span class="grhsannot">[~NoReference]</span> <span class="nt">IdentifierReference</span></div>
           <div class="rhs"><span class="grhsannot">[~NoReference]</span> <span class="nt">IdentifierReference</span> <code class="t">as</code> <span class="nt">IdentifierName</span></div>
           <div class="rhs"><span class="grhsannot">[+NoReference]</span> <span class="nt">IdentifierName</span></div>
@@ -53938,7 +53938,7 @@
       <div class="gp">
         <div class="lhs"><span class="nt">NonemptyClassRanges</span><sub>[U]</sub> <span class="geq">::</span></div>
         <div class="rhs"><span class="nt">ClassAtom</span><sub>[?U]</sub></div>
-        <div class="rhs"><span class="nt">ClassAtom</span><sub>[?U]</sub> <span class="nt">NonemptyClassRangesNoDash</span> <span class="grhsannot">[?U]</span></div>
+        <div class="rhs"><span class="nt">ClassAtom</span><sub>[?U]</sub> <span class="nt">NonemptyClassRangesNoDash</span><sub>[?U]</sub></div>
         <div class="rhs"><span class="grhsannot">[+U]</span> <span class="nt">ClassAtom</span><sub>[U]</sub> <code class="t">-</code> <span class="nt">ClassAtom</span><sub>[U]</sub> <span class="nt">ClassRanges</span><sub>[U]</sub></div>
         <div class="rhs"><span class="grhsannot">[~U]</span> <span class="nt">ClassAtomInRange</span> <code class="t">-</code> <span class="nt">ClassAtomInRange</span> <span class="nt">ClassRanges</span></div>
       </div>
@@ -53946,7 +53946,7 @@
       <div class="gp">
         <div class="lhs"><span class="nt">NonemptyClassRangesNoDash</span><sub>[U]</sub> <span class="geq">::</span></div>
         <div class="rhs"><span class="nt">ClassAtom</span><sub>[?U]</sub></div>
-        <div class="rhs"><span class="nt">ClassAtomNoDash</span><sub>[?U]</sub> <span class="nt">NonemptyClassRangesNoDash</span> <span class="grhsannot">[?U]</span></div>
+        <div class="rhs"><span class="nt">ClassAtomNoDash</span><sub>[?U]</sub> <span class="nt">NonemptyClassRangesNoDash</span><sub>[?U]</sub></div>
         <div class="rhs"><span class="grhsannot">[+U]</span> <span class="nt">ClassAtomNoDash</span><sub>[U]</sub> <code class="t">-</code> <span class="nt">ClassAtom</span><sub>[U]</sub> <span class="nt">ClassRanges</span><sub>[U]</sub></div>
         <div class="rhs"><span class="grhsannot">[~U]</span> <span class="nt">ClassAtomNoDashInRange</span> <code class="t">-</code> <span class="nt">ClassAtomInRange</span> <span class="nt">ClassRanges</span></div>
       </div>

@@ -1923,11 +1923,9 @@ def fixup_lang_overview_biblio(doc, docx):
     p.content[0:1] = [html.span(title.strip(), class_="book-title"), dot_space + rest]
 
 def is_grammar_subscript_content(content):
-    if len(content) == 1:
-        s = content[0]
-        return (s == 'opt'
-                or (isinstance(s, str) and s.startswith('[') and s.endswith((']', ']opt'))))
-    return False
+    s = ht_text(content)
+    return (s == 'opt'
+            or (isinstance(s, str) and s.startswith('[') and s.endswith((']', ']opt'))))
 
 def is_grammar_subscript(ht):
     return ht.name == 'sub' and is_grammar_subscript_content(ht.content)
