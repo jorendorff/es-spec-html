@@ -1955,7 +1955,7 @@ def fixup_simplify_formatting(doc, docx):
 
         if (style == {'font-family': 'sans-serif', 'vertical-align': 'sub'}
               and is_grammar_subscript_content(content)):
-            return [html.sub(content[0])]
+            return [html.sub(*content)]
         elif style == {'font-family': 'monospace', 'font-weight': 'bold'}:
             return [html.code(*content)]
         elif (style == {'font-family': 'Times New Roman', 'font-style': 'italic'}
@@ -2037,7 +2037,8 @@ def fixup_lang_grammar_pre(doc, docx):
             elif ht.name == 'br':
                 ht_text = '\n'
             elif is_grammar_subscript(ht):
-                ht_text = '_' + ht.content[0].replace(']opt', ']_opt')
+                s = s.rstrip()  # hack around idiosyncracies in the document
+                ht_text = '_' + content_to_text(ht.content).replace(']opt', ']_opt')
             else:
                 ht_is_code = ht.name == 'code'
                 ht_text = content_to_text(ht.content)
@@ -2136,7 +2137,7 @@ def fixup_lang_grammar_pre(doc, docx):
             if isinstance(ht, str):
                 s += ht
             elif is_grammar_subscript(ht):
-                s += '_' + ht.content[0]
+                s += '_' + inline_grammar_text(ht.content)
             else:
                 s += inline_grammar_text(ht.content)
         return s
