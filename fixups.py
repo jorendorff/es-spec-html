@@ -2027,21 +2027,18 @@ def fixup_lang_grammar_pre(doc, docx):
         else:
             return False
 
-    def stripped_lines(div):
-        def ht_to_lines(ht):
+    def content_to_text(content):
+        s = ''
+        for ht in content:
             if isinstance(ht, str):
-                return ht
+                s += ht
             elif ht.name == 'br':
-                return '\n'
+                s += '\n'
             elif is_grammar_subscript(ht):
-                return '_' + ht.content[0]
+                s += '_' + ht.content[0]
             else:
-                return content_to_lines(ht.content)
-
-        def content_to_lines(content):
-            return ''.join(ht_to_lines(ht) for ht in content)
-
-        return content_to_lines(div.content).rstrip().split('\n')
+                s += content_to_text(ht.content)
+        return s
 
     def is_lhs(text):
         text = re.sub(r'( one of-?)?( See ((\d+|[A-Z])(.\d+)*|clause \d+))?$', '', text)
@@ -2055,7 +2052,8 @@ def fixup_lang_grammar_pre(doc, docx):
             j += 1
         syntax = ''
         for e in parent.content[i:j]:
-            for line in stripped_lines(e):
+            text = content_to_text(e.content)
+            for line in text.rstrip().split('\n'):
                 line = line.strip()
                 line = ' '.join(line.split())
 
