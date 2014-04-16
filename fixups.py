@@ -1926,7 +1926,7 @@ def is_grammar_subscript_content(content):
     if len(content) == 1:
         s = content[0]
         return (s == 'opt'
-                or (isinstance(s, str) and s.startswith('[') and s.endswith(']')))
+                or (isinstance(s, str) and s.startswith('[') and s.endswith((']', ']opt'))))
     return False
 
 def is_grammar_subscript(ht):
@@ -2037,7 +2037,7 @@ def fixup_lang_grammar_pre(doc, docx):
             elif ht.name == 'br':
                 ht_text = '\n'
             elif is_grammar_subscript(ht):
-                ht_text = '_' + ht.content[0]
+                ht_text = '_' + ht.content[0].replace(']opt', ']_opt')
             else:
                 ht_is_code = ht.name == 'code'
                 ht_text = content_to_text(ht.content)

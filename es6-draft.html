@@ -2598,7 +2598,7 @@
 
       <div class="gp">
         <div class="lhs"><span class="nt">VariableDeclaration</span> <span class="geq">:</span></div>
-        <div class="rhs"><span class="nt">BindingIdentifier</span> <span class="nt">Initializer</span> <span class="grhsannot">[In]</span> <code class="t">opt</code></div>
+        <div class="rhs"><span class="nt">BindingIdentifier</span> <span class="nt">Initializer</span><sub>[In]</sub><sub>opt</sub></div>
       </div>
 
       <p>is an abbreviation for:</p>
@@ -16855,7 +16855,7 @@
         <div class="rhs"><span class="nt">MemberExpression</span><sub>[?Yield]</sub> <span class="nt">TemplateLiteral</span><sub>[?Yield]</sub></div>
         <div class="rhs"><code class="t">super</code> <code class="t">[</code> <span class="nt">Expression</span><sub>[In, ?Yield]</sub> <code class="t">]</code></div>
         <div class="rhs"><code class="t">super</code> <code class="t">.</code> <span class="nt">IdentifierName</span></div>
-        <div class="rhs"><code class="t">new</code> <code class="t">super</code> <span class="nt">Arguments</span> <span class="grhsannot">[?Yield]</span> <code class="t">opt</code></div>
+        <div class="rhs"><code class="t">new</code> <code class="t">super</code> <span class="nt">Arguments</span><sub>[?Yield]</sub><sub>opt</sub></div>
         <div class="rhs"><code class="t">new</code> <span class="grhsannot">[lookahead &notin; {<code class="t">super</code>}]</span> <span class="nt">MemberExpression</span><sub>[?Yield]</sub> <span class="nt">Arguments</span><sub>[?Yield]</sub></div>
       </div>
 
@@ -19727,9 +19727,9 @@
 
         <div class="gp">
           <div class="lhs"><span class="nt">ArrayAssignmentPattern</span><sub>[Yield]</sub> <span class="geq">:</span></div>
-          <div class="rhs"><code class="t">[</code> <span class="nt">Elision</span><sub>opt</sub> <span class="nt">AssignmentRestElement</span> <span class="grhsannot">[?Yield]</span> <code class="t">opt</code> <code class="t">]</code></div>
+          <div class="rhs"><code class="t">[</code> <span class="nt">Elision</span><sub>opt</sub> <span class="nt">AssignmentRestElement</span><sub>[?Yield]</sub><sub>opt</sub> <code class="t">]</code></div>
           <div class="rhs"><code class="t">[</code> <span class="nt">AssignmentElementList</span><sub>[?Yield]</sub> <code class="t">]</code></div>
-          <div class="rhs"><code class="t">[</code> <span class="nt">AssignmentElementList</span><sub>[?Yield]</sub> <code class="t">,</code> <span class="nt">Elision</span><sub>opt</sub> <span class="nt">AssignmentRestElement</span> <span class="grhsannot">[?Yield]</span> <code class="t">opt</code> <code class="t">]</code></div>
+          <div class="rhs"><code class="t">[</code> <span class="nt">AssignmentElementList</span><sub>[?Yield]</sub> <code class="t">,</code> <span class="nt">Elision</span><sub>opt</sub> <span class="nt">AssignmentRestElement</span><sub>[?Yield]</sub><sub>opt</sub> <code class="t">]</code></div>
         </div>
 
         <div class="gp">
@@ -19751,13 +19751,13 @@
 
         <div class="gp">
           <div class="lhs"><span class="nt">AssignmentProperty</span><sub>[Yield]</sub> <span class="geq">:</span></div>
-          <div class="rhs"><span class="nt">IdentifierReference</span><sub>[?Yield]</sub> <span class="nt">Initializer</span> <code class="t">[In,?Yield]opt</code></div>
+          <div class="rhs"><span class="nt">IdentifierReference</span><sub>[?Yield]</sub> <span class="nt">Initializer</span><sub>[In,?Yield]</sub><sub>opt</sub></div>
           <div class="rhs"><span class="nt">PropertyName</span> <code class="t">:</code> <span class="nt">AssignmentElement</span><sub>[?Yield]</sub></div>
         </div>
 
         <div class="gp">
           <div class="lhs"><span class="nt">AssignmentElement</span><sub>[Yield]</sub> <span class="geq">:</span></div>
-          <div class="rhs"><span class="nt">DestructuringAssignmentTarget</span><sub>[?Yield]</sub> <span class="nt">Initializer</span> <code class="t">[In,?Yield]opt</code></div>
+          <div class="rhs"><span class="nt">DestructuringAssignmentTarget</span><sub>[?Yield]</sub> <span class="nt">Initializer</span><sub>[In,?Yield]</sub><sub>opt</sub></div>
         </div>
 
         <div class="gp">
@@ -20325,7 +20325,7 @@
 
       <div class="gp">
         <div class="lhs"><span class="nt">Block</span><sub>[Yield, Return]</sub> <span class="geq">:</span></div>
-        <div class="rhs"><code class="t">{</code> <span class="nt">StatementList</span> <span class="grhsannot">[?Yield, ?Return]</span> <code class="t">opt</code> <code class="t">}</code></div>
+        <div class="rhs"><code class="t">{</code> <span class="nt">StatementList</span><sub>[?Yield, ?Return]</sub><sub>opt</sub> <code class="t">}</code></div>
       </div>
 
       <div class="gp">
@@ -21108,14 +21108,14 @@
         <div class="gp">
           <div class="lhs"><span class="nt">BindingElement</span> <code class="t">[Yield,GeneratorParameter</code> <code class="t">]</code> <span class="geq">:</span></div>
           <div class="rhs"><span class="nt">SingleNameBinding</span> <span class="grhsannot">[?Yield, ?GeneratorParameter]</span></div>
-          <div class="rhs"><span class="grhsannot">[+GeneratorParameter]</span> <span class="nt">BindingPattern</span> <span class="grhsannot">[?Yield,GeneratorParameter]</span> <span class="nt">Initializer</span> <span class="grhsannot">[In]</span> <code class="t">opt</code></div>
-          <div class="rhs"><span class="grhsannot">[~GeneratorParameter]</span> <span class="nt">BindingPattern</span><sub>[?Yield]</sub> <span class="nt">Initializer</span> <span class="grhsannot">[In, ?Yield]</span> <code class="t">opt</code></div>
+          <div class="rhs"><span class="grhsannot">[+GeneratorParameter]</span> <span class="nt">BindingPattern</span> <span class="grhsannot">[?Yield,GeneratorParameter]</span> <span class="nt">Initializer</span><sub>[In]</sub><sub>opt</sub></div>
+          <div class="rhs"><span class="grhsannot">[~GeneratorParameter]</span> <span class="nt">BindingPattern</span><sub>[?Yield]</sub> <span class="nt">Initializer</span><sub>[In, ?Yield]</sub><sub>opt</sub></div>
         </div>
 
         <div class="gp">
           <div class="lhs"><span class="nt">SingleNameBinding</span> <span class="grhsannot">[Yield,GeneratorParameter]</span> <span class="geq">:</span></div>
-          <div class="rhs"><span class="grhsannot">[+GeneratorParameter]</span> <span class="nt">BindingIdentifier</span><sub>[Yield]</sub> <span class="nt">Initializer</span> <span class="grhsannot">[In]</span> <code class="t">opt</code></div>
-          <div class="rhs"><span class="grhsannot">[~GeneratorParameter]</span> <span class="nt">BindingIdentifier</span><sub>[?Yield]</sub> <span class="nt">Initializer</span> <span class="grhsannot">[In, ?Yield]</span> <code class="t">opt</code></div>
+          <div class="rhs"><span class="grhsannot">[+GeneratorParameter]</span> <span class="nt">BindingIdentifier</span><sub>[Yield]</sub> <span class="nt">Initializer</span><sub>[In]</sub><sub>opt</sub></div>
+          <div class="rhs"><span class="grhsannot">[~GeneratorParameter]</span> <span class="nt">BindingIdentifier</span><sub>[?Yield]</sub> <span class="nt">Initializer</span><sub>[In, ?Yield]</sub><sub>opt</sub></div>
         </div>
 
         <div class="gp">
@@ -21782,9 +21782,9 @@
         <div class="lhs"><span class="nt">IterationStatement</span><sub>[Yield, Return]</sub> <span class="geq">:</span></div>
         <div class="rhs"><code class="t">do</code> <span class="nt">Statement</span><sub>[?Yield, ?Return]</sub> <code class="t">while</code> <code class="t">(</code> <span class="nt">Expression</span><sub>[In, ?Yield]</sub> <code class="t">)</code> <code class="t">;</code><sub>opt</sub></div>
         <div class="rhs"><code class="t">while</code> <code class="t">(</code> <span class="nt">Expression</span><sub>[In, ?Yield]</sub> <code class="t">)</code> <span class="nt">Statement</span><sub>[?Yield, ?Return]</sub></div>
-        <div class="rhs"><code class="t">for</code> <code class="t">(</code> <span class="grhsannot">[lookahead &notin; {<code class="t">let [</code>}]</span> <span class="nt">Expression</span> <span class="grhsannot">[?Yield]</span> <code class="t">opt;</code> <span class="nt">Expression</span> <span class="grhsannot">[In, ?Yield]</span> <code class="t">opt</code> <code class="t">;</code> <span class="nt">Expression</span> <span class="grhsannot">[In, ?Yield]</span> <code class="t">opt</code> <code class="t">)</code> <span class="nt">Statement</span><sub>[?Yield, ?Return]</sub></div>
-        <div class="rhs"><code class="t">for</code> <code class="t">(</code> <code class="t">var</code> <span class="nt">VariableDeclarationList</span><sub>[?Yield]</sub> <code class="t">;</code> <span class="nt">Expression</span> <span class="grhsannot">[In, ?Yield]</span> <code class="t">opt</code> <code class="t">;</code> <span class="nt">Expression</span> <span class="grhsannot">[In, ?Yield]</span> <code class="t">opt</code> <code class="t">)</code> <span class="nt">Statement</span><sub>[?Yield, ?Return]</sub></div>
-        <div class="rhs"><code class="t">for</code> <code class="t">(</code> <span class="nt">LexicalDeclaration</span><sub>[?Yield]</sub> <span class="nt">Expression</span> <span class="grhsannot">[In, ?Yield]</span> <code class="t">opt</code> <code class="t">;</code> <span class="nt">Expression</span> <span class="grhsannot">[In, ?Yield]</span> <code class="t">opt</code> <code class="t">)</code> <span class="nt">Statement</span><sub>[?Yield, ?Return]</sub></div>
+        <div class="rhs"><code class="t">for</code> <code class="t">(</code> <span class="grhsannot">[lookahead &notin; {<code class="t">let [</code>}]</span> <span class="nt">Expression</span><sub>[?Yield]</sub><sub>opt</sub> <code class="t">;</code> <span class="nt">Expression</span><sub>[In, ?Yield]</sub><sub>opt</sub> <code class="t">;</code> <span class="nt">Expression</span><sub>[In, ?Yield]</sub><sub>opt</sub> <code class="t">)</code> <span class="nt">Statement</span><sub>[?Yield, ?Return]</sub></div>
+        <div class="rhs"><code class="t">for</code> <code class="t">(</code> <code class="t">var</code> <span class="nt">VariableDeclarationList</span><sub>[?Yield]</sub> <code class="t">;</code> <span class="nt">Expression</span><sub>[In, ?Yield]</sub><sub>opt</sub> <code class="t">;</code> <span class="nt">Expression</span><sub>[In, ?Yield]</sub><sub>opt</sub> <code class="t">)</code> <span class="nt">Statement</span><sub>[?Yield, ?Return]</sub></div>
+        <div class="rhs"><code class="t">for</code> <code class="t">(</code> <span class="nt">LexicalDeclaration</span><sub>[?Yield]</sub> <span class="nt">Expression</span><sub>[In, ?Yield]</sub><sub>opt</sub> <code class="t">;</code> <span class="nt">Expression</span><sub>[In, ?Yield]</sub><sub>opt</sub> <code class="t">)</code> <span class="nt">Statement</span><sub>[?Yield, ?Return]</sub></div>
         <div class="rhs"><code class="t">for</code> <code class="t">(</code> <span class="grhsannot">[lookahead &notin; {<code class="t">let [</code>}]</span> <span class="nt">LeftHandSideExpression</span><sub>[?Yield]</sub> <code class="t">in</code> <span class="nt">Expression</span><sub>[In, ?Yield]</sub> <code class="t">)</code> <span class="nt">Statement</span><sub>[?Yield, ?Return]</sub></div>
         <div class="rhs"><code class="t">for</code> <code class="t">(</code> <code class="t">var</code> <span class="nt">ForBinding</span><sub>[?Yield]</sub> <code class="t">in</code> <span class="nt">Expression</span><sub>[In, ?Yield]</sub> <code class="t">)</code> <span class="nt">Statement</span><sub>[?Yield, ?Return]</sub></div>
         <div class="rhs"><code class="t">for</code> <code class="t">(</code> <span class="nt">ForDeclaration</span><sub>[?Yield]</sub> <code class="t">in</code> <span class="nt">Expression</span><sub>[In, ?Yield]</sub> <code class="t">)</code> <span class="nt">Statement</span> <code class="t">_[?Yield,</code> <code class="t">?Return]</code></div>
@@ -22814,8 +22814,8 @@
 
       <div class="gp">
         <div class="lhs"><span class="nt">CaseBlock</span><sub>[Yield, Return]</sub> <span class="geq">:</span></div>
-        <div class="rhs"><code class="t">{</code> <span class="nt">CaseClauses</span> <span class="grhsannot">[?Yield, ?Return]</span> <code class="t">opt</code> <code class="t">}</code></div>
-        <div class="rhs"><code class="t">{</code> <span class="nt">CaseClauses</span> <span class="grhsannot">[?Yield, ?Return]</span> <code class="t">opt</code> <span class="nt">DefaultClause</span><sub>[?Yield, ?Return]</sub> <span class="nt">CaseClauses</span> <span class="grhsannot">[?Yield, ?Return]</span> <code class="t">opt</code> <code class="t">}</code></div>
+        <div class="rhs"><code class="t">{</code> <span class="nt">CaseClauses</span><sub>[?Yield, ?Return]</sub><sub>opt</sub> <code class="t">}</code></div>
+        <div class="rhs"><code class="t">{</code> <span class="nt">CaseClauses</span><sub>[?Yield, ?Return]</sub><sub>opt</sub> <span class="nt">DefaultClause</span><sub>[?Yield, ?Return]</sub> <span class="nt">CaseClauses</span><sub>[?Yield, ?Return]</sub><sub>opt</sub> <code class="t">}</code></div>
       </div>
 
       <div class="gp">
@@ -22826,12 +22826,12 @@
 
       <div class="gp">
         <div class="lhs"><span class="nt">CaseClause</span><sub>[Yield, Return]</sub> <span class="geq">:</span></div>
-        <div class="rhs"><code class="t">case</code> <span class="nt">Expression</span><sub>[In, ?Yield]</sub> <code class="t">:</code> <span class="nt">StatementList</span> <span class="grhsannot">[?Yield, ?Return]</span> <code class="t">opt</code></div>
+        <div class="rhs"><code class="t">case</code> <span class="nt">Expression</span><sub>[In, ?Yield]</sub> <code class="t">:</code> <span class="nt">StatementList</span><sub>[?Yield, ?Return]</sub><sub>opt</sub></div>
       </div>
 
       <div class="gp">
         <div class="lhs"><span class="nt">DefaultClause</span><sub>[Yield, Return]</sub> <span class="geq">:</span></div>
-        <div class="rhs"><code class="t">default</code> <code class="t">:</code> <span class="nt">StatementList</span> <span class="grhsannot">[?Yield, ?Return]</span> <code class="t">opt</code></div>
+        <div class="rhs"><code class="t">default</code> <code class="t">:</code> <span class="nt">StatementList</span><sub>[?Yield, ?Return]</sub><sub>opt</sub></div>
       </div>
     </div>
 
@@ -23674,7 +23674,7 @@
 
       <div class="gp">
         <div class="lhs"><span class="nt">FunctionStatementList</span><sub>[Yield]</sub> <span class="geq">:</span></div>
-        <div class="rhs"><span class="nt">StatementList</span> <span class="grhsannot">[?Yield, Return]</span> <code class="t">opt</code></div>
+        <div class="rhs"><span class="nt">StatementList</span><sub>[?Yield, Return]</sub><sub>opt</sub></div>
       </div>
     </div>
 
@@ -25068,7 +25068,7 @@
 
       <div class="gp">
         <div class="lhs"><span class="nt">GeneratorExpression</span> <span class="geq">:</span></div>
-        <div class="rhs"><code class="t">function</code> <code class="t">*</code> <span class="nt">BindingIdentifier</span> <span class="grhsannot">[Yield]</span> <code class="t">opt</code> <code class="t">(</code> <span class="nt">FormalParameters</span><sub>[Yield,GeneratorParameter]</sub> <code class="t">)</code> <code class="t">{</code> <span class="nt">FunctionBody</span><sub>[Yield]</sub> <code class="t">}</code></div>
+        <div class="rhs"><code class="t">function</code> <code class="t">*</code> <span class="nt">BindingIdentifier</span><sub>[Yield]</sub><sub>opt</sub> <code class="t">(</code> <span class="nt">FormalParameters</span><sub>[Yield,GeneratorParameter]</sub> <code class="t">)</code> <code class="t">{</code> <span class="nt">FunctionBody</span><sub>[Yield]</sub> <code class="t">}</code></div>
       </div>
 
       <div class="gp">
@@ -25628,12 +25628,12 @@
 
       <div class="gp">
         <div class="lhs"><span class="nt">ClassExpression</span><sub>[Yield,GeneratorParameter]</sub> <span class="geq">:</span></div>
-        <div class="rhs"><code class="t">class</code> <span class="nt">BindingIdentifier</span> <span class="grhsannot">[?Yield]</span> <code class="t">opt</code> <span class="nt">ClassTail</span><sub>[?Yield,?GeneratorParameter]</sub></div>
+        <div class="rhs"><code class="t">class</code> <span class="nt">BindingIdentifier</span><sub>[?Yield]</sub><sub>opt</sub> <span class="nt">ClassTail</span><sub>[?Yield,?GeneratorParameter]</sub></div>
       </div>
 
       <div class="gp">
         <div class="lhs"><span class="nt">ClassTail</span><sub>[Yield,GeneratorParameter]</sub> <span class="geq">:</span></div>
-        <div class="rhs"><span class="grhsannot">[~GeneratorParameter]</span> <span class="nt">ClassHeritage</span> <span class="grhsannot">[?Yield]</span> <code class="t">opt</code> <code class="t">{</code> <span class="nt">ClassBody</span> <span class="grhsannot">[?Yield]</span> <code class="t">opt</code> <code class="t">}</code></div>
+        <div class="rhs"><span class="grhsannot">[~GeneratorParameter]</span> <span class="nt">ClassHeritage</span><sub>[?Yield]</sub><sub>opt</sub> <code class="t">{</code> <span class="nt">ClassBody</span><sub>[?Yield]</sub><sub>opt</sub> <code class="t">}</code></div>
         <div class="rhs"><span class="grhsannot">[+GeneratorParameter]</span> <span class="nt">ClassHeritage</span><sub>opt</sub> <code class="t">{</code> <span class="nt">ClassBody</span><sub>opt</sub> <code class="t">}</code></div>
       </div>
 
