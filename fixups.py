@@ -2336,6 +2336,11 @@ def fixup_lang_grammar_post(doc, docx):
             divs = []
             [syntax] = child.content
             syntax = syntax.lstrip('\n')
+
+            # Hack around a particular bug in the document.
+            syntax = syntax.replace("BindingElement[Yield,GeneratorParameter ]",
+                                    "BindingElement_[Yield,GeneratorParameter]")
+
             for production in syntax.split('\n\n'):
                 lines = production.splitlines()
                 assert not lines[0][:1].isspace()
