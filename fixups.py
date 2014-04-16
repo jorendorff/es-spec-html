@@ -2223,8 +2223,9 @@ def fixup_lang_grammar_post(doc, docx):
 
     syntax_token_re = re.compile(r'''(?x)
         ( See \  (?:clause\ )? [0-9A-Z\.]+  # cross-reference
-        | ((?:[A-Z]+[a-z]|uri)[A-Za-z]*)    # nonterminal...
-              (_\[ [^]]* \])? (?:_opt)?     # ...with optional subscripts
+        | ((?:[A-Z]+[a-z]|uri)[A-Za-z]*     # nonterminal...
+              (?:_[A-Z][A-Za-z]*)* )        # ...with optional underscore suffixes
+              (_\[ [^]]* \])? (?:_opt)?     # ...and optional subscripts
         | \[ (?: [+~?]?[A-Z][a-z]+ (?:,\ )?)+ \]  # rhs availability prefix
         | one\ of
         | but\ not\ one\ of
