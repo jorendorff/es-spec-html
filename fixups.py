@@ -2879,8 +2879,15 @@ def fixup_links(doc, docx):
             section_link_regexes = section_link_regexes_intl
 
         for link_re in section_link_regexes:
-            m = link_re.search(s)
-            while m is not None:
+            pos = 0
+            while best is None or pos <= best[0]:
+                m = link_re.search(s, pos)
+                if m is None:
+                    break
+                pos = m.end(1)
+                if best is not None and m.start(1) > best[0]:
+                    break  # match is too far right
+
                 link_text = m.group(2)
                 if link_text in non_section_ids:
                     id = non_section_ids[link_text]
@@ -2889,6 +2896,7 @@ def fixup_links(doc, docx):
                 elif link_text.startswith('Table '):
                     id = 'table-' + link_text[6:]
                 elif link_text == "":
+                    # Strip this text from the document.
                     id = None
                 else:
                     # Get the target section id.
@@ -2900,10 +2908,10 @@ def fixup_links(doc, docx):
                     id = sections_by_number.get(sec_num)
                     if id is None:
                         warn("no such section: " + sec_num)
+                        continue
 
                 if id is not None and id not in all_ids and not id.startswith('http'):
                     warn("no such section: " + m.group(2))
-                    m = link_re.search(s, m.end(1))
                 else:
                     if id is not None and not id.startswith('http'):
                         id = "#" + id
