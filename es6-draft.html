@@ -13099,16 +13099,17 @@
         <ul>
           <li>
             <p>It is an Sytax Error if <span style="font-family: Times New Roman">SV(<i>UnicodeEscapeSequence</i>)</span> is
-            neither the UTF-16 encoding of a single Unicode code point with the Unicode property &ldquo;ID_Start&rdquo; nor
-            <code>"$&Prime;</code> or <code>"_&Prime;</code>.</p>
+            neither the <a href="#sec-static-semantics-utf-16-encoding">UTF-16 encoding</a> of a single Unicode code point with
+            the Unicode property &ldquo;ID_Start&rdquo; nor <code>"$&Prime;</code> or <code>"_&Prime;</code>.</p>
           </li>
         </ul>
         <div class="gp prod"><span class="nt">IdentifierPart</span> <span class="geq">::</span> <code class="t">\</code> <span class="nt">UnicodeEscapeSequence</span></div>
         <ul>
           <li>
             <p>It is an Sytax Error if <span style="font-family: Times New Roman">SV(<i>UnicodeEscapeSequence</i>)</span> is
-            neither the UTF-16 encoding of a single Unicode code point with the Unicode property &ldquo;ID_Continue&rdquo; nor
-            <code>"$&Prime;</code> or <code>"_&Prime;</code> nor the UTF-16 encoding either &lt;ZWNJ&gt; or &lt;ZAJ&gt;.</p>
+            neither the <a href="#sec-static-semantics-utf-16-encoding">UTF-16 encoding</a> of a single Unicode code point with
+            the Unicode property &ldquo;ID_Continue&rdquo; nor <code>"$&Prime;</code> or <code>"_&Prime;</code> nor the <a
+            href="#sec-static-semantics-utf-16-encoding">UTF-16 encoding</a> either &lt;ZWNJ&gt; or &lt;ZAJ&gt;.</p>
           </li>
         </ul>
       </section>
@@ -16388,10 +16389,10 @@
             title="link to this section">12.2.8.2</a></span> Runtime Semantics: Evaluation</h1>
         <div class="gp prod"><span class="nt">PrimaryExpression</span> <span class="geq">:</span> <span class="nt">RegularExpressionLiteral</span></div>
         <ol class="proc">
-          <li>Let <i>pattern</i> be the string value consisting of the UTF-16 encoding of each code point of BodyText of
-              <i>RegularExpressionLiteral</i>.</li>
-          <li>Let <i>flags</i> be the string value consisting of the UTF-16 encoding of each code point of FlagText of
-              <i>RegularExpressionLiteral</i>.</li>
+          <li>Let <i>pattern</i> be the string value consisting of the <a href="#sec-static-semantics-utf-16-encoding">UTF-16
+              encoding</a> of each code point of BodyText of <i>RegularExpressionLiteral</i>.</li>
+          <li>Let <i>flags</i> be the string value consisting of the <a href="#sec-static-semantics-utf-16-encoding">UTF-16
+              encoding</a> of each code point of FlagText of <i>RegularExpressionLiteral</i>.</li>
           <li>Return <a href="#sec-regexpcreate">RegExpCreate</a>(<i>pattern</i>, <i>flags</i>).</li>
         </ol>
       </section>
@@ -39956,7 +39957,8 @@
                   <ol class="block">
                     <li><a href="#sec-algorithm-conventions">Assert</a>: <i>captureI</i> is a <a
                         href="#sec-list-and-record-specification-type">List</a> of code points.</li>
-                    <li>Let <i>captureString</i> be a string whose elsments are the UTF-16 encoding of the code points of
+                    <li>Let <i>captureString</i> be a string whose elsments are the <a
+                        href="#sec-static-semantics-utf-16-encoding">UTF-16 encoding</a> of the code points of
                         <i>capture.</i></li>
                   </ol>
                 </li>

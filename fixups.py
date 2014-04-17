@@ -2633,6 +2633,10 @@ def fixup_links(doc, docx):
         ("String exotic object", "String Exotic Objects"),
         ("exotic arguments object", "Arguments Exotic Objects"),
 
+        # 10.1
+        ("UTF-16 Encoding (10.1.1)", "Static Semantics: UTF-16 Encoding"),
+        ("UTF-16 encoding", "Static Semantics: UTF-16 Encoding"),
+
         # 10.2
         ("strict mode code (see 10.1.1)", "Strict Mode Code"),
         ("strict mode code", "Strict Mode Code"),
