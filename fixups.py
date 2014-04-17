@@ -11,6 +11,7 @@ import htmodel as html
 from warnings import warn
 from array import array
 import collections, contextlib, os, time, re, json
+from hacks import declare_hack, using_hack, warn_about_unused_hacks
 
 
 # === Useful functions
@@ -284,9 +285,12 @@ def fixup_list_styles(doc, docx):
     """
 
     wrong_types = ('Alg4', 'MathSpecialCase3', 'BulletNotlast', 'BulletLast')
+    for t in wrong_types:
+        declare_hack("fixup_list_styles: " + t)
 
     for p in findall(doc, 'p'):
         if p.attrs.get("class") in wrong_types and has_bullet(docx, p):
+            using_hack("fixup_list_styles: " + p.attrs['class'])
             p.attrs['class'] = "Normal"
 
 
@@ -975,6 +979,10 @@ def ht_name_is(ht, name):
 
 @InPlaceFixup
 def fixup_sec_4_3(doc, docx):
+    declare_hack("fixup_sec_4_3: built-in object")
+    declare_hack("fixup_sec_4_3: String value")
+    declare_hack("fixup_sec_4_3: standard object")
+
     for parent, i, kid in all_parent_index_child_triples(doc):
         # Hack: Sections 4.3.{7,8,16} are messed up in the document. Wrong style. Fix it.
         if (kid.name == "h1"
@@ -983,6 +991,7 @@ def fixup_sec_4_3(doc, docx):
             and (kid.content == ["built-in object"]
                  or kid.content == ["String value"]
                  or kid.content == ["standard object"])):
+            using_hack("fixup_sec_4_3: " + kid.content[0])
             kid.name = "p"
             kid.attrs['class'] = 'Terms'
 
@@ -1537,6 +1546,8 @@ def fixup_pre(doc, docx):
 def fixup_notes(doc, docx):
     """ Wrap each NOTE and EXAMPLE in div.note and wrap the labels "NOTE", "NOTE 2", etc. in span.nh. """
 
+    declare_hack("Note-miscapitalized")
+
     def find_nh(p, strict=False):
         if len(p.content) == 0:
             if strict:
@@ -1557,8 +1568,10 @@ def fixup_notes(doc, docx):
                 if strict:
                     warn('warning in fixup_notes: no "NOTE" or "EXAMPLE" in p.Note: ' + repr(s))
 
-                # HACK - The document contains one of these. Warn, but return the right answer anyway.
+                # The document contains one of these. Warn, but return the
+                # right answer anyway.
                 if left == 'Note':
+                    using_hack("Note-miscapitalized")
                     return left, right
                 return None
             else:
@@ -2007,6 +2020,12 @@ def fixup_lang_grammar_pre(doc, docx):
     Keep the text; throw everything else away.
     """
 
+    declare_hack("space-before-grammar-subscript")
+    declare_hack("missing-space-after-terminal-symbol")
+    declare_hack("cope-with-bogus-syntax-markup")
+    declare_hack("insert-missing-space-after-eq")
+    declare_hack("fix-crazy-non-subscripted-space-character-in-grammar-subscript")
+
     def is_indented(p):
         if p.style:
             ind = p.style.get('-ooxml-indentation')
@@ -2041,18 +2060,23 @@ def fixup_lang_grammar_pre(doc, docx):
             elif ht.name == 'br':
                 ht_text = '\n'
             elif is_grammar_subscript(ht):
-                s = s.rstrip()  # hack around idiosyncracies in the document
+                # There should be no space between a nonterminal and any subscripts,
+                # but sometimes there is. Strip it out.
+                if s.endswith(' '):
+                    using_hack("space-before-grammar-subscript")
+                    s = s.rstrip()
                 ht_text = '_' + content_to_text(ht.content).replace(']opt', ']_opt')
             else:
                 ht_is_code = ht.name == 'code'
                 ht_text = content_to_text(ht.content)
 
-            # Hack: terminal symbols (<code>) should never run right up against
+            # Terminal symbols (<code>) should never run right up against
             # the next token.  Insert a space if needed.
             if (previous_was_code
                     and not ht_is_code
                     and not s.endswith((' ', '\n'))
                     and not ht_text.startswith((' ', '\n', '_'))):
+                using_hack("missing-space-after-terminal-symbol")
                 s += ' '
             s += ht_text
             previous_was_code = ht_is_code
@@ -2091,11 +2115,18 @@ def fixup_lang_grammar_pre(doc, docx):
         if syntax.count('\n') == 1 and " :" in syntax:
             syntax = syntax.lstrip()
 
-        # Hack - not all the paragraphs marked as syntax are actually
-        # things we want to replace. So as a heuristic, only make the
-        # change if the first line satisfied is_lhs.
+        # Not all the paragraphs marked as syntax are actually things we want
+        # to replace. So as a heuristic, only make the change if the first line
+        # satisfied is_lhs.
         if syntax.startswith('    '):
+            using_hack("cope-with-bogus-syntax-markup")
             return
+
+        # Work around a particular layout glitch in the document.
+        if "BindingElement[Yield,GeneratorParameter ]" in syntax:
+            using_hack("fix-crazy-non-subscripted-space-character-in-grammar-subscript")
+            syntax = syntax.replace("BindingElement[Yield,GeneratorParameter ]",
+                                    "BindingElement_[Yield,GeneratorParameter]")
 
         parent.content[i:j] = [html.pre(syntax, class_="syntax")]
 
@@ -2163,8 +2194,8 @@ def fixup_lang_grammar_pre(doc, docx):
                 if j >= len(content):
                     return None
 
-        # Hack: some productions are written (roughly) <b>::</b><code>.</code>
-        # with no space between. Insert a space to make it work.
+        # Some productions are written (roughly) <b>::</b><code>.</code> with
+        # no space between. Insert a space to make it work.
         free_pass = False
         eq = content[j]
         if (not isinstance(eq, str)
@@ -2172,6 +2203,7 @@ def fixup_lang_grammar_pre(doc, docx):
               and isinstance(eq.content[0], str)
               and eq.content[0].startswith(':')
               and eq.content[0].rstrip(':') == ''):
+            using_hack("insert-missing-space-after-eq")
             eq.content[0] += ' '
             free_pass = True
 
@@ -2339,10 +2371,6 @@ def fixup_lang_grammar_post(doc, docx):
             divs = []
             [syntax] = child.content
             syntax = syntax.lstrip('\n')
-
-            # Hack around a particular bug in the document.
-            syntax = syntax.replace("BindingElement[Yield,GeneratorParameter ]",
-                                    "BindingElement_[Yield,GeneratorParameter]")
 
             for production in syntax.split('\n\n'):
                 lines = production.splitlines()
@@ -3227,4 +3255,6 @@ def fixup(docx, doc):
             html.save_html(filename, doc, strict=False)
         t1 = time.time()
         print("done ({} msec)".format(int(1000 * (t1 - t0))))
+
+    warn_about_unused_hacks()
     return doc
