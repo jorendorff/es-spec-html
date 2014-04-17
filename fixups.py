@@ -2468,6 +2468,8 @@ def title_as_algorithm_name(title, secnum):
 
 @InPlaceFixup
 def fixup_links(doc, docx):
+    declare_hack("do-not-linkify-section-numbers-in-D.2")
+
     algorithm_name_to_section = {}
     sections_by_title = {}
     sections_by_number = {}
@@ -2860,6 +2862,7 @@ def fixup_links(doc, docx):
     xref_re = re.compile(r'(.*)\{ REF _Ref[0-9]+ (\\r )?\\h \}' + '\N{LEFT-TO-RIGHT MARK}' + r'?')
 
     def find_link(s, current_section):
+        in_section_D_2 = current_section == "#sec-in-the-5th-edition"
         best = None
         for text, target in specific_links:
             i = s.find(text)
@@ -2909,6 +2912,10 @@ def fixup_links(doc, docx):
                     if id is None:
                         warn("no such section: " + sec_num)
                         continue
+
+                if in_section_D_2 and id is not None:
+                    using_hack("do-not-linkify-section-numbers-in-D.2")
+                    break
 
                 if id is not None and id not in all_ids and not id.startswith('http'):
                     warn("no such section: " + m.group(2))
