@@ -488,7 +488,7 @@ def fixup_vars(doc, docx):
 
 
 def looks_like_nonterminal(text):
-    return re.match(r'^(?:uri(?:[A-Z][A-Za-z]*)?|[A-Z]+[a-z][A-Za-z]*)$', text) is not None
+    return re.match(r'^(?:uri(?:[A-Z][A-Za-z0-9]*)?|[A-Z]+[a-z][A-Za-z0-9]*)$', text) is not None
 
 def is_marker(e):
     return ht_name_is(e, 'span') and e.attrs.get('class') == 'marker'
@@ -833,6 +833,12 @@ def ht_concat(c1, c2):
         return c1[:-1] + [c1[-1] + c2[0]] + c2[1:]
     else:
         return c1 + c2
+
+def ht_append(content, ht):
+    if content and isinstance(ht, str) and isinstance(content[-1], str):
+        content[-1] += ht
+    else:
+        content.append(ht)
 
 @Fixup
 def fixup_paragraph_classes(doc, docx):
@@ -2234,6 +2240,7 @@ def fixup_lang_grammar_post(doc, docx):
         | \[desc \  [^]]* \]
         | \[empty\]
         | \[Lexical\ goal\ [A-Z][A-Za-z]*\]
+        | \[match\ only\ if\ [^]]* \]
         | \[lookahead \  . [^]]* \]     # the . stands for &notin;
         | <[A-Z]+>                      # special character
         | [()]                          # unstick a parenthesis from the following token
@@ -2271,22 +2278,8 @@ def fixup_lang_grammar_post(doc, docx):
                     markup.append(html.sub(subscript[1:]))
             elif token in ('one of', 'but not', 'but not one of', 'or'):
                 markup.append(html.span(token, class_='grhsmod'))
-            elif token == '[empty]':
-                markup.append(html.span(token, class_='grhsannot'))
-            elif token == '[no LineTerminator here]':
-                markup.append(html.span('[no ',
-                                        html.span('LineTerminator', class_='nt'),
-                                        ' here]',
-                                        class_='grhsannot'))
             elif token.startswith('[desc '):
                 markup.append(html.span(token[6:-1].strip(), class_='gprose'))
-            elif token.startswith('[Lexical goal '):
-                assert token.endswith(']')
-                n = len('[Lexical goal ')
-                markup.append(html.span(token[:n],
-                                        html.span(token[n:-1].strip(), class_='nt'),
-                                        ']',
-                                        class_='grhsannot'))
             elif token.startswith('[lookahead '):
                 start = '[lookahead \N{NOT AN ELEMENT OF} '
                 assert token.startswith(start)
@@ -2308,12 +2301,22 @@ def fixup_lang_grammar_post(doc, docx):
                 markup.append(html.span(token, class_='geq'))
                 make_geq = False
             elif token.startswith('<') and token.endswith('>'):
-                if markup:
-                    markup[-1] += token
-                else:
-                    markup.append(token)
+                ht_append(markup, token)
             elif token.startswith('[') and token.endswith(']'):
-                markup.append(html.span(token, class_='grhsannot'))
+                # Annotation. Mark up any nonterminals inside it,
+                # such as [no LineTerminal here].
+                body = ['[']
+                for i, word in enumerate(token[1:-1].split()):
+                    if i == 0:
+                        ht_append(body, word)
+                    else:
+                        ht_append(body, ' ')
+                        if looks_like_nonterminal(word):
+                            ht_append(body, html.span(word, class_='nt'))
+                        else:
+                            ht_append(body, word)
+                ht_append(body, ']')
+                markup.append(html.span(*body, class_='grhsannot'))
             elif token:
                 # A terminal.
                 markup.append(html.code(token, class_='t'))

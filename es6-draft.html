@@ -14253,14 +14253,15 @@
 
           <li>
             <p>The CV of <span class="prod"><span class="nt">UnicodeEscapeSequence</span> <span class="geq">::</span> <code
-            class="t">u</code></span> <var>Hex4Digits</var> is the CV of <var>Hex4Digits</var></p>
+            class="t">u</code> <span class="nt">Hex4Digits</span></span> is the CV of <span class="nt">Hex4Digits</span></p>
           </li>
 
           <li>
-            <p>The CV of <var>Hex4Digits</var> <b>::</b> <span class="nt">HexDigit</span> <i>HexDigit</i> <i>HexDigit</i>
-            <i>HexDigit</i> is the code unit value that is (4096 times the MV of the first <i>HexDigit</i>) plus (256 times the MV
-            of the second <i>HexDigit</i>) plus (16 times the MV of the third <i>HexDigit</i>) plus the MV of the fourth
-            <i>HexDigit</i>.</p>
+            <p>The CV of <span class="prod"><span class="nt">Hex4Digits</span> <span class="geq">::</span> <span
+            class="nt">HexDigit</span> <span class="nt">HexDigit</span> <span class="nt">HexDigit</span> <span
+            class="nt">HexDigit</span></span> is the code unit value that is (4096 times the MV of the first <i>HexDigit</i>) plus
+            (256 times the MV of the second <i>HexDigit</i>) plus (16 times the MV of the third <i>HexDigit</i>) plus the MV of
+            the fourth <i>HexDigit</i>.</p>
           </li>
 
           <li>
@@ -37930,12 +37931,12 @@
 
       <div class="gp">
         <div class="lhs"><span class="nt">LeadSurragate</span> <span class="geq">::</span></div>
-        <div class="rhs"><span class="nt">Hex4Digits</span> <code class="t">[match</code> <code class="t">only</code> <code class="t">if</code> <code class="t">the</code> <code class="t">CV</code> <code class="t">of</code> <span class="nt">Hex4Digits</span> <code class="t">is</code> <code class="t">in</code> <code class="t">the</code> <code class="t">inclusive</code> <code class="t">range</code> <code class="t">0xD800</code> <code class="t">to</code> <code class="t">0xDBFF]</code></div>
+        <div class="rhs"><span class="nt">Hex4Digits</span> <span class="grhsannot">[match only if the CV of <span class="nt">Hex4Digits</span> is in the inclusive range 0xD800 to 0xDBFF]</span></div>
       </div>
 
       <div class="gp">
         <div class="lhs"><span class="nt">TailSurragate</span> <span class="geq">::</span></div>
-        <div class="rhs"><span class="nt">Hex4Digits</span> <code class="t">[match</code> <code class="t">only</code> <code class="t">if</code> <code class="t">the</code> <code class="t">CV</code> <code class="t">of</code> <span class="nt">Hex4Digits</span> <code class="t">is</code> <code class="t">in</code> <code class="t">the</code> <code class="t">inclusive</code> <code class="t">range</code> <code class="t">0xDC00</code> <code class="t">to</code> <code class="t">0xDFFF]</code></div>
+        <div class="rhs"><span class="nt">Hex4Digits</span> <span class="grhsannot">[match only if the CV of <span class="nt">Hex4Digits</span> is in the inclusive range 0xDC00 to 0xDFFF]</span></div>
       </div>
 
       <div class="gp">
@@ -39124,7 +39125,7 @@
         </ol>
 
         <p>The production <span class="prod"><span class="nt">RegExpUnicodeEscapeSequence</span> <span class="geq">::</span> <code
-        class="t">u</code></span> <var>Hex4Digits</var> evaluates as follows:</p>
+        class="t">u</code> <span class="nt">Hex4Digits</span></span> evaluates as follows:</p>
 
         <ol class="proc">
           <li>Return the character whose code is the CV of <i>Hex4Digits</i>.</li>
@@ -39137,15 +39138,15 @@
           <li>Return the character whose code is the MV of <i>Hex4Digits</i>.</li>
         </ol>
 
-        <p>The production <span class="prod"><span class="nt">LeadSurragate</span> <span class="geq">::</span></span>
-        <var>Hex4Digits</var> evaluates by evaluating as follows:</p>
+        <p>The production <span class="prod"><span class="nt">LeadSurragate</span> <span class="geq">::</span> <span
+        class="nt">Hex4Digits</span></span> evaluates by evaluating as follows:</p>
 
         <ol class="proc">
           <li>Return the character whose code is the CV of <i>Hex4Digits</i>.</li>
         </ol>
 
-        <p>The production <span class="prod"><span class="nt">TailSurragate</span> <span class="geq">::</span></span>
-        <var>Hex4Digits</var> evaluates as follows:</p>
+        <p>The production <span class="prod"><span class="nt">TailSurragate</span> <span class="geq">::</span> <span
+        class="nt">Hex4Digits</span></span> evaluates as follows:</p>
 
         <ol class="proc">
           <li>Return the character whose code is the CV of <i>Hex4Digits</i>.</li>
