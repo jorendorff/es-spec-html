@@ -13996,12 +13996,12 @@
 
         <div class="gp">
           <div class="lhs"><span class="nt">UnicodeEscapeSequence</span> <span class="geq">::</span></div>
-          <div class="rhs"><code class="t">u</code> <span class="nt">Hex</span> <code class="t">4Digits</code></div>
+          <div class="rhs"><code class="t">u</code> <span class="nt">Hex4Digits</span></div>
           <div class="rhs"><code class="t">u{</code> <span class="nt">HexDigits</span> <code class="t">}</code></div>
         </div>
 
         <div class="gp">
-          <div class="lhs"><span class="nt">Hex</span> <code class="t">4Digits</code> <span class="geq">::</span></div>
+          <div class="lhs"><span class="nt">Hex4Digits</span> <span class="geq">::</span></div>
           <div class="rhs"><span class="nt">HexDigit</span> <span class="nt">HexDigit</span> <span class="nt">HexDigit</span> <span class="nt">HexDigit</span></div>
         </div>
 
@@ -37924,18 +37924,18 @@
       <div class="gp">
         <div class="lhs"><span class="nt">RegExpUnicodeEscapeSequence</span><sub>[U]</sub> <span class="geq">::</span></div>
         <div class="rhs"><span class="grhsannot">[+U]</span> <code class="t">u</code> <span class="nt">LeadSurragate</span> <code class="t">\u</code> <span class="nt">TrailSurragate</span></div>
-        <div class="rhs"><code class="t">u</code> <span class="nt">Hex</span> <code class="t">4Digits</code></div>
+        <div class="rhs"><code class="t">u</code> <span class="nt">Hex4Digits</span></div>
         <div class="rhs"><span class="grhsannot">[+U]</span> <code class="t">u{</code> <span class="nt">HexDigits</span> <code class="t">}</code></div>
       </div>
 
       <div class="gp">
         <div class="lhs"><span class="nt">LeadSurragate</span> <span class="geq">::</span></div>
-        <div class="rhs"><span class="nt">Hex</span> <code class="t">4Digits</code> <code class="t">[match</code> <code class="t">only</code> <code class="t">if</code> <code class="t">the</code> <code class="t">CV</code> <code class="t">of</code> <span class="nt">Hex</span> <code class="t">4Digits</code> <code class="t">is</code> <code class="t">in</code> <code class="t">the</code> <code class="t">inclusive</code> <code class="t">range</code> <code class="t">0xD800</code> <code class="t">to</code> <code class="t">0xDBFF]</code></div>
+        <div class="rhs"><span class="nt">Hex4Digits</span> <code class="t">[match</code> <code class="t">only</code> <code class="t">if</code> <code class="t">the</code> <code class="t">CV</code> <code class="t">of</code> <span class="nt">Hex4Digits</span> <code class="t">is</code> <code class="t">in</code> <code class="t">the</code> <code class="t">inclusive</code> <code class="t">range</code> <code class="t">0xD800</code> <code class="t">to</code> <code class="t">0xDBFF]</code></div>
       </div>
 
       <div class="gp">
         <div class="lhs"><span class="nt">TailSurragate</span> <span class="geq">::</span></div>
-        <div class="rhs"><span class="nt">Hex</span> <code class="t">4Digits</code> <code class="t">[match</code> <code class="t">only</code> <code class="t">if</code> <code class="t">the</code> <code class="t">CV</code> <code class="t">of</code> <span class="nt">Hex</span> <code class="t">4Digits</code> <code class="t">is</code> <code class="t">in</code> <code class="t">the</code> <code class="t">inclusive</code> <code class="t">range</code> <code class="t">0xDC00</code> <code class="t">to</code> <code class="t">0xDFFF]</code></div>
+        <div class="rhs"><span class="nt">Hex4Digits</span> <code class="t">[match</code> <code class="t">only</code> <code class="t">if</code> <code class="t">the</code> <code class="t">CV</code> <code class="t">of</code> <span class="nt">Hex4Digits</span> <code class="t">is</code> <code class="t">in</code> <code class="t">the</code> <code class="t">inclusive</code> <code class="t">range</code> <code class="t">0xDC00</code> <code class="t">to</code> <code class="t">0xDFFF]</code></div>
       </div>
 
       <div class="gp">
