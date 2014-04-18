@@ -188,7 +188,13 @@ def save_html(filename, ht, strict=True):
         f.write("<!doctype html>\n")
         write_html(f, ht, strict=strict)
 
-def write_html(f, ht, indent='', strict=True):
+# When wrap_hack is true, space characters in attribute values are replaced
+# with this character (so that a big chunk of HTML code can be word-wrapped
+# without fear of breaking inside an attribute). The character is in the
+# Private Use area.
+NOT_A_SPACE = '\uF123'
+
+def write_html(f, ht, indent='', strict=True, wrap_hack=False):
     WIDTH = 130
 
     def htmlify(name):
@@ -198,8 +204,14 @@ def write_html(f, ht, indent='', strict=True):
         name = name.replace('_', '-')
         return name
 
-    def start_tag(ht):
-        attrs = ''.join(' {0}="{1}"'.format(htmlify(k), escape(v, True))
+    def escape_attr_value(v, wrap_hack):
+        ev = escape(v, True)
+        if wrap_hack:
+            ev = ev.replace(" ", NOT_A_SPACE)
+        return ev
+
+    def start_tag(ht, wrap_hack):
+        attrs = ''.join(' {0}="{1}"'.format(htmlify(k), escape_attr_value(v, wrap_hack))
                         for k, v in sorted(ht.attrs.items()))
         if ht.style:
             assert 'style' not in ht.attrs
@@ -210,7 +222,7 @@ def write_html(f, ht, indent='', strict=True):
     def is_ht_inline(ht):
         return isinstance(ht, str) or _tag_data[ht.name][0] == 'I'
 
-    def write_inline_content(f, content, indent, allow_last_block, strict, strict_blame):
+    def write_inline_content(f, content, indent, allow_last_block, strict, strict_blame, wrap_hack):
         if (allow_last_block
               and isinstance(content[-1], Element)
               and content[-1].name in ('ol', 'ul', 'table', 'figure')):
@@ -226,11 +238,11 @@ def write_html(f, ht, indent='', strict=True):
                 if strict and not is_ht_inline(kid):
                     raise ValueError("block element <{}> can't appear in inline content:\n".format(kid.name)
                                      + repr(strict_blame))
-                write_html(f, kid, indent, strict)
+                write_html(f, kid, indent, strict, wrap_hack)
 
         if last is not None:
             f.write('\n')
-            write_html(f, last, indent, strict)
+            write_html(f, last, indent, strict, wrap_hack)
             f.write(indent[:-2])
 
     if isinstance(ht, str):
@@ -254,10 +266,13 @@ def write_html(f, ht, indent='', strict=True):
             last_block = None
 
         # Dump content_to_wrap to a temporary buffer.
+        # We are going to word-wrap this later, so use wrap_hack=True
+        # which makes sure no spaces appear in attributes.
         tmpf = StringIO()
-        tmpf.write(start_tag(ht))
+        tmpf.write(start_tag(ht, True))
         write_inline_content(tmpf, content_to_wrap, indent + '  ',
-                             allow_last_block=ht.name == 'li', strict=strict, strict_blame=ht)
+                             allow_last_block=ht.name == 'li', strict=strict, strict_blame=ht,
+                             wrap_hack=True)
         if last_block is None:
             tmpf.write('</{}>'.format(ht.name))
         text = tmpf.getvalue()
@@ -265,25 +280,32 @@ def write_html(f, ht, indent='', strict=True):
         # Write the output to f.
         if '\n' in text:
             # This is unexpected; don't word-wrap. Write it verbatim, with newlines.
+            text = text.replace(NOT_A_SPACE, ' ')
             f.write(indent + text + "\n")
         else:
             # The usual case. Word-wrap and write.
             subsequent_indent = indent
             if ht.name != 'p':
                 subsequent_indent += '    '
-            f.write(textwrap.fill(text, WIDTH, expand_tabs=False, replace_whitespace=False,
+
+            text = textwrap.fill(text, WIDTH, expand_tabs=False, replace_whitespace=False,
                                   initial_indent=indent, subsequent_indent=subsequent_indent,
-                                  break_long_words=False, break_on_hyphens=False))
-            f.write("\n")
+                                  break_long_words=False, break_on_hyphens=False)
+
+            # Now that word wrapping is done, we can change the hacked spaces
+            # back to real spaces.
+            text = text.replace(NOT_A_SPACE, ' ')
+            f.write(text + "\n")
 
         # If we had a trailing block, dump it now (and the end tag we skipped before).
         if last_block:
-            write_html(f, last_block, indent + '  ', strict=strict)
+            write_html(f, last_block, indent + '  ', strict=strict,
+                       wrap_hack=wrap_hack)
             f.write(indent + "</{}>\n".format(ht.name))
 
     elif info[0] == 'B':
         # Block.
-        f.write(indent + start_tag(ht))
+        f.write(indent + start_tag(ht, wrap_hack))
         if info != 'B0':
             if content:
                 if is_ht_inline(content[0]):
@@ -292,7 +314,7 @@ def write_html(f, ht, indent='', strict=True):
                             raise ValueError("<{}> element may only contain tags, not text".format(ht.name))
                         else:
                             raise ValueError("<{}> element may not contain inline element <{}>".format(ht.name, content[0].name))
-                    write_inline_content(f, content, indent + '  ', ht.name == 'li', strict, strict_blame=ht)
+                    write_inline_content(f, content, indent + '  ', ht.name == 'li', strict, strict_blame=ht, wrap_hack=wrap_hack)
                 else:
                     if strict and info[1] not in 'b?':
                         raise ValueError("<{}> element may not contain block element <{}>".format(ht.name, content[0].name))
@@ -316,7 +338,8 @@ def write_html(f, ht, indent='', strict=True):
                                                 and kid.content and not is_ht_inline(kid.content[0]))))
                         if not first and (prev_needs_space or needs_space):
                             f.write('\n')
-                        write_html(f, kid, inner_indent, strict)
+                        write_html(f, kid, inner_indent, strict,
+                                   wrap_hack=wrap_hack)
                         prev_needs_space = needs_space
                         first = False
                     f.write(indent)
@@ -325,9 +348,9 @@ def write_html(f, ht, indent='', strict=True):
     else:
         # Inline. Content must be inline too.
         assert info in ('Ii', 'I0')
-        f.write(start_tag(ht))
+        f.write(start_tag(ht, wrap_hack))
         if info != 'I0':
-            write_inline_content(f, content, indent + '  ', False, strict, ht)
+            write_inline_content(f, content, indent + '  ', False, strict, ht, wrap_hack)
             f.write('</{}>'.format(ht.name))
 
 _tag_data = {}
