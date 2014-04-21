@@ -28509,8 +28509,9 @@
             <li>If <i>instantiateResult</i> is <b>undefined</b>, then
               <ol class="block">
                 <li>Let <i>body</i> be the result of parsing <i>load</i>.[[Source]], interpreted as UTF-16 encoded Unicode text as
-                    described in clause 10.1.1, using <i>Module</i> as the goal symbol. Throw a <b>SyntaxError</b> exception if
-                    the parse fails or if any static semantics errors are detected.</li>
+                    described in <a href="#sec-static-semantics-utf-16-encoding">clause 10.1.1</a>, using <i>Module</i> as the
+                    goal symbol. Throw a <b>SyntaxError</b> exception if the parse fails or if any static semantics errors are
+                    detected.</li>
                 <li>Set <i>load</i>.[[Body]] to <i>body</i>.</li>
                 <li>Set <i>load</i>.[[Kind]] to <span style="font-family: sans-serif">declarative</span>.</li>
                 <li>Let <i>depsList</i> be the ModuleRequests of <i>body</i>.</li>

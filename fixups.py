@@ -2802,7 +2802,7 @@ def fixup_links(doc, docx):
     all_ids = set([kid.attrs['id'] for _, _, kid in all_parent_index_child_triples(doc) if 'id' in kid.attrs])
 
     SECTION = "(%s)" % "|".join([
-        r'[Cc]lause\s+[0-9]+',
+        r'[Cc]lause\s+[1-9A-Z][0-9]*(?:\.[0-9]+)*',
         r'[1-9A-Z][0-9]*(?:\.[0-9]+)+',
         r'[Aa]nnex\s+[A-Z]'
     ])
