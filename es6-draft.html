@@ -1734,7 +1734,7 @@
 
   <p>A conforming implementation of ECMAScript may support program and regular expression syntax not described in this
   specification. In particular, a conforming implementation of ECMAScript may support program syntax that makes use of the
-  &ldquo;future reserved words&rdquo; listed in sub<a href="#sec-ecmascript-language-lexical-grammar">clause 11</a>.6.2.2 of this
+  &ldquo;future reserved words&rdquo; listed in <a href="#sec-future-reserved-words">subclause 11.6.2.2</a> of this
   specification.</p>
 </section>
 
@@ -2363,10 +2363,9 @@
 
       <p>A <i>lexical grammar</i> for ECMAScript is given in <a href="#sec-ecmascript-language-lexical-grammar">clause 11</a>.
       This grammar has as its terminal symbols characters (Unicode code points) that conform to the rules for <span
-      class="nt">SourceCharacter</span> defined in <a href="#sec-ecmascript-language-source-code">clause 10</a>.1. It defines a
-      set of productions, starting from the goal symbol <span class="nt">InputElementDiv</span> or <span
-      class="nt">InputElementRegExp</span>, that describe how sequences of such characters are translated into a sequence of input
-      elements.</p>
+      class="nt">SourceCharacter</span> defined in <a href="#sec-source-text">clause 10.1</a>. It defines a set of productions,
+      starting from the goal symbol <span class="nt">InputElementDiv</span> or <span class="nt">InputElementRegExp</span>, that
+      describe how sequences of such characters are translated into a sequence of input elements.</p>
 
       <p>Input elements other than white space and comments form the terminal symbols for the syntactic grammar for ECMAScript and
       are called ECMAScript <i>tokens</i>. These tokens are the reserved words, identifiers, literals, and punctuators of the
@@ -3489,9 +3488,9 @@
           </table>
         </figure>
 
-        <p>The semantics of the essential internal method for ordinary objects and standard exotic objects are specified in clause
-        9.  If any specified use of an exotic object's internal methods is not supported by an implementation, that usage must
-        throw a <b>TypeError</b> exception when attempted.</p>
+        <p>The semantics of the essential internal method for ordinary objects and standard exotic objects are specified in <a
+        href="#sec-ordinary-and-exotic-objects-behaviours">clause 9</a>.  If any specified use of an exotic object's internal
+        methods is not supported by an implementation, that usage must throw a <b>TypeError</b> exception when attempted.</p>
       </section>
 
       <section id="sec-invariants-of-the-essential-internal-methods">
@@ -15057,7 +15056,8 @@
 
         <p>With arguments <var>value</var> and <var>environment</var>.</p>
 
-        <p>See also: 12.2.4.2.2, <a href="#sec-variable-statement-runtime-semantics-bindinginitialization">13.2.2.2</a>, <a
+        <p>See also: <a href="#sec-array-comprehension-runtime-semantics-bindinginitialization">12.2.4.2.2</a>, <a
+        href="#sec-variable-statement-runtime-semantics-bindinginitialization">13.2.2.2</a>, <a
         href="#sec-destructuring-binding-patterns-static-semantics-issimpleparameterlist">13.2.3.4</a>, <a
         href="#sec-try-statement-runtime-semantics-bindinginitialization">13.14.3</a>.</p>
 
@@ -18215,7 +18215,7 @@
           <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>rnum</i>).</li>
           <li>Return the result of applying the specified operation (*, /, or %) to <i>lnum</i> and <i>rnum</i>. See the Notes
               below <a href="#sec-applying-the-mul-operator">12.6.3.1</a>, <a href="#sec-applying-the-div-operator">12.6.3.2</a>,
-              { REF _Ref424535339 \r \h  \* MERGEFORMAT }12.6.3.3.</li>
+              <a href="#sec-applying-the-mod-operator">12.6.3.3</a>.</li>
         </ol>
       </div>
 
@@ -31656,11 +31656,11 @@
           <li>Let <i>bodyText</i> be <a href="#sec-tostring">ToString</a>(<i>bodyText</i>).</li>
           <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>bodyText</i>).</li>
           <li>Let <i>parameters</i> be the result of parsing <i>P</i>, interpreted as UTF-16 encoded Unicode text as described in
-              clause { REF _Ref368310413 \r \h  \* MERGEFORMAT }10.1.1<i>,</i> using <i>FormalParameters</i> as the goal symbol.
-              Throw a <b>SyntaxError</b> exception if the parse fails.</li>
+              <a href="#sec-static-semantics-utf-16-encoding">clause 10.1.1</a><i>,</i> using <i>FormalParameters</i> as the goal
+              symbol. Throw a <b>SyntaxError</b> exception if the parse fails.</li>
           <li>Let <i>body</i> be the result of parsing <i>bodyText</i>, interpreted as UTF-16 encoded Unicode text as described in
-              clause { REF _Ref368310413 \r \h  \* MERGEFORMAT }10.1.1<i>,</i> using <i>FunctionBody</i> as the goal symbol. Throw
-              a <b>SyntaxError</b> exception if the parse fails or if any static semantics errors are detected.</li>
+              <a href="#sec-static-semantics-utf-16-encoding">clause 10.1.1</a><i>,</i> using <i>FunctionBody</i> as the goal
+              symbol. Throw a <b>SyntaxError</b> exception if the parse fails or if any static semantics errors are detected.</li>
           <li>If IsSimpleParameterList of <i>parameters</i> is <b>false</b> and any element of the BoundNames of <i>parameters</i>
               also occurs in the VarDeclaredNames of <i>body</i>, then throw a <b>SyntaxError</b> exception.</li>
           <li>If any element of the BoundNames of <i>parameters</i> also occurs in the LexicallyDeclaredNames of <i>body</i>, then
@@ -48995,12 +48995,13 @@
           <li>Let <i>bodyText</i> be <a href="#sec-tostring">ToString</a>(<i>bodyText</i>).</li>
           <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>bodyText</i>).</li>
           <li>Let <i>parameters</i> be the result of parsing <i>P</i>, interpreted as UTF-16 encoded Unicode text as described in
-              clause { REF _Ref368310413 \r \h  \* MERGEFORMAT }10.1.1<i>,</i> using <i>FormalParameters</i> as the goal symbol.
-              Throw a <b>SyntaxError</b> exception if the parse fails.</li>
+              <a href="#sec-static-semantics-utf-16-encoding">clause 10.1.1</a><i>,</i> using <i>FormalParameters</i> as the goal
+              symbol. Throw a <b>SyntaxError</b> exception if the parse fails.</li>
           <li>Let <i>funcBody</i> be the result of parsing <i>bodyText</i>, interpreted as UTF-16 encoded Unicode text as
-              described in clause { REF _Ref368310413 \r \h  \* MERGEFORMAT }10.1.1<i>,</i> using <i>FunctionBody</i><sub><span
-              style="font-family: sans-serif">[</span>Yield<span style="font-family: sans-serif">]</span></sub> as the goal
-              symbol. Throw a <b>SyntaxError</b> exception if the parse fails or if any static semantics errors are detected.</li>
+              described in <a href="#sec-static-semantics-utf-16-encoding">clause 10.1.1</a><i>,</i> using
+              <i>FunctionBody</i><sub><span style="font-family: sans-serif">[</span>Yield<span style="font-family:
+              sans-serif">]</span></sub> as the goal symbol. Throw a <b>SyntaxError</b> exception if the parse fails or if any
+              static semantics errors are detected.</li>
           <li>If IsSimpleParameterList of <i>parameters</i> is <b>false</b> and any element of the BoundNames of <i>parameters</i>
               also occurs in the VarDeclaredNames of <i>funcBody</i>, then throw a <b>SyntaxError</b> exception.</li>
           <li>If any element of the BoundNames of <i>parameters</i> also occurs in the LexicallyDeclaredNames of <i>funcBody</i>,
