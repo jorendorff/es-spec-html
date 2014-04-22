@@ -2863,7 +2863,7 @@ def fixup_links(doc, docx):
     # Disallow . ( ) , at the end since they usually aren't meant as part of the URL.
     url_re = re.compile(r'https?://[0-9A-Za-z;/?:@&=+$,_.!~*()\'-]+[0-9A-Za-z;/?:@&=+$_!~*\'-]')
 
-    xref_re = re.compile(r'(.*)\{ REF _Ref[0-9]+ (\\r )?\\h \}' + '\N{LEFT-TO-RIGHT MARK}' + r'?')
+    xref_re = re.compile(r'\{ REF _Ref[0-9]+ (\\r )?\\h \}' + '\N{LEFT-TO-RIGHT MARK}' + r'?')
 
     def find_link(s, current_section):
         in_section_D_2 = current_section == "#sec-in-the-5th-edition"
@@ -2947,9 +2947,7 @@ def fixup_links(doc, docx):
             start, stop, href = m
             if start > 0:
                 prefix = s[:start]
-                m = xref_re.match(prefix)
-                if m:
-                    prefix = m.group(1)
+                prefix = re.sub(xref_re, '', prefix)
                 if prefix:
                     parent.content.insert(i, prefix)
                     i += 1
@@ -2958,7 +2956,8 @@ def fixup_links(doc, docx):
                 assert (not href.startswith('#')
                         or href[1:] in all_ids
                         or href[1:] in non_section_id_hrefs)
-                link_body = re.sub(xref_re, r'\1', s[start:stop])
+                link_body = s[start:stop]
+                link_body = re.sub(xref_re, '', link_body)
                 parent.content[i] = html.a(href=href, *[link_body])
                 i += 1
             else:
