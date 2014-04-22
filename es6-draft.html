@@ -3266,7 +3266,7 @@
             <tr>
               <td style="border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black">[[Enumerable]]</td>
               <td style="border-bottom: 1px solid black; border-right: 1px solid black">Boolean</td>
-              <td style="border-bottom: 1px solid black; border-right: 1px solid black">If <b>true</b>, the property will be enumerated by a for-in enumeration (see <a href="#sec-runtime-semantics-createperiterationenvironment">13.6.3.4</a>). Otherwise, the property is said to be non-enumerable.</td>
+              <td style="border-bottom: 1px solid black; border-right: 1px solid black">If <b>true</b>, the property will be enumerated by a for-in enumeration (<a href="#sec-runtime-semantics-createperiterationenvironment">see 13.6.3.4</a>). Otherwise, the property is said to be non-enumerable.</td>
             </tr>
             <tr>
               <td style="border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black">[[Configurable]]</td>
@@ -3299,7 +3299,7 @@
             <tr>
               <td style="border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid #000000; border-top: 1px solid black">[[Enumerable]]</td>
               <td style="border-bottom: 1px solid black; border-right: 1px solid black">Boolean</td>
-              <td style="border-bottom: 1px solid black; border-right: 1px solid black">If <b>true</b>, the property is to be enumerated by a for-in enumeration (see <a href="#sec-runtime-semantics-createperiterationenvironment">13.6.3.4</a>). Otherwise, the property is said to be non-enumerable.</td>
+              <td style="border-bottom: 1px solid black; border-right: 1px solid black">If <b>true</b>, the property is to be enumerated by a for-in enumeration (<a href="#sec-runtime-semantics-createperiterationenvironment">see 13.6.3.4</a>). Otherwise, the property is said to be non-enumerable.</td>
             </tr>
             <tr>
               <td style="border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid #000000; border-top: 1px solid black">[[Configurable]]</td>
@@ -3548,8 +3548,8 @@
 
         <p>&#x25cf;&emsp;The Type of the return value must be either Object or Undefined.</p>
 
-        <p>&#x25cf;&emsp;If the Type of the return value is Object, that object must be a complete property descriptor (see <a
-        href="#sec-completepropertydescriptor">6.2.4.6</a>).</p>
+        <p>&#x25cf;&emsp;If the Type of the return value is Object, that object must be a complete property descriptor (<a
+        href="#sec-completepropertydescriptor">see 6.2.4.6</a>).</p>
 
         <p>&#x25cf;&emsp;If a property is described as a data property and it may return different values over time, then either
         or both of the Desc.[[Writable]] and Desc.[[Configurable]] attributes must be true even if no mechanism to change the
@@ -3972,7 +3972,7 @@
       <h1><span class="secnum" id="sec-6.2.1"><a href="#sec-list-and-record-specification-type"
           title="link to this section">6.2.1</a></span> The List and Record Specification Type</h1>
 
-      <p>The List type is used to explain the evaluation of argument lists (see <a href="#sec-argument-lists">12.3.6</a>) in
+      <p>The List type is used to explain the evaluation of argument lists (<a href="#sec-argument-lists">see 12.3.6</a>) in
       <code>new</code> expressions, in function calls, and in other algorithms where a simple ordered list of values is needed.
       Values of the List type are simply ordered sequences of list elements containing the individual values. These sequences may
       be of any length. The elements of a list may be randomly accessed using 0-origin indices. For notational convience an
@@ -4217,9 +4217,8 @@
           </li>
           <li>Else <i>base</i> must be an environment record,
             <ol class="block">
-              <li>Return the result of calling the GetBindingValue (see { REF _Ref365530749 \r \h  \* MERGEFORMAT }8.1.1)
-                  concrete method of <i>base</i> passing <a
-                  href="#sec-reference-specification-type">GetReferencedName</a>(<i>V</i>) and <a
+              <li>Return the result of calling the GetBindingValue (<a href="#sec-environment-records">see 8.1.1</a>)  concrete
+                  method of <i>base</i> passing <a href="#sec-reference-specification-type">GetReferencedName</a>(<i>V</i>) and <a
                   href="#sec-reference-specification-type">IsStrictReference</a>(<i>V</i>) as arguments.</li>
             </ol>
           </li>
@@ -4275,7 +4274,7 @@
           </li>
           <li>Else <i>base</i> must be a reference whose base is an environment record. So,
             <ol class="block">
-              <li>Return the result of calling the SetMutableBinding ({ REF _Ref365530812 \r \h  \* MERGEFORMAT }8.1.1) concrete
+              <li>Return the result of calling the SetMutableBinding (<a href="#sec-environment-records">8.1.1</a>) concrete
                   method of <i>base</i>, passing <a href="#sec-reference-specification-type">GetReferencedName</a>(<i>V</i>),
                   <i>W</i>, and <a href="#sec-reference-specification-type">IsStrictReference</a>(<i>V</i>) as arguments.</li>
             </ol>
@@ -4772,9 +4771,9 @@
       <div class="note">
         <p><span class="nh">NOTE</span> When ToPrimitive is called with no hint, then it generally behaves as if the hint were
         Number.  However, objects may over-ride this behaviour by defining a @@toPrimitive method. Of the objects defined in this
-        specification only Date objects (see <a href="#sec-date-objects">20.3</a>) and Symbol objects (see <a
-        href="#sec-symbol.prototype-@@toprimitive">19.4.3.4</a>) over-ride the default ToPrimitive behaviour. Date objects treat
-        no hint as if the hint were String.</p>
+        specification only Date objects (<a href="#sec-date-objects">see 20.3</a>) and Symbol objects (<a
+        href="#sec-symbol.prototype-@@toprimitive">see 19.4.3.4</a>) over-ride the default ToPrimitive behaviour. Date objects
+        treat no hint as if the hint were String.</p>
       </div>
     </section>
 
@@ -4978,7 +4977,7 @@
 
           <div class="note">
             <p><span class="nh">NOTE</span> Some differences should be noted between the syntax of a <i>StringNumericLiteral</i>
-            and a <i>NumericLiteral</i> (see <a href="#sec-literals-numeric-literals">11.8.3</a>):</p>
+            and a <i>NumericLiteral</i> (<a href="#sec-literals-numeric-literals">see 11.8.3</a>):</p>
 
             <ul>
               <li>
@@ -5011,7 +5010,7 @@
               title="link to this section">7.1.3.1.1</a></span> Runtime Semantics: MV&rsquo;s</h1>
 
           <p>The conversion of a String to a Number value is similar overall to the determination of the Number value for a
-          numeric literal (see <a href="#sec-literals-numeric-literals">11.8.3</a>), but some of the details are different, so the
+          numeric literal (<a href="#sec-literals-numeric-literals">see 11.8.3</a>), but some of the details are different, so the
           process for converting a String numeric literal to a value of Number type is given here in full. This value is
           determined in two steps: first, a mathematical value (MV) is derived from the String numeric literal; second, this
           mathematical value is rounded as described below.</p>
@@ -6586,7 +6585,7 @@
         <li><a href="#sec-algorithm-conventions">Assert</a>: <i>elements</i> is a <a
             href="#sec-list-and-record-specification-type">List</a> whose elements are all <a
             href="#sec-ecmascript-language-types">ECMAScript language values</a>.</li>
-        <li>Let <i>array</i> <a href="#sec-arraycreate">ArrayCreate</a>(0) (see <a href="#sec-arraycreate">9.4.2.2</a>).</li>
+        <li>Let <i>array</i> <a href="#sec-arraycreate">ArrayCreate</a>(0) (<a href="#sec-arraycreate">see 9.4.2.2</a>).</li>
         <li>Let <i>n</i> be 0.</li>
         <li>For each element <i>e</i> of <i>elements</i>
           <ol class="block">
@@ -6645,8 +6644,8 @@
             <li>Let <i>BC</i> be the value of <i>C&rsquo;s</i> <a
                 href="#sec-bound-function-exotic-objects">[[BoundTargetFunction]]</a> <a
                 href="#sec-object-internal-methods-and-internal-slots">internal slot</a>.</li>
-            <li>Return <a href="#sec-instanceofoperator">InstanceofOperator</a>(<i>O</i>,<i>BC</i>)  (see { REF _Ref368050899 \r
-                \h  \* MERGEFORMAT }12.9.4).</li>
+            <li>Return <a href="#sec-instanceofoperator">InstanceofOperator</a>(<i>O</i>,<i>BC</i>)  (<a
+                href="#sec-instanceofoperator">see 12.9.4</a>).</li>
           </ol>
         </li>
         <li>If <a href="#sec-ecmascript-data-types-and-values">Type</a>(<i>O</i>) is not Object, return <b>false</b>.</li>
@@ -8612,7 +8611,7 @@
           </tr>
           <tr>
             <td style="border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; border-top: 1px solid black">PromiseTasks</td>
-            <td style="border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; border-top: 1px solid black">Tasks that are responses to the settlement of a Promise (see <a href="#sec-promise-objects">25.4</a>).</td>
+            <td style="border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; border-top: 1px solid black">Tasks that are responses to the settlement of a Promise (<a href="#sec-promise-objects">see 25.4</a>).</td>
           </tr>
         </table>
       </figure>
@@ -9300,8 +9299,8 @@
             href="#sec-list-and-record-specification-type">List</a>.</li>
         <li>Let <i>obj</i> be a newly created object with an <a href="#sec-object-internal-methods-and-internal-slots">internal
             slot</a> for each name in <i>internalSlotsList</i>.</li>
-        <li>Set <i>obj</i>&rsquo;s essential internal methods to the default ordinary object definitions specified in { REF
-            _Ref365537907 \r \h  \* MERGEFORMAT }9.1.</li>
+        <li>Set <i>obj</i>&rsquo;s essential internal methods to the default ordinary object definitions specified in <a
+            href="#sec-ordinary-object-internal-methods-and-internal-slots">9.1</a>.</li>
         <li>Set the [[Prototype]] <a href="#sec-object-internal-methods-and-internal-slots">internal slot</a> of <i>obj</i> to
             <i>proto</i>.</li>
         <li>Set the [[Extensible]] <a href="#sec-object-internal-methods-and-internal-slots">internal slot</a> of <i>obj</i> to
@@ -9478,16 +9477,16 @@
             "<code>normal</code>" or "<code>generator</code>".</li>
         <li>If <i>functionKind</i> is not present, then let <i>functionKind</i> be "<code>normal</code>".</li>
         <li>Let <i>F</i> be a newly created <a href="#sec-ecmascript-function-objects">ECMAScript function object</a> with the
-            internal slots listed in { REF _Ref365644826 \h  \* MERGEFORMAT }<a href="#table-26">Table 26</a>. All of those
-            internal slots are initialized to <b>undefined</b>.</li>
+            internal slots listed in <a href="#table-26">Table 26</a>. All of those internal slots are initialized to
+            <b>undefined</b>.</li>
         <li>Set <i>F</i>&rsquo;s essential internal methods except for [[GetOwnProperty]] to the default ordinary object
-            definitions specified in { REF _Ref365531715 \r \h  \* MERGEFORMAT }9.1.</li>
+            definitions specified in <a href="#sec-ordinary-object-internal-methods-and-internal-slots">9.1</a>.</li>
         <li>If <i>strict</i> is <b>true</b>, set <i>F</i>&rsquo;s [[GetOwnProperty]] internal method to the default ordinary
-            object definitions specified in { REF _Ref365531715 \r \h  \* MERGEFORMAT }9.1.</li>
-        <li>Else, set <i>F</i>&rsquo;s [[GetOwnProperty]] internal method to the definitions specified in { REF _Ref366134480 \r
-            \h  \* MERGEFORMAT }9.2.2.</li>
-        <li>Set <i>F</i>&rsquo;s [[Call]] internal method to the definition specified in { REF _Ref366601140 \r \h  \* MERGEFORMAT
-            }9.2.1.</li>
+            object definitions specified in <a href="#sec-ordinary-object-internal-methods-and-internal-slots">9.1</a>.</li>
+        <li>Else, set <i>F</i>&rsquo;s [[GetOwnProperty]] internal method to the definitions specified in <a
+            href="#sec-ecmascript-function-objects-getownproperty-p">9.2.2</a>.</li>
+        <li>Set <i>F</i>&rsquo;s [[Call]] internal method to the definition specified in <a
+            href="#sec-construct-argumentslist">9.2.1</a>.</li>
         <li>Set the [[Strict]] <a href="#sec-object-internal-methods-and-internal-slots">internal slot</a> of <i>F</i> to
             <i>strict</i>.</li>
         <li>Set the [[FunctionKind]] <a href="#sec-object-internal-methods-and-internal-slots">internal slot</a> of <i>F</i> to
@@ -9759,8 +9758,8 @@
             <li>Let <i>writablePrototype</i> be <b>true</b>.</li>
           </ol>
         </li>
-        <li>Set <i>F</i>&rsquo;s essential internal method [[Construct]] to the definition specified in { REF _Ref365531781 \r \h
-            \* MERGEFORMAT }9.2.1.</li>
+        <li>Set <i>F</i>&rsquo;s essential internal method [[Construct]] to the definition specified in <a
+            href="#sec-construct-argumentslist">9.2.1</a>.</li>
         <li>If <i>installNeeded</i>, then
           <ol class="block">
             <li>Let <i>status</i> be <a href="#sec-definepropertyorthrow">DefinePropertyOrThrow</a>(<i>prototype</i>,
@@ -10721,8 +10720,9 @@
         <var>P</var> performs the following steps:</p>
 
         <ol class="proc">
-          <li>Let <i>desc</i> be the result of calling the default [[GetOwnProperty]] internal method for ordinary objects ({ REF
-              _Ref365531073 \r \h  \* MERGEFORMAT }9.1.5) on the arguments object passing <i>P</i> as the argument.</li>
+          <li>Let <i>desc</i> be the result of calling the default [[GetOwnProperty]] internal method for ordinary objects (<a
+              href="#sec-ordinary-object-internal-methods-and-internal-slots-getownproperty-p">9.1.5</a>) on the arguments object
+              passing <i>P</i> as the argument.</li>
           <li>If <i>desc</i> is <b>undefined</b> then return <i>desc</i>.</li>
           <li>Let <i>map</i> be the value of the [[ParameterMap]] <a
               href="#sec-object-internal-methods-and-internal-slots">internal slot</a> of the arguments object.</li>
@@ -10803,8 +10803,9 @@
               href="#sec-completion-record-specification-type">abrupt completion</a>.</li>
           <li>If the value of <i>isMapped</i> is <b>undefined</b>, then
             <ol class="block">
-              <li>Let <i>v</i> be the result of calling the default ordinary object [[Get]] internal method ({ REF _Ref365532308
-                  \r \h  \* MERGEFORMAT }9.1.8) on <i>args</i> passing <i>P</i> and <i>args</i> as the arguments.</li>
+              <li>Let <i>v</i> be the result of calling the default ordinary object [[Get]] internal method (<a
+                  href="#sec-ordinary-object-internal-methods-and-internal-slots-get-p-receiver">9.1.8</a>) on <i>args</i> passing
+                  <i>P</i> and <i>args</i> as the arguments.</li>
             </ol>
           </li>
           <li>Else <i>map</i> contains a formal parameter mapping for <i>P</i>,
@@ -10835,8 +10836,9 @@
               href="#sec-completion-record-specification-type">abrupt completion</a>.</li>
           <li>If the value of <i>isMapped</i> is <b>undefined</b>, then
             <ol class="block">
-              <li>Return the result of calling the default ordinary object [[Set]] internal method ({ REF _Ref365532308 \r \h  \*
-                  MERGEFORMAT }9.1.8) on <i>args</i> passing <i>P</i>, <i>V</i> and <i>receiver</i> as the arguments.</li>
+              <li>Return the result of calling the default ordinary object [[Set]] internal method (<a
+                  href="#sec-ordinary-object-internal-methods-and-internal-slots-get-p-receiver">9.1.8</a>) on <i>args</i> passing
+                  <i>P</i>, <i>V</i> and <i>receiver</i> as the arguments.</li>
             </ol>
           </li>
           <li>Else <i>map</i> contains a formal parameter mapping for <i>P</i>,
@@ -11203,8 +11205,9 @@
               </li>
             </ol>
           </li>
-          <li>Return the result of calling the default ordinary object [[Get]] internal method ({ REF _Ref365538832 \r \h  \*
-              MERGEFORMAT }9.1.8) on <i>O</i> passing <i>P</i> and <i>Receiver</i> as arguments.</li>
+          <li>Return the result of calling the default ordinary object [[Get]] internal method (<a
+              href="#sec-ordinary-object-internal-methods-and-internal-slots-get-p-receiver">9.1.8</a>) on <i>O</i> passing
+              <i>P</i> and <i>Receiver</i> as arguments.</li>
         </ol>
       </section>
 
@@ -12548,8 +12551,8 @@
 
         <li>
           <p><i>Function code</i> is source text that is parsed to supply the value of the [[Code]] <a
-          href="#sec-object-internal-methods-and-internal-slots">internal slot</a> (see <a
-          href="#sec-ordinarycreatefromconstructor">9.1.14</a>) of function and generator objects. It includes the code that
+          href="#sec-object-internal-methods-and-internal-slots">internal slot</a> (<a
+          href="#sec-ordinarycreatefromconstructor">see 9.1.14</a>) of function and generator objects. It includes the code that
           defines and initializes the formal parameters of the function. The <i>function code</i> of a particular function or
           generator does not include any source text that is parsed as the function code of a nested <i>FunctionBody</i>,
           <i>GeneratorBody</i>, <i>ConciseBody</i>, or <i>ClassBody</i>.</p>
@@ -12586,8 +12589,8 @@
         <li>
           <p>Global code is strict global code if it begins with a <a
           href="#sec-directive-prologues-and-the-use-strict-directive">Directive Prologue</a> that contains a <a
-          href="#sec-directive-prologues-and-the-use-strict-directive">Use Strict Directive</a> (see <a
-          href="#sec-directive-prologues-and-the-use-strict-directive">14.1.1</a>).</p>
+          href="#sec-directive-prologues-and-the-use-strict-directive">Use Strict Directive</a> (<a
+          href="#sec-directive-prologues-and-the-use-strict-directive">see 14.1.1</a>).</p>
         </li>
 
         <li>
@@ -12603,7 +12606,7 @@
           <p>Eval code is strict eval code if it begins with a <a
           href="#sec-directive-prologues-and-the-use-strict-directive">Directive Prologue</a> that contains a <a
           href="#sec-directive-prologues-and-the-use-strict-directive">Use Strict Directive</a> or if the call to eval is a direct
-          call (see <a href="#sec-direct-call-to-eval">18.2.1.1</a>) to the eval function that is contained in strict mode
+          call (<a href="#sec-direct-call-to-eval">see 18.2.1.1</a>) to the eval function that is contained in strict mode
           code.</p>
         </li>
 
@@ -12660,7 +12663,7 @@
     <div class="note">
       <p><span class="nh">NOTE</span> There are no syntactic grammar contexts where both a leading division or
       division-assignment, and a leading <i>RegularExpressionLiteral</i> are permitted. This is not affected by semicolon
-      insertion (see <a href="#sec-automatic-semicolon-insertion">11.9</a>); in examples such as the following:</p>
+      insertion (<a href="#sec-automatic-semicolon-insertion">see 11.9</a>); in examples such as the following:</p>
 
       <pre>a = b<br>/hi/g.exec(c).map(d);</pre>
 
@@ -12933,8 +12936,8 @@
     end of the line is not considered to be part of the single-line comment; it is recognised separately by the lexical grammar
     and becomes part of the stream of input elements for the syntactic grammar. This point is very important, because it implies
     that the presence or absence of single-line comments does not affect the process of <a
-    href="#sec-automatic-semicolon-insertion">automatic semicolon insertion</a> (see <a
-    href="#sec-automatic-semicolon-insertion">11.9</a>).</p>
+    href="#sec-automatic-semicolon-insertion">automatic semicolon insertion</a> (<a href="#sec-automatic-semicolon-insertion">see
+    11.9</a>).</p>
 
     <p>Comments behave like white space and are discarded except that, if a <span class="nt">MultiLineComment</span> contains a
     line terminator character, then the entire comment is considered to be a <span class="nt">LineTerminator</span> for purposes
@@ -13019,11 +13022,11 @@
       to the Default Identifier Syntax given in Unicode Standard Annex #31, Identifier and Pattern Syntax, with some small
       modifications. <span class="nt">ReservedWord</span>  is is an enumerated subset of <span style="font-family: Times New
       Roman"><i>IdentifierName</i>.</span> The syntactic grammer defines <span class="nt">Identifier</span> as an <span
-      class="nt">IdentifierName</span> that is not a <span class="nt">ReservedWord</span> (see <a
-      href="#sec-reserved-words">11.6.2</a>). The Unicode identifier grammar is based on character properties specified by the
-      Unicode Standard. The Unicode code points in the specified categories in version 5.1.0 of the Unicode standard must be
-      treated as in those categories by all conforming ECMAScript implementations. ECMAScript implementations may recognise
-      identifier characters defined in later editions of the Unicode Standard.</p>
+      class="nt">IdentifierName</span> that is not a <span class="nt">ReservedWord</span> (<a href="#sec-reserved-words">see
+      11.6.2</a>). The Unicode identifier grammar is based on character properties specified by the Unicode Standard. The Unicode
+      code points in the specified categories in version 5.1.0 of the Unicode standard must be treated as in those categories by
+      all conforming ECMAScript implementations. ECMAScript implementations may recognise identifier characters defined in later
+      editions of the Unicode Standard.</p>
 
       <div class="note">
         <p><span class="nh">NOTE 1</span> This standard specifies specific character additions: The dollar sign
@@ -13034,8 +13037,8 @@
 
       <p>Unicode escape sequences are permitted in an <span class="nt">IdentifierName</span>, where they contribute a single
       Unicode code point to the <span class="nt">IdentifierName</span>. The code point is expressed by the <span
-      class="nt">HexDigits</span> of the <span class="nt">UnicodeEscapeSequence</span> (see <a
-      href="#sec-literals-string-literals">11.8.4</a>). The <code>\</code> preceding the <span
+      class="nt">HexDigits</span> of the <span class="nt">UnicodeEscapeSequence</span> (<a
+      href="#sec-literals-string-literals">see 11.8.4</a>). The <code>\</code> preceding the <span
       class="nt">UnicodeEscapeSequence</span> and the <code>u</code> and <code>{ }</code> characters, if they appear, do not
       contribute code points to the <span class="nt">IdentifierName</span>. A <span class="nt">UnicodeEscapeSequence</span> cannot
       be used to put a code point into an <span class="nt">IdentifierName</span> that would otherwise be illegal. In other words,
@@ -13269,8 +13272,8 @@
 
         <div class="note">
           <p><span class="nh">NOTE</span> Use of the following tokens within <a href="#sec-strict-mode-code">strict mode code</a>
-          (see { REF _Ref365534967 \r \h  \* MERGEFORMAT }10.2.1) is also reserved. That usage is restricted using static semantic
-          restrictions (see <a href="#sec-identifiers-static-semantics-early-errors">12.1.1</a>) rather than the lexical
+          (<a href="#sec-strict-mode-code">see 10.2.1</a>) is also reserved. That usage is restricted using static semantic
+          restrictions (<a href="#sec-identifiers-static-semantics-early-errors">see 12.1.1</a>) rather than the lexical
           grammar:</p>
         </div>
 
@@ -13575,9 +13578,9 @@
           <p>is an error and not the two input elements <code>3</code> and <code>in</code>.</p>
         </div>
 
-        <p>A conforming implementation, when processing <a href="#sec-strict-mode-code">strict mode code</a> (see <a
-        href="#sec-strict-mode-code">10.2.1</a>), must not extend the syntax of <span class="nt">NumericLiteral</span> to include
-        <i>Legacy<span style="font-family: Times New Roman">OctalIntegerLiteral</span></i> as described in <a
+        <p>A conforming implementation, when processing <a href="#sec-strict-mode-code">strict mode code</a> (<a
+        href="#sec-strict-mode-code">see 10.2.1</a>), must not extend the syntax of <span class="nt">NumericLiteral</span> to
+        include <i>Legacy<span style="font-family: Times New Roman">OctalIntegerLiteral</span></i> as described in <a
         href="#sec-additional-syntax-numeric-literals">B.1.1</a>.</p>
       </div>
 
@@ -13965,9 +13968,9 @@
           <div class="rhs"><span class="nt">UnicodeEscapeSequence</span></div>
         </div>
 
-        <p>A conforming implementation, when processing <a href="#sec-strict-mode-code">strict mode code</a> (see <a
-        href="#sec-strict-mode-code">10.2.1</a>), must not extend the syntax of <span class="nt">EscapeSequence</span> to include
-        <i>Legacy<span style="font-family: Times New Roman">OctalEscapeSequence</span></i> as described in <a
+        <p>A conforming implementation, when processing <a href="#sec-strict-mode-code">strict mode code</a> (<a
+        href="#sec-strict-mode-code">see 10.2.1</a>), must not extend the syntax of <span class="nt">EscapeSequence</span> to
+        include <i>Legacy<span style="font-family: Times New Roman">OctalEscapeSequence</span></i> as described in <a
         href="#sec-additional-syntax-numeric-literals">B.1.1</a>.</p>
 
         <div class="gp">
@@ -14286,10 +14289,10 @@
 
         <div class="note">
           <p><span class="nh">NOTE</span> A regular expression literal is an input element that is converted to a RegExp object
-          (see <a href="#sec-string-iterator-objects">21.1.5</a>) each time the literal is evaluated. Two regular expression
+          (<a href="#sec-string-iterator-objects">see 21.1.5</a>) each time the literal is evaluated. Two regular expression
           literals in a program evaluate to regular expression objects that never compare as <code>===</code> to each other even
           if the two literals' contents are identical. A RegExp object may also be created at runtime by <code>new RegExp</code>
-          (see <a href="#sec-new-regexp-argumentslist">21.2.3.2</a>) or calling the <code>RegExp</code> constructor as a function
+          (<a href="#sec-new-regexp-argumentslist">see 21.2.3.2</a>) or calling the <code>RegExp</code> constructor as a function
           (<a href="#sec-regexp-pattern-flags">21.2.3.1</a>).</p>
         </div>
 
@@ -14780,7 +14783,7 @@
 
       <p>However, there is an additional overriding condition on the preceding rules: a semicolon is never inserted automatically
       if the semicolon would then be parsed as an empty statement or if that semicolon would become one of the two semicolons in
-      the header of a <code>for</code> statement (see <a href="#sec-for-statement">13.6.3</a>).</p>
+      the header of a <code>for</code> statement (<a href="#sec-for-statement">see 13.6.3</a>).</p>
 
       <div class="note">
         <p><span class="nh">NOTE</span> The following are the only restricted productions in the grammar:</p>
@@ -15054,8 +15057,7 @@
 
         <p>With arguments <var>value</var> and <var>environment</var>.</p>
 
-        <p>See also: { REF _Ref366743257 \r \h  \* MERGEFORMAT }12.2.4.2.2, <a
-        href="#sec-variable-statement-runtime-semantics-bindinginitialization">13.2.2.2</a>, <a
+        <p>See also: 12.2.4.2.2, <a href="#sec-variable-statement-runtime-semantics-bindinginitialization">13.2.2.2</a>, <a
         href="#sec-destructuring-binding-patterns-static-semantics-issimpleparameterlist">13.2.3.4</a>, <a
         href="#sec-try-statement-runtime-semantics-bindinginitialization">13.14.3</a>.</p>
 
@@ -15394,8 +15396,9 @@
           <p><span class="nh">NOTE 2:</span> In non-<a href="#sec-strict-mode-code">strict code</a>, the keyword
           <code>yield</code> may be used as an identifier. Evaluating the <i>IdentifierReference</i> production resolves the
           binding of <code>yield</code> as if it was an <i>Identifier</i>. Early Error restriction ensures that such an evaluation
-          only can occur for non-<a href="#sec-strict-mode-code">strict code</a>. See { REF _Ref366486138 \r \h  \* MERGEFORMAT
-          }13.2.1 for the handling of <code>yield</code> in binding creation contexts.</p>
+          only can occur for non-<a href="#sec-strict-mode-code">strict code</a>. See <a
+          href="#sec-let-and-const-declarations">13.2.1</a> for the handling of <code>yield</code> in binding creation
+          contexts.</p>
         </div>
       </section>
     </section>
@@ -15439,8 +15442,8 @@
         </ol>
         <div class="gp prod"><span class="nt">ValueLiteral</span> <span class="geq">:</span> <span class="nt">StringLiteral</span></div>
         <ol class="proc">
-          <li>Return the StringValue of <i>StringLiteral</i> as defined in { REF _Ref377714426 \r \h  \* MERGEFORMAT
-              }11.8.4.2.</li>
+          <li>Return the StringValue of <i>StringLiteral</i> as defined in <a
+              href="#sec-string-literals-static-semantics-stringvalue">11.8.4.2</a>.</li>
         </ol>
       </section>
     </section>
@@ -17193,14 +17196,14 @@
           <li>Let <i>constructor</i> be <a href="#sec-getvalue">GetValue</a>(<i>ref</i>).</li>
           <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>constructor</i>).</li>
           <li>Let <i>argList</i> be the result of evaluating <i>Arguments</i>, producing a <a
-              href="#sec-list-and-record-specification-type">List</a> of argument values ({ REF _Ref365546887 \r \h  \*
-              MERGEFORMAT }12.3.6).</li>
+              href="#sec-list-and-record-specification-type">List</a> of argument values (<a
+              href="#sec-argument-lists">12.3.6</a>).</li>
           <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>argList</i>).</li>
           <li>If <a href="#sec-isconstructor">IsConstructor</a> (<i>constructor</i>) is <b>false</b>, throw a <b>TypeError</b>
               exception.</li>
           <li>Let <i>thisCall</i> be this <i>MemberExpression</i>.</li>
-          <li>Let <i>tailCall</i> be <a href="#sec-intailposition">InTailPosition</a>(<i>thisCall</i>). (See { REF _Ref375557234
-              \r \h  \* MERGEFORMAT }14.6.1)</li>
+          <li>Let <i>tailCall</i> be <a href="#sec-intailposition">InTailPosition</a>(<i>thisCall</i>). (See <a
+              href="#sec-intailposition">14.6.1</a>)</li>
           <li>If <i>tailCall</i> is <b>true</b>, then perform the PrepareForTailCall abstract operation.</li>
           <li>Let <i>result</i> be the result of calling the [[Construct]] internal method on <i>constructor</i>, passing
               <i>argList</i> as the argument.</li>
@@ -17230,16 +17233,16 @@
             </ol>
           </li>
           <li>Let <i>thisCall</i> be this <i>CallExpression</i>.</li>
-          <li>Let <i>tailCall</i> be <a href="#sec-intailposition">InTailPosition</a>(<i>thisCall</i>). (See { REF _Ref375557234
-              \r \h  \* MERGEFORMAT }14.6.1)</li>
+          <li>Let <i>tailCall</i> be <a href="#sec-intailposition">InTailPosition</a>(<i>thisCall</i>). (See <a
+              href="#sec-intailposition">14.6.1</a>)</li>
           <li>Return EvaluateCall(<i>ref</i>, <i>Arguments</i>, <i>tailCall</i>).</li>
         </ol>
         <div class="gp prod"><span class="nt">CallExpression</span> <span class="geq">:</span> <span class="nt">CallExpression</span> <span class="nt">Arguments</span></div>
         <ol class="proc">
           <li>Let <i>ref</i> be the result of evaluating <i>CallExpression</i>.</li>
           <li>Let <i>thisCall</i> be this <i>CallExpressio</i></li>
-          <li>Let <i>tailCall</i> be <a href="#sec-intailposition">InTailPosition</a>(<i>thisCall</i>). (See { REF _Ref375557234
-              \r \h  \* MERGEFORMAT }14.6.1)</li>
+          <li>Let <i>tailCall</i> be <a href="#sec-intailposition">InTailPosition</a>(<i>thisCall</i>). (See <a
+              href="#sec-intailposition">14.6.1</a>)</li>
           <li>Return EvaluateCall(<i>ref</i>, <i>Arguments</i>, <i>tailCall</i>).</li>
         </ol>
       </section>
@@ -17351,8 +17354,8 @@
           <li>If <i>Arguments</i> is present, then
             <ol class="block">
               <li>Let <i>argList</i> be the result of evaluating <i>Arguments</i>, producing a <a
-                  href="#sec-list-and-record-specification-type">List</a> of argument values ({ REF _Ref365637555 \r \h  \*
-                  MERGEFORMAT }12.3.6).</li>
+                  href="#sec-list-and-record-specification-type">List</a> of argument values (<a
+                  href="#sec-argument-lists">12.3.6</a>).</li>
               <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>argList</i>).</li>
             </ol>
           </li>
@@ -17364,8 +17367,8 @@
           <li>If <a href="#sec-isconstructor">IsConstructor</a> (<i>constructor</i>) is <b>false</b>, throw a <b>TypeError</b>
               exception.</li>
           <li>Let <i>thisCall</i> be this <i>MemberExpression</i>.</li>
-          <li>Let <i>tailCall</i> be <a href="#sec-intailposition">InTailPosition</a>(<i>thisCall</i>). (See { REF _Ref375557234
-              \r \h  \* MERGEFORMAT }14.6.1)</li>
+          <li>Let <i>tailCall</i> be <a href="#sec-intailposition">InTailPosition</a>(<i>thisCall</i>). (See <a
+              href="#sec-intailposition">14.6.1</a>)</li>
           <li>If <i>tailCall</i> is <b>true</b>, then perform the PrepareForTailCall abstract operation.</li>
           <li>Let <i>result</i> be the result of calling the [[Construct]] internal method on <i>constructor</i>, passing
               <i>argList</i> as the argument.</li>
@@ -17380,8 +17383,8 @@
           <li>Let <i>ref</i> be <a href="#sec-makesuperreference">MakeSuperReference</a>(<b>undefined</b>, <i>strict</i>).</li>
           <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>ref</i>).</li>
           <li>Let <i>thisCall</i> be this <i>CallExpression</i>.</li>
-          <li>Let <i>tailCall</i> be <a href="#sec-intailposition">InTailPosition</a>(<i>thisCall</i>). (See { REF _Ref375557234
-              \r \h  \* MERGEFORMAT }14.6.1)</li>
+          <li>Let <i>tailCall</i> be <a href="#sec-intailposition">InTailPosition</a>(<i>thisCall</i>). (See <a
+              href="#sec-intailposition">14.6.1</a>)</li>
           <li>Return EvaluateCall(<i>ref</i>, <i>Arguments</i>, <i>tailCall</i>).</li>
         </ol>
       </section>
@@ -17419,8 +17422,8 @@
 
         <div class="note">
           <p><span class="nh">NOTE</span> The evaluation of an argument list produces a <a
-          href="#sec-list-and-record-specification-type">List</a> of values (see { REF _Ref366131676 \r \h  \* MERGEFORMAT
-          }6.2.1).</p>
+          href="#sec-list-and-record-specification-type">List</a> of values (<a href="#sec-list-and-record-specification-type">see
+          6.2.1</a>).</p>
         </div>
       </div>
 
@@ -17511,16 +17514,16 @@
         <ol class="proc">
           <li>Let <i>tagRef</i> be evaluating <i>MemberExpression</i>.</li>
           <li>Let <i>thisCall</i> be this <i>MemberExpression</i>.</li>
-          <li>Let <i>tailCall</i> be <a href="#sec-intailposition">InTailPosition</a>(<i>thisCall</i>). (See { REF _Ref375557234
-              \r \h  \* MERGEFORMAT }14.6.1)</li>
+          <li>Let <i>tailCall</i> be <a href="#sec-intailposition">InTailPosition</a>(<i>thisCall</i>). (See <a
+              href="#sec-intailposition">14.6.1</a>)</li>
           <li>Return EvaluateCall(<i>tagRef</i>, <i>TemplateLiteral</i>, <i>tailCall</i>).</li>
         </ol>
         <div class="gp prod"><span class="nt">CallExpression</span> <span class="geq">:</span> <span class="nt">CallExpression</span> <span class="nt">TemplateLiteral</span></div>
         <ol class="proc">
           <li>Let <i>tagRef</i> be the result of evaluating <i>CallExpression</i>.</li>
           <li>Let <i>thisCall</i> be this <i>CallExpression</i>.</li>
-          <li>Let <i>tailCall</i> be <a href="#sec-intailposition">InTailPosition</a>(<i>thisCall</i>). (See { REF _Ref375557234
-              \r \h  \* MERGEFORMAT }14.6.1)</li>
+          <li>Let <i>tailCall</i> be <a href="#sec-intailposition">InTailPosition</a>(<i>thisCall</i>). (See <a
+              href="#sec-intailposition">14.6.1</a>)</li>
           <li>Return EvaluateCall(<i>tagRef</i>, <i>TemplateLiteral</i>, <i>tailCall</i>).</li>
         </ol>
       </section>
@@ -17638,7 +17641,7 @@
           <li>Let <i>oldValue</i> be <a href="#sec-tonumber">ToNumber</a>(<a href="#sec-getvalue">GetValue</a>(<i>lhs</i>)).</li>
           <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>oldValue</i>).</li>
           <li>Let <i>newValue</i> be the result of adding the value <code>1</code> to <i>oldValue</i>, using the same rules as for
-              the <code>+</code> operator (see { REF _Ref424533048 \r \h  \* MERGEFORMAT }12.7.5).</li>
+              the <code>+</code> operator (<a href="#sec-applying-the-additive-operators-to-numbers">see 12.7.5</a>).</li>
           <li>Let <i>status</i> be <a href="#sec-putvalue">PutValue</a>(<i>lhs</i>, <i>newValue</i>).</li>
           <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>status</i>).</li>
           <li>Return <i>oldValue</i>.</li>
@@ -17660,7 +17663,7 @@
           <li>Let <i>lhs</i> be the result of evaluating <i>LeftHandSideExpression</i>.</li>
           <li>Let <i>oldValue</i> be <a href="#sec-tonumber">ToNumber</a>(<a href="#sec-getvalue">GetValue</a>(<i>lhs</i>)).</li>
           <li>Let <i>newValue</i> be the result of subtracting the value <code>1</code> from <i>oldValue</i>, using the same rules
-              as for the <code>-</code> operator ({ REF _Ref424533048 \r \h  \* MERGEFORMAT }12.7.5).</li>
+              as for the <code>-</code> operator (<a href="#sec-applying-the-additive-operators-to-numbers">12.7.5</a>).</li>
           <li>Let <i>status</i> be <a href="#sec-putvalue">PutValue</a>(<i>lhs</i>, <i>newValue</i>).</li>
           <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>status</i>).</li>
           <li>Return <i>oldValue</i>.</li>
@@ -17913,7 +17916,7 @@
             </ol>
           </li>
           <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>val</i>).</li>
-          <li>Return a String according to { REF _Ref327355399 \h  \* MERGEFORMAT }<a href="#table-33">Table 33</a>.</li>
+          <li>Return a String according to <a href="#table-33">Table 33</a>.</li>
         </ol>
 
         <figure>
@@ -17988,7 +17991,7 @@
           <li>Let <i>oldValue</i> be <a href="#sec-tonumber">ToNumber</a>(<a href="#sec-getvalue">GetValue</a>(<i>expr</i>)).</li>
           <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>oldValue</i>).</li>
           <li>Let <i>newValue</i> be the result of adding the value <code>1</code> to <i>oldValue</i>, using the same rules as for
-              the <code>+</code> operator (see { REF _Ref424533048 \r \h  \* MERGEFORMAT }12.7.5).</li>
+              the <code>+</code> operator (<a href="#sec-applying-the-additive-operators-to-numbers">see 12.7.5</a>).</li>
           <li>Let <i>status</i> be <a href="#sec-putvalue">PutValue</a>(<i>expr</i>, <i>newValue</i>).</li>
           <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>status</i>).</li>
           <li>Return <i>newValue</i>.</li>
@@ -18011,7 +18014,8 @@
           <li>Let <i>oldValue</i> be <a href="#sec-tonumber">ToNumber</a>(<a href="#sec-getvalue">GetValue</a>(<i>expr</i>)).</li>
           <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>oldValue</i>).</li>
           <li>Let <i>newValue</i> be the result of  subtracting the value <code>1</code> from <i>oldValue</i>, using the same
-              rules as for the <code>-</code> operator (see { REF _Ref424533048 \r \h  \* MERGEFORMAT }12.7.5).</li>
+              rules as for the <code>-</code> operator (<a href="#sec-applying-the-additive-operators-to-numbers">see
+              12.7.5</a>).</li>
           <li>Let <i>status</i> be <a href="#sec-putvalue">PutValue</a>(<i>expr</i>, <i>newValue</i>).</li>
           <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>status</i>).</li>
           <li>Return <i>newValue</i>.</li>
@@ -18210,8 +18214,8 @@
           <li>Let <i>rnum</i> be <a href="#sec-tonumber">ToNumber</a>(<i>rightValue</i>).</li>
           <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>rnum</i>).</li>
           <li>Return the result of applying the specified operation (*, /, or %) to <i>lnum</i> and <i>rnum</i>. See the Notes
-              below { REF _Ref365539820 \r \h  \* MERGEFORMAT }12.6.3.1, { REF _Ref424535329 \r \h  \* MERGEFORMAT }12.6.3.2, {
-              REF _Ref424535339 \r \h  \* MERGEFORMAT }12.6.3.3.</li>
+              below <a href="#sec-applying-the-mul-operator">12.6.3.1</a>, <a href="#sec-applying-the-div-operator">12.6.3.2</a>,
+              { REF _Ref424535339 \r \h  \* MERGEFORMAT }12.6.3.3.</li>
         </ol>
       </div>
 
@@ -18885,8 +18889,8 @@
         <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>lval</i>).</li>
         <li>Let <i>rref</i> be the result of evaluating <i>ShiftExpression</i>.</li>
         <li>Let <i>rval</i> be <a href="#sec-getvalue">GetValue</a>(<i>rref</i>).</li>
-        <li>Let <i>r</i> be the result of performing Abstract Relational Comparison <i>lval</i> &lt; <i>rval</i>. (see <a
-            href="#sec-isinteger">7.2.8</a>)</li>
+        <li>Let <i>r</i> be the result of performing Abstract Relational Comparison <i>lval</i> &lt; <i>rval</i>. (<a
+            href="#sec-isinteger">see 7.2.8</a>)</li>
         <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>r</i>).</li>
         <li>If <i>r</i> is <b>undefined</b>, return <b>false</b>. Otherwise, return <i>r</i>.</li>
       </ol>
@@ -24220,7 +24224,7 @@
             href="#sec-directive-prologues-and-the-use-strict-directive">Directive Prologue</a> (<a
             href="#sec-directive-prologues-and-the-use-strict-directive">14.1.1</a>) of its <i>FunctionStatementList</i> contains
             a <a href="#sec-directive-prologues-and-the-use-strict-directive">Use Strict Directive</a> or if any of the conditions
-            in { REF _Ref365636665 \r \h  \* MERGEFORMAT }10.2.1 apply.  If the code of this <i>FunctionBody</i> is <a
+            in <a href="#sec-strict-mode-code">10.2.1</a> apply.  If the code of this <i>FunctionBody</i> is <a
             href="#sec-strict-mode-code">strict mode code</a>, <i>FunctionStatementList</i> is evaluated in the following steps as
             <a href="#sec-strict-mode-code">strict mode code</a>. Otherwise, <i>StatementList</i> is evaluated in the following
             steps as non-<a href="#sec-strict-mode-code">strict mode code</a>.</li>
@@ -24744,11 +24748,11 @@
       <div class="gp prod"><span class="nt">ConciseBody</span> <span class="geq">:</span> <span class="nt">AssignmentExpression</span></div>
       <ol class="proc">
         <li>The code of this <i>ConciseBody</i> is <a href="#sec-strict-mode-code">strict mode code</a> if it is contained in <a
-            href="#sec-strict-mode-code">strict mode code</a> or if any of the conditions in { REF _Ref365636730 \r \h  \*
-            MERGEFORMAT }10.2.1 apply. If the code of this <i>ConciseBody</i> is <a href="#sec-strict-mode-code">strict mode
-            code</a>, <i>AssignmentExpression</i> is evaluated in the following steps as <a href="#sec-strict-mode-code">strict
-            mode code</a>. Otherwise, <i>AssignmentExpression</i> is evaluated in the following steps as non-<a
-            href="#sec-strict-mode-code">strict mode code</a>.</li>
+            href="#sec-strict-mode-code">strict mode code</a> or if any of the conditions in <a
+            href="#sec-strict-mode-code">10.2.1</a> apply. If the code of this <i>ConciseBody</i> is <a
+            href="#sec-strict-mode-code">strict mode code</a>, <i>AssignmentExpression</i> is evaluated in the following steps as
+            <a href="#sec-strict-mode-code">strict mode code</a>. Otherwise, <i>AssignmentExpression</i> is evaluated in the
+            following steps as non-<a href="#sec-strict-mode-code">strict mode code</a>.</li>
         <li>Let <i>exprRef</i> be the result of evaluating <i>AssignmentExpression</i>.</li>
         <li>Let <i>exprValue</i> be <a href="#sec-getvalue">GetValue</a>(<i>exprRef</i>).</li>
         <li>If <i>exprValue</i>.[[type]] is <span style="font-family: sans-serif">return</span> then return <a
@@ -24769,8 +24773,8 @@
       <div class="gp prod"><span class="nt">ArrowFunction</span> <span class="geq">:</span> <span class="nt">ArrowParameters</span> <code class="t">=&gt;</code> <span class="nt">ConciseBody</span></div>
       <ol class="proc">
         <li>If the code of this <i>ArrowFunction</i> is contained in <a href="#sec-strict-mode-code">strict mode code</a> or if
-            any of the conditions in { REF _Ref365636730 \r \h  \* MERGEFORMAT }10.2.1 apply, then let  <i>strict</i> be
-            <b>true</b>. Otherwise let <i>strict</i> be <b>false</b>.</li>
+            any of the conditions in <a href="#sec-strict-mode-code">10.2.1</a> apply, then let  <i>strict</i> be <b>true</b>.
+            Otherwise let <i>strict</i> be <b>false</b>.</li>
         <li>Let <i>scope</i> be the <a href="#sec-execution-contexts">LexicalEnvironment</a> of <a
             href="#sec-execution-contexts">the running execution context</a>.</li>
         <li>Let <i>parameters</i> be CoveredFormalsList of <i>ArrowParameters</i>.</li>
@@ -26254,8 +26258,8 @@
 
       <div class="note">
         <p><span class="nh">NOTE</span> Tail Position calls are only defined in <a href="#sec-strict-mode-code">strict mode
-        code</a> because of a common non-standard language extension (see <a
-        href="#sec-addrestrictedfunctionproperties">9.2.8</a>) that enables  observation of the chain of caller contexts.</p>
+        code</a> because of a common non-standard language extension (<a href="#sec-addrestrictedfunctionproperties">see
+        9.2.8</a>) that enables  observation of the chain of caller contexts.</p>
       </div>
     </section>
 
@@ -29830,16 +29834,16 @@
       <h1><span class="secnum" id="sec-18.1.1"><a href="#sec-value-properties-of-the-global-object-infinity"
           title="link to this section">18.1.1</a></span> Infinity</h1>
 
-      <p>The value of <code>Infinity</code> is <b>+&infin;</b> (see <a
-      href="#sec-ecmascript-language-types-number-type">6.1.6</a>). This property has the attributes { [[Writable]]: <b>false</b>,
-      [[Enumerable]]: <b>false</b>, [[Configurable]]: <b>false</b> }.</p>
+      <p>The value of <code>Infinity</code> is <b>+&infin;</b> (<a href="#sec-ecmascript-language-types-number-type">see
+      6.1.6</a>). This property has the attributes { [[Writable]]: <b>false</b>, [[Enumerable]]: <b>false</b>, [[Configurable]]:
+      <b>false</b> }.</p>
     </section>
 
     <section id="sec-value-properties-of-the-global-object-nan">
       <h1><span class="secnum" id="sec-18.1.2"><a href="#sec-value-properties-of-the-global-object-nan"
           title="link to this section">18.1.2</a></span> NaN</h1>
 
-      <p>The value of <code>NaN</code> is <b>NaN</b> (see <a href="#sec-ecmascript-language-types-number-type">6.1.6</a>). This
+      <p>The value of <code>NaN</code> is <b>NaN</b> (<a href="#sec-ecmascript-language-types-number-type">see 6.1.6</a>). This
       property has the attributes { [[Writable]]: <b>false</b>, [[Enumerable]]: <b>false</b>, [[Configurable]]: <b>false</b>
       }.</p>
     </section>
@@ -29848,9 +29852,9 @@
       <h1><span class="secnum" id="sec-18.1.3"><a href="#sec-undefined" title="link to this section">18.1.3</a></span>
           undefined</h1>
 
-      <p>The value of <code>undefined</code> is <b>undefined</b> (see <a
-      href="#sec-ecmascript-language-types-undefined-type">6.1.1</a>). This property has the attributes { [[Writable]]:
-      <b>false</b>, [[Enumerable]]: <b>false</b>, [[Configurable]]: <b>false</b> }.</p>
+      <p>The value of <code>undefined</code> is <b>undefined</b> (<a href="#sec-ecmascript-language-types-undefined-type">see
+      6.1.1</a>). This property has the attributes { [[Writable]]: <b>false</b>, [[Enumerable]]: <b>false</b>, [[Configurable]]:
+      <b>false</b> }.</p>
     </section>
   </section>
 
@@ -29870,12 +29874,12 @@
         <ol class="proc">
           <li>If <a href="#sec-ecmascript-data-types-and-values">Type</a>(<i>x</i>) is not String, return <i>x</i>.</li>
           <li>Let <i>script</i> be the ECMAScript code that is the result of parsing <i>x</i>, interpreted as UTF-16 encoded
-              Unicode text as described in { REF _Ref368310413 \r \h  \* MERGEFORMAT }10.1.1<i>,</i> for the goal symbol
+              Unicode text as described in <a href="#sec-static-semantics-utf-16-encoding">10.1.1</a><i>,</i> for the goal symbol
               <i>Script</i>. If the parse fails or any early errors are detected, throw a <b>SyntaxError</b> exception (but <a
               href="#sec-error-handling-and-language-extensions">see also clause 16</a>).</li>
           <li>If <i>script</i> Contains <i>ScriptBody</i> is <b>false</b>, return <b>undefined</b>.</li>
           <li>Let <i>strictScript</i> be IsStrict of <i>script</i>.</li>
-          <li>If this is a direct call to eval ({ REF _Ref365534325 \r \h  \* MERGEFORMAT }18.2.1.1), let <i>direct</i> be
+          <li>If this is a direct call to eval (<a href="#sec-direct-call-to-eval">18.2.1.1</a>), let <i>direct</i> be
               <b>true</b>, otherwise let <i>direct</i> be <b>false</b>.</li>
           <li>If <i>direct</i> is <b>true</b> and the code that made the direct call to eval is <a
               href="#sec-strict-mode-code">strict code</a>, then let <i>strictCaller</i> be <b>true</b><i>.</i> Otherwise, let
@@ -29926,8 +29930,8 @@
               <li>Let <i>varEnv</i> be <i>strictVarEnv</i>.</li>
             </ol>
           </li>
-          <li>Let <i>status</i> be the result of performing Eval Declaration Instantiation as described in { REF _Ref365547301 \r
-              \h  \* MERGEFORMAT }18.2.1.2 with <i>script</i>, <i>varEnv</i>, and <i>lexEnv</i>.</li>
+          <li>Let <i>status</i> be the result of performing Eval Declaration Instantiation as described in <a
+              href="#sec-eval-declaration-instantiation">18.2.1.2</a> with <i>script</i>, <i>varEnv</i>, and <i>lexEnv</i>.</li>
           <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>status</i>).</li>
           <li>Let <i>evalCxt</i> be a new <a href="#sec-execution-contexts">ECMAScript code execution context</a>.</li>
           <li>Set the <i>evalCxt&rsquo;s</i> <a href="#sec-code-realms">Realm</a>  to <i>evalRealm</i>.</li>
@@ -30037,7 +30041,7 @@
             <i>StrWhiteSpaceChar</i> and all characters to the right of that character. (In other words, remove leading white
             space.) If <i>inputString</i> does not contain any such characters, let <i>trimmedString</i> be the empty string.</li>
         <li>If neither <i>trimmedString</i> nor any prefix of <i>trimmedString</i> satisfies the syntax of a
-            <i>StrDecimalLiteral</i> (see { REF _Ref365537464 \r \h  \* MERGEFORMAT }7.1.3.1), return <b>NaN</b>.</li>
+            <i>StrDecimalLiteral</i> (<a href="#sec-tonumber-applied-to-the-string-type">see 7.1.3.1</a>), return <b>NaN</b>.</li>
         <li>Let <i>numberString</i> be the longest prefix of <i>trimmedString</i>, which might be <i>trimmedString</i> itself,
             that satisfies the syntax of a <i>StrDecimalLiteral</i>.</li>
         <li>Return the Number value for the MV of <i>numberString</i>.</li>
@@ -30861,7 +30865,7 @@
     <section id="sec-system">
       <h1><span class="secnum" id="sec-18.4.5"><a href="#sec-system" title="link to this section">18.4.5</a></span> System</h1>
 
-      <p>See { REF _Ref377984876 \r \h  \* MERGEFORMAT }26.4.</p>
+      <p>See <a href="#sec-system-object">26.4</a>.</p>
     </section>
   </section>
 </section>
@@ -31661,8 +31665,8 @@
               also occurs in the VarDeclaredNames of <i>body</i>, then throw a <b>SyntaxError</b> exception.</li>
           <li>If any element of the BoundNames of <i>parameters</i> also occurs in the LexicallyDeclaredNames of <i>body</i>, then
               throw a <b>SyntaxError</b> exception.</li>
-          <li>If <i>bodyText</i> is <a href="#sec-strict-mode-code">strict mode code</a> (see { REF _Ref365547491 \r \h  \*
-              MERGEFORMAT }10.2.1) then let <i>strict</i> be <b>true</b>, else let <i>strict</i> be <b>false</b>.</li>
+          <li>If <i>bodyText</i> is <a href="#sec-strict-mode-code">strict mode code</a> (<a href="#sec-strict-mode-code">see
+              10.2.1</a>) then let <i>strict</i> be <b>true</b>, else let <i>strict</i> be <b>false</b>.</li>
           <li>Let <i>scope</i> be <a href="#sec-global-environment-records">the Global Environment</a>.</li>
           <li>Let <i>F</i> be the <b>this</b> value.</li>
           <li>If <a href="#sec-ecmascript-data-types-and-values">Type</a>(<i>F</i>) is not Object or if <i>F</i> does not have a
@@ -32500,8 +32504,8 @@
         <ol class="proc">
           <li>If <a href="#sec-ecmascript-data-types-and-values">Type</a>(<i>sym</i>) is not Symbol, then throw a <b>TypeError</b>
               exception.</li>
-          <li>For each element <i>e</i> of the GlobalSymbolRegistry <a href="#sec-list-and-record-specification-type">List</a>
-              (see <a href="#sec-symbol.for">19.4.2.2</a>),
+          <li>For each element <i>e</i> of the GlobalSymbolRegistry <a href="#sec-list-and-record-specification-type">List</a> (<a
+              href="#sec-symbol.for">see 19.4.2.2</a>),
             <ol class="block">
               <li>If <a href="#sec-samevalue">SameValue</a>(<i>e</i>.[[symbol]], <i>sym</i>) is <b>true</b>, then return
                   <i>e</i>.[[key]].</li>
@@ -37198,8 +37202,9 @@
           </li>
           <li>Else,
             <ol class="block">
-              <li>Let <i>rx</i> be the result of the abstract operation <a href="#sec-regexpcreate">RegExpCreate</a> ({ REF
-                  _Ref366078738 \r \h  \* MERGEFORMAT }21.2.3.3) with arguments <i>regexp</i> and <b>undefined</b>.</li>
+              <li>Let <i>rx</i> be the result of the abstract operation <a href="#sec-regexpcreate">RegExpCreate</a> (<a
+                  href="#sec-abstract-operations-for-the-regexp-constructor">21.2.3.3</a>) with arguments <i>regexp</i> and
+                  <b>undefined</b>.</li>
             </ol>
           </li>
           <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>rx</i>).</li>
@@ -38220,12 +38225,12 @@
                   href="#sec-list-and-record-specification-type">List</a> of consisting of the sequence of code points of
                   <i>str</i> interpreted as a UTF-16 encoded Unicode string. Otherwise, let <i>Input</i> be a <a
                   href="#sec-list-and-record-specification-type">List</a> consisting of the sequence of code units that are the
-                  elements of <i>str</i>. <i>Input</i> will be used throughout the algorithms in { REF _Ref366078803 \r \h  \*
-                  MERGEFORMAT }21.2.2. Each element of <i>Input</i> is considered to be a character.</li>
+                  elements of <i>str</i>. <i>Input</i> will be used throughout the algorithms in <a
+                  href="#sec-pattern-semantics">21.2.2</a>. Each element of <i>Input</i> is considered to be a character.</li>
               <li>Let <i>listIndex</i> be the index into <i>Input</i> of the character that was obtained from element <i>index</i>
                   of <i>str</i>.</li>
               <li>Let <i>InputLength</i> be the number of character contained in <i>Input</i>. This variable will be used
-                  throughout the algorithms in { REF _Ref366078816 \r \h  \* MERGEFORMAT }21.2.2.</li>
+                  throughout the algorithms in <a href="#sec-pattern-semantics">21.2.2</a>.</li>
               <li>Let <i>c</i> be a Continuation that always returns its State argument as a successful MatchResult.</li>
               <li>Let <i>cap</i> be a <a href="#sec-list-and-record-specification-type">List</a> of <i>NcapturingParens</i>
                   <b>undefined</b> values, indexed 1 through <i>NcapturingParens</i>.</li>
@@ -38761,7 +38766,7 @@
         class="t">{</code> <span class="nt">DecimalDigits</span> <code class="t">}</code></span> evaluates as follows:</p>
 
         <ol class="proc">
-          <li>Let <i>i</i> be the MV of <i>DecimalDigits</i> (see <a href="#sec-literals-numeric-literals">11.8.3</a>).</li>
+          <li>Let <i>i</i> be the MV of <i>DecimalDigits</i> (<a href="#sec-literals-numeric-literals">see 11.8.3</a>).</li>
           <li>Return the two results <i>i</i> and <i>i</i>.</li>
         </ol>
 
@@ -39695,8 +39700,8 @@
             <li>If <i>F</i> contains<code>"u"</code> then let <i>BMP</i> be <b>false</b>, else let <i>BMP</i> be <b>true</b>.</li>
             <li>If <i>BMP</i> is <b>true</b>, then
               <ol class="block">
-                <li>Parse <i>P</i> interpreted as UTF-16 encoded Unicode code points using the grammars in { REF _Ref365534757 \r
-                    \h  \* MERGEFORMAT }21.2.1. The goal symbol for the parse is <i>Pattern</i>.Throw a <b>SyntaxError</b>
+                <li>Parse <i>P</i> interpreted as UTF-16 encoded Unicode code points using the grammars in <a
+                    href="#sec-patterns">21.2.1</a>. The goal symbol for the parse is <i>Pattern</i>.Throw a <b>SyntaxError</b>
                     exception if <i>P</i> did not conform to the grammar or if all characters of <i>P</i> where not matched by the
                     parse.</li>
                 <li>Let <i>patternCharacters</i>  be a <a href="#sec-list-and-record-specification-type">List</a> whose elements
@@ -39705,8 +39710,8 @@
             </li>
             <li>Else
               <ol class="block">
-                <li>Parse <i>P</i> interpreted as UTF-16 encoded Unicode code points using the grammars in { REF _Ref365534757 \r
-                    \h  \* MERGEFORMAT }21.2.1. The goal symbol for the parse is <i>Pattern</i><sub>[U]</sub>. Throw a
+                <li>Parse <i>P</i> interpreted as UTF-16 encoded Unicode code points using the grammars in <a
+                    href="#sec-patterns">21.2.1</a>. The goal symbol for the parse is <i>Pattern</i><sub>[U]</sub>. Throw a
                     <b>SyntaxError</b> exception if <i>P</i> did not conform to the grammar or if all characters of <i>P</i> where
                     not matched by the parse.</li>
                 <li>Let <i>patternCharacters</i>  be a <a href="#sec-list-and-record-specification-type">List</a> whose elements
@@ -39719,7 +39724,7 @@
                 href="#sec-object-internal-methods-and-internal-slots">internal slot</a> to <i>F</i>.</li>
             <li>Set <i>obj&rsquo;s</i> [[RegExpMatcher]] <a href="#sec-object-internal-methods-and-internal-slots">internal
                 slot</a> to the internal procedure that evaluates the above parse of <i>P</i> by applying the semantics provided
-                in { REF _Ref366079056 \r \h  \* MERGEFORMAT }21.2.2 using <i>patternCharacters</i> as the pattern&rsquo;s <a
+                in <a href="#sec-pattern-semantics">21.2.2</a> using <i>patternCharacters</i> as the pattern&rsquo;s <a
                 href="#sec-list-and-record-specification-type">List</a> of <i>SourceCharacter</i> values.and <i>F</i> as the flag
                 parameters..</li>
             <li>Let <i>putStatus</i> be the result of <a href="#sec-put-o-p-v-throw">Put</a>(<i>obj</i>, <code>"lastIndex"</code>,
@@ -40077,8 +40082,8 @@
           <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>global</i>).</li>
           <li>If <i>global</i> is not <b>true</b>, then
             <ol class="block">
-              <li>Return the result of <a href="#sec-regexpexec">RegExpExec</a>(<i>rx</i>, <i>S</i>) (see <a
-                  href="#sec-regexp.prototype.exec">21.2.5.2</a>).</li>
+              <li>Return the result of <a href="#sec-regexpexec">RegExpExec</a>(<i>rx</i>, <i>S</i>) (<a
+                  href="#sec-regexp.prototype.exec">see 21.2.5.2</a>).</li>
             </ol>
           </li>
           <li>Else <i>global</i> is <b>true</b>,
@@ -40593,7 +40598,7 @@
             lastIndex</h1>
 
         <p>The value of the <code>lastIndex</code> property specifies the String position at which to start the next match. It is
-        coerced to an integer when used (see <a href="#sec-regexp.prototype.exec">21.2.5.2</a>). This property shall have the
+        coerced to an integer when used (<a href="#sec-regexp.prototype.exec">see 21.2.5.2</a>). This property shall have the
         attributes {&nbsp;[[Writable]]: <b>true</b>, [[Enumerable]]: <b>false</b>, [[Configurable]]: <b>false</b>&nbsp;}.</p>
       </section>
     </section>
@@ -41752,9 +41757,9 @@
             title="link to this section">22.1.3.11</a></span> Array.prototype.indexOf ( searchElement [ , fromIndex ] )</h1>
 
         <p class="Note"><span style="font-family: sans-serif">NOTE</span>&#x9;<code>indexOf</code> compares <i>searchElement</i>
-        to the elements of the array, in ascending order, using the Strict Equality Comparison algorithm ({ REF _Ref366084084 \r
-        \h  \* MERGEFORMAT }7.2.11), and if found at one or more positions, returns the index of the first such position;
-        otherwise, &minus;1is returned.</p>
+        to the elements of the array, in ascending order, using the Strict Equality Comparison algorithm (<a
+        href="#sec-strict-equality-comparison">7.2.11</a>), and if found at one or more positions, returns the index of the first
+        such position; otherwise, &minus;1is returned.</p>
 
         <p class="Note">The optional second argument <i>fromIndex</i> defaults to 0 (i.e. the whole array is searched). If it is
         greater than or equal to the length of the array, &minus;1is returned, i.e. the array will not be searched. If it is
@@ -41886,8 +41891,8 @@
             title="link to this section">22.1.3.14</a></span> Array.prototype.lastIndexOf ( searchElement [ , fromIndex ] )</h1>
 
         <p class="Note"><span style="font-family: sans-serif">NOTE</span>&#x9;<code>lastIndexOf</code> compares
-        <i>searchElement</i> to the elements of the array in descending order using the Strict Equality Comparison algorithm ({
-        REF _Ref366084118 \r \h  \* MERGEFORMAT }7.2.11), and if found at one or more positions, returns the index of the last
+        <i>searchElement</i> to the elements of the array in descending order using the Strict Equality Comparison algorithm (<a
+        href="#sec-strict-equality-comparison">7.2.11</a>), and if found at one or more positions, returns the index of the last
         such position; otherwise, &minus;1is returned.</p>
 
         <p class="Note">The optional second argument <i>fromIndex</i> defaults to the array's length minus one (i.e. the whole
@@ -44929,10 +44934,10 @@
           <li>Let <i>newLength</i> be <i>endIndex</i> - <i>beginIndex</i>.</li>
           <li>Let <i>constructorName</i> be the string value <i>O</i>&rsquo;s [[TypedArrayName]] <a
               href="#sec-object-internal-methods-and-internal-slots">internal slot</a>.</li>
-          <li>Let <i>elementType</i> be the string value of the Element Type value in { REF _Ref366065074 \h  \* MERGEFORMAT }<a
-              href="#table-44">Table 44</a> for <i>constructorName</i>.</li>
-          <li>Let <i>elementSize</i> be the Number value of the Element Size value specified in { REF _Ref366065074 \h  \*
-              MERGEFORMAT }<a href="#table-44">Table 44</a> for <i>constructorName</i>.</li>
+          <li>Let <i>elementType</i> be the string value of the Element Type value in <a href="#table-44">Table 44</a> for
+              <i>constructorName</i>.</li>
+          <li>Let <i>elementSize</i> be the Number value of the Element Size value specified in <a href="#table-44">Table 44</a>
+              for <i>constructorName</i>.</li>
           <li>Let <i>srcByteOffset</i> be the value of <i>O</i>&rsquo;s [[ByteOffset]] <a
               href="#sec-object-internal-methods-and-internal-slots">internal slot</a>.</li>
           <li>Let <i>beginByteOffset</i> be <i>srcByteOffset</i> + <i>beginIndex</i> &times; <i>elementSize</i>.</li>
@@ -47612,8 +47617,8 @@
               href="#sec-object-internal-methods-and-internal-slots">internal slot</a>.</li>
           <li>Let <i>viewSize</i> be the value of <i>view&rsquo;s</i> [[ByteLength]] <a
               href="#sec-object-internal-methods-and-internal-slots">internal slot</a>.</li>
-          <li>Let <i>elementSize</i> be the Number value of the Element Size value specified in { REF _Ref366065074 \h  \*
-              MERGEFORMAT }<a href="#table-44">Table 44</a> for <i>type</i>.</li>
+          <li>Let <i>elementSize</i> be the Number value of the Element Size value specified in <a href="#table-44">Table 44</a>
+              for <i>type</i>.</li>
           <li>If <i>getIndex</i> +<i>elementSize</i> &gt; <i>viewSize</i>, then throw a <b>RangeError</b> exception.</li>
           <li>Let bufferIndex be getIndex+viewOffset.</li>
           <li>Return the result of <a href="#sec-getvaluefrombuffer">GetValueFromBuffer</a>(<i>buffer</i>, <i>bufferIndex</i>,
@@ -47647,8 +47652,8 @@
               href="#sec-object-internal-methods-and-internal-slots">internal slot</a>.</li>
           <li>Let <i>viewSize</i> be the value of <i>view&rsquo;s</i> [[ByteLength]] <a
               href="#sec-object-internal-methods-and-internal-slots">internal slot</a>.</li>
-          <li>Let <i>elementSize</i> be the Number value of the Element Size value specified in { REF _Ref366065074 \h  \*
-              MERGEFORMAT }<a href="#table-44">Table 44</a> for <i>type</i>.</li>
+          <li>Let <i>elementSize</i> be the Number value of the Element Size value specified in <a href="#table-44">Table 44</a>
+              for <i>type</i>.</li>
           <li>If <i>getIndex</i> +<i>elementSize</i> &gt; <i>viewSize</i>, then throw a <b>RangeError</b> exception.</li>
           <li>Let bufferIndex be getIndex+viewOffset.</li>
           <li>Return the result of <a href="#sec-setvalueinbuffer">SetValueInBuffer</a>(<i>buffer</i>, <i>bufferIndex</i>,
@@ -49000,8 +49005,8 @@
               also occurs in the VarDeclaredNames of <i>funcBody</i>, then throw a <b>SyntaxError</b> exception.</li>
           <li>If any element of the BoundNames of <i>parameters</i> also occurs in the LexicallyDeclaredNames of <i>funcBody</i>,
               then throw a <b>SyntaxError</b> exception.</li>
-          <li>If <i>bodyText</i> is <a href="#sec-strict-mode-code">strict mode code</a> (see { REF _Ref365534967 \r \h  \*
-              MERGEFORMAT }10.2.1) then let <i>strict</i> be <b>true</b>, else let <i>strict</i> be <b>false</b>.</li>
+          <li>If <i>bodyText</i> is <a href="#sec-strict-mode-code">strict mode code</a> (<a href="#sec-strict-mode-code">see
+              10.2.1</a>) then let <i>strict</i> be <b>true</b>, else let <i>strict</i> be <b>false</b>.</li>
           <li>Let <i>scope</i> be <a href="#sec-global-environment-records">the Global Environment</a>.</li>
           <li>Let <i>F</i> be the <b>this</b> value.</li>
           <li>If <a href="#sec-ecmascript-data-types-and-values">Type</a>(<i>F</i>) is not Object or if <i>F</i> does not have a
@@ -49812,7 +49817,7 @@
             <li>If <a href="#sec-isconstructor">IsConstructor</a>(<i>C</i>) is <b>false</b>, throw a <b>TypeError</b>
                 exception.</li>
             <li><a href="#sec-algorithm-conventions">Assert</a>: <i>C</i> is a constructor function that supports the parameter
-                conventions of the <code>Promise</code> constructor (see <a href="#sec-promise">25.4.3.1</a>).</li>
+                conventions of the <code>Promise</code> constructor (<a href="#sec-promise">see 25.4.3.1</a>).</li>
             <li>Let <i>promise</i> be <a href="#sec-createfromconstructor">CreateFromConstructor</a>(<i>C</i>).</li>
             <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>promise</i>).</li>
             <li>If <a href="#sec-ecmascript-data-types-and-values">Type</a>(<i>promise</i>) is not Object, then throw a
@@ -50402,12 +50407,12 @@
                 exception.</li>
             <li>If <i>onFulfilled</i> is <b>undefined</b> or <b>null</b>, then
               <ol class="block">
-                <li>Let <i>onFulfilled</i> be a new Identity Function (see <a href="#sec-identity-functions">25.4.5.3.1</a>).</li>
+                <li>Let <i>onFulfilled</i> be a new Identity Function (<a href="#sec-identity-functions">see 25.4.5.3.1</a>).</li>
               </ol>
             </li>
             <li>If <i>onRejected</i> is <b>undefined</b> or <b>null</b>, then
               <ol class="block">
-                <li>Let <i>onRejected</i> be a new Thrower Function (see <a href="#sec-thrower-functions">25.4.5.3.3</a>).</li>
+                <li>Let <i>onRejected</i> be a new Thrower Function (<a href="#sec-thrower-functions">see 25.4.5.3.3</a>).</li>
               </ol>
             </li>
             <li>If <a href="#sec-iscallable">IsCallable</a>(<i>onFulfilled) is <b>false</b> or if</i> <a
@@ -52203,8 +52208,8 @@
           <ol class="proc">
             <li>Let <i>p</i> be <a href="#sec-proxycreate">ProxyCreate</a>(<i>target</i>, <i>handler</i>).</li>
             <li><a href="#sec-returnifabrupt">ReturnIfAbrupt</a>(<i>p</i>).</li>
-            <li>Let  <i>revoker</i> be a new built-in function object as defined in { REF _Ref369093347 \r \h  \* MERGEFORMAT
-                }26.5.2.1.1.</li>
+            <li>Let  <i>revoker</i> be a new built-in function object as defined in <a
+                href="#sec-proxy-revocation-functions">26.5.2.1.1</a>.</li>
             <li>Set the [[RevokableProxy]] <a href="#sec-object-internal-methods-and-internal-slots">internal slot</a> of
                 <i>revoker</i> to <i>p</i>.</li>
             <li>Let <i>result</i> be the result of <a href="#sec-objectcreate">ObjectCreate</a>().</li>
@@ -52521,7 +52526,7 @@
     </figure>
 
     <p>The following tokens are also considered to be <span class="nt">FutureReservedWords</span> when parsing <a
-    href="#sec-strict-mode-code">strict mode code</a> (see <a href="#sec-strict-mode-code">10.2.1</a>).</p>
+    href="#sec-strict-mode-code">strict mode code</a> (<a href="#sec-strict-mode-code">see 10.2.1</a>).</p>
 
     <figure>
       <table class="lightweight-table">
@@ -54867,8 +54872,8 @@
     </li>
 
     <li>
-      <p>A conforming implementation, when processing <a href="#sec-strict-mode-code">strict mode code</a> (see <a
-      href="#sec-strict-mode-code">10.2.1</a>), may not extend the syntax of <i>EscapeSequence</i> to include
+      <p>A conforming implementation, when processing <a href="#sec-strict-mode-code">strict mode code</a> (<a
+      href="#sec-strict-mode-code">see 10.2.1</a>), may not extend the syntax of <i>EscapeSequence</i> to include
       <i>LegacyOctalEscapeSequence</i> as described in <a href="#sec-additional-syntax-string-literals">B.1.2</a>.</p>
     </li>
 

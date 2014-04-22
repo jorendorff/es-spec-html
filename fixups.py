@@ -2801,7 +2801,7 @@ def fixup_links(doc, docx):
 
     all_ids = set([kid.attrs['id'] for _, _, kid in all_parent_index_child_triples(doc) if 'id' in kid.attrs])
 
-    SECTION = "(%s)" % "|".join([
+    SECTION = r'(?:{ *REF *_Ref[0-9]* [^}]*\}' + '\N{LEFT-TO-RIGHT MARK}' + r'?)?(%s)' % "|".join([
         r'[Cc]lause\s+[1-9A-Z][0-9]*(?:\.[0-9]+)*',
         r'[1-9A-Z][0-9]*(?:\.[0-9]+)+',
         r'[Aa]nnex\s+[A-Z]'
@@ -2842,7 +2842,7 @@ def fixup_links(doc, docx):
         # In the Language spec, all REF fields are stripped out at this point
         # whether they refer to a section or not; hence the very strange and precarious
         # (SECTION|) in this regexp -- to allow group 2 to match the empty string.
-        r'{ REF \w+ (?:\\r )?\\h }' + '\N{LEFT-TO-RIGHT MARK}' + r'?((SECTION|))',
+        r'{ REF \w+ (?:\\r )?\\h }' + '\N{LEFT-TO-RIGHT MARK}' + r'?(SECTION|)',
 
         r'(clause\s+{ REF \w+ (?:\\r )?\\h }([1-9][0-9]+))',
 
@@ -2863,7 +2863,7 @@ def fixup_links(doc, docx):
     # Disallow . ( ) , at the end since they usually aren't meant as part of the URL.
     url_re = re.compile(r'https?://[0-9A-Za-z;/?:@&=+$,_.!~*()\'-]+[0-9A-Za-z;/?:@&=+$_!~*\'-]')
 
-    xref_re = re.compile(r'\{ REF _Ref[0-9]+ (\\r )?\\h \}' + '\N{LEFT-TO-RIGHT MARK}' + r'?')
+    xref_re = re.compile(r'\{ REF _Ref[0-9]+ (\\r )?\\h(?: +\\\*)?(?: +MERGEFORMAT)? *\}' + '\N{LEFT-TO-RIGHT MARK}' + r'?')
 
     def find_link(s, current_section):
         in_section_D_2 = current_section == "#sec-in-the-5th-edition"
@@ -2896,15 +2896,15 @@ def fixup_links(doc, docx):
                     break  # match is too far right
 
                 link_text = m.group(2)
-                if link_text in non_section_ids:
+                if link_text is None:
+                    # Strip this text from the document.
+                    id = None
+                elif link_text in non_section_ids:
                     id = non_section_ids[link_text]
                 elif link_text.startswith('ES5, '):
                     id = "http://ecma-international.org/ecma-262/5.1/#sec-" + link_text[5:]
                 elif link_text.startswith('Table '):
                     id = 'table-' + link_text[6:]
-                elif link_text == "":
-                    # Strip this text from the document.
-                    id = None
                 else:
                     # Get the target section id.
                     sec_num = link_text
