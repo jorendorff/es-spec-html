@@ -1975,6 +1975,10 @@ def fixup_simplify_formatting(doc, docx):
             return [html.sub(*content)]
         elif style == {'font-family': 'monospace', 'font-weight': 'bold'}:
             return [html.code(*content)]
+        elif style == {'font-family': 'monospace'}:
+            # This mostly happens in headings and tables where the text is bold anyway.
+            # But see also issues #66 and #67.
+            return [html.code(*content)]
         elif (style == {'font-family': 'Times New Roman', 'font-style': 'italic'}
               and len(content) == 1
               and isinstance(content[0], str)):
