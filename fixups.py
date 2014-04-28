@@ -1332,6 +1332,12 @@ def fixup_insert_section_ids(doc, docx):
                         candidates[secnum].append(parent_id + "-" + baseid)
                     break
 
+        # Most every release of the document still has sections
+        # that cannot be uniquely numbered this way, due to
+        # editorial mistakes (duplicated sections). As a last resort,
+        # use the section number and title.
+        candidates[secnum].append(secnum + '-' + candidates[secnum][0])
+
     # Use a Counter to find out which ids are duplicates, and assign to each
     # section the first id on its list that could not possibly be the id of any
     # other section in the document.
@@ -2277,7 +2283,7 @@ def fixup_lang_grammar_post(doc, docx):
         | \[empty\]
         | \[Lexical\ goal\ [A-Z][A-Za-z]*\]
         | \[match\ only\ if\ [^]]* \]
-        | \[lookahead \  . [^]]* \]     # the . stands for &notin;
+        | \[lookahead \  . [^]]* \]     # the . stands for &notin; or &ne;
         | <[A-Z]+>                      # special character
         | [()]                          # unstick a parenthesis from the following token
         | ;\ _opt                       # a terminal is optional in just one case
@@ -2317,14 +2323,17 @@ def fixup_lang_grammar_post(doc, docx):
             elif token.startswith('[desc '):
                 markup.append(html.span(token[6:-1].strip(), class_='gprose'))
             elif token.startswith('[lookahead '):
-                start = '[lookahead \N{NOT AN ELEMENT OF} '
+                start = '[lookahead '
                 assert token.startswith(start)
                 assert token.endswith(']')
                 lookset = token[len(start):-1].strip()
+                relation = lookset[0]
+                assert relation in ('\N{NOT AN ELEMENT OF}', '\N{NOT EQUAL TO}')
+                lookset = lookset[1:].strip()
                 if lookset.isalpha() and lookset[0].isupper():
-                    parts = [start, html.span(lookset, class_='nt'), ']']
+                    parts = [start + relation + ' ', html.span(lookset, class_='nt'), ']']
                 elif lookset[0] == '{' and lookset[-1] == '}':
-                    parts = [start + '{']
+                    parts = [start + relation + ' {']
                     for minitoken in lookset[1:-1].split(','):
                         if len(parts) > 1:
                             parts.append(', ')
@@ -2668,8 +2677,8 @@ def fixup_links(doc, docx):
         ("exotic arguments object", "Arguments Exotic Objects"),
 
         # 10.1
-        ("UTF-16 Encoding (10.1.1)", "Static Semantics: UTF-16 Encoding"),
-        ("UTF-16 encoding", "Static Semantics: UTF-16 Encoding"),
+        ("UTF-16Encoding (10.1.1)", "Static Semantics: UTF-16Encoding"),
+        ("UTF-16Encoding", "Static Semantics: UTF-16Encoding"),
 
         # 10.2
         ("strict mode code (see 10.1.1)", "Strict Mode Code"),
@@ -2876,7 +2885,7 @@ def fixup_links(doc, docx):
     xref_re = re.compile(WORD_REF_RE)
 
     def find_link(s, current_section):
-        in_section_D_2 = current_section == "#sec-in-the-5th-edition"
+        in_section_D_2 = current_section == "#sec-D-additions-and-changes-that-introduce-incompatibilities-with-prior-editions-in-the-5th-edition"
         best = None
         for text, target in specific_links:
             i = s.find(text)
