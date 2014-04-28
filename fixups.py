@@ -2093,9 +2093,14 @@ def fixup_lang_grammar_pre(doc, docx):
         return s
 
     def is_lhs(text):
-        text = re.sub(r'( one of-?)?( See ((\d+|[A-Z])(.\d+)*|clause \d+))?$', '', text)
-        if text.endswith(' one of'):
-            text = text[:-7]
+        text = re.sub(r'''(?x)
+            (\s+ one \s+ of -?)?
+            (\s+ See \s+
+                (            ({\ REF [^}]* })?   (\d+|[A-Z])(.\d+)*
+                | clause \s* ({\ REF [^}]* })?   \d+
+                )
+            )?
+            $''', '', text)
         return text.endswith(':')
 
     def strip_grammar_block(parent, i):
@@ -2117,6 +2122,7 @@ def fixup_lang_grammar_pre(doc, docx):
 
                 if is_lhs(line):
                     syntax += '\n'  # blank line before
+                    line = re.sub(r'(\sSee\s+(clause\s+)?){ REF[^}]*}', r'\1', line)  # strip macro if present
                 else:
                     syntax += '    '  # indent each rhs
                 syntax += line + '\n'
@@ -2166,7 +2172,6 @@ def fixup_lang_grammar_pre(doc, docx):
                 parent.content[i: i + 1] = [ht[:end], ht[end:]]
             return True
         elif ht.name == 'span':
-            #return ht.attrs.get('class') == 'nt' or (len(ht.content) == 1 and is_grammar_inline_at(ht, 0))
             if ht.attrs.get('class') == 'nt' or (len(ht.content) == 1 and is_grammar_inline_at(ht, 0)):
                 return True
             warn("Likely bug in is_grammar_inline_at:\n    {!r}\n    content: {!r}".format(ht, ht.content))
