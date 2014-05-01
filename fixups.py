@@ -354,6 +354,14 @@ def title_get_argument_names(title):
             names.append(m.group(1))
     return names
 
+def ht_text(ht):
+    if isinstance(ht, str):
+        return ht
+    elif isinstance(ht, list):
+        return ''.join(map(ht_text, ht))
+    else:
+        return ht_text(ht.content)
+
 tag_names = {
     'ANNEX': 'h1.l1',
 
@@ -420,9 +428,7 @@ def fixup_vars(doc, docx):
 
     def slices_by(iterable, break_before):
         """Break an iterable into slices, using the given predicate
-        to determine when to break.
-
-        This yields nonempty lists.
+        to determine when to break. Yields nonempty lists.
 
         `slice_by(range(6), is_even)` would yield [0, 1], then [2, 3],
         then [4, 5].
@@ -440,6 +446,181 @@ def fixup_vars(doc, docx):
     def is_heading(p):
         return ht_name_is(p, 'p') and p.attrs.get('class', '') in heading_styles
 
+    class ProseParser:
+        def __init__(self, text):
+            self.text = text
+            self.tokens = re.findall(r'(?:\s*)([0-9A-Za-z_-]+|.)', text)
+            self.i = 0
+
+        def parse(self):
+            tokens = self.tokens
+            n = len(tokens)
+            hits = []
+            while self.i < n:
+                if tokens[self.i:self.i + 3] == ['is', 'called', 'with']:
+                    print("OK", tokens[self.i:self.i + 20])
+                    # look back to match 'method of Obj is called with'
+                    if self.i >= 3 and tokens[self.i - 3:self.i - 1] == ['method', 'of']:
+                        hits.append(tokens[self.i - 1])
+                    self.i += 3  # skip "is called with"
+
+                    # skip these pointless phrases if they appear...
+                    if tokens[self.i:self.i + 3] == ['a', 'single', 'parameter']:
+                        self.i += 3
+                    elif tokens[self.i:self.i + 1] == ['parameters']:
+                        self.i += 1
+
+                    result = self.parse_arg()
+                    if result is None:
+                        warn("parse failed in {!r}".format(self.text))
+                    else:
+                        hits.append(result)
+                        while self.skip_optional(",") or self.looking_at("and"):
+                            if self.skip_optional("and"):
+                                self.skip_optional("with")  # lame
+                            result = self.parse_arg()
+                            if result is None:
+                                warn("parse failed in {!r} after ','".format(self.text))
+                            else:
+                                hits.append(result)
+                else:
+                    self.i += 1
+            return hits
+
+        def looking_at(self, *options):
+            return self.i < len(self.tokens) and self.tokens[self.i] in options
+
+        def skip_optional(self, *options):
+            hit = self.looking_at(*options)
+            if hit:
+                self.i += 1
+            return hit
+
+        def parse_arg(self):
+            # Arg : "optionally"_opt Article_opt Type_opt "argument"_opt Identifier
+            # Article : one of "a" "an"
+            self.skip_optional("optionally")
+            self.skip_optional("a", "an")
+            self.skip_optional_type()
+            self.skip_optional("as")
+            self.skip_optional("argument", "arguments")
+            tokens = self.tokens
+            n = len(tokens)
+            i = self.i
+            if i >= n:
+                return None
+            t = tokens[i]
+            if re.match(r'^[a-zA-Z0-9_-]+$', t) is not None and t not in ('and', 'where'):
+                self.i += 1
+                return t
+            return None
+
+        def skip_optional_type(self):
+            if self.skip_optional("ECMAScript"):
+                self.skip_optional("language")
+
+            tokens = self.tokens
+            n = len(tokens)
+            i = self.i
+            if i >= n:
+                return
+
+            tok = tokens[i].lower()
+
+            if tok == 'list':
+                self.i += 1
+                if i + 1 < len(tokens) and tokens[i + 1] == 'of':
+                    self.i += 1
+                    self.skip_optional_type()
+            elif tok == 'either':
+                self.i += 1
+                self.skip_optional("a", "an")
+                self.skip_optional_type()
+                if self.skip_optional("or"):
+                    self.skip_optional("with")  # mmmmm rather bogus, grammatically
+                self.skip_optional("a", "an")
+                self.skip_optional_type()
+            else:
+                for t in types:
+                    if [w.lower() for w in tokens[i:i + len(t)]] == t:
+                        if i + len(t) < len(tokens) and tokens[i + len(t)] == ',':
+                            # In "is called with argument string," don't treat
+                            # "string" as a type. It's the argument name.
+                            return
+                        self.i += len(t)
+                        return
+
+    types = [[w.lower() for w in s.split()] for s in [
+        'object',
+        'integer',
+        'string',
+        'null',
+        'boolean flag',
+        'boolean value',
+        'boolean',
+        'Property Descriptor',
+        'Property Descriptors',
+        'Lexical Environment',
+        'environment record',
+        'grammar production',
+        'value',
+        'values',
+        'function Object',
+        'property key'
+    ]]
+
+    def para_get_argument_names(para):
+        text = ht_text(para)
+        return ProseParser(text).parse()
+
+    def testp(text, expected):
+        actual = list(para_get_argument_names(text))
+        expected = expected.split()
+        if actual != expected:
+            raise ValueError("test failed: para_get_argument_names({!r})\n"
+                             "     got {!r},\n"
+                             "expected {!r}\n".format(text, actual, expected))
+
+    testp("is called with arguments O and proto,", "O proto")
+    testp("is called with argument string,", "string")
+    testp("internal method of O is called with argument V", "O V")
+    testp("is called with Property Descriptor Desc", "Desc")
+    testp("is called with object Obj", "Obj")
+    testp("is called with Property Descriptors Desc and LikeDesc", "Desc LikeDesc")
+    testp("is called with integer argument size", "size")
+    testp("is called with arguments O, P, V, and Throw where", "O P V Throw")
+    testp("is called with arguments O, P , and optionally args where", "O P args")
+    testp("is called with Object F", "F")
+    testp("is called with Object F and List argumentsList", "F argumentsList")
+    testp("is called with a Lexical Environment lex, a String name, and a Boolean flag strict.",
+          "lex name strict")
+    testp("is called with either a Lexical Environment or null as argument E", "E")
+    testp("is called with an Object O and a Lexical Environment E (or null) as arguments", "O E")
+    testp("is called with an ECMAScript function Object F and an ECMAScript value T as arguments",
+          "F T")
+    testp("is called with an ECMAScript Object G as its argument", "G")
+    testp("is called with Object O and with property key P,", "O P")
+    testp("is called with Boolean value Extensible, and Property Descriptors Desc, and Current",
+          "Extensible Desc Current")
+    testp("is called with Object O, property key P, Boolean value extensible, and "
+          "Property Descriptors Desc, and current",
+          "O P extensible Desc current")
+    testp("is called with property key P and ECMAScript language value Receiver", "P Receiver")
+    testp("is called with a single parameter argumentsList which is a possibly empty List of "
+          "ECMAScript language values.",
+          "argumentsList")
+    testp("is called with parameters thisArgument and argumentsList, a List of ECMAScript "
+          "language values.",
+          "thisArgument argumentsList")
+    testp("is called with obj as its argument.", "obj")
+    testp("is called with a function object function, an object newHome, and a property key "
+          "newName as its argument.",
+          "function newHome newName")
+    testp("is called with a list of arguments ExtraArgs", "ExtraArgs")
+    testp("is called with object func, grammar production formals, List argumentsList, and "
+          "environment record env.",
+          "func formals argumentsList env")
+
     def markup_vars(section):
         if not is_heading(section[0]):
             return section  # unchanged.
@@ -448,19 +629,21 @@ def fixup_vars(doc, docx):
         title = ht_text(section[0])
         arguments = title_get_argument_names(title)
 
-        ## look in each paragraph that precedes a list for
-        ## "is called with arguments O and proto,"
-        ## or "is called with argument string,"
+        ## look in each paragraph that precedes a list for arguments ("is
+        ## called with Object O and with property key P")
+        for i in range(1, len(section) - 1):
+            if ht_name_is(section[i], 'p') and ht_name_is(section[i + 1], 'ol'):
+                list_args = arguments + para_get_argument_names(section[i])
 
-        ## look in the body for declarations of the form "Let script be" in a list
-        ## and of certain other forms outside of lists
+                ## look in the body for declarations of the form "Let script be" in a list
+                ## and of certain other forms outside of lists
 
-        ## Then change them all from whatever markup they're using to <var>.
-        ## That part should be easy using section.replace('*').
-        ##
-        ## Oh wait but it is hard to decide where to put the var and whether to join the
-        ## neighboring runs. I knew there was a reason I hadn't done this yet.
-
+                ## Then change them all from whatever markup they're using to <var>.
+                ## That part should be easy using section.replace('*').
+                ##
+                ## Oh wait but it is hard to decide where to put the var and whether to join the
+                ## neighboring runs. I knew there was a reason I hadn't done this yet.
+        
         return section #unchanged for now ???
 
     def replace_sections(body, fn):
@@ -1183,14 +1366,6 @@ def fixup_sections(doc, docx):
             del h.style['-ooxml-ilvl']
         if h.attrs.get('class') != None:
             del h.attrs['class']
-
-def ht_text(ht):
-    if isinstance(ht, str):
-        return ht
-    elif isinstance(ht, list):
-        return ''.join(map(ht_text, ht))
-    else:
-        return ht_text(ht.content)
 
 def is_section_with_title(e, title):
     if e.name != 'section':
