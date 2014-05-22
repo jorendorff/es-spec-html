@@ -1859,33 +1859,50 @@ def fixup_lang_title_page_p_in_p(doc, docx):
             return [p]
     return doc.replace('p', fix_p)
 
-@InPlaceFixup
+
+def dict_copy_with(original, **updates):
+    copy = original.copy()
+    copy.update(updates)
+    return copy
+
+@Fixup
 def fixup_html_head(doc, docx):
     head, body = doc.content
     assert ht_name_is(head, 'head')
     assert ht_name_is(body, 'body')
-    head.content.insert(0, html.meta(charset='utf-8'))
+
+    # Figure out what title to use, and which stylesheet.
     hgroup = next(findall(body, 'hgroup'))
     if spec_is_lang(docx):
         if '5.1' in ht_text(hgroup):
             title = "ECMAScript Language Specification - ECMA-262 Edition 5.1"
         else:
             title = "ECMAScript Language Specification ECMA-262 6th Edition - DRAFT"
+        stylesheet = 'es6-draft.css'
     else:
         if version_is_intl_1_final(docx):
             title = "ECMAScript Internationalization API Specification - ECMA-402 Edition 1.0"
         else:
             title = "ECMAScript Internationalization API Specification - ECMA-402 Edition 1.0 - DRAFT"
-    title = title.replace(' - ', ' \N{EN DASH} ')
-    head.content.insert(1, html.title(title))
-    if spec_is_lang(docx):
-        stylesheet = 'es6-draft.css'
-    else:
         stylesheet = 'es5.1.css'
-    head.content.insert(2, html.link(rel='stylesheet', href=stylesheet))
+    title = title.replace(' - ', ' \N{EN DASH} ')
+
+    # Compute the filename of the script we use for coping with change.
     base, _ = os.path.splitext(os.path.basename(docx.filename))
-    head.content.insert(3, html.script(src=base + "-sections.js"))
-    doc.attrs['lang'] = 'en-GB'
+    sections_script = base + "-sections.js"
+
+    return doc.with_(
+        content=[
+            head.with_content_slice(0, 0, [
+                html.meta(charset='utf-8'),
+                html.title(title),
+                html.link(rel='stylesheet', href=stylesheet),
+                html.script(src=sections_script)
+            ] + head.content),
+            body
+        ],
+        attrs=dict_copy_with(doc.attrs, lang='en-GB'))
+
 
 def find_section(doc, title):
     # super slow algorithm
