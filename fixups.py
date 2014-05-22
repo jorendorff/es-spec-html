@@ -3154,6 +3154,8 @@ def fixup_add_disclaimer(doc, docx):
     em = html.em
     i = html.i
     a = html.a
+    ul = html.ul
+    li = html.li
 
     if spec_is_lang(docx) and version_is_51_final(docx):
         disclaimer = div(
@@ -3169,22 +3171,28 @@ def fixup_add_disclaimer(doc, docx):
     elif spec_is_lang(docx):
         disclaimer = div(
             p(strong("This is ", em("not"), " the official ECMAScript Language Specification.")),
-            p("The most recent final ECMAScript standard is Edition 5.1, the PDF document located at ",
-              a("http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-262.pdf",
-                href="http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-262.pdf"),
-              "."),
-            p("This is a draft of the next edition of the standard."),
-            p("This page is based on the current working draft published at ",
-              a("http://wiki.ecmascript.org/doku.php?id=harmony:specification_drafts",
-                href="http://wiki.ecmascript.org/doku.php?id=harmony:specification_drafts"),
-              ". The program used to convert that Word doc to HTML is a custom-piled heap of hacks. "
-              "It may have stripped out or garbled some of the formatting that makes "
-              "the specification comprehensible. You can help improve the program ",
-              a("here", href="https://github.com/jorendorff/es-spec-html"),
-              "."),
+            p("This is a draft of the next edition of the standard. See also:"),
+            ul(
+                li(
+                    a("ECMAScript Language Specification, Edition 5.1 (PDF)",
+                      href="http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-262.pdf"),
+                    ", the most recent official, final standard."),
+                li(
+                    a("The ES specification drafts archive",
+                      href="http://wiki.ecmascript.org/doku.php?id=harmony:specification_drafts"),
+                    " for PDF and Word versions of this document, and older drafts."),
+                li(
+                    a("The script that produced this web page",
+                      href="https://github.com/jorendorff/es-spec-html"),
+                    ", and especially the ",
+                    a("issue tracker \N{EM DASH} please file bugs when you find them",
+                      href="https://github.com/jorendorff/es-spec-html/issues?state=open"),
+                    ". Patches are welcome too.")),
 
-            # (U+2019 is RIGHT SINGLE QUOTATION MARK, the character you're supposed to use for an apostrophe.)
-            p("For copyright information, see Ecma International\u2019s legal disclaimer in the document itself."),
+            # (U+2019 is RIGHT SINGLE QUOTATION MARK, the character you're
+            # supposed to use for an apostrophe.)
+            p("For copyright information, see Ecma International\u2019s legal disclaimer "
+              "in the document itself."),
             id="unofficial")
         position = 0
     elif spec_is_intl(docx) and version_is_intl_1_final(docx):
