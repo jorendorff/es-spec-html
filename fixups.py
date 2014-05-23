@@ -1896,6 +1896,7 @@ def fixup_html_head(doc, docx):
             head.with_content_slice(0, 0, [
                 html.meta(charset='utf-8'),
                 html.title(title),
+                html.meta(name='viewport', content='width=device-width,initial-scale=1')
                 html.link(rel='stylesheet', href=stylesheet),
                 html.script(src=sections_script)
             ] + head.content),

@@ -8,7 +8,7 @@ body {
     max-width: 800px;
     background-color: #fdfdfc;
     color: #333333;
-    font-family: Cambria, Palatino Linotype, Palatino, Liberation Serif,
+    font-family: Cambria, Palatino Linotype, Palatino, 'Liberation Serif',
         serif;
     font-size: 17px;
     line-height: 135%;
@@ -56,7 +56,7 @@ span.errorname, code, pre {
     font-weight: bold;
 }
 
-code, pre, .string.value { font-family: "Courier New", monospace; }
+code, pre, .string.value { font-family: Courier New, monospace; }
 code, .string, .math { white-space: nowrap; }
 
 sup, sub {
@@ -154,8 +154,8 @@ span.nh {
 }
 
 /* Figures and tables */
-figure { display: block; margin: 1em 0 3em 0; }
-figure object { display: block; margin: 0 auto; }
+figure { display: block; margin: 1em 0 3em 0; max-width: 100%; overflow: auto; }
+figure object, figure img { display: block; margin: 0 auto; }
 figure table.real-table { margin: 0 auto; }
 figure figcaption {
     display: block;
@@ -202,6 +202,11 @@ div.end-pile { clear: both; }
 code { /* including code.t, meaning "terminal" or "token" */
     font-weight: bold;
     color: #555555;
+}
+pre, code, a, i, sub, sup, h1, .nt, li, var {
+    white-space: pre;
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }
 span.nt {  /* nonterminal */
     font-family: Times New Roman, Times, FreeSerif, serif;
@@ -288,6 +293,41 @@ ol.bibliography > li {
     margin-left: 3em; list-style-type: none; margin-bottom: 1.1em; }
 ol.bibliography > li > span.num {
     float: left; margin-left: -3em; width: 2.5em; text-align: right; }
+
+@media (max-width: 900px) {
+    html {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    #unofficial {
+        margin: 0;
+        padding: 5px 10px;
+    }
+    h1 span.secnum {
+        width: auto;
+        margin-left: 0;
+        text-align: inherit;
+        float: none;
+    }
+    ol, ul {
+        padding-left: 1.25em;
+    }
+    div.gp, div.rhs, div.pile {
+        margin-left: 1em;
+        max-width: 100%;
+    }
+    div.note {
+        margin: 0;
+    }
+    span.nh {
+        float: none;
+        font-weight: bold;
+        margin-left: 0;
+    }
+    body > section { margin-top: 2em; }
+    body > section > section { margin-top: 1.5em; }
+    body > section > section section { margin-top: 1em; }
+}
 
 @media print {
     html {
