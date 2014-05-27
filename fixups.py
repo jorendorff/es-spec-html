@@ -1371,16 +1371,51 @@ def fixup_insert_section_ids(doc, docx):
     legacy_sections_json = sections_js[start:stop]
     legacy_sections = json.loads(legacy_sections_json)
 
-    # 3. Throw if anything in $BASE-sections.js points to a section that no longer exists.
+    # 3. Throw if anything in $BASE-sections.js is seriously messed up.
     all_new_sections = collections.OrderedDict(sorted([(v, k) for k, v in section_ids.items()]))
     failed = False
     for obsolete_id, current_id in legacy_sections.items():
-        if current_id not in all_new_sections:
-            warn("Obsolete id {!r} maps to {!r}, which does not exist in the new document"
-                 .format('#' + obsolete_id, '#' + current_id))
-
+        # Don't redirect from a section that exists to anything else.
+        if obsolete_id in all_new_sections:
+            # If you see this warning, the fix is to modify the JS file.
+            # That file maps obsolete section ids to current ones, so that
+            # obsolete links continue to work in the current document.
+            #
+            # Right now you have an entry like:
+            #      "sec-original-title": "sec-second-title",
+            # But the document we're processing contains a section with the id
+            # "sec-original-title". Possibly the title was changed back from
+            # second-title to original-title; in that case, the entry needs to
+            # be reversed:
+            #     "sec-second-title": "sec-original-title",
+            #
+            # Use _fixup_logs (see the README) to find out what the section ids are now.
+            warn("{} has an entry for {!r}, which exists in the new document"
+                 .format(legacy_sections_filename, obsolete_id))
             failed = True
+
+        # Don't redirect the user to a section that doesn't exist.
+        if current_id not in all_new_sections:
+            # If you see this warning, the fix is to modify the JS file.
+            # That file maps obsolete section ids to current ones, so that
+            # obsolete links continue to work in the current document.
+            #
+            # Right now you have an entry like:
+            #      "sec-original-title": "sec-second-title",
+            # but the document has changed the title again, and now you need two entries:
+            #      "sec-original-title": "sec-third-title",
+            #      "sec-second-title":   "sec-third-title",
+            # Or the section was deleted, in which case you still need two entries,
+            # but instead of pointing them at "sec-third-title", point them to some
+            # section the user might find helpful.
+            #
+            # Use _fixup_logs (see the README) to find out what the section ids are now.
+            warn("{} has an entry mapping {!r} to {!r}, which does not exist in the new document"
+                 .format(legacy_sections_filename, obsolete_id, current_id))
+            failed = True
+
     if failed:
+        # Don't disable this exception! See the comments above.
         raise ValueError("Either remove obsolete ids from {} or fix the target"
                          .format(legacy_sections_filename))
 
@@ -2156,9 +2191,9 @@ def fixup_lang_grammar_pre(doc, docx):
             return
 
         # Work around a particular layout glitch in the document.
-        if "BindingElement[Yield,GeneratorParameter ]" in syntax:
+        if "BindingElement[Yield, GeneratorParameter ]" in syntax:
             using_hack("fix-crazy-non-subscripted-space-character-in-grammar-subscript")
-            syntax = syntax.replace("BindingElement[Yield,GeneratorParameter ]",
+            syntax = syntax.replace("BindingElement[Yield, GeneratorParameter ]",
                                     "BindingElement_[Yield,GeneratorParameter]")
 
         parent.content[i:j] = [html.pre(syntax, class_="syntax")]
@@ -2688,7 +2723,6 @@ def fixup_links(doc, docx):
         # 9.1
         ("ECMAScript Function object", "ECMAScript Function Objects"),
         ("ECMAScript function object", "ECMAScript Function Objects"),
-        ("Function Declaration Instantiation", "Function Declaration Instantiation"),
         ("Bound Function", "Bound Function Exotic Objects"),
         ("bound function", "Bound Function Exotic Objects"),
         ("[[BoundTargetFunction]]", "Bound Function Exotic Objects"),
@@ -2907,7 +2941,8 @@ def fixup_links(doc, docx):
     xref_re = re.compile(WORD_REF_RE)
 
     def find_link(s, current_section):
-        in_section_D_2 = current_section == "#sec-D-additions-and-changes-that-introduce-incompatibilities-with-prior-editions-in-the-5th-edition"
+        in_section_D_2 = current_section in ("#sec-corrections-and-clarifications-that-may-introduce-incompatibilities-with-prior-editions-in-the-5th-edition",
+                                             "#sec-additions-and-changes-that-introduce-incompatibilities-with-prior-editions-in-the-5th-edition")
         best = None
         for text, target in specific_links:
             i = s.find(text)
