@@ -8,7 +8,7 @@ body {
     max-width: 800px;
     background-color: #fdfdfc;
     color: #333333;
-    font-family: Cambria, Palatino Linotype, Palatino, Liberation Serif,
+    font-family: Cambria, Palatino Linotype, Palatino, 'Liberation Serif',
         serif;
     font-size: 17px;
     line-height: 135%;
@@ -45,7 +45,7 @@ span.errorname, code, pre {
     font-weight: bold;
 }
 
-code, pre, .string.value { font-family: "Courier New", monospace; }
+code, pre, .string.value { font-family: Courier New, monospace; }
 code, .string, .math { white-space: nowrap; }
 
 #sec4\.3 section h1 { font-size: 100%; margin-bottom: 0; }
@@ -146,7 +146,7 @@ span.nh {
 }
 
 /* Figures and tables */
-figure { display: block; margin: 1em 0 3em 0; }
+figure { display: block; margin: 1em 0 3em 0; max-width: 100%; overflow: auto; }
 figure object { display: block; margin: 0 auto; }
 figure table.real-table { margin: 0 auto; }
 figure figcaption {
