@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>ECMAScript Language Specification ECMA-262 6th Edition &ndash; DRAFT</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <link href="es6-draft.css" rel="stylesheet">
   <script src="es6-draft-sections.js"></script>
 </head>
@@ -41590,13 +41591,12 @@
           (including any <b>undefined</b> results) of the capturing parentheses are spliced into the output array.
           For&nbsp;example,</p>
 
-          <p><span style="font-family:
-          sans-serif">/&lt;(\/)?([^&lt;&gt;]+)&gt;/.split("A&lt;B&gt;bold&lt;/B&gt;and&lt;CODE&gt;coded&lt;/CODE&gt;")</span></p>
+          <pre>/&lt;(\/)?([^&lt;&gt;]+)&gt;/.split("A&lt;B&gt;bold&lt;/B&gt;and&lt;CODE&gt;coded&lt;/CODE&gt;")</pre>
 
           <p>evaluates to the array</p>
 
-          <p><span style="font-family: sans-serif">["A", undefined, "B", "bold", "/", "B", "and", undefined,"CODE", "coded", "/",
-          "CODE", ""]</span></p>
+          <pre>["A", undefined, "B", "bold", "/", "B", "and", undefined,"CODE", "coded", "/",
+          "CODE", ""]</pre>
 
           <p>If <i>limit</i> is not <b>undefined</b>, then the output array is truncated so that it contains no more than
           <i>limit</i> elements.</p>
@@ -46265,7 +46265,7 @@
         <h1><span class="secnum" id="sec-22.2.3.28"><a href="#sec-%typedarray%.prototype.tolocalestring"
             title="link to this section">22.2.3.28</a></span> %TypedArray%.prototype.toLocaleString ( )</h1>
 
-        <p>The initial value of the %TypedArray%.prototype.toLocaleString data property is the same built-in function object as
+        <p>The initial value of the <code>%TypedArray%.prototype.toLocaleString</code> data property is the same built-in function object as
         the <a href="#sec-array.prototype.tolocalestring">Array.prototype.toLocaleString</a> method defined in <a
         href="#sec-array.prototype.tolocalestring">22.1.3.26</a>.</p>
       </section>
@@ -46444,7 +46444,7 @@
         <h1><span class="secnum" id="sec-22.2.6.1"><a href="#sec-typedarray.prototype.bytes_per_element"
             title="link to this section">22.2.6.1</a></span> <i>TypedArray</i>.prototype.BYTES_PER_ELEMENT</h1>
 
-        <p>The value of <i>TypedArray</i>.prototype.BYTES_PER_ELEMENT is the Number value of the Element Size value specified in
+        <p>The value of <code><i>TypedArray</i>.prototype.BYTES_PER_ELEMENT</code> is the Number value of the Element Size value specified in
         <a href="#table-44">Table 44</a> for <i>TypedArray</i>.</p>
 
         <p>This property has the attributes { [[Writable]]: <b>false</b>, [[Enumerable]]: <b>false</b>, [[Configurable]]:
@@ -55289,7 +55289,7 @@
           HTML-like Comments</h1>
 
       <p style="background-color: #F79646">TODO See <a
-      href="http://javascript.spec.whatwg.org/">http://javascript.spec.whatwg.org/</a>#comment-syntax</p>
+      href="http://javascript.spec.whatwg.org/#comment-syntax">http://javascript.spec.whatwg.org/#comment-syntax</a></p>
     </section>
 
     <section id="sec-regular-expressions-patterns">
@@ -57010,19 +57010,19 @@
   interchange</i> <span style="font-family: Times New Roman">&mdash;</span> <i>Representation of dates and times</i></p>
 
   <p><span class="marker">[2]&#x9;</span>RFC 1738 &ldquo;Uniform Resource Locators (URL)&rdquo;, available at
-  &lt;http://tools.ietf.org/html/rfc1738&gt;</p>
+  <a href="http://tools.ietf.org/html/rfc1738">&lt;http://tools.ietf.org/html/rfc1738&gt;</a></p>
 
   <p><span class="marker">[3]&#x9;</span>RFC 2396 &ldquo;Uniform Resource Identifiers (URI): Generic Syntax&rdquo;, available at
-  &lt;http://tools.ietf.org/html/rfc2396&gt;</p>
+  <a href="http://tools.ietf.org/html/rfc2396">&lt;http://tools.ietf.org/html/rfc2396&gt;</a></p>
 
   <p><span class="marker">[4]&#x9;</span>RFC 3629 &ldquo;UTF-8, a transformation format of ISO 10646&rdquo;, available at
-  &lt;http://tools.ietf.org/html/rfc3629&gt;</p>
+  <a href="http://tools.ietf.org/html/rfc3629">&lt;http://tools.ietf.org/html/rfc3629&gt;</a></p>
 
   <p><span class="marker">[5]&#x9;</span>RFC 4627 &ldquo;The application/json Media Type for JavaScript Object Notation
-  (JSON)&rdquo; , available at &lt;http://tools.ietf.org/html/rfc4627&gt;</p>
+  (JSON)&rdquo; , available at <a href="http://tools.ietf.org/html/rfc4627">&lt;http://tools.ietf.org/html/rfc4627&gt;</a></p>
 
   <p><span class="marker">[6]&#x9;</span>Unicode Inc. (2010), Unicode Technical Report #15: &ldquo;Unicode Normalization
-  Forms&rdquo;, available at &lt;http://www.unicode.org/reports/tr15/tr15-29.html&gt;</p>
+  Forms&rdquo;, available at <a href="http://www.unicode.org/reports/tr15/tr15-29.html">&lt;http://www.unicode.org/reports/tr15/tr15-29.html&gt;</a></p>
 
   <p></p>
 </section>
