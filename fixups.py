@@ -1238,7 +1238,8 @@ def fixup_insert_section_ids(doc, docx):
 
     def mangle(title):
         # This is unicode-hostile. The goal is to have simple, typeable ids.
-        # I don't know that any headings use any non-ASCII characters.
+        # I don't know that any headings use any non-ASCII characters
+        # other than punctuation.
         token_re = r'''(?x)
             \s*
             (
@@ -1284,7 +1285,7 @@ def fixup_insert_section_ids(doc, docx):
                 elif w.startswith('"'):
                     w = w.strip('"')
                 w = w.rstrip(":")
-                if not any(c.isalpha() for c in w):
+                if not any(c.isalnum() for c in w):
                     continue
             words.append(w.lower())
 
@@ -1485,7 +1486,7 @@ def fixup_strip_toc(doc, docx):
     else:
         section_iterator = body.kids("section")
         i1, first_section = next(section_iterator)
-    body.content[i0: i1] = [toc]
+    body.content[i0:i1] = [toc]
 
 @InPlaceFixup
 def fixup_tables(doc, docx):
@@ -2519,14 +2520,14 @@ def title_as_algorithm_name(title, secnum):
             (?: \s* \[ \s* @@[A-Za-z0-9.%]* \s* \]
               | \s* \[\[ \s* [A-Za-z0-9.%]* \s* \]\] )?
         )
-        :?   # Ignore stray colon in a few headings
         (?:
             # Arguments (or something else in parentheses); or "Abstract Operation"; or both.
             (?: \s* \( .* \) )? \s* Abstract \s+ Operation \s*
             | \s* \( .* \)
         )
+        (?: \s* ---- .* )?   # Dash followed by a gloss
         $
-    '''
+    '''.replace("----", "\N{EM DASH}")
 
     m = re.match(algorithm_name_re, title)
     if m is not None:
@@ -2941,8 +2942,9 @@ def fixup_links(doc, docx):
     xref_re = re.compile(WORD_REF_RE)
 
     def find_link(s, current_section):
-        in_section_D_2 = current_section in ("#sec-corrections-and-clarifications-that-may-introduce-incompatibilities-with-prior-editions-in-the-5th-edition",
-                                             "#sec-additions-and-changes-that-introduce-incompatibilities-with-prior-editions-in-the-5th-edition")
+        if '5' in current_section: print(current_section)
+        unlinkifiable_section = current_section in ("#sec-in-the-5th-edition",
+                                                    "#sec-in-edition-5.1")
         best = None
         for text, target in specific_links:
             i = s.find(text)
@@ -2993,7 +2995,7 @@ def fixup_links(doc, docx):
                         warn("no such section: " + sec_num)
                         continue
 
-                if in_section_D_2 and id is not None:
+                if unlinkifiable_section and id is not None:
                     using_hack("do-not-linkify-section-numbers-in-D.2")
                     break
 
