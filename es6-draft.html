@@ -27,7 +27,7 @@
 
 <hgroup>
   <h1>ECMA-262</h1>
-  <h1>6<sup>th</sup> Edition / Draft May  22, 2014</h1>
+  <h1>6<sup>th</sup> Edition / Draft July  18, 2014</h1>
   <h1>Draft</h1>
 </hgroup>
 <hgroup>
@@ -41,7 +41,7 @@
 
   <p>Component:  choose an appropriate one</p>
 
-  <p>Version:  Rev 25, May 22, 2014 Draft</p>
+  <p>Version:  Rev 26, July 18, 2014 Draft</p>
 
   <h1>Ecma/TC39/2014/0xx</h1>
 </hgroup>
@@ -3327,7 +3327,7 @@
             <tr>
               <td style="border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black">[[Enumerable]]</td>
               <td style="border-bottom: 1px solid black; border-right: 1px solid black">Boolean</td>
-              <td style="border-bottom: 1px solid black; border-right: 1px solid black">If <b>true</b>, the property will be enumerated by a for-in enumeration (<a href="#sec-runtime-semantics-forbodyevaluation">see 13.6.3.5</a>). Otherwise, the property is said to be non-enumerable.</td>
+              <td style="border-bottom: 1px solid black; border-right: 1px solid black">If <b>true</b>, the property will be enumerated by a for-in enumeration (<a href="#sec-runtime-semantics-createperiterationenvironment">see 13.6.3.6</a>). Otherwise, the property is said to be non-enumerable.</td>
             </tr>
             <tr>
               <td style="border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black">[[Configurable]]</td>
@@ -3360,7 +3360,7 @@
             <tr>
               <td style="border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid #000000; border-top: 1px solid black">[[Enumerable]]</td>
               <td style="border-bottom: 1px solid black; border-right: 1px solid black">Boolean</td>
-              <td style="border-bottom: 1px solid black; border-right: 1px solid black">If <b>true</b>, the property is to be enumerated by a for-in enumeration (<a href="#sec-runtime-semantics-forbodyevaluation">see 13.6.3.5</a>). Otherwise, the property is said to be non-enumerable.</td>
+              <td style="border-bottom: 1px solid black; border-right: 1px solid black">If <b>true</b>, the property is to be enumerated by a for-in enumeration (<a href="#sec-runtime-semantics-createperiterationenvironment">see 13.6.3.6</a>). Otherwise, the property is said to be non-enumerable.</td>
             </tr>
             <tr>
               <td style="border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid #000000; border-top: 1px solid black">[[Configurable]]</td>
@@ -11613,12 +11613,10 @@
                 href="#sec-object-internal-methods-and-internal-slots">internal slot</a>.</li>
             <li>Set the [[GetOwnProperty]] internal method of <i>obj</i> as specified in <a
                 href="#sec-arguments-exotic-objects-getownproperty-p">9.4.4.1</a>.</li>
-            <li>Set the [[DefineOwnProperty]] internal method of <i>obj</i> as specified in <a
-                href="#sec-arguments-exotic-objects-defineownproperty-p-desc">9.4.4.2</a>.</li>
+            <li>Set the [[DefineOwnProperty]] internal method of <i>obj</i> as specified in 0.</li>
             <li>Set the [[Get]] internal method of <i>obj</i> as specified in <a
                 href="#sec-arguments-exotic-objects-get-p-receiver">9.4.4.3</a>.</li>
-            <li>Set the [[Set]] internal method of <i>obj</i> as specified in <a
-                href="#sec-arguments-exotic-objects-set-p-v-receiver">9.4.4.4</a>.</li>
+            <li>Set the [[Set]] internal method of <i>obj</i> as specified in 0.</li>
             <li>Set the [[Delete]] internal method of <i>obj</i> as specified in <a
                 href="#sec-arguments-exotic-objects-delete-p">9.4.4.5</a>.</li>
             <li>Set the remainder of <i>obj</i>&rsquo;s essential internal methods to the default ordinary object definitions
@@ -16983,8 +16981,8 @@
             title="link to this section">12.2.5.6</a></span> Static Semantics:  <i>PropName</i></h1>
 
         <p>See also: <a href="#sec-method-definitions-static-semantics-propname">14.3.5</a>, <a
-        href="#sec-generator-function-definitions-static-semantics-referencessuper">14.4.10</a>, <a
-        href="#sec-static-semantics-staticpropertynamelist">14.5.13</a></p>
+        href="#sec-generator-function-definitions-static-semantics-propname">14.4.9</a>, <a
+        href="#sec-class-definitions-static-semantics-propname">14.5.12</a></p>
 
         <div class="gp prod"><span class="nt">PropertyDefinition</span> <span class="geq">:</span> <span class="nt">IdentifierReference</span></div>
         <ol class="proc">
@@ -17083,8 +17081,8 @@
 
         <p>With parameter <span style="font-family: Times New Roman"><i>object</i>.</span></p>
 
-        <p>See also: <a href="#sec-method-definitions-runtime-semantics-propertydefinitionevaluation">14.3.9</a>, { REF
-        _Ref366745263 \r \h }14.4.16, B.3.1</p>
+        <p>See also: <a href="#sec-method-definitions-runtime-semantics-propertydefinitionevaluation">14.3.9</a>, <a
+        href="#sec-generator-function-definitions-runtime-semantics-propertydefinitionevaluation">14.4.13</a>, B.3.1</p>
 
         <div class="gp prod"><span class="nt">PropertyDefinitionList</span> <span class="geq">:</span> <span class="nt">PropertyDefinitionList</span> <code class="t">,</code> <span class="nt">PropertyDefinition</span></div>
         <ol class="proc">
@@ -17508,10 +17506,10 @@
           <div class="note">
             <p><span class="nh">NOTE 2</span> Each <i>TemplateLiteral</i> in the program code is associated with a unique Template
             call site object that is used in the evaluation of tagged Templates (<a
-            href="#sec-tagged-templates-runtime-semantics-evaluation">12.3.7.1</a>). The call site objects are frozen and the same
-            call site object is used each time a specific tagged Template is evaluated.  Whether call site objects are created
-            lazily upon first evaluation of the <i>TemplateLiteral</i> or eagerly prior to first evaluation is an implementation
-            choice that is not observable to ECMAScript code.</p>
+            href="#sec-runtime-semantics-runtime-semantics-evaluation">12.2.9.2.4</a>). The call site objects are frozen and the
+            same call site object is used each time a specific tagged Template is evaluated.  Whether call site objects are
+            created lazily upon first evaluation of the <i>TemplateLiteral</i> or eagerly prior to first evaluation is an
+            implementation choice that is not observable to ECMAScript code.</p>
           </div>
 
           <div class="note">
@@ -21148,8 +21146,7 @@
       href="#sec-do-while-statement-static-semantics-vardeclarednames">13.6.1.1</a>, <a
       href="#sec-while-statement-static-semantics-vardeclarednames">13.6.2.1</a>, <a
       href="#sec-for-statement-static-semantics-early-errors">13.6.3.1</a>, <a
-      href="#sec-for-in-and-for-of-statements-static-semantics-vardeclarednames">13.6.4.3</a>, <a
-      href="#sec-with-statement-static-semantics-vardeclarednames">13.10.2</a>, <a
+      href="#sec-for-in-and-for-of-statements-static-semantics-vardeclarednames">13.6.4.3</a>, &#xf0b7;, <a
       href="#sec-switch-statement-static-semantics-vardeclarednames">13.11.4</a>, <a
       href="#sec-labelled-statements-static-semantics-vardeclarednames">13.12.10</a>, <a
       href="#sec-try-statement-static-semantics-vardeclarednames">13.14.2</a>, <a
@@ -21183,7 +21180,7 @@
       href="#sec-if-statement-static-semantics-varscopeddeclarations">13.5.3</a>, <a
       href="#sec-do-while-statement-static-semantics-varscopeddeclarations">13.6.1.2</a>, <a
       href="#sec-while-statement-static-semantics-varscopeddeclarations">13.6.2.2</a>, <a
-      href="#sec-for-statement-static-semantics-vardeclarednames">13.6.3.2</a>, <a
+      href="#sec-for-statement-static-semantics-varscopeddeclarations">13.6.3.3</a>, <a
       href="#sec-for-in-and-for-of-statements-static-semantics-varscopeddeclarations">13.6.4.4</a>, <a
       href="#sec-with-statement-static-semantics-varscopeddeclarations">13.10.3</a>, <a
       href="#sec-switch-statement-static-semantics-varscopeddeclarations">13.11.5</a>, <a
@@ -21218,9 +21215,9 @@
 
       <p>See also: <a href="#sec-do-while-statement-static-semantics-varscopeddeclarations">13.6.1.2</a>, <a
       href="#sec-while-statement-static-semantics-varscopeddeclarations">13.6.2.2</a>, <a
-      href="#sec-for-statement-static-semantics-vardeclarednames">13.6.3.2</a>, <a
+      href="#sec-for-statement-static-semantics-varscopeddeclarations">13.6.3.3</a>, <a
       href="#sec-for-in-and-for-of-statements-runtime-semantics-labelledevaluation">13.6.4.6</a>, <a
-      href="#sec-labelled-statements-static-semantics-lexicallydeclarednames">13.12.4</a>.</p>
+      href="#sec-labelled-statements-runtime-semantics-labelledevaluation">13.12.12</a>.</p>
 
       <div class="gp prod"><span class="nt">BreakableStatement</span> <span class="geq">:</span> <span class="nt">IterationStatement</span></div>
       <ol class="proc">
@@ -21530,8 +21527,7 @@
       href="#sec-do-while-statement-static-semantics-vardeclarednames">13.6.1.1</a>, <a
       href="#sec-while-statement-static-semantics-vardeclarednames">13.6.2.1</a>, <a
       href="#sec-for-statement-static-semantics-early-errors">13.6.3.1</a>, <a
-      href="#sec-for-in-and-for-of-statements-static-semantics-vardeclarednames">13.6.4.3</a>, <a
-      href="#sec-with-statement-static-semantics-vardeclarednames">13.10.2</a>, <a
+      href="#sec-for-in-and-for-of-statements-static-semantics-vardeclarednames">13.6.4.3</a>, &#xf0b7;, <a
       href="#sec-switch-statement-static-semantics-vardeclarednames">13.11.4</a>, <a
       href="#sec-labelled-statements-static-semantics-vardeclarednames">13.12.10</a>, <a
       href="#sec-try-statement-static-semantics-vardeclarednames">13.14.2</a>, <a
@@ -21565,7 +21561,7 @@
       href="#sec-if-statement-static-semantics-varscopeddeclarations">13.5.3</a>, <a
       href="#sec-do-while-statement-static-semantics-varscopeddeclarations">13.6.1.2</a>, <a
       href="#sec-while-statement-static-semantics-varscopeddeclarations">13.6.2.2</a>, <a
-      href="#sec-for-statement-static-semantics-vardeclarednames">13.6.3.2</a>, <a
+      href="#sec-for-statement-static-semantics-varscopeddeclarations">13.6.3.3</a>, <a
       href="#sec-for-in-and-for-of-statements-static-semantics-varscopeddeclarations">13.6.4.4</a>, <a
       href="#sec-with-statement-static-semantics-varscopeddeclarations">13.10.3</a>, <a
       href="#sec-switch-statement-static-semantics-varscopeddeclarations">13.11.5</a>, <a
@@ -21971,8 +21967,7 @@
         href="#sec-do-while-statement-static-semantics-vardeclarednames">13.6.1.1</a>, <a
         href="#sec-while-statement-static-semantics-vardeclarednames">13.6.2.1</a>, <a
         href="#sec-for-statement-static-semantics-early-errors">13.6.3.1</a>, <a
-        href="#sec-for-in-and-for-of-statements-static-semantics-vardeclarednames">13.6.4.3</a>, <a
-        href="#sec-with-statement-static-semantics-vardeclarednames">13.10.2</a>, <a
+        href="#sec-for-in-and-for-of-statements-static-semantics-vardeclarednames">13.6.4.3</a>, &#xf0b7;, <a
         href="#sec-switch-statement-static-semantics-vardeclarednames">13.11.4</a>, <a
         href="#sec-labelled-statements-static-semantics-vardeclarednames">13.12.10</a>, <a
         href="#sec-try-statement-static-semantics-vardeclarednames">13.14.2</a>, <a
@@ -21996,7 +21991,7 @@
         href="#sec-if-statement-static-semantics-varscopeddeclarations">13.5.3</a>, <a
         href="#sec-do-while-statement-static-semantics-varscopeddeclarations">13.6.1.2</a>, <a
         href="#sec-while-statement-static-semantics-varscopeddeclarations">13.6.2.2</a>, <a
-        href="#sec-for-statement-static-semantics-vardeclarednames">13.6.3.2</a>, <a
+        href="#sec-for-statement-static-semantics-varscopeddeclarations">13.6.3.3</a>, <a
         href="#sec-for-in-and-for-of-statements-static-semantics-varscopeddeclarations">13.6.4.4</a>, <a
         href="#sec-with-statement-static-semantics-varscopeddeclarations">13.10.3</a>, <a
         href="#sec-switch-statement-static-semantics-varscopeddeclarations">13.11.5</a>, <a
@@ -22445,7 +22440,7 @@
         <p>With parameters <var>iterator,</var> and  <var>environment</var>.</p>
 
         <p>See also: <a href="#sec-function-definitions-runtime-semantics-iteratorbindinginitialization">14.1.20</a>, <a
-        href="#sec-arrow-function-definitions-static-semantics-early-errors">14.2.1</a>.</p>
+        href="#sec-arrow-function-definitions-runtime-semantics-iteratorbindinginitialization">14.2.15</a>.</p>
 
         <div class="note">
           <p><span class="nh">NOTE</span> When <b>undefined</b> is passed for <var>environment</var> it indicates that a <a
@@ -22792,8 +22787,7 @@
       href="#sec-do-while-statement-static-semantics-vardeclarednames">13.6.1.1</a>, <a
       href="#sec-while-statement-static-semantics-vardeclarednames">13.6.2.1</a>, <a
       href="#sec-for-statement-static-semantics-early-errors">13.6.3.1</a>, <a
-      href="#sec-for-in-and-for-of-statements-static-semantics-vardeclarednames">13.6.4.3</a>, <a
-      href="#sec-with-statement-static-semantics-vardeclarednames">13.10.2</a>, <a
+      href="#sec-for-in-and-for-of-statements-static-semantics-vardeclarednames">13.6.4.3</a>, &#xf0b7;, <a
       href="#sec-switch-statement-static-semantics-vardeclarednames">13.11.4</a>, <a
       href="#sec-labelled-statements-static-semantics-vardeclarednames">13.12.10</a>, <a
       href="#sec-try-statement-static-semantics-vardeclarednames">13.14.2</a>, <a
@@ -22823,7 +22817,7 @@
       href="#sec-variable-statement-static-semantics-varscopeddeclarations">13.2.2.3</a>, <a
       href="#sec-do-while-statement-static-semantics-varscopeddeclarations">13.6.1.2</a>, <a
       href="#sec-while-statement-static-semantics-varscopeddeclarations">13.6.2.2</a>, <a
-      href="#sec-for-statement-static-semantics-vardeclarednames">13.6.3.2</a>, <a
+      href="#sec-for-statement-static-semantics-varscopeddeclarations">13.6.3.3</a>, <a
       href="#sec-for-in-and-for-of-statements-static-semantics-varscopeddeclarations">13.6.4.4</a>, <a
       href="#sec-with-statement-static-semantics-varscopeddeclarations">13.10.3</a>, <a
       href="#sec-switch-statement-static-semantics-varscopeddeclarations">13.11.5</a>, <a
@@ -23012,8 +23006,7 @@
         href="#sec-if-statement-static-semantics-vardeclarednames">13.5.2</a>, <a
         href="#sec-while-statement-static-semantics-vardeclarednames">13.6.2.1</a>, <a
         href="#sec-for-statement-static-semantics-early-errors">13.6.3.1</a>, <a
-        href="#sec-for-in-and-for-of-statements-static-semantics-vardeclarednames">13.6.4.3</a>, <a
-        href="#sec-with-statement-static-semantics-vardeclarednames">13.10.2</a>, <a
+        href="#sec-for-in-and-for-of-statements-static-semantics-vardeclarednames">13.6.4.3</a>, &#xf0b7;, <a
         href="#sec-switch-statement-static-semantics-vardeclarednames">13.11.4</a>, <a
         href="#sec-labelled-statements-static-semantics-vardeclarednames">13.12.10</a>, <a
         href="#sec-try-statement-static-semantics-vardeclarednames">13.14.2</a>, <a
@@ -23037,7 +23030,7 @@
         href="#sec-variable-statement-static-semantics-varscopeddeclarations">13.2.2.3</a>, <a
         href="#sec-if-statement-static-semantics-varscopeddeclarations">13.5.3</a>, <a
         href="#sec-while-statement-static-semantics-varscopeddeclarations">13.6.2.2</a>, <a
-        href="#sec-for-statement-static-semantics-vardeclarednames">13.6.3.2</a>, <a
+        href="#sec-for-statement-static-semantics-varscopeddeclarations">13.6.3.3</a>, <a
         href="#sec-for-in-and-for-of-statements-static-semantics-varscopeddeclarations">13.6.4.4</a>, <a
         href="#sec-with-statement-static-semantics-varscopeddeclarations">13.10.3</a>, <a
         href="#sec-switch-statement-static-semantics-varscopeddeclarations">13.11.5</a>, <a
@@ -23062,9 +23055,9 @@
 
         <p>See also: <a href="#sec-statement-semantics-static-semantics-varscopeddeclarations">13.0.2</a>, <a
         href="#sec-while-statement-static-semantics-varscopeddeclarations">13.6.2.2</a>, <a
-        href="#sec-for-statement-static-semantics-vardeclarednames">13.6.3.2</a>, <a
+        href="#sec-for-statement-static-semantics-varscopeddeclarations">13.6.3.3</a>, <a
         href="#sec-for-in-and-for-of-statements-runtime-semantics-labelledevaluation">13.6.4.6</a>, <a
-        href="#sec-labelled-statements-static-semantics-lexicallydeclarednames">13.12.4</a>.</p>
+        href="#sec-labelled-statements-runtime-semantics-labelledevaluation">13.12.12</a>.</p>
 
         <div class="gp prod"><span class="nt">IterationStatement</span> <span class="geq">:</span> <code class="t">do</code> <span class="nt">Statement</span> <code class="t">while</code> <code class="t">(</code> <span class="nt">Expression</span> <code class="t">)</code> <code class="t">;</code><sub>opt</sub></div>
         <ol class="proc">
@@ -23110,8 +23103,7 @@
         href="#sec-if-statement-static-semantics-vardeclarednames">13.5.2</a>, <a
         href="#sec-do-while-statement-static-semantics-vardeclarednames">13.6.1.1</a>, <a
         href="#sec-for-statement-static-semantics-early-errors">13.6.3.1</a>, <a
-        href="#sec-for-in-and-for-of-statements-static-semantics-vardeclarednames">13.6.4.3</a>, <a
-        href="#sec-with-statement-static-semantics-vardeclarednames">13.10.2</a>, <a
+        href="#sec-for-in-and-for-of-statements-static-semantics-vardeclarednames">13.6.4.3</a>, &#xf0b7;, <a
         href="#sec-switch-statement-static-semantics-vardeclarednames">13.11.4</a>, <a
         href="#sec-labelled-statements-static-semantics-vardeclarednames">13.12.10</a>, <a
         href="#sec-try-statement-static-semantics-vardeclarednames">13.14.2</a>, <a
@@ -23135,7 +23127,7 @@
         href="#sec-variable-statement-static-semantics-varscopeddeclarations">13.2.2.3</a>, <a
         href="#sec-if-statement-static-semantics-varscopeddeclarations">13.5.3</a>, <a
         href="#sec-do-while-statement-static-semantics-varscopeddeclarations">13.6.1.2</a>, <a
-        href="#sec-for-statement-static-semantics-vardeclarednames">13.6.3.2</a>, <a
+        href="#sec-for-statement-static-semantics-varscopeddeclarations">13.6.3.3</a>, <a
         href="#sec-for-in-and-for-of-statements-static-semantics-varscopeddeclarations">13.6.4.4</a>, <a
         href="#sec-with-statement-static-semantics-varscopeddeclarations">13.10.3</a>, <a
         href="#sec-switch-statement-static-semantics-varscopeddeclarations">13.11.5</a>, <a
@@ -23160,9 +23152,9 @@
 
         <p>See also: <a href="#sec-statement-semantics-static-semantics-varscopeddeclarations">13.0.2</a>, <a
         href="#sec-do-while-statement-static-semantics-varscopeddeclarations">13.6.1.2</a>, <a
-        href="#sec-for-statement-static-semantics-vardeclarednames">13.6.3.2</a>, <a
+        href="#sec-for-statement-static-semantics-varscopeddeclarations">13.6.3.3</a>, <a
         href="#sec-for-in-and-for-of-statements-runtime-semantics-labelledevaluation">13.6.4.6</a>, <a
-        href="#sec-labelled-statements-static-semantics-lexicallydeclarednames">13.12.4</a>.</p>
+        href="#sec-labelled-statements-runtime-semantics-labelledevaluation">13.12.12</a>.</p>
 
         <div class="gp prod"><span class="nt">IterationStatement</span> <span class="geq">:</span> <code class="t">while</code> <code class="t">(</code> <span class="nt">Expression</span> <code class="t">)</code> <span class="nt">Statement</span></div>
         <ol class="proc">
@@ -23220,8 +23212,7 @@
         href="#sec-if-statement-static-semantics-vardeclarednames">13.5.2</a>, <a
         href="#sec-do-while-statement-static-semantics-vardeclarednames">13.6.1.1</a>, <a
         href="#sec-while-statement-static-semantics-vardeclarednames">13.6.2.1</a>, <a
-        href="#sec-for-in-and-for-of-statements-static-semantics-vardeclarednames">13.6.4.3</a>, <a
-        href="#sec-with-statement-static-semantics-vardeclarednames">13.10.2</a>, <a
+        href="#sec-for-in-and-for-of-statements-static-semantics-vardeclarednames">13.6.4.3</a>, &#xf0b7;, <a
         href="#sec-switch-statement-static-semantics-vardeclarednames">13.11.4</a>, <a
         href="#sec-labelled-statements-static-semantics-vardeclarednames">13.12.10</a>, <a
         href="#sec-try-statement-static-semantics-vardeclarednames">13.14.2</a>, <a
@@ -23292,7 +23283,7 @@
         href="#sec-do-while-statement-static-semantics-varscopeddeclarations">13.6.1.2</a>, <a
         href="#sec-while-statement-static-semantics-varscopeddeclarations">13.6.2.2</a>, <a
         href="#sec-for-in-and-for-of-statements-runtime-semantics-labelledevaluation">13.6.4.6</a>, <a
-        href="#sec-labelled-statements-static-semantics-lexicallydeclarednames">13.12.4</a>.</p>
+        href="#sec-labelled-statements-runtime-semantics-labelledevaluation">13.12.12</a>.</p>
 
         <div class="gp prod"><span class="nt">IterationStatement</span> <span class="geq">:</span> <code class="t">for</code> <code class="t">(</code> <span class="nt">Expression</span><sub>opt</sub> <code class="t">;</code> <span class="nt">Expression</span><sub>opt</sub> <code class="t">;</code> <span class="nt">Expression</span><sub>opt</sub> <code class="t">)</code> <span class="nt">Statement</span></div>
         <ol class="proc">
@@ -23554,8 +23545,7 @@
         href="#sec-if-statement-static-semantics-vardeclarednames">13.5.2</a>, <a
         href="#sec-do-while-statement-static-semantics-vardeclarednames">13.6.1.1</a>, <a
         href="#sec-while-statement-static-semantics-vardeclarednames">13.6.2.1</a>, <a
-        href="#sec-for-statement-static-semantics-early-errors">13.6.3.1</a>, <a
-        href="#sec-with-statement-static-semantics-vardeclarednames">13.10.2</a>, <a
+        href="#sec-for-statement-static-semantics-early-errors">13.6.3.1</a>, &#xf0b7;, <a
         href="#sec-switch-statement-static-semantics-vardeclarednames">13.11.4</a>, <a
         href="#sec-labelled-statements-static-semantics-vardeclarednames">13.12.10</a>, <a
         href="#sec-try-statement-static-semantics-vardeclarednames">13.14.2</a>, <a
@@ -23604,7 +23594,7 @@
         href="#sec-if-statement-static-semantics-varscopeddeclarations">13.5.3</a>, <a
         href="#sec-do-while-statement-static-semantics-varscopeddeclarations">13.6.1.2</a>, <a
         href="#sec-while-statement-static-semantics-varscopeddeclarations">13.6.2.2</a>, <a
-        href="#sec-for-statement-static-semantics-vardeclarednames">13.6.3.2</a>, <a
+        href="#sec-for-statement-static-semantics-varscopeddeclarations">13.6.3.3</a>, <a
         href="#sec-with-statement-static-semantics-varscopeddeclarations">13.10.3</a>, <a
         href="#sec-switch-statement-static-semantics-varscopeddeclarations">13.11.5</a>, <a
         href="#sec-labelled-statements-static-semantics-varscopeddeclarations">13.12.11</a>, <a
@@ -23655,8 +23645,8 @@
         <p>See also: <a href="#sec-statement-semantics-static-semantics-varscopeddeclarations">13.0.2</a>, <a
         href="#sec-do-while-statement-static-semantics-varscopeddeclarations">13.6.1.2</a>, <a
         href="#sec-while-statement-static-semantics-varscopeddeclarations">13.6.2.2</a>, <a
-        href="#sec-for-statement-static-semantics-vardeclarednames">13.6.3.2</a>, <a
-        href="#sec-labelled-statements-static-semantics-lexicallydeclarednames">13.12.4</a>.</p>
+        href="#sec-for-statement-static-semantics-varscopeddeclarations">13.6.3.3</a>, <a
+        href="#sec-labelled-statements-runtime-semantics-labelledevaluation">13.12.12</a>.</p>
 
         <div class="gp prod"><span class="nt">ForDeclaration</span> <span class="geq">:</span> <span class="nt">LetOrConst</span> <span class="nt">ForBinding</span></div>
         <ol class="proc">
@@ -23691,8 +23681,8 @@
         <p>See also: <a href="#sec-statement-semantics-static-semantics-varscopeddeclarations">13.0.2</a>, <a
         href="#sec-do-while-statement-static-semantics-varscopeddeclarations">13.6.1.2</a>, <a
         href="#sec-while-statement-static-semantics-varscopeddeclarations">13.6.2.2</a>, <a
-        href="#sec-for-statement-static-semantics-vardeclarednames">13.6.3.2</a>, <a
-        href="#sec-labelled-statements-static-semantics-lexicallydeclarednames">13.12.4</a>.</p>
+        href="#sec-for-statement-static-semantics-varscopeddeclarations">13.6.3.3</a>, <a
+        href="#sec-labelled-statements-runtime-semantics-labelledevaluation">13.12.12</a>.</p>
 
         <div class="gp prod"><span class="nt">IterationStatement</span> <span class="geq">:</span> <code class="t">for</code> <code class="t">(</code> <span class="nt">LeftHandSideExpression</span> <code class="t">in</code> <span class="nt">Expression</span> <code class="t">)</code> <span class="nt">Statement</span></div>
         <ol class="proc">
@@ -24154,7 +24144,7 @@
       href="#sec-if-statement-static-semantics-varscopeddeclarations">13.5.3</a>, <a
       href="#sec-do-while-statement-static-semantics-varscopeddeclarations">13.6.1.2</a>, <a
       href="#sec-while-statement-static-semantics-varscopeddeclarations">13.6.2.2</a>, <a
-      href="#sec-for-statement-static-semantics-vardeclarednames">13.6.3.2</a>, <a
+      href="#sec-for-statement-static-semantics-varscopeddeclarations">13.6.3.3</a>, <a
       href="#sec-for-in-and-for-of-statements-static-semantics-varscopeddeclarations">13.6.4.4</a>, <a
       href="#sec-switch-statement-static-semantics-varscopeddeclarations">13.11.5</a>, <a
       href="#sec-labelled-statements-static-semantics-varscopeddeclarations">13.12.11</a>, <a
@@ -24346,8 +24336,7 @@
       href="#sec-do-while-statement-static-semantics-vardeclarednames">13.6.1.1</a>, <a
       href="#sec-while-statement-static-semantics-vardeclarednames">13.6.2.1</a>, <a
       href="#sec-for-statement-static-semantics-early-errors">13.6.3.1</a>, <a
-      href="#sec-for-in-and-for-of-statements-static-semantics-vardeclarednames">13.6.4.3</a>, <a
-      href="#sec-with-statement-static-semantics-vardeclarednames">13.10.2</a>, <a
+      href="#sec-for-in-and-for-of-statements-static-semantics-vardeclarednames">13.6.4.3</a>, &#xf0b7;, <a
       href="#sec-labelled-statements-static-semantics-vardeclarednames">13.12.10</a>, <a
       href="#sec-try-statement-static-semantics-vardeclarednames">13.14.2</a>, <a
       href="#sec-function-definitions-static-semantics-vardeclarednames">14.1.17</a>, <a
@@ -24401,7 +24390,7 @@
       href="#sec-if-statement-static-semantics-varscopeddeclarations">13.5.3</a>, <a
       href="#sec-do-while-statement-static-semantics-varscopeddeclarations">13.6.1.2</a>, <a
       href="#sec-while-statement-static-semantics-varscopeddeclarations">13.6.2.2</a>, <a
-      href="#sec-for-statement-static-semantics-vardeclarednames">13.6.3.2</a>, <a
+      href="#sec-for-statement-static-semantics-varscopeddeclarations">13.6.3.3</a>, <a
       href="#sec-for-in-and-for-of-statements-static-semantics-varscopeddeclarations">13.6.4.4</a>, <a
       href="#sec-with-statement-static-semantics-varscopeddeclarations">13.10.3</a>, <a
       href="#sec-labelled-statements-static-semantics-varscopeddeclarations">13.12.11</a>, <a
@@ -24864,8 +24853,7 @@
       href="#sec-do-while-statement-static-semantics-vardeclarednames">13.6.1.1</a>, <a
       href="#sec-while-statement-static-semantics-vardeclarednames">13.6.2.1</a>, <a
       href="#sec-for-statement-static-semantics-early-errors">13.6.3.1</a>, <a
-      href="#sec-for-in-and-for-of-statements-static-semantics-vardeclarednames">13.6.4.3</a>, <a
-      href="#sec-with-statement-static-semantics-vardeclarednames">13.10.2</a>, <a
+      href="#sec-for-in-and-for-of-statements-static-semantics-vardeclarednames">13.6.4.3</a>, &#xf0b7;, <a
       href="#sec-switch-statement-static-semantics-vardeclarednames">13.11.4</a>, <a
       href="#sec-try-statement-static-semantics-vardeclarednames">13.14.2</a>, <a
       href="#sec-function-definitions-static-semantics-vardeclarednames">14.1.17</a>, <a
@@ -24893,7 +24881,7 @@
       href="#sec-if-statement-static-semantics-varscopeddeclarations">13.5.3</a>, <a
       href="#sec-do-while-statement-static-semantics-varscopeddeclarations">13.6.1.2</a>, <a
       href="#sec-while-statement-static-semantics-varscopeddeclarations">13.6.2.2</a>, <a
-      href="#sec-for-statement-static-semantics-vardeclarednames">13.6.3.2</a>, <a
+      href="#sec-for-statement-static-semantics-varscopeddeclarations">13.6.3.3</a>, <a
       href="#sec-for-in-and-for-of-statements-static-semantics-varscopeddeclarations">13.6.4.4</a>, <a
       href="#sec-with-statement-static-semantics-varscopeddeclarations">13.10.3</a>, <a
       href="#sec-switch-statement-static-semantics-varscopeddeclarations">13.11.5</a>, <a
@@ -24923,7 +24911,7 @@
         <p>See also: <a href="#sec-statement-semantics-static-semantics-varscopeddeclarations">13.0.2</a>, <a
         href="#sec-do-while-statement-static-semantics-varscopeddeclarations">13.6.1.2</a>, <a
         href="#sec-while-statement-static-semantics-varscopeddeclarations">13.6.2.2</a>, <a
-        href="#sec-for-statement-static-semantics-vardeclarednames">13.6.3.2</a>, <a
+        href="#sec-for-statement-static-semantics-varscopeddeclarations">13.6.3.3</a>, <a
         href="#sec-for-in-and-for-of-statements-runtime-semantics-labelledevaluation">13.6.4.6</a>.</p>
 
         <div class="gp prod"><span class="nt">LabelledStatement</span> <span class="geq">:</span> <span class="nt">LabelIdentifier</span> <code class="t">:</code> <span class="nt">LabelledItem</span></div>
@@ -25079,8 +25067,7 @@
       href="#sec-do-while-statement-static-semantics-vardeclarednames">13.6.1.1</a>, <a
       href="#sec-while-statement-static-semantics-vardeclarednames">13.6.2.1</a>, <a
       href="#sec-for-statement-static-semantics-early-errors">13.6.3.1</a>, <a
-      href="#sec-for-in-and-for-of-statements-static-semantics-vardeclarednames">13.6.4.3</a>, <a
-      href="#sec-with-statement-static-semantics-vardeclarednames">13.10.2</a>, <a
+      href="#sec-for-in-and-for-of-statements-static-semantics-vardeclarednames">13.6.4.3</a>, &#xf0b7;, <a
       href="#sec-switch-statement-static-semantics-vardeclarednames">13.11.4</a>, <a
       href="#sec-labelled-statements-static-semantics-vardeclarednames">13.12.10</a>, <a
       href="#sec-function-definitions-static-semantics-vardeclarednames">14.1.17</a>, <a
@@ -25123,7 +25110,7 @@
       href="#sec-if-statement-static-semantics-varscopeddeclarations">13.5.3</a>, <a
       href="#sec-do-while-statement-static-semantics-varscopeddeclarations">13.6.1.2</a>, <a
       href="#sec-while-statement-static-semantics-varscopeddeclarations">13.6.2.2</a>, <a
-      href="#sec-for-statement-static-semantics-vardeclarednames">13.6.3.2</a>, <a
+      href="#sec-for-statement-static-semantics-varscopeddeclarations">13.6.3.3</a>, <a
       href="#sec-for-in-and-for-of-statements-static-semantics-varscopeddeclarations">13.6.4.4</a>, <a
       href="#sec-with-statement-static-semantics-varscopeddeclarations">13.10.3</a>, <a
       href="#sec-switch-statement-static-semantics-varscopeddeclarations">13.11.5</a>, <a
@@ -25807,7 +25794,7 @@
 
       <p>See also: <a href="#sec-arrow-function-definitions-static-semantics-referencessuper">14.2.12</a>, <a
       href="#sec-method-definitions-static-semantics-referencessuper">14.3.6</a>, <a
-      href="#sec-generator-function-definitions-runtime-semantics-evaluatebody">14.4.11</a>.</p>
+      href="#sec-generator-function-definitions-static-semantics-referencessuper">14.4.10</a>.</p>
 
       <div class="gp prod"><span class="nt">FunctionDeclaration</span> <span class="geq">:</span> <code class="t">function</code> <span class="nt">BindingIdentifier</span> <code class="t">(</code> <span class="nt">FormalParameters</span> <code class="t">)</code> <code class="t">{</code> <span class="nt">FunctionBody</span> <code class="t">}</code></div>
       <ol class="proc">
@@ -25844,8 +25831,7 @@
       href="#sec-do-while-statement-static-semantics-vardeclarednames">13.6.1.1</a>, <a
       href="#sec-while-statement-static-semantics-vardeclarednames">13.6.2.1</a>, <a
       href="#sec-for-statement-static-semantics-early-errors">13.6.3.1</a>, <a
-      href="#sec-for-in-and-for-of-statements-static-semantics-vardeclarednames">13.6.4.3</a>, <a
-      href="#sec-with-statement-static-semantics-vardeclarednames">13.10.2</a>, <a
+      href="#sec-for-in-and-for-of-statements-static-semantics-vardeclarednames">13.6.4.3</a>, &#xf0b7;, <a
       href="#sec-switch-statement-static-semantics-vardeclarednames">13.11.4</a>, <a
       href="#sec-labelled-statements-static-semantics-vardeclarednames">13.12.10</a>, <a
       href="#sec-try-statement-static-semantics-vardeclarednames">13.14.2</a>, <a
@@ -25873,7 +25859,7 @@
       href="#sec-if-statement-static-semantics-varscopeddeclarations">13.5.3</a>, <a
       href="#sec-do-while-statement-static-semantics-varscopeddeclarations">13.6.1.2</a>, <a
       href="#sec-while-statement-static-semantics-varscopeddeclarations">13.6.2.2</a>, <a
-      href="#sec-for-statement-static-semantics-vardeclarednames">13.6.3.2</a>, <a
+      href="#sec-for-statement-static-semantics-varscopeddeclarations">13.6.3.3</a>, <a
       href="#sec-for-in-and-for-of-statements-static-semantics-varscopeddeclarations">13.6.4.4</a>, <a
       href="#sec-with-statement-static-semantics-varscopeddeclarations">13.10.3</a>, <a
       href="#sec-switch-statement-static-semantics-varscopeddeclarations">13.11.5</a>, <a
@@ -25899,8 +25885,8 @@
 
       <p>With parameter <var>functionObject</var>.</p>
 
-      <p>See also: <a href="#sec-arrow-function-definitions-static-semantics-boundnames">14.2.2</a>, <a
-      href="#sec-generator-function-definitions-runtime-semantics-evaluation">14.4.14</a>.</p>
+      <p>See also: <a href="#sec-arrow-function-definitions-runtime-semantics-evaluatebody">14.2.16</a>, <a
+      href="#sec-generator-function-definitions-runtime-semantics-evaluatebody">14.4.11</a>.</p>
 
       <div class="gp prod"><span class="nt">FunctionBody</span> <span class="geq">:</span> <span class="nt">FunctionStatementList</span></div>
       <ol class="proc">
@@ -25936,7 +25922,7 @@
       </div>
 
       <p>See also: <a href="#sec-destructuring-binding-patterns-runtime-semantics-iteratorbindinginitialization">13.2.3.6</a>, <a
-      href="#sec-arrow-function-definitions-static-semantics-early-errors">14.2.1</a>.</p>
+      href="#sec-arrow-function-definitions-runtime-semantics-iteratorbindinginitialization">14.2.15</a>.</p>
 
       <div class="gp prod"><span class="nt">FormalParameters</span> <span class="geq">:</span> <span class="grhsannot">[empty]</span></div>
       <ol class="proc">
@@ -25966,7 +25952,7 @@
 
       <p>With parameter <var>scope</var>.</p>
 
-      <p>See also: { REF _Ref368472700 \r \h }14.4.15.</p>
+      <p>See also: <a href="#sec-generator-function-definitions-runtime-semantics-instantiatefunctionobject">14.4.12</a>.</p>
 
       <div class="gp prod"><span class="nt">FunctionDeclaration</span> <span class="geq">:</span> <code class="t">function</code> <span class="nt">BindingIdentifier</span> <code class="t">(</code> <span class="nt">FormalParameters</span> <code class="t">)</code> <code class="t">{</code> <span class="nt">FunctionBody</span> <code class="t">}</code></div>
       <ol class="proc">
@@ -26362,7 +26348,7 @@
 
       <p>See also: <a href="#sec-function-definitions-static-semantics-referencessuper">14.1.16</a>, <a
       href="#sec-method-definitions-static-semantics-referencessuper">14.3.6</a>, <a
-      href="#sec-generator-function-definitions-runtime-semantics-evaluatebody">14.4.11</a>.</p>
+      href="#sec-generator-function-definitions-static-semantics-referencessuper">14.4.10</a>.</p>
 
       <div class="gp prod"><span class="nt">ArrowFunction</span> <span class="geq">:</span> <span class="nt">ArrowParameters</span> <code class="t">=&gt;</code> <span class="nt">ConciseBody</span></div>
       <ol class="proc">
@@ -26386,8 +26372,7 @@
       href="#sec-do-while-statement-static-semantics-vardeclarednames">13.6.1.1</a>, <a
       href="#sec-while-statement-static-semantics-vardeclarednames">13.6.2.1</a>, <a
       href="#sec-for-statement-static-semantics-early-errors">13.6.3.1</a>, <a
-      href="#sec-for-in-and-for-of-statements-static-semantics-vardeclarednames">13.6.4.3</a>, <a
-      href="#sec-with-statement-static-semantics-vardeclarednames">13.10.2</a>, <a
+      href="#sec-for-in-and-for-of-statements-static-semantics-vardeclarednames">13.6.4.3</a>, &#xf0b7;, <a
       href="#sec-switch-statement-static-semantics-vardeclarednames">13.11.4</a>, <a
       href="#sec-labelled-statements-static-semantics-vardeclarednames">13.12.10</a>, <a
       href="#sec-try-statement-static-semantics-vardeclarednames">13.14.2</a>, <a
@@ -26411,7 +26396,7 @@
       href="#sec-if-statement-static-semantics-varscopeddeclarations">13.5.3</a>, <a
       href="#sec-do-while-statement-static-semantics-varscopeddeclarations">13.6.1.2</a>, <a
       href="#sec-while-statement-static-semantics-varscopeddeclarations">13.6.2.2</a>, <a
-      href="#sec-for-statement-static-semantics-vardeclarednames">13.6.3.2</a>, <a
+      href="#sec-for-statement-static-semantics-varscopeddeclarations">13.6.3.3</a>, <a
       href="#sec-for-in-and-for-of-statements-static-semantics-varscopeddeclarations">13.6.4.4</a>, <a
       href="#sec-with-statement-static-semantics-varscopeddeclarations">13.10.3</a>, <a
       href="#sec-switch-statement-static-semantics-varscopeddeclarations">13.11.5</a>, <a
@@ -26477,7 +26462,7 @@
       <p>With parameter <var>functionObject</var>.</p>
 
       <p>See also: <a href="#sec-function-definitions-runtime-semantics-evaluatebody">14.1.19</a>, <a
-      href="#sec-generator-function-definitions-runtime-semantics-evaluation">14.4.14</a>.</p>
+      href="#sec-generator-function-definitions-runtime-semantics-evaluatebody">14.4.11</a>.</p>
 
       <div class="gp prod"><span class="nt">ConciseBody</span> <span class="geq">:</span> <span class="nt">AssignmentExpression</span></div>
       <ol class="proc">
@@ -26636,8 +26621,8 @@
           title="link to this section">14.3.5</a></span> Static Semantics:  PropName</h1>
 
       <p><b>See also:</b> <a href="#sec-object-initializer-static-semantics-propname">12.2.5.6</a>, <a
-      href="#sec-generator-function-definitions-static-semantics-referencessuper">14.4.10</a>, <a
-      href="#sec-static-semantics-staticpropertynamelist">14.5.13</a></p>
+      href="#sec-generator-function-definitions-static-semantics-propname">14.4.9</a>, <a
+      href="#sec-class-definitions-static-semantics-propname">14.5.12</a></p>
 
       <div class="gp">
         <div class="lhs"><span class="nt">MethodDefinition</span> <span class="geq">:</span></div>
@@ -26657,7 +26642,7 @@
 
       <p>See also: <a href="#sec-function-definitions-static-semantics-referencessuper">14.1.16</a>, <a
       href="#sec-arrow-function-definitions-static-semantics-referencessuper">14.2.12</a>, <a
-      href="#sec-generator-function-definitions-runtime-semantics-evaluatebody">14.4.11</a>.</p>
+      href="#sec-generator-function-definitions-static-semantics-referencessuper">14.4.10</a>.</p>
 
       <div class="gp prod"><span class="nt">MethodDefinition</span> <span class="geq">:</span> <span class="nt">PropertyName</span> <code class="t">(</code> <span class="nt">StrictFormalParameters</span> <code class="t">)</code> <code class="t">{</code> <span class="nt">FunctionBody</span> <code class="t">}</code></div>
       <ol class="proc">
@@ -26728,8 +26713,8 @@
 
       <p>With parameter <span style="font-family: Times New Roman"><i>object</i>.</span></p>
 
-      <p>See also: <a href="#sec-object-initializer-runtime-semantics-propertydefinitionevaluation">12.2.5.9</a>, { REF
-      _Ref366745263 \r \h }14.4.16, B.3.1</p>
+      <p>See also: <a href="#sec-object-initializer-runtime-semantics-propertydefinitionevaluation">12.2.5.9</a>, <a
+      href="#sec-generator-function-definitions-runtime-semantics-propertydefinitionevaluation">14.4.13</a>, B.3.1</p>
 
       <div class="gp prod"><span class="nt">MethodDefinition</span> <span class="geq">:</span> <span class="nt">PropertyName</span> <code class="t">(</code> <span class="nt">StrictFormalParameters</span> <code class="t">)</code> <code class="t">{</code> <span class="nt">FunctionBody</span> <code class="t">}</code></div>
       <ol class="proc">
@@ -27034,7 +27019,7 @@
 
       <p><b>See also:</b> <a href="#sec-object-initializer-static-semantics-propname">12.2.5.6</a>, <a
       href="#sec-method-definitions-static-semantics-propname">14.3.5</a>, <a
-      href="#sec-static-semantics-staticpropertynamelist">14.5.13</a></p>
+      href="#sec-class-definitions-static-semantics-propname">14.5.12</a></p>
 
       <div class="gp prod"><span class="nt">GeneratorMethod</span> <span class="geq">:</span> <code class="t">*</code> <span class="nt">PropertyName</span> <code class="t">(</code> <span class="nt">StrictFormalParameters</span> <code class="t">)</code> <code class="t">{</code> <span class="nt">FunctionBody</span> <code class="t">}</code></div>
       <ol class="proc">
@@ -27074,7 +27059,7 @@
       <p>With parameter <var>functionObject</var>.</p>
 
       <p>See also: <a href="#sec-function-definitions-runtime-semantics-evaluatebody">14.1.19</a>, <a
-      href="#sec-arrow-function-definitions-static-semantics-boundnames">14.2.2</a>.</p>
+      href="#sec-arrow-function-definitions-runtime-semantics-evaluatebody">14.2.16</a>.</p>
 
       <div class="gp prod"><span class="nt">GeneratorBody</span> <span class="geq">:</span> <span class="nt">FunctionBody</span></div>
       <ol class="proc">
@@ -27640,7 +27625,7 @@
 
       <p><b>See also:</b> <a href="#sec-object-initializer-static-semantics-propname">12.2.5.6</a>, <a
       href="#sec-method-definitions-static-semantics-propname">14.3.5</a>, <a
-      href="#sec-generator-function-definitions-static-semantics-referencessuper">14.4.10</a></p>
+      href="#sec-generator-function-definitions-static-semantics-propname">14.4.9</a></p>
 
       <div class="gp prod"><span class="nt">ClassElement</span> <span class="geq">:</span> <code class="t">;</code></div>
       <ol class="proc">
@@ -28346,8 +28331,7 @@
       href="#sec-do-while-statement-static-semantics-vardeclarednames">13.6.1.1</a>, <a
       href="#sec-while-statement-static-semantics-vardeclarednames">13.6.2.1</a>, <a
       href="#sec-for-statement-static-semantics-early-errors">13.6.3.1</a>, <a
-      href="#sec-for-in-and-for-of-statements-static-semantics-vardeclarednames">13.6.4.3</a>, <a
-      href="#sec-with-statement-static-semantics-vardeclarednames">13.10.2</a>, <a
+      href="#sec-for-in-and-for-of-statements-static-semantics-vardeclarednames">13.6.4.3</a>, &#xf0b7;, <a
       href="#sec-switch-statement-static-semantics-vardeclarednames">13.11.4</a>, <a
       href="#sec-labelled-statements-static-semantics-vardeclarednames">13.12.10</a>, <a
       href="#sec-try-statement-static-semantics-vardeclarednames">13.14.2</a>, <a
@@ -28371,7 +28355,7 @@
       href="#sec-if-statement-static-semantics-varscopeddeclarations">13.5.3</a>, <a
       href="#sec-do-while-statement-static-semantics-varscopeddeclarations">13.6.1.2</a>, <a
       href="#sec-while-statement-static-semantics-varscopeddeclarations">13.6.2.2</a>, <a
-      href="#sec-for-statement-static-semantics-vardeclarednames">13.6.3.2</a>, <a
+      href="#sec-for-statement-static-semantics-varscopeddeclarations">13.6.3.3</a>, <a
       href="#sec-for-in-and-for-of-statements-static-semantics-varscopeddeclarations">13.6.4.4</a>, <a
       href="#sec-with-statement-static-semantics-varscopeddeclarations">13.10.3</a>, <a
       href="#sec-switch-statement-static-semantics-varscopeddeclarations">13.11.5</a>, <a
@@ -28971,8 +28955,7 @@
         href="#sec-do-while-statement-static-semantics-vardeclarednames">13.6.1.1</a>, <a
         href="#sec-while-statement-static-semantics-vardeclarednames">13.6.2.1</a>, <a
         href="#sec-for-statement-static-semantics-early-errors">13.6.3.1</a>, <a
-        href="#sec-for-in-and-for-of-statements-static-semantics-vardeclarednames">13.6.4.3</a>, <a
-        href="#sec-with-statement-static-semantics-vardeclarednames">13.10.2</a>, <a
+        href="#sec-for-in-and-for-of-statements-static-semantics-vardeclarednames">13.6.4.3</a>, &#xf0b7;, <a
         href="#sec-switch-statement-static-semantics-vardeclarednames">13.11.4</a>, <a
         href="#sec-labelled-statements-static-semantics-vardeclarednames">13.12.10</a>, <a
         href="#sec-try-statement-static-semantics-vardeclarednames">13.14.2</a>, <a
@@ -29008,7 +28991,7 @@
         href="#sec-if-statement-static-semantics-varscopeddeclarations">13.5.3</a>, <a
         href="#sec-do-while-statement-static-semantics-varscopeddeclarations">13.6.1.2</a>, <a
         href="#sec-while-statement-static-semantics-varscopeddeclarations">13.6.2.2</a>, <a
-        href="#sec-for-statement-static-semantics-vardeclarednames">13.6.3.2</a>, <a
+        href="#sec-for-statement-static-semantics-varscopeddeclarations">13.6.3.3</a>, <a
         href="#sec-for-in-and-for-of-statements-static-semantics-varscopeddeclarations">13.6.4.4</a>, <a
         href="#sec-with-statement-static-semantics-varscopeddeclarations">13.10.3</a>, <a
         href="#sec-switch-statement-static-semantics-varscopeddeclarations">13.11.5</a>, <a
@@ -33852,9 +33835,6 @@
 
         <p>Anonymous functions objects that do not have a contextual name associated with them by this specification do not have a
         <code>name</code> own property but inherit the <code>name</code> property of %FunctionPrototype%.</p>
-
-        <p class="Note">Function objects created using <code><a
-        href="#sec-function.prototype.bind">Function.prototype.bind</a></code> do not have a <code>name</code> property.</p>
       </section>
 
       <section id="sec-function-instances-prototype">
@@ -57220,7 +57200,7 @@
       made using <code><a href="#sec-function.prototype.apply">Function.prototype.apply</a></code> and <b><code><a
       href="#sec-function.prototype.call">Function.prototype.call</a></code>)</b> do not coerce the passed this value to an object
       (<a href="#sec-getthisenvironment">8.3.2</a>, <a href="#sec-this-keyword">12.2.1</a>, <a
-      href="#sec-function.prototype.apply">19.2.3.1</a>, <a href="#sec-function.prototype.call">19.2.3.3</a>).</p>
+      href="#sec-function.prototype.apply">19.2.3.1</a>, 0).</p>
     </li>
 
     <li>
