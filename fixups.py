@@ -2942,7 +2942,6 @@ def fixup_links(doc, docx):
     xref_re = re.compile(WORD_REF_RE)
 
     def find_link(s, current_section):
-        if '5' in current_section: print(current_section)
         unlinkifiable_section = current_section in ("#sec-in-the-5th-edition",
                                                     "#sec-in-edition-5.1")
         best = None
