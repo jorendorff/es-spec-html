@@ -1402,11 +1402,16 @@ def fixup_insert_section_ids(doc, docx):
             # obsolete links continue to work in the current document.
             #
             # Right now you have an entry like:
-            #      "sec-original-title": "sec-second-title",
+            #     "sec-original-title": "sec-second-title",
             # but the document has changed the title again, and now you need two entries:
-            #      "sec-original-title": "sec-third-title",
-            #      "sec-second-title":   "sec-third-title",
-            # Or the section was deleted, in which case you still need two entries,
+            #     "sec-original-title": "sec-third-title",
+            #     "sec-second-title":   "sec-third-title",
+            #
+            # Or, the document changed and the section got its original id back,
+            # in which case you only need to reverse the entry:
+            #     "sec-second-title": "sec-original-title",
+            #
+            # Or the section was deleted, in which case you need two entries,
             # but instead of pointing them at "sec-third-title", point them to some
             # section the user might find helpful.
             #
@@ -2083,7 +2088,6 @@ def fixup_lang_grammar_pre(doc, docx):
     Keep the text; throw everything else away.
     """
 
-    declare_hack("space-before-grammar-subscript")
     declare_hack("missing-space-after-terminal-symbol")
     declare_hack("cope-with-bogus-syntax-markup")
     declare_hack("insert-missing-space-after-eq")
@@ -2123,11 +2127,6 @@ def fixup_lang_grammar_pre(doc, docx):
             elif ht.name == 'br':
                 ht_text = '\n'
             elif is_grammar_subscript(ht):
-                # There should be no space between a nonterminal and any subscripts,
-                # but sometimes there is. Strip it out.
-                if s.endswith(' '):
-                    using_hack("space-before-grammar-subscript")
-                    s = s.rstrip()
                 ht_text = '_' + content_to_text(ht.content).replace(']opt', ']_opt')
             else:
                 ht_is_code = ht.name == 'code'
