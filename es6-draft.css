@@ -163,6 +163,14 @@ figure figcaption {
     font-weight: bold;
     text-align: center;
 }
+figcaption :target {
+    /* When a user visits #table-1, slide the caption down
+       so it won't be obscured by a sticky heading (issue #73).
+       Thanks to Claude Pache for this "nasty trick" (his words). */
+    display: inline-block;
+    padding-top: 2em;
+    margin-top: -2em;
+}
 
 table.real-table {
     border-collapse: collapse;
