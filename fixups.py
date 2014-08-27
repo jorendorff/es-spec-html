@@ -1413,7 +1413,8 @@ def fixup_insert_section_ids(doc, docx):
 
     def mangle(title):
         # This is unicode-hostile. The goal is to have simple, typeable ids.
-        # I don't know that any headings use any non-ASCII characters.
+        # I don't know that any headings use any non-ASCII characters
+        # other than punctuation.
         token_re = r'''(?x)
             \s*
             (
@@ -1459,7 +1460,7 @@ def fixup_insert_section_ids(doc, docx):
                 elif w.startswith('"'):
                     w = w.strip('"')
                 w = w.rstrip(":")
-                if not any(c.isalpha() for c in w):
+                if not any(c.isalnum() for c in w):
                     continue
             words.append(w.lower())
 
@@ -1546,16 +1547,56 @@ def fixup_insert_section_ids(doc, docx):
     legacy_sections_json = sections_js[start:stop]
     legacy_sections = json.loads(legacy_sections_json)
 
-    # 3. Throw if anything in $BASE-sections.js points to a section that no longer exists.
+    # 3. Throw if anything in $BASE-sections.js is seriously messed up.
     all_new_sections = collections.OrderedDict(sorted([(v, k) for k, v in section_ids.items()]))
     failed = False
     for obsolete_id, current_id in legacy_sections.items():
-        if current_id not in all_new_sections:
-            warn("Obsolete id {!r} maps to {!r}, which does not exist in the new document"
-                 .format('#' + obsolete_id, '#' + current_id))
-
+        # Don't redirect from a section that exists to anything else.
+        if obsolete_id in all_new_sections:
+            # If you see this warning, the fix is to modify the JS file.
+            # That file maps obsolete section ids to current ones, so that
+            # obsolete links continue to work in the current document.
+            #
+            # Right now you have an entry like:
+            #      "sec-original-title": "sec-second-title",
+            # But the document we're processing contains a section with the id
+            # "sec-original-title". Possibly the title was changed back from
+            # second-title to original-title; in that case, the entry needs to
+            # be reversed:
+            #     "sec-second-title": "sec-original-title",
+            #
+            # Use _fixup_logs (see the README) to find out what the section ids are now.
+            warn("{} has an entry for {!r}, which exists in the new document"
+                 .format(legacy_sections_filename, obsolete_id))
             failed = True
+
+        # Don't redirect the user to a section that doesn't exist.
+        if current_id not in all_new_sections:
+            # If you see this warning, the fix is to modify the JS file.
+            # That file maps obsolete section ids to current ones, so that
+            # obsolete links continue to work in the current document.
+            #
+            # Right now you have an entry like:
+            #     "sec-original-title": "sec-second-title",
+            # but the document has changed the title again, and now you need two entries:
+            #     "sec-original-title": "sec-third-title",
+            #     "sec-second-title":   "sec-third-title",
+            #
+            # Or, the document changed and the section got its original id back,
+            # in which case you only need to reverse the entry:
+            #     "sec-second-title": "sec-original-title",
+            #
+            # Or the section was deleted, in which case you need two entries,
+            # but instead of pointing them at "sec-third-title", point them to some
+            # section the user might find helpful.
+            #
+            # Use _fixup_logs (see the README) to find out what the section ids are now.
+            warn("{} has an entry mapping {!r} to {!r}, which does not exist in the new document"
+                 .format(legacy_sections_filename, obsolete_id, current_id))
+            failed = True
+
     if failed:
+        # Don't disable this exception! See the comments above.
         raise ValueError("Either remove obsolete ids from {} or fix the target"
                          .format(legacy_sections_filename))
 
@@ -1625,7 +1666,7 @@ def fixup_strip_toc(doc, docx):
     else:
         section_iterator = body.kids("section")
         i1, first_section = next(section_iterator)
-    body.content[i0: i1] = [toc]
+    body.content[i0:i1] = [toc]
 
 @InPlaceFixup
 def fixup_tables(doc, docx):
@@ -2034,33 +2075,50 @@ def fixup_lang_title_page_p_in_p(doc, docx):
             return [p]
     return doc.replace('p', fix_p)
 
-@InPlaceFixup
+
+def dict_copy_with(original, **updates):
+    copy = original.copy()
+    copy.update(updates)
+    return copy
+
+@Fixup
 def fixup_html_head(doc, docx):
     head, body = doc.content
     assert ht_name_is(head, 'head')
     assert ht_name_is(body, 'body')
-    head.content.insert(0, html.meta(charset='utf-8'))
+
+    # Figure out what title to use, and which stylesheet.
     hgroup = next(findall(body, 'hgroup'))
     if spec_is_lang(docx):
         if '5.1' in ht_text(hgroup):
             title = "ECMAScript Language Specification - ECMA-262 Edition 5.1"
         else:
             title = "ECMAScript Language Specification ECMA-262 6th Edition - DRAFT"
+        stylesheet = 'es6-draft.css'
     else:
         if version_is_intl_1_final(docx):
             title = "ECMAScript Internationalization API Specification - ECMA-402 Edition 1.0"
         else:
             title = "ECMAScript Internationalization API Specification - ECMA-402 Edition 1.0 - DRAFT"
-    title = title.replace(' - ', ' \N{EN DASH} ')
-    head.content.insert(1, html.title(title))
-    if spec_is_lang(docx):
-        stylesheet = 'es6-draft.css'
-    else:
         stylesheet = 'es5.1.css'
-    head.content.insert(2, html.link(rel='stylesheet', href=stylesheet))
+    title = title.replace(' - ', ' \N{EN DASH} ')
+
+    # Compute the filename of the script we use for coping with change.
     base, _ = os.path.splitext(os.path.basename(docx.filename))
-    head.content.insert(3, html.script(src=base + "-sections.js"))
-    doc.attrs['lang'] = 'en-GB'
+    sections_script = base + "-sections.js"
+
+    return doc.with_(
+        content=[
+            head.with_content_slice(0, 0, [
+                html.meta(charset='utf-8'),
+                html.title(title),
+                html.link(rel='stylesheet', href=stylesheet),
+                html.script(src=sections_script)
+            ] + head.content),
+            body
+        ],
+        attrs=dict_copy_with(doc.attrs, lang='en-GB'))
+
 
 def find_section(doc, title):
     # super slow algorithm
@@ -2205,7 +2263,6 @@ def fixup_lang_grammar_pre(doc, docx):
     Keep the text; throw everything else away.
     """
 
-    declare_hack("space-before-grammar-subscript")
     declare_hack("missing-space-after-terminal-symbol")
     declare_hack("cope-with-bogus-syntax-markup")
     declare_hack("insert-missing-space-after-eq")
@@ -2245,11 +2302,6 @@ def fixup_lang_grammar_pre(doc, docx):
             elif ht.name == 'br':
                 ht_text = '\n'
             elif is_grammar_subscript(ht):
-                # There should be no space between a nonterminal and any subscripts,
-                # but sometimes there is. Strip it out.
-                if s.endswith(' '):
-                    using_hack("space-before-grammar-subscript")
-                    s = s.rstrip()
                 ht_text = '_' + content_to_text(ht.content).replace(']opt', ']_opt')
             else:
                 ht_is_code = ht.name == 'code'
@@ -2314,9 +2366,9 @@ def fixup_lang_grammar_pre(doc, docx):
             return
 
         # Work around a particular layout glitch in the document.
-        if "BindingElement[Yield,GeneratorParameter ]" in syntax:
+        if "BindingElement[Yield, GeneratorParameter ]" in syntax:
             using_hack("fix-crazy-non-subscripted-space-character-in-grammar-subscript")
-            syntax = syntax.replace("BindingElement[Yield,GeneratorParameter ]",
+            syntax = syntax.replace("BindingElement[Yield, GeneratorParameter ]",
                                     "BindingElement_[Yield,GeneratorParameter]")
 
         parent.content[i:j] = [html.pre(syntax, class_="syntax")]
@@ -2642,14 +2694,14 @@ def title_as_algorithm_name(title, secnum):
             (?: \s* \[ \s* @@[A-Za-z0-9.%]* \s* \]
               | \s* \[\[ \s* [A-Za-z0-9.%]* \s* \]\] )?
         )
-        :?   # Ignore stray colon in a few headings
         (?:
             # Arguments (or something else in parentheses); or "Abstract Operation"; or both.
             (?: \s* \( .* \) )? \s* Abstract \s+ Operation \s*
             | \s* \( .* \)
         )
+        (?: \s* ---- .* )?   # Dash followed by a gloss
         $
-    '''
+    '''.replace("----", "\N{EM DASH}")
 
     m = re.match(algorithm_name_re, title)
     if m is not None:
@@ -2846,7 +2898,6 @@ def fixup_links(doc, docx):
         # 9.1
         ("ECMAScript Function object", "ECMAScript Function Objects"),
         ("ECMAScript function object", "ECMAScript Function Objects"),
-        ("Function Declaration Instantiation", "Function Declaration Instantiation"),
         ("Bound Function", "Bound Function Exotic Objects"),
         ("bound function", "Bound Function Exotic Objects"),
         ("[[BoundTargetFunction]]", "Bound Function Exotic Objects"),
@@ -3065,7 +3116,8 @@ def fixup_links(doc, docx):
     xref_re = re.compile(WORD_REF_RE)
 
     def find_link(s, current_section):
-        in_section_D_2 = current_section == "#sec-D-additions-and-changes-that-introduce-incompatibilities-with-prior-editions-in-the-5th-edition"
+        unlinkifiable_section = current_section in ("#sec-in-the-5th-edition",
+                                                    "#sec-in-edition-5.1")
         best = None
         for text, target in specific_links:
             i = s.find(text)
@@ -3116,7 +3168,7 @@ def fixup_links(doc, docx):
                         warn("no such section: " + sec_num)
                         continue
 
-                if in_section_D_2 and id is not None:
+                if unlinkifiable_section and id is not None:
                     using_hack("do-not-linkify-section-numbers-in-D.2")
                     break
 
@@ -3312,6 +3364,8 @@ def fixup_add_disclaimer(doc, docx):
     em = html.em
     i = html.i
     a = html.a
+    ul = html.ul
+    li = html.li
 
     if spec_is_lang(docx) and version_is_51_final(docx):
         disclaimer = div(
@@ -3327,22 +3381,28 @@ def fixup_add_disclaimer(doc, docx):
     elif spec_is_lang(docx):
         disclaimer = div(
             p(strong("This is ", em("not"), " the official ECMAScript Language Specification.")),
-            p("The most recent final ECMAScript standard is Edition 5.1, the PDF document located at ",
-              a("http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-262.pdf",
-                href="http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-262.pdf"),
-              "."),
-            p("This is a draft of the next edition of the standard."),
-            p("This page is based on the current working draft published at ",
-              a("http://wiki.ecmascript.org/doku.php?id=harmony:specification_drafts",
-                href="http://wiki.ecmascript.org/doku.php?id=harmony:specification_drafts"),
-              ". The program used to convert that Word doc to HTML is a custom-piled heap of hacks. "
-              "It may have stripped out or garbled some of the formatting that makes "
-              "the specification comprehensible. You can help improve the program ",
-              a("here", href="https://github.com/jorendorff/es-spec-html"),
-              "."),
+            p("This is a draft of the next edition of the standard. See also:"),
+            ul(
+                li(
+                    a("ECMAScript Language Specification, Edition 5.1 (PDF)",
+                      href="http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-262.pdf"),
+                    ", the most recent official, final standard."),
+                li(
+                    a("The ES specification drafts archive",
+                      href="http://wiki.ecmascript.org/doku.php?id=harmony:specification_drafts"),
+                    " for PDF and Word versions of this document, and older drafts."),
+                li(
+                    a("The script that produced this web page",
+                      href="https://github.com/jorendorff/es-spec-html"),
+                    ", and especially the ",
+                    a("issue tracker \N{EM DASH} please file bugs when you find them",
+                      href="https://github.com/jorendorff/es-spec-html/issues?state=open"),
+                    ". Patches are welcome too.")),
 
-            # (U+2019 is RIGHT SINGLE QUOTATION MARK, the character you're supposed to use for an apostrophe.)
-            p("For copyright information, see Ecma International\u2019s legal disclaimer in the document itself."),
+            # (U+2019 is RIGHT SINGLE QUOTATION MARK, the character you're
+            # supposed to use for an apostrophe.)
+            p("For copyright information, see Ecma International\u2019s legal disclaimer "
+              "in the document itself."),
             id="unofficial")
         position = 0
     elif spec_is_intl(docx) and version_is_intl_1_final(docx):
