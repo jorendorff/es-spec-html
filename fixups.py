@@ -1387,6 +1387,8 @@ def is_section_with_title(e, title):
 def fixup_insert_section_ids(doc, docx):
     """ Give each section an id= number and a section link. """
 
+    declare_hack("multiple-sections-have-the-same-number")
+
     def match(e):
         if (e.name == 'section'
             and e.content
@@ -1478,15 +1480,24 @@ def fixup_insert_section_ids(doc, docx):
                 yield mb
         yield mt
 
+    # === Assign a unique section-id to each numbered section
+    # The result of this whole chunk of code is the dictionary section_ids.
+    # (And, for an ugly hack, HACK_section_remapping.)
+
     # We need to avoid giving two sections the same id if they have the same
     # title. For each section in the document, make a list of all possible ids
     # we could give it.
     candidates = {}
+    HACK_section_remapping = {}
     for section in doc.find(match):
         heading, span_secnum, secnum_str, secnum = split_section(section)
 
         if secnum in candidates:
-            raise ValueError("multiple sections have the number " + secnum)
+            using_hack("multiple-sections-have-the-same-number")
+            warn("multiple sections have the number " + secnum)
+            bolt_on = len([1 for sec in candidates if sec.startswith(secnum + "_")])
+            secnum += "_" + str(bolt_on)
+            HACK_section_remapping[ht_text(heading)] = secnum
 
         rest = heading.content[1:]
         if rest and isinstance(rest[0], str) and rest[0].isspace():
@@ -1528,7 +1539,7 @@ def fixup_insert_section_ids(doc, docx):
         else:
             warn("no unique id found for section {}; tried: {!r}".format(secnum, idlist))
 
-    # Warn if any old sections no longer exist in the current file.
+    # === Warn if any old sections no longer exist in the current file
     # A ton of code, 5 "easy" steps.
 
     # 1. Load dict of all sections that were in the previous revision.
@@ -1617,8 +1628,14 @@ def fixup_insert_section_ids(doc, docx):
     with open(all_sections_filename, 'w') as f:
         f.write(all_sections_json + "\n")
 
+    # === Finally, add <section id=> attributes to all sections.
     def replacement(section):
         heading, span_secnum, secnum_str, secnum = split_section(section)
+
+        HACK_text = ht_text(heading)
+        if HACK_text in HACK_section_remapping:
+            secnum = HACK_section_remapping[HACK_text]
+
         if secnum not in section_ids:
             return [section]
 
@@ -2932,7 +2949,12 @@ def fixup_links(doc, docx):
         ("Use Strict Directive", "Directive Prologues and the Use Strict Directive"),
 
         # clause 18
-        ("direct call (see 18.2.1.1) to the eval function", "Direct Call to Eval"),
+        ## There is no longer any prose explanation of direct eval in the spec.
+        ## Furthermore the section that specifies direct calls to eval has the same heading
+        ## as 59 other sections: "Runtime Semantics: Evaluation".
+        ##("direct call (see 12.3.4.1) to the eval function", ???),
+        ##("direct eval", ???),
+        ##("direct call to eval", ???),
 
         # 20.3
         ("this time value", "Properties of the Date Prototype Object"),
