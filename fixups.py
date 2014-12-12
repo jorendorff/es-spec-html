@@ -458,7 +458,8 @@ def fixup_vars(doc, docx):
             hits = []
             while self.i < n:
                 if tokens[self.i:self.i + 3] == ['is', 'called', 'with']:
-                    print("OK", tokens[self.i:self.i + 20])
+                    #print("OK", tokens[self.i:self.i + 20])
+
                     # look back to match 'method of Obj is called with'
                     if self.i >= 3 and tokens[self.i - 3:self.i - 1] == ['method', 'of']:
                         hits.append(tokens[self.i - 1])
@@ -475,7 +476,8 @@ def fixup_vars(doc, docx):
                         warn("parse failed in {!r}".format(self.text))
                     else:
                         hits.append(result)
-                        while self.skip_optional(",") or self.looking_at("and"):
+                        while ((self.skip_optional(",") and not self.i == len(self.tokens))
+                               or self.looking_at("and")):
                             if self.skip_optional("and"):
                                 self.skip_optional("with")  # lame
                             result = self.parse_arg()
@@ -1549,7 +1551,7 @@ def fixup_insert_section_ids(doc, docx):
         all_old_sections_json = f.read()
     all_old_sections = json.loads(all_old_sections_json)
 
-    # 2. Load legacy-sections dict.
+    # 2. Load legacy_sections dict.
     legacy_sections_filename = base + "-sections.js"
     with open(legacy_sections_filename, 'r') as f:
         sections_js = f.read()
@@ -1582,7 +1584,7 @@ def fixup_insert_section_ids(doc, docx):
             failed = True
 
         # Don't redirect the user to a section that doesn't exist.
-        if current_id not in all_new_sections:
+        if current_id != "" and current_id not in all_new_sections:
             # If you see this warning, the fix is to modify the JS file.
             # That file maps obsolete section ids to current ones, so that
             # obsolete links continue to work in the current document.
@@ -1598,8 +1600,9 @@ def fixup_insert_section_ids(doc, docx):
             #     "sec-second-title": "sec-original-title",
             #
             # Or the section was deleted, in which case you need two entries,
-            # but instead of pointing them at "sec-third-title", point them to some
-            # section the user might find helpful.
+            # but instead of pointing them at "sec-third-title", point them to
+            # some section the user might find helpful. (If no existing section
+            # seems helpful, you can link to "" to get rid of the warning.)
             #
             # Use _fixup_logs (see the README) to find out what the section ids are now.
             warn("{} has an entry mapping {!r} to {!r}, which does not exist in the new document"
