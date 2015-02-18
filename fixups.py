@@ -831,6 +831,8 @@ def fixup_formatting(doc, docx):
 def fixup_lists(doc, docx):
     """ Group numbered paragraphs into lists. """
 
+    declare_hack("fixup_lists_unindented_nested_lists")
+
     # A List represents either an element that is <ol>, <ul>, or <body>.
     #
     # parent: The List that contains this List, or None if this List is the
@@ -968,6 +970,13 @@ def fixup_lists(doc, docx):
                 # new list.
                 if margin > current.left_margin:
                     open_list(p, numId, ilvl, margin)
+                # HACK: if we see numbered lists and bullet lists with
+                # the same indentation level (ouch), assume the numbered list is
+                # nested inside the bulleted one (aaaaarrrrrgh).
+                elif (current.marker_type == 'bullet'
+                      and p.content[0].content[0] != '\uf0b7\t'):
+                    using_hack("fixup_lists_unindented_nested_lists")
+                    open_list(p, numId, ilvl, margin)
 
                 assert margin == current.left_margin
 
@@ -989,7 +998,11 @@ def fixup_lists(doc, docx):
                 marker_str = p.content[0].content[0]
                 if current.marker_type == 'bullet':
                     # U+F0B7 is not a Unicode character, this is Word nonsense
-                    assert marker_str == '\uf0b7\t'
+                    if marker_str != '\uf0b7\t':
+                        warn("HTML numbering differs from Word. "
+                             "Word marker is {!r}, HTML will render as a bullet"
+                             .format(marker_str))
+                        print(li)
                 else:
                     depth = current.marker_type
                     i = len(current.content)
@@ -997,8 +1010,9 @@ def fixup_lists(doc, docx):
                     marker_formatter = formatters[depth % 3]
                     html_marker_str = marker_formatter(i) + '.\t'
                     if html_marker_str != marker_str:
-                        warn("HTML numbering may differ from Word!")
-                        print("Word marker is {!r}, HTML will show {!r}".format(marker_str, html_marker_str))
+                        warn("HTML numbering differs from Word. "
+                             "Word marker is {!r}, HTML will show {!r}"
+                             .format(marker_str, html_marker_str))
                         print(li)
 
         return [body.with_content(result)]
