@@ -109,9 +109,14 @@ def int_to_lower_roman(i):
     return result
 
 def int_to_lower_letter(i):
-    if i > 26:
-        raise ValueError("Don't know any more letters after z.")
-    return "abcdefghijklmnopqrstuvwxyz"[i - 1]
+    letters = "abcdefghijklmnopqrstuvwxyz"
+    if i <= 26:
+        return letters[i - 1]
+    elif i == 27:
+        return "aa"  # well, you learn something every day
+    else:
+        # but not sure if the next letter is "bb" or "ab", so:
+        raise ValueError("Don't know any more letters after z, except of course \"aa\".")
 
 list_formatters = {
     'lowerLetter': int_to_lower_letter,
@@ -251,7 +256,15 @@ def fixup_add_numbering(doc, docx):
         result = []
         for p in body.content:
             if p.name == 'p':
-                p = add_numbering(p)
+                try:
+                    p = add_numbering(p)
+                except Exception as exc:
+                    if not hasattr(exc, "_already_dumped_context"):
+                        print("*** Error happened while processing paragraph:")
+                        print(p)
+                        exc._already_dumped_context = True
+                    raise
+
             result.append(p)
         return [body.with_content(result)]
 
@@ -2729,8 +2742,10 @@ def title_as_algorithm_name(title, secnum):
               | \s* \[\[ \s* [A-Za-z0-9.%]* \s* \]\] )?
         )
         (?:
-            # Arguments (or something else in parentheses); or "Abstract Operation"; or both.
-            (?: \s* \( .* \) )? \s* Abstract \s+ Operation \s*
+            # Arguments (or something else in parentheses);
+            # or "Abstract Operation/Concrete Method"; or both.
+            (?: \s* \( .* \) )? \s* (?: Abstract \s+ Operation \s* |
+                                        Concrete \s+ Method \s* )
             | \s* \( .* \)
         )
         (?: \s* ---- .* )?   # Dash followed by a gloss
@@ -2747,8 +2762,6 @@ def title_as_algorithm_name(title, secnum):
 
 @InPlaceFixup
 def fixup_links(doc, docx):
-    declare_hack("do-not-linkify-section-numbers-in-D.2")
-
     algorithm_name_to_section = {}
     sections_by_title = {}
     sections_by_number = {}
@@ -2881,7 +2894,7 @@ def fixup_links(doc, docx):
         ("the SameValue algorithm", "SameValue(x, y)"),
         ("the SameValue Algorithm", "SameValue(x, y)"),
         ("Get(", "Get (O, P)"),
-        ("Put(", "Put (O, P, V, Throw)"),
+        ("Set(", "Set (O, P, V, Throw)"),
 
         # 8.1
         ("Lexical Environment", "Lexical Environments"),
@@ -2940,10 +2953,6 @@ def fixup_links(doc, docx):
         ("Array exotic object", "Array Exotic Objects"),
         ("String exotic object", "String Exotic Objects"),
         ("exotic arguments object", "Arguments Exotic Objects"),
-
-        # 10.1
-        ("UTF-16Encoding (10.1.1)", "Static Semantics: UTF-16Encoding"),
-        ("UTF-16Encoding", "Static Semantics: UTF-16Encoding"),
 
         # 10.2
         ("strict mode code (see 10.1.1)", "Strict Mode Code"),
@@ -3155,8 +3164,6 @@ def fixup_links(doc, docx):
     xref_re = re.compile(WORD_REF_RE)
 
     def find_link(s, current_section):
-        unlinkifiable_section = current_section in ("#sec-in-the-5th-edition",
-                                                    "#sec-in-edition-5.1")
         best = None
         for text, target in specific_links:
             i = s.find(text)
@@ -3206,10 +3213,6 @@ def fixup_links(doc, docx):
                     if id is None:
                         warn("no such section: " + sec_num)
                         continue
-
-                if unlinkifiable_section and id is not None:
-                    using_hack("do-not-linkify-section-numbers-in-D.2")
-                    break
 
                 if id is not None and id not in all_ids and not id.startswith('http'):
                     warn("no such section: " + m.group(2))
