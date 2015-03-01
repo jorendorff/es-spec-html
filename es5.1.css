@@ -280,6 +280,10 @@ ol.bibliography > li {
 ol.bibliography > li > span.num {
     float: left; margin-left: -3em; width: 2.5em; text-align: right; }
 
+/* BNF */
+sub.bnf-params { color: darkgrey; }
+sub.bnf-opt { color: lime; }
+
 @media print {
     html {
         padding-left: 0;

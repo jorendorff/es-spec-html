@@ -3497,6 +3497,15 @@ def fixup_add_ecma_flavor(doc, docx):
         doc_body(doc).content.insert(0, html.img(src="Ecma_RVB-003.jpg", alt="Ecma International Logo.",
             height="146", width="373"))
 
+@InPlaceFixup
+def fixup_highlight_bnf(doc, docx):
+    def match_sub(e):
+        return e.name == "sub" and len(e.content) == 1
+    for sub in doc.find(match_sub):
+        if sub.content[0] == "opt":
+            sub.add_class("bnf-opt")
+        elif re.match(r"^\[.*?\]$", sub.content[0]):
+            sub.add_class("bnf-params")
 
 # === Main
 
@@ -3547,6 +3556,7 @@ def get_fixups(docx):
     yield fixup_sticky
     yield fixup_add_disclaimer
     yield fixup_add_ecma_flavor
+    yield fixup_highlight_bnf
 
 def fixup(docx, doc):
     logdir = "_fixup_log"

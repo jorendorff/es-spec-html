@@ -17,6 +17,14 @@ class Element:
         self.content = list(content)
         assert all(isinstance(item, (str, Element)) for item in self.content)
 
+    def add_class(self, cname):
+        assert len(cname) > 0
+        if 'class' not in self.attrs or len(self.attrs['class']) == 0:
+            self.attrs['class'] = cname
+        else:
+            classes = self.attrs['class'].split()
+            self.attrs['class'] += (' ' + cname) if cname not in classes else ''
+
     def is_block(self):
         """ True if this is a block element.
 
