@@ -2596,7 +2596,7 @@ def fixup_lang_grammar_post(doc, docx):
                 markup.append(html.span(m.group(2), class_='nt'))
                 subscript = m.group(3)
                 if subscript is not None:
-                    markup.append(html.sub(subscript[1:]))
+                    markup.append(html.sub(subscript[1:], class_="g-params"))
             elif token in ('one of', 'but not', 'but not one of', 'or'):
                 markup.append(html.span(token, class_='grhsmod'))
             elif token.startswith('[desc '):
@@ -2648,7 +2648,7 @@ def fixup_lang_grammar_post(doc, docx):
                 assert opt
 
             if opt:
-                markup.append(html.sub('opt'))
+                markup.append(html.sub('opt', class_="g-opt"))
 
             i = m.end()
 

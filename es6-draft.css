@@ -206,6 +206,8 @@ div.keyword.pile code { float: left; width: 25%; }
 div.keyword5.pile code { float: left; width: 20%; }
 div.operator.pile code { float: left; width: 16%; }
 div.end-pile { clear: both; }
+sub.g-opt { color: #d1009e; /* sort of magenta */ }
+sub.g-params { color: #49a08a; /* sort of aqua */ }
 
 code { /* including code.t, meaning "terminal" or "token" */
     font-weight: bold;
