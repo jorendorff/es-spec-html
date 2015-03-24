@@ -203,7 +203,6 @@ var legacy_sections = {
     "sec-identifiers-and-identifier-names-static-semantics-stringvalue": "sec-identifier-names-static-semantics-stringvalue",
     "sec-identity-functions": "sec-promisereactionjob",
     "sec-iloader.prototype.normalize-name-referername-refereraddress": "",
-    "sec-imports-runtime-semantics-evaluation": "#sec-imports",
     "sec-in-edition-5": "",
     "sec-in-edition-5.1": "",
     "sec-in-edition-6": "sec-corrections-and-clarifications-in-edition-6-with-possible-compatibility-impact",
