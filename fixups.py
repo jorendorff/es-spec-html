@@ -3092,7 +3092,7 @@ def fixup_links(doc, docx):
 
     all_ids = set([kid.attrs['id'] for _, _, kid in all_parent_index_child_triples(doc) if 'id' in kid.attrs])
 
-    WORD_REF_RE = (r'(?:{ REF \w+ (?:\\r )?\\h(?: +\\\*)?(?: +MERGEFORMAT)? *}'
+    WORD_REF_RE = (r'(?:{ REF \w+ (?:\\[rn] )?\\h(?: +\\\*)?(?: +MERGEFORMAT)? *}'
                    + '\N{LEFT-TO-RIGHT MARK}' + r'?)')
 
     SECTION = r'%s?(%s)' % (
