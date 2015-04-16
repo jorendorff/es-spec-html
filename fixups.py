@@ -317,6 +317,10 @@ def title_get_argument_names(title):
     the arguments: ["O", "P"]. Otherwise it returns an empty list.
     """
 
+    if title == '19.1.2.3.1\tRuntime Semantics: ObjectDefineProperties ( O. Properties )':
+        using_hack("fixup_vars_tweak_19.1.2.3.1")
+        title = title.replace(" O. Prop", " O, Prop")
+
     algorithm_arguments_re = r'''(?x)
         ^
         # Ignore optional section number.
@@ -437,6 +441,8 @@ def fixup_vars(doc, docx):
     """
     Convert italicized variable names to <var> elements.
     """
+
+    declare_hack("fixup_vars_tweak_19.1.2.3.1")
 
     def slices_by(iterable, break_before):
         """Break an iterable into slices, using the given predicate
@@ -1663,7 +1669,7 @@ def fixup_insert_section_ids(doc, docx):
 
     if failed:
         # Don't disable this exception! See the comments above.
-        raise ValueError("Either remove obsolete ids from {} or fix the target"
+        raise ValueError("Please update {} to redirect old links pointing to the renamed/deleted sections"
                          .format(legacy_sections_filename))
 
     # 4. Warn if anything in the old $BASE-all-sections.json is neither in the
@@ -2926,6 +2932,7 @@ def fixup_links(doc, docx):
         ("lexical environment", "Lexical Environments"),
         ("outer environment reference", "Lexical Environments"),
         ("outer lexical environment reference", "Lexical Environments"),
+        ("EnvironmentRecord", "Lexical Environments"),  # that's where it's defined
         ("Environment Record", "Environment Records"),
         ("declarative environment record", "Declarative Environment Records"),
         ("Declarative Environment Record", "Declarative Environment Records"),
@@ -2993,6 +3000,10 @@ def fixup_links(doc, docx):
         #("Declaration Binding Instantiation", "Declaration Binding Instantiation"),
         #("declaration binding instantiation (10.5)", "Declaration Binding Instantiation"),
         #("Function Declaration Binding Instantiation", "Function Declaration Instantiation"),
+
+        # 15.2
+        ("Module Record (see 15.2.1.14)", "Abstract Module Records"),
+        ("Module Record", "Abstract Module Records"),
 
         # clause 15
         ("Directive Prologue", "Directive Prologues and the Use Strict Directive"),
