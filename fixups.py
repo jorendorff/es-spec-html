@@ -2926,7 +2926,6 @@ def fixup_links(doc, docx):
         ("lexical environment", "Lexical Environments"),
         ("outer environment reference", "Lexical Environments"),
         ("outer lexical environment reference", "Lexical Environments"),
-        ("environment record (10.2.1)", "Environment Records"),
         ("Environment Record", "Environment Records"),
         ("declarative environment record", "Declarative Environment Records"),
         ("Declarative Environment Record", "Declarative Environment Records"),
@@ -2944,10 +2943,10 @@ def fixup_links(doc, docx):
         ("Global Environment Records", globalEnv),
 
         # 8.2
-        ("Code Realms (10.3)", "Code Realms"),
+        ("Code Realms (8.2)", "Code Realms"),
         ("Code Realm", "Code Realms"),
         ("Realm", "Code Realms"),
-        ("Realm (10.3)", "Code Realms"),
+        ("Realm (8.2)", "Code Realms"),
 
         # 8.3
         ("LexicalEnvironment", "Execution Contexts"),
@@ -2980,16 +2979,16 @@ def fixup_links(doc, docx):
         ("exotic arguments object", "Arguments Exotic Objects"),
 
         # 10.2
-        ("strict mode code (see 10.1.1)", "Strict Mode Code"),
+        ("strict mode code (see 10.2.1)", "Strict Mode Code"),
         ("strict mode code", "Strict Mode Code"),
         ("strict code", "Strict Mode Code"),
         ("base code", "Strict Mode Code"),
 
         # 11.6-11.9
-        ("automatic semicolon insertion (7.9)", "Automatic Semicolon Insertion"),
-        ("automatic semicolon insertion (see 7.9)", "Automatic Semicolon Insertion"),
+        ("automatic semicolon insertion (11.9)", "Automatic Semicolon Insertion"),
+        ("automatic semicolon insertion (see 11.9)", "Automatic Semicolon Insertion"),
         ("automatic semicolon insertion", "Automatic Semicolon Insertion"),
-        ("semicolon insertion (see 7.9)", "Automatic Semicolon Insertion"),
+        ("semicolon insertion (see 11.9)", "Automatic Semicolon Insertion"),
 
         #("Declaration Binding Instantiation", "Declaration Binding Instantiation"),
         #("declaration binding instantiation (10.5)", "Declaration Binding Instantiation"),
