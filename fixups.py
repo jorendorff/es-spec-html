@@ -1269,7 +1269,7 @@ def fixup_hr(doc, docx):
             if not all(isinstance(ht, str) and ht.isspace() for ht in head):
                 result.insert(0, p.with_content(head))
             tail = p.content[i + 1:]
-            if not all(isinstance(ht, str) and ht.isspace() for ht in head):
+            if not all(isinstance(ht, str) and ht.isspace() for ht in tail):
                 result += bubble_up_hr(p.with_content(head))
             return result
         return [p]
