@@ -1,8 +1,6 @@
 from xml.etree import ElementTree
 from htmodel import *
 from docx import shorten, parse_pr
-from collections import defaultdict
-import re
 
 def dict_to_css(d):
     return "; ".join(p + ": " + v for p, v in d.items())

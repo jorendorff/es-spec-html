@@ -9,7 +9,6 @@ The entry point is fixup().
 
 import htmodel as html
 from warnings import warn
-from array import array
 import collections, contextlib, os, time, re, json
 from hacks import declare_hack, using_hack, warn_about_unused_hacks
 
@@ -1088,8 +1087,6 @@ def ht_append(content, ht):
 
 @Fixup
 def fixup_paragraph_classes(doc, docx):
-    annex_counters = [0, 0, 0, 0]
-
     def replace_tag_name(e):
         num = e.style and e.style.get('-ooxml-numId', '0') != '0'
         default_tag = 'li' if num else 'p'
@@ -1297,8 +1294,6 @@ def fixup_sections(doc, docx):
 
     body_elt = doc_body(doc)
     body = body_elt.content
-
-    level_re = re.compile(r'l[1-5]')
 
     def starts_with_section_number(s):
         return re.match(r'[1-9]|[A-Z]\.[1-9][0-9]*', s) is not None
