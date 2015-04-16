@@ -512,11 +512,11 @@ def fixup_vars(doc, docx):
             return hit
 
         def parse_arg(self):
-            # Arg : "optionally"_opt Article_opt Type_opt "argument"_opt Identifier
+            # Arg : "optionally"_opt Article_opt Type_opt "argument"_opt Identifier Suffix_opt
             # Article : one of "a" "an"
             self.skip_optional("optionally")
             self.skip_optional("a", "an")
-            self.skip_optional_type()
+            self.skip_optional_type(deferring=True)
             self.skip_optional("as")
             self.skip_optional("argument", "arguments")
             tokens = self.tokens
@@ -527,10 +527,40 @@ def fixup_vars(doc, docx):
             t = tokens[i]
             if re.match(r'^[a-zA-Z0-9_-]+$', t) is not None and t not in ('and', 'where'):
                 self.i += 1
+                self.skip_optional_suffix()
                 return t
             return None
 
-        def skip_optional_type(self):
+        def skip_optional_suffix(self):
+            # Suffix : "," Article Type [lookahead in {".", ","}]
+            tokens = self.tokens
+            n = len(tokens)
+            i = self.i
+            if i >= n:
+                return
+
+            if tokens[i] != ",":
+                return
+            i += 1
+            if i >= n:
+                return
+
+            if tokens[i] not in ("a", "an"):
+                return
+            i += 1
+            if i >= n:
+                return
+
+            # Transactionally attempt skip_optional_type and roll all the way
+            # back to the beginning if it doesn't match.
+            saved_place = self.i
+            self.i = i
+            self.skip_optional_type(deferring=False)
+            if self.i == i or not (self.looking_at(",") or self.looking_at(".")):
+                # No match! Roll back.
+                self.i = saved_place
+
+        def skip_optional_type(self, deferring):
             if self.skip_optional("ECMAScript"):
                 self.skip_optional("language")
 
@@ -546,19 +576,19 @@ def fixup_vars(doc, docx):
                 self.i += 1
                 if i + 1 < len(tokens) and tokens[i + 1] == 'of':
                     self.i += 1
-                    self.skip_optional_type()
+                    self.skip_optional_type(deferring=False)
             elif tok == 'either':
                 self.i += 1
                 self.skip_optional("a", "an")
-                self.skip_optional_type()
+                self.skip_optional_type(deferring=False)
                 if self.skip_optional("or"):
                     self.skip_optional("with")  # mmmmm rather bogus, grammatically
                 self.skip_optional("a", "an")
-                self.skip_optional_type()
+                self.skip_optional_type(deferring=False)
             else:
                 for t in types:
                     if [w.lower() for w in tokens[i:i + len(t)]] == t:
-                        if i + len(t) < len(tokens) and tokens[i + len(t)] == ',':
+                        if deferring and i + len(t) < len(tokens) and tokens[i + len(t)] == ',':
                             # In "is called with argument string," don't treat
                             # "string" as a type. It's the argument name.
                             return
