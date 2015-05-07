@@ -2213,50 +2213,58 @@ def find_section(doc, title):
                 return sect
     raise ValueError("No section has the title " + repr(title))
 
-@InPlaceFixup
+@Fixup
 def fixup_lang_overview_biblio(doc, docx):
-    sect = find_section(doc, "Overview")
-    for i, p in enumerate(sect.content):
-        if p.name == 'p':
-            if p.content and p.content[0].startswith('Gosling'):
-                break
+    def with_class(src, cls):
+        result = src.copy()
+        result['class'] = cls
+        return result
 
-    # First, strip the span element around the &trade; symbol.
-    assert p.content[1].name == 'span'
-    assert p.content[1].style == {'vertical-align': 'super'}
-    assert p.content[1].content == ['\N{TRADE MARK SIGN}']
-    s = p.content[0] + p.content[1].content[0] + p.content[2]
+    def transform_biblio(p, title_opener, title_closer):
+        c = p.content
 
-    # Make this paragraph a reference.
-    p.attrs['class'] = 'formal-reference'
+        # One biblio entry has a span element around a TM symbol that we want
+        # to strip out.
+        if (len(c) > 1
+            and c[1].name == 'span'
+            and c[1].style == {'vertical-align': 'super'}
+            and c[1].content == ['\N{TRADE MARK SIGN}']):
+            p = p.with_content(ht_concat(ht_concat(c[:1], c[1].content), c[2:]))
+            c = p.content
 
-    # Italicize the title.
-    people, dot_space, rest = s.partition('. ')
-    assert dot_space
-    title, dot_space, rest = rest.partition('. ')
-    assert dot_space
-    p.content[0:3] = [people + dot_space, html.span(title.strip(), class_="book-title"), dot_space + rest]
+        # Italicize the title.
+        if title_opener == '':
+            pre_title, opener, rest = '', '', c[0]
+        else:
+            pre_title, opener, rest = c[0].partition(title_opener)
+            assert opener
+        title, closer, rest = rest.partition(title_closer)
+        assert closer
+        new_content = []
+        if pre_title or opener:
+            new_content.append(pre_title + opener)
+        new_content.append(html.span(title.strip(), class_="book-title"))
+        new_content.append(closer + rest)
+        new_content += c[1:]
+        return p.with_(attrs=with_class(p.attrs, 'formal-reference'),
+                       content=new_content)
 
-    # Fix up the second reference.
-    i += 1
-    p = sect.content[i]
-    assert p.name == 'p'
-    p.attrs['class'] = 'formal-reference'
-    people, dot_space, rest = p.content[0].partition('. ')
-    assert dot_space
-    title, dot_space, rest = rest.partition('. ')
-    assert dot_space
-    p.content[0:1] = [people + dot_space, html.span(title.strip(), class_="book-title"), dot_space + rest]
+    def f(sect):
+        for i, p in enumerate(sect.content):
+            if p.name == 'p':
+                if p.content and p.content[0].startswith('ISO/IEC\N{NO-BREAK SPACE}9899:1996'):
+                    break
+        else:
+            raise ValueError("ISO/IEC line not found")
+        transformed = [
+            transform_biblio(sect.content[i], ", ", "."),     # C
+            transform_biblio(sect.content[i+1], ". ", ". "),  # Java
+            transform_biblio(sect.content[i+2], ". ", ". "),  # Self
+            transform_biblio(sect.content[i+3], "", ".")      # Scheme
+        ]
+        return sect.with_content(sect.content[:i] + transformed + sect.content[i+4:])
+    return map_section(doc, "Overview", f)
 
-    # Fix up the third reference.
-    i += 1
-    p = sect.content[i]
-    assert p.name == 'p'
-    assert p.content[0].startswith('IEEE')
-    p.attrs['class'] = 'formal-reference'
-    title, dot_space, rest = p.content[0].partition('.')
-    assert dot_space
-    p.content[0:1] = [html.span(title.strip(), class_="book-title"), dot_space + rest]
 
 def is_grammar_subscript_content(content):
     s = ht_text(content)
