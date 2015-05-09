@@ -1,11 +1,21 @@
 # es-spec - Convert the ECMAScript Language Specification to HTML
 
+To install the HTML minifier dependency using [npm](https://www.npmjs.com/):
+
+    npm install html-minifier -g
+
 To run the program:
 
     ./es-spec.py es6-draft.docx
 
 Note: Python 3 is required.
 
+To minify the generated HTML afterwards:
+
+    html-minifier --collapse-whitespace --remove-attribute-quotes \
+        --remove-redundant-attributes --prevent-attributes-escaping \
+        --use-short-doctype --remove-optional-tags -o es6-draft.html \
+        es6-draft.html
 
 ## About this program
 
